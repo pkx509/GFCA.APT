@@ -20,9 +20,10 @@ namespace GFCA.APT.DAL
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
             throw new UnintentionalCodeFirstException();
         }
     
@@ -69,5 +70,6 @@ namespace GFCA.APT.DAL
         public virtual DbSet<VW_List_Costcenter> VW_List_Costcenter { get; set; }
         public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
         public virtual DbSet<APTCustomer> APTCustomers { get; set; }
+        public virtual DbSet<TB_M_CUSTOMER> TB_M_CUSTOMER { get; set; }
     }
 }

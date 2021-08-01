@@ -181,6 +181,9 @@
     <Compile Include="SupplierCustomer.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_M_CUSTOMER.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TradeActivity.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
