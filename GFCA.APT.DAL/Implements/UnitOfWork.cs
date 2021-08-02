@@ -4,8 +4,14 @@ namespace GFCA.APT.DAL.Implements
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private APTDbContext _context = new APTDbContext();
-        
+        private readonly APTDbContext _context;
+
+        public UnitOfWork()
+        {
+            _context = new APTDbContext();
+            _context.Configuration.LazyLoadingEnabled = false;
+        }
+
         private Repository<Department> department;
         public Repository<Department> Departments
         {
@@ -19,27 +25,27 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
-        private Repository<Brand> _brand;
-        public Repository<Brand> Brands
+        private Repository<TB_M_BRAND> _brand;
+        public Repository<TB_M_BRAND> Brands
         {
             get
             {
                 if (this._brand == null)
                 {
-                    this._brand = new Repository<Brand>(_context);
+                    this._brand = new Repository<TB_M_BRAND>(_context);
                 }
                 return _brand;
             }
         }
 
-        private Repository<Channel> _channel;
-        public Repository<Channel> Channels
+        private Repository<TB_M_CHANNEL> _channel;
+        public Repository<TB_M_CHANNEL> Channels
         {
             get
             {
                 if (this._channel == null)
                 {
-                    this._channel = new Repository<Channel>(_context);
+                    this._channel = new Repository<TB_M_CHANNEL>(_context);
                 }
                 return _channel;
             }

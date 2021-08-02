@@ -18,12 +18,10 @@ namespace GFCA.APT.DAL
         public APTDbContext()
             : base("name=APTDbContext")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
             throw new UnintentionalCodeFirstException();
         }
     
@@ -71,5 +69,14 @@ namespace GFCA.APT.DAL
         public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
         public virtual DbSet<APTCustomer> APTCustomers { get; set; }
         public virtual DbSet<TB_M_CUSTOMER> TB_M_CUSTOMER { get; set; }
+        public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
+        public virtual DbSet<TB_M_CHANNEL> TB_M_CHANNEL { get; set; }
+        public virtual DbSet<TB_M_COMPANY> TB_M_COMPANY { get; set; }
+        public virtual DbSet<TB_M_COST_CENTER> TB_M_COST_CENTER { get; set; }
+        public virtual DbSet<TB_M_DOCUMENT_TYPE> TB_M_DOCUMENT_TYPE { get; set; }
+        public virtual DbSet<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
+        public virtual DbSet<TB_M_ORGANIZATION> TB_M_ORGANIZATION { get; set; }
+        public virtual DbSet<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
+        public virtual DbSet<TB_T_FIXED_CONTRACT> TB_T_FIXED_CONTRACT { get; set; }
     }
 }

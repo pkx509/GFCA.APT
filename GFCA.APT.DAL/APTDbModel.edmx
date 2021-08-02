@@ -526,12 +526,159 @@ warning 6002: The table/view 'APT2Db.dbo.APTCustomer' does not have a primary ke
           <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
           <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_BRAND">
+          <Key>
+            <PropertyRef Name="BRAND_ID" />
+          </Key>
+          <Property Name="BRAND_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="BRAND_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_CHANNEL">
+          <Key>
+            <PropertyRef Name="CHANNEL_ID" />
+          </Key>
+          <Property Name="CHANNEL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CHANNEL_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="CHANNEL_DESC" Type="varchar(max)" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_COMPANY">
+          <Key>
+            <PropertyRef Name="COMP_ID" />
+          </Key>
+          <Property Name="COMP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="COMP_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ADDRESS" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_COST_CENTER">
+          <Key>
+            <PropertyRef Name="CENTER_ID" />
+          </Key>
+          <Property Name="CENTER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="TB_M_CUSTOMER">
           <Key>
             <PropertyRef Name="CUSTOMER_ID" />
           </Key>
           <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
           <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CUST_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_DOCUMENT_TYPE">
+          <Key>
+            <PropertyRef Name="DOC_TYPE_ID" />
+          </Key>
+          <Property Name="DOC_TYPE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_TYPE_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_TYPE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DOC_TYPE_DESC" Type="varchar(max)" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_GL_ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACC_ID" />
+          </Key>
+          <Property Name="ACC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="ACC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ACC_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="ACC_TYPE_DESC" Type="varchar(max)" />
+          <Property Name="ACC_GROUP1" Type="varchar" MaxLength="50" />
+          <Property Name="ACC_GROUP1_DESC" Type="varchar(max)" />
+          <Property Name="ACC_GROUP2" Type="varchar" MaxLength="50" />
+          <Property Name="ACC_GROUP2_DESC" Type="varchar(max)" />
+          <Property Name="ACC_REMARK" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_ORGANIZATION">
+          <Key>
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="ORG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COMP_ID" Type="int" />
+          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="ORG_DEPARTMENT_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ORG_POSITION_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ORG_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_T_DOCUMENT">
+          <Key>
+            <PropertyRef Name="DOC_ID" />
+          </Key>
+          <Property Name="DOC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_TYPE" Type="int" />
+          <Property Name="DOC_NO" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_VER" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_REV" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_MONTH" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_YEAR" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="FLOW_CURRENT" Type="varchar" MaxLength="50" />
+          <Property Name="FLOW_NEXT" Type="varchar" MaxLength="50" />
+          <Property Name="REQUESTER" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_T_FIXED_CONTRACT">
+          <Key>
+            <PropertyRef Name="DOC_FC_ID" />
+          </Key>
+          <Property Name="DOC_FC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_ID" Type="int" />
+          <Property Name="ACCOUNT_ID" Type="int" />
+          <Property Name="COST_CENTER_ID" Type="int" />
+          <Property Name="ACTIVITY_ID" Type="int" />
+          <Property Name="UOM" Type="varchar" MaxLength="50" />
+          <Property Name="CONDITION_TYPE" Type="varchar" MaxLength="100" />
+          <Property Name="CONTRACT_CATE" Type="varchar" MaxLength="50" />
+          <Property Name="CONTRACT_DESC" Type="varchar(max)" />
+          <Property Name="M01" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M02" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M03" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M04" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M05" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M06" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M07" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M08" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M09" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M10" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M11" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="M12" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="TradeActivity">
           <Key>
@@ -1235,6 +1382,42 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_M_ORGANIZATION_TB_M_COMPANY">
+          <End Role="TB_M_COMPANY" Type="Self.TB_M_COMPANY" Multiplicity="0..1" />
+          <End Role="TB_M_ORGANIZATION" Type="Self.TB_M_ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_COMPANY">
+              <PropertyRef Name="COMP_ID" />
+            </Principal>
+            <Dependent Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="COMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE">
+          <End Role="TB_M_DOCUMENT_TYPE" Type="Self.TB_M_DOCUMENT_TYPE" Multiplicity="0..1" />
+          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_DOCUMENT_TYPE">
+              <PropertyRef Name="DOC_TYPE_ID" />
+            </Principal>
+            <Dependent Role="TB_T_DOCUMENT">
+              <PropertyRef Name="DOC_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT">
+          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Role="TB_T_FIXED_CONTRACT" Type="Self.TB_T_FIXED_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_T_DOCUMENT">
+              <PropertyRef Name="DOC_ID" />
+            </Principal>
+            <Dependent Role="TB_T_FIXED_CONTRACT">
+              <PropertyRef Name="DOC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TradeInvesment_Channel_ChannelId">
           <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
           <End Role="TradeInvesment" Type="Self.TradeInvesment" Multiplicity="*" />
@@ -1331,7 +1514,16 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <EntitySet Name="StateProcess" EntityType="Self.StateProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierCustomer" EntityType="Self.SupplierCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_CHANNEL" EntityType="Self.TB_M_CHANNEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_COMPANY" EntityType="Self.TB_M_COMPANY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_COST_CENTER" EntityType="Self.TB_M_COST_CENTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_CUSTOMER" EntityType="Self.TB_M_CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Self.TB_M_DOCUMENT_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Self.TB_M_GL_ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_ORGANIZATION" EntityType="Self.TB_M_ORGANIZATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_T_DOCUMENT" EntityType="Self.TB_T_DOCUMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_T_FIXED_CONTRACT" EntityType="Self.TB_T_FIXED_CONTRACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TradeActivity" EntityType="Self.TradeActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TradeInvesment" EntityType="Self.TradeInvesment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
@@ -1563,6 +1755,18 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <AssociationSet Name="FK_SupplierCustomer_Supplier_SupplierId" Association="Self.FK_SupplierCustomer_Supplier_SupplierId">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="SupplierCustomer" EntitySet="SupplierCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_M_ORGANIZATION_TB_M_COMPANY" Association="Self.FK_TB_M_ORGANIZATION_TB_M_COMPANY">
+            <End Role="TB_M_COMPANY" EntitySet="TB_M_COMPANY" />
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" Association="Self.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE">
+            <End Role="TB_M_DOCUMENT_TYPE" EntitySet="TB_M_DOCUMENT_TYPE" />
+            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" Association="Self.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT">
+            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
+            <End Role="TB_T_FIXED_CONTRACT" EntitySet="TB_T_FIXED_CONTRACT" />
           </AssociationSet>
           <AssociationSet Name="FK_TradeInvesment_Channel_ChannelId" Association="Self.FK_TradeInvesment_Channel_ChannelId">
             <End Role="Channel" EntitySet="Channel" />
@@ -3167,6 +3371,27 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           </AssociationSet>
           <EntitySet Name="APTCustomers" EntityType="Models.APTCustomer" />
           <EntitySet Name="TB_M_CUSTOMER" EntityType="Models.TB_M_CUSTOMER" />
+          <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
+          <EntitySet Name="TB_M_CHANNEL" EntityType="Models.TB_M_CHANNEL" />
+          <EntitySet Name="TB_M_COMPANY" EntityType="Models.TB_M_COMPANY" />
+          <EntitySet Name="TB_M_COST_CENTER" EntityType="Models.TB_M_COST_CENTER" />
+          <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Models.TB_M_DOCUMENT_TYPE" />
+          <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Models.TB_M_GL_ACCOUNT" />
+          <EntitySet Name="TB_M_ORGANIZATION" EntityType="Models.TB_M_ORGANIZATION" />
+          <EntitySet Name="TB_T_DOCUMENT" EntityType="Models.TB_T_DOCUMENT" />
+          <EntitySet Name="TB_T_FIXED_CONTRACT" EntityType="Models.TB_T_FIXED_CONTRACT" />
+          <AssociationSet Name="FK_TB_M_ORGANIZATION_TB_M_COMPANY" Association="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY">
+            <End Role="TB_M_COMPANY" EntitySet="TB_M_COMPANY" />
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" Association="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE">
+            <End Role="TB_M_DOCUMENT_TYPE" EntitySet="TB_M_DOCUMENT_TYPE" />
+            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" Association="Models.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT">
+            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
+            <End Role="TB_T_FIXED_CONTRACT" EntitySet="TB_T_FIXED_CONTRACT" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="APTCustomer">
           <Key>
@@ -3198,7 +3423,196 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           </Key>
           <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
           <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_BRAND">
+          <Key>
+            <PropertyRef Name="BRAND_ID" />
+          </Key>
+          <Property Name="BRAND_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BRAND_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BRAND_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_CHANNEL">
+          <Key>
+            <PropertyRef Name="CHANNEL_ID" />
+          </Key>
+          <Property Name="CHANNEL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CHANNEL_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_COMPANY">
+          <Key>
+            <PropertyRef Name="COMP_ID" />
+          </Key>
+          <Property Name="COMP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COMP_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_ORGANIZATION" Relationship="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY" FromRole="TB_M_COMPANY" ToRole="TB_M_ORGANIZATION" />
+        </EntityType>
+        <EntityType Name="TB_M_COST_CENTER">
+          <Key>
+            <PropertyRef Name="CENTER_ID" />
+          </Key>
+          <Property Name="CENTER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="TB_M_DOCUMENT_TYPE">
+          <Key>
+            <PropertyRef Name="DOC_TYPE_ID" />
+          </Key>
+          <Property Name="DOC_TYPE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_TYPE_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_TYPE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" FromRole="TB_M_DOCUMENT_TYPE" ToRole="TB_T_DOCUMENT" />
+        </EntityType>
+        <EntityType Name="TB_M_GL_ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACC_ID" />
+          </Key>
+          <Property Name="ACC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_TYPE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_GROUP1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_GROUP1_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_GROUP2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_GROUP2_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ACC_REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_ORGANIZATION">
+          <Key>
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="ORG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COMP_ID" Type="Int32" />
+          <Property Name="ORG_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_DEPARTMENT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_POSITION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_COMPANY" Relationship="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY" FromRole="TB_M_ORGANIZATION" ToRole="TB_M_COMPANY" />
+        </EntityType>
+        <EntityType Name="TB_T_DOCUMENT">
+          <Key>
+            <PropertyRef Name="DOC_ID" />
+          </Key>
+          <Property Name="DOC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_TYPE" Type="Int32" />
+          <Property Name="DOC_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_VER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_REV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_MONTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_YEAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FLOW_CURRENT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FLOW_NEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_M_DOCUMENT_TYPE" Relationship="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" FromRole="TB_T_DOCUMENT" ToRole="TB_M_DOCUMENT_TYPE" />
+          <NavigationProperty Name="TB_T_FIXED_CONTRACT" Relationship="Models.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_FIXED_CONTRACT" />
+        </EntityType>
+        <EntityType Name="TB_T_FIXED_CONTRACT">
+          <Key>
+            <PropertyRef Name="DOC_FC_ID" />
+          </Key>
+          <Property Name="DOC_FC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_ID" Type="Int32" />
+          <Property Name="ACCOUNT_ID" Type="Int32" />
+          <Property Name="COST_CENTER_ID" Type="Int32" />
+          <Property Name="ACTIVITY_ID" Type="Int32" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITION_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRACT_CATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRACT_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="M01" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M02" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M03" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M04" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M05" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M06" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M07" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M08" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M09" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M10" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M11" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="M12" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" FromRole="TB_T_FIXED_CONTRACT" ToRole="TB_T_DOCUMENT" />
+        </EntityType>
+        <Association Name="FK_TB_M_ORGANIZATION_TB_M_COMPANY">
+          <End Type="Models.TB_M_COMPANY" Role="TB_M_COMPANY" Multiplicity="0..1" />
+          <End Type="Models.TB_M_ORGANIZATION" Role="TB_M_ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_COMPANY">
+              <PropertyRef Name="COMP_ID" />
+            </Principal>
+            <Dependent Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="COMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE">
+          <End Type="Models.TB_M_DOCUMENT_TYPE" Role="TB_M_DOCUMENT_TYPE" Multiplicity="0..1" />
+          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_DOCUMENT_TYPE">
+              <PropertyRef Name="DOC_TYPE_ID" />
+            </Principal>
+            <Dependent Role="TB_T_DOCUMENT">
+              <PropertyRef Name="DOC_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT">
+          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Type="Models.TB_T_FIXED_CONTRACT" Role="TB_T_FIXED_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_T_DOCUMENT">
+              <PropertyRef Name="DOC_ID" />
+            </Principal>
+            <Dependent Role="TB_T_FIXED_CONTRACT">
+              <PropertyRef Name="DOC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3875,8 +4289,164 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <EntitySetMapping Name="TB_M_CUSTOMER">
             <EntityTypeMapping TypeName="Models.TB_M_CUSTOMER">
               <MappingFragment StoreEntitySet="TB_M_CUSTOMER">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CUST_NAME" ColumnName="CUST_NAME" />
                 <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
                 <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_BRAND">
+            <EntityTypeMapping TypeName="Models.TB_M_BRAND">
+              <MappingFragment StoreEntitySet="TB_M_BRAND">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="BRAND_NAME" ColumnName="BRAND_NAME" />
+                <ScalarProperty Name="BRAND_CODE" ColumnName="BRAND_CODE" />
+                <ScalarProperty Name="BRAND_ID" ColumnName="BRAND_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_CHANNEL">
+            <EntityTypeMapping TypeName="Models.TB_M_CHANNEL">
+              <MappingFragment StoreEntitySet="TB_M_CHANNEL">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CHANNEL_DESC" ColumnName="CHANNEL_DESC" />
+                <ScalarProperty Name="CHANNEL_NAME" ColumnName="CHANNEL_NAME" />
+                <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
+                <ScalarProperty Name="CHANNEL_ID" ColumnName="CHANNEL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_COMPANY">
+            <EntityTypeMapping TypeName="Models.TB_M_COMPANY">
+              <MappingFragment StoreEntitySet="TB_M_COMPANY">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="COMP_NAME" ColumnName="COMP_NAME" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_COST_CENTER">
+            <EntityTypeMapping TypeName="Models.TB_M_COST_CENTER">
+              <MappingFragment StoreEntitySet="TB_M_COST_CENTER">
+                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_DOCUMENT_TYPE">
+            <EntityTypeMapping TypeName="Models.TB_M_DOCUMENT_TYPE">
+              <MappingFragment StoreEntitySet="TB_M_DOCUMENT_TYPE">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="DOC_TYPE_DESC" ColumnName="DOC_TYPE_DESC" />
+                <ScalarProperty Name="DOC_TYPE_NAME" ColumnName="DOC_TYPE_NAME" />
+                <ScalarProperty Name="DOC_TYPE_CODE" ColumnName="DOC_TYPE_CODE" />
+                <ScalarProperty Name="DOC_TYPE_ID" ColumnName="DOC_TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_GL_ACCOUNT">
+            <EntityTypeMapping TypeName="Models.TB_M_GL_ACCOUNT">
+              <MappingFragment StoreEntitySet="TB_M_GL_ACCOUNT">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="ACC_REMARK" ColumnName="ACC_REMARK" />
+                <ScalarProperty Name="ACC_GROUP2_DESC" ColumnName="ACC_GROUP2_DESC" />
+                <ScalarProperty Name="ACC_GROUP2" ColumnName="ACC_GROUP2" />
+                <ScalarProperty Name="ACC_GROUP1_DESC" ColumnName="ACC_GROUP1_DESC" />
+                <ScalarProperty Name="ACC_GROUP1" ColumnName="ACC_GROUP1" />
+                <ScalarProperty Name="ACC_TYPE_DESC" ColumnName="ACC_TYPE_DESC" />
+                <ScalarProperty Name="ACC_TYPE" ColumnName="ACC_TYPE" />
+                <ScalarProperty Name="ACC_NAME" ColumnName="ACC_NAME" />
+                <ScalarProperty Name="ACC_CODE" ColumnName="ACC_CODE" />
+                <ScalarProperty Name="ACC_ID" ColumnName="ACC_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_ORGANIZATION">
+            <EntityTypeMapping TypeName="Models.TB_M_ORGANIZATION">
+              <MappingFragment StoreEntitySet="TB_M_ORGANIZATION">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="ORG_DESC" ColumnName="ORG_DESC" />
+                <ScalarProperty Name="ORG_POSITION_NAME" ColumnName="ORG_POSITION_NAME" />
+                <ScalarProperty Name="ORG_DEPARTMENT_NAME" ColumnName="ORG_DEPARTMENT_NAME" />
+                <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
+                <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+                <ScalarProperty Name="ORG_ID" ColumnName="ORG_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_T_DOCUMENT">
+            <EntityTypeMapping TypeName="Models.TB_T_DOCUMENT">
+              <MappingFragment StoreEntitySet="TB_T_DOCUMENT">
+                <ScalarProperty Name="REQUESTER" ColumnName="REQUESTER" />
+                <ScalarProperty Name="FLOW_NEXT" ColumnName="FLOW_NEXT" />
+                <ScalarProperty Name="FLOW_CURRENT" ColumnName="FLOW_CURRENT" />
+                <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
+                <ScalarProperty Name="DOC_YEAR" ColumnName="DOC_YEAR" />
+                <ScalarProperty Name="DOC_MONTH" ColumnName="DOC_MONTH" />
+                <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
+                <ScalarProperty Name="DOC_VER" ColumnName="DOC_VER" />
+                <ScalarProperty Name="DOC_NO" ColumnName="DOC_NO" />
+                <ScalarProperty Name="DOC_TYPE" ColumnName="DOC_TYPE" />
+                <ScalarProperty Name="DOC_ID" ColumnName="DOC_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_T_FIXED_CONTRACT">
+            <EntityTypeMapping TypeName="Models.TB_T_FIXED_CONTRACT">
+              <MappingFragment StoreEntitySet="TB_T_FIXED_CONTRACT">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="M12" ColumnName="M12" />
+                <ScalarProperty Name="M11" ColumnName="M11" />
+                <ScalarProperty Name="M10" ColumnName="M10" />
+                <ScalarProperty Name="M09" ColumnName="M09" />
+                <ScalarProperty Name="M08" ColumnName="M08" />
+                <ScalarProperty Name="M07" ColumnName="M07" />
+                <ScalarProperty Name="M06" ColumnName="M06" />
+                <ScalarProperty Name="M05" ColumnName="M05" />
+                <ScalarProperty Name="M04" ColumnName="M04" />
+                <ScalarProperty Name="M03" ColumnName="M03" />
+                <ScalarProperty Name="M02" ColumnName="M02" />
+                <ScalarProperty Name="M01" ColumnName="M01" />
+                <ScalarProperty Name="CONTRACT_DESC" ColumnName="CONTRACT_DESC" />
+                <ScalarProperty Name="CONTRACT_CATE" ColumnName="CONTRACT_CATE" />
+                <ScalarProperty Name="CONDITION_TYPE" ColumnName="CONDITION_TYPE" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="ACTIVITY_ID" ColumnName="ACTIVITY_ID" />
+                <ScalarProperty Name="COST_CENTER_ID" ColumnName="COST_CENTER_ID" />
+                <ScalarProperty Name="ACCOUNT_ID" ColumnName="ACCOUNT_ID" />
+                <ScalarProperty Name="DOC_ID" ColumnName="DOC_ID" />
+                <ScalarProperty Name="DOC_FC_ID" ColumnName="DOC_FC_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
