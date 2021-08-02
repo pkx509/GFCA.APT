@@ -12,14 +12,24 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_CUSTOMER
+    public partial class TB_M_DOCUMENT_TYPE
     {
-        public int CUSTOMER_ID { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CUST_NAME { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_M_DOCUMENT_TYPE()
+        {
+            this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
+        }
+    
+        public int DOC_TYPE_ID { get; set; }
+        public string DOC_TYPE_CODE { get; set; }
+        public string DOC_TYPE_NAME { get; set; }
+        public string DOC_TYPE_DESC { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
     }
 }

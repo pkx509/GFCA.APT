@@ -12,11 +12,19 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_CUSTOMER
+    public partial class TB_M_GL_ACCOUNT
     {
-        public int CUSTOMER_ID { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CUST_NAME { get; set; }
+        public int ACC_ID { get; set; }
+        public string ACC_CODE { get; set; }
+        public string ACC_NAME { get; set; }
+        public string ACC_TYPE { get; set; }
+        public string ACC_TYPE_DESC { get; set; }
+        public string ACC_GROUP1 { get; set; }
+        public string ACC_GROUP1_DESC { get; set; }
+        public string ACC_GROUP2 { get; set; }
+        public string ACC_GROUP2_DESC { get; set; }
+        public string ACC_REMARK { get; set; }
+        public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
