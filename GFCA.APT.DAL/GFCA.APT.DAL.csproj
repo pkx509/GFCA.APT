@@ -34,23 +34,90 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Collection, Version=7.0.0.0, Culture=neutral, PublicKeyToken=e57c3f0a3d6646db, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Collection.7.0.1\lib\net461\AutoMapper.Collection.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Collection.EntityFramework, Version=7.0.0.0, Culture=neutral, PublicKeyToken=e57c3f0a3d6646db, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Collection.EntityFramework.7.0.1\lib\net461\AutoMapper.Collection.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Data, Version=5.0.0.0, Culture=neutral, PublicKeyToken=c81663b416b68723, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Data.5.0.0\lib\net461\AutoMapper.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.EF6, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.EF6.2.0.0\lib\net461\AutoMapper.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Extensions.EnumMapping, Version=1.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Extensions.EnumMapping.1.1.0\lib\net461\AutoMapper.Extensions.EnumMapping.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Extensions.ExpressionMapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Extensions.ExpressionMapping.4.1.1\lib\net461\AutoMapper.Extensions.ExpressionMapping.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.90\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.2.0.78\lib\net461\Dapper.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.SimpleCRUD, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.SimpleCRUD.2.3.0\lib\netstandard2.0\Dapper.SimpleCRUD.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperExtensions, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.7.0\lib\net461\DapperExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.0.24.0\lib\net45\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.EntityFramework.0.24.0\lib\net45\DelegateDecompiler.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Reflection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Reflection.Core.1.1.1\lib\net45\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Slapper, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Slapper.AutoMapper.2.0.1\lib\net46\Slapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.Dapper.Plus, Version=4.0.9.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.Dapper.Plus.4.0.9\lib\net45\Z.Dapper.Plus.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actor.cs">
@@ -62,6 +129,7 @@
     <Compile Include="APTCustomer.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="APTDbContext.cs" />
     <Compile Include="APTDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,6 +214,7 @@
     <Compile Include="GLGroup.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\BrandRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="OperatorCondition.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
@@ -157,7 +226,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CostCenterRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="IRepository.cs" />
@@ -181,7 +249,34 @@
     <Compile Include="SupplierCustomer.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_M_BRAND.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_CHANNEL.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_COMPANY.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_COST_CENTER.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_M_CUSTOMER.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_DOCUMENT_TYPE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_GL_ACCOUNT.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_ORGANIZATION.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_DOCUMENT.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_FIXED_CONTRACT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TradeActivity.cs">
@@ -218,6 +313,7 @@
     <None Include="APTDbModel.edmx.diagram">
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +336,9 @@
       <DependentUpon>APTDbModel.edmx</DependentUpon>
       <LastGenOutput>APTDbModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -8,7 +8,10 @@
     <title>@ViewBag.Title - APT</title>
 
     @Styles.Render("~/Content/cssLte")
+
     @Styles.Render("~/Content/ej2/bootstrap4.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/polyfill")
     @Scripts.Render("~/Scripts/ej2/ej2.min.js")
     <style>
         /*icon styles */
@@ -47,8 +50,7 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-
-    @Html.EJS().ScriptManager()
+    
     @Scripts.Render("~/bundles/jquerylte")
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -56,5 +58,6 @@
     </script>
     @Scripts.Render("~/bundles/adminlte")
     @RenderSection("scripts", required: false)
+    @Html.EJS().ScriptManager()
 </body>
 </html>

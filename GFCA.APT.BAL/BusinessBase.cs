@@ -1,6 +1,6 @@
 ﻿using GFCA.APT.BAL.Log;
 using GFCA.APT.DAL;
-using GFCA.APT.Domain.DTO;
+using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Models;
 using System;
 
@@ -10,16 +10,16 @@ namespace GFCA.APT.BAL
     {
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly ILogService _logger;
-        protected UserProfile _currentUser;
+        protected UserInfoDto _currentUser;
         protected BusinessResponse _response;
 
 
         protected BusinessBase(IUnitOfWork unitOfWork, ILogService logger)
+            :this(unitOfWork, new UserInfoDto(), logger)
         {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
+
         }
-        protected BusinessBase(IUnitOfWork unitOfWork, UserProfile currentUser, ILogService logger)
+        protected BusinessBase(IUnitOfWork unitOfWork, UserInfoDto currentUser, ILogService logger)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;

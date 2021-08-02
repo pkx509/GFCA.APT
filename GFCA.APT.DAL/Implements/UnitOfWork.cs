@@ -1,65 +1,58 @@
 ﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Linq;
+using GFCA.APT.Domain.Dto;
 
 namespace GFCA.APT.DAL.Implements
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private APTDbContext _context = new APTDbContext();
-        
-        private Repository<Department> department;
-        public Repository<Department> Departments
+        private readonly APTDbContext _context;
+        private readonly SqlTransaction _transaction;
+        private SqlConnection _connection => new SqlConnection(ConnectionString);
+        public UnitOfWork()
         {
-            get
-            {
-                if (this.department == null)
-                {
-                    this.department = new Repository<Department>(_context);
-                }
-                return department;
-            }
+            _context = new APTDbContext();
+            _context.Configuration.LazyLoadingEnabled = false;
+        }
+        public static string ConnectionString => ConfigurationManager.ConnectionStrings["APTDbConnectionString"].ToString();
+
+        public SqlTransaction Transaction => _transaction;
+
+        public void TransactionBegin()
+        {
+            //_transaction = _context.Database.BeginTransaction();
         }
 
-        private Repository<Brand> _brand;
-        public Repository<Brand> Brands
-        {
-            get
-            {
-                if (this._brand == null)
-                {
-                    this._brand = new Repository<Brand>(_context);
-                }
-                return _brand;
-            }
-        }
+        private BrandRepository _brand;
+        public BrandRepository Brand => _brand ?? new BrandRepository(_context);
 
-        private Repository<Channel> _channel;
-        public Repository<Channel> Channels
-        {
-            get
-            {
-                if (this._channel == null)
-                {
-                    this._channel = new Repository<Channel>(_context);
-                }
-                return _channel;
-            }
-        }
-        private Repository<TB_M_CUSTOMER> _customers;
-        public Repository<TB_M_CUSTOMER> Customers
-        {
-            get
-            {
-                if (this._customers == null)
-                {
-                    this._customers = new Repository<TB_M_CUSTOMER>(_context);
-                }
-                return _customers;
-            }
-        }
-
-        public void Save()
+        public void Commit()
         {
             _context.SaveChanges();
+            //_transaction.Commit();
+            /*
+            bool saveFailed;
+            do
+            {
+                saveFailed = false;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    saveFailed = true;
+                    // Update the values of the entity that failed to save from the store
+                    ex.Entries.Single().Reload();
+                }
+            } while (saveFailed);
+            */
         }
 
         private bool disposed = false;
@@ -69,6 +62,7 @@ namespace GFCA.APT.DAL.Implements
             {
                 if (disposing)
                 {
+                    //_transaction.Dispose();
                     _context.Dispose();
                 }
             }
@@ -81,4 +75,5 @@ namespace GFCA.APT.DAL.Implements
         }
 
     }
+
 }

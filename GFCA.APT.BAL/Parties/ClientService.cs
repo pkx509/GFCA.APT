@@ -1,6 +1,6 @@
 ﻿using GFCA.APT.BAL.Log;
 using GFCA.APT.DAL;
-using GFCA.APT.Domain.DTO;
+using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;

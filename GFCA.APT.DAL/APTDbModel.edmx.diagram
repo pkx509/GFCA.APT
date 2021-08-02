@@ -101,6 +101,18 @@
         <AssociationConnector Association="Models.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Models.APTCustomer" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Models.TB_M_BRAND" Width="1.5" PointX="3.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Models.TB_M_CHANNEL" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Models.TB_M_COMPANY" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="Models.TB_M_COST_CENTER" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Models.TB_M_DOCUMENT_TYPE" Width="1.5" PointX="16.75" PointY="14.875" />
+        <EntityTypeShape EntityType="Models.TB_M_GL_ACCOUNT" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Models.TB_M_ORGANIZATION" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="Models.TB_T_DOCUMENT" Width="1.5" PointX="19" PointY="14.5" />
+        <EntityTypeShape EntityType="Models.TB_T_FIXED_CONTRACT" Width="1.5" PointX="21.25" PointY="13.125" />
+        <AssociationConnector Association="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY" />
+        <AssociationConnector Association="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" />
+        <AssociationConnector Association="Models.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,7 +21,7 @@ namespace GFCA.APT.DAL.Repositories
         {
             return _context.Customers.ToList();
         }
-        public Customer GetById(int primaryKey)
+        public Customer GetByID(int primaryKey)
         {
             return _context.Customers.Find(primaryKey);
         }
