@@ -12,14 +12,8 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_CUSTOMER
+    public partial class TB_M_COST_CENTER
     {
-        public int CUSTOMER_ID { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CUST_NAME { get; set; }
-        public string CREATED_BY { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
-        public string UPDATED_BY { get; set; }
-        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+        public int CENTER_ID { get; set; }
     }
 }

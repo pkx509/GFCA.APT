@@ -12,14 +12,25 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_CUSTOMER
+    public partial class TB_M_COMPANY
     {
-        public int CUSTOMER_ID { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CUST_NAME { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_M_COMPANY()
+        {
+            this.TB_M_ORGANIZATION = new HashSet<TB_M_ORGANIZATION>();
+        }
+    
+        public int COMP_ID { get; set; }
+        public string COMP_CODE { get; set; }
+        public string COMP_NAME { get; set; }
+        public string ADDRESS { get; set; }
+        public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_M_ORGANIZATION> TB_M_ORGANIZATION { get; set; }
     }
 }

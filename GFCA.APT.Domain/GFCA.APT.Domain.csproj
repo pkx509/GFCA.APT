@@ -47,6 +47,7 @@
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />
     <Compile Include="Enums\FLAG_DEL.cs" />
+    <Compile Include="Enums\FLAG_ROW.cs" />
     <Compile Include="HTTP\IRequest.cs" />
     <Compile Include="HTTP\IResponse.cs" />
     <Compile Include="Models\BusinessResponse.cs" />
