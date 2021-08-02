@@ -100,6 +100,7 @@
         <AssociationConnector Association="Models.FK_WorkflowState_WorkflowState_PreviousStateId" ManuallyRouted="false" />
         <AssociationConnector Association="Models.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Models.APTCustomer" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

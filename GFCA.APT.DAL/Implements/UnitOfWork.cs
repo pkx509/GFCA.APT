@@ -44,6 +44,18 @@ namespace GFCA.APT.DAL.Implements
                 return _channel;
             }
         }
+        private Repository<TB_M_CUSTOMER> _customers;
+        public Repository<TB_M_CUSTOMER> Customers
+        {
+            get
+            {
+                if (this._customers == null)
+                {
+                    this._customers = new Repository<TB_M_CUSTOMER>(_context);
+                }
+                return _customers;
+            }
+        }
 
         public void Save()
         {

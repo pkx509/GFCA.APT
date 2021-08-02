@@ -526,6 +526,13 @@ warning 6002: The table/view 'APT2Db.dbo.APTCustomer' does not have a primary ke
           <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
           <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TradeActivity">
           <Key>
             <PropertyRef Name="TradeActivityId" />
@@ -1324,6 +1331,7 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <EntitySet Name="StateProcess" EntityType="Self.StateProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierCustomer" EntityType="Self.SupplierCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_CUSTOMER" EntityType="Self.TB_M_CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TradeActivity" EntityType="Self.TradeActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TradeInvesment" EntityType="Self.TradeInvesment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
@@ -3158,6 +3166,7 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="APTCustomers" EntityType="Models.APTCustomer" />
+          <EntitySet Name="TB_M_CUSTOMER" EntityType="Models.TB_M_CUSTOMER" />
         </EntityContainer>
         <EntityType Name="APTCustomer">
           <Key>
@@ -3182,6 +3191,13 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <Property Name="CustGroupName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Shortname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_M_CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3853,6 +3869,14 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
                 <ScalarProperty Name="SAPsalesorg" ColumnName="SAPsalesorg" />
                 <ScalarProperty Name="SAPCustomerName" ColumnName="SAPCustomerName" />
                 <ScalarProperty Name="SAPcustcode" ColumnName="SAPcustcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_CUSTOMER">
+            <EntityTypeMapping TypeName="Models.TB_M_CUSTOMER">
+              <MappingFragment StoreEntitySet="TB_M_CUSTOMER">
+                <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

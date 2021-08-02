@@ -48,7 +48,7 @@
                 <div class="card card-success card-outline">
                     <div class="card-body text-sm p-1">
 
-                        @Html.EJS().Grid("grdBrand").Height("460").DataSource((IEnumerable<object>)ViewBag.dataSource).ShowColumnMenu(false).AllowSorting().AllowFiltering(true).ActionComplete("actionComplete").Columns(col =>
+                        @Html.EJS().Grid("grdBrand").Height("420").DataSource((IEnumerable<object>)ViewBag.dataSource).ShowColumnMenu(false).AllowSorting().AllowFiltering(true).ActionComplete("actionComplete").Columns(col =>
                    {
 
                        col.Field("BrandId").HeaderText("Brand ID").IsIdentity(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
@@ -75,7 +75,7 @@
                     }).Toolbar(new List<string>()
                     {
                         "Add", "Edit", "Delete", "Update", "Cancel"
-                    }).Load("load").Created("created").ActionBegin("actionBegin").ActionComplete("actionComplete").DataBound("dataBound").Render()
+                    }).ActionComplete("actionComplete").Render()
 
                     </div>
                 </div><!-- /.card -->

@@ -13,7 +13,7 @@ namespace GFCA.APT.BAL.Parties
         public CustomerService(IUnitOfWork unitOfWork, ILogService logger)
             : base(unitOfWork, logger) { }
 
-        public object Handler(Customer payload, UserProfile currentUser)
+        public object Handler(TB_M_CUSTOMER payload, UserProfile currentUser)
         {
 
             try
@@ -34,11 +34,12 @@ namespace GFCA.APT.BAL.Parties
             return 1;
         }
 
-        /*
-        public IEnumerable<Client> GetAll()
+        
+        public IEnumerable<TB_M_CUSTOMER> GetAll()
         {
-            return _unitOfWork.Customer.Get();
+            return _unitOfWork.Customers.Get();
         }
+        /*
         public Client GetById(int Id)
         {
             return _unitOfWork.Customer.GetByID(Id);
