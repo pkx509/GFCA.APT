@@ -33,7 +33,10 @@ namespace GFCA.APT.WEB
             var c = GlobalConfiguration.Configuration;
             c.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             //c.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-            c.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            
+            //c.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+
+            //c.Formatters.JsonFormatter.SerializerSettings.ContractResolver = Newtonsoft.Json.Serialization.IContractResolver;
 
         }
 

@@ -57,6 +57,13 @@ namespace GFCA.APT.WEB
             ~/Content/plugins/daterangepicker/daterangepicker.css                                     <!-- Daterange picker -->
             ~/Content/plugins/summernote/summernote-bs4.min.css                                       <!-- summernote -->
             */
+            Bundle polyfillScript = new ScriptBundle("~/bundles/polyfill");
+            polyfillScript.Orderer = new AsIsBundleOrderer();
+            polyfillScript
+                .Include("~/Scripts/es6-promise/dist/es6-promise.js")
+                .Include("~/Scripts/es6-promise/dist/es6-promise.auto.js")
+                ;
+            bundles.Add(polyfillScript);
 
             Bundle ejScript = new ScriptBundle("~/bundles/ejScripts");
             ejScript.Orderer = new AsIsBundleOrderer();

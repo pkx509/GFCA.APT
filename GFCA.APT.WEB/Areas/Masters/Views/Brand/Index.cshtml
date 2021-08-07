@@ -1,8 +1,10 @@
-﻿@using Syncfusion.EJ2.Grids
-@using Syncfusion.EJ2
-@{
+﻿@{
     ViewBag.Title = "Brand";
 }
+
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2
+
 
 @section styles
 {
@@ -37,140 +39,96 @@
             }
         }
     </style>
+    <script>
+
+        var urlServices = {
+            BeforeAdd: "@Url.Action("BeforeAdd", "Brand", new { Area = "Masters" })",
+            BeforeEdit: "@Url.Action("BeforeEdit", "Brand", new { Area = "Masters" })",
+
+            Add: "@Url.Action("Add", "Brand", new { Area = "Masters" })",
+            Edit: "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
+            Delete: "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
+        }
+
+    </script>
 }
 
 
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-lg-12 p-1">
-                <div class="card card-success card-outline">
-                    <div class="card-body text-sm p-1">
 
-                        @Html.EJS().Grid("grdBrand").Height("420").DataSource((IEnumerable<object>)ViewBag.dataSource).ShowColumnMenu(false).AllowSorting().AllowFiltering(true).ActionComplete("actionComplete").Columns(col =>
-                   {
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
 
-                       col.Field("BrandId").HeaderText("Brand ID").IsIdentity(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                       col.Field("BrandCode").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                       col.Field("BrandName").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                       col.Field("CreatedBy").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                       col.Field("CreatedDate").HeaderText("Created Date").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
-                       col.Field("UpdatedBy").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                       col.Field("UpdatedDate").HeaderText("Updated Date").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
+                            @(Html.EJS()
+.Grid("grdBrand")
+.Height("430")
+.DataSource(ds =>
+{
+    ds
+    .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+    //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
+    //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
+    .RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
+    .Adaptor("UrlAdaptor")
+    ;
+})
+.DataBound("brand.OnDataBound")
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport().ToolbarClick("brand.OnExcelExportClick")
+.Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
+.EditSettings(edit =>
+{
+    edit
+    .AllowEditOnDblClick(false)
+    .AllowAdding(true)
+    .AllowEditing(true)
+    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .Mode(EditMode.Dialog)
+    .Template("#dialogtemplate");
+})
+.ActionComplete("brand.OnActionComplete")
+.Columns(col =>
+{
+    col.Field("BRAND_ID").HeaderText("Brand ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("BRAND_CODE").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("BRAND_NAME").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
+    col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
+})
+.Render())
 
-                    }).FilterSettings(filter =>
-                    {
-                       filter.Type(FilterType.Excel);
-                    }).AllowPaging().PageSettings(page => page.PageCount(5)).EditSettings(edit =>
-                    {
-                        edit.AllowAdding(true)
-                        .AllowEditOnDblClick(false)
-                        .AllowEditing(true)
-                        .AllowDeleting(true)
-                        .ShowConfirmDialog(true)
-                        .ShowDeleteConfirmDialog(true)
-                        .Mode(EditMode.Dialog)
-                        .Template("#dialogtemplate");
-                    }).Toolbar(new List<string>()
-                    {
-                        "Add", "Edit", "Delete", "Update", "Cancel"
-                    }).ActionComplete("actionComplete").Render()
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
 
-                    </div>
-                </div><!-- /.card -->
-            </div>
-        </div><!-- /.row -->
-
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-
-<script>
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
 
-
-    function load() {
-        console.log("load");
-    }
-    function created() {
-        console.log("created");
-    }
-    function actionBegin(args) {
-        console.log("actionBegin Save Cancel " + JSON.stringify(args));
-        if (args.requestType === 'save') {
-            args.data.rowData = args.data.rowData.toString();
-        }
-
-    }
-    function dataBound() {
-        console.log('dataBound');
-    }
-    function actionComplete(args) {
-        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
-            let spinner = ej.popups.createSpinner({ target: args.dialog.element });
-            ej.popups.showSpinner(args.dialog.element);
-            if (args.requestType === 'beginEdit') {
-                var ajax = new ej.base.Ajax({
-                    url: "@Url.Action("Edit", "Brand", new { Area = "Masters" })", //render the partial view
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify({ value: args.rowData })
-                });
-                ajax.send().then(function (data) {
-                    appendElement(data, args.form); //render the edit form with selected record
-                    args.form.elements.namedItem('BrandId').focus();
-                    ej.popups.hideSpinner(args.dialog.element);
-                }).catch(function (xhr) {
-                    console.log(xhr);
-                    ej.popups.hideSpinner(args.dialog.element);
-                });
-            }
-            if (args.requestType === 'add') {
-                var ajax = new ej.base.Ajax({
-                    url: "@Url.Action("Add", "Brand", new { Area = "Masters" })", //render the partial view
-                    type: "POST",
-                    contentType: "application/json",
-                });
-                ajax.send().then(function (data) {
-                    appendElement(data, args.form); //Render the edit form with selected record
-                    args.form.elements.namedItem('BrandId').focus();
-                    ej.popups.hideSpinner(args.dialog.element);
-                }).catch(function (xhr) {
-                    console.log(xhr);
-                    ej.popups.hideSpinner(args.dialog.element);
-                });
-            }
-        }
-    }
-
-    function appendElement(elementString, form) {
-        let dialogTemp = form.querySelector("#dialogTemp");
-        dialogTemp.innerHTML = elementString;
-        let formInstance = form.ej2_instances[0];
-        formInstance.addRules('BrandId', { required: true, number: true });
-        formInstance.addRules('BrandCode', { required: true, minLength: 2 }); //adding the form validation rules
-        formInstance.refresh();  // refresh method of the formObj
-        var script = document.createElement('script');
-        script.type = "text/javascript";
-        var serverScript = dialogTemp.querySelector('script');
-        script.textContent = serverScript.innerHTML;
-        document.head.appendChild(script);
-        serverScript.remove();
-    }
-
-</script>
 
 <script id='dialogtemplate' type="text/x-template">
     <div id="dialogTemp">
     </div>
 </script>
 
+
+
 @section scripts
 {
-
+    @Scripts.Render("~/Scripts/masters/brandService.js")
     <script>
-        
+
         $(document).ready(function () {
             console.info("document ready");
         });

@@ -145,6 +145,11 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -204,12 +209,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Masters\Data\" />
     <Folder Include="Areas\Masters\Views\CostCenter\" />
     <Folder Include="Areas\Transactions\Data\" />
     <Folder Include="Areas\Transactions\Views\Index\" />
     <Folder Include="Areas\Transactions\Views\Promotion\" />
     <Folder Include="Areas\Transactions\Views\Shared\" />
     <Folder Include="log\" />
+    <Folder Include="Scripts\transaction\" />
     <Folder Include="Views\Layout\" />
     <Folder Include="Views\Views\" />
   </ItemGroup>
@@ -228,7 +235,6 @@
     <Compile Include="Areas\Masters\Controllers\ProductController.cs" />
     <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\TradeActivityController.cs" />
-    <Compile Include="Areas\Masters\Data\BrandViewModel.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Areas\Transactions\Controllers\BudgetPlanController.cs" />
     <Compile Include="Areas\Transactions\Controllers\DefaultController.cs" />
@@ -240,6 +246,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="CustomAttributes\AuthorizeAttribute.cs" />
+    <Compile Include="CustomAttributes\CustomAuthenticationAttribute.cs" />
+    <Compile Include="CustomAttributes\CustomHandleErrorAttribute.cs" />
+    <Compile Include="CustomAttributes\IActionFilter.cs" />
+    <Compile Include="CustomAttributes\IAuthenticationFilter.cs" />
+    <Compile Include="CustomAttributes\IAuthorizationFilter.cs" />
+    <Compile Include="CustomAttributes\IExceptionFilter.cs" />
+    <Compile Include="CustomAttributes\IResultFilter.cs" />
+    <Compile Include="CustomAttributes\LogActionFilter.cs" />
     <Compile Include="CustomAttributes\NonUrlActionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4011,6 +4026,7 @@
     <Content Include="Areas\Masters\Views\Brand\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Shared\_BrandAddDialog.cshtml" />
     <Content Include="Areas\Masters\Views\Shared\_BrandEditDialog.cshtml" />
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4018,8 +4034,34 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\es6-promise\CHANGELOG.md" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.auto.map" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.auto.min.map" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.map" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.min.map" />
+    <Content Include="Scripts\es6-promise\LICENSE" />
+    <Content Include="Scripts\es6-promise\package.json" />
+    <Content Include="Scripts\es6-promise\README.md" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ej2\ej2.min.js" />
+    <Content Include="Scripts\es6-promise\auto.js" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.auto.js" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.auto.min.js" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.js" />
+    <Content Include="Scripts\es6-promise\dist\es6-promise.min.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise.auto.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\-internal.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\asap.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\enumerator.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\polyfill.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\promise.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\promise\all.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\promise\race.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\promise\reject.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\promise\resolve.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\then.js" />
+    <Content Include="Scripts\es6-promise\lib\es6-promise\utils.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -4031,6 +4073,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\brandService.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
@@ -4106,6 +4149,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
+    <TypeScriptCompile Include="Scripts\es6-promise\es6-promise.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

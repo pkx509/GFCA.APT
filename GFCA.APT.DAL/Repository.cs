@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace GFCA.APT.DAL
 {
-    public class Repository<TEntity> where TEntity : class
+    internal class Repository<TEntity> where TEntity : class
     {
-        internal APTDbContext _context;
-        internal DbSet<TEntity> dbSet;
-
+        private APTDbContext _context;
+        private DbSet<TEntity> dbSet;
         public Repository(APTDbContext context)
         {
             this._context = context;
+            this._context.Configuration.LazyLoadingEnabled = false;
             this.dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public virtual IQueryable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
@@ -37,11 +36,11 @@ namespace GFCA.APT.DAL
 
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                return orderBy(query);
             }
             else
             {
-                return query.AsNoTracking().ToList<TEntity>();
+                return query;
             }
         }
 
@@ -71,5 +70,29 @@ namespace GFCA.APT.DAL
             dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
+        public virtual void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        private bool _disposed = false;
+        protected void Dispose(bool disposing)
+        {
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this._disposed = true;
+        }
+        public virtual void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
     }
+
 }

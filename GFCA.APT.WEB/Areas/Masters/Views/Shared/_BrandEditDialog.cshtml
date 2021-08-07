@@ -1,13 +1,13 @@
-﻿@model GFCA.APT.WEB.Areas.Masters.Data.BrandViewModel
+﻿@model GFCA.APT.Domain.Dto.BrandDto
 @using Syncfusion.EJ2
 
 <div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BrandId", Model.BrandId.ToString(), new { disabled = true })
+                @Html.TextBox("BRAND_ID", Model.BRAND_ID.ToString(), new { disabled = true })
                 <span class="e-float-line"></span>
-                @Html.Label("BrandId", "Brand ID", new { @class = "e-float-text e-label-top" })
+                @Html.Label("BRAND_ID", "Brand ID", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
     </div>
@@ -15,16 +15,16 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BrandCode", Model.BrandCode.ToString())
+                @Html.TextBox("BRAND_CODE", Model.BRAND_CODE?? string.Empty, new { disabled = true })
                 <span class="e-float-line"></span>
-                @Html.Label("BrandCode", "Brand Code", new { @class = "e-float-text e-label-top" })
+                @Html.Label("BRAND_CODE", "Brand Code", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
         <div class="form-group col-md-6">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BrandName", Model.BrandName.ToString())
+                @Html.TextBox("BRAND_NAME", Model.BRAND_NAME?? string.Empty)
                 <span class="e-float-line"></span>
-                @Html.Label("BrandName", "Brand Name", new { @class = "e-float-text e-label-top" })
+                @Html.Label("BRAND_NAME", "Brand Name", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
     </div>

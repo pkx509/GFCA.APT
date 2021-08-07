@@ -33,7 +33,7 @@ namespace GFCA.APT.WEB
         {
             protected override void Load(ContainerBuilder builder)
             {
-                builder.RegisterType(typeof(APTDbContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
+                //builder.RegisterType(typeof(APTDbContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
                 builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
             }
         }

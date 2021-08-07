@@ -10,5 +10,6 @@ namespace GFCA.APT.WEB
         {
             ConfigureAuth(app);
         }
+
     }
 }

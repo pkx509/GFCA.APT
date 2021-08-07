@@ -1,5 +1,6 @@
 ﻿using GFCA.APT.BAL.Log;
 using GFCA.APT.DAL;
+using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using System;
@@ -7,30 +8,74 @@ using System.Collections.Generic;
 
 namespace GFCA.APT.BAL.Parties
 {
-    public class BrandService : BusinessBase
+    public class BrandService : BusinessBase, IBrandService
     {
         public BrandService(IUnitOfWork unitOfWork, ILogService log)
             : base(unitOfWork, log) { }
 
-        public IEnumerable<TB_M_BRAND> GetAll()
+        public IEnumerable<BrandDto> GetAll()
         {
-            return _unitOfWork.Brands.Get();
+            var dto = _unitOfWork.Brand.GetAll();
+            return dto;
         }
-        public TB_M_BRAND GetById(int Id)
+        public BrandDto GetByID(int Id)
         {
-            return _unitOfWork.Brands.GetByID(Id);
+            var dto = _unitOfWork.Brand.GetByID(Id);
+            return dto;
         }
-        public BusinessResponse Create(TB_M_BRAND model)
+        public BusinessResponse Create(BrandDto model)
         {
             var response = new BusinessResponse();
             try
             {
-                model.FLAG_ROW = FLAG_ROW.SHOW;
-                model.CREATED_BY = _currentUser.UserName;
-                model.CREATED_DATE = DateTime.UtcNow;
+                var dto = new BrandDto();
 
-                _unitOfWork.Brands.Insert(model);
-                _unitOfWork.Save();
+                dto.BRAND_ID = 0;
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.BRAND_NAME = model.BRAND_NAME;
+                dto.FLAG_ROW = FLAG_ROW.SHOW;
+                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_DATE = DateTime.UtcNow;
+
+                _unitOfWork.Brand.Insert(dto);
+                //_unitOfWork.Brand.Save();
+
+                response.Message = $"{typeof(BrandService)} has been created";
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"{ex.Message}");
+                
+            }
+            finally
+            {
+                base.Dispose();
+            }
+
+            return response;
+        }
+        public BusinessResponse Edit(BrandDto model)
+        {
+            var response = new BusinessResponse();
+            try
+            {
+                if (model.BRAND_ID == null || model.BRAND_ID == 0)
+                    throw new Exception("not existing BrandID");
+
+                dynamic id = model.BRAND_ID ?? 0;
+                var dto = _unitOfWork.Brand.GetByID(id);
+
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.BRAND_NAME = model.BRAND_NAME;
+                //dto.FLAG_ROW = FLAG_ROW.SHOW;
+
+                dto.UPDATED_BY = _currentUser.UserName?? "System";
+                dto.UPDATED_DATE = DateTime.UtcNow;
+                
+                _unitOfWork.Brand.Update(dto);
+                //_unitOfWork.Commit();
+
+                response.Message = $"{typeof(BrandService)} has been changed";
             }
             catch (Exception ex)
             {
@@ -43,41 +88,33 @@ namespace GFCA.APT.BAL.Parties
 
             return response;
         }
-        public BusinessResponse Edit(TB_M_BRAND model)
+        public BusinessResponse Delete(BrandDto model)
         {
             var response = new BusinessResponse();
             try
             {
+                if (model.BRAND_ID == null || model.BRAND_ID == 0)
+                    throw new Exception("not existing BrandID");
 
-                model.UPDATED_BY = _currentUser.UserName;
-                model.UPDATED_DATE = DateTime.UtcNow;
+                dynamic id = model.BRAND_ID ?? 0;
+                var dto = _unitOfWork.Brand.GetByID(id);
 
-                _unitOfWork.Brands.Update(model);
-                _unitOfWork.Save();
+                dto.FLAG_ROW = FLAG_ROW.DELETE;
+                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                dto.UPDATED_DATE = DateTime.UtcNow;
 
+                _unitOfWork.Brand.Update(dto);
+                //_unitOfWork.Commit();
+
+                response.Message = $"{typeof(BrandService)} has been deleted";
             }
             catch (Exception ex)
             {
                 _logger.Error($"{ex.Message}");
             }
-
-            return response;
-        }
-        public BusinessResponse Delete(TB_M_BRAND model)
-        {
-            var response = new BusinessResponse();
-            try
+            finally
             {
-                model.FLAG_ROW = FLAG_ROW.DELETE;
-                model.UPDATED_BY = _currentUser.UserName;
-                model.UPDATED_DATE = DateTime.UtcNow;
-
-                _unitOfWork.Brands.Update(model);
-                _unitOfWork.Save();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error($"{ex.Message}");
+                base.Dispose();
             }
 
             return response;
