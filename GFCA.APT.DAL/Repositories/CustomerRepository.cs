@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace GFCA.APT.DAL.Repositories
 {
@@ -10,6 +11,10 @@ namespace GFCA.APT.DAL.Repositories
         , IRepository<Customer>
         , IDisposable
     {
+        public IQueryable<Customer> Table => throw new NotImplementedException();
+
+        public IQueryable<Customer> TableNoTracking => throw new NotImplementedException();
+
         public CustomerRepository() : base()
         {
         }
@@ -37,6 +42,31 @@ namespace GFCA.APT.DAL.Repositories
         {
             Customer data = _context.Customers.Find(primaryKey);
             _context.Customers.Remove(data);
+        }
+
+        public Customer GetById(int primaryKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(IEnumerable<Customer> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Customer entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(IEnumerable<Customer> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Customer> Where(Expression<Func<Customer, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
     }
 }

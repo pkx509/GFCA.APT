@@ -12,28 +12,41 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_ORGANIZATION
+    public partial class TB_M_PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_ORGANIZATION()
+        public TB_M_PRODUCT()
         {
-            this.TB_P_COST_IO = new HashSet<TB_P_COST_IO>();
+            this.TB_P_PRODUCT_GROUP = new HashSet<TB_P_PRODUCT_GROUP>();
         }
     
-        public int ORG_ID { get; set; }
-        public Nullable<int> COMP_ID { get; set; }
+        public int PROD_ID { get; set; }
+        public string PROD_CODE { get; set; }
+        public string PROD_NAME { get; set; }
+        public string CUST_CODE { get; set; }
+        public string MAT_CODE { get; set; }
         public string ORG_CODE { get; set; }
-        public string ORG_DEPARTMENT_NAME { get; set; }
-        public string ORG_POSITION_NAME { get; set; }
-        public string ORG_DESC { get; set; }
+        public string DIV_CODE { get; set; }
+        public string EMIS_CODE { get; set; }
+        public string MAT_GROUP { get; set; }
+        public string MAT_GROUP_DESC { get; set; }
+        public string MAT_GROUP1 { get; set; }
+        public string MAT_GROUP1_DESC { get; set; }
+        public string MAT_GROUP2 { get; set; }
+        public string MAT_GROUP2_DESC { get; set; }
+        public string MAT_GROUP3 { get; set; }
+        public string MAT_GROUP3_DESC { get; set; }
+        public string FORMULA { get; set; }
+        public string PACK { get; set; }
+        public string PACK_DESC { get; set; }
+        public string UNIT_CODE { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_COMPANY TB_M_COMPANY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_COST_IO> TB_P_COST_IO { get; set; }
+        public virtual ICollection<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
     }
 }
