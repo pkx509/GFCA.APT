@@ -17,6 +17,7 @@ namespace GFCA.APT.DAL
         public int BRAND_ID { get; set; }
         public string BRAND_CODE { get; set; }
         public string BRAND_NAME { get; set; }
+        public string BRAND_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }

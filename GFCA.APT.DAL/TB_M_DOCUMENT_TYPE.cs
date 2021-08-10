@@ -24,6 +24,7 @@ namespace GFCA.APT.DAL
         public string DOC_TYPE_CODE { get; set; }
         public string DOC_TYPE_NAME { get; set; }
         public string DOC_TYPE_DESC { get; set; }
+        public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }

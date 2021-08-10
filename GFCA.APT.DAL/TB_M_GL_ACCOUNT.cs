@@ -14,7 +14,18 @@ namespace GFCA.APT.DAL
     
     public partial class TB_M_GL_ACCOUNT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_M_GL_ACCOUNT()
+        {
+            this.TB_M_ACTIVITY = new HashSet<TB_M_ACTIVITY>();
+            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
+        }
+    
         public int ACC_ID { get; set; }
+        public Nullable<int> IO_ID { get; set; }
+        public Nullable<int> CENTER_ID { get; set; }
+        public Nullable<int> FUND_ID { get; set; }
+        public Nullable<int> FUND_CENTER_ID { get; set; }
         public string ACC_CODE { get; set; }
         public string ACC_NAME { get; set; }
         public string ACC_TYPE { get; set; }
@@ -29,5 +40,10 @@ namespace GFCA.APT.DAL
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
     }
 }

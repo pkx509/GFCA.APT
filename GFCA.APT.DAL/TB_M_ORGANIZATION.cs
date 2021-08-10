@@ -14,6 +14,12 @@ namespace GFCA.APT.DAL
     
     public partial class TB_M_ORGANIZATION
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_M_ORGANIZATION()
+        {
+            this.TB_P_COST_IO = new HashSet<TB_P_COST_IO>();
+        }
+    
         public int ORG_ID { get; set; }
         public Nullable<int> COMP_ID { get; set; }
         public string ORG_CODE { get; set; }
@@ -27,5 +33,7 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         public virtual TB_M_COMPANY TB_M_COMPANY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_P_COST_IO> TB_P_COST_IO { get; set; }
     }
 }
