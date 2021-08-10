@@ -17,7 +17,9 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_T_DOCUMENT()
         {
+            this.TB_T_BUDGET = new HashSet<TB_T_BUDGET>();
             this.TB_T_FIXED_CONTRACT = new HashSet<TB_T_FIXED_CONTRACT>();
+            this.TB_T_PROMOTION_PLAN_H = new HashSet<TB_T_PROMOTION_PLAN_H>();
         }
     
         public int DOC_ID { get; set; }
@@ -34,6 +36,10 @@ namespace GFCA.APT.DAL
     
         public virtual TB_M_DOCUMENT_TYPE TB_M_DOCUMENT_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_BUDGET> TB_T_BUDGET { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_FIXED_CONTRACT> TB_T_FIXED_CONTRACT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
     }
 }

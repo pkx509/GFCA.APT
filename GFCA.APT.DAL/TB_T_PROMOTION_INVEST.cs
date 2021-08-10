@@ -12,16 +12,11 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_BRAND
+    public partial class TB_T_PROMOTION_INVEST
     {
-        public int BRAND_ID { get; set; }
-        public string BRAND_CODE { get; set; }
-        public string BRAND_NAME { get; set; }
-        public string BRAND_DESC { get; set; }
-        public string FLAG_ROW { get; set; }
-        public string CREATED_BY { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
-        public string UPDATED_BY { get; set; }
-        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+        public int PROPL_INVEST_ID { get; set; }
+        public Nullable<int> PROPL_ID { get; set; }
+    
+        public virtual TB_T_PROMOTION_PLAN_H TB_T_PROMOTION_PLAN_H { get; set; }
     }
 }

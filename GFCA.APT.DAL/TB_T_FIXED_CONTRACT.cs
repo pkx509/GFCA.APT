@@ -17,9 +17,12 @@ namespace GFCA.APT.DAL
         public int DOC_FC_ID { get; set; }
         public Nullable<int> DOC_ID { get; set; }
         public Nullable<int> ACCOUNT_ID { get; set; }
-        public Nullable<int> COST_CENTER_ID { get; set; }
+        public Nullable<int> CENTER_ID { get; set; }
         public Nullable<int> ACTIVITY_ID { get; set; }
+        public Nullable<int> BRAND_ID { get; set; }
+        public string SIZE { get; set; }
         public string UOM { get; set; }
+        public string DATE_REF { get; set; }
         public string CONDITION_TYPE { get; set; }
         public string CONTRACT_CATE { get; set; }
         public string CONTRACT_DESC { get; set; }
@@ -36,6 +39,8 @@ namespace GFCA.APT.DAL
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
         public string FLAG_ROW { get; set; }
+        public Nullable<System.DateTime> START_DATE { get; set; }
+        public Nullable<System.DateTime> END_DATE { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }

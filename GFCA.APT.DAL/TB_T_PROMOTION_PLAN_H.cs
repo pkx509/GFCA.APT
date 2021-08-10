@@ -12,38 +12,36 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_GL_ACCOUNT
+    public partial class TB_T_PROMOTION_PLAN_H
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_GL_ACCOUNT()
+        public TB_T_PROMOTION_PLAN_H()
         {
-            this.TB_M_ACTIVITY = new HashSet<TB_M_ACTIVITY>();
-            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
+            this.TB_T_PROMOTION_INVEST = new HashSet<TB_T_PROMOTION_INVEST>();
+            this.TB_T_PROMOTION_SALE = new HashSet<TB_T_PROMOTION_SALE>();
         }
     
-        public int ACC_ID { get; set; }
-        public Nullable<int> IO_ID { get; set; }
-        public Nullable<int> CENTER_ID { get; set; }
-        public Nullable<int> FUND_ID { get; set; }
-        public Nullable<int> FUND_CENTER_ID { get; set; }
-        public string ACC_CODE { get; set; }
-        public string ACC_NAME { get; set; }
-        public string ACC_TYPE { get; set; }
-        public string ACC_TYPE_DESC { get; set; }
-        public string ACC_GROUP1 { get; set; }
-        public string ACC_GROUP1_DESC { get; set; }
-        public string ACC_GROUP2 { get; set; }
-        public string ACC_GROUP2_DESC { get; set; }
-        public string ACC_REMARK { get; set; }
+        public int PROPL_ID { get; set; }
+        public Nullable<int> DOC_ID { get; set; }
+        public int PROGP_ID { get; set; }
+        public int CLIENT_ID { get; set; }
+        public int CUST_ID { get; set; }
+        public int CHANNEL_ID { get; set; }
+        public string PROPL_CODE { get; set; }
+        public string PROPL_NAME { get; set; }
+        public Nullable<System.DateTime> PROPL_BEGIN { get; set; }
+        public Nullable<System.DateTime> PROPL_END { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
+        public virtual TB_M_PROMOTION_GROUP TB_M_PROMOTION_GROUP { get; set; }
+        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
+        public virtual ICollection<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual ICollection<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
     }
 }

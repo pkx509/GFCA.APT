@@ -20,7 +20,7 @@ namespace GFCA.APT.BAL.Parties
         }
         public BrandDto GetByID(int Id)
         {
-            var dto = _unitOfWork.Brand.GetByID(Id);
+            var dto = _unitOfWork.Brand.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(BrandDto model)
@@ -33,7 +33,7 @@ namespace GFCA.APT.BAL.Parties
                 dto.BRAND_ID = 0;
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
-                dto.FLAG_ROW = FLAG_ROW.SHOW;
+                //dto.FLAG_ROW = FLAG_ROW.SHOW;
                 dto.CREATED_BY = _currentUser.UserName ?? "System";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
@@ -63,7 +63,7 @@ namespace GFCA.APT.BAL.Parties
                     throw new Exception("not existing BrandID");
 
                 dynamic id = model.BRAND_ID ?? 0;
-                var dto = _unitOfWork.Brand.GetByID(id);
+                var dto = _unitOfWork.Brand.GetById(id);
 
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
@@ -97,7 +97,7 @@ namespace GFCA.APT.BAL.Parties
                     throw new Exception("not existing BrandID");
 
                 dynamic id = model.BRAND_ID ?? 0;
-                var dto = _unitOfWork.Brand.GetByID(id);
+                var dto = _unitOfWork.Brand.GetById(id);
 
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";

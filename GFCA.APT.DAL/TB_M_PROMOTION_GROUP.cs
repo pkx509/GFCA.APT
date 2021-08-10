@@ -12,18 +12,22 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_DOCUMENT_TYPE
+    public partial class TB_M_PROMOTION_GROUP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_DOCUMENT_TYPE()
+        public TB_M_PROMOTION_GROUP()
         {
-            this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
+            this.TB_P_PRODUCT_GROUP = new HashSet<TB_P_PRODUCT_GROUP>();
+            this.TB_T_PROMOTION_PLAN_H = new HashSet<TB_T_PROMOTION_PLAN_H>();
         }
     
-        public int DOC_TYPE_ID { get; set; }
-        public string DOC_TYPE_CODE { get; set; }
-        public string DOC_TYPE_NAME { get; set; }
-        public string DOC_TYPE_DESC { get; set; }
+        public int PROGP_ID { get; set; }
+        public int CHANNEL_ID { get; set; }
+        public int CUST_ID { get; set; }
+        public int CLIENT_ID { get; set; }
+        public string PROGP_CODE { get; set; }
+        public string PROGP_NAME { get; set; }
+        public string PROGP_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
@@ -31,6 +35,8 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
+        public virtual ICollection<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
     }
 }

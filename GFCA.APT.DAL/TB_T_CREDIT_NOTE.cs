@@ -12,25 +12,22 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_DOCUMENT_TYPE
+    public partial class TB_T_CREDIT_NOTE
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_DOCUMENT_TYPE()
-        {
-            this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
-        }
-    
-        public int DOC_TYPE_ID { get; set; }
-        public string DOC_TYPE_CODE { get; set; }
-        public string DOC_TYPE_NAME { get; set; }
-        public string DOC_TYPE_DESC { get; set; }
+        public int CN_ID { get; set; }
+        public Nullable<int> BILL_ID { get; set; }
+        public Nullable<int> CN_NO { get; set; }
+        public string CN_DESC { get; set; }
+        public Nullable<int> QTY { get; set; }
+        public Nullable<decimal> UNIT_PRICE { get; set; }
+        public Nullable<decimal> DISCOUNT { get; set; }
+        public Nullable<decimal> AMOUNT { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
+        public virtual TB_T_BILLING TB_T_BILLING { get; set; }
     }
 }
