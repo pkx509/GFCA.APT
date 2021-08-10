@@ -104,8 +104,8 @@ namespace GFCA.APT.DAL.Implements
 );
 ";
             //var entity = mapper.Map<TB_M_BRAND>(data);
-            var entity = data.ToBrandEntity();
-            _repository.Insert(entity);
+            //var entity = data.ToBrandEntity();
+            //_repository.Insert(entity);
 
             var parameters = new
             {
