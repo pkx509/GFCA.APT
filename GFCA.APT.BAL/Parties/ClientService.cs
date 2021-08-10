@@ -1,13 +1,6 @@
 ﻿using GFCA.APT.BAL.Log;
-using GFCA.APT.DAL;
-using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.Models;
-using log4net;
+using GFCA.APT.DAL.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Parties
 {

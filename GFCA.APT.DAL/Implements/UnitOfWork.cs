@@ -1,79 +1,103 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
-using System.Data.Common;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
-using System.Linq;
-using GFCA.APT.Domain.Dto;
+using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly APTDbContext _context;
-        private readonly SqlTransaction _transaction;
-        private SqlConnection _connection => new SqlConnection(ConnectionString);
-        public UnitOfWork()
-        {
-            _context = new APTDbContext();
-            _context.Configuration.LazyLoadingEnabled = false;
-        }
-        public static string ConnectionString => ConfigurationManager.ConnectionStrings["APTDbConnectionString"].ToString();
+        private IDbConnection _connection;
+        private IDbTransaction _transaction;
+        private bool _disposed = false;
 
-        public SqlTransaction Transaction => _transaction;
-
-        public void TransactionBegin()
+        public static IUnitOfWork Create()
         {
-            //_transaction = _context.Database.BeginTransaction();
+            var uow = new UnitOfWork("APTDbConnectionString");
+            return uow;
         }
 
-        private BrandRepository _brand;
-        public BrandRepository Brand => _brand ?? new BrandRepository(_context);
+        public UnitOfWork(string connectionName)
+        {
+            string connString = ConfigurationManager.ConnectionStrings[connectionName].ToString();
+            Initial(connString);
+        }
+
+        private void Initial(string connectionString)
+        {
+            _connection = new SqlConnection(connectionString);
+            _connection.Open();
+            _transaction = _connection.BeginTransaction();
+        }
+        
+        private IBrandRepository _brandRepository;
+        public IBrandRepository BrandRepository
+        {
+            get
+            {
+                return _brandRepository ?? (_brandRepository = new BrandRepository(_transaction));
+            }
+        }
+
+        private void resetRepositories()
+        {
+            _brandRepository = null;
+        }
 
         public void Commit()
         {
-            _context.SaveChanges();
-            //_transaction.Commit();
-            /*
-            bool saveFailed;
-            do
+            try
             {
-                saveFailed = false;
-                try
-                {
-                    _context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    saveFailed = true;
-                    // Update the values of the entity that failed to save from the store
-                    ex.Entries.Single().Reload();
-                }
-            } while (saveFailed);
-            */
+                _transaction.Commit();
+            }
+            catch //(Exception ex)
+            {
+                _transaction.Rollback();
+                throw;
+            }
+            finally 
+            {
+                _transaction.Dispose();
+                _transaction = _connection.BeginTransaction();
+                resetRepositories();
+            }
         }
 
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
+        #region [ Grabrage Collection ]
+        
+        private void Dispose(bool disposing)
         {
-            if (!this.disposed)
+
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    //_transaction.Dispose();
-                    _context.Dispose();
+                    if (_transaction != null)
+                    {
+                        _transaction.Dispose();
+                        _transaction = null;
+                    }
+                    if (_connection != null)
+                    {
+                        _connection.Dispose();
+                        _connection = null;
+                    }
                 }
+                _disposed = true;
             }
-            this.disposed = true;
         }
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        ~UnitOfWork()
+        {
+            Dispose(false);
+        }
 
+        #endregion [ Grabrage Collection ]
     }
 
 }

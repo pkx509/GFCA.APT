@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using GFCA.APT.WEB.CustomAttributes;
 using System.Reflection;
 using System.Web.Http.Filters;
+using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
@@ -23,7 +24,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         private readonly IBrandService _brandSvc;
         public BrandController(ILogService log) : base(log)
         {
-            _uow = new UnitOfWork();
+            //_uow = new UnitOfWork();
             _brandSvc = new BrandService(_uow, log);
         }
 
@@ -115,7 +116,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         [HttpPost]
         public JsonResult Delete(int key)
         {
-            var value = _brandSvc.GetByID(key);
+            var value = _brandSvc.GetById(key);
             _brandSvc.Delete(value);
             return Json(new { Status = 200, message = JsonConvert.SerializeObject(value), JsonRequestBehavior.AllowGet });
         }

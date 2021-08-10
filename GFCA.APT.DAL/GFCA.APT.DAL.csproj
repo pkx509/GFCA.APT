@@ -137,11 +137,11 @@
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Implements\BrandRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Implements\RepositoryBase.cs" />
+    <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Implements\UnitOfWork.cs" />
     <Compile Include="tb_email_inbound.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
@@ -236,6 +236,7 @@
     <Compile Include="TB_T_PROMOTION_SALE.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DbUtilities.cs" />
     <Compile Include="VW_List_Costcenter.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -276,9 +277,7 @@
       <LastGenOutput>APTDbModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
