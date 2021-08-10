@@ -9,11 +9,11 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
     public class CustomerController : ControllerWebBase
     {
         private readonly IUnitOfWork _uow;
-        private readonly ICustomerService _customerSvc;
+       // private readonly ICustomerService _customerSvc;
         public CustomerController(ILogService log) : base(log)
         {
             _uow = new UnitOfWork();
-            _customerSvc = new CustomerService(_uow, log);
+           // _customerSvc = new CustomerService(_uow, log);
         }
         public ActionResult Index()
         {
