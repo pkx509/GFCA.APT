@@ -159,3 +159,31 @@
 }
 
 /*icon styles */
+
+
+.table {
+    display: table;
+    width: 80%;
+    margin: .5% auto 0;
+    border-collapse: separate;
+    font-weight: 400;
+}
+
+.table_row {
+    display: table-row;
+}
+
+.table_small {
+    display: table-cell;
+}
+
+.table_row > .table_small > .table_cell {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+@@media screen and (max-width: 1080px) {
+    .table {
+        width: 90%
+    }
+}

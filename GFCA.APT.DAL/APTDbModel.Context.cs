@@ -25,58 +25,38 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Actor> Actors { get; set; }
-        public virtual DbSet<ActorState> ActorStates { get; set; }
-        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
-        public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Budget> Budgets { get; set; }
-        public virtual DbSet<BudgetType> BudgetTypes { get; set; }
-        public virtual DbSet<Channel> Channels { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<CostCenter> CostCenters { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<CustomerProduct> CustomerProducts { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Document> Documents { get; set; }
-        public virtual DbSet<DocumentAction> DocumentActions { get; set; }
-        public virtual DbSet<DocumentType> DocumentTypes { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<FixedContract> FixedContracts { get; set; }
-        public virtual DbSet<FlowItem> FlowItems { get; set; }
-        public virtual DbSet<GLAccount> GLAccounts { get; set; }
-        public virtual DbSet<GLGroup> GLGroups { get; set; }
-        public virtual DbSet<OperatorCondition> OperatorConditions { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
-        public virtual DbSet<SaleForecast> SaleForecasts { get; set; }
-        public virtual DbSet<SourceFund> SourceFunds { get; set; }
-        public virtual DbSet<StateFlowItem> StateFlowItems { get; set; }
-        public virtual DbSet<StateProcess> StateProcesses { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<SupplierCustomer> SupplierCustomers { get; set; }
-        public virtual DbSet<TradeActivity> TradeActivities { get; set; }
-        public virtual DbSet<TradeInvesment> TradeInvesments { get; set; }
-        public virtual DbSet<Workflow> Workflows { get; set; }
-        public virtual DbSet<WorkflowAction> WorkflowActions { get; set; }
-        public virtual DbSet<WorkflowActivity> WorkflowActivities { get; set; }
-        public virtual DbSet<WorkflowState> WorkflowStates { get; set; }
-        public virtual DbSet<VW_List_Costcenter> VW_List_Costcenter { get; set; }
-        public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
-        public virtual DbSet<APTCustomer> APTCustomers { get; set; }
-        public virtual DbSet<TB_M_CUSTOMER> TB_M_CUSTOMER { get; set; }
+        public virtual DbSet<tb_email_inbound> tb_email_inbound { get; set; }
+        public virtual DbSet<TB_M_ACCOUNT_PAYABLE> TB_M_ACCOUNT_PAYABLE { get; set; }
+        public virtual DbSet<TB_M_ACCOUNT_RECEIVEABLE> TB_M_ACCOUNT_RECEIVEABLE { get; set; }
+        public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
+        public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }
         public virtual DbSet<TB_M_CHANNEL> TB_M_CHANNEL { get; set; }
         public virtual DbSet<TB_M_COMPANY> TB_M_COMPANY { get; set; }
         public virtual DbSet<TB_M_COST_CENTER> TB_M_COST_CENTER { get; set; }
+        public virtual DbSet<TB_M_CUSTOMER> TB_M_CUSTOMER { get; set; }
+        public virtual DbSet<TB_M_DISTRIBUTOR> TB_M_DISTRIBUTOR { get; set; }
         public virtual DbSet<TB_M_DOCUMENT_TYPE> TB_M_DOCUMENT_TYPE { get; set; }
+        public virtual DbSet<TB_M_EMISSION> TB_M_EMISSION { get; set; }
         public virtual DbSet<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
+        public virtual DbSet<TB_M_INTERNAL_ORDER> TB_M_INTERNAL_ORDER { get; set; }
         public virtual DbSet<TB_M_ORGANIZATION> TB_M_ORGANIZATION { get; set; }
+        public virtual DbSet<TB_M_PRODUCT> TB_M_PRODUCT { get; set; }
+        public virtual DbSet<TB_M_PROMOTION_GROUP> TB_M_PROMOTION_GROUP { get; set; }
+        public virtual DbSet<TB_M_UNIT> TB_M_UNIT { get; set; }
+        public virtual DbSet<TB_P_COST_IO> TB_P_COST_IO { get; set; }
+        public virtual DbSet<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual DbSet<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
+        public virtual DbSet<TB_T_BILLING> TB_T_BILLING { get; set; }
+        public virtual DbSet<TB_T_BUDGET> TB_T_BUDGET { get; set; }
+        public virtual DbSet<TB_T_CREDIT_NOTE> TB_T_CREDIT_NOTE { get; set; }
+        public virtual DbSet<TB_T_DEBIT_NOTE> TB_T_DEBIT_NOTE { get; set; }
         public virtual DbSet<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
         public virtual DbSet<TB_T_FIXED_CONTRACT> TB_T_FIXED_CONTRACT { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
+        public virtual DbSet<VW_List_Costcenter> VW_List_Costcenter { get; set; }
+        public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
     }
 }

@@ -12,25 +12,21 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_DOCUMENT_TYPE
+    public partial class TB_P_PRODUCT_GROUP
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_DOCUMENT_TYPE()
-        {
-            this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
-        }
-    
-        public int DOC_TYPE_ID { get; set; }
-        public string DOC_TYPE_CODE { get; set; }
-        public string DOC_TYPE_NAME { get; set; }
-        public string DOC_TYPE_DESC { get; set; }
+        public int PROGP_ID { get; set; }
+        public int PROD_ID { get; set; }
+        public Nullable<decimal> NORM_SHELF_PRICE { get; set; }
+        public Nullable<decimal> NORM_DISCOUNT { get; set; }
+        public Nullable<decimal> NORM_GP { get; set; }
+        public string DISCOUNT_TYPE { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
+        public virtual TB_M_PRODUCT TB_M_PRODUCT { get; set; }
+        public virtual TB_M_PROMOTION_GROUP TB_M_PROMOTION_GROUP { get; set; }
     }
 }

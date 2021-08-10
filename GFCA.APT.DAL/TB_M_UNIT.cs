@@ -12,18 +12,21 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_DOCUMENT_TYPE
+    public partial class TB_M_UNIT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_DOCUMENT_TYPE()
+        public TB_M_UNIT()
         {
-            this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
+            this.TB_M_UNIT1 = new HashSet<TB_M_UNIT>();
         }
     
-        public int DOC_TYPE_ID { get; set; }
-        public string DOC_TYPE_CODE { get; set; }
-        public string DOC_TYPE_NAME { get; set; }
-        public string DOC_TYPE_DESC { get; set; }
+        public int UNIT_ID { get; set; }
+        public Nullable<int> PARENT_ID { get; set; }
+        public string UNIT_CODE { get; set; }
+        public string UNIT_NAME { get; set; }
+        public string UNIT_TYPE { get; set; }
+        public decimal FACTOR { get; set; }
+        public string UNIT_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
@@ -31,6 +34,7 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
+        public virtual ICollection<TB_M_UNIT> TB_M_UNIT1 { get; set; }
+        public virtual TB_M_UNIT TB_M_UNIT2 { get; set; }
     }
 }
