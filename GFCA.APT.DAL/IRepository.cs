@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace GFCA.APT.DAL
 {
-    public interface IRepository<TModel>
+    public interface IRepository<T>
     {
-        IEnumerable<TModel> GetAll();
-        TModel GetByID(int primaryKey);
-        void Insert(TModel data);
-        void Update(TModel data);
-        void Delete(int primaryKey);
-        void Save();
-    }
+        IEnumerable<T> GetAll();
+        T GetById(int primaryKey);
+        void Insert(T entity);
+        void Update(T entity);
+		void Update(IEnumerable<T> entities);
+		void Delete(T entity);
+		void Delete(IEnumerable<T> entities);
+
+		IQueryable<T> Table { get; }
+		IQueryable<T> TableNoTracking { get; }
+		IQueryable<T> Where(Expression<Func<T, bool>> expression);
+	}
 }

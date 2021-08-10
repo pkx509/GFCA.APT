@@ -10,6 +10,7 @@ using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Linq.Expressions;
 
 namespace GFCA.APT.DAL.Implements
 {
@@ -20,6 +21,11 @@ namespace GFCA.APT.DAL.Implements
         private readonly IMapper mapper;
         private SqlConnection _conn;
         private SqlTransaction _tranx;
+
+        public IQueryable<BrandDto> Table => throw new NotImplementedException();
+
+        public IQueryable<BrandDto> TableNoTracking => throw new NotImplementedException();
+
         //private SqlConnection _conn;
         public BrandRepository(APTDbContext context)
         {
@@ -65,7 +71,7 @@ namespace GFCA.APT.DAL.Implements
             return result;
         }
 
-        public BrandDto GetByID(int primaryKey)
+        public BrandDto GetById(int primaryKey)
         {
             string sql = "SELECT * FROM TB_M_BRAND WHERE BRAND_ID = @BRAND_ID;";
             var dto = new BrandDto();
@@ -183,6 +189,10 @@ BRAND_ID = @BRAND_ID;
                 throw ex;
             }
         }
+        public void Update(IEnumerable<BrandDto> entities)
+        {
+            throw new NotImplementedException();
+        }
         
         public void Delete(int primaryKey)
         {
@@ -208,10 +218,18 @@ BRAND_ID = @BRAND_ID;
             _conn.Close();
             //_repository.Delete(primaryKey);
         }
-
-        public void Save()
+        public void Delete(BrandDto entity)
         {
-            //_repository.Save();
+            throw new NotImplementedException();
+        }
+        public void Delete(IEnumerable<BrandDto> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<BrandDto> Where(Expression<Func<BrandDto, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
     }
 
