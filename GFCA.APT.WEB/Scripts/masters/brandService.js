@@ -45,6 +45,7 @@
                 .then(saveSuccess)
                 .catch(onPopupAjaxCatch)
                 ;
+
         }
         /*
         if (args.requestType === 'delete') {
@@ -67,9 +68,10 @@
     }
 
     let saveSuccess = function (data) {
-        if (_popupMode === 'add') {
-            return;
-        }
+      //  if (_popupMode === 'add') {
+           // window.location = 'http://localhost:57628/M/Brand';
+          //  return;
+        //}
         appendElement(data, _args.form); //render the edit form with selected record
         let objItem = _args.form.elements.namedItem('BRAND_CODE');
         if (objItem != undefined) {
