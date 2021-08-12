@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using GFCA.APT.DAL.Interfaces;
+using System;
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
@@ -86,10 +87,9 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             if (isDuplicateCode != null)
                 return Json(new { Status = 500, data = JsonConvert.SerializeObject(value),  message = "Duplicate Code", JsonRequestBehavior.AllowGet });
 
-            _brandSvc.Create(value);
-
+            var msg = _brandSvc.Create(value);
             var objData = _brandSvc.GetAll().FirstOrDefault(o => o.BRAND_CODE.Equals(value.BRAND_CODE));
-
+            
             return Json(new { Status = 200, data = JsonConvert.SerializeObject(objData) }, JsonRequestBehavior.AllowGet);
         }
         

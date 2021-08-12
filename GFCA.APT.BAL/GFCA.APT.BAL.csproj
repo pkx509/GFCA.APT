@@ -106,6 +106,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Implements\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
