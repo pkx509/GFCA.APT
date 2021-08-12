@@ -1,5 +1,5 @@
 ﻿using GFCA.APT.BAL.Log;
-using GFCA.APT.DAL;
+using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
@@ -15,12 +15,12 @@ namespace GFCA.APT.BAL.Parties
 
         public IEnumerable<BrandDto> GetAll()
         {
-            var dto = _unitOfWork.Brand.GetAll();
+            var dto = _uow.BrandRepository.All();
             return dto;
         }
-        public BrandDto GetByID(int Id)
+        public BrandDto GetById(int Id)
         {
-            var dto = _unitOfWork.Brand.GetById(Id);
+            var dto = _uow.BrandRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(BrandDto model)
@@ -37,8 +37,8 @@ namespace GFCA.APT.BAL.Parties
                 dto.CREATED_BY = _currentUser.UserName ?? "System";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
-                _unitOfWork.Brand.Insert(dto);
-                //_unitOfWork.Brand.Save();
+                _uow.BrandRepository.Add(dto);
+                _uow.Commit();
 
                 response.Message = $"{typeof(BrandService)} has been created";
             }
@@ -63,7 +63,7 @@ namespace GFCA.APT.BAL.Parties
                     throw new Exception("not existing BrandID");
 
                 dynamic id = model.BRAND_ID ?? 0;
-                var dto = _unitOfWork.Brand.GetById(id);
+                var dto = _uow.BrandRepository.GetById(id);
 
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
@@ -72,8 +72,8 @@ namespace GFCA.APT.BAL.Parties
                 dto.UPDATED_BY = _currentUser.UserName?? "System";
                 dto.UPDATED_DATE = DateTime.UtcNow;
                 
-                _unitOfWork.Brand.Update(dto);
-                //_unitOfWork.Commit();
+                _uow.BrandRepository.Update(dto);
+                _uow.Commit();
 
                 response.Message = $"{typeof(BrandService)} has been changed";
             }
@@ -97,14 +97,14 @@ namespace GFCA.APT.BAL.Parties
                     throw new Exception("not existing BrandID");
 
                 dynamic id = model.BRAND_ID ?? 0;
-                var dto = _unitOfWork.Brand.GetById(id);
-
+                //var dto = _uow.BrandRepository.GetById(id);
+                var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
-                _unitOfWork.Brand.Update(dto);
-                //_unitOfWork.Commit();
+                _uow.BrandRepository.Update(dto);
+                _uow.Commit();
 
                 response.Message = $"{typeof(BrandService)} has been deleted";
             }

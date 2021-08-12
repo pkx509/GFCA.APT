@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using Autofac.Core;
 using Autofac.Integration.Mvc;
 using GFCA.APT.DAL;
 using GFCA.APT.DAL.Implements;
+using GFCA.APT.DAL.Interfaces;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
@@ -34,7 +36,8 @@ namespace GFCA.APT.WEB
             protected override void Load(ContainerBuilder builder)
             {
                 //builder.RegisterType(typeof(APTDbContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
-                builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
+                //builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
+                builder.Register(c => new UnitOfWork("APTDbConnectionString")).As<IUnitOfWork>().InstancePerLifetimeScope();
             }
         }
 
@@ -44,8 +47,8 @@ namespace GFCA.APT.WEB
             {
                 builder.RegisterAssemblyTypes(Assembly.Load("GFCA.APT.BAL"))
                     .Where(t => t.Name.EndsWith("Service"))
-                    .AsImplementedInterfaces();
-                //.InstancePerLifetimeScope();
+                    .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
             }
         }
 

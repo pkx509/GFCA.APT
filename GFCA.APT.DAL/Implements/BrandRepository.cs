@@ -1,99 +1,53 @@
-﻿using AutoMapper;
-using GFCA.APT.Domain.Dto;
-using System;
-using System.Collections.Generic;
-using AutoMapper.QueryableExtensions;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using System.Data;
-using System.Data.Common;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Linq.Expressions;
+using GFCA.APT.Domain.Dto;
+using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class BrandRepository : IRepository<BrandDto>
+    public class BrandRepository : RepositoryBase, IBrandRepository
     {
-        private Repository<TB_M_BRAND> _repository;
-        private MapperConfiguration _mapConfig;
-        private readonly IMapper mapper;
-        private SqlConnection _conn;
-        private SqlTransaction _tranx;
+        
+        public BrandRepository(IDbTransaction transaction): base(transaction) { }
 
-        public IQueryable<BrandDto> Table => throw new NotImplementedException();
-
-        public IQueryable<BrandDto> TableNoTracking => throw new NotImplementedException();
-
-        //private SqlConnection _conn;
-        public BrandRepository(APTDbContext context)
+        public BrandDto GetById(int id)
         {
-            _repository = new Repository<TB_M_BRAND>(context);
-            /*
-            _mapConfig = new MapperConfiguration(cfg => 
-            {
-                cfg.CreateMap<TB_M_BRAND, BrandDto>();
-                cfg.CreateMap<BrandDto, TB_M_BRAND>();
-            });
-            */
-            _mapConfig = new MapperConfiguration(cfg => cfg.CreateMap<TB_M_BRAND, BrandDto>());
-            mapper = _mapConfig.CreateMapper();
-            //_conn = context.Database.Connection;
-            string conStr = ConfigurationManager.ConnectionStrings["APTDbConnectionString"].ToString();
-            _conn = new SqlConnection(conStr);
-            //SqlCommand cmm = new SqlCommand("sql", _conn, _tranx);
+            string sqlQuery = "SELECT * FROM TB_M_BRAND WHERE BRAND_ID = @BRAND_ID;";
+            var query = Connection.Query<BrandDto>(
+                sql: sqlQuery,
+                param: new { BRAND_ID = id },
+                transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
+        public BrandDto GetByCode(string code)
+        {
+            string sqlQuery = "SELECT * FROM TB_M_BRAND WHERE BRAND_CODE = @BRAND_CODE;";
+            var query = Connection.Query<BrandDto>(
+                sql: sqlQuery,
+                param: new { BRAND_CODE = code },
+                transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
+        public IEnumerable<BrandDto> All()
+        {
+            string sqlQuery = "SELECT * FROM TB_M_BRAND;";
+            var query = Connection.Query<BrandDto>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
         }
 
-
-        public IEnumerable<BrandDto> GetAll()
+        public void Add(BrandDto entity)
         {
-            /*
-            var dto = _repository.Get()
-                .Where(s => s.FLAG_ROW.Equals("S"))
-                .ProjectTo<BrandDto>(_mapConfig)
-                .ToList();
-            */
-
-            string sql = "SELECT * FROM TB_M_BRAND;";
-            IList<BrandDto> result = new List<BrandDto>();
-            try
-            {
-                _conn.Open();
-                result = _conn.Query<BrandDto>(sql).AsList();
-                _conn.Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return result;
-        }
-
-        public BrandDto GetById(int primaryKey)
-        {
-            string sql = "SELECT * FROM TB_M_BRAND WHERE BRAND_ID = @BRAND_ID;";
-            var dto = new BrandDto();
-            try
-            {
-                _conn.Open();
-                dto = _conn.QueryFirstOrDefault<BrandDto>(sql, new { BRAND_ID = primaryKey });
-                _conn.Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return dto;
-
-        }
-
-        public void Insert(BrandDto data)
-        {
-
-            string sql =
+            string sqlExecute =
 @"INSERT INTO TB_M_BRAND
 (
   BRAND_CODE
@@ -107,49 +61,34 @@ namespace GFCA.APT.DAL.Implements
 , @FLAG_ROW
 , @CREATED_BY
 , @CREATED_DATE
-);
+); SELECT SCOPE_IDENTITY()
 ";
-            //var entity = mapper.Map<TB_M_BRAND>(data);
-            //var entity = data.ToBrandEntity();
-            //_repository.Insert(entity);
 
-            var parameters = new
+            var parms = new
             {
                 //BRAND_ID = 0,
-                BRAND_CODE = data.BRAND_CODE,
-                BRAND_NAME = data.BRAND_NAME,
-                FLAG_ROW = data.FLAG_ROW,
-                CREATED_BY = data.CREATED_BY,
-                CREATED_DATE = data.CREATED_DATE,
-                //UPDATED_BY = data.UPDATED_BY,
-                //UPDATED_DATE = data.UPDATED_DATE
+                BRAND_CODE = entity.BRAND_CODE,
+                BRAND_NAME = entity.BRAND_NAME,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
+                //UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
             };
-            try
-            {
-                _conn.Open();
-                var effected = _conn.Execute(sql, parameters, commandType: CommandType.Text);
-                _conn.Close();
-            }
-            catch (DbException ex)
-            {
-                _conn.Close();
-                throw ex;
-            }
+
+            entity.BRAND_ID = Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
 
         }
-
-        public void Update(BrandDto data)
+        public void Update(BrandDto entity)
         {
-            //var entity = mapper.Map<TB_M_BRAND>(data);
-            //var entity = data.ToBrandEntity();
-            //_repository.Context.Database.ExecuteSqlCommand
-            //_repository.Update(entity);
-            try
-            {
-                string sql = 
+            string sqlExecute =
 @"UPDATE TB_M_BRAND
 SET
-  BRAND_CODE   = @BRAND_CODE
+BRAND_CODE   = @BRAND_CODE
 , BRAND_NAME   = @BRAND_NAME
 , FLAG_ROW     = @FLAG_ROW
 , UPDATED_BY   = @UPDATED_BY
@@ -157,82 +96,60 @@ SET
 WHERE
 BRAND_ID = @BRAND_ID;
 ";
-                //var parms = new DynamicParameters();
-                //parms.Add("@effected", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue );
-                //int effected = parms.Get<int>("@effected");
-                var parms = new
-                {
-                    BRAND_ID = data.BRAND_ID,
-                    BRAND_CODE = data.BRAND_CODE,
-                    BRAND_NAME = data.BRAND_NAME,
-                    FLAG_ROW = data.FLAG_ROW,
-                    //CREATED_BY = data.CREATED_BY,
-                    //CREATED_DATE = data.CREATED_DATE,
-                    UPDATED_BY = data.UPDATED_BY,
-                    //UPDATED_DATE = data.UPDATED_DATE
-                    UPDATED_DATE = DateTime.UtcNow
-                };
-                /*
-                Z.Dapper.Plus.DapperPlusManager
-                    .Entity<TB_M_BRAND>()
-                    .Table("TB_M_BRAND")
-                    .Identity(x => x.BRAND_ID)
-                    .BatchSize(200);
-                */
-                _conn.Open();
-                var result = _conn.Execute(sql, parms, commandType: CommandType.Text);
-                _conn.Close();
 
-            }
-            catch (Exception ex)
+            var parms = new
             {
-                throw ex;
-            }
+                BRAND_ID = entity.BRAND_ID,
+                BRAND_CODE = entity.BRAND_CODE,
+                BRAND_NAME = entity.BRAND_NAME,
+                FLAG_ROW = entity.FLAG_ROW,
+                //CREATED_BY = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+            };
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
-        public void Update(IEnumerable<BrandDto> entities)
+
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
-        
-        public void Delete(int primaryKey)
-        {
-            string sql =
+
+            string sqlExecute =
 @"DELETE TB_M_BRAND
 WHERE
 BRAND_ID = @BRAND_ID;
 ";
             var parms = new
             {
-                BRAND_ID = primaryKey,
-                //BRAND_CODE = data.BRAND_CODE,
-                //BRAND_NAME = data.BRAND_NAME,
-                //FLAG_ROW = data.FLAG_ROW,
-                //CREATED_BY = data.CREATED_BY,
-                //CREATED_DATE = data.CREATED_DATE,
-                //UPDATED_BY = data.UPDATED_BY,
-                //UPDATED_DATE = data.UPDATED_DATE
+                BRAND_ID = id,
+                //BRAND_CODE = entity.BRAND_CODE,
+                //BRAND_NAME = entity.BRAND_NAME,
+                //FLAG_ROW = entity.FLAG_ROW,
+                //CREATED_BY = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                //UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
                 //UPDATED_DATE = DateTime.UtcNow
             };
-            _conn.Open();
-            var result = _conn.Execute(sql, parms, commandType: CommandType.Text);
-            _conn.Close();
-            //_repository.Delete(primaryKey);
-        }
-        public void Delete(BrandDto entity)
-        {
-            throw new NotImplementedException();
-        }
-        public void Delete(IEnumerable<BrandDto> entities)
-        {
-            throw new NotImplementedException();
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
 
-        public IQueryable<BrandDto> Where(Expression<Func<BrandDto, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
     }
 
+    /*
     public static class BrandRepositoryExtensions
     {
         public static TB_M_BRAND ToBrandEntity(this BrandDto self)
@@ -262,4 +179,6 @@ BRAND_ID = @BRAND_ID;
             return dto;
         }
     }
+    */
+
 }

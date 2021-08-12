@@ -1,5 +1,6 @@
 ﻿using GFCA.APT.BAL.Log;
-using GFCA.APT.DAL;
+using GFCA.APT.DAL.Implements;
+using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Models;
 using System;
@@ -8,7 +9,7 @@ namespace GFCA.APT.BAL
 {
     public abstract class BusinessBase : IDisposable
     {
-        protected readonly IUnitOfWork _unitOfWork;
+        protected readonly IUnitOfWork _uow;
         protected readonly ILogService _logger;
         protected UserInfoDto _currentUser;
         protected BusinessResponse _response;
@@ -21,14 +22,16 @@ namespace GFCA.APT.BAL
         }
         protected BusinessBase(IUnitOfWork unitOfWork, UserInfoDto currentUser, ILogService logger)
         {
-            _unitOfWork = unitOfWork;
+            //_uow = unitOfWork?? new UnitOfWork("APTDbConnectionString");
+            _uow = unitOfWork ?? UnitOfWork.Create();
+            //_uow = unitOfWork;
             _currentUser = currentUser;
             _logger = logger;
         }
 
         public void Dispose()
         {
-            _unitOfWork.Dispose();
+            _uow.Dispose();
         }
 
     }
