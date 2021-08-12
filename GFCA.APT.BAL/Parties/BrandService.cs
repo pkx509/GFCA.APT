@@ -6,6 +6,7 @@ using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GFCA.APT.BAL.Parties
 {
@@ -37,9 +38,13 @@ namespace GFCA.APT.BAL.Parties
             var response = new BusinessResponse();
             try
             {
+                var objDuplicate = _uow.BrandRepository.All().Where(w => w.BRAND_CODE.Equals(model.BRAND_CODE)).FirstOrDefault();
+                if (objDuplicate != null)
+                    throw new Exception("Is duplicate data");
+
                 var dto = new BrandDto();
 
-                dto.BRAND_ID = 0;
+                //dto.BRAND_ID = 0;
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
                 //dto.FLAG_ROW = FLAG_ROW.SHOW;
