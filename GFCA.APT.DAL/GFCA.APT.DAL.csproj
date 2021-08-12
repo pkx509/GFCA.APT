@@ -137,8 +137,10 @@
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Implements\BrandRepository.cs" />
+    <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,109 +1,149 @@
-﻿using AutoMapper;
+﻿using Dapper;
+using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
-using System;
 using System.Collections.Generic;
-using AutoMapper.QueryableExtensions;
-using System.Linq;
-using Dapper;
 using System.Data;
-using System.Data.Common;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Linq.Expressions;
+using System.Linq;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class ProductRepository : IRepository<ProductDto>
+    public class ProductRepository : RepositoryBase, IProductRepository
     {
-        private Repository<TB_M_PRODUCT> _repository;
-        private MapperConfiguration _mapConfig;
-        private readonly IMapper mapper;
-        private SqlConnection _conn;
-        private SqlTransaction _tranx;
+        public ProductRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public IQueryable<ProductDto> Table => throw new NotImplementedException();
-
-        public IQueryable<ProductDto> TableNoTracking => throw new NotImplementedException();
-
-        //private SqlConnection _conn;
-        public ProductRepository(APTDbContext context)
+        public ProductDto GetById(int id)
         {
-            _repository = new Repository<TB_M_PRODUCT>(context);
-            /*
-            _mapConfig = new MapperConfiguration(cfg => 
+            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE BRAND_ID = @BRAND_ID;";
+            var query = Connection.Query<ProductDto>(
+                sql: sqlQuery,
+                param: new { PROD_ID = id },
+                transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
+        public ProductDto GetByCode(string code)
+        {
+            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE BRAND_CODE = @BRAND_CODE;";
+            var query = Connection.Query<ProductDto>(
+                sql: sqlQuery,
+                param: new { PROD_CODE = code },
+                transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
+        public IEnumerable<ProductDto> All()
+        {
+            string sqlQuery = "SELECT * FROM TB_M_PRODUCT;";
+            var query = Connection.Query<ProductDto>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public void Add(ProductDto entity)
+        {
+            string sqlExecute =
+@"INSERT INTO TB_M_PRODUCT
+(
+  BRAND_CODE
+, BRAND_NAME
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+) VALUES (
+  @BRAND_CODE
+, @BRAND_NAME
+, @FLAG_ROW
+, @CREATED_BY
+, @CREATED_DATE
+); SELECT SCOPE_IDENTITY()
+";
+
+            var parms = new
             {
-                cfg.CreateMap<TB_M_BRAND, BrandDto>();
-                cfg.CreateMap<BrandDto, TB_M_BRAND>();
-            });
-            */
-            _mapConfig = new MapperConfiguration(cfg => cfg.CreateMap<TB_M_PRODUCT, ProductDto>());
-            mapper = _mapConfig.CreateMapper();
-            //_conn = context.Database.Connection;
-            string conStr = ConfigurationManager.ConnectionStrings["APTDbConnectionString"].ToString();
-            _conn = new SqlConnection(conStr);
-            //SqlCommand cmm = new SqlCommand("sql", _conn, _tranx);
+                //BRAND_ID     = 0,
+                PROD_CODE      = entity.PROD_CODE,
+                PROD_NAME      = entity.PROD_NAME,
+                FLAG_ROW       = entity.FLAG_ROW,
+                CREATED_BY     = entity.CREATED_BY,
+                CREATED_DATE   = entity.CREATED_DATE?.ToDateTime2(),
+                //UPDATED_BY   = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+            };
+
+            entity.PROD_ID = Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
-
-
-        public IEnumerable<ProductDto> GetAll()
-        {
-            /*
-            var dto = _repository.Get()
-                .Where(s => s.FLAG_ROW.Equals("S"))
-                .ProjectTo<BrandDto>(_mapConfig)
-                .ToList();
-            */
-
-            string sql = "SELECT * FROM TB_M_PRODUCT;";
-            IList<ProductDto> result = new List<ProductDto>();
-            try
-            {
-                _conn.Open();
-                result = _conn.Query<ProductDto>(sql).AsList();
-                _conn.Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return result;
-        }
-
-        public ProductDto GetById(int primaryKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(ProductDto entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(ProductDto entity)
         {
-            throw new NotImplementedException();
+            string sqlExecute =
+@"UPDATE TB_M_PRODUCT
+SET
+BRAND_CODE   = @BRAND_CODE
+, BRAND_NAME   = @BRAND_NAME
+, FLAG_ROW     = @FLAG_ROW
+, UPDATED_BY   = @UPDATED_BY
+, UPDATED_DATE = @UPDATED_DATE
+WHERE
+BRAND_ID = @BRAND_ID;
+";
+
+            var parms = new
+            {
+                PROD_ID        = entity.PROD_ID,
+                PROD_CODE      = entity.PROD_CODE,
+                PROD_NAME      = entity.PROD_NAME,
+                FLAG_ROW       = entity.FLAG_ROW,
+                //CREATED_BY   = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY     = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+            };
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
 
-        public void Update(IEnumerable<ProductDto> entities)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Delete(ProductDto entity)
-        {
-            throw new NotImplementedException();
-        }
+            string sqlExecute =
+@"DELETE TB_M_PRODUCT
+WHERE
+BRAND_ID = @BRAND_ID;
+";
+            var parms = new
+            {
+                PROD_ID = id,
+                //BRAND_CODE = entity.BRAND_CODE,
+                //BRAND_NAME = entity.BRAND_NAME,
+                //FLAG_ROW = entity.FLAG_ROW,
+                //CREATED_BY = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                //UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+                //UPDATED_DATE = DateTime.UtcNow
+            };
 
-        public void Delete(IEnumerable<ProductDto> entities)
-        {
-            throw new NotImplementedException();
-        }
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
 
-        public IQueryable<ProductDto> Where(Expression<Func<ProductDto, bool>> expression)
-        {
-            throw new NotImplementedException();
         }
     }
 }

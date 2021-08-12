@@ -1,4 +1,5 @@
 ﻿using GFCA.APT.BAL.Log;
+using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
@@ -10,6 +11,14 @@ namespace GFCA.APT.BAL.Parties
 {
     public class BrandService : BusinessBase, IBrandService
     {
+        public static BrandService CreateInstant(ILogService log)
+        {
+            var uow = UnitOfWork.CreateInstant();
+            var svc = new BrandService(uow, log);
+
+            return svc;
+        }
+
         public BrandService(IUnitOfWork unitOfWork, ILogService log)
             : base(unitOfWork, log) { }
 

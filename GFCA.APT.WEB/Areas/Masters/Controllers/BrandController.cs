@@ -1,18 +1,13 @@
-﻿using GFCA.APT.BAL;
-using GFCA.APT.BAL.Log;
+﻿using GFCA.APT.BAL.Log;
 using GFCA.APT.BAL.Parties;
 using GFCA.APT.DAL.Implements;
 using System.Web.Mvc;
-using GFCA.APT.DAL;
 using GFCA.APT.Domain.Dto;
 using Syncfusion.EJ2.Base;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using GFCA.APT.WEB.CustomAttributes;
-using System.Reflection;
-using System.Web.Http.Filters;
 using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
@@ -20,12 +15,10 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
     //[TypeFilter(typeof(LogActionFilter), Arguments = new object[] { 10 })]
     public class BrandController : ControllerWebBase
     {
-        private readonly IUnitOfWork _uow;
         private readonly IBrandService _brandSvc;
         public BrandController(ILogService log) : base(log)
         {
-            //_uow = new UnitOfWork();
-            _brandSvc = new BrandService(_uow, log);
+            _brandSvc = BrandService.CreateInstant(log);
         }
 
         // GET: Masters/Brand
@@ -82,7 +75,6 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             return PartialView("_BrandAddDialog");
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public JsonResult Add(BrandDto value)
         {

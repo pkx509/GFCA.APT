@@ -1,30 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="GFCA.APT.BAL.Log.LogService" Collapsed="true">
-    <Position X="1.75" Y="1.5" Width="1.5" />
+  <Class Name="GFCA.APT.BAL.Parties.BrandService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAcAAAAAAAAAAAAAAAAEAAAAAAEAEAAA=</HashCode>
-      <FileName>Log\LogService.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="GFCA.APT.BAL.Parties.BrandService" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAgAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAEAAEACAgAAAAAAAIA=</HashCode>
       <FileName>Parties\BrandService.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GFCA.APT.BAL.Parties.ChannelService" Collapsed="true">
-    <Position X="5" Y="5" Width="1.5" />
+    <Position X="2.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAgAAAAAAAIA=</HashCode>
       <FileName>Parties\ChannelService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GFCA.APT.BAL.Parties.ClientService" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="8.75" Width="1.5" />
+    <Position X="0.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Parties\ClientService.cs</FileName>
@@ -32,39 +24,55 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GFCA.APT.BAL.Parties.CustomerService" Collapsed="true">
-    <Position X="5" Y="4" Width="1.5" />
+    <Position X="2.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Parties\CustomerService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GFCA.APT.BAL.Warehouses.ProductService" Collapsed="true">
-    <Position X="5.75" Y="7.25" Width="1.5" />
+    <Position X="4.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAEAAEACAgAAgAAAAAA=</HashCode>
       <FileName>Warehouses\ProductService.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="GFCA.APT.BAL.Log.ILogService" Collapsed="true">
-    <Position X="3.75" Y="1.5" Width="1.5" />
+  <Class Name="GFCA.APT.BAL.BusinessBase" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAYAAAAAAAAAAAAAAAAEAAAAAAEAEAAA=</HashCode>
-      <FileName>Log\ILogService.cs</FileName>
+      <HashCode>AAAAAAAAACAAACAAAEAAAAAAIAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessBase.cs</FileName>
     </TypeIdentifier>
-  </Interface>
-  <Interface Name="GFCA.APT.BAL.Parties.IBrandService">
-    <Position X="2.25" Y="5.75" Width="1.5" />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GFCA.APT.BAL.Log.LogService" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAgAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAcAAAAAAAAAAAAAAAAEAAAAAAEAEAAA=</HashCode>
+      <FileName>Log\LogService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="GFCA.APT.BAL.Parties.IBrandService" Collapsed="true">
+    <Position X="4.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAgAAAAAAAIA=</HashCode>
       <FileName>Parties\IBrandService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="GFCA.APT.BAL.Warehouses.IProductService" Collapsed="true">
-    <Position X="6" Y="8.25" Width="1.5" />
+    <Position X="4.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAgAAgAAAAAA=</HashCode>
       <FileName>Warehouses\IProductService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GFCA.APT.BAL.Log.ILogService" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAAAAAAAAAAAEAAAAAAEAEAAA=</HashCode>
+      <FileName>Log\ILogService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

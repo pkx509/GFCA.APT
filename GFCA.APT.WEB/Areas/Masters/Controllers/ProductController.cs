@@ -1,7 +1,7 @@
 ﻿using GFCA.APT.BAL.Log;
 using GFCA.APT.BAL.Warehouses;
-using GFCA.APT.DAL;
 using GFCA.APT.DAL.Implements;
+using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
@@ -18,8 +18,8 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         private readonly IProductService _productSvc;
         public ProductController(ILogService log) : base(log)
         {
-            _uow = new UnitOfWork();
-            _productSvc = new ProductService(_uow, log);
+            _uow = UnitOfWork.CreateInstant();
+            _productSvc = ProductService.CreateInstant(log);
         }
 
         [HttpGet()]
@@ -31,7 +31,6 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             return View();
         }
 
-        //[HttpGet]
         public ActionResult UrlDataSource(DataManagerRequest dm)
         {
             IEnumerable DataSource = _productSvc.GetAll();
@@ -64,21 +63,15 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         [HttpPost]
         public PartialViewResult BeforeEdit(ProductDto value)
         {
-            //var service = _brandSvc.GetByID(value.BRAND_ID);
-            //ViewBag.dataSource = _brandSvc.GetAll();
             return PartialView("_ProductEditDialog", value);
         }
 
         [HttpPost]
         public PartialViewResult BeforeAdd()
         {
-            //var service = _brandSvc.GetAll();
-            //ViewBag.dataSource = _brandSvc.GetAll();
             return PartialView("_ProductAddDialog");
         }
 
-
-        //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public JsonResult Add(ProductDto value)
         {

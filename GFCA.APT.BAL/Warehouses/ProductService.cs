@@ -1,22 +1,27 @@
 ﻿using GFCA.APT.BAL.Log;
-using GFCA.APT.DAL;
+using GFCA.APT.DAL.Implements;
+using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Warehouses
 {
     public class ProductService : BusinessBase, IProductService
     {
+        public static ProductService CreateInstant(ILogService log)
+        {
+            var uow = UnitOfWork.CreateInstant();
+            var svc = new ProductService(uow, log);
+
+            return svc;
+        }
         public ProductService(IUnitOfWork unitOfWork, ILogService log) : base(unitOfWork, log) { }
 
         public IEnumerable<ProductDto> GetAll()
         {
-            var dto = _unitOfWork.Product.GetAll();
+            var dto = _uow.ProductRepository.All();
             return dto;
         }
 

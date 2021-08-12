@@ -10,9 +10,11 @@ namespace GFCA.APT.DAL.Implements
     {
         private IDbConnection _connection;
         private IDbTransaction _transaction;
-        private bool _disposed = false;
+        private IBrandRepository _brandRepository;
+        private IProductRepository _productRepository;
 
-        public static IUnitOfWork Create()
+        private bool _disposed = false;
+        public static IUnitOfWork CreateInstant()
         {
             var uow = new UnitOfWork("APTDbConnectionString");
             return uow;
@@ -31,7 +33,6 @@ namespace GFCA.APT.DAL.Implements
             _transaction = _connection.BeginTransaction();
         }
         
-        private IBrandRepository _brandRepository;
         public IBrandRepository BrandRepository
         {
             get
@@ -39,10 +40,17 @@ namespace GFCA.APT.DAL.Implements
                 return _brandRepository ?? (_brandRepository = new BrandRepository(_transaction));
             }
         }
-
+        public IProductRepository ProductRepository
+        {
+            get
+            {
+                return _productRepository ?? (_productRepository = new ProductRepository(_transaction));
+            }
+        }
         private void resetRepositories()
         {
             _brandRepository = null;
+            _productRepository = null;
         }
 
         public void Commit()

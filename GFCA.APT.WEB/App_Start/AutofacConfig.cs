@@ -37,7 +37,8 @@ namespace GFCA.APT.WEB
             {
                 //builder.RegisterType(typeof(APTDbContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
                 //builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
-                builder.Register(c => new UnitOfWork("APTDbConnectionString")).As<IUnitOfWork>().InstancePerLifetimeScope();
+                //builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerLifetimeScope();
+                builder.Register(c => new UnitOfWork("APTDbConnectionString")).As<IUnitOfWork>().InstancePerRequest();
             }
         }
 

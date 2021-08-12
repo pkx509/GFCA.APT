@@ -22,9 +22,8 @@ namespace GFCA.APT.BAL
         }
         protected BusinessBase(IUnitOfWork unitOfWork, UserInfoDto currentUser, ILogService logger)
         {
-            //_uow = unitOfWork?? new UnitOfWork("APTDbConnectionString");
-            _uow = unitOfWork ?? UnitOfWork.Create();
-            //_uow = unitOfWork;
+            //_uow = unitOfWork ?? UnitOfWork.Create();
+            _uow = unitOfWork;
             _currentUser = currentUser;
             _logger = logger;
         }
