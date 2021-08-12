@@ -52,6 +52,7 @@
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\BrandDto.cs" />
     <Compile Include="Dto\CostCenterDto.cs" />
+    <Compile Include="Dto\ProductDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />

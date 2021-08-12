@@ -1,34 +1,189 @@
-﻿@model GFCA.APT.WEB.Areas.Masters.Data.ProductViewModel
-@using Syncfusion.EJ2
+﻿@using Syncfusion.EJ2
 
 <div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("ProductId", "0", new { disabled = true })
+                @Html.TextBox("PROD_ID", "0", new { disabled = true })
                 <span class="e-float-line"></span>
-                @Html.Label("ProductId", "ProductId ID", new { @class = "e-float-text e-label-top" })
+                @Html.Label("PROD_ID", "ProductId ID", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("ProductCode", string.Empty)
+                @Html.TextBox("PROD_CODE", string.Empty)
                 <span class="e-float-line"></span>
-                @Html.Label("ProductCode", "Product Code", new { @class = "e-float-text e-label-top" })
+                @Html.Label("PROD_CODE", "Product Code", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("ProductName", string.Empty)
+                @Html.TextBox("PROD_NAME", string.Empty)
                 <span class="e-float-line"></span>
-                @Html.Label("ProductName", "Product Name", new { @class = "e-float-text e-label-top" })
+                @Html.Label("PROD_NAME", "Product Name", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("CUST_CODE", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("CUST_CODE", "CUST CODE", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_CODE", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_CODE", "MAT_CODE", new { @class = "e-float-text e-label-top" })
             </div>
         </div>
     </div>
 
+    @*
+
+
+
+
+
+
+
+
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("EMIS_CODE", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("EMIS_CODE", "EMIS_CODE", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("FORMULA", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("FORMULA", "FORMULA", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("ORG_CODE", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("ORG_CODE", "ORG_CODE", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("DIV_CODE", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("DIV_CODE", "DIV_CODE", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP", "MAT_GROUP", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP_DESC", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP_DESC", "MAT_GROUP_DESC", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP1", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP1", "MAT_GROUP1", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP1_DESC", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP1_DESC", "MAT_GROUP1_DESC", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP2", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP2", "MAT_GROUP2", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP2_DESC", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP2_DESC", "MAT_GROUP2_DESC", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP3", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP3", "MAT_GROUP3", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("MAT_GROUP3_DESC", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("MAT_GROUP3_DESC", "MAT_GROUP3_DESC", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("PACK", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("PACK", "PACK", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="e-float-input e-control-wrapper">
+                @Html.TextBox("PACK_DESC", string.Empty)
+                <span class="e-float-line"></span>
+                @Html.Label("PACK_DESC", "PACK_DESC", new { @class = "e-float-text e-label-top" })
+            </div>
+        </div>
+
+
+
+    </div>
+
+    *@
 </div>
 
-@Html.EJS().ScriptManager()
+    @Html.EJS().ScriptManager()

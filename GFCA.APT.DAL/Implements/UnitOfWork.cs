@@ -30,7 +30,11 @@ namespace GFCA.APT.DAL.Implements
         }
 
         private BrandRepository _brand;
+        private ProductRepository _product;
         public BrandRepository Brand => _brand ?? new BrandRepository(_context);
+
+ 
+        public ProductRepository Product => _product ?? new ProductRepository(_context);
 
         public void Commit()
         {

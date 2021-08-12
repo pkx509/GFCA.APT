@@ -1,7 +1,133 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Material and Product";
 }
 
-<h2>Material &amp; Product</h2>
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2
+
+
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 400px;
+        }
+
+        #ShipAddress {
+            resize: vertical;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 700px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+                min-height: 415px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+    <script>
+
+        var urlServices = {
+            BeforeAdd: "@Url.Action("BeforeAdd", "Product", new { Area = "Masters" })",
+            BeforeEdit: "@Url.Action("BeforeEdit", "Product", new { Area = "Masters" })",
+
+            Add: "@Url.Action("Add", "Product", new { Area = "Masters" })",
+            Edit: "@Url.Action("Edit", "Product", new { Area = "Masters" })",
+            Delete: "@Url.Action("Delete", "Product", new { Area = "Masters" })",
+        }
+
+    </script>
+}
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-lg-12 p-1">
+                <div class="card card-success card-outline">
+                    <div class="card-body text-sm p-1">
+
+                        @(Html.EJS()
+.Grid("grdProduct")
+.Height("430")
+.DataSource(ds =>
+{
+    ds
+    .Url(@Url.Action("UrlDatasource", "Product", new { Area = "Masters" }))
+    //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
+    //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
+    .RemoveUrl(@Url.Action("Delete", "Product", new { Area = "Masters" }))
+    .Adaptor("UrlAdaptor")
+    ;
+})
+.DataBound("product.OnDataBound")
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport().ToolbarClick("product.OnExcelExportClick")
+.Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
+.EditSettings(edit =>
+{
+    edit
+    .AllowEditOnDblClick(false)
+    .AllowAdding(true)
+    .AllowEditing(true)
+    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .Mode(EditMode.Dialog)
+    .Template("#dialogtemplate");
+})
+.ActionComplete("product.OnActionComplete")
+.Columns(col =>
+{
+    col.Field("BRAND_ID").HeaderText("Brand ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("BRAND_CODE").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("BRAND_NAME").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+    col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+})
+.Render())
+
+                    </div>
+                </div><!-- /.card -->
+            </div>
+        </div><!-- /.row -->
+
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+
+
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp">
+    </div>
+</script>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/masters/productService.js")
+
+}
+
 

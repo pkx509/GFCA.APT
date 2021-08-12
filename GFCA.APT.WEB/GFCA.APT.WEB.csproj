@@ -4049,6 +4049,7 @@
     <Content Include="Areas\Masters\Views\Shared\_BrandAddDialog.cshtml" />
     <Content Include="Areas\Masters\Views\Shared\_BrandEditDialog.cshtml" />
     <Content Include="libman.json" />
+    <Content Include="Areas\Masters\Views\Shared\_ProductAddDialog.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4095,6 +4096,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\productService.js" />
     <Content Include="Scripts\masters\brandService.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
