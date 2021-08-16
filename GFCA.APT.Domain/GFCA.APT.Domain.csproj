@@ -73,14 +73,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\Auditable.cs" />
-    <Compile Include="Dto\CustomerDto.cs" />
-    <Compile Include="Dto\BrandDto.cs" />
-    <Compile Include="Dto\CostCenterDto.cs" />
-    <Compile Include="Dto\EmissionDto.cs" />
-    <Compile Include="Dto\ProductDto.cs" />
-    <Compile Include="Dto\UserInfoDto.cs" />
-    <Compile Include="Dto\UserLoginDto.cs" />
+    <Compile Include="DtoTmp\Auditable.cs" />
+    <Compile Include="DtoTmp\CustomerDto.cs" />
+    <Compile Include="DtoTmp\BrandDto.cs" />
+    <Compile Include="DtoTmp\CostCenterDto.cs" />
+    <Compile Include="DtoTmp\EmissionDto.cs" />
+    <Compile Include="DtoTmp\ProductDto.cs" />
+    <Compile Include="DtoTmp\UserInfoDto.cs" />
+    <Compile Include="DtoTmp\UserLoginDto.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />
     <Compile Include="Enums\FLAG_DEL.cs" />
