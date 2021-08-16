@@ -5,59 +5,62 @@
 
     this.OnActionComplete = function (args) {
         _args = args;
+        try {
+            debugger;
+            let ajax = new ej.base.Ajax({
+                type: "POST",
+                contentType: "application/json",
+            });
+            if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                _popupMode = args.requestType;
 
-        let ajax = new ej.base.Ajax({
-            type: "POST",
-            contentType: "application/json",
-        });
-
-        if (args.requestType === 'beginEdit' || args.requestType === 'add') {
-            _popupMode = args.requestType;
-
-            if (_popupMode === 'beginEdit') {
-                ajax.url = urlServices.BeforeEdit; //render the partial view
+                if (_popupMode === 'beginEdit') {
+                    ajax.url = urlServices.BeforeEdit; //render the partial view
+                }
+                if (_popupMode === 'add') {
+                    ajax.url = urlServices.BeforeAdd;  //render the partial view
+                }
+                ajax.data = JSON.stringify({ value: args.rowData });
+                ajax
+                    .send()
+                    .then(renderPatialFormSuccess)
+                    .catch(onPopupAjaxCatch)
+                    ;
             }
-            if (_popupMode === 'add') {
-                ajax.url = urlServices.BeforeAdd;  //render the partial view
+
+            if (args.requestType === 'save') { // popup save
+                if (!_popupMode)
+                    return false;
+
+                if (_popupMode === 'beginEdit') {
+                    ajax.url = urlServices.Edit;
+                }
+                if (_popupMode === 'add') {
+                    ajax.url = urlServices.Add;
+                }
+
+                ajax.data = JSON.stringify({ value: args.data });
+                ajax
+                    .send()
+                    .then(saveSuccess)
+                    .catch(onPopupAjaxCatch)
+                    ;
+
             }
-            ajax.data = JSON.stringify({ value: args.rowData });
-            ajax
-                .send()
-                .then(renderPatialFormSuccess)
-                .catch(onPopupAjaxCatch)
-                ;
+            /*
+            if (args.requestType === 'delete') {
+                ajax.url = urlServices.PostDelete;
+                ajax.data = JSON.stringify({ value: args.data });
+                ajax
+                    .send()
+                    .then(saveSuccess)
+                    .catch(onPopupAjaxCatch)
+                    ;
+            }
+            */
+        } catch (e) {
+            console.log(e);
         }
-
-        if (args.requestType === 'save') { // popup save
-            if (!_popupMode)
-                return false;
-
-            if (_popupMode === 'beginEdit') {
-                ajax.url = urlServices.Edit;
-            }
-            if (_popupMode === 'add') {
-                ajax.url = urlServices.Add;
-            }
-
-            ajax.data = JSON.stringify({ value: args.data });
-            ajax
-                .send()
-                .then(saveSuccess)
-                .catch(onPopupAjaxCatch)
-                ;
-
-        }
-        /*
-        if (args.requestType === 'delete') {
-            ajax.url = urlServices.PostDelete;
-            ajax.data = JSON.stringify({ value: args.data });
-            ajax
-                .send()
-                .then(saveSuccess)
-                .catch(onPopupAjaxCatch)
-                ;
-        }
-        */
 
     }
 

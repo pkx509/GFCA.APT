@@ -5,25 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6292087b870042ff9f473381f9523913" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.tb_email_inbound" Width="1.5" PointX="17.75" PointY="16.75" />
-        <EntityTypeShape EntityType="Models.TB_M_ACCOUNT_PAYABLE" Width="1.5" PointX="7.75" PointY="2.75" />
-        <EntityTypeShape EntityType="Models.TB_M_ACCOUNT_RECEIVEABLE" Width="1.5" PointX="18.75" PointY="7.75" />
         <EntityTypeShape EntityType="Models.TB_M_ACTIVITY" Width="1.5" PointX="11" PointY="10.875" />
-        <EntityTypeShape EntityType="Models.TB_M_BRAND" Width="1.5" PointX="5.75" PointY="20.75" />
+        <EntityTypeShape EntityType="Models.TB_M_BRAND" Width="1.5" PointX="15.75" PointY="16.75" />
         <EntityTypeShape EntityType="Models.TB_M_BUDGET_TYPE" Width="1.5" PointX="0.75" PointY="15.375" />
-        <EntityTypeShape EntityType="Models.TB_M_CHANNEL" Width="1.5" PointX="8.75" PointY="20.5" />
+        <EntityTypeShape EntityType="Models.TB_M_CHANNEL" Width="1.5" PointX="8.75" PointY="11.875" />
         <EntityTypeShape EntityType="Models.TB_M_COMPANY" Width="1.5" PointX="13.75" PointY="3.25" />
-        <EntityTypeShape EntityType="Models.TB_M_COST_CENTER" Width="1.5" PointX="16" PointY="8.375" />
-        <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="8.75" PointY="12.25" />
-        <EntityTypeShape EntityType="Models.TB_M_DISTRIBUTOR" Width="1.5" PointX="8.75" PointY="16.375" />
+        <EntityTypeShape EntityType="Models.TB_M_COST_CENTER" Width="1.5" PointX="16" PointY="12.125" />
+        <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="8.75" PointY="15.625" />
+        <EntityTypeShape EntityType="Models.TB_M_DISTRIBUTOR" Width="1.5" PointX="8.75" PointY="19.75" />
         <EntityTypeShape EntityType="Models.TB_M_DOCUMENT_TYPE" Width="1.5" PointX="1.5" PointY="11.375" />
-        <EntityTypeShape EntityType="Models.TB_M_EMISSION" Width="1.5" PointX="6.5" PointY="16.625" />
+        <EntityTypeShape EntityType="Models.TB_M_EMISSION" Width="1.5" PointX="6.5" PointY="19.875" />
         <EntityTypeShape EntityType="Models.TB_M_GL_ACCOUNT" Width="1.5" PointX="8.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Models.TB_M_INTERNAL_ORDER" Width="1.5" PointX="16" PointY="12.125" />
+        <EntityTypeShape EntityType="Models.TB_M_INTERNAL_ORDER" Width="1.5" PointX="16" PointY="8.375" />
         <EntityTypeShape EntityType="Models.TB_M_ORGANIZATION" Width="1.5" PointX="16" PointY="3" />
         <EntityTypeShape EntityType="Models.TB_M_PRODUCT" Width="1.5" PointX="3.75" PointY="13.75" />
         <EntityTypeShape EntityType="Models.TB_M_PROMOTION_GROUP" Width="1.5" PointX="0.75" PointY="5.875" />
-        <EntityTypeShape EntityType="Models.TB_M_UNIT" Width="1.5" PointX="15.75" PointY="16.75" />
+        <EntityTypeShape EntityType="Models.TB_M_UNIT" Width="1.5" PointX="5.75" PointY="13.75" />
         <EntityTypeShape EntityType="Models.TB_P_COST_IO" Width="1.5" PointX="18.25" PointY="3.125" />
         <EntityTypeShape EntityType="Models.TB_P_CUSTOMER_PARTY" Width="1.5" PointX="11" PointY="5.125" />
         <EntityTypeShape EntityType="Models.TB_P_PRODUCT_GROUP" Width="1.5" PointX="6" PointY="6" />
@@ -33,11 +30,11 @@
         <EntityTypeShape EntityType="Models.TB_T_DEBIT_NOTE" Width="1.5" PointX="13" PointY="21.625" />
         <EntityTypeShape EntityType="Models.TB_T_DOCUMENT" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Models.TB_T_FIXED_CONTRACT" Width="1.5" PointX="3" PointY="20.5" />
-        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_INVEST" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_INVEST" Width="1.5" PointX="5.25" PointY="2.75" />
         <EntityTypeShape EntityType="Models.TB_T_PROMOTION_PLAN_H" Width="1.5" PointX="3" PointY="5.375" />
-        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_SALE" Width="1.5" PointX="5.25" PointY="2.75" />
-        <EntityTypeShape EntityType="Models.VW_List_Costcenter" Width="1.5" PointX="9.75" PointY="2.75" />
-        <EntityTypeShape EntityType="Models.VW_List_TradeActivity" Width="1.5" PointX="5.75" PointY="13.75" />
+        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_SALE" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="Models.VW_List_Costcenter" Width="1.5" PointX="7.75" PointY="2.75" />
+        <EntityTypeShape EntityType="Models.VW_List_TradeActivity" Width="1.5" PointX="9.75" PointY="2.75" />
         <AssociationConnector Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" />
         <AssociationConnector Association="Models.FK_TB_T_BUDGET_TB_M_BUDGET_TYPE" />
         <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_CHANNEL" />

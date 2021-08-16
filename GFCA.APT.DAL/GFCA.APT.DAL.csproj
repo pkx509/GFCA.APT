@@ -33,6 +33,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <OutputPath>bin\Development\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
@@ -137,23 +161,16 @@
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Implements\BrandRepository.cs" />
+    <Compile Include="Implements\EmissionRepository.cs" />
     <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\IEmissionRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implements\UnitOfWork.cs" />
-    <Compile Include="tb_email_inbound.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_ACCOUNT_PAYABLE.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_ACCOUNT_RECEIVEABLE.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_M_ACTIVITY.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>

@@ -1,33 +1,83 @@
 ﻿@using Syncfusion.EJ2
 
-<div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BRAND_ID", "0", new { disabled = true })
-                <span class="e-float-line"></span>
-                @Html.Label("BRAND_ID", "Brand ID", new { @class = "e-float-text e-label-top" })
-            </div>
-        </div>
-    </div>
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<form class="form-horizontal">
+    <div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-group row">
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BRAND_CODE")
-                <span class="e-float-line"></span>
-                @Html.Label("BRAND_CODE", "Brand Code", new { @class = "e-float-text e-label-top" })
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <div class="e-float-input e-control-wrapper">
-                @Html.TextBox("BRAND_NAME")
-                <span class="e-float-line"></span>
-                @Html.Label("BRAND_NAME", "Brand Name", new { @class = "e-float-text e-label-top" })
-            </div>
-        </div>
-    </div>
+                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                        ID
+                    </label>
+                    <div class="col-sm-9 col-md-10 col-lg-9">
+                        @Html.EJS().TextBox("BRAND_ID").Value("0").HtmlAttributes(disabled).Render()
+                    </div>
 
-</div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-group row">
+
+                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                        ID
+                    </label>
+                    <div class="col-sm-9 col-md-10 col-lg-9">
+                        @Html.EJS().TextBox("CLIENT_CODE").Value("1").HtmlAttributes(disabled).Render()
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-group row">
+
+                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                        Code
+                    </label>
+                    <div class="col-sm-9 col-md-10 col-lg-9">
+                        @Html.EJS().TextBox("BRAND_CODE").Placeholder("Brand Code").CssClass("mandatory").Render()
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-group row">
+
+                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                        Name
+                    </label>
+                    <div class="col-sm-9 col-md-10 col-lg-9">
+                        @Html.EJS().TextBox("BRAND_NAME").Placeholder("Brand Name").Render()
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-group row">
+
+                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                        Active
+                    </label>
+                    <div class="col-sm-9 col-md-10 col-lg-9">
+                        @Html.EJS().CheckBox("IS_ACTIVED").Render()
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
 
 @Html.EJS().ScriptManager()

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Web;
-using System.Diagnostics;
 using System.Web.Mvc;
 using System.Web.Routing;
-using GFCA.APT.BAL.Log;
+using GFCA.APT.BAL.Interfaces;
 
 namespace GFCA.APT.WEB.CustomAttributes
 {
     public class LogActionFilter : ActionFilterAttribute
     {
-        protected ILogService _logger { get; }
+        protected readonly ILogService _logger;
         public LogActionFilter(ILogService logger)
         {
             _logger = logger;
@@ -53,8 +52,9 @@ namespace GFCA.APT.WEB.CustomAttributes
         {
             var controllerName = routeData.Values["controller"];
             var actionName = routeData.Values["action"];
-            var message = String.Format("{0} controller:{1} action:{2}", methodName, controllerName, actionName);
+            var message = string.Format("{0} controller:{1} action:{2}", methodName, controllerName, actionName);
             //Debug.WriteLine(message, "Action Filter Log");
+            _logger.Debug(message + "Action Filter Log");
         }
     }
 }

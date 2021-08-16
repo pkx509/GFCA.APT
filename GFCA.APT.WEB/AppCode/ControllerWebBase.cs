@@ -1,4 +1,5 @@
-﻿using GFCA.APT.BAL.Log;
+﻿using log4net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -6,11 +7,8 @@ namespace GFCA.APT.WEB
 {
     public abstract class ControllerWebBase : Controller
     {
-        protected readonly ILogService _logger;
-        protected ControllerWebBase(ILogService log)
-        {
-            _logger = log;
-        }
+        private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
@@ -27,7 +25,7 @@ namespace GFCA.APT.WEB
             userName = !string.IsNullOrWhiteSpace(userName) ? userName : "anonymous";
 
             string text = $"User : {userName},  HttpMethod : {Request.HttpMethod}, Controller : {controllerName}, Action : {actionName} ";
-            _logger.Info(text);
+            logger.Info(text);
             base.OnActionExecuting(filterContext);
         }
     }

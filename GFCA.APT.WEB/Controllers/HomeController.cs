@@ -1,11 +1,11 @@
-﻿using GFCA.APT.BAL.Log;
+﻿using GFCA.APT.BAL.Interfaces;
 using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Controllers
 {
     public class HomeController : ControllerWebBase
     {
-        public HomeController(ILogService logger):base(logger) { }
+        public HomeController(ILogService logger) { }
 
         public ActionResult Index()
         {

@@ -1,16 +1,13 @@
-﻿using GFCA.APT.BAL.Log;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GFCA.APT.BAL.Interfaces;
+using log4net;
+using System.Reflection;
 using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
     public class FixedContractController : ControllerWebBase
     {
-        public FixedContractController(ILogService log): base(log) { }
-        
+        private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Transactions/FixedContract
         public ActionResult Index()
         {
@@ -19,7 +16,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         public ActionResult DocumentItem(int id)
         {
-            _logger.Debug($"QueryString is {id}");
+            logger.Debug($"QueryString is {id}");
             return View();
         }
 

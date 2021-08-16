@@ -12,6 +12,7 @@ namespace GFCA.APT.DAL.Implements
         private IDbTransaction _transaction;
         private IBrandRepository _brandRepository;
         private IProductRepository _productRepository;
+        private IEmissionRepository _emissionRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -47,10 +48,19 @@ namespace GFCA.APT.DAL.Implements
                 return _productRepository ?? (_productRepository = new ProductRepository(_transaction));
             }
         }
+        public IEmissionRepository EmissionRepository
+        {
+            get
+            {
+                return _emissionRepository ?? (_emissionRepository = new EmissionRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
             _productRepository = null;
+            _emissionRepository = null;
         }
 
         public void Commit()

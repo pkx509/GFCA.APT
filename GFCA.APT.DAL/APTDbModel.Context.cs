@@ -25,9 +25,6 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_email_inbound> tb_email_inbound { get; set; }
-        public virtual DbSet<TB_M_ACCOUNT_PAYABLE> TB_M_ACCOUNT_PAYABLE { get; set; }
-        public virtual DbSet<TB_M_ACCOUNT_RECEIVEABLE> TB_M_ACCOUNT_RECEIVEABLE { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
         public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }

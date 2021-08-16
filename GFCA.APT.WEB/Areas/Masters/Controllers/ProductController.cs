@@ -1,5 +1,5 @@
-﻿using GFCA.APT.BAL.Log;
-using GFCA.APT.BAL.Warehouses;
+﻿using GFCA.APT.BAL.Implements;
+using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
@@ -16,10 +16,10 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IProductService _productSvc;
-        public ProductController(ILogService log) : base(log)
+        public ProductController(ILogService log)
         {
             _uow = UnitOfWork.CreateInstant();
-            _productSvc = ProductService.CreateInstant(log);
+            _productSvc = ProductService.CreateInstant();
         }
 
         [HttpGet()]

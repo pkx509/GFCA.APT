@@ -1,10 +1,7 @@
 ﻿using Autofac;
-using Autofac.Core;
 using Autofac.Integration.Mvc;
-using GFCA.APT.DAL;
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
-using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -22,9 +19,14 @@ namespace GFCA.APT.WEB
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
+            // Register dependencies in filter attributes
+            builder.RegisterFilterProvider();
+
             builder.RegisterModule(new DataAccessLayer());
             builder.RegisterModule(new BusinessLayer());
 
+            // Register dependencies in custom views
+            builder.RegisterSource(new ViewRegistrationSource());
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

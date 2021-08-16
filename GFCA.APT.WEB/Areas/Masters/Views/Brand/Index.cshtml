@@ -1,20 +1,15 @@
-﻿@{
-    ViewBag.Title = "Brand";
-}
+﻿@{ ViewBag.Title = "Brand"; }
 
+@using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
-
 
 @section styles
 {
     <style>
         .form-group.col-md-6 {
             width: 250px;
-        }
-
-        #ShipAddress {
-            resize: vertical;
         }
 
         :-ms-fullscreen, .e-dialog {
@@ -30,8 +25,8 @@
         @@media only screen and (min-width: 992px) {
             .e-dialog.e-control.e-popup {
                 /* min-width: 550px !important;*/
-                min-width: 300px !important; 
-                min-height: 415px;
+                min-width: 300px !important;
+                min-height: 180px;
             }
 
             .e-bigger.e-dialog.e-control.e-popup,
@@ -40,22 +35,78 @@
             }
         }
     </style>
-    <script>
+}
+@*
+    @{
+        Dictionary<string, object> rows = new Dictionary<string, object>();
+        rows.Add("rows", "2");
+        Dictionary<string, object> resetType = new Dictionary<string, object>();
+        resetType.Add("type", "reset");
+        Dictionary<string, object> submitType = new Dictionary<string, object>();
+        submitType.Add("type", "submit");
 
-        var urlServices = {
-            BeforeAdd: "@Url.Action("BeforeAdd", "Brand", new { Area = "Masters" })",
-            BeforeEdit: "@Url.Action("BeforeEdit", "Brand", new { Area = "Masters" })",
+        Func<object, object> Content1 = @<div>
 
-            Add: "@Url.Action("Add", "Brand", new { Area = "Masters" })",
-            Edit: "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
-            Delete: "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
-        }
+        <div>
 
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <div id="formId" class="form-horizontal e-lib e-formvalidator">
+                    <div class="content-wrapper">
+                        <div class="form-title"><span>Add Customer Details</span></div>
+                        <div class="form-group">
+                            <div class="e-float-input">
+                                @Html.EJS().TextBoxFor(model => model.BRAND_ID).Placeholder("User Name").FloatLabelType(FloatLabelType.Auto).Render()
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="e-float-input">
+                                @Html.EJS().TextBoxFor(model => model.BRAND_CODE).Placeholder("Date of Birth").Render()
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="e-float-input">
+                                @Html.EJS().TextBoxFor(model => model.BRAND_NAME).Multiline(true).Placeholder("Address").FloatLabelType(FloatLabelType.Auto).HtmlAttributes(rows).Render()
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="e-float-input">
+                                @Html.EJS().CheckBoxFor(model => model.FLAG_ROW).Checked(false).Change("brandPopup.onFlagChange").Render()
+                            </div>
+                        </div>
+                        <div class="e-row">
+                            <div style="width: 220px;margin:0px auto;height: 100px;padding-top: 25px;">
+                                <div style="display: inline-block;">
+                                    @Html.EJS().Button("validateSubmit").Content("Add Customer").HtmlAttributes(submitType).IsPrimary(true).Render()
+                                </div>
+                                <div style="float: right;">
+                                    @Html.EJS().Button("resetbtn").Content("Clear").HtmlAttributes(resetType).Render()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>;
+    }
+*@
+
+@section DialogPlaceholder
+{
+    <!-- BEGIN DialogPlaceholder -->
+    <script id='dialogtemplate' type="text/x-template">
+        <div id="dialogTemp" style="width:650px; height:300px;">
+        </div>
     </script>
+    <!-- BEGIN DialogPlaceholder -->
 }
 
-
-
+@section ContentPlaceholder
+{
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -66,14 +117,16 @@
 
                             @(Html.EJS()
 .Grid("grdBrand")
-.Height("430")
+.Height("450")
+.FrozenColumns(1)
+.FrozenColumns(6)
 .DataSource(ds =>
 {
     ds
     .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
     //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
     //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
-    .RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
+    //.RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
     .Adaptor("UrlAdaptor")
     ;
 })
@@ -96,14 +149,25 @@
 .ActionComplete("brand.OnActionComplete")
 .Columns(col =>
 {
-    col.Field("BRAND_ID").HeaderText("Brand ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_CODE").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_NAME").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
-    col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+    col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")
+    //.ForeignKeyField("CLIENT_ID")
+    //.ForeignKeyValue("CLIENT_CODE")
+    //.ValidationRules(new { required = false })
+    .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
+    .Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
+
+    col.Field("BRAND_ID").HeaderText("ID").Width("115")
+    .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
+    .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+    col.Field("BRAND_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("BRAND_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("BRAND_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+    col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 })
 .Render())
 
@@ -116,22 +180,58 @@
     </div>
     <!-- /.content-header -->
 
+}
 
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
 
-<script id='dialogtemplate' type="text/x-template">
-    <div id="dialogTemp">
-    </div>
-</script>
+        var urlServices = {
+            BeforeAdd: "@Url.Action("BeforeAdd", "Brand", new { Area = "Masters" })",
+            BeforeEdit: "@Url.Action("BeforeEdit", "Brand", new { Area = "Masters" })",
 
+            Add: "@Url.Action("Add", "Brand", new { Area = "Masters" })",
+            Edit: "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
+            Delete: "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
+        }
 
+    </script>
+    @Scripts.Render("~/Scripts/masters/brandService.js")
+    <!-- END preScripts -->
+}
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/masters/brandService.js")
     <script>
+        var dialogObj;
+        var brandPopup = {
+            dialogClose() {
+                $("#dialogBtn").style.display = "inline-block";
+            },
 
+            dialogOpen() {
+                $("#dialogBtn").style.display = "none";
+            },
+
+            create() {
+                dialogObj = this;
+            },
+
+            onFlagChange(args) {
+                let flag = $("#FLAG_ROW").ej2_instances[0];
+                flag.autofill = args.checked;
+            }
+
+        };
+
+        //initial popup
         $(document).ready(function () {
-            console.info("document ready");
+
+            //$("#dialogBtn").Click(function () {
+            //    brandPopup.show();
+            //});
+
         });
     </script>
 }

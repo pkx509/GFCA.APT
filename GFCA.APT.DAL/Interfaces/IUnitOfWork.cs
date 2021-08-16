@@ -6,6 +6,8 @@ namespace GFCA.APT.DAL.Interfaces
 	{
 		IBrandRepository BrandRepository { get; }
 		IProductRepository ProductRepository { get; }
+		IEmissionRepository EmissionRepository { get; }
+
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
 		//bool ProxyCreationEnabled { get; set; }

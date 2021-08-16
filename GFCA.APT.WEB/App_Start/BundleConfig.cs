@@ -41,7 +41,8 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/daterangepicker/daterangepicker.css")
                 .Include("~/Content/plugins/summernote/summernote-bs4.min.css")
                 //.Include("~/Content/bootstrap.css")
-                .Include("~/Content/site.css")
+                .Include("~/Content/ej2/bootstrap4.css")
+                .Include("~/Content/Site.css")
                 ;
             bundles.Add(csslteStyle);
 

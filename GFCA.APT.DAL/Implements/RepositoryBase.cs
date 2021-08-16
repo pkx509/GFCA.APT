@@ -6,7 +6,6 @@ namespace GFCA.APT.DAL.Implements
     {
         protected IDbTransaction Transaction { get; private set; }
         protected IDbConnection Connection => Transaction.Connection;
-
         public RepositoryBase(IDbTransaction transaction)
         {
             Transaction = transaction;

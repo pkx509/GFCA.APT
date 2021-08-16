@@ -1,6 +1,9 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Globalization;
+using System.Reflection;
 using System.Threading;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,11 +23,27 @@ namespace GFCA.APT.WEB
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutofacConfig.Register();
             log4net.Config.XmlConfigurator.Configure();
+
+            //ASP.NET MVC version disclosure
+            MvcHandler.DisableMvcResponseHeader = true;
             
+        }
+
+        protected void Application_PreSendRequestHeaders()
+        {
+            Response.Headers.Set("Server", "My httpd server");
+            Response.Headers.Remove("X-AspNet-Version");
+            Response.Headers.Remove("X-AspNetMvc-Version");
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            var application = sender as HttpApplication;
+            if (application != null && application.Context != null)
+            {
+                application.Context.Response.Headers.Remove("Server");
+            }
+
             CultureInfo culture = new CultureInfo("en-US");
             //culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
             //culture.DateTimeFormat.DateSeparator = "/";

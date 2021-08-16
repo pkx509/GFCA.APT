@@ -32,6 +32,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <OutputPath>bin\Development\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -49,15 +73,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\Auditable.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\BrandDto.cs" />
     <Compile Include="Dto\CostCenterDto.cs" />
+    <Compile Include="Dto\EmissionDto.cs" />
     <Compile Include="Dto\ProductDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
+    <Compile Include="Dto\UserLoginDto.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />
     <Compile Include="Enums\FLAG_DEL.cs" />
     <Compile Include="Enums\FLAG_ROW.cs" />
+    <Compile Include="HTTP\Controls\SelectionItem.cs" />
     <Compile Include="HTTP\IRequest.cs" />
     <Compile Include="HTTP\IResponse.cs" />
     <Compile Include="Mappers\Destination.cs" />

@@ -5,42 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tb_email_inbound">
-          <Key>
-            <PropertyRef Name="email_id" />
-          </Key>
-          <Property Name="email_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="from_email" Type="varchar" MaxLength="200" />
-          <Property Name="data_path" Type="varchar" MaxLength="4000" />
-          <Property Name="is_active" Type="int" Nullable="false" />
-          <Property Name="remark" Type="varchar" MaxLength="4000" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
-          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
-          <Key>
-            <PropertyRef Name="AP_ID" />
-          </Key>
-          <Property Name="AP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IO_ID" Type="int" />
-          <Property Name="CENTER_ID" Type="int" />
-          <Property Name="FUND_ID" Type="int" />
-          <Property Name="FUND_CENTER_ID" Type="int" />
-          <Property Name="MATERIAL" Type="int" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
-          <Key>
-            <PropertyRef Name="AR_ID" />
-          </Key>
-          <Property Name="AR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IO_ID" Type="int" />
-          <Property Name="CENTER_ID" Type="int" />
-          <Property Name="FUND_ID" Type="int" />
-          <Property Name="FUND_CENTER_ID" Type="int" />
-          <Property Name="MATERIAL" Type="int" />
-        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_ID" />
@@ -826,9 +790,6 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelsStoreContainer">
-          <EntitySet Name="tb_email_inbound" EntityType="Self.tb_email_inbound" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Self.TB_M_ACCOUNT_PAYABLE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Self.TB_M_ACCOUNT_RECEIVEABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Self.TB_M_BUDGET_TYPE" Schema="dbo" store:Type="Tables" />
@@ -967,9 +928,6 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="APTDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_email_inbound" EntityType="Models.tb_email_inbound" />
-          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Models.TB_M_ACCOUNT_PAYABLE" />
-          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Models.TB_M_ACCOUNT_RECEIVEABLE" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Models.TB_M_BUDGET_TYPE" />
@@ -1093,42 +1051,6 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <End Role="TB_T_PROMOTION_SALE" EntitySet="TB_T_PROMOTION_SALE" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="tb_email_inbound">
-          <Key>
-            <PropertyRef Name="email_id" />
-          </Key>
-          <Property Name="email_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="from_email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="data_path" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="Int32" Nullable="false" />
-          <Property Name="remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
-          <Key>
-            <PropertyRef Name="AP_ID" />
-          </Key>
-          <Property Name="AP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IO_ID" Type="Int32" />
-          <Property Name="CENTER_ID" Type="Int32" />
-          <Property Name="FUND_ID" Type="Int32" />
-          <Property Name="FUND_CENTER_ID" Type="Int32" />
-          <Property Name="MATERIAL" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
-          <Key>
-            <PropertyRef Name="AR_ID" />
-          </Key>
-          <Property Name="AR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IO_ID" Type="Int32" />
-          <Property Name="CENTER_ID" Type="Int32" />
-          <Property Name="FUND_ID" Type="Int32" />
-          <Property Name="FUND_CENTER_ID" Type="Int32" />
-          <Property Name="MATERIAL" Type="Int32" />
-        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_ID" />
@@ -1943,45 +1865,6 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="APTDbContext">
-          <EntitySetMapping Name="tb_email_inbound">
-            <EntityTypeMapping TypeName="Models.tb_email_inbound">
-              <MappingFragment StoreEntitySet="tb_email_inbound">
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="data_path" ColumnName="data_path" />
-                <ScalarProperty Name="from_email" ColumnName="from_email" />
-                <ScalarProperty Name="email_id" ColumnName="email_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_ACCOUNT_PAYABLE">
-            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_PAYABLE">
-              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_PAYABLE">
-                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
-                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
-                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
-                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
-                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
-                <ScalarProperty Name="AP_ID" ColumnName="AP_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_ACCOUNT_RECEIVEABLE">
-            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_RECEIVEABLE">
-              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_RECEIVEABLE">
-                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
-                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
-                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
-                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
-                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
-                <ScalarProperty Name="AR_ID" ColumnName="AR_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_ACTIVITY">
             <EntityTypeMapping TypeName="Models.TB_M_ACTIVITY">
               <MappingFragment StoreEntitySet="TB_M_ACTIVITY">
