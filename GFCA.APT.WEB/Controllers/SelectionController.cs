@@ -21,7 +21,10 @@ namespace GFCA.APT.WEB.Controllers
         [HttpPost]
         public IEnumerable<SelectionItem> GetEmission()
         {
-            IEmissionService svc = EmissionService.CreateInstant();
+            IBusinessProvider biz = new BusinessProvider();
+            //IBrandService svc = BrandService.CreateInstant();
+            IEmissionService svc = biz.EmissionService;
+            //IEmissionService svc = EmissionService.CreateInstant();
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
                 .Select(o => new SelectionItem { Value = o.EMIS_ID, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" });
@@ -34,7 +37,9 @@ namespace GFCA.APT.WEB.Controllers
         [HttpPost]
         public IEnumerable<SelectionItem> GetBrand()
         {
-            IBrandService svc = BrandService.CreateInstant();
+            IBusinessProvider biz = new BusinessProvider();
+            //IBrandService svc = BrandService.CreateInstant();
+            IBrandService svc = biz.BrandService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
                 .Select(o => new SelectionItem { Value = o.BRAND_ID, Text = $"{o.BRAND_CODE} - {o.BRAND_NAME}" });

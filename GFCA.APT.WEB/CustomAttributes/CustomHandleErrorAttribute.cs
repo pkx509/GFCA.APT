@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,12 @@ namespace GFCA.APT.WEB.CustomAttributes
 {
     public class CustomHandleErrorAttribute : HandleErrorAttribute
     {
+        public ILogger Logger { get; set; }
         public override void OnException(ExceptionContext filterContext)
         {
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
             {
+                //Logger.Log("OnException");
                 return;
             }
 

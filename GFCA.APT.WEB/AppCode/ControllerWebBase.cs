@@ -25,7 +25,7 @@ namespace GFCA.APT.WEB
             userName = !string.IsNullOrWhiteSpace(userName) ? userName : "anonymous";
 
             string text = $"User : {userName},  HttpMethod : {Request.HttpMethod}, Controller : {controllerName}, Action : {actionName} ";
-            logger.Info(text);
+            //logger.Info(text);
             base.OnActionExecuting(filterContext);
         }
     }

@@ -7,8 +7,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using GFCA.APT.Domain.Models;
 using GFCA.APT.BAL.Interfaces;
-using GFCA.APT.BAL.Implements;
-using log4net;
 using System.Reflection;
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
@@ -16,14 +14,13 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
 
     public class BrandController : ControllerWebBase
     {
-        private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IBrandService _brandSvc;
-        public BrandController()
+        private readonly IBusinessProvider _biz;
+        public BrandController(IBusinessProvider biz)
         {
-            _brandSvc = BrandService.CreateInstant();
+            _biz = biz;
         }
 
-        // GET: Masters/Brand
+        // GET: M/Brand
         [HttpGet()]
         public ActionResult Index()
         {
@@ -34,38 +31,38 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         //[HttpGet]
         public ActionResult UrlDataSource(DataManagerRequest dm)
         {
-            logger.Debug("UrlDataSource");
-            IEnumerable DataSource = _brandSvc.GetAll();
+            _biz.LogService.Debug("UrlDataSource");
+            IEnumerable dataSource = _biz.BrandService.GetAll();
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0)
             {
-                DataSource = operation.PerformSearching(DataSource, dm.Search);  //Search
+                dataSource = operation.PerformSearching(dataSource, dm.Search);  //Search
             }
             if (dm.Sorted != null && dm.Sorted.Count > 0) //Sorting
             {
-                DataSource = operation.PerformSorting(DataSource, dm.Sorted);
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
             }
             if (dm.Where != null && dm.Where.Count > 0) //Filtering
             {
-                DataSource = operation.PerformFiltering(DataSource, dm.Where, dm.Where[0].Operator);
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
             }
-            int count = DataSource.Cast<BrandDto>().Count();
+            int count = dataSource.Cast<BrandDto>().Count();
             if (dm.Skip != 0)
             {
-                DataSource = operation.PerformSkip(DataSource, dm.Skip);         //Paging
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);         //Paging
             }
             if (dm.Take != 0)
             {
-                DataSource = operation.PerformTake(DataSource, dm.Take);
+                dataSource = operation.PerformTake(dataSource, dm.Take);
             }
-            return dm.RequiresCounts ? Json(new { result = DataSource, count = count }) : Json(DataSource);
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
         [HttpPost]
         public PartialViewResult BeforeEdit(BrandDto value)
         {
-            logger.Debug("BeforeEdit");
+            _biz.LogService.Debug("BeforeEdit");
             //var service = _brandSvc.GetByID(value.BRAND_ID);
             //ViewBag.dataSource = _brandSvc.GetAll();
             return PartialView("_BrandEditDialog", value);
@@ -74,7 +71,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         [HttpPost]
         public PartialViewResult BeforeAdd()
         {
-            logger.Debug("BeforeAdd");
+            _biz.LogService.Debug("BeforeAdd");
             //var service = _brandSvc.GetAll();
             //ViewBag.dataSource = _brandSvc.GetAll();
             return PartialView("_BrandAddDialog");
@@ -83,12 +80,12 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         [HttpPost]
         public JsonResult Add(BrandDto value)
         {
-            logger.Debug("Add");
+            _biz.LogService.Debug("Add");
             dynamic data = new BusinessResponse();
 
             try
             {
-                var biz = _brandSvc.Create(value);
+                var biz = _biz.BrandService.Create(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
@@ -103,11 +100,11 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         [HttpPost]
         public JsonResult Edit(BrandDto value)
         {
-            logger.Debug("Edit");
+            _biz.LogService.Debug("Edit");
             dynamic data = new BusinessResponse();
             try
             {
-                var biz = _brandSvc.Edit(value);
+                var biz = _biz.BrandService.Edit(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
@@ -118,16 +115,35 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             return Json(new { data, JsonRequestBehavior.AllowGet });
         }
 
+
+        [HttpPost]
+        public JsonResult Delete(BrandDto value)
+        {
+            _biz.LogService.Debug("Delete");
+            dynamic data = new BusinessResponse();
+            try
+            {
+                var biz = _biz.BrandService.Delete(value);
+                data = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+
+            return Json(new { data, JsonRequestBehavior.AllowGet });
+        }
+
         //[ValidateAntiForgeryToken]
         [HttpPost]
         public JsonResult Delete(int key)
         {
-            logger.Debug("Delete");
+            _biz.LogService.Debug("Delete");
             dynamic data = new BusinessResponse();
             try
             {
-                var value = _brandSvc.GetById(key);
-                var biz = _brandSvc.Delete(value);
+                var value = _biz.BrandService.GetById(key);
+                var biz = _biz.BrandService.Delete(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch

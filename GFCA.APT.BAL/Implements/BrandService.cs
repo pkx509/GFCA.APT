@@ -15,7 +15,7 @@ namespace GFCA.APT.BAL.Implements
     public class BrandService : ServiceBase, IBrandService
     {
         private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public static BrandService CreateInstant()
+        internal static BrandService CreateInstant()
         {
             var uow = UnitOfWork.CreateInstant();
             var svc = new BrandService(uow);
@@ -128,7 +128,15 @@ namespace GFCA.APT.BAL.Implements
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
-                _uow.BrandRepository.Update(dto);
+                if (model.IS_DELETE_PERMANANT)
+                {
+                    _uow.BrandRepository.Delete(id);
+                }
+                else
+                {
+                    _uow.BrandRepository.Update(dto);
+                }
+
                 _uow.Commit();
 
                 response.Success = true;

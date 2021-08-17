@@ -1,7 +1,5 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
@@ -61,7 +59,6 @@ namespace GFCA.APT.WEB
 
         public static void Register(HttpConfiguration config)
         {
-            
             // Web API configuration and services
 
             // Web API routes

@@ -13,7 +13,7 @@ namespace GFCA.APT.BAL.Implements
     public class EmissionService : ServiceBase, IEmissionService
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public static EmissionService CreateInstant()
+        internal static EmissionService CreateInstant()
         {
             var uow = UnitOfWork.CreateInstant();
             var svc = new EmissionService(uow);

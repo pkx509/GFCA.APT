@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Autofac;
 
 [assembly: OwinStartupAttribute(typeof(GFCA.APT.WEB.Startup))]
 namespace GFCA.APT.WEB
@@ -9,8 +10,8 @@ namespace GFCA.APT.WEB
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //
+            //app.UseAutofacMiddleware(container);
+            //app.UseAutofacMvc();
         }
-
     }
 }

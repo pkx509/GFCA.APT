@@ -5,7 +5,11 @@ namespace GFCA.APT.WEB.Controllers
 {
     public class HomeController : ControllerWebBase
     {
-        public HomeController(ILogService logger) { }
+        private readonly IBusinessProvider _biz;
+        public HomeController(IBusinessProvider biz) 
+        {
+            _biz = biz;
+        }
 
         public ActionResult Index()
         {
