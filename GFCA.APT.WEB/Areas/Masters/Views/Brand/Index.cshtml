@@ -147,6 +147,8 @@
     .Template("#dialogtemplate");
 })
 .ActionComplete("brand.OnActionComplete")
+.ActionFailure("brand.OnActionFailure")
+.ActionBegin("brand.OnActionBegin")
 .Columns(col =>
 {
     col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")

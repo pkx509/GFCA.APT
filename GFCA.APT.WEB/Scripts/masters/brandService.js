@@ -3,10 +3,41 @@
     let _args = null;
     let _popupMode = null;
 
+    this.OnActionBegin = function (args) {
+        debugger;
+        try {
+            console.log(args);
+
+            let ajax = new ej.base.Ajax({
+                type: "POST",
+                contentType: "application/json",
+            });
+            if (args.requestType === 'beginEdit' || args.requestType === 'add') {
+                _popupMode = args.requestType;
+
+                if (_popupMode === 'beginEdit') {
+                    ajax.url = urlServices.BeforeEdit; //render the partial view
+                }
+                if (_popupMode === 'add') {
+                    ajax.url = urlServices.BeforeAdd;  //render the partial view
+                }
+                ajax.data = JSON.stringify({ value: args.rowData });
+                ajax
+                    .send()
+                    .then(renderPatialFormSuccess)
+                    .catch(onPopupAjaxCatch)
+                    ;
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     this.OnActionComplete = function (args) {
         _args = args;
         try {
-            debugger;
+
             let ajax = new ej.base.Ajax({
                 type: "POST",
                 contentType: "application/json",
@@ -63,6 +94,12 @@
         }
 
     }
+
+    this.OnActionFailure = function (args) {
+        debugger;
+        console.log(args);
+    }
+
 
     let renderPatialFormSuccess = function (data) {
         appendElement(data, _args.form); //render the edit form with selected record
