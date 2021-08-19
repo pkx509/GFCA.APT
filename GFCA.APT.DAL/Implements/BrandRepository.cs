@@ -14,49 +14,58 @@ namespace GFCA.APT.DAL.Implements
 
         public BrandDto GetById(int id)
         {
-            string sqlQuery = "SELECT * FROM TB_M_BRAND WHERE BRAND_ID = @BRAND_ID;";
+            string sqlQuery = @"SELECT b.CLIENT_CODE, a.* 
+FROM TB_M_BRAND a
+LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID)
+WHERE BRAND_ID = @BRAND_ID;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
-                param: new { BRAND_ID = id },
-                transaction: Transaction
+                param: new { BRAND_ID = id }
+                ,transaction: Transaction
                 ).FirstOrDefault();
 
             return query;
         }
         public BrandDto GetByCode(string code)
         {
-            string sqlQuery = "SELECT * FROM TB_M_BRAND WHERE BRAND_CODE = @BRAND_CODE;";
+            string sqlQuery = @"SELECT * FROM TB_M_BRAND a
+LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID)
+WHERE a.BRAND_CODE = @BRAND_CODE;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
-                param: new { BRAND_CODE = code },
-                transaction: Transaction
+                param: new { BRAND_CODE = code }
+                ,transaction: Transaction
                 ).FirstOrDefault();
 
             return query;
         }
         public IEnumerable<BrandDto> All()
         {
-            string sqlQuery = "SELECT * FROM TB_M_BRAND;";
+            string sqlQuery = @"SELECT b.CLIENT_CODE, a.* 
+FROM TB_M_BRAND a
+LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID);";
             var query = Connection.Query<BrandDto>(
-                sql: sqlQuery,
-                transaction: Transaction
+                sql: sqlQuery
+                ,transaction: Transaction
                 ).ToList();
 
             return query;
         }
 
-        public void Add(BrandDto entity)
+        public void Insert(BrandDto entity)
         {
             string sqlExecute =
 @"INSERT INTO TB_M_BRAND
 (
   BRAND_CODE
+, CLIENT_ID
 , BRAND_NAME
 , FLAG_ROW
 , CREATED_BY
 , CREATED_DATE
 ) VALUES (
   @BRAND_CODE
+, @CLIENT_ID
 , @BRAND_NAME
 , @FLAG_ROW
 , @CREATED_BY
@@ -68,6 +77,7 @@ namespace GFCA.APT.DAL.Implements
             {
                 //BRAND_ID = 0,
                 BRAND_CODE = entity.BRAND_CODE,
+                CLIENT_ID = entity.CLIENT_ID,
                 BRAND_NAME = entity.BRAND_NAME,
                 FLAG_ROW = entity.FLAG_ROW,
                 CREATED_BY = entity.CREATED_BY,
@@ -88,7 +98,8 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute =
 @"UPDATE TB_M_BRAND
 SET
-BRAND_CODE   = @BRAND_CODE
+  BRAND_CODE   = @BRAND_CODE
+, CLIENT_ID    = @CLIENT_ID
 , BRAND_NAME   = @BRAND_NAME
 , FLAG_ROW     = @FLAG_ROW
 , UPDATED_BY   = @UPDATED_BY
@@ -101,6 +112,7 @@ BRAND_ID = @BRAND_ID;
             {
                 BRAND_ID = entity.BRAND_ID,
                 BRAND_CODE = entity.BRAND_CODE,
+                CLIENT_ID = entity.CLIENT_ID,
                 BRAND_NAME = entity.BRAND_NAME,
                 FLAG_ROW = entity.FLAG_ROW,
                 //CREATED_BY = entity.CREATED_BY,
@@ -148,37 +160,5 @@ BRAND_ID = @BRAND_ID;
         }
 
     }
-
-    /*
-    public static class BrandRepositoryExtensions
-    {
-        public static TB_M_BRAND ToBrandEntity(this BrandDto self)
-        {
-            TB_M_BRAND entity = new TB_M_BRAND();
-            entity.BRAND_ID = self.BRAND_ID??0;
-            entity.BRAND_CODE = self.BRAND_CODE;
-            entity.BRAND_NAME = self.BRAND_NAME;
-            entity.FLAG_ROW = self.FLAG_ROW;
-            entity.CREATED_BY = self.CREATED_BY;
-            entity.CREATED_DATE = self.CREATED_DATE?? DateTime.UtcNow;
-            entity.UPDATED_BY = self.UPDATED_BY;
-            entity.UPDATED_DATE = self.UPDATED_DATE;
-            return entity;
-        }
-        public static BrandDto ToBrandDto(this TB_M_BRAND self)
-        {
-            BrandDto dto = new BrandDto();
-            dto.BRAND_ID = self.BRAND_ID;
-            dto.BRAND_CODE = self.BRAND_CODE;
-            dto.BRAND_NAME = self.BRAND_NAME;
-            dto.FLAG_ROW = self.FLAG_ROW;
-            dto.CREATED_BY = self.CREATED_BY;
-            dto.CREATED_DATE = self.CREATED_DATE;
-            dto.UPDATED_BY = self.UPDATED_BY;
-            dto.UPDATED_DATE = self.UPDATED_DATE;
-            return dto;
-        }
-    }
-    */
 
 }

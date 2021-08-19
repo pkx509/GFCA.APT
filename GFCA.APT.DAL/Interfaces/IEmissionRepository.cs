@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface IEmissionRepository : IRepository<EmissionDto>
+    public interface IEmissionRepository : IRepositories<EmissionDto>
     {
     }
 }

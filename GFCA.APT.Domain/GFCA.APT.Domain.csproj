@@ -86,6 +86,7 @@
     <Compile Include="Enums\FLAG_DEL.cs" />
     <Compile Include="Enums\FLAG_ROW.cs" />
     <Compile Include="HTTP\Controls\SelectionItem.cs" />
+    <Compile Include="HTTP\Controls\ToolbarItem.cs" />
     <Compile Include="HTTP\IRequest.cs" />
     <Compile Include="HTTP\IResponse.cs" />
     <Compile Include="Mappers\Destination.cs" />

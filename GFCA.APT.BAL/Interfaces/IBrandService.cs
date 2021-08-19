@@ -14,6 +14,6 @@ namespace GFCA.APT.BAL.Interfaces
         BrandDto GetById(int Id);
         BusinessResponse Create(BrandDto model);
         BusinessResponse Edit(BrandDto model);
-        BusinessResponse Delete(BrandDto model);
+        BusinessResponse Remove(BrandDto model);
     }
 }

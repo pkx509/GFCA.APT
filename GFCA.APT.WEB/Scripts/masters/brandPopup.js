@@ -1,26 +1,26 @@
-﻿let brand = new (function () {
+﻿let brandPopup = new (function () {
 
     let self = null;
     let _args = null;
     let _popupMode = null;
 
     //UI
-    this.popup_id      = "#popup-brand";
-    this.header_title  = "#pop-lbl-header-title";
+    this.popup_id = "#popup-brand";
+    this.header_title = "#pop-lbl-header-title";
     this.button_remove = "#pop-btn-del-permanat";
-    this.button_save   = "#pop-btn-save";
+    this.button_save = "#pop-btn-save";
 
-    this.MODE_TYPE     = ["CREATE", "EDIT", "DELETE"]
+    this.MODE_TYPE = ["CREATE", "EDIT", "DELETE"]
     this.isCreateState = true;
 
     //Model Dto
-    this.field_brand_id      = "#pop-txt-brand-id";
-    this.field_client_code   = "#pop-cmb-client-code";
-    this.field_client_id     = "#pop-hid-client-id";
-    this.field_brand_code    = "#pop-txt-brand-code";
-    this.field_brand_name    = "#pop-txt-brand-name";
-    this.field_brand_desc    = "#pop-txt-brand-desc";
-    this.field_is_active     = "input[id='pop-ckb-is-active']:checked";
+    this.field_brand_id = "#pop-txt-brand-id";
+    this.field_client_code = "#pop-cmb-client-code";
+    this.field_client_id = "#pop-hid-client-id";
+    this.field_brand_code = "#pop-txt-brand-code";
+    this.field_brand_name = "#pop-txt-brand-name";
+    this.field_brand_desc = "#pop-txt-brand-desc";
+    this.field_is_active = "input[id='pop-ckb-is-active']:checked";
     this.field_permanant_del = "#pop-hid-permanant-del";
 
     //Value Dto
@@ -80,7 +80,7 @@
 
         if (!dataSelection) //validate selected item
         {
-            brand.callBack(this.dataFields);
+            brandPopup.callBack(this.dataFields);
             return;
         }
         $(this.header_title).html("Edit Brand");
@@ -96,7 +96,7 @@
 
         if (!dataSelection) //validate selected item
         {
-            brand.callBack(this.dataFields);
+            brandPopup.callBack(this.dataFields);
             return;
         }
         $(this.header_title).html("Delete Brand");
@@ -171,8 +171,8 @@
                 ...this.dataFields,
                 IS_DELETE_PERMANANT
             };
-            brand.callBack(this.dataFields);
-            brand.close();
+            brandPopup.callBack(this.dataFields);
+            brandPopup.close();
         }
 
     }
@@ -182,8 +182,8 @@
             ...this.dataFields,
             IS_DELETE_PERMANANT
         };
-        brand.callBack(this.dataFields);
-        //brand.close();
+        brandPopup.callBack(this.dataFields);
+        //brandPopup.close();
     }
 
     this.onTestNestModal = function (e) {
@@ -222,7 +222,7 @@
         });
     }
 
-    this.OnRowSelecting= function (args) {
+    this.OnRowSelecting = function (args) {
         argruments.data = args.data;
         //this.dataFields = args.data;
     }

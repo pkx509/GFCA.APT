@@ -1,5 +1,9 @@
-﻿@{ ViewBag.Title = "Brand"; }
-
+﻿@{
+#if DNX48
+ViewBag.Title = "Brand";
+#endif
+}
+@using GFCA.APT.Domain.HTTP.Controls
 @using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
@@ -36,64 +40,6 @@
         }
     </style>
 }
-@*
-    @{
-        Dictionary<string, object> rows = new Dictionary<string, object>();
-        rows.Add("rows", "2");
-        Dictionary<string, object> resetType = new Dictionary<string, object>();
-        resetType.Add("type", "reset");
-        Dictionary<string, object> submitType = new Dictionary<string, object>();
-        submitType.Add("type", "submit");
-
-        Func<object, object> Content1 = @<div>
-
-        <div>
-
-            @using (Html.BeginForm())
-            {
-                @Html.ValidationSummary(true)
-                <div id="formId" class="form-horizontal e-lib e-formvalidator">
-                    <div class="content-wrapper">
-                        <div class="form-title"><span>Add Customer Details</span></div>
-                        <div class="form-group">
-                            <div class="e-float-input">
-                                @Html.EJS().TextBoxFor(model => model.BRAND_ID).Placeholder("User Name").FloatLabelType(FloatLabelType.Auto).Render()
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="e-float-input">
-                                @Html.EJS().TextBoxFor(model => model.BRAND_CODE).Placeholder("Date of Birth").Render()
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="e-float-input">
-                                @Html.EJS().TextBoxFor(model => model.BRAND_NAME).Multiline(true).Placeholder("Address").FloatLabelType(FloatLabelType.Auto).HtmlAttributes(rows).Render()
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="e-float-input">
-                                @Html.EJS().CheckBoxFor(model => model.FLAG_ROW).Checked(false).Change("brandPopup.onFlagChange").Render()
-                            </div>
-                        </div>
-                        <div class="e-row">
-                            <div style="width: 220px;margin:0px auto;height: 100px;padding-top: 25px;">
-                                <div style="display: inline-block;">
-                                    @Html.EJS().Button("validateSubmit").Content("Add Customer").HtmlAttributes(submitType).IsPrimary(true).Render()
-                                </div>
-                                <div style="float: right;">
-                                    @Html.EJS().Button("resetbtn").Content("Clear").HtmlAttributes(resetType).Render()
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-
-        </div>
-
-    </div>;
-    }
-*@
 
 @section DialogPlaceholder
 {
@@ -102,6 +48,7 @@
         <div id="dialogTemp" style="width:650px; height:300px;">
         </div>
     </script>
+
     <!-- BEGIN DialogPlaceholder -->
 }
 
@@ -114,62 +61,69 @@
                 <div class="col-lg-12 p-1">
                     <div class="card card-success card-outline">
                         <div class="card-body text-sm p-1">
-
                             @(Html.EJS()
-.Grid("grdBrand")
-.Height("450")
-.FrozenColumns(1)
-.FrozenColumns(6)
-.DataSource(ds =>
-{
-    ds
-    .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
-    //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
-    //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
-    //.RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
-    .Adaptor("UrlAdaptor")
-    ;
-})
-.DataBound("brand.OnDataBound")
-.ShowColumnMenu(false).AllowSorting()
-.AllowPaging(true).PageSettings(page => page.PageCount(5))
-.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
-.AllowExcelExport().ToolbarClick("brand.OnExcelExportClick")
-.Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
-.EditSettings(edit =>
-{
-    edit
-    .AllowEditOnDblClick(false)
-    .AllowAdding(true)
-    .AllowEditing(true)
-    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
-    .Mode(EditMode.Dialog)
-    .Template("#dialogtemplate");
-})
-.ActionComplete("brand.OnActionComplete")
-.Columns(col =>
-{
-    col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")
-    //.ForeignKeyField("CLIENT_ID")
-    //.ForeignKeyValue("CLIENT_CODE")
-    //.ValidationRules(new { required = false })
-    .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
-    .Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
+                                  .Grid("grdBrand")
+                                  .Height("450")
+                                  .FrozenColumns(1)
+                                  .FrozenColumns(6)
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      new { id ="toolbar_add", text = "Add", prefixIcon = "" },
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "" },
+                                      new { text = "ExcelExport" }
+                                  })
+                                  .ToolbarClick("brandPopup.OnExcelExportClick")
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(true)
+                                      .AllowEditing(true)
+                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .Mode(EditMode.Dialog)
+                                      .Template("#dialogtemplate");
+                                  })
+                                  .DataBound("brandPopup.OnDataBound")
+                                  //.ActionComplete("brandPopup.OnActionComplete")
+                                  //.ActionBegin("brandPopup.OnActionBegin")
+                                  //.ActionFailure("brandPopup.OnActionFailure")
+                                  //.RowSelecting("brandPopup.OnRowSelecting")
+                                  .RowDeselected("brandPopup.OnRowDeselected")
+                                  .RowSelected("brandPopup.OnRowSelected")
+                                  .Columns(col =>
+                                  {
+                                      col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")
+                                      .ForeignKeyField("CLIENT_ID")
+                                      .ForeignKeyValue("CLIENT_CODE")
+                                      .ValidationRules(new { required = false })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
+                                      .Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
 
-    col.Field("BRAND_ID").HeaderText("ID").Width("115")
-    .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
-    .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BRAND_ID").HeaderText("ID").Width("115")
+                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
 
-    col.Field("BRAND_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("BRAND_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("BRAND_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-    col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-})
-.Render())
+                                      col.Field("BRAND_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("BRAND_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("BRAND_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+                                      col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                  })
+                                  .Render())
 
                         </div>
                     </div><!-- /.card -->
@@ -180,6 +134,7 @@
     </div>
     <!-- /.content-header -->
 
+    @Html.Partial("~/Areas/Masters/Views/Brand/_Popup_Brand.cshtml")
 }
 
 @section preScripts
@@ -188,51 +143,25 @@
     <script>
 
         var urlServices = {
-            BeforeAdd: "@Url.Action("BeforeAdd", "Brand", new { Area = "Masters" })",
-            BeforeEdit: "@Url.Action("BeforeEdit", "Brand", new { Area = "Masters" })",
-
+            CurrentUrl: "@Url.Action("index", "Brand", new { Area = "Masters" })",
             Add: "@Url.Action("Add", "Brand", new { Area = "Masters" })",
             Edit: "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
             Delete: "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
         }
 
+        var argruments = {
+            data: null,
+        }
     </script>
-    @Scripts.Render("~/Scripts/masters/brandService.js")
+
+    @Scripts.Render("~/Scripts/masters/brandPopup.js")
     <!-- END preScripts -->
+
 }
 
 @section scripts
 {
-    <script>
-        var dialogObj;
-        var brandPopup = {
-            dialogClose() {
-                $("#dialogBtn").style.display = "inline-block";
-            },
 
-            dialogOpen() {
-                $("#dialogBtn").style.display = "none";
-            },
-
-            create() {
-                dialogObj = this;
-            },
-
-            onFlagChange(args) {
-                let flag = $("#FLAG_ROW").ej2_instances[0];
-                flag.autofill = args.checked;
-            }
-
-        };
-
-        //initial popup
-        $(document).ready(function () {
-
-            //$("#dialogBtn").Click(function () {
-            //    brandPopup.show();
-            //});
-
-        });
-    </script>
+    @Scripts.Render("~/Scripts/masters/brand.js")
+    
 }
-

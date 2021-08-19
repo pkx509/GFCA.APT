@@ -196,3 +196,15 @@
     padding-top: 0.8rem;
     padding-bottom: 0;
 }
+
+.bootstrap-dialog .modal-header.bootstrap-dialog-draggable {
+    cursor: move;
+}
+.modal-header {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.modal-footer {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}

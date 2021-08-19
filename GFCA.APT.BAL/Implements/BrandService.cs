@@ -56,7 +56,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.CREATED_BY = _currentUser.UserName ?? "System";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
-                _uow.BrandRepository.Add(dto);
+                _uow.BrandRepository.Insert(dto);
                 _uow.Commit();
 
                 response.Success = true;
@@ -113,7 +113,7 @@ namespace GFCA.APT.BAL.Implements
 
             return response;
         }
-        public BusinessResponse Delete(BrandDto model)
+        public BusinessResponse Remove(BrandDto model)
         {
             var response = new BusinessResponse();
             try
@@ -121,7 +121,7 @@ namespace GFCA.APT.BAL.Implements
                 if (model.BRAND_ID == null || model.BRAND_ID == 0)
                     throw new Exception("not existing BrandID");
 
-                dynamic id = model.BRAND_ID ?? 0;
+                int id = model.BRAND_ID ?? 0;
                 //var dto = _uow.BrandRepository.GetById(id);
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;

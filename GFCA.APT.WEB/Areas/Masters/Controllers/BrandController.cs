@@ -29,7 +29,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         }
 
         //[HttpGet]
-        public ActionResult UrlDataSource(DataManagerRequest dm)
+        public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
             IEnumerable dataSource = _biz.BrandService.GetAll();
@@ -57,24 +57,6 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
                 dataSource = operation.PerformTake(dataSource, dm.Take);
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
-        }
-
-        [HttpPost]
-        public PartialViewResult BeforeEdit(BrandDto value)
-        {
-            _biz.LogService.Debug("BeforeEdit");
-            //var service = _brandSvc.GetByID(value.BRAND_ID);
-            //ViewBag.dataSource = _brandSvc.GetAll();
-            return PartialView("_BrandEditDialog", value);
-        }
-        
-        [HttpPost]
-        public PartialViewResult BeforeAdd()
-        {
-            _biz.LogService.Debug("BeforeAdd");
-            //var service = _brandSvc.GetAll();
-            //ViewBag.dataSource = _brandSvc.GetAll();
-            return PartialView("_BrandAddDialog");
         }
 
         [HttpPost]
@@ -114,8 +96,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
 
             return Json(new { data, JsonRequestBehavior.AllowGet });
         }
-
-
+        
         [HttpPost]
         public JsonResult Delete(BrandDto value)
         {
@@ -123,32 +104,12 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             dynamic data = new BusinessResponse();
             try
             {
-                var biz = _biz.BrandService.Delete(value);
+                var biz = _biz.BrandService.Remove(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
             {
 
-            }
-
-            return Json(new { data, JsonRequestBehavior.AllowGet });
-        }
-
-        //[ValidateAntiForgeryToken]
-        [HttpPost]
-        public JsonResult Delete(int key)
-        {
-            _biz.LogService.Debug("Delete");
-            dynamic data = new BusinessResponse();
-            try
-            {
-                var value = _biz.BrandService.GetById(key);
-                var biz = _biz.BrandService.Delete(value);
-                data = JsonConvert.SerializeObject(biz);
-            }
-            catch
-            {
-                
             }
 
             return Json(new { data, JsonRequestBehavior.AllowGet });

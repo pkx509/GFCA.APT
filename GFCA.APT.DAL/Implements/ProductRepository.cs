@@ -44,7 +44,7 @@ namespace GFCA.APT.DAL.Implements
             return query;
         }
 
-        public void Add(ProductDto entity)
+        public void Insert(ProductDto entity)
         {
             string sqlExecute =
 @"INSERT INTO TB_M_PRODUCT

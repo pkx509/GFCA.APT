@@ -4,80 +4,137 @@
     Dictionary<string, object> disabled = new Dictionary<string, object>();
     disabled.Add("disabled", "true");
 }
+<button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button>
 <form class="form-horizontal">
-    <div>
-        <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="form-group row">
-
-                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                        ID
-                    </label>
-                    <div class="col-sm-9 col-md-10 col-lg-9">
-                        @Html.EJS().TextBox("BRAND_ID").Value("0").HtmlAttributes(disabled).Render()
-                    </div>
-
+    <div id="popup-brand" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BRAND</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="col-sm-12 col-lg-6">
-                <div class="form-group row">
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
 
-                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                        ID
-                    </label>
-                    <div class="col-sm-9 col-md-10 col-lg-9">
-                        @Html.EJS().TextBox("CLIENT_CODE").Value("1").HtmlAttributes(disabled).Render()
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-brand-id").Value("0").HtmlAttributes(disabled).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Client
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-client-code")
+                                                .Placeholder("-- Select --")
+                                                .Autofill(true)
+                                                .DataSource(o =>
+                                                {
+                                                    o.Url("http://localhost:57628/api/Selection/GetEmission")
+                                                    .CrossDomain(false)
+                                                    .Adaptor("UrlAdaptor");
+                                                })
+                                                .Change("brandPopup.OnClientChangeValue")
+                                                .Value(3)
+                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                .Render())
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Code
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        <input type="hidden" id="pop-hid-client-id" />
+                                        @Html.EJS().TextBox("pop-txt-brand-code").Placeholder("Brand Code").CssClass("mandatory").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Name
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-brand-name").Placeholder("Brand Name").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-txt-brand-desc">
+                                        Description
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-brand-desc").Multiline(true).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-ckb-is-active">
+                                        Active
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" id="pop-hid-permanant-del" />
+                    <button id="pop-btn-del-permanat" type="button" class="btn btn-danger" data-loading-text="Processing..." onclick="javascript:brandPopup.onRemovePerm(this)">Remove Permanent</button>
+                    <button id="pop-btn-save" type="button" class="btn btn-primary" data-loading-text="Processing..." onclick="javascript:brandPopup.onSave(this)">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="javascript:brandPopup.close(this)">Close</button>
+                </div>
+
             </div>
         </div>
-        <div class="row">
-
-            <div class="col-sm-12 col-lg-6">
-                <div class="form-group row">
-
-                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                        Code
-                    </label>
-                    <div class="col-sm-9 col-md-10 col-lg-9">
-                        @Html.EJS().TextBox("BRAND_CODE").Placeholder("Brand Code").CssClass("mandatory").Render()
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-lg-6">
-                <div class="form-group row">
-
-                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                        Name
-                    </label>
-                    <div class="col-sm-9 col-md-10 col-lg-9">
-                        @Html.EJS().TextBox("BRAND_NAME").Placeholder("Brand Name").Render()
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-sm-12 col-lg-6">
-                <div class="form-group row">
-
-                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                        Active
-                    </label>
-                    <div class="col-sm-9 col-md-10 col-lg-9">
-                        @Html.EJS().CheckBox("IS_ACTIVED").Render()
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 </form>
 
-@Html.EJS().ScriptManager()
+
+
