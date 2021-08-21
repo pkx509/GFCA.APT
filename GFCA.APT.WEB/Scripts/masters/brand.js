@@ -1,125 +1,73 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+    let sendPost = function (url, data) {
+        let value = {
+            ...data
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: JSON.stringify(value),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
 
-    $("#toolbar_add").click(function (e) {
-        let callBack = function (data) {
-            $.ajax({
-                url: urlServices.Add,
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: JSON.stringify(data),
-                success: function (response) {
+                let res = JSON.parse(response.data);
 
-                    let res = JSON.parse(response.data);
+                $.toast({
+                    type: "success",
+                    title: "information",
+                    subtitle: (new Date()).toDateString(),
+                    content: res.Message,
+                    delay: 7000
+                });
 
-                    $.toast({
-                        type: "success",
-                        title: "information",
-                        subtitle: (new Date()).toDateString(),
-                        content: res.Message,
-                        delay: 5000
-                    });
-
-                    if (res.Success === true) {
-                        brandPopup.close();
+                if (res.Success === true) {
+                    brandPopup.close();
+                    let objGrid = document.getElementById("grdBrand").ej2_instances[0];
+                    if (objGrid) {
+                        objGrid.refresh();
+                    } else {
                         window.location = urlServices.CurrentUrl;
                     }
-                },
-                error: function (response) {
-                    $.toast({
-                        type: "warning",
-                        title: "Invalid information",
-                        subtitle: (new Date()).toDateString(),
-                        content: JSON.stringify(response),
-                        delay: 5000
-                    });
                 }
-            });
+            },
+            error: function (response) {
+                $.toast({
+                    type: "error",
+                    title: "error",
+                    subtitle: (new Date()).toDateString(),
+                    content: JSON.stringify(response),
+                    delay: 7000
+                });
+            }
+        });
+    }
+
+    $("#toolbar_add").click(function (e) {
+        e.preventDefault();
+        let callBack = function (data) {
+            sendPost(urlServices.Add, data);
         };
 
-        brandPopup.openCreate(true, argruments.data, callBack);
+        brandPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
 
     });
     $("#toolbar_edit").click(function (e) {
+        e.preventDefault();
         let callBack = function (data) {
-            $.ajax({
-                url: urlServices.Edit,
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: JSON.stringify(data),
-                success: function (response) {
-
-                    let res = JSON.parse(response.data);
-
-                    $.toast({
-                        type: "success",
-                        title: "information",
-                        subtitle: (new Date()).toDateString(),
-                        content: res.Message,
-                        delay: 5000
-                    });
-
-                    if (res.Success === true) {
-                        brandPopup.close();
-                        window.location = urlServices.CurrentUrl;
-                    }
-                },
-                error: function (response) {
-                    $.toast({
-                        type: "warning",
-                        title: "Invalid information",
-                        subtitle: (new Date()).toDateString(),
-                        content: JSON.stringify(response),
-                        delay: 5000
-                    });
-                }
-            });
+            sendPost(urlServices.Edit, data);
         };
 
-        brandPopup.openEdit(true, argruments.data, callBack);
+        brandPopup.open(POPUP_MODE.EDIT, argruments.data, callBack);
     });
     $("#toolbar_del").click(function (e) {
+        e.preventDefault();
         let callBack = function (data) {
-            $.ajax({
-                url: urlServices.Delete,
-                type: 'POST',
-                //processData: false,
-                //contentType: false,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify(data),
-                success: function (response) {
-                    //let res = JSON.parse(response);
-                    let res = JSON.parse(response.data);
-
-                    $.toast({
-                        type: "success",
-                        title: "information",
-                        subtitle: (new Date()).toDateString(),
-                        content: res.Message,
-                        delay: 5000
-                    });
-
-                    if (res.Success === true) {
-                        brandPopup.close();
-                        window.location = urlServices.CurrentUrl;
-                        //$("#grdBrand").refresh();
-                    }
-                },
-                error: function (response) {
-                    $.toast({
-                        type: "warning",
-                        title: "Invalid information",
-                        subtitle: (new Date()).toDateString(),
-                        content: JSON.stringify(response),
-                        delay: 5000
-                    });
-                }
-            });
+            sendPost(urlServices.Edit, data);
         };
 
-        brandPopup.openDelete(true, argruments.data, callBack);
+        brandPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });
