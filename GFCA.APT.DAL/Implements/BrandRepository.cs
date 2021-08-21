@@ -60,6 +60,7 @@ LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID);";
   BRAND_CODE
 , CLIENT_ID
 , BRAND_NAME
+, BRAND_DESC
 , FLAG_ROW
 , CREATED_BY
 , CREATED_DATE
@@ -67,6 +68,7 @@ LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID);";
   @BRAND_CODE
 , @CLIENT_ID
 , @BRAND_NAME
+, @BRAND_DESC
 , @FLAG_ROW
 , @CREATED_BY
 , @CREATED_DATE
@@ -79,6 +81,7 @@ LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID);";
                 BRAND_CODE = entity.BRAND_CODE,
                 CLIENT_ID = entity.CLIENT_ID,
                 BRAND_NAME = entity.BRAND_NAME,
+                BRAND_DESC = entity.BRAND_DESC,
                 FLAG_ROW = entity.FLAG_ROW,
                 CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
@@ -101,6 +104,7 @@ SET
   BRAND_CODE   = @BRAND_CODE
 , CLIENT_ID    = @CLIENT_ID
 , BRAND_NAME   = @BRAND_NAME
+, BRAND_DESC   = @BRAND_DESC
 , FLAG_ROW     = @FLAG_ROW
 , UPDATED_BY   = @UPDATED_BY
 , UPDATED_DATE = @UPDATED_DATE
@@ -114,6 +118,7 @@ BRAND_ID = @BRAND_ID;
                 BRAND_CODE = entity.BRAND_CODE,
                 CLIENT_ID = entity.CLIENT_ID,
                 BRAND_NAME = entity.BRAND_NAME,
+                BRAND_DESC = entity.BRAND_DESC,
                 FLAG_ROW = entity.FLAG_ROW,
                 //CREATED_BY = entity.CREATED_BY,
                 //CREATED_DATE = entity.CREATED_DATE,
@@ -143,6 +148,7 @@ BRAND_ID = @BRAND_ID;
                 BRAND_ID = id,
                 //BRAND_CODE = entity.BRAND_CODE,
                 //BRAND_NAME = entity.BRAND_NAME,
+                //BRAND_DESC = entity.BRAND_DESC,
                 //FLAG_ROW = entity.FLAG_ROW,
                 //CREATED_BY = entity.CREATED_BY,
                 //CREATED_DATE = entity.CREATED_DATE,

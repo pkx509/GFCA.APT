@@ -158,9 +158,11 @@
     color: #656a70;
 }
 
+.e-export-excel {
+    content: '\e74e'
+}
+
 /*icon styles */
-
-
 .table {
     display: table;
     width: 80%;

@@ -12,6 +12,7 @@ namespace GFCA.APT.Domain.Dto
         [Required]
         public string BRAND_CODE { get; set; }
         public string BRAND_NAME { get; set; }
+        public string BRAND_DESC { get; set; }
         public bool IS_ACTIVED { get; set; } = true;
         public bool IS_DELETE_PERMANANT { get; set; } = false;
         public string FLAG_ROW { get; set; }
