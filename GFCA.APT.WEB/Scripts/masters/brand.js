@@ -15,7 +15,7 @@ $(document).ready(function () {
                 let res = JSON.parse(response.data);
 
                 $.toast({
-                    type: "success",
+                    type: res.MessageType,
                     title: "information",
                     subtitle: (new Date()).toDateString(),
                     content: res.Message,
@@ -64,9 +64,8 @@ $(document).ready(function () {
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.Delete, data);
         };
-
         brandPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 

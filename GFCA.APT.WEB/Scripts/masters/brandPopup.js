@@ -6,13 +6,11 @@
 
 let brandPopup = new (function () {
 
-    let self = null;
     let _args = null;
 
     //UI
     this.popup_id      = "#popup-brand";
     this.header_title  = "#pop-lbl-header-title";
-    this.button_remove = "#pop-btn-del-permanat";
     this.button_del    = "#pop-btn-del";
     this.button_save   = "#pop-btn-save";
 
@@ -32,7 +30,7 @@ let brandPopup = new (function () {
     this.field_brand_name    = "#pop-txt-brand-name";
     this.field_brand_desc    = "textarea[name='pop-txt-brand-desc']";
     this.field_is_active     = "input[id='pop-ckb-is-active']";
-    this.field_permanant_del = "#pop-hid-permanant-del";
+    this.field_permanant_del = "input[id='pop-ckb-is-del-perm]";
 
     //Value Dto
     this.jsonData = {
@@ -43,8 +41,8 @@ let brandPopup = new (function () {
         BRAND_NAME         : null,
         BRAND_DESC         : null,
         FLAG_ROW           : null,
-        IS_ACTIVED         : null,
-        IS_DELETE_PERMANANT: null,
+        IS_ACTIVED         : true,
+        IS_DELETE_PERMANANT: false,
     };
 
     this.callBack = function (data) {
@@ -59,8 +57,8 @@ let brandPopup = new (function () {
             BRAND_NAME         : null,
             BRAND_DESC         : null,
             FLAG_ROW           : null,
-            IS_ACTIVED         : null,
-            IS_DELETE_PERMANANT: null,
+            IS_ACTIVED         : true,
+            IS_DELETE_PERMANANT: false,
         };
     }
     this.setHeading = function (headerTitle) {
@@ -77,8 +75,10 @@ let brandPopup = new (function () {
             this.init();
             this.callBack = fn;
 
+            //UI Initial
             $(this.field_brand_code).prop("disabled", false);
-            $(this.field_brand_code).addClass("mandatory");
+            $(this.field_brand_code).parent().removeClass("e-disabled")
+            $(this.field_brand_code).parent().addClass("mandatory");
 
             this.setHeading("Create New Brand");
             $(this.button_save).html("Save");
@@ -99,8 +99,10 @@ let brandPopup = new (function () {
             }
             this.bindDom(this.jsonData);
 
+            //UI Initial
             $(this.field_brand_code).prop("disabled", true);
-            $(this.field_brand_code).removeClass("mandatory");
+            $(this.field_brand_code).parent().addClass("e-disabled")
+            $(this.field_brand_code).parent().removeClass("mandatory");
 
             $(this.header_title).html("Edit Brand");
             $(this.button_save).html("Save Changes");
@@ -119,12 +121,7 @@ let brandPopup = new (function () {
                 brandPopup.callBack(this.jsonData);
                 return;
             }
-            $(this.header_title).html("Delete Brand");
-            $(this.button_remove).show();
-            $(this.button_del).show();
-            $(this.button_save).hide();
-            $(this.popup_id).modal("show");
-
+            this.openFormDeletePermanent(this.jsonData);
         }
     }
     this.close = function () {
@@ -139,8 +136,24 @@ let brandPopup = new (function () {
         $(this.field_brand_code).val(data.BRAND_CODE);
         $(this.field_brand_name).val(data.BRAND_NAME);
         $(this.field_brand_desc).val(data.BRAND_DESC);
-        $(this.field_is_active).prop("checked", data.IS_ACTIVED);
-        $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
+        if (data.IS_ACTIVED === false) {
+            $(this.field_is_active).prop("checked", "");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "false");
+            $(this.field_is_active).parent().children().removeClass("e-check");
+
+        } else {
+            $(this.field_is_active).prop("checked", "checked");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "true");
+            $(this.field_is_active).parent().children().addClass("e-check");
+            $(this.field_is_active).removeClass("e-check");
+        }
+        /*
+        if (data.IS_DELETE_PERMANANT === false) {
+            $(this.field_permanant_del).prop("checked", "");
+        } else {
+            $(this.field_permanant_del).prop("checked", "checked");
+        }
+        */
     }
     this.bindField = function () {
         let BRAND_ID            = $(this.field_brand_id).val();
@@ -149,8 +162,8 @@ let brandPopup = new (function () {
         let BRAND_CODE          = $(this.field_brand_code).val();
         let BRAND_NAME          = $(this.field_brand_name).val();
         let BRAND_DESC          = $(this.field_brand_desc).val();
-        let IS_ACTIVED          = $(this.field_is_active).val();
-        let IS_DELETE_PERMANANT = $(this.field_permanant_del).val();
+        let IS_ACTIVED          = $(this.field_is_active).prop("checked");
+        let IS_DELETE_PERMANANT = $(this.field_permanant_del).prop("checked");
 
         this.jsonData = {
             BRAND_ID, CLIENT_CODE, CLIENT_ID, BRAND_CODE, BRAND_NAME, BRAND_DESC,
@@ -209,50 +222,37 @@ let brandPopup = new (function () {
         }
 
     }
-    this.onDelete = function (e) {
-        let IS_ACTIVED = false;
-        this.jsonData = {
-            ...this.jsonData,
-            IS_ACTIVED
-        };
-        brandPopup.callBack(this.jsonData);
-        //brandPopup.close();
-    }
 
-    this.onDeletePerm = function (e) {
-        let IS_DELETE_PERMANANT = true;
-        this.jsonData = {
-            ...this.jsonData,
-            IS_DELETE_PERMANANT
-        };
-        brandPopup.callBack(this.jsonData);
-        //brandPopup.close();
-    }
-
-    this.onTestNestModal = function (e) {
+    this.openFormDeletePermanent = function () {
+        let json = brandPopup.jsonData;
         BootstrapDialog.show({
-            type: BootstrapDialog.TYPE_DEFAULT,
-            size: BootstrapDialog.SIZE_WIDE,
-            closable: false,
-            closeByBackdrop: false,
-            closeByKeyboard: false,
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            closable: true,
+            closeByBackdrop: true,
+            closeByKeyboard: true,
             draggable: true,
-            title: 'Confirm',
-            message: 'Write your example here.',
+            title: 'Confirmation',
+            message: `<label><input type="checkbox" class="e-control"></input> You're deleting a brand "${json.BRAND_CODE}", Are you? </label>`,
             buttons: [
                 {
-                    label: 'Save',
-                    cssClass: 'btn-primary',
-                    icon: 'glyphicon glyphicon-send',
+                    label: 'Delete',
+                    cssClass: 'btn btn-danger',
+                    icon: 'fas fa-paper-plane',
                     action: function (self) {
-                        alert("do process something")
-
+                        let chkAgree = self.getModalBody().find('input').prop("checked");
+                        let IS_DELETE_PERMANANT = chkAgree;
+                        json = {
+                            ...json,
+                            IS_DELETE_PERMANANT
+                        };
                         self.enableButtons(false);
                         self.setClosable(false);
-                        self.getModalBody().html('Inprocessing...');
+                        self.getModalBody().html('Processing...');
                         setTimeout(function () {
+                            brandPopup.callBack(json);
                             self.close();
-                        }, 3000);
+                        }, 1500);
                     }
                 },
                 {
@@ -307,11 +307,25 @@ let brandPopup = new (function () {
         //var gridObj = document.getElementById('grdBrand')['ej2_instances'][0];
         //Object.assign(gridObj.filterModule.filterOperators, { startsWith: 'contains' });
     }
-    this.OnExcelExportClick = function (args) {
+    this.OnToolbarClick = function (args) {
+
         let gridObj = document.getElementById("grdBrand").ej2_instances[0];
-        if (args.item.id === 'grdBrand_excelexport') {
+        if (args.item.id === 'toolbar_excel') {
             gridObj.excelExport();
         }
+
+        if (args.item.id === 'toolbar_add') {
+            //args.preventDefault();
+        }
+
+        if (args.item.id === 'toolbar_edit') {
+            //args.preventDefault();
+        }
+
+        if (args.item.id === 'toolbar_add') {
+            //args.preventDefault();
+        }
+
     }
 
 })();

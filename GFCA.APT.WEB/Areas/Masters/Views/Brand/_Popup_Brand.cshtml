@@ -5,7 +5,7 @@
     disabled.Add("disabled", "true");
 }
 <!-- <button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button> -->
-<form class="form-horizontal" id="pop-form-brand">
+<form class="form-horizontal" id="pop-form-brand" autocomplete="off">
     <div id="popup-brand" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -48,7 +48,7 @@
                                                 .Autofill(true)
                                                 .DataSource(o =>
                                                 {
-                                                    o.Url("http://localhost:57628/api/Selection/GetEmission")
+                                                    o.Url("/api/Selection/GetEmission")
                                                     .CrossDomain(false)
                                                     .Adaptor("UrlAdaptor");
                                                 })
@@ -115,6 +115,7 @@
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                        <!-- input id="pop-ckb-is-active" type="checkbox" class="e-control e-checkbox e-lib" / -->
                                     </div>
 
                                 </div>
@@ -125,11 +126,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <input type="hidden" id="pop-hid-permanant-del" />
-                    <button id="pop-btn-del-permanat" type="button" class="e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:brandPopup.onRemovePerm(this)">Delete Permanent</button>
-                    <button id="pop-btn-del" type="button" class="e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:brandPopup.onRemove(this)">Delete</button>
-                    <button id="pop-btn-save" type="button" class="e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:brandPopup.onSave(this)">Save</button>
-                    <button type="button" class="e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:brandPopup.close(this)">Close</button>
+                    <button id="pop-btn-del" type="button" class="btn e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:brandPopup.onDelete(this)">Delete</button>
+                    <button id="pop-btn-save" type="button" class="btn e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:brandPopup.onSave(this)">Save</button>
+                    <button type="button" class="btn e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:brandPopup.close(this)">Close</button>
                 </div>
 
             </div>
