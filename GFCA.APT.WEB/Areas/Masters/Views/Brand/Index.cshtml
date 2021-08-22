@@ -1,6 +1,6 @@
 ﻿@{
 #if DNX48
-ViewBag.Title = "Brand";
+    ViewBag.Title = "Brand";
 #endif
 }
 @using GFCA.APT.Domain.HTTP.Controls
@@ -39,17 +39,6 @@ ViewBag.Title = "Brand";
             }
         }
     </style>
-}
-
-@section DialogPlaceholder
-{
-    <!-- BEGIN DialogPlaceholder -->
-    <script id='dialogtemplate' type="text/x-template">
-        <div id="dialogTemp" style="width:650px; height:300px;">
-        </div>
-    </script>
-
-    <!-- BEGIN DialogPlaceholder -->
 }
 
 @section ContentPlaceholder
@@ -126,7 +115,6 @@ ViewBag.Title = "Brand";
                     </div><!-- /.card -->
                 </div>
             </div><!-- /.row -->
-
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -149,6 +137,7 @@ ViewBag.Title = "Brand";
         var argruments = {
             data: null,
         }
+
     </script>
 
     @Scripts.Render("~/Scripts/masters/brandPopup.js")
