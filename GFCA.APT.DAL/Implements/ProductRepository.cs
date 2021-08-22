@@ -46,38 +46,39 @@ namespace GFCA.APT.DAL.Implements
 
         public void Insert(ProductDto entity)
         {
-            string sqlExecute =
-@"INSERT INTO TB_M_PRODUCT
-(
-  BRAND_CODE
-, BRAND_NAME
-, FLAG_ROW
-, CREATED_BY
-, CREATED_DATE
-) VALUES (
-  @BRAND_CODE
-, @BRAND_NAME
-, @FLAG_ROW
-, @CREATED_BY
-, @CREATED_DATE
-); SELECT SCOPE_IDENTITY()
-";
-
-            var parms = new
+            string sqlExecute = "INSERT INTO TB_M_PRODUCT(PROD_CODE,PROD_NAME,CUST_CODE,MAT_CODE,ORG_CODE,DIV_CODE,EMIS_CODE,MAT_GROUP,MAT_GROUP_DESC,MAT_GROUP1,MAT_GROUP1_DESC,MAT_GROUP2,MAT_GROUP2_DESC,MAT_GROUP3,MAT_GROUP3_DESC,FORMULA,PACK,PACK_DESC,UNIT_CODE,FLAG_ROW,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE) VALUES (@PROD_CODE,@PROD_NAME,@CUST_CODE,@MAT_CODE,@ORG_CODE,@DIV_CODE,@EMIS_CODE,@MAT_GROUP,@MAT_GROUP_DESC,@MAT_GROUP1,@MAT_GROUP1_DESC,@MAT_GROUP2,@MAT_GROUP2_DESC,@MAT_GROUP3,@MAT_GROUP3_DESC,@FORMULA,@PACK,@PACK_DESC,@UNIT_CODE,@FLAG_ROW,@CREATED_BY,@CREATED_DATE,@UPDATED_BY,@UPDATED_DATE);";
+            var parameters = new
             {
-                //BRAND_ID     = 0,
-                PROD_CODE      = entity.PROD_CODE,
-                PROD_NAME      = entity.PROD_NAME,
-                FLAG_ROW       = entity.FLAG_ROW,
-                CREATED_BY     = entity.CREATED_BY,
-                CREATED_DATE   = entity.CREATED_DATE?.ToDateTime2(),
-                //UPDATED_BY   = entity.UPDATED_BY,
-                //UPDATED_DATE = entity.UPDATED_DATE
+                PROD_ID = entity.PROD_ID,
+                PROD_CODE = entity.PROD_CODE,
+                PROD_NAME = entity.PROD_NAME,
+                CUST_CODE = entity.CUST_CODE,
+                MAT_CODE = entity.MAT_CODE,
+                ORG_CODE = entity.ORG_CODE,
+                DIV_CODE = entity.DIV_CODE,
+                EMIS_CODE = entity.EMIS_CODE,
+                MAT_GROUP = entity.MAT_GROUP,
+                MAT_GROUP_DESC = entity.MAT_GROUP_DESC,
+                MAT_GROUP1 = entity.MAT_GROUP1,
+                MAT_GROUP1_DESC = entity.MAT_GROUP1_DESC,
+                MAT_GROUP2 = entity.MAT_GROUP2,
+                MAT_GROUP2_DESC = entity.MAT_GROUP2_DESC,
+                MAT_GROUP3 = entity.MAT_GROUP3,
+                MAT_GROUP3_DESC = entity.MAT_GROUP3_DESC,
+                FORMULA = entity.FORMULA,
+                PACK = entity.PACK,
+                PACK_DESC = entity.PACK_DESC,
+                UNIT_CODE = entity.UNIT_CODE,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE,
             };
 
             entity.PROD_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
-                param: parms,
+                param: parameters,
                 transaction: Transaction
             );
 

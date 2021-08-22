@@ -263,6 +263,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Masters\Data\" />
     <Folder Include="Areas\Masters\Views\CostCenter\" />
+    <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Areas\Transactions\Data\" />
     <Folder Include="Areas\Transactions\Views\Index\" />
     <Folder Include="Areas\Transactions\Views\Promotion\" />
@@ -4078,7 +4079,7 @@
     <Content Include="Areas\Transactions\Views\FixedContract\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Brand\Index.cshtml" />
     <Content Include="libman.json" />
-    <Content Include="Areas\Masters\Views\Shared\_ProductAddDialog.cshtml" />
+    <Content Include="Areas\Masters\Views\Product\_Popup_Product.cshtml" />
     <Content Include="Areas\Masters\Views\Brand\_Popup_Brand.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -4150,9 +4151,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\productPopup.js" />
+    <Content Include="Scripts\masters\product.js" />
     <Content Include="Scripts\masters\brand.js" />
     <Content Include="Scripts\masters\brandPopup.js" />
-    <Content Include="Scripts\masters\productService.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

@@ -1,24 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Material and Product";
+#if DNX48
+ViewBag.Title = "Product";
+#endif
 }
-
+@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
-
 
 @section styles
 {
     <style>
         .form-group.col-md-6 {
-            width: 400px;
-        }
-
-        #ShipAddress {
-            resize: vertical;
+            width: 250px;
         }
 
         :-ms-fullscreen, .e-dialog {
-            max-width: 700px;
+            max-width: 552px;
         }
 
         @@media only screen and (max-width: 991px) {
@@ -29,8 +28,9 @@
 
         @@media only screen and (min-width: 992px) {
             .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
                 min-width: 300px !important;
-                min-height: 415px;
+                min-height: 180px;
             }
 
             .e-bigger.e-dialog.e-control.e-popup,
@@ -39,95 +39,141 @@
             }
         }
     </style>
+}
+
+@section DialogPlaceholder
+{
+    <!-- BEGIN DialogPlaceholder -->
+    <script id='dialogtemplate' type="text/x-template">
+        <div id="dialogTemp" style="width:650px; height:300px;">
+        </div>
+    </script>
+
+    <!-- BEGIN DialogPlaceholder -->
+}
+
+@section ContentPlaceholder
+{
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
+                            @(Html.EJS()
+                                  .Grid("grdProduct")
+                                  .Height("450")
+                                 
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlDataSource", "Product", new { Area = "Masters" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-excelexport" },
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "" },
+                                      new { text = "ExcelExport" }
+                                  })
+                                  .ToolbarClick("productPopup.OnExcelExportClick")
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(true)
+                                      .AllowEditing(true)
+                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .Mode(EditMode.Dialog)
+                                      .Template("#dialogtemplate");
+                                  })
+                                  .DataBound("productPopup.OnDataBound")
+                                  //.ActionComplete("productPopup.OnActionComplete")
+                                  //.ActionBegin("productPopup.OnActionBegin")
+                                  //.ActionFailure("productPopup.OnActionFailure")
+                                  //.RowSelecting("productPopup.OnRowSelecting")
+                                  .RowDeselected("productPopup.OnRowDeselected")
+                                  .RowSelected("productPopup.OnRowSelected")
+                                  .Columns(col =>
+                                  {
+
+                                      col.Field("PROD_ID").HeaderText("PROD_ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("PROD_CODE").HeaderText("PROD  Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("PROD_NAME").HeaderText("PROD Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_CODE").HeaderText("CUST_CODE ").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("MAT_CODE").HeaderText("MAT_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ORG_CODE").HeaderText("ORG_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DIV_CODE").HeaderText("DIV_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("EMIS_CODE").HeaderText("EMIS_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP").HeaderText("MAT_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP_DESC ").HeaderText("MAT_GROUP_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("MAT_GROUP").HeaderText("MAT_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP_DESC ").HeaderText("MAT_GROUP_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP1").HeaderText("MAT1_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROU1_DESC ").HeaderText("MAT_GROUP1_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP2").HeaderText("MAT_GROUP2").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP2_DESC ").HeaderText("MAT_GROUP2_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP3").HeaderText("MAT_GROUP3").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP3_DESC ").HeaderText("MAT_GROUP3_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("FORMULA").HeaderText("FORMULA").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("PACK ").HeaderText("PACK ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("PACK_DESC ").HeaderText("PACK_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UNIT_CODE ").HeaderText("UNIT_CODE ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FLAG_ROW ").HeaderText("FLAG_ROW ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                  })
+                                  .Render())
+
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    @Html.Partial("~/Areas/Masters/Views/Product/_Popup_Product.cshtml")
+}
+
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
     <script>
 
         var urlServices = {
-            BeforeAdd: "@Url.Action("BeforeAdd", "Product", new { Area = "Masters" })",
-            BeforeEdit: "@Url.Action("BeforeEdit", "Product", new { Area = "Masters" })",
-
+            CurrentUrl: "@Url.Action("index", "Product", new { Area = "Masters" })",
             Add: "@Url.Action("Add", "Product", new { Area = "Masters" })",
             Edit: "@Url.Action("Edit", "Product", new { Area = "Masters" })",
             Delete: "@Url.Action("Delete", "Product", new { Area = "Masters" })",
         }
 
+        var argruments = {
+            data: null,
+        }
     </script>
+
+    @Scripts.Render("~/Scripts/masters/productPopup.js")
+    <!-- END preScripts -->
+
 }
-
-
-
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-lg-12 p-1">
-                <div class="card card-success card-outline">
-                    <div class="card-body text-sm p-1">
-
-                        @(Html.EJS()
-.Grid("grdProduct")
-.Height("430")
-.DataSource(ds =>
-{
-    ds
-    .Url(@Url.Action("UrlDatasource", "Product", new { Area = "Masters" }))
-    //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
-    //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
-    .RemoveUrl(@Url.Action("Delete", "Product", new { Area = "Masters" }))
-    .Adaptor("UrlAdaptor")
-    ;
-})
-.DataBound("product.OnDataBound")
-.ShowColumnMenu(false).AllowSorting()
-.AllowPaging(true).PageSettings(page => page.PageCount(5))
-.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
-.AllowExcelExport().ToolbarClick("product.OnExcelExportClick")
-.Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
-.EditSettings(edit =>
-{
-    edit
-    .AllowEditOnDblClick(false)
-    .AllowAdding(true)
-    .AllowEditing(true)
-    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
-    .Mode(EditMode.Dialog)
-    .Template("#dialogtemplate");
-})
-.ActionComplete("product.OnActionComplete")
-.Columns(col =>
-{
-    col.Field("BRAND_ID").HeaderText("Brand ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_CODE").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_NAME").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
-    col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
-})
-.Render())
-
-                    </div>
-                </div><!-- /.card -->
-            </div>
-        </div><!-- /.row -->
-
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-
-
-
-<script id='dialogtemplate' type="text/x-template">
-    <div id="dialogTemp">
-    </div>
-</script>
-
-
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/masters/productService.js")
+
+    @Scripts.Render("~/Scripts/masters/product.js")
 
 }
-
-
