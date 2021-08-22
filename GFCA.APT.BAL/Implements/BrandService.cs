@@ -94,7 +94,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
                 dto.BRAND_DESC = model.BRAND_DESC;
-                //dto.FLAG_ROW = FLAG_ROW.SHOW;
+                dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
 
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
                 dto.UPDATED_DATE = DateTime.UtcNow;
@@ -147,11 +147,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
+                response.MessageType = TOAST_TYPE.SUCCESS;
                 response.Message = $"{typeof(BrandService)} has been deleted";
             }
             catch (Exception ex)
             {
                 response.Success = false;
+                response.MessageType = TOAST_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
             }
