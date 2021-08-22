@@ -44,22 +44,23 @@ namespace GFCA.APT.WEB
             //builder.RegisterModule<BusinessLayer>();
             //builder.RegisterModule<DataAccessLayer>();
 
-            
+
             builder.RegisterType<BusinessProvider>().As<IBusinessProvider>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            
+
             /*
             builder.RegisterAssemblyTypes(Assembly.Load("GFCA.APT.BAL"))
-                .Where(t => t.Namespace.Contains("Implements") && t.Name.EndsWith("Service"))
+                .Where(t => t.Namespace.Contains("Interfaces") && t.Name.EndsWith("Service"))
                 //.As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
             builder.RegisterAssemblyTypes(Assembly.Load("GFCA.APT.DAL"))
-                .Where(t => t.Namespace.Contains("Implements") && t.Name.EndsWith("Repository"))
+                .Where(t => t.Namespace.Contains("Interfaces") && t.Name.EndsWith("Repository"))
                 //.As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
             */
+
             #region Set the MVC dependency resolver to use Autofac
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

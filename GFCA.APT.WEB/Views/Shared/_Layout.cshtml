@@ -8,7 +8,9 @@
     <title>@ViewBag.Title - APT</title>
 
     @Styles.Render("~/Content/cssLte")
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" />
     @RenderSection("styles", required: false)
+    @Scripts.Render("~/Scripts/ej2/ej2.min.js")
 </head>
 <body class="hold-transition sidebar-mini sidebar-mini-xs sidebar-mini-md sidebar-collapse layout-fixed layout-navbar-fixed layout-footer-fixed text-sm">
     <div class="wrapper">
@@ -25,24 +27,24 @@
         @Html.Partial("_Sidebar")
 
         <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        @if (IsSectionDefined("HeaderPlaceholder"))
-        {
-            @RenderSection("HeaderPlaceholder", required: false)
-        }
-        @if (IsSectionDefined("ContentPlaceholder"))
-        {
-            @RenderSection("ContentPlaceholder", required: false)
-        }
-        else
-        {
-            @RenderBody()
-        }
-        @if (IsSectionDefined("DialogPlaceholder"))
-        {
-            @RenderSection("DialogPlaceholder", required: false)
-        }
-    </div>
+        <div class="content-wrapper">
+            @if (IsSectionDefined("HeaderPlaceholder"))
+            {
+                @RenderSection("HeaderPlaceholder", required: false)
+            }
+            @if (IsSectionDefined("ContentPlaceholder"))
+            {
+                @RenderSection("ContentPlaceholder", required: false)
+            }
+            else
+            {
+                @RenderBody()
+            }
+            @if (IsSectionDefined("DialogPlaceholder"))
+            {
+                @RenderSection("DialogPlaceholder", required: false)
+            }
+        </div>
         <!-- /.content-wrapper -->
         @if (IsSectionDefined("FooterPlaceholder"))
         {
@@ -59,17 +61,24 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/polyfill")
     @Scripts.Render("~/bundles/jquerylte")
+
+
+    @Scripts.Render("~/bundles/adminlte")
+    <script src="https://cdn.jsdelivr.net/gh/GedMarc/bootstrap4-dialog/dist/js/bootstrap-dialog.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    @Scripts.Render("~/bundles/adminlte")
-    @Scripts.Render("~/Scripts/ej2/ej2.min.js")
+        $.widget.bridge('uibutton', $.ui.button);
 
+        $.toastDefaults.position = 'bottom-right';
+        $.toastDefaults.dismissible = true;
+        $.toastDefaults.stackable = true;
+        $.toastDefaults.pauseDelayOnHover = true;
+
+    </script>
     @RenderSection("preScripts", required: false)
     @Html.EJS().ScriptManager()
     @RenderSection("scripts", required: false)

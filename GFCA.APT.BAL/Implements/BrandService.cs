@@ -3,6 +3,7 @@ using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
+using GFCA.APT.Domain.HTTP.Controls;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;
@@ -52,19 +53,22 @@ namespace GFCA.APT.BAL.Implements
                 //dto.BRAND_ID = 0;
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
-                //dto.FLAG_ROW = FLAG_ROW.SHOW;
+                dto.BRAND_DESC = model.BRAND_DESC;
+                dto.FLAG_ROW = FLAG_ROW.SHOW;
                 dto.CREATED_BY = _currentUser.UserName ?? "System";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
-                _uow.BrandRepository.Add(dto);
+                _uow.BrandRepository.Insert(dto);
                 _uow.Commit();
 
                 response.Success = true;
-                response.Message = $"{typeof(BrandService)} has been created";
+                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.Message = $"Brand ({model.BRAND_CODE}) has been created";
             }
             catch (Exception ex)
             {
                 response.Success = false;
+                response.MessageType = TOAST_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
 
@@ -82,14 +86,15 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 if (model.BRAND_ID == null || model.BRAND_ID == 0)
-                    throw new Exception("not existing BrandID");
+                    throw new Exception("Please select some one to editing.");
 
-                dynamic id = model.BRAND_ID ?? 0;
+                int id = model.BRAND_ID ?? 0;
                 var dto = _uow.BrandRepository.GetById(id);
 
                 dto.BRAND_CODE = model.BRAND_CODE;
                 dto.BRAND_NAME = model.BRAND_NAME;
-                //dto.FLAG_ROW = FLAG_ROW.SHOW;
+                dto.BRAND_DESC = model.BRAND_DESC;
+                dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
 
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
                 dto.UPDATED_DATE = DateTime.UtcNow;
@@ -98,11 +103,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
-                response.Message = $"{typeof(BrandService)} has been changed";
+                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.Message = $"Brand ({model.BRAND_CODE}) has been changed";
             }
             catch (Exception ex)
             {
                 response.Success = false;
+                response.MessageType = TOAST_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
             }
@@ -113,7 +120,7 @@ namespace GFCA.APT.BAL.Implements
 
             return response;
         }
-        public BusinessResponse Delete(BrandDto model)
+        public BusinessResponse Remove(BrandDto model)
         {
             var response = new BusinessResponse();
             try
@@ -121,7 +128,7 @@ namespace GFCA.APT.BAL.Implements
                 if (model.BRAND_ID == null || model.BRAND_ID == 0)
                     throw new Exception("not existing BrandID");
 
-                dynamic id = model.BRAND_ID ?? 0;
+                int id = model.BRAND_ID ?? 0;
                 //var dto = _uow.BrandRepository.GetById(id);
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
@@ -140,11 +147,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
+                response.MessageType = TOAST_TYPE.SUCCESS;
                 response.Message = $"{typeof(BrandService)} has been deleted";
             }
             catch (Exception ex)
             {
                 response.Success = false;
+                response.MessageType = TOAST_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
             }

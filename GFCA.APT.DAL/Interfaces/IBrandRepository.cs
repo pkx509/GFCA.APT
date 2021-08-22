@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface IBrandRepository : IRepository<BrandDto>
+    public interface IBrandRepository : IRepositories<BrandDto>
     {
 	}
 }

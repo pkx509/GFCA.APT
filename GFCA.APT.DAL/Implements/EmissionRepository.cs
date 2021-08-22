@@ -12,7 +12,7 @@ namespace GFCA.APT.DAL.Implements
     {
         public EmissionRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public void Add(EmissionDto entity)
+        public void Insert(EmissionDto entity)
         {
             throw new NotImplementedException();
         }

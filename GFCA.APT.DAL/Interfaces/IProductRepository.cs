@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface IProductRepository : IRepository<ProductDto>
+    public interface IProductRepository : IRepositories<ProductDto>
     {
     }
 }

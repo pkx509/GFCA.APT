@@ -25,7 +25,7 @@
     <TypeScriptLib>dom,es2015</TypeScriptLib>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>4.2</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -38,6 +38,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>6</LangVersion>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -227,7 +240,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web">
+      <Private>true</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.Extensions" />
@@ -4062,8 +4077,6 @@
     <Content Include="Content\plugins\source-sans-pro\WOFF\VAR\SourceSansVariable-Roman.ttf.woff" />
     <Content Include="Areas\Transactions\Views\FixedContract\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Brand\Index.cshtml" />
-    <Content Include="Areas\Masters\Views\Shared\_BrandAddDialog.cshtml" />
-    <Content Include="Areas\Masters\Views\Shared\_BrandEditDialog.cshtml" />
     <Content Include="libman.json" />
     <Content Include="Areas\Masters\Views\Shared\_ProductAddDialog.cshtml" />
     <Content Include="Areas\Masters\Views\Brand\_Popup_Brand.cshtml" />
@@ -4074,6 +4087,11 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bs4-toast\dist\toast.min.css" />
+    <Content Include="Scripts\bs4-toast\dist\toast.min.js" />
+    <Content Include="Scripts\bs4-toast\example\index.html" />
+    <Content Include="Scripts\bs4-toast\src\css\toast.css" />
+    <Content Include="Scripts\bs4-toast\src\js\toast.js" />
     <Content Include="Scripts\es6-promise\CHANGELOG.md" />
     <Content Include="Scripts\es6-promise\dist\es6-promise.auto.map" />
     <Content Include="Scripts\es6-promise\dist\es6-promise.auto.min.map" />
@@ -4083,6 +4101,10 @@
     <Content Include="Scripts\es6-promise\package.json" />
     <Content Include="Scripts\es6-promise\README.md" />
     <Content Include="Scripts\ej2\ej2.min.js.map" />
+    <Content Include="Scripts\bs4-toast\LICENSE" />
+    <Content Include="Scripts\bs4-toast\package.json" />
+    <Content Include="Scripts\bs4-toast\README.md" />
+    <Content Include="Scripts\bs4-toast\_config.yml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ej2\ej2.min.js" />
     <Content Include="Scripts\es6-promise\auto.js" />
@@ -4109,13 +4131,28 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\.editorconfig" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\.gitignore" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\.jshintrc" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\.travis.yml" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\package.json" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\README.md" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\release.sh" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\dist\jquery.bsAlerts.min.js" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\docs\css\prettify.css" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\docs\css\styles.css" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\docs\index.html" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\docs\js\jquery.bsAlerts.js" />
+    <Content Include="Scripts\jquery-bs-alerts-1.0.5\gulpfile.js" />
+    <Content Include="Scripts\jquery.bsAlerts.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\brand.js" />
+    <Content Include="Scripts\masters\brandPopup.js" />
     <Content Include="Scripts\masters\productService.js" />
-    <Content Include="Scripts\masters\brandService.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

@@ -74,9 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Auditable.cs" />
+    <Compile Include="Dto\CostCenterDto.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\BrandDto.cs" />
-    <Compile Include="Dto\CostCenterDto.cs" />
     <Compile Include="Dto\EmissionDto.cs" />
     <Compile Include="Dto\ProductDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Enums\FLAG_DEL.cs" />
     <Compile Include="Enums\FLAG_ROW.cs" />
     <Compile Include="HTTP\Controls\SelectionItem.cs" />
+    <Compile Include="HTTP\Controls\ToolbarItem.cs" />
     <Compile Include="HTTP\IRequest.cs" />
     <Compile Include="HTTP\IResponse.cs" />
     <Compile Include="Mappers\Destination.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HTTP\Controls\TOAST_TYPE.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

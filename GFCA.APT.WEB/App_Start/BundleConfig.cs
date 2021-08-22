@@ -43,6 +43,7 @@ namespace GFCA.APT.WEB
                 //.Include("~/Content/bootstrap.css")
                 .Include("~/Content/ej2/bootstrap4.css")
                 .Include("~/Content/Site.css")
+                .Include("~/Scripts/bs4-toast/dist/toast.min.css")
                 ;
             bundles.Add(csslteStyle);
 
@@ -119,6 +120,8 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/summernote/summernote-bs4.min.js")
                 .Include("~/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")
                 .Include("~/Content/dist/js/adminlte.js")
+                .Include("~/Scripts/jquery.bsAlerts.min.js")
+                .Include("~/Scripts/bs4-toast/dist/toast.min.js")
                 ;
             bundles.Add(adminlteScript);
             bundles.Add(new StyleBundle("~/bundles/ejstyles").Include(

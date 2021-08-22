@@ -1,0 +1,58 @@
+{
+  "_from": "bs4-toast",
+  "_id": "bs4-toast@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-RxMJ4SQxlbUx4gO0vGDYMraOB7YRc7nogUIW5xQPIgRebjN93txo1Jc+FcLZYMuJUFr1YlCvpb5KMp9yC/xv6g==",
+  "_location": "/bs4-toast",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bs4-toast",
+    "name": "bs4-toast",
+    "escapedName": "bs4-toast",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bs4-toast/-/bs4-toast-1.2.0.tgz",
+  "_shasum": "a390cd0d095786b449d1d06c8294c7e535a0400b",
+  "_spec": "bs4-toast",
+  "_where": "D:\\ITSmart\\APT\\APT-pub",
+  "author": {
+    "name": "Script47",
+    "email": "Script47@hotmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Script47/Toast/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bootstrap": ">=4.2.0",
+    "jquery": ">=1.9.1"
+  },
+  "deprecated": false,
+  "description": "Toast - A Bootstrap 4.2+ jQuery plugin for the toast component",
+  "devDependencies": {},
+  "homepage": "https://github.com/Script47/Toast",
+  "keywords": [
+    "bootstrap-4",
+    "bootstrap",
+    "toast",
+    "toast-notifications",
+    "snack",
+    "jquery-plugin"
+  ],
+  "license": "MIT",
+  "main": "dist/toast.min.js",
+  "name": "bs4-toast",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Script47/Toast.git"
+  },
+  "version": "1.2.0"
+}
