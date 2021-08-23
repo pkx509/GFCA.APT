@@ -10,20 +10,174 @@ ViewBag.Title = "Fixed Contract Document";
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
 
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 250px;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 552px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
+                min-width: 300px !important;
+                min-height: 180px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+}
+
 @section ContentPlaceholder
 {
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-lg-12 p-1">
-                    <div class="card card-success card-outline">
+    <form autocomplete="off" class="form-horizontal">
 
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+
+                            <div>
+
+                                <div data-alerts="alerts"
+                                     data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                                     data-ids="myid"
+                                     data-fade="4000"
+                                     data-usebullets="true"></div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-group row">
+
+                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
+                                                Company
+                                            </label>
+                                            <div class="col-sm-9 col-md-10 col-lg-7">
+                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-group row">
+
+                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
+                                                Document No
+                                            </label>
+                                            <div class="col-sm-9 col-md-10 col-lg-7">
+                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-group row">
+
+                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
+                                                Document Status
+                                            </label>
+                                            <div class="col-sm-9 col-md-10 col-lg-7">
+                                                <input type="text" class="e-control e-textbox e-lib e-input" value="Draft" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-group row">
+                                            <!-- Confirm State -->
+                                            <button class="btn btn-primary">Submit</button>
+                                            <button class="btn btn-success">Confirm</button>
+                                            <button class="btn btn-default">Cancel</button>
+
+                                            <!-- Approval State -->
+                                            <button class="btn btn-success">Approve</button>
+                                            <button class="btn btn-danger">Reject</button>
+
+                                            <!-- Review State -->
+                                            <button class="btn btn-primary">Review</button>
+                                            <button class="btn btn-success">Commit</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div>
+
+                                <div data-alerts="alerts"
+                                     data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                                     data-ids="myid"
+                                     data-fade="4000"
+                                     data-usebullets="true"></div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
+                                                Requester
+                                            </label>
+                                            <div class="col-sm-9 col-md-10 col-lg-7">
+                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div>
+
+                                <div class="col-sm-6 col-lg-3">
+
+                                </div>
+                                <div class="col-sm-6 col-lg-3">
+
+                                </div>
+                                <div class="col-sm-6 col-lg-3">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-    </div>
+
+    </form>
 
 }
-                
