@@ -4135,7 +4135,6 @@
     <Content Include="Scripts\jquery-bs-alerts-1.0.5\.gitignore" />
     <Content Include="Scripts\jquery-bs-alerts-1.0.5\.jshintrc" />
     <Content Include="Scripts\jquery-bs-alerts-1.0.5\.travis.yml" />
-    <Content Include="Scripts\jquery-bs-alerts-1.0.5\package.json" />
     <Content Include="Scripts\jquery-bs-alerts-1.0.5\README.md" />
     <Content Include="Scripts\jquery-bs-alerts-1.0.5\release.sh" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
