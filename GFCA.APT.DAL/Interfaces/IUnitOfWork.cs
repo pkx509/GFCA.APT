@@ -8,6 +8,8 @@ namespace GFCA.APT.DAL.Interfaces
 		IProductRepository ProductRepository { get; }
 		IEmissionRepository EmissionRepository { get; }
 
+		IGLAccountRepository GLAccountRepository { get; }
+
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
 		//bool ProxyCreationEnabled { get; set; }
