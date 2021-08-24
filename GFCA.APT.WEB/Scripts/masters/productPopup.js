@@ -25,26 +25,65 @@ let productPopup = new (function () {
     this.isCreateState = true;
 
     //Model Dto
-    this.field_brand_id = "#pop-txt-product-id";
-    this.field_brand_code = "#pop-cmb-brand-code";
-    this.field_client_id = "#pop-hid-client-id";
+
+    this.field_prod_id = "#pop-txt-prod_id";
     this.field_prod_code = "#pop-txt-prod_code";
-    this.field_brand_name = "#pop-txt-brand-name";
-    this.field_brand_desc = "textarea[name='pop-txt-brand-desc']";
-    this.field_is_active = "input[id='pop-ckb-is-active']";
-    this.field_permanant_del = "#pop-hid-permanant-del";
+    this.field_prod_name = "#pop-txt-prod_name";
+    this.field_cust_code = "#pop-txt-cust_code";
+    this.field_mat_code = "#pop-txt-mat_code";
+    this.field_org_code = "#pop-txt-org_code";
+    this.field_div_code = "#pop-txt-div_code";
+    this.field_emis_code = "#pop-txt-emis_code";
+    this.field_mat_group = "#pop-txt-mat_group";
+    this.field_mat_group_desc = "#pop-txt-mat_group_desc";
+    this.field_mat_group1 = "#pop-txt-mat_group1";
+    this.field_mat_group1_desc = "#pop-txt-mat_group1_desc";
+    this.field_mat_group2 = "#pop-txt-mat_group2";
+    this.field_mat_group2_desc = "#pop-txt-mat_group2_desc";
+    this.field_mat_group3 = "#pop-txt-mat_group3";
+    this.field_mat_group3_desc = "#pop-txt-mat_group3_desc";
+    this.field_formula = "#pop-txt-formula";
+    this.field_pack = "#pop-txt-pack";
+    this.field_pack_desc = "#pop-txt-pack_desc";
+    this.field_size = "#pop-txt-size";
+    this.field_uom_size = "#pop-txt-uom_size";
+    this.field_uom_sale = "#pop-txt-uom_sale";
+    this.field_unit_code = "#pop-txt-unit_code";
+    this.field_flag_row = "#pop-txt-flag_row";
+    this.field_created_by = "#pop-txt-created_by";
+    this.field_created_date = "#pop-txt-created_date";
+    this.field_updated_by = "#pop-txt-updated_by";
+    this.field_updated_date = "#pop-txt-updated_date";
+
+
+
 
     //Value Dto
     this.jsonData = {
-        BRAND_ID: 0,
-        CLIENT_ID: null,
-        CLIENT_CODE: null,
-        BRAND_CODE: null,
-        BRAND_NAME: null,
-        BRAND_DESC: null,
-        FLAG_ROW: null,
-        IS_ACTIVED: null,
-        IS_DELETE_PERMANANT: null,
+        PROD_ID: 0,
+        PROD_CODE: null,
+        PROD_NAME: null,
+        CUST_CODE: null,
+        MAT_CODE: null,
+        ORG_CODE: null,
+        DIV_CODE: null,
+        EMIS_CODE: null,
+        MAT_GROUP: null,
+        MAT_GROUP_DESC: null,
+        MAT_GROUP1: null,
+        MAT_GROUP1_DESC: null,
+        MAT_GROUP2: null,
+        MAT_GROUP2_DESC: null,
+        MAT_GROUP3: null,
+        MAT_GROUP3_DESC: null,
+        FORMULA: null,
+        PACK: null,
+        PACK_DESC: null,
+        SIZE: null,
+        UOM_SIZE: null,
+        UOM_SALE: null,
+        UNIT_CODE: null,
+        FLAG_ROW: null
     };
 
     this.callBack = function (data) {
@@ -52,15 +91,30 @@ let productPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            BRAND_ID: 0,
-            CLIENT_ID: null,
-            CLIENT_CODE: null,
-            BRAND_CODE: null,
-            BRAND_NAME: null,
-            BRAND_DESC: null,
+            PROD_ID: 0,
+            PROD_CODE: null,
+            PROD_NAME: null,
+            CUST_CODE: null,
+            MAT_CODE: null,
+            ORG_CODE: null,
+            DIV_CODE: null,
+            EMIS_CODE: null,
+            MAT_GROUP: null,
+            MAT_GROUP_DESC: null,
+            MAT_GROUP1: null,
+            MAT_GROUP1_DESC: null,
+            MAT_GROUP2: null,
+            MAT_GROUP2_DESC: null,
+            MAT_GROUP3: null,
+            MAT_GROUP3_DESC: null,
+            FORMULA: null,
+            PACK: null,
+            PACK_DESC: null,
+            SIZE: null,
+            UOM_SIZE: null,
+            UOM_SALE: null,
+            UNIT_CODE: null,
             FLAG_ROW: null,
-            IS_ACTIVED: null,
-            IS_DELETE_PERMANANT: null,
         };
     }
     this.setHeading = function (headerTitle) {
@@ -143,18 +197,62 @@ let productPopup = new (function () {
         $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
     }
     this.bindField = function () {
-        let BRAND_ID = $(this.field_brand_id).val();
-        let CLIENT_CODE = $(this.field_client_code).val();
-        let CLIENT_ID = $(this.field_client_id).val();
+        let PROD_ID = $(this.field_prod_id).val();
         let PROD_CODE = $(this.field_prod_code).val();
-        let BRAND_NAME = $(this.field_brand_name).val();
-        let BRAND_DESC = $(this.field_brand_desc).val();
-        let IS_ACTIVED = $(this.field_is_active).val();
-        let IS_DELETE_PERMANANT = $(this.field_permanant_del).val();
+        let PROD_NAME = $(this.field_prod_name).val();
+        let CUST_CODE = $(this.field_cust_code).val();
+        let MAT_CODE = $(this.field_mat_code).val();
+        let ORG_CODE = $(this.field_org_code).val();
+        let DIV_CODE = $(this.field_div_code).val();
+        let EMIS_CODE = $(this.field_emis_code).val();
+        let MAT_GROUP = $(this.field_mat_group).val();
+        let MAT_GROUP_DESC = $(this.field_mat_group_desc).val();
+        let MAT_GROUP1 = $(this.field_mat_group1).val();
+        let MAT_GROUP1_DESC = $(this.field_mat_group1_desc).val();
+        let MAT_GROUP2 = $(this.field_mat_group2).val();
+        let MAT_GROUP2_DESC = $(this.field_mat_group2_desc).val();
+        let MAT_GROUP3 = $(this.field_mat_group3).val();
+        let MAT_GROUP3_DESC = $(this.field_mat_group3_desc).val();
+        let FORMULA = $(this.field_formula).val();
+        let PACK = $(this.field_pack).val();
+        let PACK_DESC = $(this.field_pack_desc).val();
+        let SIZE = $(this.field_size).val();
+        let UOM_SIZE = $(this.field_uom_size).val();
+        let UOM_SALE = $(this.field_uom_sale).val();
+        let UNIT_CODE = $(this.field_unit_code).val();
+        let FLAG_ROW = $(this.field_flag_row).val();
+        let CREATED_BY = $(this.field_created_by).val();
+        let CREATED_DATE = $(this.field_created_date).val();
+        let UPDATED_BY = $(this.field_updated_by).val();
+        let UPDATED_DATE = $(this.field_updated_date).val();
+
 
         this.jsonData = {
-            BRAND_ID, CLIENT_CODE, CLIENT_ID, BRAND_CODE, BRAND_NAME, BRAND_DESC,
-            IS_ACTIVED, IS_DELETE_PERMANANT
+            PROD_ID,
+            PROD_CODE,
+            PROD_NAME,
+            CUST_CODE,
+            MAT_CODE,
+            ORG_CODE,
+            DIV_CODE,
+            EMIS_CODE,
+            MAT_GROUP,
+            MAT_GROUP_DESC,
+            MAT_GROUP1,
+            MAT_GROUP1_DESC,
+            MAT_GROUP2,
+            MAT_GROUP2_DESC,
+            MAT_GROUP3,
+            MAT_GROUP3_DESC,
+            FORMULA,
+            PACK,
+            PACK_DESC,
+            SIZE,
+            UOM_SIZE,
+            UOM_SALE,
+            UNIT_CODE
+
+
         };
     }
     this.fieldsDisable = function () {

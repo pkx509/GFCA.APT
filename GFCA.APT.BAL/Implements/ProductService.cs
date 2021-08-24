@@ -6,9 +6,6 @@ using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Implements
 {
@@ -28,7 +25,7 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.ProductRepository.All();
             return dto;
         }
-          public BusinessResponse Create(ProductDto model)
+        public BusinessResponse Create(ProductDto model)
         {
             var response = new BusinessResponse();
             try
@@ -126,7 +123,7 @@ namespace GFCA.APT.BAL.Implements
                 dynamic id = model.PROD_ID;
                 var dto = _uow.ProductRepository.GetById(id);
 
-                
+
 
                 dto.PROD_CODE = model.PROD_CODE;
                 dto.PROD_NAME = model.PROD_NAME;
@@ -180,6 +177,6 @@ namespace GFCA.APT.BAL.Implements
             return dto;
         }
 
-     
+
     }
 }
