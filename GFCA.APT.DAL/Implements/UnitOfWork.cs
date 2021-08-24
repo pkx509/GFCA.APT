@@ -13,6 +13,7 @@ namespace GFCA.APT.DAL.Implements
         private IBrandRepository _brandRepository;
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
+        private IGLAccountRepository _glaccountRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -33,7 +34,15 @@ namespace GFCA.APT.DAL.Implements
             _connection.Open();
             _transaction = _connection.BeginTransaction();
         }
-        
+
+        public IGLAccountRepository GLAccountRepository
+        {
+            get
+            {
+                return _glaccountRepository ?? (_glaccountRepository = new GLAccountRepository(_transaction));
+            }
+        }
+
         public IBrandRepository BrandRepository
         {
             get
@@ -61,6 +70,7 @@ namespace GFCA.APT.DAL.Implements
             _brandRepository = null;
             _productRepository = null;
             _emissionRepository = null;
+            _glaccountRepository = null;
         }
 
         public void Commit()

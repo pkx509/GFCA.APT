@@ -1,0 +1,262 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<!-- <button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button> -->
+<form class="form-horizontal" id="pop-form-brand" autocomplete="off">
+    <div id="popup-brand" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW GL-Account</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-acc-id").Value("0").HtmlAttributes(disabled).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        IO_ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-io-id").Placeholder("IO ID").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CENTER_ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-centerId").Placeholder("Center ID").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FUND_ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-fundId").Placeholder("Fund ID").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FUND_CENTER_ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-fcenterId").Placeholder("FundCenter ID").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-accCode").Placeholder("Code").CssClass("mandatory").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_NAME
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-accName").Placeholder("ACC Name").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_TYPE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-accType").Placeholder("Type").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_TYPE_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-typeDes").Placeholder("ACC_TYPE_DESC").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_GROUP1
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-grp1").Placeholder("ACC_GROUP1_DESC").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_GROUP1_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-grp1Des").Placeholder("ACC_GROUP2").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_GROUP2
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-grp2").Placeholder("ACC_GROUP2_DESC").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ACC_GROUP2_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-grp2Des").Placeholder("ACC_GROUP2").Render()
+                                    </div>
+
+                                </div>
+                            </div> 
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-txt-accRemark">
+                                        ACC_REMARK
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-accRemark").Multiline(true).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-ckb-is-active">
+                                        Active
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                        <!-- input id="pop-ckb-is-active" type="checkbox" class="e-control e-checkbox e-lib" / -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="pop-btn-del" type="button" class="btn e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:gl_accountPopup.onDelete(this)">Delete</button>
+                    <button id="pop-btn-save" type="button" class="btn e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:gl_accountPopup.onSave(this)">Save</button>
+                    <button type="button" class="btn e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:gl_accountPopup.close(this)">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

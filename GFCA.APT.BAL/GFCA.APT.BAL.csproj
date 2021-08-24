@@ -136,6 +136,7 @@
     <Compile Include="Implements\BusinessProvider.cs" />
     <Compile Include="Implements\EmissionService.cs" />
     <Compile Include="Implements\FormsAuthenticationService.cs" />
+    <Compile Include="Implements\GLAccountService.cs" />
     <Compile Include="Implements\LogService.cs" />
     <Compile Include="Implements\LookupService.cs" />
     <Compile Include="Implements\ProductService.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IBusinessProvider.cs" />
     <Compile Include="Interfaces\IEmissionService.cs" />
+    <Compile Include="Interfaces\IGLAccountService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

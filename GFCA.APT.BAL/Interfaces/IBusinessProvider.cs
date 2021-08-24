@@ -7,5 +7,7 @@ namespace GFCA.APT.BAL.Interfaces
         IBrandService BrandService { get; }
         IEmissionService EmissionService { get; }
         IProductService ProductService { get; }
+
+        IGLAccountService GLAccountService { get; }
     }
 }
