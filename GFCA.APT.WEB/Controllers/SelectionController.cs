@@ -18,32 +18,42 @@ namespace GFCA.APT.WEB.Controllers
         private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         // POST: api/Selection/GetEmission
+        // POST: api/Selection/GetEmission/true
         [HttpPost]
-        public IEnumerable<SelectionItem> GetEmission()
+        public IEnumerable<SelectionItem> GetEmission(bool isOption = false)
         {
             IBusinessProvider biz = new BusinessProvider();
-            //IBrandService svc = BrandService.CreateInstant();
             IEmissionService svc = biz.EmissionService;
-            //IEmissionService svc = EmissionService.CreateInstant();
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.EMIS_ID, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" });
+                .Select(o => new SelectionItem { Value = o.EMIS_ID, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" })
+                .ToList();
+
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
 
             return ret;
         }
 
 
         // POST: api/Selection/GetBrand
+        // POST: api/Selection/GetBrand/true
         [HttpPost]
-        public IEnumerable<SelectionItem> GetBrand()
+        public IEnumerable<SelectionItem> GetBrand(bool isOption = false)
         {
             IBusinessProvider biz = new BusinessProvider();
-            //IBrandService svc = BrandService.CreateInstant();
             IBrandService svc = biz.BrandService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.BRAND_ID, Text = $"{o.BRAND_CODE} - {o.BRAND_NAME}" });
+                .Select(o => new SelectionItem { Value = o.BRAND_ID, Text = $"{o.BRAND_CODE} - {o.BRAND_NAME}" })
+                .ToList();
 
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
             return ret;
         }
     }

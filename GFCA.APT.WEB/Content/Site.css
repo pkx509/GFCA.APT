@@ -190,15 +190,31 @@
     }
 }
 
+label {
+    font-weight: 400 !important;
+}
 .mandatory {
     background-color: rgb(250, 250, 210) !important;
 }
 
+.content-header {
+    padding-top: 0rem !important;
+}
+.card {
+    margin-top: 0.1rem;
+    margin-bottom: 0.4rem;
+}
+.card-header {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 .card-body {
     padding-top: 0.8rem;
     padding-bottom: 0;
 }
-
+.card-footer {
+    background-color: rgba(0,0,0,.02);
+}
 .bootstrap-dialog .modal-header.bootstrap-dialog-draggable {
     cursor: move;
 }
