@@ -194,9 +194,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="C__EFMigrationsHistory.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="FlowItem.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -229,12 +226,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StateProcess.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_ACCOUNT_PAYABLE.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_ACCOUNT_RECEIVEABLE.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_ACTIVITY.cs">

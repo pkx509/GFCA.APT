@@ -5,13 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__EFMigrationsHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Actor">
           <Key>
             <PropertyRef Name="ActorId" />
@@ -77,28 +70,6 @@
           <Property Name="ActionName" Type="varchar" MaxLength="100" />
           <Property Name="ActivityPiority" Type="int" Nullable="false" />
           <Property Name="ActionPiority" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
-          <Key>
-            <PropertyRef Name="AP_ID" />
-          </Key>
-          <Property Name="AP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IO_ID" Type="int" />
-          <Property Name="CENTER_ID" Type="int" />
-          <Property Name="FUND_ID" Type="int" />
-          <Property Name="FUND_CENTER_ID" Type="int" />
-          <Property Name="MATERIAL" Type="int" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
-          <Key>
-            <PropertyRef Name="AR_ID" />
-          </Key>
-          <Property Name="AR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IO_ID" Type="int" />
-          <Property Name="CENTER_ID" Type="int" />
-          <Property Name="FUND_ID" Type="int" />
-          <Property Name="FUND_CENTER_ID" Type="int" />
-          <Property Name="MATERIAL" Type="int" />
         </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
@@ -1188,15 +1159,12 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
         
         
         <EntityContainer Name="ModelsStoreContainer">
-          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActorState" EntityType="Self.ActorState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FlowItem" EntityType="Self.FlowItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OperatorCondition" EntityType="Self.OperatorCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StateFlowItem" EntityType="Self.StateFlowItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StateProcess" EntityType="Self.StateProcess" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Self.TB_M_ACCOUNT_PAYABLE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Self.TB_M_ACCOUNT_RECEIVEABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Self.TB_M_BUDGET_TYPE" Schema="dbo" store:Type="Tables" />
@@ -1403,15 +1371,12 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="APTDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__EFMigrationsHistory" EntityType="Models.C__EFMigrationsHistory" />
           <EntitySet Name="Actors" EntityType="Models.Actor" />
           <EntitySet Name="ActorStates" EntityType="Models.ActorState" />
           <EntitySet Name="FlowItems" EntityType="Models.FlowItem" />
           <EntitySet Name="OperatorConditions" EntityType="Models.OperatorCondition" />
           <EntitySet Name="StateFlowItems" EntityType="Models.StateFlowItem" />
           <EntitySet Name="StateProcesses" EntityType="Models.StateProcess" />
-          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Models.TB_M_ACCOUNT_PAYABLE" />
-          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Models.TB_M_ACCOUNT_RECEIVEABLE" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Models.TB_M_BUDGET_TYPE" />
@@ -1448,6 +1413,8 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <EntitySet Name="WorkflowActions" EntityType="Models.WorkflowAction" />
           <EntitySet Name="WorkflowActivities" EntityType="Models.WorkflowActivity" />
           <EntitySet Name="WorkflowStates" EntityType="Models.WorkflowState" />
+          <EntitySet Name="VW_List_Costcenter" EntityType="Models.VW_List_Costcenter" />
+          <EntitySet Name="VW_List_TradeActivity" EntityType="Models.VW_List_TradeActivity" />
           <AssociationSet Name="FK_ActorState_Actor_ActorId" Association="Models.FK_ActorState_Actor_ActorId">
             <End Role="Actor" EntitySet="Actors" />
             <End Role="ActorState" EntitySet="ActorStates" />
@@ -1600,16 +1567,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
             <End Role="WorkflowState" EntitySet="WorkflowStates" />
             <End Role="WorkflowState1" EntitySet="WorkflowStates" />
           </AssociationSet>
-          <EntitySet Name="VW_List_Costcenter" EntityType="Models.VW_List_Costcenter" />
-          <EntitySet Name="VW_List_TradeActivity" EntityType="Models.VW_List_TradeActivity" />
         </EntityContainer>
-        <EntityType Name="C__EFMigrationsHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Actor">
           <Key>
             <PropertyRef Name="ActorId" />
@@ -1686,28 +1644,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <NavigationProperty Name="WorkflowAction" Relationship="Models.FK_StateProcess_WorkflowAction_ActionId" FromRole="StateProcess" ToRole="WorkflowAction" />
           <NavigationProperty Name="WorkflowActivity" Relationship="Models.FK_StateProcess_WorkflowActivity_ActivityId" FromRole="StateProcess" ToRole="WorkflowActivity" />
           <NavigationProperty Name="WorkflowState" Relationship="Models.FK_StateProcess_WorkflowState_WorkflowStateId" FromRole="StateProcess" ToRole="WorkflowState" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
-          <Key>
-            <PropertyRef Name="AP_ID" />
-          </Key>
-          <Property Name="AP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IO_ID" Type="Int32" />
-          <Property Name="CENTER_ID" Type="Int32" />
-          <Property Name="FUND_ID" Type="Int32" />
-          <Property Name="FUND_CENTER_ID" Type="Int32" />
-          <Property Name="MATERIAL" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
-          <Key>
-            <PropertyRef Name="AR_ID" />
-          </Key>
-          <Property Name="AR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IO_ID" Type="Int32" />
-          <Property Name="CENTER_ID" Type="Int32" />
-          <Property Name="FUND_ID" Type="Int32" />
-          <Property Name="FUND_CENTER_ID" Type="Int32" />
-          <Property Name="MATERIAL" Type="Int32" />
         </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
@@ -2364,6 +2300,21 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <NavigationProperty Name="WorkflowState1" Relationship="Models.FK_WorkflowState_WorkflowState_PreviousStateId" FromRole="WorkflowState" ToRole="WorkflowState1" />
           <NavigationProperty Name="WorkflowState2" Relationship="Models.FK_WorkflowState_WorkflowState_PreviousStateId" FromRole="WorkflowState1" ToRole="WorkflowState" />
         </EntityType>
+        <EntityType Name="VW_List_Costcenter">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="166" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_List_TradeActivity">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+        </EntityType>
         <Association Name="FK_ActorState_Actor_ActorId">
           <End Type="Models.Actor" Role="Actor" Multiplicity="1" />
           <End Type="Models.ActorState" Role="ActorState" Multiplicity="*" />
@@ -2820,35 +2771,12 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="VW_List_Costcenter">
-          <Key>
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="166" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="VW_List_TradeActivity">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="APTDbContext">
-          <EntitySetMapping Name="C__EFMigrationsHistory">
-            <EntityTypeMapping TypeName="Models.C__EFMigrationsHistory">
-              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Actors">
             <EntityTypeMapping TypeName="Models.Actor">
               <MappingFragment StoreEntitySet="Actor">
@@ -2918,30 +2846,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
                 <ScalarProperty Name="ActionId" ColumnName="ActionId" />
                 <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
                 <ScalarProperty Name="StateProcessId" ColumnName="StateProcessId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_ACCOUNT_PAYABLE">
-            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_PAYABLE">
-              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_PAYABLE">
-                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
-                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
-                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
-                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
-                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
-                <ScalarProperty Name="AP_ID" ColumnName="AP_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_ACCOUNT_RECEIVEABLE">
-            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_RECEIVEABLE">
-              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_RECEIVEABLE">
-                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
-                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
-                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
-                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
-                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
-                <ScalarProperty Name="AR_ID" ColumnName="AR_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

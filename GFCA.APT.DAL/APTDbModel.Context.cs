@@ -25,15 +25,12 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
         public virtual DbSet<Actor> Actors { get; set; }
         public virtual DbSet<ActorState> ActorStates { get; set; }
         public virtual DbSet<FlowItem> FlowItems { get; set; }
         public virtual DbSet<OperatorCondition> OperatorConditions { get; set; }
         public virtual DbSet<StateFlowItem> StateFlowItems { get; set; }
         public virtual DbSet<StateProcess> StateProcesses { get; set; }
-        public virtual DbSet<TB_M_ACCOUNT_PAYABLE> TB_M_ACCOUNT_PAYABLE { get; set; }
-        public virtual DbSet<TB_M_ACCOUNT_RECEIVEABLE> TB_M_ACCOUNT_RECEIVEABLE { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
         public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }
