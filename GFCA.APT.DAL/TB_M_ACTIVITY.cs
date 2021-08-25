@@ -19,6 +19,8 @@ namespace GFCA.APT.DAL
         public string ACTIVITY_CODE { get; set; }
         public string ACTIVITY_TYPE { get; set; }
         public string ACTIVTITY_NAME { get; set; }
+        public string HAS_FIXED_CONTRACT { get; set; }
+        public string CAN_DEDUCTABLE { get; set; }
         public string IN_THB_CS { get; set; }
         public string IN_GROSS_SALE { get; set; }
         public string IN_NOT_SALE { get; set; }

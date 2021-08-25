@@ -25,24 +25,37 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
+        public virtual DbSet<Actor> Actors { get; set; }
+        public virtual DbSet<ActorState> ActorStates { get; set; }
+        public virtual DbSet<FlowItem> FlowItems { get; set; }
+        public virtual DbSet<OperatorCondition> OperatorConditions { get; set; }
+        public virtual DbSet<StateFlowItem> StateFlowItems { get; set; }
+        public virtual DbSet<StateProcess> StateProcesses { get; set; }
+        public virtual DbSet<TB_M_ACCOUNT_PAYABLE> TB_M_ACCOUNT_PAYABLE { get; set; }
+        public virtual DbSet<TB_M_ACCOUNT_RECEIVEABLE> TB_M_ACCOUNT_RECEIVEABLE { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
         public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }
         public virtual DbSet<TB_M_CHANNEL> TB_M_CHANNEL { get; set; }
+        public virtual DbSet<TB_M_CLIENT> TB_M_CLIENT { get; set; }
         public virtual DbSet<TB_M_COMPANY> TB_M_COMPANY { get; set; }
         public virtual DbSet<TB_M_COST_CENTER> TB_M_COST_CENTER { get; set; }
         public virtual DbSet<TB_M_CUSTOMER> TB_M_CUSTOMER { get; set; }
         public virtual DbSet<TB_M_DISTRIBUTOR> TB_M_DISTRIBUTOR { get; set; }
         public virtual DbSet<TB_M_DOCUMENT_TYPE> TB_M_DOCUMENT_TYPE { get; set; }
         public virtual DbSet<TB_M_EMISSION> TB_M_EMISSION { get; set; }
+        public virtual DbSet<TB_M_EMPLOYEE> TB_M_EMPLOYEE { get; set; }
         public virtual DbSet<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
         public virtual DbSet<TB_M_INTERNAL_ORDER> TB_M_INTERNAL_ORDER { get; set; }
         public virtual DbSet<TB_M_ORGANIZATION> TB_M_ORGANIZATION { get; set; }
         public virtual DbSet<TB_M_PRODUCT> TB_M_PRODUCT { get; set; }
         public virtual DbSet<TB_M_PROMOTION_GROUP> TB_M_PROMOTION_GROUP { get; set; }
         public virtual DbSet<TB_M_UNIT> TB_M_UNIT { get; set; }
+        public virtual DbSet<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
         public virtual DbSet<TB_P_COST_IO> TB_P_COST_IO { get; set; }
         public virtual DbSet<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual DbSet<TB_P_EMP_ORG> TB_P_EMP_ORG { get; set; }
         public virtual DbSet<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
         public virtual DbSet<TB_T_BILLING> TB_T_BILLING { get; set; }
         public virtual DbSet<TB_T_BUDGET> TB_T_BUDGET { get; set; }
@@ -53,6 +66,10 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
         public virtual DbSet<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
         public virtual DbSet<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
+        public virtual DbSet<Workflow> Workflows { get; set; }
+        public virtual DbSet<WorkflowAction> WorkflowActions { get; set; }
+        public virtual DbSet<WorkflowActivity> WorkflowActivities { get; set; }
+        public virtual DbSet<WorkflowState> WorkflowStates { get; set; }
         public virtual DbSet<VW_List_Costcenter> VW_List_Costcenter { get; set; }
         public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
     }

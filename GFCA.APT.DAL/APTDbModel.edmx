@@ -5,6 +5,101 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActorName" Type="varchar" MaxLength="100" />
+          <Property Name="ActorEmail" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ActorState">
+          <Key>
+            <PropertyRef Name="ActorStateId" />
+          </Key>
+          <Property Name="ActorStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowStateId" Type="int" Nullable="false" />
+          <Property Name="ActorId" Type="int" Nullable="false" />
+          <Property Name="ContactType" Type="varchar" MaxLength="100" />
+          <Property Name="RoleState" Type="varchar" MaxLength="100" />
+          <Property Name="User" Type="varchar" MaxLength="100" />
+          <Property Name="Position" Type="varchar" MaxLength="100" />
+          <Property Name="OperatorConditionId" Type="int" Nullable="false" />
+          <Property Name="OperatorCode" Type="varchar" MaxLength="50" />
+          <Property Name="LimitValue" Type="numeric" Precision="13" Scale="4" />
+        </EntityType>
+        <EntityType Name="FlowItem">
+          <Key>
+            <PropertyRef Name="FlowItemId" />
+          </Key>
+          <Property Name="FlowItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="FlowItemName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OperatorCondition">
+          <Key>
+            <PropertyRef Name="OperatorConditionId" />
+          </Key>
+          <Property Name="OperatorConditionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperatorCode" Type="varchar" MaxLength="50" />
+          <Property Name="OperatoDesc" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="StateFlowItem">
+          <Key>
+            <PropertyRef Name="StateFlowItemId" />
+          </Key>
+          <Property Name="StateFlowItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowStateId" Type="int" Nullable="false" />
+          <Property Name="FlowItemId" Type="int" Nullable="false" />
+          <Property Name="FlowItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="FlowItemName" Type="varchar" MaxLength="100" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateProcess">
+          <Key>
+            <PropertyRef Name="StateProcessId" />
+          </Key>
+          <Property Name="StateProcessId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowStateId" Type="int" Nullable="false" />
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="ActivityCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActionCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="100" />
+          <Property Name="ActionName" Type="varchar" MaxLength="100" />
+          <Property Name="ActivityPiority" Type="int" Nullable="false" />
+          <Property Name="ActionPiority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
+          <Key>
+            <PropertyRef Name="AP_ID" />
+          </Key>
+          <Property Name="AP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IO_ID" Type="int" />
+          <Property Name="CENTER_ID" Type="int" />
+          <Property Name="FUND_ID" Type="int" />
+          <Property Name="FUND_CENTER_ID" Type="int" />
+          <Property Name="MATERIAL" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
+          <Key>
+            <PropertyRef Name="AR_ID" />
+          </Key>
+          <Property Name="AR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IO_ID" Type="int" />
+          <Property Name="CENTER_ID" Type="int" />
+          <Property Name="FUND_ID" Type="int" />
+          <Property Name="FUND_CENTER_ID" Type="int" />
+          <Property Name="MATERIAL" Type="int" />
+        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_ID" />
@@ -14,6 +109,8 @@
           <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ACTIVITY_TYPE" Type="varchar" MaxLength="50" />
           <Property Name="ACTIVTITY_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="HAS_FIXED_CONTRACT" Type="varchar" MaxLength="1" />
+          <Property Name="CAN_DEDUCTABLE" Type="varchar" MaxLength="1" />
           <Property Name="IN_THB_CS" Type="varchar" MaxLength="1" />
           <Property Name="IN_GROSS_SALE" Type="varchar" MaxLength="1" />
           <Property Name="IN_NOT_SALE" Type="varchar" MaxLength="1" />
@@ -34,6 +131,7 @@
             <PropertyRef Name="BRAND_ID" />
           </Key>
           <Property Name="BRAND_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLIENT_ID" Type="int" />
           <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BRAND_NAME" Type="varchar" MaxLength="100" />
           <Property Name="BRAND_DESC" Type="varchar(max)" />
@@ -65,6 +163,20 @@
           <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CHANNEL_NAME" Type="varchar" MaxLength="100" />
           <Property Name="CHANNEL_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_CLIENT">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLIENT_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CLIENT_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="CLIENT_DESC" Type="varchar(max)" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
@@ -158,6 +270,21 @@
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PREFIX" Type="varchar" MaxLength="50" />
+          <Property Name="NAME_FIRST" Type="varchar" MaxLength="50" />
+          <Property Name="NAME_LAST" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TB_M_GL_ACCOUNT">
           <Key>
             <PropertyRef Name="ACC_ID" />
@@ -203,6 +330,7 @@
           <Property Name="ORG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COMP_ID" Type="int" />
           <Property Name="ORG_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="ORG_TYPE" Type="varchar" MaxLength="100" />
           <Property Name="ORG_DEPARTMENT_NAME" Type="varchar" MaxLength="100" />
           <Property Name="ORG_POSITION_NAME" Type="varchar" MaxLength="100" />
           <Property Name="ORG_DESC" Type="varchar(max)" />
@@ -219,11 +347,11 @@
           <Property Name="PROD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PROD_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PROD_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="MAT_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DIV_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="EMIS_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="MAT_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DIV_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="EMIS_CODE" Type="varchar" MaxLength="50" />
           <Property Name="MAT_GROUP" Type="varchar" MaxLength="100" />
           <Property Name="MAT_GROUP_DESC" Type="varchar(max)" />
           <Property Name="MAT_GROUP1" Type="varchar" MaxLength="100" />
@@ -232,10 +360,17 @@
           <Property Name="MAT_GROUP2_DESC" Type="varchar(max)" />
           <Property Name="MAT_GROUP3" Type="varchar" MaxLength="100" />
           <Property Name="MAT_GROUP3_DESC" Type="varchar(max)" />
+          <Property Name="MAT_GROUP4" Type="varchar" MaxLength="100" />
+          <Property Name="MAT_GROUP4_DESC" Type="varchar(max)" />
           <Property Name="FORMULA" Type="varchar" MaxLength="100" />
-          <Property Name="PACK" Type="varchar" MaxLength="100" />
+          <Property Name="PACK" Type="int" />
           <Property Name="PACK_DESC" Type="varchar(max)" />
+          <Property Name="SIZE" Type="int" />
+          <Property Name="UOM_SIZE" Type="varchar" MaxLength="50" />
+          <Property Name="UOM_SALE" Type="nvarchar" MaxLength="50" />
           <Property Name="UNIT_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CONV_FCL" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CONV_L" Type="numeric" Precision="18" Scale="0" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
@@ -276,6 +411,22 @@
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_P_BRAND_ORG">
+          <Key>
+            <PropertyRef Name="BRAND_ID" />
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="BRAND_ID" Type="int" Nullable="false" />
+          <Property Name="ORG_ID" Type="int" Nullable="false" />
+          <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EFF_FROM" Type="date" />
+          <Property Name="EFF_TO" Type="date" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TB_P_COST_IO">
           <Key>
             <PropertyRef Name="CENTER_ID" />
@@ -307,6 +458,23 @@
           <Property Name="DISTB_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_P_EMP_ORG">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="int" Nullable="false" />
+          <Property Name="ORG_ID" Type="int" Nullable="false" />
+          <Property Name="ORG_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="EMP_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EFF_FROM" Type="date" />
+          <Property Name="EFF_TO" Type="date" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
@@ -476,14 +644,60 @@
           <Property Name="PROPL_SALE_ID" Type="int" Nullable="false" />
           <Property Name="PROPL_ID" Type="int" />
         </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowName" Type="varchar" MaxLength="100" />
+          <Property Name="WorkflowDesc" Type="varchar(max)" />
+          <Property Name="BeginDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="WorkflowAction">
+          <Key>
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ActionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActionName" Type="varchar" MaxLength="100" />
+          <Property Name="ActionPiority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowActivity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="100" />
+          <Property Name="ActivityPiority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowState">
+          <Key>
+            <PropertyRef Name="WorkflowStateId" />
+          </Key>
+          <Property Name="WorkflowStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreviousStateId" Type="int" />
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="100" />
+          <Property Name="StateDesc" Type="varchar(max)" />
+          <Property Name="NotifySubject" Type="varchar" MaxLength="200" />
+          <Property Name="NotifyMessage" Type="varchar(max)" />
+          <Property Name="BeginDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2Db.dbo.VW_LIST_Channel' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'APT2DB3.dbo.VW_LIST_Channel' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="VW_LIST_Channel">
           <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="Name" Type="nvarchar" MaxLength="71" />
         </EntityType>-->
         <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2Db.dbo.VW_List_Costcenter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'APT2DB3.dbo.VW_List_Costcenter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_List_Costcenter">
           <Key>
             <PropertyRef Name="Code" />
@@ -493,14 +707,14 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_Costcenter' does not have a pri
           <Property Name="Name" Type="nvarchar" MaxLength="166" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2Db.dbo.VW_List_Customer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'APT2DB3.dbo.VW_List_Customer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="VW_List_Customer">
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="201" />
           <Property Name="ChannelCode" Type="nvarchar" MaxLength="20" />
         </EntityType>-->
         <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'APT2DB3.dbo.VW_List_TradeActivity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_List_TradeActivity">
           <Key>
             <PropertyRef Name="Code" />
@@ -509,10 +723,106 @@ warning 6002: The table/view 'APT2Db.dbo.VW_List_TradeActivity' does not have a 
           <Property Name="Name" Type="varchar" MaxLength="101" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="VW_List_YEAR">
           <Property Name="Year" Type="int" />
         </EntityType>-->
+        <Association Name="FK_ActorState_Actor_ActorId">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="1" />
+          <End Role="ActorState" Type="Self.ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActorState_OperatorCondition_OperatorConditionId">
+          <End Role="OperatorCondition" Type="Self.OperatorCondition" Multiplicity="1" />
+          <End Role="ActorState" Type="Self.ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperatorCondition">
+              <PropertyRef Name="OperatorConditionId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="OperatorConditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActorState_WorkflowState_WorkflowStateId">
+          <End Role="WorkflowState" Type="Self.WorkflowState" Multiplicity="1" />
+          <End Role="ActorState" Type="Self.ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateFlowItem_FlowItem_FlowItemId">
+          <End Role="FlowItem" Type="Self.FlowItem" Multiplicity="1" />
+          <End Role="StateFlowItem" Type="Self.StateFlowItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FlowItem">
+              <PropertyRef Name="FlowItemId" />
+            </Principal>
+            <Dependent Role="StateFlowItem">
+              <PropertyRef Name="FlowItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateFlowItem_WorkflowState_WorkflowStateId">
+          <End Role="WorkflowState" Type="Self.WorkflowState" Multiplicity="1" />
+          <End Role="StateFlowItem" Type="Self.StateFlowItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="StateFlowItem">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowAction_ActionId">
+          <End Role="WorkflowAction" Type="Self.WorkflowAction" Multiplicity="1" />
+          <End Role="StateProcess" Type="Self.StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowAction">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowActivity_ActivityId">
+          <End Role="WorkflowActivity" Type="Self.WorkflowActivity" Multiplicity="1" />
+          <End Role="StateProcess" Type="Self.StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowActivity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowState_WorkflowStateId">
+          <End Role="WorkflowState" Type="Self.WorkflowState" Multiplicity="1" />
+          <End Role="StateProcess" Type="Self.StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
           <End Role="TB_M_GL_ACCOUNT" Type="Self.TB_M_GL_ACCOUNT" Multiplicity="0..1" />
           <End Role="TB_M_ACTIVITY" Type="Self.TB_M_ACTIVITY" Multiplicity="*" />
@@ -522,6 +832,18 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Principal>
             <Dependent Role="TB_M_ACTIVITY">
               <PropertyRef Name="ACC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_M_BRAND_TB_M_CLIENT">
+          <End Role="TB_M_CLIENT" Type="Self.TB_M_CLIENT" Multiplicity="0..1" />
+          <End Role="TB_M_BRAND" Type="Self.TB_M_BRAND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="TB_M_BRAND">
+              <PropertyRef Name="CLIENT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -558,6 +880,30 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Principal>
             <Dependent Role="TB_M_UNIT1">
               <PropertyRef Name="PARENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_BRAND_ORG_TB_M_BRAND">
+          <End Role="TB_M_BRAND" Type="Self.TB_M_BRAND" Multiplicity="1" />
+          <End Role="TB_P_BRAND_ORG" Type="Self.TB_P_BRAND_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_BRAND">
+              <PropertyRef Name="BRAND_ID" />
+            </Principal>
+            <Dependent Role="TB_P_BRAND_ORG">
+              <PropertyRef Name="BRAND_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION">
+          <End Role="TB_M_ORGANIZATION" Type="Self.TB_M_ORGANIZATION" Multiplicity="1" />
+          <End Role="TB_P_BRAND_ORG" Type="Self.TB_P_BRAND_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="ORG_ID" />
+            </Principal>
+            <Dependent Role="TB_P_BRAND_ORG">
+              <PropertyRef Name="ORG_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -642,6 +988,30 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Principal>
             <Dependent Role="TB_P_CUSTOMER_PARTY">
               <PropertyRef Name="ACC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_EMP_ORG_TB_M_EMPLOYEE">
+          <End Role="TB_M_EMPLOYEE" Type="Self.TB_M_EMPLOYEE" Multiplicity="1" />
+          <End Role="TB_P_EMP_ORG" Type="Self.TB_P_EMP_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_EMPLOYEE">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="TB_P_EMP_ORG">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_EMP_ORG_TB_M_ORGANIZATION">
+          <End Role="TB_M_ORGANIZATION" Type="Self.TB_M_ORGANIZATION" Multiplicity="1" />
+          <End Role="TB_P_EMP_ORG" Type="Self.TB_P_EMP_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="ORG_ID" />
+            </Principal>
+            <Dependent Role="TB_P_EMP_ORG">
+              <PropertyRef Name="ORG_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -789,25 +1159,66 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkflowState_Workflow_WorkflowId">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkflowState" Type="Self.WorkflowState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="WorkflowId" />
+            </Principal>
+            <Dependent Role="WorkflowState">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowState_WorkflowState_PreviousStateId">
+          <End Role="WorkflowState" Type="Self.WorkflowState" Multiplicity="0..1" />
+          <End Role="WorkflowState1" Type="Self.WorkflowState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="WorkflowState1">
+              <PropertyRef Name="PreviousStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        
+        
+        
+        
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActorState" EntityType="Self.ActorState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FlowItem" EntityType="Self.FlowItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperatorCondition" EntityType="Self.OperatorCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateFlowItem" EntityType="Self.StateFlowItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateProcess" EntityType="Self.StateProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Self.TB_M_ACCOUNT_PAYABLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Self.TB_M_ACCOUNT_RECEIVEABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Self.TB_M_BUDGET_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_CHANNEL" EntityType="Self.TB_M_CHANNEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_CLIENT" EntityType="Self.TB_M_CLIENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_COMPANY" EntityType="Self.TB_M_COMPANY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_COST_CENTER" EntityType="Self.TB_M_COST_CENTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_CUSTOMER" EntityType="Self.TB_M_CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_DISTRIBUTOR" EntityType="Self.TB_M_DISTRIBUTOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Self.TB_M_DOCUMENT_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_EMISSION" EntityType="Self.TB_M_EMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_EMPLOYEE" EntityType="Self.TB_M_EMPLOYEE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Self.TB_M_GL_ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_INTERNAL_ORDER" EntityType="Self.TB_M_INTERNAL_ORDER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ORGANIZATION" EntityType="Self.TB_M_ORGANIZATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_PRODUCT" EntityType="Self.TB_M_PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Self.TB_M_PROMOTION_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_UNIT" EntityType="Self.TB_M_UNIT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_P_BRAND_ORG" EntityType="Self.TB_P_BRAND_ORG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_P_COST_IO" EntityType="Self.TB_P_COST_IO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_P_CUSTOMER_PARTY" EntityType="Self.TB_P_CUSTOMER_PARTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_P_EMP_ORG" EntityType="Self.TB_P_EMP_ORG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_P_PRODUCT_GROUP" EntityType="Self.TB_P_PRODUCT_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_BILLING" EntityType="Self.TB_T_BILLING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_BUDGET" EntityType="Self.TB_T_BUDGET" Schema="dbo" store:Type="Tables" />
@@ -818,6 +1229,10 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <EntitySet Name="TB_T_PROMOTION_INVEST" EntityType="Self.TB_T_PROMOTION_INVEST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_PROMOTION_PLAN_H" EntityType="Self.TB_T_PROMOTION_PLAN_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_PROMOTION_SALE" EntityType="Self.TB_T_PROMOTION_SALE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowAction" EntityType="Self.WorkflowAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowActivity" EntityType="Self.WorkflowActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowState" EntityType="Self.WorkflowState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VW_List_Costcenter" EntityType="Self.VW_List_Costcenter" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_List_Costcenter].[Code] AS [Code], 
@@ -830,9 +1245,45 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
     [VW_List_TradeActivity].[Name] AS [Name]
     FROM [dbo].[VW_List_TradeActivity] AS [VW_List_TradeActivity]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_ActorState_Actor_ActorId" Association="Self.FK_ActorState_Actor_ActorId">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="ActorState" EntitySet="ActorState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActorState_OperatorCondition_OperatorConditionId" Association="Self.FK_ActorState_OperatorCondition_OperatorConditionId">
+            <End Role="OperatorCondition" EntitySet="OperatorCondition" />
+            <End Role="ActorState" EntitySet="ActorState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActorState_WorkflowState_WorkflowStateId" Association="Self.FK_ActorState_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowState" />
+            <End Role="ActorState" EntitySet="ActorState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateFlowItem_FlowItem_FlowItemId" Association="Self.FK_StateFlowItem_FlowItem_FlowItemId">
+            <End Role="FlowItem" EntitySet="FlowItem" />
+            <End Role="StateFlowItem" EntitySet="StateFlowItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateFlowItem_WorkflowState_WorkflowStateId" Association="Self.FK_StateFlowItem_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowState" />
+            <End Role="StateFlowItem" EntitySet="StateFlowItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowAction_ActionId" Association="Self.FK_StateProcess_WorkflowAction_ActionId">
+            <End Role="WorkflowAction" EntitySet="WorkflowAction" />
+            <End Role="StateProcess" EntitySet="StateProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowActivity_ActivityId" Association="Self.FK_StateProcess_WorkflowActivity_ActivityId">
+            <End Role="WorkflowActivity" EntitySet="WorkflowActivity" />
+            <End Role="StateProcess" EntitySet="StateProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowState_WorkflowStateId" Association="Self.FK_StateProcess_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowState" />
+            <End Role="StateProcess" EntitySet="StateProcess" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Self.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
             <End Role="TB_M_ACTIVITY" EntitySet="TB_M_ACTIVITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_M_BRAND_TB_M_CLIENT" Association="Self.FK_TB_M_BRAND_TB_M_CLIENT">
+            <End Role="TB_M_CLIENT" EntitySet="TB_M_CLIENT" />
+            <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_M_DISTRIBUTOR_TB_M_EMISSION" Association="Self.FK_TB_M_DISTRIBUTOR_TB_M_EMISSION">
             <End Role="TB_M_EMISSION" EntitySet="TB_M_EMISSION" />
@@ -845,6 +1296,14 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <AssociationSet Name="FK_TB_M_UNIT_TB_M_UNIT" Association="Self.FK_TB_M_UNIT_TB_M_UNIT">
             <End Role="TB_M_UNIT" EntitySet="TB_M_UNIT" />
             <End Role="TB_M_UNIT1" EntitySet="TB_M_UNIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_BRAND" Association="Self.FK_TB_P_BRAND_ORG_TB_M_BRAND">
+            <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
+            <End Role="TB_P_BRAND_ORG" EntitySet="TB_P_BRAND_ORG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION" Association="Self.FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION">
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+            <End Role="TB_P_BRAND_ORG" EntitySet="TB_P_BRAND_ORG" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_P_COST_IO_TB_M_COST_CENTER" Association="Self.FK_TB_P_COST_IO_TB_M_COST_CENTER">
             <End Role="TB_M_COST_CENTER" EntitySet="TB_M_COST_CENTER" />
@@ -873,6 +1332,14 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <AssociationSet Name="FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT" Association="Self.FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
             <End Role="TB_P_CUSTOMER_PARTY" EntitySet="TB_P_CUSTOMER_PARTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" Association="Self.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE">
+            <End Role="TB_M_EMPLOYEE" EntitySet="TB_M_EMPLOYEE" />
+            <End Role="TB_P_EMP_ORG" EntitySet="TB_P_EMP_ORG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_EMP_ORG_TB_M_ORGANIZATION" Association="Self.FK_TB_P_EMP_ORG_TB_M_ORGANIZATION">
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+            <End Role="TB_P_EMP_ORG" EntitySet="TB_P_EMP_ORG" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_P_PRODUCT_GROUP_TB_M_PRODUCT" Association="Self.FK_TB_P_PRODUCT_GROUP_TB_M_PRODUCT">
             <End Role="TB_M_PRODUCT" EntitySet="TB_M_PRODUCT" />
@@ -922,30 +1389,51 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
             <End Role="TB_T_PROMOTION_SALE" EntitySet="TB_T_PROMOTION_SALE" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkflowState_Workflow_WorkflowId" Association="Self.FK_WorkflowState_Workflow_WorkflowId">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="WorkflowState" EntitySet="WorkflowState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowState_WorkflowState_PreviousStateId" Association="Self.FK_WorkflowState_WorkflowState_PreviousStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowState" />
+            <End Role="WorkflowState1" EntitySet="WorkflowState" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="APTDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Models.C__EFMigrationsHistory" />
+          <EntitySet Name="Actors" EntityType="Models.Actor" />
+          <EntitySet Name="ActorStates" EntityType="Models.ActorState" />
+          <EntitySet Name="FlowItems" EntityType="Models.FlowItem" />
+          <EntitySet Name="OperatorConditions" EntityType="Models.OperatorCondition" />
+          <EntitySet Name="StateFlowItems" EntityType="Models.StateFlowItem" />
+          <EntitySet Name="StateProcesses" EntityType="Models.StateProcess" />
+          <EntitySet Name="TB_M_ACCOUNT_PAYABLE" EntityType="Models.TB_M_ACCOUNT_PAYABLE" />
+          <EntitySet Name="TB_M_ACCOUNT_RECEIVEABLE" EntityType="Models.TB_M_ACCOUNT_RECEIVEABLE" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Models.TB_M_BUDGET_TYPE" />
           <EntitySet Name="TB_M_CHANNEL" EntityType="Models.TB_M_CHANNEL" />
+          <EntitySet Name="TB_M_CLIENT" EntityType="Models.TB_M_CLIENT" />
           <EntitySet Name="TB_M_COMPANY" EntityType="Models.TB_M_COMPANY" />
           <EntitySet Name="TB_M_COST_CENTER" EntityType="Models.TB_M_COST_CENTER" />
           <EntitySet Name="TB_M_CUSTOMER" EntityType="Models.TB_M_CUSTOMER" />
           <EntitySet Name="TB_M_DISTRIBUTOR" EntityType="Models.TB_M_DISTRIBUTOR" />
           <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Models.TB_M_DOCUMENT_TYPE" />
           <EntitySet Name="TB_M_EMISSION" EntityType="Models.TB_M_EMISSION" />
+          <EntitySet Name="TB_M_EMPLOYEE" EntityType="Models.TB_M_EMPLOYEE" />
           <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Models.TB_M_GL_ACCOUNT" />
           <EntitySet Name="TB_M_INTERNAL_ORDER" EntityType="Models.TB_M_INTERNAL_ORDER" />
           <EntitySet Name="TB_M_ORGANIZATION" EntityType="Models.TB_M_ORGANIZATION" />
           <EntitySet Name="TB_M_PRODUCT" EntityType="Models.TB_M_PRODUCT" />
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Models.TB_M_PROMOTION_GROUP" />
           <EntitySet Name="TB_M_UNIT" EntityType="Models.TB_M_UNIT" />
+          <EntitySet Name="TB_P_BRAND_ORG" EntityType="Models.TB_P_BRAND_ORG" />
           <EntitySet Name="TB_P_COST_IO" EntityType="Models.TB_P_COST_IO" />
           <EntitySet Name="TB_P_CUSTOMER_PARTY" EntityType="Models.TB_P_CUSTOMER_PARTY" />
+          <EntitySet Name="TB_P_EMP_ORG" EntityType="Models.TB_P_EMP_ORG" />
           <EntitySet Name="TB_P_PRODUCT_GROUP" EntityType="Models.TB_P_PRODUCT_GROUP" />
           <EntitySet Name="TB_T_BILLING" EntityType="Models.TB_T_BILLING" />
           <EntitySet Name="TB_T_BUDGET" EntityType="Models.TB_T_BUDGET" />
@@ -956,11 +1444,53 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <EntitySet Name="TB_T_PROMOTION_INVEST" EntityType="Models.TB_T_PROMOTION_INVEST" />
           <EntitySet Name="TB_T_PROMOTION_PLAN_H" EntityType="Models.TB_T_PROMOTION_PLAN_H" />
           <EntitySet Name="TB_T_PROMOTION_SALE" EntityType="Models.TB_T_PROMOTION_SALE" />
-          <EntitySet Name="VW_List_Costcenter" EntityType="Models.VW_List_Costcenter" />
-          <EntitySet Name="VW_List_TradeActivity" EntityType="Models.VW_List_TradeActivity" />
+          <EntitySet Name="Workflows" EntityType="Models.Workflow" />
+          <EntitySet Name="WorkflowActions" EntityType="Models.WorkflowAction" />
+          <EntitySet Name="WorkflowActivities" EntityType="Models.WorkflowActivity" />
+          <EntitySet Name="WorkflowStates" EntityType="Models.WorkflowState" />
+          <AssociationSet Name="FK_ActorState_Actor_ActorId" Association="Models.FK_ActorState_Actor_ActorId">
+            <End Role="Actor" EntitySet="Actors" />
+            <End Role="ActorState" EntitySet="ActorStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActorState_OperatorCondition_OperatorConditionId" Association="Models.FK_ActorState_OperatorCondition_OperatorConditionId">
+            <End Role="OperatorCondition" EntitySet="OperatorConditions" />
+            <End Role="ActorState" EntitySet="ActorStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActorState_WorkflowState_WorkflowStateId" Association="Models.FK_ActorState_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowStates" />
+            <End Role="ActorState" EntitySet="ActorStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateFlowItem_FlowItem_FlowItemId" Association="Models.FK_StateFlowItem_FlowItem_FlowItemId">
+            <End Role="FlowItem" EntitySet="FlowItems" />
+            <End Role="StateFlowItem" EntitySet="StateFlowItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateFlowItem_WorkflowState_WorkflowStateId" Association="Models.FK_StateFlowItem_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowStates" />
+            <End Role="StateFlowItem" EntitySet="StateFlowItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowAction_ActionId" Association="Models.FK_StateProcess_WorkflowAction_ActionId">
+            <End Role="WorkflowAction" EntitySet="WorkflowActions" />
+            <End Role="StateProcess" EntitySet="StateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowActivity_ActivityId" Association="Models.FK_StateProcess_WorkflowActivity_ActivityId">
+            <End Role="WorkflowActivity" EntitySet="WorkflowActivities" />
+            <End Role="StateProcess" EntitySet="StateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateProcess_WorkflowState_WorkflowStateId" Association="Models.FK_StateProcess_WorkflowState_WorkflowStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowStates" />
+            <End Role="StateProcess" EntitySet="StateProcesses" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
             <End Role="TB_M_ACTIVITY" EntitySet="TB_M_ACTIVITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_M_BRAND_TB_M_CLIENT" Association="Models.FK_TB_M_BRAND_TB_M_CLIENT">
+            <End Role="TB_M_CLIENT" EntitySet="TB_M_CLIENT" />
+            <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_BRAND" Association="Models.FK_TB_P_BRAND_ORG_TB_M_BRAND">
+            <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
+            <End Role="TB_P_BRAND_ORG" EntitySet="TB_P_BRAND_ORG" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_T_BUDGET_TB_M_BUDGET_TYPE" Association="Models.FK_TB_T_BUDGET_TB_M_BUDGET_TYPE">
             <End Role="TB_M_BUDGET_TYPE" EntitySet="TB_M_BUDGET_TYPE" />
@@ -994,6 +1524,10 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <End Role="TB_M_DOCUMENT_TYPE" EntitySet="TB_M_DOCUMENT_TYPE" />
             <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" Association="Models.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE">
+            <End Role="TB_M_EMPLOYEE" EntitySet="TB_M_EMPLOYEE" />
+            <End Role="TB_P_EMP_ORG" EntitySet="TB_P_EMP_ORG" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT" Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
             <End Role="TB_P_CUSTOMER_PARTY" EntitySet="TB_P_CUSTOMER_PARTY" />
@@ -1002,9 +1536,17 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <End Role="TB_M_INTERNAL_ORDER" EntitySet="TB_M_INTERNAL_ORDER" />
             <End Role="TB_P_COST_IO" EntitySet="TB_P_COST_IO" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION" Association="Models.FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION">
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+            <End Role="TB_P_BRAND_ORG" EntitySet="TB_P_BRAND_ORG" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_P_COST_IO_TB_M_ORGANIZATION" Association="Models.FK_TB_P_COST_IO_TB_M_ORGANIZATION">
             <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
             <End Role="TB_P_COST_IO" EntitySet="TB_P_COST_IO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_P_EMP_ORG_TB_M_ORGANIZATION" Association="Models.FK_TB_P_EMP_ORG_TB_M_ORGANIZATION">
+            <End Role="TB_M_ORGANIZATION" EntitySet="TB_M_ORGANIZATION" />
+            <End Role="TB_P_EMP_ORG" EntitySet="TB_P_EMP_ORG" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_P_PRODUCT_GROUP_TB_M_PRODUCT" Association="Models.FK_TB_P_PRODUCT_GROUP_TB_M_PRODUCT">
             <End Role="TB_M_PRODUCT" EntitySet="TB_M_PRODUCT" />
@@ -1050,7 +1592,123 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
             <End Role="TB_T_PROMOTION_SALE" EntitySet="TB_T_PROMOTION_SALE" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkflowState_Workflow_WorkflowId" Association="Models.FK_WorkflowState_Workflow_WorkflowId">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="WorkflowState" EntitySet="WorkflowStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowState_WorkflowState_PreviousStateId" Association="Models.FK_WorkflowState_WorkflowState_PreviousStateId">
+            <End Role="WorkflowState" EntitySet="WorkflowStates" />
+            <End Role="WorkflowState1" EntitySet="WorkflowStates" />
+          </AssociationSet>
+          <EntitySet Name="VW_List_Costcenter" EntityType="Models.VW_List_Costcenter" />
+          <EntitySet Name="VW_List_TradeActivity" EntityType="Models.VW_List_TradeActivity" />
         </EntityContainer>
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActorEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ActorStates" Relationship="Models.FK_ActorState_Actor_ActorId" FromRole="Actor" ToRole="ActorState" />
+        </EntityType>
+        <EntityType Name="ActorState">
+          <Key>
+            <PropertyRef Name="ActorStateId" />
+          </Key>
+          <Property Name="ActorStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowStateId" Type="Int32" Nullable="false" />
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="ContactType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="User" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OperatorConditionId" Type="Int32" Nullable="false" />
+          <Property Name="OperatorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LimitValue" Type="Decimal" Precision="13" Scale="4" />
+          <NavigationProperty Name="Actor" Relationship="Models.FK_ActorState_Actor_ActorId" FromRole="ActorState" ToRole="Actor" />
+          <NavigationProperty Name="OperatorCondition" Relationship="Models.FK_ActorState_OperatorCondition_OperatorConditionId" FromRole="ActorState" ToRole="OperatorCondition" />
+          <NavigationProperty Name="WorkflowState" Relationship="Models.FK_ActorState_WorkflowState_WorkflowStateId" FromRole="ActorState" ToRole="WorkflowState" />
+        </EntityType>
+        <EntityType Name="FlowItem">
+          <Key>
+            <PropertyRef Name="FlowItemId" />
+          </Key>
+          <Property Name="FlowItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FlowItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StateFlowItems" Relationship="Models.FK_StateFlowItem_FlowItem_FlowItemId" FromRole="FlowItem" ToRole="StateFlowItem" />
+        </EntityType>
+        <EntityType Name="OperatorCondition">
+          <Key>
+            <PropertyRef Name="OperatorConditionId" />
+          </Key>
+          <Property Name="OperatorConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperatorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperatoDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ActorStates" Relationship="Models.FK_ActorState_OperatorCondition_OperatorConditionId" FromRole="OperatorCondition" ToRole="ActorState" />
+        </EntityType>
+        <EntityType Name="StateFlowItem">
+          <Key>
+            <PropertyRef Name="StateFlowItemId" />
+          </Key>
+          <Property Name="StateFlowItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowStateId" Type="Int32" Nullable="false" />
+          <Property Name="FlowItemId" Type="Int32" Nullable="false" />
+          <Property Name="FlowItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FlowItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FlowItem" Relationship="Models.FK_StateFlowItem_FlowItem_FlowItemId" FromRole="StateFlowItem" ToRole="FlowItem" />
+          <NavigationProperty Name="WorkflowState" Relationship="Models.FK_StateFlowItem_WorkflowState_WorkflowStateId" FromRole="StateFlowItem" ToRole="WorkflowState" />
+        </EntityType>
+        <EntityType Name="StateProcess">
+          <Key>
+            <PropertyRef Name="StateProcessId" />
+          </Key>
+          <Property Name="StateProcessId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowStateId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="ActivityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityPiority" Type="Int32" Nullable="false" />
+          <Property Name="ActionPiority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WorkflowAction" Relationship="Models.FK_StateProcess_WorkflowAction_ActionId" FromRole="StateProcess" ToRole="WorkflowAction" />
+          <NavigationProperty Name="WorkflowActivity" Relationship="Models.FK_StateProcess_WorkflowActivity_ActivityId" FromRole="StateProcess" ToRole="WorkflowActivity" />
+          <NavigationProperty Name="WorkflowState" Relationship="Models.FK_StateProcess_WorkflowState_WorkflowStateId" FromRole="StateProcess" ToRole="WorkflowState" />
+        </EntityType>
+        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
+          <Key>
+            <PropertyRef Name="AP_ID" />
+          </Key>
+          <Property Name="AP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IO_ID" Type="Int32" />
+          <Property Name="CENTER_ID" Type="Int32" />
+          <Property Name="FUND_ID" Type="Int32" />
+          <Property Name="FUND_CENTER_ID" Type="Int32" />
+          <Property Name="MATERIAL" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
+          <Key>
+            <PropertyRef Name="AR_ID" />
+          </Key>
+          <Property Name="AR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IO_ID" Type="Int32" />
+          <Property Name="CENTER_ID" Type="Int32" />
+          <Property Name="FUND_ID" Type="Int32" />
+          <Property Name="FUND_CENTER_ID" Type="Int32" />
+          <Property Name="MATERIAL" Type="Int32" />
+        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_ID" />
@@ -1060,6 +1718,8 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="ACTIVITY_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVITY_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVTITY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HAS_FIXED_CONTRACT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CAN_DEDUCTABLE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IN_THB_CS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IN_GROSS_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IN_NOT_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -1081,6 +1741,7 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             <PropertyRef Name="BRAND_ID" />
           </Key>
           <Property Name="BRAND_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENT_ID" Type="Int32" />
           <Property Name="BRAND_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BRAND_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="BRAND_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1089,6 +1750,8 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_CLIENT" Relationship="Models.FK_TB_M_BRAND_TB_M_CLIENT" FromRole="TB_M_BRAND" ToRole="TB_M_CLIENT" />
+          <NavigationProperty Name="TB_P_BRAND_ORG" Relationship="Models.FK_TB_P_BRAND_ORG_TB_M_BRAND" FromRole="TB_M_BRAND" ToRole="TB_P_BRAND_ORG" />
         </EntityType>
         <EntityType Name="TB_M_BUDGET_TYPE">
           <Key>
@@ -1119,6 +1782,21 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TB_P_CUSTOMER_PARTY" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_CHANNEL" FromRole="TB_M_CHANNEL" ToRole="TB_P_CUSTOMER_PARTY" />
+        </EntityType>
+        <EntityType Name="TB_M_CLIENT">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENT_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CLIENT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CLIENT_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_BRAND" Relationship="Models.FK_TB_M_BRAND_TB_M_CLIENT" FromRole="TB_M_CLIENT" ToRole="TB_M_BRAND" />
         </EntityType>
         <EntityType Name="TB_M_COMPANY">
           <Key>
@@ -1214,6 +1892,22 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TB_M_DISTRIBUTOR" Relationship="Models.FK_TB_M_DISTRIBUTOR_TB_M_EMISSION" FromRole="TB_M_EMISSION" ToRole="TB_M_DISTRIBUTOR" />
         </EntityType>
+        <EntityType Name="TB_M_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PREFIX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NAME_FIRST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NAME_LAST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_P_EMP_ORG" Relationship="Models.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" FromRole="TB_M_EMPLOYEE" ToRole="TB_P_EMP_ORG" />
+        </EntityType>
         <EntityType Name="TB_M_GL_ACCOUNT">
           <Key>
             <PropertyRef Name="ACC_ID" />
@@ -1262,6 +1956,7 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="ORG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COMP_ID" Type="Int32" />
           <Property Name="ORG_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ORG_DEPARTMENT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ORG_POSITION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ORG_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1271,7 +1966,9 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TB_M_COMPANY" Relationship="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY" FromRole="TB_M_ORGANIZATION" ToRole="TB_M_COMPANY" />
+          <NavigationProperty Name="TB_P_BRAND_ORG" Relationship="Models.FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION" FromRole="TB_M_ORGANIZATION" ToRole="TB_P_BRAND_ORG" />
           <NavigationProperty Name="TB_P_COST_IO" Relationship="Models.FK_TB_P_COST_IO_TB_M_ORGANIZATION" FromRole="TB_M_ORGANIZATION" ToRole="TB_P_COST_IO" />
+          <NavigationProperty Name="TB_P_EMP_ORG" Relationship="Models.FK_TB_P_EMP_ORG_TB_M_ORGANIZATION" FromRole="TB_M_ORGANIZATION" ToRole="TB_P_EMP_ORG" />
         </EntityType>
         <EntityType Name="TB_M_PRODUCT">
           <Key>
@@ -1280,11 +1977,11 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="PROD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PROD_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PROD_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CUST_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MAT_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ORG_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DIV_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EMIS_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MAT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIV_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMIS_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MAT_GROUP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MAT_GROUP_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MAT_GROUP1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1293,10 +1990,17 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="MAT_GROUP2_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MAT_GROUP3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MAT_GROUP3_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MAT_GROUP4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MAT_GROUP4_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FORMULA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PACK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PACK" Type="Int32" />
           <Property Name="PACK_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SIZE" Type="Int32" />
+          <Property Name="UOM_SIZE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UOM_SALE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UNIT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONV_FCL" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CONV_L" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
@@ -1342,6 +2046,24 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <NavigationProperty Name="TB_M_UNIT1" Relationship="Models.FK_TB_M_UNIT_TB_M_UNIT" FromRole="TB_M_UNIT" ToRole="TB_M_UNIT1" />
           <NavigationProperty Name="TB_M_UNIT2" Relationship="Models.FK_TB_M_UNIT_TB_M_UNIT" FromRole="TB_M_UNIT1" ToRole="TB_M_UNIT" />
         </EntityType>
+        <EntityType Name="TB_P_BRAND_ORG">
+          <Key>
+            <PropertyRef Name="BRAND_ID" />
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="BRAND_ID" Type="Int32" Nullable="false" />
+          <Property Name="ORG_ID" Type="Int32" Nullable="false" />
+          <Property Name="BRAND_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EFF_FROM" Type="DateTime" Precision="0" />
+          <Property Name="EFF_TO" Type="DateTime" Precision="0" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_BRAND" Relationship="Models.FK_TB_P_BRAND_ORG_TB_M_BRAND" FromRole="TB_P_BRAND_ORG" ToRole="TB_M_BRAND" />
+          <NavigationProperty Name="TB_M_ORGANIZATION" Relationship="Models.FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION" FromRole="TB_P_BRAND_ORG" ToRole="TB_M_ORGANIZATION" />
+        </EntityType>
         <EntityType Name="TB_P_COST_IO">
           <Key>
             <PropertyRef Name="CENTER_ID" />
@@ -1384,6 +2106,25 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <NavigationProperty Name="TB_M_CUSTOMER" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_CUSTOMER" FromRole="TB_P_CUSTOMER_PARTY" ToRole="TB_M_CUSTOMER" />
           <NavigationProperty Name="TB_M_DISTRIBUTOR" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_DISTRIBUTOR" FromRole="TB_P_CUSTOMER_PARTY" ToRole="TB_M_DISTRIBUTOR" />
           <NavigationProperty Name="TB_M_GL_ACCOUNT" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT" FromRole="TB_P_CUSTOMER_PARTY" ToRole="TB_M_GL_ACCOUNT" />
+        </EntityType>
+        <EntityType Name="TB_P_EMP_ORG">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+            <PropertyRef Name="ORG_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="Int32" Nullable="false" />
+          <Property Name="ORG_ID" Type="Int32" Nullable="false" />
+          <Property Name="ORG_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="EMP_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EFF_FROM" Type="DateTime" Precision="0" />
+          <Property Name="EFF_TO" Type="DateTime" Precision="0" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_EMPLOYEE" Relationship="Models.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" FromRole="TB_P_EMP_ORG" ToRole="TB_M_EMPLOYEE" />
+          <NavigationProperty Name="TB_M_ORGANIZATION" Relationship="Models.FK_TB_P_EMP_ORG_TB_M_ORGANIZATION" FromRole="TB_P_EMP_ORG" ToRole="TB_M_ORGANIZATION" />
         </EntityType>
         <EntityType Name="TB_P_PRODUCT_GROUP">
           <Key>
@@ -1568,21 +2309,157 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
           <Property Name="PROPL_ID" Type="Int32" />
           <NavigationProperty Name="TB_T_PROMOTION_PLAN_H" Relationship="Models.FK_TB_T_PROMOTION_SALE_TB_T_PROMOTION_PLAN_H" FromRole="TB_T_PROMOTION_SALE" ToRole="TB_T_PROMOTION_PLAN_H" />
         </EntityType>
-        <EntityType Name="VW_List_Costcenter">
+        <EntityType Name="Workflow">
           <Key>
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="WorkflowId" />
           </Key>
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="166" FixedLength="false" Unicode="true" />
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WorkflowDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="WorkflowStates" Relationship="Models.FK_WorkflowState_Workflow_WorkflowId" FromRole="Workflow" ToRole="WorkflowState" />
         </EntityType>
-        <EntityType Name="VW_List_TradeActivity">
+        <EntityType Name="WorkflowAction">
           <Key>
-            <PropertyRef Name="Code" />
+            <PropertyRef Name="ActionId" />
           </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActionPiority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StateProcesses" Relationship="Models.FK_StateProcess_WorkflowAction_ActionId" FromRole="WorkflowAction" ToRole="StateProcess" />
         </EntityType>
+        <EntityType Name="WorkflowActivity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityPiority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StateProcesses" Relationship="Models.FK_StateProcess_WorkflowActivity_ActivityId" FromRole="WorkflowActivity" ToRole="StateProcess" />
+        </EntityType>
+        <EntityType Name="WorkflowState">
+          <Key>
+            <PropertyRef Name="WorkflowStateId" />
+          </Key>
+          <Property Name="WorkflowStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreviousStateId" Type="Int32" />
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotifySubject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NotifyMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ActorStates" Relationship="Models.FK_ActorState_WorkflowState_WorkflowStateId" FromRole="WorkflowState" ToRole="ActorState" />
+          <NavigationProperty Name="StateFlowItems" Relationship="Models.FK_StateFlowItem_WorkflowState_WorkflowStateId" FromRole="WorkflowState" ToRole="StateFlowItem" />
+          <NavigationProperty Name="StateProcesses" Relationship="Models.FK_StateProcess_WorkflowState_WorkflowStateId" FromRole="WorkflowState" ToRole="StateProcess" />
+          <NavigationProperty Name="Workflow" Relationship="Models.FK_WorkflowState_Workflow_WorkflowId" FromRole="WorkflowState" ToRole="Workflow" />
+          <NavigationProperty Name="WorkflowState1" Relationship="Models.FK_WorkflowState_WorkflowState_PreviousStateId" FromRole="WorkflowState" ToRole="WorkflowState1" />
+          <NavigationProperty Name="WorkflowState2" Relationship="Models.FK_WorkflowState_WorkflowState_PreviousStateId" FromRole="WorkflowState1" ToRole="WorkflowState" />
+        </EntityType>
+        <Association Name="FK_ActorState_Actor_ActorId">
+          <End Type="Models.Actor" Role="Actor" Multiplicity="1" />
+          <End Type="Models.ActorState" Role="ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActorState_OperatorCondition_OperatorConditionId">
+          <End Type="Models.OperatorCondition" Role="OperatorCondition" Multiplicity="1" />
+          <End Type="Models.ActorState" Role="ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperatorCondition">
+              <PropertyRef Name="OperatorConditionId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="OperatorConditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActorState_WorkflowState_WorkflowStateId">
+          <End Type="Models.WorkflowState" Role="WorkflowState" Multiplicity="1" />
+          <End Type="Models.ActorState" Role="ActorState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="ActorState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateFlowItem_FlowItem_FlowItemId">
+          <End Type="Models.FlowItem" Role="FlowItem" Multiplicity="1" />
+          <End Type="Models.StateFlowItem" Role="StateFlowItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FlowItem">
+              <PropertyRef Name="FlowItemId" />
+            </Principal>
+            <Dependent Role="StateFlowItem">
+              <PropertyRef Name="FlowItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateFlowItem_WorkflowState_WorkflowStateId">
+          <End Type="Models.WorkflowState" Role="WorkflowState" Multiplicity="1" />
+          <End Type="Models.StateFlowItem" Role="StateFlowItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="StateFlowItem">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowAction_ActionId">
+          <End Type="Models.WorkflowAction" Role="WorkflowAction" Multiplicity="1" />
+          <End Type="Models.StateProcess" Role="StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowAction">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowActivity_ActivityId">
+          <End Type="Models.WorkflowActivity" Role="WorkflowActivity" Multiplicity="1" />
+          <End Type="Models.StateProcess" Role="StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowActivity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateProcess_WorkflowState_WorkflowStateId">
+          <End Type="Models.WorkflowState" Role="WorkflowState" Multiplicity="1" />
+          <End Type="Models.StateProcess" Role="StateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="StateProcess">
+              <PropertyRef Name="WorkflowStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
           <End Type="Models.TB_M_GL_ACCOUNT" Role="TB_M_GL_ACCOUNT" Multiplicity="0..1" />
           <End Type="Models.TB_M_ACTIVITY" Role="TB_M_ACTIVITY" Multiplicity="*" />
@@ -1592,6 +2469,30 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Principal>
             <Dependent Role="TB_M_ACTIVITY">
               <PropertyRef Name="ACC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_M_BRAND_TB_M_CLIENT">
+          <End Type="Models.TB_M_CLIENT" Role="TB_M_CLIENT" Multiplicity="0..1" />
+          <End Type="Models.TB_M_BRAND" Role="TB_M_BRAND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="TB_M_BRAND">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_BRAND_ORG_TB_M_BRAND">
+          <End Type="Models.TB_M_BRAND" Role="TB_M_BRAND" Multiplicity="1" />
+          <End Type="Models.TB_P_BRAND_ORG" Role="TB_P_BRAND_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_BRAND">
+              <PropertyRef Name="BRAND_ID" />
+            </Principal>
+            <Dependent Role="TB_P_BRAND_ORG">
+              <PropertyRef Name="BRAND_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1691,6 +2592,18 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_P_EMP_ORG_TB_M_EMPLOYEE">
+          <End Type="Models.TB_M_EMPLOYEE" Role="TB_M_EMPLOYEE" Multiplicity="1" />
+          <End Type="Models.TB_P_EMP_ORG" Role="TB_P_EMP_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_EMPLOYEE">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="TB_P_EMP_ORG">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT">
           <End Type="Models.TB_M_GL_ACCOUNT" Role="TB_M_GL_ACCOUNT" Multiplicity="1" />
           <End Type="Models.TB_P_CUSTOMER_PARTY" Role="TB_P_CUSTOMER_PARTY" Multiplicity="*" />
@@ -1715,6 +2628,18 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION">
+          <End Type="Models.TB_M_ORGANIZATION" Role="TB_M_ORGANIZATION" Multiplicity="1" />
+          <End Type="Models.TB_P_BRAND_ORG" Role="TB_P_BRAND_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="ORG_ID" />
+            </Principal>
+            <Dependent Role="TB_P_BRAND_ORG">
+              <PropertyRef Name="ORG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_P_COST_IO_TB_M_ORGANIZATION">
           <End Type="Models.TB_M_ORGANIZATION" Role="TB_M_ORGANIZATION" Multiplicity="1" />
           <End Type="Models.TB_P_COST_IO" Role="TB_P_COST_IO" Multiplicity="*" />
@@ -1723,6 +2648,18 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
               <PropertyRef Name="ORG_ID" />
             </Principal>
             <Dependent Role="TB_P_COST_IO">
+              <PropertyRef Name="ORG_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_P_EMP_ORG_TB_M_ORGANIZATION">
+          <End Type="Models.TB_M_ORGANIZATION" Role="TB_M_ORGANIZATION" Multiplicity="1" />
+          <End Type="Models.TB_P_EMP_ORG" Role="TB_P_EMP_ORG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_ORGANIZATION">
+              <PropertyRef Name="ORG_ID" />
+            </Principal>
+            <Dependent Role="TB_P_EMP_ORG">
               <PropertyRef Name="ORG_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1859,12 +2796,155 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkflowState_Workflow_WorkflowId">
+          <End Type="Models.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="Models.WorkflowState" Role="WorkflowState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="WorkflowId" />
+            </Principal>
+            <Dependent Role="WorkflowState">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowState_WorkflowState_PreviousStateId">
+          <End Type="Models.WorkflowState" Role="WorkflowState" Multiplicity="0..1" />
+          <End Type="Models.WorkflowState" Role="WorkflowState1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkflowState">
+              <PropertyRef Name="WorkflowStateId" />
+            </Principal>
+            <Dependent Role="WorkflowState1">
+              <PropertyRef Name="PreviousStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VW_List_Costcenter">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="166" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_List_TradeActivity">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="APTDbContext">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="Models.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="Models.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="ActorEmail" ColumnName="ActorEmail" />
+                <ScalarProperty Name="ActorName" ColumnName="ActorName" />
+                <ScalarProperty Name="ActorCode" ColumnName="ActorCode" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActorStates">
+            <EntityTypeMapping TypeName="Models.ActorState">
+              <MappingFragment StoreEntitySet="ActorState">
+                <ScalarProperty Name="LimitValue" ColumnName="LimitValue" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="OperatorConditionId" ColumnName="OperatorConditionId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="RoleState" ColumnName="RoleState" />
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+                <ScalarProperty Name="ActorStateId" ColumnName="ActorStateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlowItems">
+            <EntityTypeMapping TypeName="Models.FlowItem">
+              <MappingFragment StoreEntitySet="FlowItem">
+                <ScalarProperty Name="FlowItemName" ColumnName="FlowItemName" />
+                <ScalarProperty Name="FlowItemCode" ColumnName="FlowItemCode" />
+                <ScalarProperty Name="FlowItemId" ColumnName="FlowItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperatorConditions">
+            <EntityTypeMapping TypeName="Models.OperatorCondition">
+              <MappingFragment StoreEntitySet="OperatorCondition">
+                <ScalarProperty Name="OperatoDesc" ColumnName="OperatoDesc" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="OperatorConditionId" ColumnName="OperatorConditionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateFlowItems">
+            <EntityTypeMapping TypeName="Models.StateFlowItem">
+              <MappingFragment StoreEntitySet="StateFlowItem">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="FlowItemName" ColumnName="FlowItemName" />
+                <ScalarProperty Name="FlowItemCode" ColumnName="FlowItemCode" />
+                <ScalarProperty Name="FlowItemId" ColumnName="FlowItemId" />
+                <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+                <ScalarProperty Name="StateFlowItemId" ColumnName="StateFlowItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateProcesses">
+            <EntityTypeMapping TypeName="Models.StateProcess">
+              <MappingFragment StoreEntitySet="StateProcess">
+                <ScalarProperty Name="ActionPiority" ColumnName="ActionPiority" />
+                <ScalarProperty Name="ActivityPiority" ColumnName="ActivityPiority" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+                <ScalarProperty Name="StateProcessId" ColumnName="StateProcessId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_ACCOUNT_PAYABLE">
+            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_PAYABLE">
+              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_PAYABLE">
+                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
+                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
+                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
+                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
+                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
+                <ScalarProperty Name="AP_ID" ColumnName="AP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_ACCOUNT_RECEIVEABLE">
+            <EntityTypeMapping TypeName="Models.TB_M_ACCOUNT_RECEIVEABLE">
+              <MappingFragment StoreEntitySet="TB_M_ACCOUNT_RECEIVEABLE">
+                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
+                <ScalarProperty Name="FUND_CENTER_ID" ColumnName="FUND_CENTER_ID" />
+                <ScalarProperty Name="FUND_ID" ColumnName="FUND_ID" />
+                <ScalarProperty Name="CENTER_ID" ColumnName="CENTER_ID" />
+                <ScalarProperty Name="IO_ID" ColumnName="IO_ID" />
+                <ScalarProperty Name="AR_ID" ColumnName="AR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_ACTIVITY">
             <EntityTypeMapping TypeName="Models.TB_M_ACTIVITY">
               <MappingFragment StoreEntitySet="TB_M_ACTIVITY">
@@ -1882,6 +2962,8 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="IN_NOT_SALE" ColumnName="IN_NOT_SALE" />
                 <ScalarProperty Name="IN_GROSS_SALE" ColumnName="IN_GROSS_SALE" />
                 <ScalarProperty Name="IN_THB_CS" ColumnName="IN_THB_CS" />
+                <ScalarProperty Name="CAN_DEDUCTABLE" ColumnName="CAN_DEDUCTABLE" />
+                <ScalarProperty Name="HAS_FIXED_CONTRACT" ColumnName="HAS_FIXED_CONTRACT" />
                 <ScalarProperty Name="ACTIVTITY_NAME" ColumnName="ACTIVTITY_NAME" />
                 <ScalarProperty Name="ACTIVITY_TYPE" ColumnName="ACTIVITY_TYPE" />
                 <ScalarProperty Name="ACTIVITY_CODE" ColumnName="ACTIVITY_CODE" />
@@ -1901,6 +2983,7 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="BRAND_DESC" ColumnName="BRAND_DESC" />
                 <ScalarProperty Name="BRAND_NAME" ColumnName="BRAND_NAME" />
                 <ScalarProperty Name="BRAND_CODE" ColumnName="BRAND_CODE" />
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
                 <ScalarProperty Name="BRAND_ID" ColumnName="BRAND_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1932,6 +3015,21 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="CHANNEL_NAME" ColumnName="CHANNEL_NAME" />
                 <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
                 <ScalarProperty Name="CHANNEL_ID" ColumnName="CHANNEL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_CLIENT">
+            <EntityTypeMapping TypeName="Models.TB_M_CLIENT">
+              <MappingFragment StoreEntitySet="TB_M_CLIENT">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="CLIENT_DESC" ColumnName="CLIENT_DESC" />
+                <ScalarProperty Name="CLIENT_NAME" ColumnName="CLIENT_NAME" />
+                <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2028,6 +3126,22 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_EMPLOYEE">
+            <EntityTypeMapping TypeName="Models.TB_M_EMPLOYEE">
+              <MappingFragment StoreEntitySet="TB_M_EMPLOYEE">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NAME_LAST" ColumnName="NAME_LAST" />
+                <ScalarProperty Name="NAME_FIRST" ColumnName="NAME_FIRST" />
+                <ScalarProperty Name="PREFIX" ColumnName="PREFIX" />
+                <ScalarProperty Name="EMP_CODE" ColumnName="EMP_CODE" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_GL_ACCOUNT">
             <EntityTypeMapping TypeName="Models.TB_M_GL_ACCOUNT">
               <MappingFragment StoreEntitySet="TB_M_GL_ACCOUNT">
@@ -2079,6 +3193,7 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="ORG_DESC" ColumnName="ORG_DESC" />
                 <ScalarProperty Name="ORG_POSITION_NAME" ColumnName="ORG_POSITION_NAME" />
                 <ScalarProperty Name="ORG_DEPARTMENT_NAME" ColumnName="ORG_DEPARTMENT_NAME" />
+                <ScalarProperty Name="ORG_TYPE" ColumnName="ORG_TYPE" />
                 <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
                 <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
                 <ScalarProperty Name="ORG_ID" ColumnName="ORG_ID" />
@@ -2093,10 +3208,17 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="CONV_L" ColumnName="CONV_L" />
+                <ScalarProperty Name="CONV_FCL" ColumnName="CONV_FCL" />
                 <ScalarProperty Name="UNIT_CODE" ColumnName="UNIT_CODE" />
+                <ScalarProperty Name="UOM_SALE" ColumnName="UOM_SALE" />
+                <ScalarProperty Name="UOM_SIZE" ColumnName="UOM_SIZE" />
+                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
                 <ScalarProperty Name="PACK_DESC" ColumnName="PACK_DESC" />
                 <ScalarProperty Name="PACK" ColumnName="PACK" />
                 <ScalarProperty Name="FORMULA" ColumnName="FORMULA" />
+                <ScalarProperty Name="MAT_GROUP4_DESC" ColumnName="MAT_GROUP4_DESC" />
+                <ScalarProperty Name="MAT_GROUP4" ColumnName="MAT_GROUP4" />
                 <ScalarProperty Name="MAT_GROUP3_DESC" ColumnName="MAT_GROUP3_DESC" />
                 <ScalarProperty Name="MAT_GROUP3" ColumnName="MAT_GROUP3" />
                 <ScalarProperty Name="MAT_GROUP2_DESC" ColumnName="MAT_GROUP2_DESC" />
@@ -2152,6 +3274,22 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TB_P_BRAND_ORG">
+            <EntityTypeMapping TypeName="Models.TB_P_BRAND_ORG">
+              <MappingFragment StoreEntitySet="TB_P_BRAND_ORG">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="EFF_TO" ColumnName="EFF_TO" />
+                <ScalarProperty Name="EFF_FROM" ColumnName="EFF_FROM" />
+                <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
+                <ScalarProperty Name="BRAND_CODE" ColumnName="BRAND_CODE" />
+                <ScalarProperty Name="ORG_ID" ColumnName="ORG_ID" />
+                <ScalarProperty Name="BRAND_ID" ColumnName="BRAND_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_P_COST_IO">
             <EntityTypeMapping TypeName="Models.TB_P_COST_IO">
               <MappingFragment StoreEntitySet="TB_P_COST_IO">
@@ -2182,6 +3320,23 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
                 <ScalarProperty Name="DISTB_ID" ColumnName="DISTB_ID" />
                 <ScalarProperty Name="ACC_ID" ColumnName="ACC_ID" />
                 <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_P_EMP_ORG">
+            <EntityTypeMapping TypeName="Models.TB_P_EMP_ORG">
+              <MappingFragment StoreEntitySet="TB_P_EMP_ORG">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="EFF_TO" ColumnName="EFF_TO" />
+                <ScalarProperty Name="EFF_FROM" ColumnName="EFF_FROM" />
+                <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
+                <ScalarProperty Name="EMP_CODE" ColumnName="EMP_CODE" />
+                <ScalarProperty Name="ORG_TYPE" ColumnName="ORG_TYPE" />
+                <ScalarProperty Name="ORG_ID" ColumnName="ORG_ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2355,6 +3510,56 @@ warning 6013: The table/view 'APT2Db.dbo.VW_List_YEAR' does not have a primary k
               <MappingFragment StoreEntitySet="TB_T_PROMOTION_SALE">
                 <ScalarProperty Name="PROPL_ID" ColumnName="PROPL_ID" />
                 <ScalarProperty Name="PROPL_SALE_ID" ColumnName="PROPL_SALE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="Models.Workflow">
+              <MappingFragment StoreEntitySet="Workflow">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="WorkflowDesc" ColumnName="WorkflowDesc" />
+                <ScalarProperty Name="WorkflowName" ColumnName="WorkflowName" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowActions">
+            <EntityTypeMapping TypeName="Models.WorkflowAction">
+              <MappingFragment StoreEntitySet="WorkflowAction">
+                <ScalarProperty Name="ActionPiority" ColumnName="ActionPiority" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowActivities">
+            <EntityTypeMapping TypeName="Models.WorkflowActivity">
+              <MappingFragment StoreEntitySet="WorkflowActivity">
+                <ScalarProperty Name="ActivityPiority" ColumnName="ActivityPiority" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowStates">
+            <EntityTypeMapping TypeName="Models.WorkflowState">
+              <MappingFragment StoreEntitySet="WorkflowState">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="NotifyMessage" ColumnName="NotifyMessage" />
+                <ScalarProperty Name="NotifySubject" ColumnName="NotifySubject" />
+                <ScalarProperty Name="StateDesc" ColumnName="StateDesc" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="PreviousStateId" ColumnName="PreviousStateId" />
+                <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

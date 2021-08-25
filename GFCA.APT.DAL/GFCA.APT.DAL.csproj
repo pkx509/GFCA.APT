@@ -172,6 +172,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActorState.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="APTDbContext.cs" />
     <Compile Include="APTDbModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -188,6 +194,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="C__EFMigrationsHistory.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FlowItem.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Implements\BrandRepository.cs" />
     <Compile Include="Implements\EmissionRepository.cs" />
     <Compile Include="Implements\GLAccountRepository.cs" />
@@ -199,8 +211,23 @@
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="OperatorCondition.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implements\UnitOfWork.cs" />
+    <Compile Include="StateFlowItem.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StateProcess.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_ACCOUNT_PAYABLE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_ACCOUNT_RECEIVEABLE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_M_ACTIVITY.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -211,6 +238,9 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_CHANNEL.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_CLIENT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_COMPANY.cs">
@@ -231,6 +261,9 @@
     <Compile Include="TB_M_EMISSION.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_M_EMPLOYEE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_M_GL_ACCOUNT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -249,10 +282,16 @@
     <Compile Include="TB_M_UNIT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_P_BRAND_ORG.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_P_COST_IO.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_P_CUSTOMER_PARTY.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_P_EMP_ORG.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_P_PRODUCT_GROUP.cs">
@@ -290,6 +329,18 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_List_TradeActivity.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Workflow.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkflowAction.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkflowActivity.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkflowState.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

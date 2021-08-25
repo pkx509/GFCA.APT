@@ -12,27 +12,20 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_BRAND
+    public partial class TB_P_BRAND_ORG
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_BRAND()
-        {
-            this.TB_P_BRAND_ORG = new HashSet<TB_P_BRAND_ORG>();
-        }
-    
         public int BRAND_ID { get; set; }
-        public Nullable<int> CLIENT_ID { get; set; }
+        public int ORG_ID { get; set; }
         public string BRAND_CODE { get; set; }
-        public string BRAND_NAME { get; set; }
-        public string BRAND_DESC { get; set; }
-        public string FLAG_ROW { get; set; }
+        public string ORG_CODE { get; set; }
+        public Nullable<System.DateTime> EFF_FROM { get; set; }
+        public Nullable<System.DateTime> EFF_TO { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_CLIENT TB_M_CLIENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
+        public virtual TB_M_BRAND TB_M_BRAND { get; set; }
+        public virtual TB_M_ORGANIZATION TB_M_ORGANIZATION { get; set; }
     }
 }

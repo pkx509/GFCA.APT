@@ -12,27 +12,25 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_BRAND
+    public partial class Workflow
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_BRAND()
+        public Workflow()
         {
-            this.TB_P_BRAND_ORG = new HashSet<TB_P_BRAND_ORG>();
+            this.WorkflowStates = new HashSet<WorkflowState>();
         }
     
-        public int BRAND_ID { get; set; }
-        public Nullable<int> CLIENT_ID { get; set; }
-        public string BRAND_CODE { get; set; }
-        public string BRAND_NAME { get; set; }
-        public string BRAND_DESC { get; set; }
-        public string FLAG_ROW { get; set; }
-        public string CREATED_BY { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
-        public string UPDATED_BY { get; set; }
-        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+        public int WorkflowId { get; set; }
+        public string WorkflowName { get; set; }
+        public string WorkflowDesc { get; set; }
+        public System.DateTime BeginDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+        public string CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual TB_M_CLIENT TB_M_CLIENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
+        public virtual ICollection<WorkflowState> WorkflowStates { get; set; }
     }
 }
