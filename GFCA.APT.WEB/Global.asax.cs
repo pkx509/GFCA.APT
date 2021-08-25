@@ -43,8 +43,8 @@ namespace GFCA.APT.WEB
             }
 
             CultureInfo culture = new CultureInfo("en-US");
-            //culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
-            //culture.DateTimeFormat.DateSeparator = "/";
+            culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            culture.DateTimeFormat.DateSeparator = "/";
             Thread.CurrentThread.CurrentCulture = culture;
 
             var c = GlobalConfiguration.Configuration;

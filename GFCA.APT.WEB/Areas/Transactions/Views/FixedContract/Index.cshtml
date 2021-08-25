@@ -52,74 +52,713 @@ ViewBag.Title = "Fixed Contract Document";
                 <div class="row mb-2">
                     <div class="col-lg-12 p-1">
                         <div class="card card-info card-outline">
+                            <div class="card-body">
 
-                            <div>
+                                <div>
 
-                                <div data-alerts="alerts"
-                                     data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
-                                     data-ids="myid"
-                                     data-fade="4000"
-                                     data-usebullets="true"></div>
+                                    <div data-alerts="alerts"
+                                         data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                                         data-ids="myid"
+                                         data-fade="4000"
+                                         data-usebullets="true"></div>
 
-                                <div class="row">
-                                    <div class="col-sm-12 col-lg-3">
-                                        <div class="form-group row">
+                                    <div class="row justify-content-center">
+                                        <div class="col col-sm-12 col-lg-12">
 
-                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                                Company
-                                            </label>
-                                            <div class="col-sm-9 col-md-10 col-lg-7">
-                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                            <div class="row">
+
+                                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col-lg-4 control-label text-right">
+                                                            Company
+                                                        </label>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col-lg-4 control-label text-right">
+                                                            Document No
+                                                        </label>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col-lg-4 control-label text-right">
+                                                            Version
+                                                        </label>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" class="e-control e-textbox e-lib e-input" disabled />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col-lg-4 control-label text-right">
+                                                            Status
+                                                        </label>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" class="e-control e-textbox e-lib e-input" value="Draft" disabled />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
+
                                     </div>
 
-                                    <div class="col-sm-12 col-lg-3">
-                                        <div class="form-group row">
 
-                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                                Document No
-                                            </label>
-                                            <div class="col-sm-9 col-md-10 col-lg-7">
-                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h6>Contract header</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col col-sm-12 col-lg-10">
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Client
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Customer
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Channel
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Start Date
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        @Html.EJS().DatePicker("dpk1").Placeholder("Choose a Date").CssClass("mandatory").Render()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4 ">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        End Date
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        @Html.EJS().DatePicker("dpk2").Placeholder("Choose a Date").CssClass("mandatory").Value(new DateTime(2099, 12, 31)).Render()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Requester
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Position
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Fixed contract detail</h5>
+                            </div>
+                            <div class="card-header">
+
+                                <div class="justify-content-start">
+
+                                    <div class="col col-sm-12 col-lg-10">
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Brand
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        @(Html.EJS().ComboBox("pop-cmb-brand")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetBrand/true")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Apply to All
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Trade Activity
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        @(Html.EJS().ComboBox("pop-cmb-trade-activity")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetBrand/false")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Category
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
+                                        <div class="row">
 
-                                    <div class="col-sm-12 col-lg-3">
-                                        <div class="form-group row">
-
-                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                                Document Status
-                                            </label>
-                                            <div class="col-sm-9 col-md-10 col-lg-7">
-                                                <input type="text" class="e-control e-textbox e-lib e-input" value="Draft" />
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Date Reference
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        UOM
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Cost Center
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 control-label text-right">
+                                                        Remark
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <textarea name="des" cols="2" rows="2" class="e-control e-textbox e-lib e-input"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
                                     </div>
-                                    <div class="col-sm-12 col-lg-3">
-                                        <div class="form-group row">
+
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Q1</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-0">
+
+                                                            <div class="col col-lg-4 offset-lg-3 align-content-center">
+                                                                <label class="control-label">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-4">
+                                                                <label class="control-label text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                January
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                February
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                March
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col-lg-3 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Q2</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-0">
+
+                                                            <div class="col col-lg-4 offset-lg-3 align-content-center">
+                                                                <label class="control-label">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-4">
+                                                                <label class="control-label text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                April
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                May
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                June
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col-lg-3 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Q3</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-0">
+
+                                                            <div class="col col-lg-4 offset-lg-3 align-content-center">
+                                                                <label class="control-label">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-4">
+                                                                <label class="control-label text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                July
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                August
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                September
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col-lg-3 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Q4</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col col-lg-4 offset-lg-3 align-content-center">
+                                                                <label class="control-label">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-4">
+                                                                <label class="control-label text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                October
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                November
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-right">
+                                                                December
+                                                            </label>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col-lg-3 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-3 offset-lg-9">
+
                                             <!-- Confirm State -->
                                             <button class="btn btn-primary">Submit</button>
                                             <button class="btn btn-success">Confirm</button>
                                             <button class="btn btn-default">Cancel</button>
 
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Claim</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Approval</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="form-group row">
+                                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group row">
+
                                             <!-- Approval State -->
-                                            <button class="btn btn-success">Approve</button>
+                                            <button class="btn btn-primary">Approve</button>
                                             <button class="btn btn-danger">Reject</button>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Reviewer</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="form-group row">
+                                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group row">
+
                                             <!-- Review State -->
-                                            <button class="btn btn-primary">Review</button>
+                                            <button class="btn btn-info">Review</button>
                                             <button class="btn btn-success">Commit</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -127,49 +766,25 @@ ViewBag.Title = "Fixed Contract Document";
                 <div class="row mb-2">
                     <div class="col-lg-12 p-1">
                         <div class="card card-info card-outline">
-                            <div>
+                            <div class="card-header">
+                                <h5>Audit &amp; History</h5>
+                            </div>
+                            <div class="card-body">
 
-                                <div data-alerts="alerts"
-                                     data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
-                                     data-ids="myid"
-                                     data-fade="4000"
-                                     data-usebullets="true"></div>
+                                <div>
 
-                                <div class="row">
-                                    <div class="col-sm-12 col-lg-3">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                                Requester
-                                            </label>
-                                            <div class="col-sm-9 col-md-10 col-lg-7">
-                                                <input type="text" class="e-control e-textbox e-lib e-input" />
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-3">
+                                            <div class="form-group row">
+
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-lg-12 p-1">
-                        <div class="card card-info card-outline">
-                            <div>
-
-                                <div class="col-sm-6 col-lg-3">
-
-                                </div>
-                                <div class="col-sm-6 col-lg-3">
-
-                                </div>
-                                <div class="col-sm-6 col-lg-3">
 
                                 </div>
 
                             </div>
+
                         </div>
                     </div>
                 </div>

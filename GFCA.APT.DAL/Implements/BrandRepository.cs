@@ -41,9 +41,9 @@ WHERE a.BRAND_CODE = @BRAND_CODE;";
         }
         public IEnumerable<BrandDto> All()
         {
-            string sqlQuery = @"SELECT b.CLIENT_CODE, a.* 
-FROM TB_M_BRAND a
-LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID);";
+            string sqlQuery = @"SELECT a.*
+, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+FROM TB_M_BRAND a;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery
                 ,transaction: Transaction

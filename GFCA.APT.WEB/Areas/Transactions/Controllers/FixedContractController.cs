@@ -1,5 +1,10 @@
-﻿using GFCA.APT.BAL.Interfaces;
+﻿using GFCA.APT.BAL.Implements;
+using GFCA.APT.BAL.Interfaces;
+using GFCA.APT.Domain.Enums;
+using GFCA.APT.Domain.HTTP.Controls;
 using log4net;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
