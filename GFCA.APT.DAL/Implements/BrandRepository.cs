@@ -14,9 +14,9 @@ namespace GFCA.APT.DAL.Implements
 
         public BrandDto GetById(int id)
         {
-            string sqlQuery = @"SELECT b.CLIENT_CODE, a.* 
-FROM TB_M_BRAND a
-LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID)
+            string sqlQuery = @"SELECT a.*
+, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+FROM TB_M_BRAND a;
 WHERE BRAND_ID = @BRAND_ID;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
@@ -28,8 +28,9 @@ WHERE BRAND_ID = @BRAND_ID;";
         }
         public BrandDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT * FROM TB_M_BRAND a
-LEFT JOIN TB_M_CLIENT b on (b.CLIENT_ID = b.CLIENT_ID)
+            string sqlQuery = @"SELECT a.*
+, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+FROM TB_M_BRAND a
 WHERE a.BRAND_CODE = @BRAND_CODE;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
