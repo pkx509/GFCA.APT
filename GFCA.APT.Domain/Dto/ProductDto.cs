@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class ProductDto
+    public class ProductDto : Auditable
     {
         [Required]
         public int PROD_ID { get; set; }
@@ -27,9 +27,6 @@ namespace GFCA.APT.Domain.Dto
         public string PACK_DESC { get; set; }
         public string UNIT_CODE { get; set; }
         public string FLAG_ROW { get; set; }
-        public string CREATED_BY { get; set; }
-        public DateTime? CREATED_DATE { get; set; }
-        public string UPDATED_BY { get; set; }
-        public DateTime? UPDATED_DATE { get; set; }
+
     }
 }

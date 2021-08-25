@@ -206,10 +206,19 @@
     <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\IChannelRepository.cs" />
+    <Compile Include="Interfaces\IClientRepository.cs" />
+    <Compile Include="Interfaces\ICostCenterRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IDistributorRepository.cs" />
     <Compile Include="Interfaces\IEmissionRepository.cs" />
+    <Compile Include="Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\IGLAccountRepository.cs" />
+    <Compile Include="Interfaces\IOrganizationRepository.cs" />
+    <Compile Include="Interfaces\IProductGroupRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ITradeActivityRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="OperatorCondition.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>

@@ -74,12 +74,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Auditable.cs" />
+    <Compile Include="Dto\ChannelDto.cs" />
+    <Compile Include="Dto\ClientDto.cs" />
+    <Compile Include="Dto\CompanyDto.cs" />
     <Compile Include="Dto\CostCenterDto.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\BrandDto.cs" />
     <Compile Include="Dto\EmissionDto.cs" />
     <Compile Include="Dto\GLAccountDto.cs" />
     <Compile Include="Dto\ProductDto.cs" />
+    <Compile Include="Dto\TradeActivityDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="Dto\UserLoginDto.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
