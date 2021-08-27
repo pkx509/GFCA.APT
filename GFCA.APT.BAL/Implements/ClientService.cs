@@ -54,7 +54,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.CLIENT_NAME = model.CLIENT_NAME;
                 dto.CLIENT_DESC = model.CLIENT_DESC;
                 dto.FLAG_ROW = FLAG_ROW.SHOW;
-                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
                 _uow.ClientRepository.Insert(dto);
@@ -95,7 +95,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.CLIENT_DESC = model.CLIENT_DESC;
                 dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
 
-                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
                 _uow.ClientRepository.Update(dto);
@@ -130,7 +130,7 @@ namespace GFCA.APT.BAL.Implements
                 int id = model.CLIENT_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
-                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
                 if (model.IS_DELETE_PERMANANT)
