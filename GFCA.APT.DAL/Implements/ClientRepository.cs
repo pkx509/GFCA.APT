@@ -47,24 +47,23 @@ namespace GFCA.APT.DAL.Implements
 
         public void Insert(ClientDto entity)
         {
-            string sqlExecute =
-                @"INSERT INTO TB_M_CLIENT
-                (
-                  CLIENT_CODE
-                , CLIENT_NAME
-                , CLIENT_DESC
-                , FLAG_ROW
-                , CREATED_BY
-                , CREATED_DATE
-                ) VALUES (
-                  @CLIENT_CODE
-                , @CLIENT_NAME
-                , @CLIENT_DESC
-                , @FLAG_ROW
-                , @CREATED_BY
-                , @CREATED_DATE
-                ); SELECT SCOPE_IDENTITY()
-                ";
+            string sqlExecute =  @"INSERT INTO TB_M_CLIENT
+                                (
+                                  CLIENT_CODE
+                                , CLIENT_NAME
+                                , CLIENT_DESC
+                                , FLAG_ROW
+                                , CREATED_BY
+                                , CREATED_DATE
+                                ) VALUES (
+                                  @CLIENT_CODE
+                                , @CLIENT_NAME
+                                , @CLIENT_DESC
+                                , @FLAG_ROW
+                                , @CREATED_BY
+                                , @CREATED_DATE
+                                ); SELECT SCOPE_IDENTITY()
+                                ";
 
             var parms = new
             {
@@ -85,18 +84,17 @@ namespace GFCA.APT.DAL.Implements
         }
         public void Update(ClientDto entity)
         {
-            string sqlExecute =
-                @"UPDATE TB_M_CLIENT
-                SET
-                  CLIENT_CODE   = @CLIENT_CODE
-                , CLIENT_NAME   = @CLIENT_NAME
-                , CLIENT_DESC   = @CLIENT_DESC
-                , FLAG_ROW     = @FLAG_ROW
-                , UPDATED_BY   = @UPDATED_BY
-                , UPDATED_DATE = @UPDATED_DATE
-                WHERE
-                CLIENT_ID = @CLIENT_ID;
-                ";
+            string sqlExecute = @"UPDATE TB_M_CLIENT
+                                SET
+                                  CLIENT_CODE   = @CLIENT_CODE
+                                , CLIENT_NAME   = @CLIENT_NAME
+                                , CLIENT_DESC   = @CLIENT_DESC
+                                , FLAG_ROW     = @FLAG_ROW
+                                , UPDATED_BY   = @UPDATED_BY
+                                , UPDATED_DATE = @UPDATED_DATE
+                                WHERE
+                                CLIENT_ID = @CLIENT_ID;
+                                ";
 
             var parms = new
             {
