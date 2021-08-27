@@ -48,12 +48,11 @@
                                                 .Autofill(true)
                                                 .DataSource(o =>
                                                 {
-                                                    o.Url("/api/Selection/GetEmission")
+                                                    o.Url("/api/Selection/GetClient")
                                                     .CrossDomain(false)
                                                     .Adaptor("UrlAdaptor");
                                                 })
                                                 .Change("brandPopup.OnClientChangeValue")
-                                                .Value(3)
                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                 .Render())
                                     </div>

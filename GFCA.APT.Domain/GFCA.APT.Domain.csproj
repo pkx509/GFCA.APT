@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Auditable.cs" />
+    <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\CostCenterDto.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\BrandDto.cs" />

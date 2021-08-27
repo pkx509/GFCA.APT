@@ -16,7 +16,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlQuery = @"SELECT a.*
 , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
-FROM TB_M_BRAND a;
+FROM TB_M_BRAND a
 WHERE BRAND_ID = @BRAND_ID;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,

@@ -14,6 +14,7 @@ namespace GFCA.APT.DAL.Implements
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
         private IGLAccountRepository _glaccountRepository;
+        private IClientRepository _clientRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -64,6 +65,13 @@ namespace GFCA.APT.DAL.Implements
                 return _emissionRepository ?? (_emissionRepository = new EmissionRepository(_transaction));
             }
         }
+        public IClientRepository ClientRepository
+        {
+            get
+            {
+                return _clientRepository ?? (_clientRepository = new ClientRepository(_transaction));
+            }
+        }
 
         private void resetRepositories()
         {
@@ -71,6 +79,7 @@ namespace GFCA.APT.DAL.Implements
             _productRepository = null;
             _emissionRepository = null;
             _glaccountRepository = null;
+            _clientRepository = null;
         }
 
         public void Commit()

@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implements\ClientService.cs" />
     <Compile Include="Implements\BrandService.cs" />
     <Compile Include="Implements\BusinessProvider.cs" />
     <Compile Include="Implements\EmissionService.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Implements\ProductService.cs" />
     <Compile Include="Implements\ServiceBase.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IBusinessProvider.cs" />
     <Compile Include="Interfaces\IEmissionService.cs" />

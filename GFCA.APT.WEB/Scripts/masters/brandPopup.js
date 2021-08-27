@@ -37,6 +37,7 @@ let brandPopup = new (function () {
         BRAND_ID           : 0,
         CLIENT_ID          : null,
         CLIENT_CODE        : null,
+        CLIENT_NAME        : null,
         BRAND_CODE         : null,
         BRAND_NAME         : null,
         BRAND_DESC         : null,
@@ -53,6 +54,7 @@ let brandPopup = new (function () {
             BRAND_ID           : 0,
             CLIENT_ID          : null,
             CLIENT_CODE        : null,
+            CLIENT_NAME        : null,
             BRAND_CODE         : null,
             BRAND_NAME         : null,
             BRAND_DESC         : null,
@@ -211,7 +213,6 @@ let brandPopup = new (function () {
                 delay: 5000
             });
         } else {
-
             let IS_DELETE_PERMANANT = false;
             this.jsonData = {
                 ...this.jsonData,
@@ -281,6 +282,7 @@ let brandPopup = new (function () {
         //let v = e.itemData.Value;
         let t = e.itemData.Text;
         let CLIENT_ID = e.value;
+        $("#pop-hid-client-id").val(e.value);
         this.jsonData = {
             ...this.jsonData,
             //CLIENT_CODE,

@@ -17,6 +17,9 @@ namespace GFCA.APT.BAL.Implements
         private IProductService _productService;
         public IProductService ProductService => _productService ?? (_productService = Serve.ProductService.CreateInstant());
 
+        private IClientService _clientService;
+        public IClientService ClientService => _clientService ?? (_clientService = Serve.ClientService.CreateInstant());
+
         private IGLAccountService _glaccountService;
         public IGLAccountService GLAccountService => _glaccountService ?? (_glaccountService = Serve.GLAccountService.CreateInstant());
     }
