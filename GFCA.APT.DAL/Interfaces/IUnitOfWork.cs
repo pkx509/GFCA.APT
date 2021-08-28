@@ -12,6 +12,7 @@ namespace GFCA.APT.DAL.Interfaces
 		ITradeActivityRepository TradeActivityRepository { get; }
 		IChannelRepository ChannelRepository { get; }
 		ICompanyRepository CompanyRepository { get; }
+		ICostCenterRepository CostCenterRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

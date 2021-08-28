@@ -31,5 +31,8 @@ namespace GFCA.APT.BAL.Implements
 
         private ICompanyService _companyService;
         public ICompanyService CompanyService => _companyService ?? (_companyService = Serve.CompanyService.CreateInstant());
+
+        private ICostCenterService _costCenterService;
+        public ICostCenterService CostCenterService => _costCenterService ?? (_costCenterService = Serve.CostCenterService.CreateInstant());
     }
 }
