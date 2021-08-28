@@ -12,15 +12,17 @@ namespace GFCA.APT.Domain.Dto
         public string ACTIVITY_CODE { get; set; }
         public string ACTIVITY_TYPE { get; set; }
         public string ACTIVTITY_NAME { get; set; }
-        public string HAS_FIXED_CONTRACT { get; set; }
-        public string CAN_DEDUCTABLE { get; set; }
-        public string IN_THB_CS { get; set; }
-        public string IN_GROSS_SALE { get; set; }
-        public string IN_NOT_SALE { get; set; }
-        public string OUT_THB_CS { get; set; }
-        public string OUT_GROSS_SALE { get; set; }
-        public string OUT_NOT_SALE { get; set; }
-        public string NO_RELATE_ABS_AMT { get; set; }
+
+        public bool HAS_FIXED_CONTRACT { get; set; } = false;
+        public bool CAN_DEDUCTABLE { get; set; }     = false;
+        public bool IN_THB_CS { get; set; }          = false;
+        public bool IN_GROSS_SALE { get; set; }      = false;
+        public bool IN_NOT_SALE { get; set; }        = false;
+        public bool OUT_THB_CS { get; set; }         = false;
+        public bool OUT_GROSS_SALE { get; set; }     = false;
+        public bool OUT_NOT_SALE { get; set; }       = false;
+        public bool NO_RELATE_ABS_AMT { get; set; }  = false;
+
         public string VALUABLE { get; set; }
         public string ACTIVITY_DESC { get; set; }
         public string FLAG_ROW { get; set; }
