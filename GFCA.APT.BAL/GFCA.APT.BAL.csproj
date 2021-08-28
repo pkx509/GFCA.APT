@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\DataDuplicateException.cs" />
+    <Compile Include="Implements\BudgetTypeService.cs" />
     <Compile Include="Implements\BrandService.cs" />
     <Compile Include="Implements\BusinessProvider.cs" />
     <Compile Include="Implements\EmissionService.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Implements\ServiceBase.cs" />
     <Compile Include="Implements\TradeActivityService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Interfaces\IBudgetTypeService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IBusinessProvider.cs" />
     <Compile Include="Interfaces\IEmissionService.cs" />

@@ -7,8 +7,8 @@ namespace GFCA.APT.DAL.Interfaces
 		IBrandRepository BrandRepository { get; }
 		IProductRepository ProductRepository { get; }
 		IEmissionRepository EmissionRepository { get; }
-
 		IGLAccountRepository GLAccountRepository { get; }
+		IBudgetTypeRepository BudgetTypeRepository { get; }
 		ITradeActivityRepository TradeActivityRepository { get; }
 
 		void Commit();

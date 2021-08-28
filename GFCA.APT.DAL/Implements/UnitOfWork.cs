@@ -14,6 +14,7 @@ namespace GFCA.APT.DAL.Implements
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
         private IGLAccountRepository _glaccountRepository;
+        private IBudgetTypeRepository _budgetTypeRepository;
         private ITradeActivityRepository _tradeActivityRepository;
 
         private bool _disposed = false;
@@ -65,6 +66,13 @@ namespace GFCA.APT.DAL.Implements
                 return _emissionRepository ?? (_emissionRepository = new EmissionRepository(_transaction));
             }
         }
+        public IBudgetTypeRepository BudgetTypeRepository
+        {
+            get
+            {
+                return _budgetTypeRepository ?? (_budgetTypeRepository = new BudgetTypeRepository(_transaction));
+            }
+        }
         public ITradeActivityRepository TradeActivityRepository
         {
             get
@@ -79,6 +87,7 @@ namespace GFCA.APT.DAL.Implements
             _productRepository = null;
             _emissionRepository = null;
             _glaccountRepository = null;
+            _budgetTypeRepository = null;
             _tradeActivityRepository = null;
         }
 
