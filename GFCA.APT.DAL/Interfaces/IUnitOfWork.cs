@@ -13,6 +13,8 @@ namespace GFCA.APT.DAL.Interfaces
 		IChannelRepository ChannelRepository { get; }
 		ICompanyRepository CompanyRepository { get; }
 		ICostCenterRepository CostCenterRepository { get; }
+		ICustomerRepository CustomerRepository { get; }
+		
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

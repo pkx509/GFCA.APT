@@ -13,5 +13,6 @@ namespace GFCA.APT.BAL.Interfaces
         IChannelService ChannelService { get; }
         ICompanyService CompanyService { get; }
         ICostCenterService CostCenterService { get; }
+        ICustomerService CustomerService { get; }
     }
 }
