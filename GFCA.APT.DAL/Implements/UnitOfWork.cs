@@ -16,6 +16,7 @@ namespace GFCA.APT.DAL.Implements
         private IGLAccountRepository _glaccountRepository;
         private IBudgetTypeRepository _budgetTypeRepository;
         private ITradeActivityRepository _tradeActivityRepository;
+        private IChannelRepository _channelRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -80,6 +81,13 @@ namespace GFCA.APT.DAL.Implements
                 return _tradeActivityRepository ?? (_tradeActivityRepository = new TradeActivityRepository(_transaction));
             }
         }
+        public IChannelRepository ChannelRepository
+        {
+            get
+            {
+                return _channelRepository ?? (_channelRepository = new ChannelRepository(_transaction));
+            }
+        }
 
         private void resetRepositories()
         {
@@ -89,6 +97,7 @@ namespace GFCA.APT.DAL.Implements
             _glaccountRepository = null;
             _budgetTypeRepository = null;
             _tradeActivityRepository = null;
+            _channelRepository = null;
         }
 
         public void Commit()

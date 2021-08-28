@@ -197,6 +197,7 @@
     <Compile Include="FlowItem.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\ChannelRepository.cs" />
     <Compile Include="Implements\BudgetTypeRepository.cs" />
     <Compile Include="Implements\BrandRepository.cs" />
     <Compile Include="Implements\EmissionRepository.cs" />

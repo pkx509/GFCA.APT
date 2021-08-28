@@ -10,5 +10,6 @@ namespace GFCA.APT.BAL.Interfaces
         IGLAccountService GLAccountService { get; }
         IBudgetTypeService BudgetTypeService { get; }
         ITradeActivityService TradeActivityService { get; }
+        IChannelService ChannelService { get; }
     }
 }

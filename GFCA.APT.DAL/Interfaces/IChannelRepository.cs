@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GFCA.APT.Domain.Dto;
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    interface IChannelRepository
+    public interface IChannelRepository : IRepositories<ChannelDto>
     {
     }
 }

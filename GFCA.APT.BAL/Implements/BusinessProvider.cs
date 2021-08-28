@@ -25,5 +25,8 @@ namespace GFCA.APT.BAL.Implements
 
         private ITradeActivityService _tradeActivityService;
         public ITradeActivityService TradeActivityService => _tradeActivityService ?? (_tradeActivityService = Serve.TradeActivityService.CreateInstant());
+        
+        private IChannelService _channelService;
+        public IChannelService ChannelService => _channelService ?? (_channelService = Serve.ChannelService.CreateInstant());
     }
 }
