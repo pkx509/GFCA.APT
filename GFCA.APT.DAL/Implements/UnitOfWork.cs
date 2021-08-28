@@ -14,6 +14,7 @@ namespace GFCA.APT.DAL.Implements
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
         private IGLAccountRepository _glaccountRepository;
+        private IBudgetTypeRepository _budgetTypeRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -64,6 +65,13 @@ namespace GFCA.APT.DAL.Implements
                 return _emissionRepository ?? (_emissionRepository = new EmissionRepository(_transaction));
             }
         }
+        public IBudgetTypeRepository BudgetTypeRepository
+        {
+            get
+            {
+                return _budgetTypeRepository ?? (_budgetTypeRepository = new BudgetTypeRepository(_transaction));
+            }
+        }
 
         private void resetRepositories()
         {
@@ -71,6 +79,7 @@ namespace GFCA.APT.DAL.Implements
             _productRepository = null;
             _emissionRepository = null;
             _glaccountRepository = null;
+            _budgetTypeRepository = null;
         }
 
         public void Commit()

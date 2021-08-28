@@ -9,6 +9,9 @@ namespace GFCA.APT.DAL.Interfaces
 		IEmissionRepository EmissionRepository { get; }
 
 		IGLAccountRepository GLAccountRepository { get; }
+		
+		IBudgetTypeRepository BudgetTypeRepository { get; }
+
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
