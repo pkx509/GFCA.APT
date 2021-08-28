@@ -64,7 +64,7 @@ ViewBag.Title = "Product";
                             @(Html.EJS()
                                   .Grid("grdProduct")
                                   .Height("450")
-                                 
+
                                   .DataSource(ds =>
                                   {
                                       ds
@@ -104,7 +104,7 @@ ViewBag.Title = "Product";
                                   {
 
                                       col.Field("PROD_ID").HeaderText("PROD_ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("PROD_CODE").HeaderText("PROD  Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("PROD_CODE").HeaderText("PROD Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("PROD_NAME").HeaderText("PROD Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CUST_CODE").HeaderText("CUST_CODE ").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("MAT_CODE").HeaderText("MAT_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
@@ -122,18 +122,38 @@ ViewBag.Title = "Product";
                                       col.Field("MAT_GROUP2_DESC ").HeaderText("MAT_GROUP2_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("MAT_GROUP3").HeaderText("MAT_GROUP3").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("MAT_GROUP3_DESC ").HeaderText("MAT_GROUP3_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP4").HeaderText("MAT_GROUP4").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP4_DESC ").HeaderText("MAT_GROUP4_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
 
                                       col.Field("FORMULA").HeaderText("FORMULA").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("PACK ").HeaderText("PACK ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
                                       col.Field("PACK_DESC ").HeaderText("PACK_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UNIT_CODE ").HeaderText("UNIT_CODE ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FLAG_ROW ").HeaderText("FLAG_ROW ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
-                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+
+
+
+
+
+                                      col.Field("SIZE").HeaderText("SIZE ").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UOM_SIZE").HeaderText("UOM_SIZE").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("UOM_SALE").HeaderText("UOM_SALE ").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                   
+
+                                      col.Field("UNIT_CODE").HeaderText("UNIT_CODE ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FLAG_ROW").HeaderText("FLAG_ROW").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("CONV_FCL").HeaderText("CONV FCL ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CONV_L").HeaderText("CONV L ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("CREATED_BY").HeaderText("Create By").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
                                   })
                                   .Render())
 

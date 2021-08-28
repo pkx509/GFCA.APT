@@ -40,12 +40,12 @@
     <script>
 
         var urlServices = {
-            BeforeAdd: "@Url.Action("BeforeAdd", "Brand", new { Area = "Masters" })",
-            BeforeEdit: "@Url.Action("BeforeEdit", "Brand", new { Area = "Masters" })",
+            BeforeAdd: "@Url.Action("BeforeAdd", "Customer", new { Area = "Masters" })",
+            BeforeEdit: "@Url.Action("BeforeEdit", "Customer", new { Area = "Masters" })",
 
-            Add: "@Url.Action("Add", "Brand", new { Area = "Masters" })",
-            Edit: "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
-            Delete: "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
+            Add: "@Url.Action("Add", "Customer", new { Area = "Masters" })",
+            Edit: "@Url.Action("Edit", "Customer", new { Area = "Masters" })",
+            Delete: "@Url.Action("Delete", "Customer", new { Area = "Masters" })",
         }
 
     </script>
@@ -62,40 +62,41 @@
                     <div class="card-body text-sm p-1">
 
                         @(Html.EJS()
-.Grid("grdBrand")
+.Grid("grdCustomer")
 .Height("430")
 .DataSource(ds =>
 {
     ds
-    .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+    .Url(@Url.Action("UrlDatasource", "Customer", new { Area = "Masters" }))
     //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
     //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
-    .RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
+    .RemoveUrl(@Url.Action("Delete", "Customer", new { Area = "Masters" }))
     .Adaptor("UrlAdaptor")
     ;
 })
-.DataBound("brand.OnDataBound")
+.DataBound("customerPopup.OnDataBound")
 .ShowColumnMenu(false).AllowSorting()
 .AllowPaging(true).PageSettings(page => page.PageCount(5))
 .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
-.AllowExcelExport().ToolbarClick("brand.OnExcelExportClick")
+.AllowExcelExport().ToolbarClick("customerPopup.OnExcelExportClick")
 .Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
 .EditSettings(edit =>
 {
     edit
     .AllowEditOnDblClick(false)
-    .AllowAdding(true)
-    .AllowEditing(true)
-    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .AllowAdding(false)
+    .AllowEditing(false)
+    .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
     .Mode(EditMode.Dialog)
     .Template("#dialogtemplate");
 })
-.ActionComplete("brand.OnActionComplete")
+.ActionComplete("customerPopup.OnActionComplete")
 .Columns(col =>
 {
-    col.Field("BRAND_ID").HeaderText("Brand ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_CODE").HeaderText("Brand Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("BRAND_NAME").HeaderText("Brand Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CUST_CODE").HeaderText("Code").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CUST_NAME").HeaderText("CUST_NAME").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CUST_ABV").HeaderText("CUST_ABV").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CUST_DESC").HeaderText("CUST_DESC").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
     col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
     col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
     col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
@@ -120,12 +121,13 @@
     </div>
 </script>
 
-
+@Scripts.Render("~/Scripts/masters/customerPopup.js")
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/masters/brandService.js")
-    <script>$(document).ready(function () {
+    @Scripts.Render("~/Scripts/masters/customer.js")
+    <script>
+        $(document).ready(function () {
             console.info("document ready");
         });</script>
 }

@@ -1,25 +1,27 @@
-﻿using GFCA.APT.BAL.Implements;
-using GFCA.APT.BAL.Interfaces;
-using GFCA.APT.DAL.Implements;
-using GFCA.APT.DAL.Interfaces;
+﻿using System.Web.Mvc;
 using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.Models;
-using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Newtonsoft.Json;
+using GFCA.APT.Domain.Models;
+using GFCA.APT.BAL.Interfaces;
+using System.Reflection;
+
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
     public class ProductController : ControllerWebBase
     {
         private readonly IBusinessProvider _biz;
+   
+
         public ProductController(IBusinessProvider biz)
         {
             _biz = biz;
         }
+
 
         // GET: M/Brand
         [HttpGet()]

@@ -34,7 +34,7 @@
                                         ID
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-prod_id").Value("0").HtmlAttributes(disabled).Render()
+                                        @Html.EJS().TextBox("pop-txt-prod_id").HtmlAttributes(disabled).Render()
                                     </div>
 
                                 </div>
@@ -43,15 +43,77 @@
                                 <div class="form-group row">
 
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        CUST_CODE
+
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-cust_code").Placeholder("").Render()
+
+
+
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Customer
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @(Html.EJS().ComboBox("pop-cmb-cust_code")
+                                                .Placeholder("-- Select --")
+                                                .Autofill(true)
+                                                .DataSource(o =>
+                                                {
+                                                    o.Url("http://localhost:57628/api/Selection/GetCustomer")
+                                                    .CrossDomain(false)
+                                                    .Adaptor("UrlAdaptor");
+                                                })
+
+
+                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                .Render())
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        EMIS CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+
+                                        @(Html.EJS().ComboBox("pop-cmb-emis_code")
+                                                .Placeholder("-- Select --")
+                                                .Autofill(true)
+                                                .DataSource(o =>
+                                                {
+                                                    o.Url("http://localhost:57628/api/Selection/GetEmission")
+                                                    .CrossDomain(false)
+                                                    .Adaptor("UrlAdaptor");
+                                                })
+
+
+                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                .Render())
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="row">
 
                             <div class="col-sm-12 col-lg-6">
@@ -62,7 +124,7 @@
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-prod_code").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-prod_code").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -75,21 +137,12 @@
                                         PROD_NAME
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-prod_name").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-prod_name").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -104,11 +157,11 @@
                                 <div class="form-group row">
 
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        FORMULA
+                                        MAT_CODE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-formula").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-mat_code").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -121,12 +174,15 @@
                                         ORG_CODE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-brand").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-org_code").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
+
+
 
 
 
@@ -140,7 +196,49 @@
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-dib_code").Placeholder("").CssClass("mandatory").Render()
+                                        @Html.EJS().TextBox("pop-txt-div_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FORMULA
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-formual").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group").HtmlAttributes(disabled).Placeholder("").Render()
+
                                     </div>
 
                                 </div>
@@ -150,15 +248,16 @@
                                 <div class="form-group row">
 
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        MAT_GROUP
+                                        MAT_GROUP_DESC
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-mat_group").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-field_mat_group_desc").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
 
 
 
@@ -172,8 +271,9 @@
                                         MAT_GROUP1
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-mat_group1").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group1").HtmlAttributes(disabled).Placeholder("").Render()
+
                                     </div>
 
                                 </div>
@@ -186,7 +286,7 @@
                                         MAT_GROUP_DESC1
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-mat_group_desc1").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-mat_group_desc1").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -204,8 +304,8 @@
                                         MAT_GROUP2
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-mat_group2").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group2").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -218,7 +318,7 @@
                                         MAT_GROUP_DESC2
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-mat_group_desc2").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-mat_group2_desc").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -238,8 +338,8 @@
                                         MAT_GROUP3
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-mat_group3").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group3").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -252,12 +352,55 @@
                                         MAT_GROUP_DESC3
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-mat_group_desc3").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-mat_group3_desc").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP4
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group4").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP4_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-mat_group4_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
 
 
                         <div class="row">
@@ -269,8 +412,8 @@
                                         PACK
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-pack").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-pack").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -283,7 +426,7 @@
                                         PACK_DESC
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-pacl_desc").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-pack_desc").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -300,8 +443,8 @@
                                         SIZE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-size").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-size").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -314,7 +457,7 @@
                                         UOM_SIZE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-uom_size").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-uom_size").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -332,8 +475,8 @@
                                         UOM_SALE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-uom_sale").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-uom_sale").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -346,7 +489,7 @@
                                         UNIT_CODE
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-unit_code").Placeholder("").Render()
+                                        @Html.EJS().TextBox("pop-txt-unit_code").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -361,11 +504,11 @@
                                 <div class="form-group row">
 
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        FLAG_ROW
+                                        CONV_FCL
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-delete_row").Placeholder("").CssClass("mandatory").Render()
+
+                                        @Html.EJS().TextBox("pop-txt-conv_fcl").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -375,10 +518,91 @@
                                 <div class="form-group row">
 
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        UNIT_CODE
+                                        CONV_L
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                       
+                                        @Html.EJS().TextBox("pop-txt-conv_l").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FLAG_ROW
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-flag_row").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_BY
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-created_by").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_DATE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-created_date").HtmlAttributes(disabled).HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        UPDATE_BY
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-updated_by").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_DATE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-update_date").HtmlAttributes(disabled).Placeholder("").Render()
                                     </div>
 
                                 </div>
@@ -387,7 +611,10 @@
 
 
 
-                        
+
+
+
+
 
 
                     </div>

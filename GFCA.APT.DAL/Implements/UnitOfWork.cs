@@ -13,6 +13,10 @@ namespace GFCA.APT.DAL.Implements
         private IBrandRepository _brandRepository;
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
+        private IChannelRepository _channelRepository;
+        private IClientRepository _clientRepository;
+        private ICostcenterRepository _costcenterRepository;
+        private ICustomerRepository _customerRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -53,6 +57,44 @@ namespace GFCA.APT.DAL.Implements
             get
             {
                 return _emissionRepository ?? (_emissionRepository = new EmissionRepository(_transaction));
+            }
+        }
+
+       
+
+        public IChannelRepository ChannelRepository
+        {
+            get
+            {
+                return _channelRepository ?? (_channelRepository = new ChannelRepository(_transaction));
+            }
+        }
+
+   
+        public IClientRepository ClientRepository
+        {
+            get
+            {
+                return _clientRepository ?? (_clientRepository = new ClientRepository(_transaction));
+            }
+        }
+
+        
+        public ICostcenterRepository CostcenterRepository
+        {
+            get
+            {
+                return _costcenterRepository ?? (_costcenterRepository = new CostcenterRepository(_transaction));
+            }
+        }
+
+   
+
+        public ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                return _customerRepository ?? (_customerRepository = new CustomerRepository(_transaction));
             }
         }
 

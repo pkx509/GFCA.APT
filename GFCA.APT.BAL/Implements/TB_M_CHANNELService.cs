@@ -19,7 +19,17 @@ namespace GFCA.APT.BAL.Implements
 
         public IEnumerable<TB_M_CHANNELDto> GetAll()
         {
-            throw new NotImplementedException();
+            //  var dto = _uow.ChannelRepository.All();
+
+
+            var dto = _uow.ChannelRepository.All();
+            return dto;
+
+
+
+
+
+
         }
 
         public TB_M_CHANNELDto GetById(int Id)

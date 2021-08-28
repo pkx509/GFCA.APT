@@ -29,11 +29,11 @@ let productPopup = new (function () {
     this.field_prod_id = "#pop-txt-prod_id";
     this.field_prod_code = "#pop-txt-prod_code";
     this.field_prod_name = "#pop-txt-prod_name";
-    this.field_cust_code = "#pop-txt-cust_code";
+    this.field_cust_code = "#pop-cmb-cust_code";
     this.field_mat_code = "#pop-txt-mat_code";
     this.field_org_code = "#pop-txt-org_code";
     this.field_div_code = "#pop-txt-div_code";
-    this.field_emis_code = "#pop-txt-emis_code";
+    this.field_emis_code = "#pop-cmb-emis_code";
     this.field_mat_group = "#pop-txt-mat_group";
     this.field_mat_group_desc = "#pop-txt-mat_group_desc";
     this.field_mat_group1 = "#pop-txt-mat_group1";
@@ -49,7 +49,13 @@ let productPopup = new (function () {
     this.field_uom_size = "#pop-txt-uom_size";
     this.field_uom_sale = "#pop-txt-uom_sale";
     this.field_unit_code = "#pop-txt-unit_code";
+
+    this.field_conv_fcl = "#pop-txt-conv_fcl";
+    this.field_conv_l = "#pop-txt-conv_l";
+
+
     this.field_flag_row = "#pop-txt-flag_row";
+
     this.field_created_by = "#pop-txt-created_by";
     this.field_created_date = "#pop-txt-created_date";
     this.field_updated_by = "#pop-txt-updated_by";
@@ -76,6 +82,10 @@ let productPopup = new (function () {
         MAT_GROUP2_DESC: null,
         MAT_GROUP3: null,
         MAT_GROUP3_DESC: null,
+        MAT_GROUP4: null,
+        MAT_GROUP4_DESC: null,
+        CONV_FCL: null,
+        CONV_L:null,
         FORMULA: null,
         PACK: null,
         PACK_DESC: null,
@@ -107,6 +117,10 @@ let productPopup = new (function () {
             MAT_GROUP2_DESC: null,
             MAT_GROUP3: null,
             MAT_GROUP3_DESC: null,
+            MAT_GROUP4: null,
+            MAT_GROUP4_DESC: null,
+            CONV_FCL: null,
+            CONV_L: null,
             FORMULA: null,
             PACK: null,
             PACK_DESC: null,
@@ -114,7 +128,7 @@ let productPopup = new (function () {
             UOM_SIZE: null,
             UOM_SALE: null,
             UNIT_CODE: null,
-            FLAG_ROW: null,
+            FLAG_ROW: null
         };
     }
     this.setHeading = function (headerTitle) {
@@ -156,7 +170,7 @@ let productPopup = new (function () {
             $(this.field_brand_code).prop("disabled", true);
             $(this.field_brand_code).removeClass("mandatory");
 
-            $(this.header_title).html("Edit Brand");
+            $(this.header_title).html("EDIT PRODUCT");
             $(this.button_save).html("Save Changes");
             $(this.button_save).show();
             $(this.button_remove).hide();
@@ -187,14 +201,73 @@ let productPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-        $(this.field_brand_id).val(data.BRAND_ID);
-        $(this.field_client_code).val(data.CLIENT_CODE);
+        $(this.field_prod_id).val(data.PROD_ID);
+        $(this.field_cust_code).val(data.CUST_CODE);
+
+        $(this.field_emis_code).val(data.EMIS_CODE);
+
+        //field_emis_code
+
+        $(this.field_client_code).val(data.cust);
         $(this.field_client_id).val(data.CLIENT_ID);
         $(this.field_prod_code).val(data.PROD_CODE);
-        $(this.field_brand_name).val(data.BRAND_NAME);
-        $(this.field_brand_desc).val(data.BRAND_DESC);
-        $(this.field_is_active).prop("checked", data.IS_ACTIVED);
-        $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
+        $(this.field_prod_name).val(data.PROD_NAME);
+
+        $(this.field_mat_code).val(data.MAT_CODE);
+        $(this.field_org_code).val(data.ORG_CODE);
+        $(this.field_div_code).val(data.DIV_CODE);
+
+        $(this.field_mat_group).val(data.MAT_GROUP);
+        $(this.field_mat_group_desc).val(data.MAT_GROUP_DESC);
+
+
+        $(this.field_mat_group1).val(data.MAT_GROUP1);
+        $(this.field_mat_group1_desc).val(data.MAT_GROUP1_DESC);
+
+
+
+        $(this.field_mat_group2).val(data.MAT_GROUP2);
+        $(this.field_mat_group2_desc).val(data.MAT_GROUP2_DESC);
+
+
+        $(this.field_mat_group3).val(data.MAT_GROUP3);
+        $(this.field_mat_group3_desc).val(data.MAT_GROUP3_DESC);
+
+        $(this.field_mat_group4).val(data.MAT_GROUP4);
+        $(this.field_mat_group4_desc).val(data.MAT_GROUP4_DESC);
+
+
+        $(this.field_pack).val(data.PACK);
+        $(this.field_pack_desc).val(data.PACK_DESC);
+
+
+
+        $(this.field_size).val(data.SIZE);
+        $(this.field_uom_size).val(data.UOM_SIZE);
+
+
+
+        $(this.field_conv_fcl).val(data.CONV_FCL);
+        $(this.field_conv_l).val(data.CONV_L);
+
+
+         
+
+
+
+        $(this.field_unit_code).val(data.UNIT_CODE);
+        $(this.field_created_by).val(data.CREATED_BY);
+        $(this.field_created_date).val(data.CREATED_DATE);
+        $(this.field_updated_by).val(data.UPDATED_DATE);
+        $(this.field_updated_date).val(data.UPDATED_DATE);
+
+ 
+
+        $(this.field_flag_row).val(data.FLAG_ROW);
+        $(this.field_uom_sale).val(data.UOM_SALE);
+
+  
+
     }
     this.bindField = function () {
         let PROD_ID = $(this.field_prod_id).val();
@@ -217,6 +290,8 @@ let productPopup = new (function () {
         let PACK = $(this.field_pack).val();
         let PACK_DESC = $(this.field_pack_desc).val();
         let SIZE = $(this.field_size).val();
+        let CONV_FCL = $(this.field_conv_fcl).val();
+        let CONV_L = $(this.field_conv_l).val();
         let UOM_SIZE = $(this.field_uom_size).val();
         let UOM_SALE = $(this.field_uom_sale).val();
         let UNIT_CODE = $(this.field_unit_code).val();
@@ -225,6 +300,12 @@ let productPopup = new (function () {
         let CREATED_DATE = $(this.field_created_date).val();
         let UPDATED_BY = $(this.field_updated_by).val();
         let UPDATED_DATE = $(this.field_updated_date).val();
+
+
+
+         
+
+
 
 
         this.jsonData = {
@@ -250,7 +331,14 @@ let productPopup = new (function () {
             SIZE,
             UOM_SIZE,
             UOM_SALE,
-            UNIT_CODE
+            UNIT_CODE,
+            CREATED_BY,
+            CREATED_DATE,
+            UPDATED_BY,
+            UPDATED_DATE,
+            FLAG_ROW,
+            CONV_FCL,
+            CONV_L
 
 
         };

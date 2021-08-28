@@ -7,6 +7,10 @@ namespace GFCA.APT.DAL.Interfaces
 		IBrandRepository BrandRepository { get; }
 		IProductRepository ProductRepository { get; }
 		IEmissionRepository EmissionRepository { get; }
+		IChannelRepository ChannelRepository { get; }
+		IClientRepository ClientRepository { get; }
+		ICostcenterRepository CostcenterRepository { get; }
+		ICustomerRepository CustomerRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

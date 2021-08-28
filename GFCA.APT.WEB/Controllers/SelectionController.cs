@@ -46,5 +46,95 @@ namespace GFCA.APT.WEB.Controllers
 
             return ret;
         }
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetMatGroup()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetMatGroup().Select(o => new SelectionItem { Value = o.MatGroup, Text = $"{o.MatGroup} - {o.MatGroupDesc}" });
+
+        //    return null;
+          return ret;
+        }
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetMatGroup1()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetMatGroup1().Select(o => new SelectionItem { Value = o.MatGroup1, Text = $"{o.MatGroup1} - {o.MatGroup1_Desc}" });
+
+            return ret;
+        }
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetMatGroup2()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetMatGroup2().Select(o => new SelectionItem { Value = o.MatGroup2, Text = $"{o.MatGroup2} - {o.MatGroup2_Desc}" });
+
+            return ret;
+        }
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetMatGroup3()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetMatGroup3().Select(o => new SelectionItem { Value = o.MatGroup3, Text = $"{o.MatGroup3} - {o.MatGroup3_Desc}" });
+
+            return ret;
+        }
+
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetMatGroup4()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetMatGroup4().Select(o => new SelectionItem { Value = o.MatGroup4, Text = $"{o.MatGroup4} - {o.MatGroup4_Desc}" });
+            return ret;
+        }
+
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetFormula()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetFormula().Select(o => new SelectionItem { Value = o.Formula, Text = $"{o.Formula}" });
+            return ret;
+        }
+
+
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetPack()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetPack().Select(o => new SelectionItem { Value = o.Pack, Text = $"{o.Pack} - {o.PackDetail}" });
+            return ret;
+        }
+
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetCustomer()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IProductService svc = biz.ProductService;
+            var ret = svc.GetCustomer().Select(o => new SelectionItem { Value = o.CUST_CODE, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" });
+            return ret;
+        }
+        //GetCustomer
+
     }
 }

@@ -19,7 +19,9 @@ namespace GFCA.APT.BAL.Implements
 
         public IEnumerable<TB_M_COST_CENTERDto> GetAll()
         {
-            throw new NotImplementedException();
+            var dto = _uow.CostcenterRepository.All();
+
+            return dto;
         }
 
         public TB_M_COST_CENTERDto GetById(int Id)

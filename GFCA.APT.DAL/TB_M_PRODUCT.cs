@@ -36,10 +36,15 @@ namespace GFCA.APT.DAL
         public string MAT_GROUP2_DESC { get; set; }
         public string MAT_GROUP3 { get; set; }
         public string MAT_GROUP3_DESC { get; set; }
+        public string MAT_GROUP4 { get; set; }
+        public string MAT_GROUP4_DESC { get; set; }
         public string FORMULA { get; set; }
         public string PACK { get; set; }
         public string PACK_DESC { get; set; }
+        public int? SIZE { get; set; }
         public string UNIT_CODE { get; set; }
+        public decimal? CONV_FCL { get; set; }
+        public decimal? CONV_L { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }

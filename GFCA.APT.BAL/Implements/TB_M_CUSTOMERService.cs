@@ -19,7 +19,9 @@ namespace GFCA.APT.BAL.Implements
 
         public IEnumerable<TB_M_CUSTOMERDto> GetAll()
         {
-            throw new NotImplementedException();
+            var dto = _uow.CustomerRepository.All();
+
+            return dto;
         }
 
         public TB_M_CUSTOMERDto GetById(int Id)

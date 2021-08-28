@@ -262,7 +262,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Masters\Data\" />
-    <Folder Include="Areas\Masters\Views\CostCenter\" />
     <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Areas\Transactions\Data\" />
     <Folder Include="Areas\Transactions\Views\Index\" />
@@ -281,13 +280,16 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Masters\Controllers\AccountpaybleController.cs" />
     <Compile Include="Areas\Masters\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Masters\Controllers\ChannelController.cs" />
     <Compile Include="Areas\Masters\Controllers\ClientController.cs" />
     <Compile Include="Areas\Masters\Controllers\CostCenterController.cs" />
     <Compile Include="Areas\Masters\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Masters\Controllers\ProductController.cs" />
     <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\TradeActivityController.cs" />
+    <Compile Include="Areas\Masters\Controllers\UnitController.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Areas\Transactions\Controllers\BudgetPlanController.cs" />
     <Compile Include="Areas\Transactions\Controllers\DefaultController.cs" />
@@ -4081,6 +4083,11 @@
     <Content Include="libman.json" />
     <Content Include="Areas\Masters\Views\Product\_Popup_Product.cshtml" />
     <Content Include="Areas\Masters\Views\Brand\_Popup_Brand.cshtml" />
+    <Content Include="Areas\Masters\Views\CostCenter\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Channel\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Unit\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Channel\_Popup_Channel.cshtml" />
+    <Content Include="Areas\Masters\Views\Accountpayble\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4151,6 +4158,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\accountpayble.js" />
+    <Content Include="Scripts\masters\accountpayblePopup.js" />
+    <Content Include="Scripts\masters\customerPopup.js" />
+    <Content Include="Scripts\masters\customer.js" />
+    <Content Include="Scripts\masters\costcenterPopup.js" />
+    <Content Include="Scripts\masters\costcenter.js" />
+    <Content Include="Scripts\masters\clientPopup.js" />
+    <Content Include="Scripts\masters\client.js" />
+    <Content Include="Scripts\masters\channelPopup.js" />
+    <Content Include="Scripts\masters\channel.js" />
     <Content Include="Scripts\masters\productPopup.js" />
     <Content Include="Scripts\masters\product.js" />
     <Content Include="Scripts\masters\brand.js" />

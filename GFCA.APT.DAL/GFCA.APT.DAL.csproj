@@ -188,10 +188,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Implements\AccountpaybleRepository.cs" />
+    <Compile Include="Implements\UnitRepository.cs" />
+    <Compile Include="Implements\CustomerRepository.cs" />
+    <Compile Include="Implements\CostcenterRepository.cs" />
+    <Compile Include="Implements\ClientRepository.cs" />
+    <Compile Include="Implements\ChannelRepository.cs" />
     <Compile Include="Implements\BrandRepository.cs" />
     <Compile Include="Implements\EmissionRepository.cs" />
     <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
+    <Compile Include="Interfaces\IAccountpaybleRepository.cs" />
+    <Compile Include="Interfaces\IUnitRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\ICostcenterRepository.cs" />
+    <Compile Include="Interfaces\IClientRepository.cs" />
+    <Compile Include="Interfaces\IChannelRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\IEmissionRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />

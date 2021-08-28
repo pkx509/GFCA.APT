@@ -1,19 +1,22 @@
-﻿using Dapper;
-using GFCA.APT.DAL.Interfaces;
-using GFCA.APT.Domain.Dto;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Dapper;
+using System.Data;
+using GFCA.APT.Domain.Dto;
+using GFCA.APT.DAL.Interfaces;
+
 
 namespace GFCA.APT.DAL.Implements
 {
     public class ProductRepository : RepositoryBase, IProductRepository
     {
+
         public ProductRepository(IDbTransaction transaction) : base(transaction) { }
+
 
         public ProductDto GetById(int id)
         {
-            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE BRAND_ID = @BRAND_ID;";
+            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE PROD_ID = @PROD_ID;";
             var query = Connection.Query<ProductDto>(
                 sql: sqlQuery,
                 param: new { PROD_ID = id },
@@ -24,7 +27,7 @@ namespace GFCA.APT.DAL.Implements
         }
         public ProductDto GetByCode(string code)
         {
-            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE BRAND_CODE = @BRAND_CODE;";
+            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE PROD_CODE = @PROD_CODE;";
             var query = Connection.Query<ProductDto>(
                 sql: sqlQuery,
                 param: new { PROD_CODE = code },
@@ -68,7 +71,7 @@ namespace GFCA.APT.DAL.Implements
                 FORMULA = entity.FORMULA,
                 PACK = entity.PACK,
                 PACK_DESC = entity.PACK_DESC,
-                UNIT_CODE = entity.UNIT_CODE,
+                // UNIT_CODE = entity.UNIT_CODE,
                 FLAG_ROW = entity.FLAG_ROW,
                 CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE,
@@ -87,26 +90,22 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute =
 @"UPDATE TB_M_PRODUCT
-SET
-BRAND_CODE   = @BRAND_CODE
-, BRAND_NAME   = @BRAND_NAME
-, FLAG_ROW     = @FLAG_ROW
+SET  
+CUST_CODE   = @CUST_CODE
+, EMIS_CODE   = @EMIS_CODE
 , UPDATED_BY   = @UPDATED_BY
 , UPDATED_DATE = @UPDATED_DATE
 WHERE
-BRAND_ID = @BRAND_ID;
+PROD_ID = @PROD_ID;
 ";
 
             var parms = new
             {
-                PROD_ID        = entity.PROD_ID,
-                PROD_CODE      = entity.PROD_CODE,
-                PROD_NAME      = entity.PROD_NAME,
-                FLAG_ROW       = entity.FLAG_ROW,
-                //CREATED_BY   = entity.CREATED_BY,
-                //CREATED_DATE = entity.CREATED_DATE,
-                UPDATED_BY     = entity.UPDATED_BY,
-                //UPDATED_DATE = entity.UPDATED_DATE
+                PROD_ID = entity.PROD_ID,
+                CUST_CODE = entity.CUST_CODE,
+                FLAG_ROW = entity.FLAG_ROW,
+                EMIS_CODE = entity.EMIS_CODE,
+                UPDATED_BY = entity.UPDATED_BY,
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
             };
 
@@ -145,6 +144,138 @@ BRAND_ID = @BRAND_ID;
                 transaction: Transaction
             );
 
+        }
+
+
+        public IEnumerable<APTProduct> GetMatGroup()
+        {
+            string sqlQuery = "SELECT DISTINCT   MatGroup,MatGroupDesc FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetMatGroup1()
+        {
+            string sqlQuery = "SELECT DISTINCT   MatGroup1,MatGroup1 FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetMatGroup2()
+        {
+            string sqlQuery = "SELECT DISTINCT   MatGroup2,MatGroup2 FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetMatGroup3()
+        {
+            string sqlQuery = "SELECT DISTINCT   MatGroup3,MatGroup3 FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+        public IEnumerable<APTProduct> GetMatGroup4()
+        {
+            string sqlQuery = "SELECT DISTINCT   MatGroup4,MatGroup4 FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        IEnumerable<APTProduct> IProductRepository.GetFormula()
+        {
+            string sqlQuery = "SELECT DISTINCT   Formula FROM APTProduct;";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        IEnumerable<APTProduct> IProductRepository.GetPack()
+        {
+            string sqlQuery = "SELECT DISTINCT   PACK,PackDetail FROM APTProduct";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetSize()
+        {
+            string sqlQuery = "SELECT DISTINCT   Size FROM APTProduct";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetSixeUOM()
+        {
+            string sqlQuery = "SELECT DISTINCT   SizeUOM FROM APTProduct";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetCONV_FCL()
+        {
+            string sqlQuery = "SELECT DISTINCT   CONV_FCL FROM APTProduct";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<APTProduct> GetCONV_L()
+        {
+            string sqlQuery = "SELECT DISTINCT   CONV_L FROM APTProduct";
+            var query = Connection.Query<APTProduct>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<CustomerDto> GetCustomer()
+        {
+            string sqlQuery = "SELECT DISTINCT CUST_CODE,CUST_NAME FROM TB_M_CUSTOMER";
+            var query = Connection.Query<CustomerDto>(
+                sql: sqlQuery,
+                transaction: Transaction
+                ).ToList();
+
+            return query;
         }
     }
 }
