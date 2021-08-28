@@ -56,5 +56,25 @@ namespace GFCA.APT.WEB.Controllers
             }
             return ret;
         }
+
+        // POST: api/Selection/GetTradeActivity
+        // POST: api/Selection/GetTradeActivity/true
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetTradeActivity(bool isOption = false)
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            ITradeActivityService svc = biz.TradeActivityService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.ACTIVITY_ID, Text = $"{o.ACTIVITY_CODE} - {o.ACTIVTITY_NAME}" })
+                .ToList();
+
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
+            return ret;
+        }
+
     }
 }

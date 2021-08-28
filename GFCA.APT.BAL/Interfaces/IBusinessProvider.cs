@@ -9,5 +9,6 @@ namespace GFCA.APT.BAL.Interfaces
         IProductService ProductService { get; }
 
         IGLAccountService GLAccountService { get; }
+        ITradeActivityService TradeActivityService { get; }
     }
 }

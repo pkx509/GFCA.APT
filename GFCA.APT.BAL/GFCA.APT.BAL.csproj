@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DataDuplicateException.cs" />
     <Compile Include="Implements\BrandService.cs" />
     <Compile Include="Implements\BusinessProvider.cs" />
     <Compile Include="Implements\EmissionService.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Implements\LookupService.cs" />
     <Compile Include="Implements\ProductService.cs" />
     <Compile Include="Implements\ServiceBase.cs" />
+    <Compile Include="Implements\TradeActivityService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IBusinessProvider.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Interfaces\IGLAccountService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Interfaces\ITradeActivityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

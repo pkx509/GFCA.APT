@@ -202,6 +202,7 @@
     <Compile Include="Implements\GLAccountRepository.cs" />
     <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
+    <Compile Include="Implements\TradeActivityRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\IChannelRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />

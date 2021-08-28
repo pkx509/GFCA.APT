@@ -19,5 +19,8 @@ namespace GFCA.APT.BAL.Implements
 
         private IGLAccountService _glaccountService;
         public IGLAccountService GLAccountService => _glaccountService ?? (_glaccountService = Serve.GLAccountService.CreateInstant());
+
+        private ITradeActivityService _tradeActivityService;
+        public ITradeActivityService TradeActivityService => _tradeActivityService ?? (_tradeActivityService = Serve.TradeActivityService.CreateInstant());
     }
 }
