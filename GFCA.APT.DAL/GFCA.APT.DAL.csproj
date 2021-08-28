@@ -197,6 +197,7 @@
     <Compile Include="FlowItem.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\CompanyRepository.cs" />
     <Compile Include="Implements\ChannelRepository.cs" />
     <Compile Include="Implements\BudgetTypeRepository.cs" />
     <Compile Include="Implements\BrandRepository.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\ICompanyRepository.cs" />
     <Compile Include="Interfaces\IChannelRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\ICostCenterRepository.cs" />

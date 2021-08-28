@@ -12,15 +12,15 @@ using System.Reflection;
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
 
-    public class ChannelController : ControllerWebBase
+    public class CompanyController : ControllerWebBase
     {
         private readonly IBusinessProvider _biz;
-        public ChannelController(IBusinessProvider biz)
+        public CompanyController(IBusinessProvider biz)
         {
             _biz = biz;
         }
 
-        // GET: M/Channel
+        // GET: M/Company
         [HttpGet()]
         public ActionResult Index()
         {
@@ -31,7 +31,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
-            IEnumerable dataSource = _biz.ChannelService.GetAll();
+            IEnumerable dataSource = _biz.CompanyService.GetAll();
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
@@ -46,7 +46,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             {
                 dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
             }
-            int count = dataSource.Cast<ChannelDto>().Count();
+            int count = dataSource.Cast<CompanyDto>().Count();
             if (dm.Skip != 0) // Paging
             {
                 dataSource = operation.PerformSkip(dataSource, dm.Skip);
@@ -59,14 +59,14 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         }
 
         [HttpPost]
-        public JsonResult Add(ChannelDto value)
+        public JsonResult Add(CompanyDto value)
         {
             _biz.LogService.Debug("Add");
             dynamic data = new BusinessResponse();
 
             try
             {
-                var biz = _biz.ChannelService.Create(value);
+                var biz = _biz.CompanyService.Create(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
@@ -79,13 +79,13 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         
         //[ValidateAntiForgeryToken]
         [HttpPost]
-        public JsonResult Edit(ChannelDto value)
+        public JsonResult Edit(CompanyDto value)
         {
             _biz.LogService.Debug("Edit");
             dynamic data = new BusinessResponse();
             try
             {
-                var biz = _biz.ChannelService.Edit(value);
+                var biz = _biz.CompanyService.Edit(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
@@ -97,13 +97,13 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         }
         
         [HttpPost]
-        public JsonResult Delete(ChannelDto value)
+        public JsonResult Delete(CompanyDto value)
         {
             _biz.LogService.Debug("Delete");
             dynamic data = new BusinessResponse();
             try
             {
-                var biz = _biz.ChannelService.Remove(value);
+                var biz = _biz.CompanyService.Remove(value);
                 data = JsonConvert.SerializeObject(biz);
             }
             catch

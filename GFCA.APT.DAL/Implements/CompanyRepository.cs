@@ -7,37 +7,37 @@ using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class ChannelRepository : RepositoryBase, IChannelRepository
+    public class CompanyRepository : RepositoryBase, ICompanyRepository
     {
         
-        public ChannelRepository(IDbTransaction transaction): base(transaction) { }
+        public CompanyRepository(IDbTransaction transaction): base(transaction) { }
 
-        public ChannelDto GetById(int id)
+        public CompanyDto GetById(int id)
         {
-            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL WHERE CHANNEL_ID = @CHANNEL_ID;";
-            var query = Connection.Query<ChannelDto>(
+            string sqlQuery = @"SELECT * FROM TB_M_COMPANY WHERE COMP_ID = @COMP_ID;";
+            var query = Connection.Query<CompanyDto>(
                 sql: sqlQuery,
-                param: new { CHANNEL_ID = id }
+                param: new { COMPANY_ID = id }
                 ,transaction: Transaction
                 ).FirstOrDefault();
 
             return query;
         }
-        public ChannelDto GetByCode(string code)
+        public CompanyDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL WHERE CHANNEL_CODE = @CHANNEL_CODE;";
-            var query = Connection.Query<ChannelDto>(
+            string sqlQuery = @"SELECT * FROM TB_M_COMPANY WHERE COMP_CODE = @COMP_CODE;";
+            var query = Connection.Query<CompanyDto>(
                 sql: sqlQuery,
-                param: new { CHANNEL_CODE = code }
+                param: new { COMP_CODE = code }
                 ,transaction: Transaction
                 ).FirstOrDefault();
 
             return query;
         }
-        public IEnumerable<ChannelDto> All()
+        public IEnumerable<CompanyDto> All()
         {
-            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL";
-            var query = Connection.Query<ChannelDto>(
+            string sqlQuery = @"SELECT * FROM TB_M_COMPANY";
+            var query = Connection.Query<CompanyDto>(
                 sql: sqlQuery
                 ,transaction: Transaction
                 ).ToList();
@@ -45,20 +45,20 @@ namespace GFCA.APT.DAL.Implements
             return query;
         }
 
-        public void Insert(ChannelDto entity)
+        public void Insert(CompanyDto entity)
         {
-            string sqlExecute = @"INSERT INTO TB_M_CHANNEL
+            string sqlExecute = @"INSERT INTO TB_M_COMPANY
                                 (
-                                  CHANNEL_CODE
-                                , CHANNEL_NAME
-                                , CHANNEL_DESC
+                                  COMP_CODE
+                                , COMP_NAME
+                                , ADDRESS
                                 , FLAG_ROW
                                 , CREATED_BY
                                 , CREATED_DATE
                                 ) VALUES (
-                                  @CHANNEL_CODE
-                                , @CHANNEL_NAME
-                                , @CHANNEL_DESC
+                                  @COMP_CODE
+                                , @COMP_NAME
+                                , @ADDRESS
                                 , @FLAG_ROW
                                 , @CREATED_BY
                                 , @CREATED_DATE
@@ -67,41 +67,41 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                CHANNEL_CODE = entity.CHANNEL_CODE,
-                CHANNEL_NAME = entity.CHANNEL_NAME,
-                CHANNEL_DESC = entity.CHANNEL_DESC,
+                COMP_CODE = entity.COMP_CODE,
+                COMP_NAME = entity.COMP_NAME,
+                ADDRESS = entity.ADDRESS,
                 FLAG_ROW = entity.FLAG_ROW,
                 CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.CHANNEL_ID = Connection.ExecuteScalar<int>(
+            entity.COMP_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
             );
 
         }
-        public void Update(ChannelDto entity)
+        public void Update(CompanyDto entity)
         {
-            string sqlExecute = @"UPDATE TB_M_CHANNEL
+            string sqlExecute = @"UPDATE TB_M_COMPANY
                                 SET
-                                  CHANNEL_CODE   = @CHANNEL_CODE
-                                , CHANNEL_NAME   = @CHANNEL_NAME
-                                , CHANNEL_DESC   = @CHANNEL_DESC
+                                  COMP_CODE   = @COMP_CODE
+                                , COMP_NAME   = @COMP_NAME
+                                , ADDRESS   = @ADDRESS
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                CHANNEL_ID = @CHANNEL_ID;
+                                COMP_ID = @COMP_ID;
                                 ";
 
             var parms = new
             {
-                CHANNEL_ID = entity.CHANNEL_ID,
-                CAHNNEL_CODE = entity.CHANNEL_CODE,
-                CHANNEL_NAME = entity.CHANNEL_NAME,
-                CHANNEL_DESC = entity.CHANNEL_DESC,
+                COMP_ID = entity.COMP_ID,
+                COMP_CODE = entity.COMP_CODE,
+                COMP_NAME = entity.COMP_NAME,
+                ADDRESS = entity.ADDRESS,
                 FLAG_ROW = entity.FLAG_ROW,
                 UPDATED_BY = entity.UPDATED_BY,
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
@@ -117,8 +117,8 @@ namespace GFCA.APT.DAL.Implements
 
         public void Delete(int id)
         {
-            string sqlExecute = @"DELETE TB_M_CHANNEL WHERE CHANNEL_ID = @CHANNEL_ID;";
-            var parms = new { CHANNEL_ID = id };
+            string sqlExecute = @"DELETE TB_M_COMPANY WHERE COMP_ID = @COMP_ID;";
+            var parms = new { COMP_ID = id };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

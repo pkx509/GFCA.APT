@@ -17,6 +17,7 @@ namespace GFCA.APT.DAL.Implements
         private IBudgetTypeRepository _budgetTypeRepository;
         private ITradeActivityRepository _tradeActivityRepository;
         private IChannelRepository _channelRepository;
+        private ICompanyRepository _companyRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -89,6 +90,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public ICompanyRepository CompanyRepository
+        {
+            get
+            {
+                return _companyRepository ?? (_companyRepository = new CompanyRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -98,6 +107,7 @@ namespace GFCA.APT.DAL.Implements
             _budgetTypeRepository = null;
             _tradeActivityRepository = null;
             _channelRepository = null;
+            _companyRepository = null;
         }
 
         public void Commit()

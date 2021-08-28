@@ -15,6 +15,8 @@ namespace GFCA.APT.Domain.Dto
         public string COMP_CODE { get; set; }
         public string COMP_NAME { get; set; }
         public string ADDRESS { get; set; }
+        public bool IS_ACTIVED { get; set; } = true;
+        public bool IS_DELETE_PERMANANT { get; set; } = false;
         public string FLAG_ROW { get; set; }
     }
 }

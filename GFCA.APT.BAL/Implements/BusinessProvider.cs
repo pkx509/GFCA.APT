@@ -28,5 +28,8 @@ namespace GFCA.APT.BAL.Implements
         
         private IChannelService _channelService;
         public IChannelService ChannelService => _channelService ?? (_channelService = Serve.ChannelService.CreateInstant());
+
+        private ICompanyService _companyService;
+        public ICompanyService CompanyService => _companyService ?? (_companyService = Serve.CompanyService.CreateInstant());
     }
 }
