@@ -14,31 +14,48 @@ namespace GFCA.APT.DAL.Implements
         
         public IEnumerable<TradeActivityDto> All()
         {
-            string sqlQuery = @"SELECT * FROM TB_M_ACTIVITY;";
-            var query = Connection.Query<TB_M_ACTIVITY>(
-                sql: sqlQuery
-                , transaction: Transaction
-                ).ToList();
+            try
+            {
 
-            return query.Select(o => o.ToDto());
+                string sqlQuery = @"SELECT * FROM TB_M_ACTIVITY;";
+                var query = Connection.Query<TB_M_ACTIVITY>(
+                    sql: sqlQuery
+                    , transaction: Transaction
+                    ).ToList();
+
+                return query.Select(o => o.ToDto());
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public TradeActivityDto GetById(int id)
         {
             string sqlQuery = @"SELECT * FROM TB_M_ACTIVITY WHERE ACTIVITY_ID = @ACTIVITY_ID;";
 
-            var parms = new
+            try
             {
-                ACTIVITY_ID = id
-            };
-            var query = Connection.Query<TB_M_ACTIVITY>(
-                sql: sqlQuery
-                , param: parms
-                , transaction: Transaction
-                ).FirstOrDefault();
 
-            return query.ToDto();
+                var parms = new
+                {
+                    ACTIVITY_ID = id
+                };
+                var query = Connection.Query<TB_M_ACTIVITY>(
+                    sql: sqlQuery
+                    , param: parms
+                    , transaction: Transaction
+                    ).FirstOrDefault();
 
+                return query.ToDto();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Insert(TradeActivityDto dto)
