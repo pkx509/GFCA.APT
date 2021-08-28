@@ -6,7 +6,8 @@ namespace GFCA.APT.Domain.Dto
     public class ProductDto : Auditable
     {
         [Required]
-        public int PROD_ID { get; set; }
+        public int? PROD_ID { get; set; }
+        [Required]
         public string PROD_CODE { get; set; }
         public string PROD_NAME { get; set; }
         public string CUST_CODE { get; set; }
