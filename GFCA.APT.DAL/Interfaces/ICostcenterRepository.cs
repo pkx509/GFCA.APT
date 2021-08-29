@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface ICostcenterRepository : IRepositories<TB_M_COST_CENTERDto>
+    public interface ICostCenterRepository : IRepositories<CostCenterDto>
     {
 	}
 }

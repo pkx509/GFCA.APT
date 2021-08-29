@@ -7,20 +7,20 @@ using GFCA.APT.DAL.Interfaces;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class CostcenterRepository : RepositoryBase, ICostcenterRepository
+    public class CostCenterRepository : RepositoryBase, ICostCenterRepository
     {
         
-        public CostcenterRepository(IDbTransaction transaction): base(transaction) { }
+        public CostCenterRepository(IDbTransaction transaction): base(transaction) { }
 
         
 
  
 
 
-        public  IEnumerable<TB_M_COST_CENTERDto> All()
+        public IEnumerable<CostCenterDto> All()
         {
             string sqlQuery = "SELECT  *   FROM [dbo].[TB_M_COST_CENTER];";
-            var query = Connection.Query<TB_M_COST_CENTERDto>(
+            var query = Connection.Query<CostCenterDto>(
                 sql: sqlQuery
                 , transaction: Transaction
                 ).ToList();
@@ -28,17 +28,17 @@ namespace GFCA.APT.DAL.Implements
             return query;
         }
 
-        TB_M_COST_CENTERDto IRepositories<TB_M_COST_CENTERDto>.GetById(int id)
+        public CostCenterDto GetById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Insert(TB_M_COST_CENTERDto entity)
+        public void Insert(CostCenterDto entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Update(TB_M_COST_CENTERDto entity)
+        public void Update(CostCenterDto entity)
         {
             throw new System.NotImplementedException();
         }
