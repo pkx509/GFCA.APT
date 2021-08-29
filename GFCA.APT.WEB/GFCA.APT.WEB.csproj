@@ -280,6 +280,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Masters\Controllers\OrganizationController.cs" />
     <Compile Include="Areas\Masters\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Masters\Controllers\ChannelController.cs" />
     <Compile Include="Areas\Masters\Controllers\BudgetTypeController.cs" />

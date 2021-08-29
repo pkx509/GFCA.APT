@@ -21,6 +21,7 @@ namespace GFCA.APT.DAL.Implements
         private ICompanyRepository _companyRepository;
         private ICostCenterRepository _costCenterRepository;
         private ICustomerRepository _customerRepository;
+        private IOrganizationRepository _organizationRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -124,6 +125,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IOrganizationRepository OrganizationRepository
+        {
+            get
+            {
+                return _organizationRepository ?? (_organizationRepository = new OrganizationRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -137,6 +146,7 @@ namespace GFCA.APT.DAL.Implements
             _costCenterRepository = null;
             _customerRepository = null;
             _clientRepository = null;
+            _organizationRepository = null;
         }
 
         public void Commit()
