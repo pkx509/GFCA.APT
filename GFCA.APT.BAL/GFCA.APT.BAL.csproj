@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\DataDuplicateException.cs" />
+    <Compile Include="Exceptions\DataNoSelectionException.cs" />
     <Compile Include="Implements\CustomerService.cs" />
     <Compile Include="Implements\CostCenterService.cs" />
     <Compile Include="Implements\CompanyService.cs" />

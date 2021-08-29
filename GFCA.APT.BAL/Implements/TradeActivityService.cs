@@ -94,6 +94,9 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 //start process
+                if (model.ACTIVITY_ID == null || model.ACTIVITY_ID == 0)
+                    throw new DataNoSelectionException();
+
                 var data = model;
                 _uow.TradeActivityRepository.Update(model);
                 _uow.Commit();
@@ -104,6 +107,14 @@ namespace GFCA.APT.BAL.Implements
                 response.MessageType = TOAST_TYPE.SUCCESS;
                 response.Message = "TradeActivity has been updated";
                 _logger.Info(response.Message);
+            }
+            catch (DataNoSelectionException ex)
+            {
+                _logger.Debug(model);
+                _logger.Error($"Error while process: {ex}");
+                response.Success = false;
+                response.MessageType = TOAST_TYPE.WARNING;
+                response.Message = ex.Message;
             }
             catch (Exception ex)
             {

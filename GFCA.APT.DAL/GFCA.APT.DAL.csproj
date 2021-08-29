@@ -214,7 +214,6 @@
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />
     <Compile Include="Interfaces\IChannelRepository.cs" />
-    <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\ICostCenterRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\IDistributorRepository.cs" />
