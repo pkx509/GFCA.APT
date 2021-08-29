@@ -107,7 +107,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
                 data = JsonConvert.SerializeObject(biz);
             }
             catch
-            {
+        {
 
             }
 

@@ -23,10 +23,18 @@ namespace GFCA.APT.Domain.Dto
         public string MAT_GROUP2_DESC { get; set; }
         public string MAT_GROUP3 { get; set; }
         public string MAT_GROUP3_DESC { get; set; }
+        public string MAT_GROUP4 { get; set; }
+        public string MAT_GROUP4_DESC { get; set; }
         public string FORMULA { get; set; }
-        public string PACK { get; set; }
+        public int? PACK { get; set; }
+    
         public string PACK_DESC { get; set; }
+        public int? SIZE { get; set; }
+        public string UOM_SIZE { get; set; }
+        public string UOM_SALE { get; set; }
         public string UNIT_CODE { get; set; }
+        public decimal? CONV_FCL { get; set; }
+        public decimal? CONV_L { get; set; }
         public string FLAG_ROW { get; set; }
 
     }

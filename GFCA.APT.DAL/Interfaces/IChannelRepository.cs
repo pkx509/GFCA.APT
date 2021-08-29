@@ -4,5 +4,5 @@ namespace GFCA.APT.DAL.Interfaces
 {
     public interface IChannelRepository : IRepositories<ChannelDto>
     {
-    }
+	}
 }

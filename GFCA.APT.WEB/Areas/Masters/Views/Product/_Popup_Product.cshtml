@@ -1,0 +1,637 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<!-- <button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button> -->
+<form class="form-horizontal" id="pop-form-product">
+    <div id="popup-product" class="modal fade bd-brand-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BRAND</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+
+
+
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ID
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-prod_id").HtmlAttributes(disabled).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Customer
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @(Html.EJS().ComboBox("pop-cmb-cust_code")
+                                                .Placeholder("-- Select --")
+                                                .Autofill(true)
+                                                .DataSource(o =>
+                                                {
+                                                    o.Url("http://localhost:57628/api/Selection/GetCustomer")
+                                                    .CrossDomain(false)
+                                                    .Adaptor("UrlAdaptor");
+                                                })
+
+
+                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                .Render())
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        EMIS CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+
+                                        @(Html.EJS().ComboBox("pop-cmb-emis_code")
+                                                .Placeholder("-- Select --")
+                                                .Autofill(true)
+                                                .DataSource(o =>
+                                                {
+                                                    o.Url("http://localhost:57628/api/Selection/GetEmission")
+                                                    .CrossDomain(false)
+                                                    .Adaptor("UrlAdaptor");
+                                                })
+
+
+                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                .Render())
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        PROD_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        <input type="hidden" id="pop-hid-client-id" />
+                                        @Html.EJS().TextBox("pop-txt-prod_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        PROD_NAME
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-prod_name").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        <input type="hidden" id="pop-hid-client-id" />
+                                        @Html.EJS().TextBox("pop-txt-mat_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        ORG_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-org_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        DIV_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        <input type="hidden" id="pop-hid-client-id" />
+                                        @Html.EJS().TextBox("pop-txt-div_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FORMULA
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-formual").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group").HtmlAttributes(disabled).Placeholder("").Render()
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-field_mat_group_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP1
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group1").HtmlAttributes(disabled).Placeholder("").Render()
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP_DESC1
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-mat_group_desc1").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP2
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group2").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP_DESC2
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-mat_group2_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP3
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group3").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP_DESC3
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-mat_group3_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP4
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-mat_group4").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        MAT_GROUP4_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-mat_group4_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        PACK
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-pack").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        PACK_DESC
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-pack_desc").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        SIZE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-size").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        UOM_SIZE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-uom_size").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        UOM_SALE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-uom_sale").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        UNIT_CODE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-unit_code").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CONV_FCL
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-conv_fcl").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CONV_L
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-conv_l").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        FLAG_ROW
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-flag_row").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_BY
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-created_by").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_DATE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-created_date").HtmlAttributes(disabled).HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        UPDATE_BY
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+
+                                        @Html.EJS().TextBox("pop-txt-updated_by").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        CREATED_DATE
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-update_date").HtmlAttributes(disabled).Placeholder("").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" id="pop-hid-permanant-del" />
+                    <button id="pop-btn-del-permanat" type="button" class="e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:productPopup.onRemovePerm(this)">Delete Permanent</button>
+                    <button id="pop-btn-del" type="button" class="e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:productPopup.onRemove(this)">Delete</button>
+                    <button id="pop-btn-save" type="button" class="e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:productPopup.onSave(this)">Save</button>
+                    <button type="button" class="e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:productPopup.close(this)">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

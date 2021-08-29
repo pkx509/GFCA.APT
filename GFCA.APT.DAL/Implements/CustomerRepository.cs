@@ -20,7 +20,7 @@ namespace GFCA.APT.DAL.Implements
                 param: new { CUST_ID = id }
                 ,transaction: Transaction
                 ).FirstOrDefault();
-
+     
             return query;
         }
         public CustomerDto GetByCode(string code)
@@ -31,19 +31,19 @@ namespace GFCA.APT.DAL.Implements
                 param: new { CUST_CODE = code }
                 ,transaction: Transaction
                 ).FirstOrDefault();
-
+             
             return query;
         }
         public IEnumerable<CustomerDto> All()
         {
             string sqlQuery = @"SELECT * FROM TB_M_CUSTOMER";
             var query = Connection.Query<CustomerDto>(
-                sql: sqlQuery
+                    sql: sqlQuery
                 ,transaction: Transaction
-                ).ToList();
+                    ).ToList();
 
-            return query;
-        }
+                return query;
+            }
 
         public void Insert(CustomerDto entity)
         {
@@ -70,7 +70,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-            {
+        {
                 CUST_CODE = entity.CUST_CODE,
                 CUST_NAME = entity.CUST_NAME,
                 CUST_ABV = entity.CUST_ABV,
@@ -105,7 +105,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-            {
+        {
                 CUST_ID = entity.CUST_ID,
                 CUST_CODE = entity.CUST_CODE,
                 CUST_NAME = entity.CUST_NAME,

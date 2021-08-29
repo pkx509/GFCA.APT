@@ -9,7 +9,7 @@ namespace GFCA.APT.DAL.Implements
 {
     public class ClientRepository : RepositoryBase, IClientRepository
     {
-        
+
         public ClientRepository(IDbTransaction transaction): base(transaction) { }
 
         public ClientDto GetById(int id)
@@ -97,7 +97,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-            {
+        {
                 CLIENT_ID = entity.CLIENT_ID,
                 CLIENT_CODE = entity.CLIENT_CODE,
                 CLIENT_NAME = entity.CLIENT_NAME,

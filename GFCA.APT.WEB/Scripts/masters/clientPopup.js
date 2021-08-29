@@ -138,7 +138,7 @@ let clientPopup = new (function () {
             $(this.field_is_active).parent().parent().attr("aria-checked", "true");
             $(this.field_is_active).parent().children().addClass("e-check");
             $(this.field_is_active).removeClass("e-check");
-        }
+    }
     }
     this.bindField = function () {
         let CLIENT_ID            = $(this.field_client_id).val();
@@ -187,6 +187,7 @@ let clientPopup = new (function () {
                 delay: 5000
             });
         } else {
+
             let IS_DELETE_PERMANANT = false;
             this.jsonData = {
                 ...this.jsonData,
@@ -194,7 +195,7 @@ let clientPopup = new (function () {
             };
             clientPopup.callBack(this.jsonData);
             clientPopup.close();
-        }
+    }
 
     }
 
@@ -250,6 +251,16 @@ let clientPopup = new (function () {
     this.OnRowDeselected = function (args) {
         if (argruments.data == args.data) {
             argruments.data = null;
+        }
+    }
+    this.OnClientChangeValue = function (e) {
+        //let v = e.itemData.Value;
+        let t = e.itemData.Text;
+        let CLIENT_ID = e.value;
+        this.jsonData = {
+            ...this.jsonData,
+            //CLIENT_CODE,
+            CLIENT_ID
         }
     }
 

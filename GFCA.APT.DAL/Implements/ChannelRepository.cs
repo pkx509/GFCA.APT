@@ -9,7 +9,7 @@ namespace GFCA.APT.DAL.Implements
 {
     public class ChannelRepository : RepositoryBase, IChannelRepository
     {
-        
+
         public ChannelRepository(IDbTransaction transaction): base(transaction) { }
 
         public ChannelDto GetById(int id)
@@ -31,7 +31,7 @@ namespace GFCA.APT.DAL.Implements
                 param: new { CHANNEL_CODE = code }
                 ,transaction: Transaction
                 ).FirstOrDefault();
-
+       
             return query;
         }
         public IEnumerable<ChannelDto> All()
@@ -97,7 +97,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-            {
+        {
                 CHANNEL_ID = entity.CHANNEL_ID,
                 CAHNNEL_CODE = entity.CHANNEL_CODE,
                 CHANNEL_NAME = entity.CHANNEL_NAME,

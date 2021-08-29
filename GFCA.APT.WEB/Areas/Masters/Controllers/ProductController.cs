@@ -1,93 +1,119 @@
-﻿using GFCA.APT.BAL.Implements;
-using GFCA.APT.BAL.Interfaces;
-using GFCA.APT.DAL.Implements;
-using GFCA.APT.DAL.Interfaces;
+﻿using System.Web.Mvc;
 using GFCA.APT.Domain.Dto;
-using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Newtonsoft.Json;
+using GFCA.APT.Domain.Models;
+using GFCA.APT.BAL.Interfaces;
+using System.Reflection;
+
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
     public class ProductController : ControllerWebBase
     {
-        private readonly IUnitOfWork _uow;
-        private readonly IProductService _productSvc;
-        public ProductController(ILogService log)
+        private readonly IBusinessProvider _biz;
+   
+
+        public ProductController(IBusinessProvider biz)
         {
-            _uow = UnitOfWork.CreateInstant();
-            _productSvc = ProductService.CreateInstant();
+            _biz = biz;
         }
 
+
+        // GET: M/Brand
         [HttpGet()]
         public ActionResult Index()
         {
-            //ViewBag.dataSource = _productSvc.GetAll();
-        
-
+            //ViewBag.dataSource = _brandSvc.GetAll();
             return View();
         }
 
-        public ActionResult UrlDataSource(DataManagerRequest dm)
+        public JsonResult UrlDataSource(DataManagerRequest dm)
         {
-            IEnumerable DataSource = _productSvc.GetAll();
+            _biz.LogService.Debug("UrlDataSource");
+            IEnumerable dataSource = _biz.ProductService.GetAll();
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0)
             {
-                DataSource = operation.PerformSearching(DataSource, dm.Search);  //Search
+                dataSource = operation.PerformSearching(dataSource, dm.Search);  //Search
             }
             if (dm.Sorted != null && dm.Sorted.Count > 0) //Sorting
             {
-                DataSource = operation.PerformSorting(DataSource, dm.Sorted);
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
             }
             if (dm.Where != null && dm.Where.Count > 0) //Filtering
             {
-                DataSource = operation.PerformFiltering(DataSource, dm.Where, dm.Where[0].Operator);
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
             }
-            int count = DataSource.Cast<ProductDto>().Count();
+            int count = dataSource.Cast<ProductDto>().Count();
             if (dm.Skip != 0)
             {
-                DataSource = operation.PerformSkip(DataSource, dm.Skip);         //Paging
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);         //Paging
             }
             if (dm.Take != 0)
             {
-                DataSource = operation.PerformTake(DataSource, dm.Take);
+                dataSource = operation.PerformTake(dataSource, dm.Take);
             }
-            return dm.RequiresCounts ? Json(new { result = DataSource, count = count }) : Json(DataSource);
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
-
-        [HttpPost]
-        public PartialViewResult BeforeEdit(ProductDto value)
-        {
-            return PartialView("_ProductEditDialog", value);
-        }
-
-        [HttpPost]
-        public PartialViewResult BeforeAdd()
-        {
-            return PartialView("_ProductAddDialog");
-        }
-
         [HttpPost]
         public JsonResult Add(ProductDto value)
         {
-            if (!ModelState.IsValid)
-                return Json(new { Status = 500, message = "Invalid model", JsonRequestBehavior.AllowGet });
+            _biz.LogService.Debug("Add");
+            dynamic data = new BusinessResponse();
 
-            var isDuplicateCode = _productSvc.GetAll()
-                .FirstOrDefault(o => o.PROD_CODE.Equals(value.PROD_CODE));
-            if (isDuplicateCode != null)
-                return Json(new { Status = 500, data = JsonConvert.SerializeObject(value), message = "Duplicate Code", JsonRequestBehavior.AllowGet });
+            try
+            {
+                var biz = _biz.ProductService.Create(value);
+                data = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
 
-            _productSvc.Create(value);
+            }
+            return Json(new { data, JsonRequestBehavior.AllowGet });
 
-            var objData = _productSvc.GetAll().FirstOrDefault(o => o.PROD_CODE.Equals(value.PROD_CODE));
+        }
 
-            return Json(new { Status = 200, data = JsonConvert.SerializeObject(objData) }, JsonRequestBehavior.AllowGet);
+        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        public JsonResult Edit(ProductDto value)
+        {
+            _biz.LogService.Debug("Edit");
+            dynamic data = new BusinessResponse();
+            try
+            {
+               var biz = _biz.ProductService.Edit(value);
+                data = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+
+            return Json(new { data, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult Delete(ProductDto value)
+        {
+            _biz.LogService.Debug("Delete");
+            dynamic data = new BusinessResponse();
+            try
+            {
+                var biz = _biz.ProductService.Remove(value);
+                data = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+
+            return Json(new { data, JsonRequestBehavior.AllowGet });
         }
 
     }
