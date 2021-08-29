@@ -26,6 +26,7 @@ namespace GFCA.APT.DAL
         public string NAME_FIRST { get; set; }
         public string NAME_LAST { get; set; }
         public string EMAIL { get; set; }
+        public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
