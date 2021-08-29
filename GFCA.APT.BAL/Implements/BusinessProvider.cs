@@ -40,5 +40,8 @@ namespace GFCA.APT.BAL.Implements
 
         private ICustomerService _customerService;
         public ICustomerService CustomerService => _customerService ?? (_customerService = Serve.CustomerService.CreateInstant());
+
+        private IDocumentTypeService _documentTypeService;
+        public IDocumentTypeService DocumentTypeService => _documentTypeService ?? (_documentTypeService = Serve.DocumentTypeService.CreateInstant());
     }
 }
