@@ -146,7 +146,7 @@ BRAND_ID = @BRAND_ID;
 
         }
 
-
+        /*
         public IEnumerable<APTProduct> GetMatGroup()
         {
             string sqlQuery = "SELECT DISTINCT   MatGroup,MatGroupDesc FROM APTProduct;";
@@ -266,16 +266,7 @@ BRAND_ID = @BRAND_ID;
 
             return query;
         }
-
-        public IEnumerable<CustomerDto> GetCustomer()
-        {
-            string sqlQuery = "SELECT DISTINCT CUST_CODE,CUST_NAME FROM TB_M_CUSTOMER";
-            var query = Connection.Query<CustomerDto>(
-                sql: sqlQuery,
-                transaction: Transaction
-                ).ToList();
-
-            return query;
-        }
+        */
+        
     }
 }

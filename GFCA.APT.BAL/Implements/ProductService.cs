@@ -173,7 +173,7 @@ namespace GFCA.APT.BAL.Implements
       
 
 
-
+        /*
         public IEnumerable<APTProduct> GetMatGroup()
         {
             var dto = _uow.ProductRepository.GetMatGroup();
@@ -223,7 +223,7 @@ namespace GFCA.APT.BAL.Implements
             return dto;
         }
 
-      
+      */
 
       
 

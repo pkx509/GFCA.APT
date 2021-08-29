@@ -78,6 +78,7 @@ namespace GFCA.APT.WEB.Controllers
 
 
         // POST: api/Selection/GetClient
+        // POST: api/Selection/GetClient/true
         [HttpPost]
         public IEnumerable<SelectionItem> GetClient()
         {
@@ -89,7 +90,7 @@ namespace GFCA.APT.WEB.Controllers
 
             return ret;
         }
-
+        /*
         [HttpPost]
         public IEnumerable<SelectionItem> GetMatGroup()
         {
@@ -166,15 +167,25 @@ namespace GFCA.APT.WEB.Controllers
             var ret = svc.GetPack().Select(o => new SelectionItem { Value = o.Pack, Text = $"{o.Pack} - {o.PackDetail}" });
             return ret;
         }
+        */
 
-
-
+        // POST: api/Selection/GetCustomer
+        // POST: api/Selection/GetCustomer/true
         [HttpPost]
-        public IEnumerable<SelectionItem> GetCustomer()
+        public IEnumerable<SelectionItem> GetCustomer(bool isOption = false)
         {
             IBusinessProvider biz = new BusinessProvider();
-            IProductService svc = biz.ProductService;
-            var ret = svc.GetCustomer().Select(o => new SelectionItem { Value = o.CUST_CODE, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" });
+            ICustomerService svc = biz.CustomerService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.CUST_ID, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" })
+                .ToList();
+            /*
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
+            */
             return ret;
         }
         //GetCustomer

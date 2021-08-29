@@ -20,7 +20,7 @@ namespace GFCA.APT.BAL.Interfaces
 
 
        //IEnumerable<ProductDto> GetAll();
-       
+       /*
         IEnumerable<APTProduct> GetMatGroup();
         IEnumerable<APTProduct> GetMatGroup1();
         IEnumerable<APTProduct> GetMatGroup2();
@@ -31,7 +31,7 @@ namespace GFCA.APT.BAL.Interfaces
 
 
         IEnumerable<CustomerDto> GetCustomer();
-
+        */
 
         // BusinessResponse Create(ProductDto model);
         //   BusinessResponse Edit(ProductDto model);

@@ -5,6 +5,7 @@ namespace GFCA.APT.DAL.Interfaces
 {
     public interface IProductRepository : IRepositories<ProductDto>
     {
+        /*
         ProductDto GetById(int Id);
 
 
@@ -25,7 +26,7 @@ namespace GFCA.APT.DAL.Interfaces
         IEnumerable<APTProduct> GetCONV_L();
 
         IEnumerable<CustomerDto> GetCustomer();
-
+        */
  
     }
 }
