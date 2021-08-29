@@ -76,5 +76,18 @@ namespace GFCA.APT.WEB.Controllers
             return ret;
         }
 
+
+        // POST: api/Selection/GetClient
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetClient()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IClientService svc = biz.ClientService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.CLIENT_ID, Text = $"{o.CLIENT_CODE} - {o.CLIENT_NAME}" });
+
+            return ret;
+        }
     }
 }

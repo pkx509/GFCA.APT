@@ -4086,6 +4086,7 @@
     <Content Include="Areas\Masters\Views\Brand\_Popup_Brand.cshtml" />
     <Content Include="Areas\Masters\Views\GLAccount\Index.cshtml" />
     <Content Include="Areas\Masters\Views\GLAccount\_Popup_gl_account.cshtml" />
+    <Content Include="Areas\Masters\Views\Client\_Popup_Client.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4155,6 +4156,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\masters\clientPopup.js" />
+    <Content Include="Scripts\masters\client.js" />
     <Content Include="Scripts\masters\gl_account.js" />
     <Content Include="Scripts\masters\brand.js" />
     <Content Include="Scripts\masters\gl_accountPopup.js" />

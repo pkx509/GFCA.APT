@@ -15,9 +15,9 @@ namespace GFCA.APT.DAL.Implements
         public BrandDto GetById(int id)
         {
             string sqlQuery = @"SELECT a.*
-, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
-FROM TB_M_BRAND a;
-WHERE BRAND_ID = @BRAND_ID;";
+                            , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+                            FROM TB_M_BRAND a
+                            WHERE BRAND_ID = @BRAND_ID;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
                 param: new { BRAND_ID = id }
@@ -29,9 +29,9 @@ WHERE BRAND_ID = @BRAND_ID;";
         public BrandDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT a.*
-, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
-FROM TB_M_BRAND a
-WHERE a.BRAND_CODE = @BRAND_CODE;";
+                            , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+                            FROM TB_M_BRAND a
+                            WHERE a.BRAND_CODE = @BRAND_CODE;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery,
                 param: new { BRAND_CODE = code }
@@ -43,8 +43,8 @@ WHERE a.BRAND_CODE = @BRAND_CODE;";
         public IEnumerable<BrandDto> All()
         {
             string sqlQuery = @"SELECT a.*
-, (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
-FROM TB_M_BRAND a;";
+                            , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+                            FROM TB_M_BRAND a;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery
                 ,transaction: Transaction
@@ -55,26 +55,25 @@ FROM TB_M_BRAND a;";
 
         public void Insert(BrandDto entity)
         {
-            string sqlExecute =
-@"INSERT INTO TB_M_BRAND
-(
-  BRAND_CODE
-, CLIENT_ID
-, BRAND_NAME
-, BRAND_DESC
-, FLAG_ROW
-, CREATED_BY
-, CREATED_DATE
-) VALUES (
-  @BRAND_CODE
-, @CLIENT_ID
-, @BRAND_NAME
-, @BRAND_DESC
-, @FLAG_ROW
-, @CREATED_BY
-, @CREATED_DATE
-); SELECT SCOPE_IDENTITY()
-";
+            string sqlExecute = @"INSERT INTO TB_M_BRAND
+                                (
+                                  BRAND_CODE
+                                , CLIENT_ID
+                                , BRAND_NAME
+                                , BRAND_DESC
+                                , FLAG_ROW
+                                , CREATED_BY
+                                , CREATED_DATE
+                                ) VALUES (
+                                  @BRAND_CODE
+                                , @CLIENT_ID
+                                , @BRAND_NAME
+                                , @BRAND_DESC
+                                , @FLAG_ROW
+                                , @CREATED_BY
+                                , @CREATED_DATE
+                                ); SELECT SCOPE_IDENTITY()
+                                ";
 
             var parms = new
             {
@@ -99,19 +98,18 @@ FROM TB_M_BRAND a;";
         }
         public void Update(BrandDto entity)
         {
-            string sqlExecute =
-@"UPDATE TB_M_BRAND
-SET
-  BRAND_CODE   = @BRAND_CODE
-, CLIENT_ID    = @CLIENT_ID
-, BRAND_NAME   = @BRAND_NAME
-, BRAND_DESC   = @BRAND_DESC
-, FLAG_ROW     = @FLAG_ROW
-, UPDATED_BY   = @UPDATED_BY
-, UPDATED_DATE = @UPDATED_DATE
-WHERE
-BRAND_ID = @BRAND_ID;
-";
+            string sqlExecute = @"UPDATE TB_M_BRAND
+                                SET
+                                  BRAND_CODE   = @BRAND_CODE
+                                , CLIENT_ID    = @CLIENT_ID
+                                , BRAND_NAME   = @BRAND_NAME
+                                , BRAND_DESC   = @BRAND_DESC
+                                , FLAG_ROW     = @FLAG_ROW
+                                , UPDATED_BY   = @UPDATED_BY
+                                , UPDATED_DATE = @UPDATED_DATE
+                                WHERE
+                                BRAND_ID = @BRAND_ID;
+                                ";
 
             var parms = new
             {
@@ -139,11 +137,10 @@ BRAND_ID = @BRAND_ID;
         public void Delete(int id)
         {
 
-            string sqlExecute =
-@"DELETE TB_M_BRAND
-WHERE
-BRAND_ID = @BRAND_ID;
-";
+            string sqlExecute = @"DELETE TB_M_BRAND
+                                WHERE
+                                BRAND_ID = @BRAND_ID;
+                                ";
             var parms = new
             {
                 BRAND_ID = id,

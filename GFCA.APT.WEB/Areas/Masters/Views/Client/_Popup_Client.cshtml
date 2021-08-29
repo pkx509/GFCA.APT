@@ -4,13 +4,12 @@
     Dictionary<string, object> disabled = new Dictionary<string, object>();
     disabled.Add("disabled", "true");
 }
-<!-- <button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button> -->
-<form class="form-horizontal" id="pop-form-brand" autocomplete="off">
-    <div id="popup-brand" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<form class="form-horizontal" id="pop-form-client" autocomplete="off">
+    <div id="popup-client" class="modal fade bd-client-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BRAND</h5>
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW CLIENT</h5>
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -31,37 +30,11 @@
                                         ID
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-brand-id").Value("0").HtmlAttributes(disabled).Render()
+                                        @Html.EJS().TextBox("pop-txt-client-id").Value("0").HtmlAttributes(disabled).Render()
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Client
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @(Html.EJS().ComboBox("pop-cmb-client-code")
-                                                .Placeholder("-- Select --")
-                                                .Autofill(true)
-                                                .DataSource(o =>
-                                                {
-                                                    o.Url("/api/Selection/GetClient")
-                                                    .CrossDomain(false)
-                                                    .Adaptor("UrlAdaptor");
-                                                })
-                                                .Change("brandPopup.OnClientChangeValue")
-                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                .Render())
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
 
@@ -69,13 +42,13 @@
                                         Code
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        <input type="hidden" id="pop-hid-client-id" />
-                                        @Html.EJS().TextBox("pop-txt-brand-code").Placeholder("Brand Code").CssClass("mandatory").Render()
+                                        @Html.EJS().TextBox("pop-txt-client-code").Placeholder("Client Code").Render()
                                     </div>
 
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
 
@@ -83,7 +56,7 @@
                                         Name
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-brand-name").Placeholder("Brand Name").Render()
+                                        @Html.EJS().TextBox("pop-txt-client-name").Placeholder("Client Name").Render()
                                     </div>
 
                                 </div>
@@ -94,11 +67,11 @@
                             <div class="col-sm-12 col-lg-12">
                                 <div class="form-group row">
 
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-txt-brand-desc">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-txt-client-desc">
                                         Description
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-brand-desc").Multiline(true).Render()
+                                        @Html.EJS().TextBox("pop-txt-client-desc").Multiline(true).Render()
                                     </div>
 
                                 </div>
@@ -125,9 +98,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="pop-btn-del" type="button" class="btn e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:brandPopup.onDelete(this)">Delete</button>
-                    <button id="pop-btn-save" type="button" class="btn e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:brandPopup.onSave(this)">Save</button>
-                    <button type="button" class="btn e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:brandPopup.close(this)">Close</button>
+                    <button id="pop-btn-del" type="button" class="btn e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:clientPopup.onDelete(this)">Delete</button>
+                    <button id="pop-btn-save" type="button" class="btn e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:clientPopup.onSave(this)">Save</button>
+                    <button type="button" class="btn e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:clientPopup.close(this)">Close</button>
                 </div>
 
             </div>

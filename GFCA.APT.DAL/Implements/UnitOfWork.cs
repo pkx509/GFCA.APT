@@ -14,6 +14,7 @@ namespace GFCA.APT.DAL.Implements
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
         private IGLAccountRepository _glaccountRepository;
+        private IClientRepository _clientRepository;
         private IBudgetTypeRepository _budgetTypeRepository;
         private ITradeActivityRepository _tradeActivityRepository;
         private IChannelRepository _channelRepository;
@@ -91,6 +92,13 @@ namespace GFCA.APT.DAL.Implements
                 return _channelRepository ?? (_channelRepository = new ChannelRepository(_transaction));
             }
         }
+        public IClientRepository ClientRepository
+        {
+            get
+            {
+                return _clientRepository ?? (_clientRepository = new ClientRepository(_transaction));
+            }
+        }
 
         public ICompanyRepository CompanyRepository
         {
@@ -128,6 +136,7 @@ namespace GFCA.APT.DAL.Implements
             _companyRepository = null;
             _costCenterRepository = null;
             _customerRepository = null;
+            _clientRepository = null;
         }
 
         public void Commit()

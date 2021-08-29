@@ -202,6 +202,7 @@
     <Compile Include="Implements\CompanyRepository.cs" />
     <Compile Include="Implements\ChannelRepository.cs" />
     <Compile Include="Implements\BudgetTypeRepository.cs" />
+    <Compile Include="Implements\ClientRepository.cs" />
     <Compile Include="Implements\BrandRepository.cs" />
     <Compile Include="Implements\EmissionRepository.cs" />
     <Compile Include="Implements\GLAccountRepository.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
+    <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />
     <Compile Include="Interfaces\IChannelRepository.cs" />

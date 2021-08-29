@@ -138,6 +138,7 @@
     <Compile Include="Implements\CompanyService.cs" />
     <Compile Include="Implements\ChannelService.cs" />
     <Compile Include="Implements\BudgetTypeService.cs" />
+    <Compile Include="Implements\ClientService.cs" />
     <Compile Include="Implements\BrandService.cs" />
     <Compile Include="Implements\BusinessProvider.cs" />
     <Compile Include="Implements\EmissionService.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Interfaces\ICompanyService.cs" />
     <Compile Include="Interfaces\IChannelService.cs" />
     <Compile Include="Interfaces\IBudgetTypeService.cs" />
+    <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\IBusinessProvider.cs" />
     <Compile Include="Interfaces\IEmissionService.cs" />
