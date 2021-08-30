@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using GFCA.APT.Domain.Dto;
+using log4net;
+using System;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -26,7 +28,18 @@ namespace GFCA.APT.WEB
 
             string text = $"User : {userName},  HttpMethod : {Request.HttpMethod}, Controller : {controllerName}, Action : {actionName} ";
             //logger.Info(text);
+
+            var assambly = System.Reflection.Assembly.GetExecutingAssembly();
+            var versionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(assambly.Location);
+            ViewBag.InfomationSystem = new InfomationSystem 
+            {
+                Environment = Environment.GetEnvironmentVariable("DEV_ENVIRONMENT") == "1"? "Development": "Production",
+                SystemVersion = versionInfo.FileVersion,
+                DatabaseVersion = "0.0.1"
+            };
+
             base.OnActionExecuting(filterContext);
         }
+        
     }
 }

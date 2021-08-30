@@ -1,7 +1,30 @@
-﻿<footer class="main-footer text-sm">
+﻿@{
+    var sys = (GFCA.APT.Domain.Dto.InfomationSystem)ViewBag.InfomationSystem;
+}
+
+<footer class="main-footer text-sm">
     <strong>Copyright &copy; 2014-2021 IT Smart.</strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> Development 1.0.1
+    <div class="float-right d-none d-sm-inline-block mr-lg-5">
+
+        @if (sys.Environment.ToLower() == "development")
+        {
+            <div class="ribbon-wrapper">
+                <div class="ribbon bg-warning font-weight-light text-sm">
+                    Dev
+                </div>
+            </div>
+        }
+        else if (sys.Environment.ToLower() == "uat")
+        {
+            <div class="ribbon-wrapper">
+                <div class="ribbon bg-warning font-weight-light text-sm">
+                    UAT
+                </div>
+            </div>
+        }
+
+        <b>System</b>&nbsp;@sys.SystemVersion&nbsp;&nbsp;<b>Database</b>&nbsp;@sys.DatabaseVersion
+
     </div>
 </footer>
