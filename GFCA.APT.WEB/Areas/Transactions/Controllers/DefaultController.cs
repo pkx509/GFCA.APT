@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
-    public class DefaultController : Controller
+    public class DefaultController : ControllerWebBase
     {
         // GET: Transactions/Default
         public ActionResult Index()
