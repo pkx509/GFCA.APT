@@ -16,6 +16,7 @@ namespace GFCA.APT.DAL.Interfaces
 		ICustomerRepository CustomerRepository { get; }
 		IClientRepository ClientRepository { get; }
 		IDistributorRepository DistributorRepository { get; }
+		IDocumentTypeRepository DocumentTypeRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

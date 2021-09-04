@@ -21,6 +21,7 @@ namespace GFCA.APT.DAL.Implements
         private ICompanyRepository _companyRepository;
         private ICostCenterRepository _costCenterRepository;
         private ICustomerRepository _customerRepository;
+        private IDocumentTypeRepository _documentTypeRepository;
         private IDistributorRepository _distributorRepository;
 
         private bool _disposed = false;
@@ -125,6 +126,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IDocumentTypeRepository DocumentTypeRepository
+        {
+            get
+            {
+                return _documentTypeRepository ?? (_documentTypeRepository = new DocumentTypeRepository(_transaction));
+            }
+        }
+
         public IDistributorRepository DistributorRepository
         {
             get
@@ -146,6 +155,7 @@ namespace GFCA.APT.DAL.Implements
             _costCenterRepository = null;
             _customerRepository = null;
             _clientRepository = null;
+            _documentTypeRepository = null;
             _distributorRepository = null;
         }
 

@@ -198,6 +198,7 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Implements\DistributorRepository.cs" />
+    <Compile Include="Implements\DocumentTypeRepository.cs" />
     <Compile Include="Implements\CustomerRepository.cs" />
     <Compile Include="Implements\CostCenterRepository.cs" />
     <Compile Include="Implements\CompanyRepository.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
+    <Compile Include="Interfaces\IDocumentTypeRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />
