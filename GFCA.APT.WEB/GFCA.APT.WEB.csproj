@@ -285,6 +285,7 @@
     <Compile Include="Areas\Masters\Controllers\DocumentTypeController.cs" />
     <Compile Include="Areas\Masters\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Masters\Controllers\InternalOrderController.cs" />
+    <Compile Include="Areas\Masters\Controllers\OrganizationController.cs" />
     <Compile Include="Areas\Masters\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Masters\Controllers\ChannelController.cs" />
     <Compile Include="Areas\Masters\Controllers\BudgetTypeController.cs" />

@@ -52,5 +52,8 @@ namespace GFCA.APT.BAL.Implements
 
         private IInternalOrderService _internalOrderService;
         public IInternalOrderService InternalOrderService => _internalOrderService ?? (_internalOrderService = Serve.InternalOrderService.CreateInstant());
+
+        private IOrganizationService _organizationService;
+        public IOrganizationService OrganizationService => _organizationService ?? (_organizationService = Serve.OrganizationService.CreateInstant());
     }
 }
