@@ -46,5 +46,8 @@ namespace GFCA.APT.BAL.Implements
         
         private IDistributorService _distributorService;
         public IDistributorService DistributorService => _distributorService ?? (_distributorService = Serve.DistributorService.CreateInstant());
+
+        private IEmployeeService _employeeService;
+        public IEmployeeService EmployeeService => _employeeService ?? (_employeeService = Serve.EmployeeService.CreateInstant());
     }
 }

@@ -23,6 +23,7 @@ namespace GFCA.APT.DAL.Implements
         private ICustomerRepository _customerRepository;
         private IDocumentTypeRepository _documentTypeRepository;
         private IDistributorRepository _distributorRepository;
+        private IEmployeeRepository _employeeRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -142,6 +143,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IEmployeeRepository EmployeeRepository
+        {
+            get
+            {
+                return _employeeRepository ?? (_employeeRepository = new EmployeeRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -157,6 +166,7 @@ namespace GFCA.APT.DAL.Implements
             _clientRepository = null;
             _documentTypeRepository = null;
             _distributorRepository = null;
+            _employeeRepository = null;
         }
 
         public void Commit()

@@ -17,5 +17,6 @@ namespace GFCA.APT.BAL.Interfaces
         ICustomerService CustomerService { get; }
         IDocumentTypeService DocumentTypeService { get; }
         IDistributorService DistributorService { get; }
+        IEmployeeService EmployeeService { get; }
     }
 }

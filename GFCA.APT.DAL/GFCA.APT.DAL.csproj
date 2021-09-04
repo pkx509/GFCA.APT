@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="Implements\DistributorRepository.cs" />
     <Compile Include="Implements\DocumentTypeRepository.cs" />
+    <Compile Include="Implements\EmployeeRepository.cs" />
     <Compile Include="Implements\CustomerRepository.cs" />
     <Compile Include="Implements\CostCenterRepository.cs" />
     <Compile Include="Implements\CompanyRepository.cs" />
