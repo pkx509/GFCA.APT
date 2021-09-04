@@ -18,5 +18,6 @@ namespace GFCA.APT.BAL.Interfaces
         IDocumentTypeService DocumentTypeService { get; }
         IDistributorService DistributorService { get; }
         IEmployeeService EmployeeService { get; }
+        IInternalOrderService InternalOrderService { get; }
     }
 }

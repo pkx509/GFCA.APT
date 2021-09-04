@@ -18,6 +18,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IDistributorRepository DistributorRepository { get; }
 		IDocumentTypeRepository DocumentTypeRepository { get; }
 		IEmployeeRepository EmployeeRepository { get; }
+		IInternalOrderRepository InternalOrderRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

@@ -49,5 +49,8 @@ namespace GFCA.APT.BAL.Implements
 
         private IEmployeeService _employeeService;
         public IEmployeeService EmployeeService => _employeeService ?? (_employeeService = Serve.EmployeeService.CreateInstant());
+
+        private IInternalOrderService _internalOrderService;
+        public IInternalOrderService InternalOrderService => _internalOrderService ?? (_internalOrderService = Serve.InternalOrderService.CreateInstant());
     }
 }
