@@ -19,12 +19,18 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 "T/FixedContract/{id}",
                 new { controller = "FixedContract", action = "DocumentItem" }
             );
+
             context.MapRoute(
                 "Transactions_default",
                 "T/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
 
+            context.MapRoute(
+                "Transactions_default1",
+                "T/{controller}/{action}/{id}",
+                new {controller = "default", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

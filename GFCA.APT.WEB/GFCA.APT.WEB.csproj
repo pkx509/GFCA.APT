@@ -268,7 +268,6 @@
     <Folder Include="Areas\Transactions\Views\Promotion\" />
     <Folder Include="Areas\Transactions\Views\Shared\" />
     <Folder Include="log\" />
-    <Folder Include="Scripts\transaction\" />
     <Folder Include="Views\Layout\" />
     <Folder Include="Views\Views\" />
   </ItemGroup>
@@ -4186,6 +4185,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\transactions\fixed-contract.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />

@@ -88,6 +88,7 @@
     <Compile Include="Dto\BrandDto.cs" />
     <Compile Include="Dto\EmissionDto.cs" />
     <Compile Include="Dto\GLAccountDto.cs" />
+    <Compile Include="Dto\InfomationSystem.cs" />
     <Compile Include="Dto\ProductDto.cs" />
     <Compile Include="Dto\ProductGroupDto.cs" />
     <Compile Include="Dto\TradeActivityDto.cs" />

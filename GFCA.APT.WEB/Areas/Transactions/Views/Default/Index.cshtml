@@ -1,7 +1,105 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{ ViewBag.Title = "Documents List"; }
+@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@section styles
+{
+
 }
 
-<h2>Documents List</h2>
+@section scripts
+{
+
+}
+
+@section ContentPlaceholder
+{
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
+                            @{
+
+                                List<object> commands = new List<object>();
+                                commands.Add(new { type = "Edit", buttonOption = new { iconCss = "e-icons e-icon-preview fas fa-eye", cssClass = "e-flat" } });
+
+                            }
+
+                            @(Html.EJS()
+                                  .Grid("grdDocumentList")
+                                  .Height("560")
+                                  .FrozenColumns(1)
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { text = "Print", prefixIcon = "e-icons e-print" },
+                                  })
+                                  //.ToolbarClick("brandPopup.OnToolbarClick")
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(true)
+                                      .AllowEditing(true)
+                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .Mode(EditMode.Dialog);
+                                  })
+                                  .EnableInfiniteScrolling(false)
+                                  //.DataBound("brandPopup.OnDataBound")
+                                  //.RowDeselected("brandPopup.OnRowDeselected")
+                                  //.RowSelected("brandPopup.OnRowSelected")
+                                  .Columns(col =>
+                                  {
+                                      col.Field("DOC_TYPE_NAME").HeaderText("Document Type").Width("200")
+                                      .ForeignKeyField("DOC_TYPE_ID")
+                                      .ForeignKeyValue("DOC_TYPE_NAME")
+                                      .ValidationRules(new { required = false })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
+                                      .Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
+
+                                      col.Field("DOC_ID").HeaderText("ID").Width("115")
+                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+                                      col.Field("DOC_NO").HeaderText("Document No").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_NAME").HeaderText("Customer").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("DOC_VER").HeaderText("Version").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_REV").HeaderText("Revision").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_MONTH").HeaderText("Month").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("DOC_YEAR").HeaderText("Year").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_STATUS").HeaderText("Status").Width("208").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("REQUESTER").HeaderText("Requester").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.HeaderText(" ").Width("60").Commands(commands).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+                                  })
+                                  .Render())
+
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+}
 

@@ -133,6 +133,10 @@
     content: '\e808';
 }
 
+.icon-preview:before {
+    content: '\e787';
+}
+
 #sidebar-menu .icon-globe:before {
     content: '\e809';
 }
