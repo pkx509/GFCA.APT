@@ -1,4 +1,5 @@
-﻿@{ #if DNX48
+﻿@{ ViewBag.Title = "DocumentType"; }
+@{ #if DNX48
 ViewBag.Title = "DocumentType";
 #endif
 }
@@ -53,6 +54,9 @@ ViewBag.Title = "DocumentType";
 
 @section ContentPlaceholder
 {
+    <!--
+           Last update to git 05/09/2021 By  Jirasak.M
+        -->
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -61,59 +65,59 @@ ViewBag.Title = "DocumentType";
                     <div class="card card-success card-outline">
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
-                                  .Grid("grdBrand")
+                                  .Grid("grdDocumenttype")
                                   .Height("450")
-                                  .FrozenColumns(1)
-                                  .FrozenColumns(6)
                                   .DataSource(ds =>
                                   {
+
                                       ds
-                                      .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+                                      .Url(@Url.Action("UrlDatasource", "DocumentType", new { Area = "Masters" }))
+                                      //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
+                                      //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
+                                      .RemoveUrl(@Url.Action("Delete", "DocumentType", new { Area = "Masters" }))
                                       .Adaptor("UrlAdaptor")
                                       ;
+
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
                                   .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+
                                       new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
                                       new { text = "Print", prefixIcon = "e-icons e-print" },
                                   })
-                                  .ToolbarClick("brandPopup.OnToolbarClick")
-                                  .EditSettings(edit =>
-                                  {
-                                      edit
-                                      .AllowEditOnDblClick(false)
-                                      .AllowAdding(true)
-                                      .AllowEditing(true)
-                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
-                                      .Mode(EditMode.Dialog)
-                                      .Template("#dialogtemplate");
-                                  })
-                                  .DataBound("brandPopup.OnDataBound")
-                                  .RowDeselected("brandPopup.OnRowDeselected")
-                                  .RowSelected("brandPopup.OnRowSelected")
+                                  .ToolbarClick("documenttypePopup.OnToolbarClick")
+                                 .EditSettings(edit =>
+                                 {
+
+
+
+
+
+                                 })
+                                  .DataBound("documenttypePopup.OnDataBound")
+                                  .RowDeselected("documenttypePopup.OnRowDeselected")
+                                  .RowSelected("documenttypePopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-                                      col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")
-                                      .ForeignKeyField("CLIENT_ID")
-                                      .ForeignKeyValue("CLIENT_CODE")
+                                      col.Field("DOC_TYPE_CODE").HeaderText("DOC_TYPE_CODE").Width("150")
+                                      .ForeignKeyField("DOC_TYPE_ID")
+                                      .ForeignKeyValue("DOC_TYPE_CODE")
                                       .ValidationRules(new { required = false })
-                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
-                                      .Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center);
 
-                                      col.Field("BRAND_ID").HeaderText("ID").Width("115")
+                                      col.Field("DOC_TYPE_ID").HeaderText("ID").Width("120")
                                       .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
                                       .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
 
-                                      col.Field("BRAND_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("BRAND_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("BRAND_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+                                      col.Field("DOC_TYPE_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_TYPE_NAME").HeaderText("Name").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_TYPE_DESC").HeaderText("Description").Width("400").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
@@ -139,10 +143,10 @@ ViewBag.Title = "DocumentType";
     <script>
 
         var urlServices = {
-            CurrentUrl: "@Url.Action("index", "Brand", new { Area = "Masters" })",
-            Add       : "@Url.Action("Add", "Brand", new { Area = "Masters" })",
-            Edit      : "@Url.Action("Edit", "Brand", new { Area = "Masters" })",
-            Delete    : "@Url.Action("Delete", "Brand", new { Area = "Masters" })",
+            CurrentUrl: "@Url.Action("index", "DocumentType", new { Area = "Masters" })",
+            Add       : "@Url.Action("Add", "DocumentType", new { Area = "Masters" })",
+            Edit      : "@Url.Action("Edit", "DocumentType", new { Area = "Masters" })",
+            Delete    : "@Url.Action("Delete", "DocumentType", new { Area = "Masters" })",
         }
 
         var argruments = {

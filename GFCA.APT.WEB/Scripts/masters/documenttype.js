@@ -23,8 +23,8 @@ $(document).ready(function () {
                 });
 
                 if (res.Success === true) {
-                    brandPopup.close();
-                    let objGrid = document.getElementById("grdBrand").ej2_instances[0];
+                    documenttypePopup.close();
+                    let objGrid = document.getElementById("grdDocumenttype").ej2_instances[0];
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
@@ -50,7 +50,7 @@ $(document).ready(function () {
             sendPost(urlServices.Add, data);
         };
 
-        brandPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+        documenttypePopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
 
     });
     $("#toolbar_edit").click(function (e) {
@@ -59,14 +59,14 @@ $(document).ready(function () {
             sendPost(urlServices.Edit, data);
         };
 
-        brandPopup.open(POPUP_MODE.EDIT, argruments.data, callBack);
+        documenttypePopup.open(POPUP_MODE.EDIT, argruments.data, callBack);
     });
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
         let callBack = function (data) {
             sendPost(urlServices.Delete, data);
         };
-        brandPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+        documenttypePopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });
