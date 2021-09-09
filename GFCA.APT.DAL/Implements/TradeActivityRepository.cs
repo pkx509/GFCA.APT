@@ -21,12 +21,11 @@ namespace GFCA.APT.DAL.Implements
                 var query = Connection.Query<TB_M_ACTIVITY>(
                     sql: sqlQuery
                     , transaction: Transaction
-                    ).AsEnumerable<TB_M_ACTIVITY>();
+                    );
 
-                IList<TradeActivityDto> dto = (from q in query
-                                              select q.ToDto()).ToList();
-
-                return dto;
+                return query
+                    .Select(q => q.ToDto())
+                    .AsEnumerable<TradeActivityDto>();
 
             }
             catch (Exception ex)

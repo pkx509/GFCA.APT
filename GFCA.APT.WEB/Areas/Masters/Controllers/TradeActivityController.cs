@@ -28,7 +28,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
-            IEnumerable dataSource;
+            IEnumerable<TradeActivityDto> dataSource;
             int count = 0;
             DataOperations operation = new DataOperations();
 
@@ -59,7 +59,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
                 }
 
             }
-            catch ( Exception ex)
+            catch (Exception ex)
             {
                 _biz.LogService.Error(ex.Message);
                 throw;
