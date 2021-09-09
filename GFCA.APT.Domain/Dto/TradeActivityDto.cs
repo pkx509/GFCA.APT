@@ -28,5 +28,6 @@ namespace GFCA.APT.Domain.Dto
         public string FLAG_ROW { get; set; }
         public bool IS_ACTIVED { get; set; } = true;
         public bool IS_DELETE { get; set; } = false;
+
     }
 }

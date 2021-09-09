@@ -3,6 +3,7 @@ using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Models;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,29 +28,41 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
-            IEnumerable dataSource = _biz.TradeActivityService.GetAll();
+            IEnumerable dataSource;
+            int count = 0;
             DataOperations operation = new DataOperations();
-            List<string> str = new List<string>();
-            if (dm.Search != null && dm.Search.Count > 0)
+
+            try
             {
-                dataSource = operation.PerformSearching(dataSource, dm.Search);  //Search
+                dataSource = _biz.TradeActivityService.GetAll();
+                List<string> str = new List<string>();
+                if (dm.Search != null && dm.Search.Count > 0)
+                {
+                    dataSource = operation.PerformSearching(dataSource, dm.Search);  //Search
+                }
+                if (dm.Sorted != null && dm.Sorted.Count > 0) //Sorting
+                {
+                    dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+                }
+                if (dm.Where != null && dm.Where.Count > 0) //Filtering
+                {
+                    dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+                }
+                count = dataSource.Cast<TradeActivityDto>().Count();
+                if (dm.Skip != 0)
+                {
+                    dataSource = operation.PerformSkip(dataSource, dm.Skip);         //Paging
+                }
+                if (dm.Take != 0)
+                {
+                    dataSource = operation.PerformTake(dataSource, dm.Take);
+                }
+
             }
-            if (dm.Sorted != null && dm.Sorted.Count > 0) //Sorting
+            catch ( Exception ex)
             {
-                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
-            }
-            if (dm.Where != null && dm.Where.Count > 0) //Filtering
-            {
-                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
-            }
-            int count = dataSource.Cast<TradeActivityDto>().Count();
-            if (dm.Skip != 0)
-            {
-                dataSource = operation.PerformSkip(dataSource, dm.Skip);         //Paging
-            }
-            if (dm.Take != 0)
-            {
-                dataSource = operation.PerformTake(dataSource, dm.Take);
+                _biz.LogService.Error(ex.Message);
+                throw;
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }

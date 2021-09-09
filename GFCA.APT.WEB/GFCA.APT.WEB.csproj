@@ -4095,6 +4095,7 @@
     <Content Include="Areas\Masters\Views\CostCenter\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Channel\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Channel\_Popup_Channel.cshtml" />
+    <Content Include="Areas\Masters\Views\TradeActivity\_Popup_Tradeactivity.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4166,6 +4167,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\masters\accountpayble.js" />
     <Content Include="Scripts\masters\accountpayblePopup.js" />
+    <Content Include="Scripts\masters\tradeactivity.js" />
+    <Content Include="Scripts\masters\tradeactivityPopup.js" />
     <Content Include="Scripts\masters\channel.js" />
     <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\masters\clientPopup.js" />

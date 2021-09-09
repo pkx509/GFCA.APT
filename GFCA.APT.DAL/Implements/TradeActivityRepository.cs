@@ -21,9 +21,12 @@ namespace GFCA.APT.DAL.Implements
                 var query = Connection.Query<TB_M_ACTIVITY>(
                     sql: sqlQuery
                     , transaction: Transaction
-                    ).ToList();
+                    ).AsEnumerable<TB_M_ACTIVITY>();
 
-                return query.Select(o => o.ToDto());
+                IList<TradeActivityDto> dto = (from q in query
+                                              select q.ToDto()).ToList();
+
+                return dto;
 
             }
             catch (Exception ex)
@@ -238,56 +241,75 @@ namespace GFCA.APT.DAL.Implements
         public static TB_M_ACTIVITY ToEntity(this TradeActivityDto self)
         {
             var entity = new TB_M_ACTIVITY();
-            entity.ACTIVITY_ID         = self.ACTIVITY_ID??0;
-            entity.ACC_ID              = self.ACC_ID;
-            entity.ACTIVITY_CODE       = self.ACTIVITY_CODE;
-            entity.ACTIVITY_TYPE       = self.ACTIVITY_TYPE;
-            entity.ACTIVTITY_NAME      = self.ACTIVTITY_NAME;
+            try
+            {
 
-            entity.HAS_FIXED_CONTRACT  = self.HAS_FIXED_CONTRACT? "Y": null;
-            entity.CAN_DEDUCTABLE      = self.CAN_DEDUCTABLE ? "Y" : null;
-            entity.IN_THB_CS           = self.IN_THB_CS ? "Y" : null;
-            entity.IN_GROSS_SALE       = self.IN_GROSS_SALE ? "Y" : null;
-            entity.IN_NOT_SALE         = self.IN_NOT_SALE ? "Y" : null;
-            entity.OUT_THB_CS          = self.OUT_THB_CS ? "Y" : null;
-            entity.OUT_GROSS_SALE      = self.OUT_GROSS_SALE ? "Y" : null;
-            entity.OUT_NOT_SALE        = self.OUT_NOT_SALE ? "Y" : null;
-            entity.NO_RELATE_ABS_AMT   = self.NO_RELATE_ABS_AMT ? "Y" : null;
+                entity.ACTIVITY_ID         = self.ACTIVITY_ID??0;
+                entity.ACC_ID              = self.ACC_ID;
+                entity.ACTIVITY_CODE       = self.ACTIVITY_CODE;
+                entity.ACTIVITY_TYPE       = self.ACTIVITY_TYPE;
+                entity.ACTIVTITY_NAME      = self.ACTIVTITY_NAME;
 
-            entity.VALUABLE            = self.VALUABLE;
-            entity.ACTIVITY_DESC       = self.ACTIVITY_DESC;
-            entity.FLAG_ROW            = self.FLAG_ROW;
-            entity.CREATED_BY          = self.CREATED_BY;
-            entity.CREATED_DATE        = self.CREATED_DATE.GetValueOrDefault().ToDateTime2();
-            entity.UPDATED_BY          = self.CREATED_BY;
-            entity.UPDATED_DATE        = self.CREATED_DATE.GetValueOrDefault().ToDateTime2();
+                entity.HAS_FIXED_CONTRACT  = self.HAS_FIXED_CONTRACT? "Y": null;
+                entity.CAN_DEDUCTABLE      = self.CAN_DEDUCTABLE ? "Y" : null;
+                entity.IN_THB_CS           = self.IN_THB_CS ? "Y" : null;
+                entity.IN_GROSS_SALE       = self.IN_GROSS_SALE ? "Y" : null;
+                entity.IN_NOT_SALE         = self.IN_NOT_SALE ? "Y" : null;
+                entity.OUT_THB_CS          = self.OUT_THB_CS ? "Y" : null;
+                entity.OUT_GROSS_SALE      = self.OUT_GROSS_SALE ? "Y" : null;
+                entity.OUT_NOT_SALE        = self.OUT_NOT_SALE ? "Y" : null;
+                entity.NO_RELATE_ABS_AMT   = self.NO_RELATE_ABS_AMT ? "Y" : null;
+
+                entity.VALUABLE            = self.VALUABLE;
+                entity.ACTIVITY_DESC       = self.ACTIVITY_DESC;
+                entity.FLAG_ROW            = self.FLAG_ROW;
+                entity.CREATED_BY          = self.CREATED_BY;
+                entity.CREATED_DATE        = self.CREATED_DATE.GetValueOrDefault().ToDateTime2();
+                entity.UPDATED_BY          = self.CREATED_BY;
+                entity.UPDATED_DATE        = self.CREATED_DATE.GetValueOrDefault().ToDateTime2();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return entity;
         }
         public static TradeActivityDto ToDto(this TB_M_ACTIVITY self)
         {
             var dto = new TradeActivityDto();
-            dto.ACC_ID             = self.ACC_ID;
-            dto.ACTIVITY_CODE      = self.ACTIVITY_CODE;
-            dto.ACTIVITY_TYPE      = self.ACTIVITY_TYPE;
-            dto.ACTIVTITY_NAME     = self.ACTIVTITY_NAME;
+            try
+            {
 
-            dto.HAS_FIXED_CONTRACT = self.HAS_FIXED_CONTRACT == "Y" ? true : false;
-            dto.CAN_DEDUCTABLE     = self.CAN_DEDUCTABLE == "Y" ? true : false;
-            dto.IN_THB_CS          = self.IN_THB_CS == "Y" ? true : false;
-            dto.IN_GROSS_SALE      = self.IN_GROSS_SALE == "Y" ? true : false;
-            dto.IN_NOT_SALE        = self.IN_NOT_SALE == "Y" ? true : false;
-            dto.OUT_THB_CS         = self.OUT_THB_CS == "Y" ? true : false;
-            dto.OUT_GROSS_SALE     = self.OUT_GROSS_SALE == "Y" ? true : false;
-            dto.OUT_NOT_SALE       = self.OUT_NOT_SALE == "Y" ? true : false;
-            dto.NO_RELATE_ABS_AMT  = self.NO_RELATE_ABS_AMT == "Y" ? true : false;
+                dto.ACTIVITY_ID        = self.ACTIVITY_ID;
+                dto.ACC_ID             = self.ACC_ID??0;
+                dto.ACTIVITY_CODE      = self.ACTIVITY_CODE;
+                dto.ACTIVITY_TYPE      = self.ACTIVITY_TYPE;
+                dto.ACTIVTITY_NAME     = self.ACTIVTITY_NAME;
 
-            dto.VALUABLE           = self.VALUABLE;
-            dto.ACTIVITY_DESC      = self.ACTIVITY_DESC;
-            dto.FLAG_ROW           = self.FLAG_ROW;
-            dto.CREATED_BY         = self.CREATED_BY;
-            dto.CREATED_DATE       = self.CREATED_DATE;
-            dto.UPDATED_BY         = self.CREATED_BY;
-            dto.UPDATED_DATE       = self.CREATED_DATE;
+                dto.HAS_FIXED_CONTRACT = self.HAS_FIXED_CONTRACT == "Y" ? true : false;
+                dto.CAN_DEDUCTABLE     = self.CAN_DEDUCTABLE == "Y" ? true : false;
+                dto.IN_THB_CS          = self.IN_THB_CS == "Y" ? true : false;
+                dto.IN_GROSS_SALE      = self.IN_GROSS_SALE == "Y" ? true : false;
+                dto.IN_NOT_SALE        = self.IN_NOT_SALE == "Y" ? true : false;
+                dto.OUT_THB_CS         = self.OUT_THB_CS == "Y" ? true : false;
+                dto.OUT_GROSS_SALE     = self.OUT_GROSS_SALE == "Y" ? true : false;
+                dto.OUT_NOT_SALE       = self.OUT_NOT_SALE == "Y" ? true : false;
+                dto.NO_RELATE_ABS_AMT  = self.NO_RELATE_ABS_AMT == "Y" ? true : false;
+
+                dto.VALUABLE           = self.VALUABLE;
+                dto.ACTIVITY_DESC      = self.ACTIVITY_DESC;
+                dto.FLAG_ROW           = self.FLAG_ROW;
+                dto.CREATED_BY         = self.CREATED_BY;
+                dto.CREATED_DATE       = self.CREATED_DATE;
+                dto.UPDATED_BY         = self.CREATED_BY;
+                dto.UPDATED_DATE       = self.CREATED_DATE;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return dto;
         }
