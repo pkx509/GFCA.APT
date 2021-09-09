@@ -4095,6 +4095,7 @@
     <Content Include="Areas\Masters\Views\CostCenter\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Channel\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Channel\_Popup_Channel.cshtml" />
+    <Content Include="Areas\Masters\Views\Organization\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
