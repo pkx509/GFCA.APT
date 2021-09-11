@@ -90,6 +90,25 @@ namespace GFCA.APT.WEB.Controllers
 
             return ret;
         }
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetGLAccount(bool isOption = false)
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IGLAccountService svc = biz.GLAccountService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.ACC_ID, Text = $"{o.ACC_CODE} - {o.ACC_NAME}" })
+                .ToList();
+
+
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
+            return ret;
+        }
+
         /*
         [HttpPost]
         public IEnumerable<SelectionItem> GetMatGroup()

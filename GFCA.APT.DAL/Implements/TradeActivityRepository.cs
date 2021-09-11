@@ -128,8 +128,8 @@ namespace GFCA.APT.DAL.Implements
                     , VALUABLE           = entity.VALUABLE
                     , ACTIVITY_DESC      = entity.ACTIVITY_DESC
                     , FLAG_ROW           = entity.FLAG_ROW
-                    , CREATED_BY         = entity.CREATED_BY
-                    , CREATED_DATE       = entity.CREATED_DATE
+                    , CREATED_BY         = entity.CREATED_BY??""
+                    , CREATED_DATE       = System.DateTime.Now.ToDateTime2()
                     //, UPDATED_BY       = entity.UPDATED_BY
                     //, UPDATED_DATE     = entity.UPDATED_DATE
                 };
@@ -174,27 +174,27 @@ namespace GFCA.APT.DAL.Implements
             {
 
                 var entity = dto.ToEntity();
-                var parms = new 
+                var parms = new
                 {
-                      ACTIVITY_ID        = entity.ACTIVITY_ID
-                    , ACC_ID             = entity.ACC_ID
-                    , ACTIVITY_CODE      = entity.ACTIVITY_CODE
-                    , ACTIVITY_TYPE      = entity.ACTIVITY_TYPE
-                    , ACTIVTITY_NAME     = entity.ACTIVTITY_NAME
+                    ACTIVITY_ID = entity.ACTIVITY_ID
+                    , ACC_ID = entity.ACC_ID
+                    , ACTIVITY_CODE = entity.ACTIVITY_CODE
+                    , ACTIVITY_TYPE = entity.ACTIVITY_TYPE
+                    , ACTIVTITY_NAME = entity.ACTIVTITY_NAME
                     , HAS_FIXED_CONTRACT = entity.HAS_FIXED_CONTRACT
-                    , CAN_DEDUCTABLE     = entity.CAN_DEDUCTABLE
-                    , IN_THB_CS          = entity.IN_THB_CS
-                    , IN_GROSS_SALE      = entity.IN_GROSS_SALE
-                    , IN_NOT_SALE        = entity.IN_NOT_SALE
-                    , OUT_THB_CS         = entity.OUT_THB_CS
-                    , OUT_GROSS_SALE     = entity.OUT_GROSS_SALE
-                    , OUT_NOT_SALE       = entity.OUT_NOT_SALE
-                    , NO_RELATE_ABS_AMT  = entity.NO_RELATE_ABS_AMT
-                    , VALUABLE           = entity.VALUABLE
-                    , ACTIVITY_DESC      = entity.ACTIVITY_DESC
-                    , FLAG_ROW           = entity.FLAG_ROW
-                    , UPDATED_BY         = entity.UPDATED_BY
-                    , UPDATED_DATE       = entity.UPDATED_DATE?.ToDateTime2()
+                    , CAN_DEDUCTABLE = entity.CAN_DEDUCTABLE
+                    , IN_THB_CS = entity.IN_THB_CS
+                    , IN_GROSS_SALE = entity.IN_GROSS_SALE
+                    , IN_NOT_SALE = entity.IN_NOT_SALE
+                    , OUT_THB_CS = entity.OUT_THB_CS
+                    , OUT_GROSS_SALE = entity.OUT_GROSS_SALE
+                    , OUT_NOT_SALE = entity.OUT_NOT_SALE
+                    , NO_RELATE_ABS_AMT = entity.NO_RELATE_ABS_AMT
+                    , VALUABLE = entity.VALUABLE
+                    , ACTIVITY_DESC = entity.ACTIVITY_DESC
+                    , FLAG_ROW = entity.FLAG_ROW
+                    , UPDATED_BY = entity.UPDATED_BY
+                    , UPDATED_DATE = System.DateTime.Now.ToDateTime2()
                 };
 
                 Connection.ExecuteScalar<int>(
@@ -281,7 +281,7 @@ namespace GFCA.APT.DAL.Implements
             {
 
                 dto.ACTIVITY_ID        = self.ACTIVITY_ID;
-                dto.ACC_ID             = self.ACC_ID??0;
+                dto.ACC_ID             = self.ACC_ID;
                 dto.ACTIVITY_CODE      = self.ACTIVITY_CODE;
                 dto.ACTIVITY_TYPE      = self.ACTIVITY_TYPE;
                 dto.ACTIVTITY_NAME     = self.ACTIVTITY_NAME;

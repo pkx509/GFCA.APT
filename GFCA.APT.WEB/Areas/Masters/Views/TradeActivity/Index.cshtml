@@ -16,6 +16,10 @@ ViewBag.Title = "Brand";
 @section styles
 {
     <style>
+        .e-label {
+            margin-bottom: 0;
+        }
+
         .form-group.col-md-6 {
             width: 250px;
         }
@@ -106,10 +110,10 @@ ViewBag.Title = "Brand";
 
 
 
-                                      col.IsPrimaryKey(true).IsIdentity(true).Field("ACTIVITY_ID").HeaderText("ACTIVITY_ID").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.IsPrimaryKey(true).IsIdentity(true).Field("ACTIVITY_ID").HeaderText("ACTIVITY_ID").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
 
 
-                                      col.Field("ACC_ID").HeaderText("ACC_ID").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_ID").HeaderText("ACC_ID").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("ACTIVITY_CODE").HeaderText("ACTIVITY_CODE").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("ACTIVITY_TYPE").HeaderText("ACTIVITY_TYPE").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("ACTIVTITY_NAME").HeaderText("ACTIVTITY_NAME").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
@@ -144,7 +148,7 @@ ViewBag.Title = "Brand";
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
- 
+
     @Html.Partial("~/Areas/Masters/Views/TradeActivity/_Popup_Tradeactivity.cshtml")
 }
 

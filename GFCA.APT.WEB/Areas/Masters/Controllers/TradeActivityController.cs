@@ -110,6 +110,9 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         {
             _biz.LogService.Debug("Delete");
             dynamic data = new BusinessResponse();
+
+            value.IS_ACTIVED = false;
+            value.FLAG_ROW = "D";
             try
             {
                 var biz = _biz.TradeActivityService.Remove(value);

@@ -69,4 +69,65 @@ $(document).ready(function () {
         tradeactivityPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
+
+
 });
+
+function initcbbox(id) {
+
+
+    $(id).prop("checked", "");
+    $(id).parent().parent().attr("aria-checked", "false");
+    $(id).parent().children().removeClass("e-check");
+
+}
+
+function deleteproduct(id,key) {
+
+
+    //alert(id);
+  //  alert(key);
+
+   
+    $.ajax({
+        type: 'POST',
+        url: '/api/Selection/GetGLAccount/1")',
+        dataType: 'json',
+        data: {
+            isOption: "1"
+        },
+
+
+        success: function (obj) {
+
+            $.each(obj, function (key, value) {
+
+
+               // $('#select1').append('<option selected="selected" value=2>kai1234 </option>');
+
+
+              //  $("#pop-cmd-acc_id_hidden").append(new Option(value.Text, value.Value, true,true));
+
+               // sum += value;
+             //   alert(value.Value)
+             //  alert(value.Text)
+                return false;
+            });
+
+            //<option selected="" value="5">11012001 - KBANK-CA # 081-1-06793-8 Maxvalu พัฒนาการ</option>
+            //<option selected="" value="5">11012001 - KBANK-CA # 081-1-06793-8 Maxvalu พัฒนาการ</option>
+
+            //<option selected="" value="2">11011001 - เงินสดในมือ</option>
+
+
+        },
+        error: function (ex) {
+            alert('Failed to retrieve states.' + ex);
+        }
+    });
+
+
+
+
+
+}
