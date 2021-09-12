@@ -64,10 +64,20 @@
     <Folder Include="Security" />
     <Folder Include="Security\Users" />
     <Folder Include="Schemas" />
+    <Folder Include="Programmability\Types" />
+    <Folder Include="Programmability\Types\User-Defined Data Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\TB_M_CLIENT.sql" />
     <Build Include="Security\Users\app.sql" />
     <Build Include="Schemas\dbo.sql" />
+    <Build Include="Programmability\Stored_Procedures\SP_SYNC_ORGANIZATION.sql" />
+    <Build Include="Tables\TB_S_ORGANIZATION.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_CODE.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_DESC.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_NAME.sql" />
+    <Build Include="Tables\DB_Errors.sql" />
+    <Build Include="Programmability\Functions\Split.sql" />
+    <Build Include="Tables\TB_M_ORGANIZATION.sql" />
   </ItemGroup>
 </Project>
