@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "Size";
+}
+
+ @{ #if DNX48
+ViewBag.Title = "Brand";
+#endif
+}
+@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 250px;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 552px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
+                min-width: 300px !important;
+                min-height: 180px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+}
+
+@section DialogPlaceholder
+{
+    <!-- BEGIN DialogPlaceholder -->
+    <script id='dialogtemplate' type="text/x-template">
+        <div id="dialogTemp" style="width:650px; height:300px;">
+        </div>
+    </script>
+
+    <!-- BEGIN DialogPlaceholder -->
+}
+
+@section ContentPlaceholder
+{
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
+                            @(Html.EJS()
+                                  .Grid("grdSize")
+                                  .Height("450")
+                                  
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlDatasource", "Size", new { Area = "Masters" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      
+                                      new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { text = "Print", prefixIcon = "e-icons e-print" },
+                                  })
+                                  .ToolbarClick("sizePopup.OnToolbarClick")
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(false)
+                                      .AllowEditing(false)
+                                      .AllowDeleting(false).ShowConfirmDialog(false).ShowDeleteConfirmDialog(false)
+                                      .Mode(EditMode.Dialog)
+                                      .Template("#dialogtemplate");
+                                  })
+                                  .DataBound("sizePopup.OnDataBound")
+                                  .RowDeselected("sizePopup.OnRowDeselected")
+                                  .RowSelected("sizePopup.OnRowSelected")
+                                  .Columns(col =>
+                                  {
+                                      
+
+                                      col.Field("SIZE_ID").HeaderText("ID").Width("115")
+                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+                                      col.Field("SIZE_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("SIZE_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("SIZE_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                  })
+                                  .Render())
+
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    
+}
+
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
+
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "Size", new { Area = "Masters" })",
+            Add       : "@Url.Action("Add", "Size", new { Area = "Masters" })",
+            Edit      : "@Url.Action("Edit", "Size", new { Area = "Masters" })",
+            Delete    : "@Url.Action("Delete", "Size", new { Area = "Masters" })",
+        }
+
+        var argruments = {
+            data: null,
+        }
+    </script>
+
+    @Scripts.Render("~/Scripts/masters/sizePopup.js")
+    <!-- END preScripts -->
+
+}
+
+@section scripts
+{
+
+    @Scripts.Render("~/Scripts/masters/size.js")
+
+}
+
+

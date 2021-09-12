@@ -26,6 +26,7 @@ namespace GFCA.APT.DAL.Implements
         private IEmployeeRepository _employeeRepository;
         private IInternalOrderRepository _internalOrderRepository;
         private IOrganizationRepository _organizationRepository;
+        private ISizeRepository _sizeRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -168,6 +169,16 @@ namespace GFCA.APT.DAL.Implements
                 return _organizationRepository ?? (_organizationRepository = new OrganizationRepository(_transaction));
             }
         }
+
+        public ISizeRepository SizeRepository
+        {
+            get
+            {
+                return _sizeRepository ?? (_sizeRepository = new SizeRepository(_transaction));
+            }
+        }
+
+
 
         private void resetRepositories()
         {

@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\DataDuplicateException.cs" />
     <Compile Include="Exceptions\DataNoSelectionException.cs" />
+    <Compile Include="Implements\SizeService.cs" />
     <Compile Include="Implements\DocumentTypeService.cs" />
     <Compile Include="Implements\DistributorService.cs" />
     <Compile Include="Implements\EmployeeService.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Implements\ServiceBase.cs" />
     <Compile Include="Implements\TradeActivityService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Interfaces\ISizeService.cs" />
     <Compile Include="Interfaces\IDocumentTypeService.cs" />
     <Compile Include="Interfaces\IDistributorService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
