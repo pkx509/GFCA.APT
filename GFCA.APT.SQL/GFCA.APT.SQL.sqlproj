@@ -81,5 +81,13 @@
     <Build Include="Tables\DB_Errors.sql" />
     <Build Include="Tables\TB_M_ORGANIZATION.sql" />
     <Build Include="Programmability\Functions\Table-valued Functions\Split.sql" />
+    <Build Include="Tables\TB_M_EMPLOYEE.sql" />
+    <Build Include="Tables\TB_S_EMPLOYEE.sql" />
+    <Build Include="Tables\TB_P_EMP_ORG.sql" />
+    <Build Include="Tables\TB_M_COMPANY.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_AUDIT_DATE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="GFCA.APT.SQL.refactorlog" />
   </ItemGroup>
 </Project>
