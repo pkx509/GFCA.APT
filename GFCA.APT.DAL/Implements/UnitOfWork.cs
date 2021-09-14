@@ -26,6 +26,7 @@ namespace GFCA.APT.DAL.Implements
         private IEmployeeRepository _employeeRepository;
         private IInternalOrderRepository _internalOrderRepository;
         private IOrganizationRepository _organizationRepository;
+        private IPackRepository _packRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -169,6 +170,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IPackRepository PackRepository
+        {
+            get
+            {
+                return _packRepository ?? (_packRepository = new PackRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -187,6 +196,7 @@ namespace GFCA.APT.DAL.Implements
             _employeeRepository = null;
             _internalOrderRepository = null;
             _organizationRepository = null;
+            _packRepository = null;
         }
 
         public void Commit()

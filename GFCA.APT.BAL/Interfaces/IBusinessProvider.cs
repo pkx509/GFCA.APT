@@ -20,5 +20,6 @@ namespace GFCA.APT.BAL.Interfaces
         IEmployeeService EmployeeService { get; }
         IInternalOrderService InternalOrderService { get; }
         IOrganizationService OrganizationService { get; }
+        IPackService PackService { get; }
     }
 }
