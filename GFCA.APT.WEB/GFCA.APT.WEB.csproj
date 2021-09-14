@@ -279,6 +279,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\EmissionController.cs" />
     <Compile Include="Areas\Masters\Controllers\DistributorController.cs" />
     <Compile Include="Areas\Masters\Controllers\DocumentTypeController.cs" />
@@ -294,7 +295,6 @@
     <Compile Include="Areas\Masters\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Masters\Controllers\GLAccountController.cs" />
     <Compile Include="Areas\Masters\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\TradeActivityController.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Areas\Transactions\Controllers\BudgetPlanController.cs" />
@@ -4096,6 +4096,7 @@
     <Content Include="Areas\Masters\Views\Channel\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Channel\_Popup_Channel.cshtml" />
     <Content Include="Areas\Masters\Views\Organization\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\PromotionGroup\_Popup_PromotionGroup.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4167,6 +4168,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\masters\accountpayble.js" />
     <Content Include="Scripts\masters\accountpayblePopup.js" />
+    <Content Include="Scripts\masters\promotiongroup.js" />
+    <Content Include="Scripts\masters\promotiongroupPopup.js" />
     <Content Include="Scripts\masters\channel.js" />
     <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\masters\clientPopup.js" />

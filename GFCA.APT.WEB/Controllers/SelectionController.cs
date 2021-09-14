@@ -171,6 +171,8 @@ namespace GFCA.APT.WEB.Controllers
 
         // POST: api/Selection/GetCustomer
         // POST: api/Selection/GetCustomer/true
+
+
         [HttpPost]
         public IEnumerable<SelectionItem> GetCustomer(bool isOption = false)
         {
@@ -179,6 +181,25 @@ namespace GFCA.APT.WEB.Controllers
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
                 .Select(o => new SelectionItem { Value = o.CUST_ID, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" })
+                .ToList();
+            /*
+            if (isOption)
+            {
+                ret.Insert(0, new SelectionItem() { Value = null, Text = "-- Select --" });
+            }
+            */
+            return ret;
+        }
+
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetChannel(bool isOption = false)
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IChannelService svc = biz.ChannelService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.CHANNEL_ID, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" })
                 .ToList();
             /*
             if (isOption)
