@@ -4,6 +4,10 @@
     DELETE: 3
 });
 
+// By jirasak.m 20210914
+
+
+
 let promotiongroupPopup = new (function () {
 
     let _args = null;
@@ -197,8 +201,9 @@ let promotiongroupPopup = new (function () {
         let PROGP_CODE = $(this.field_progp_code).val();
         let PROGP_NAME = $(this.field_progp_name).val();
         let PROGP_DESC = $(this.field_progp_desc).val();
-        let IS_ACTIVED = $(this.field_is_active).val();
+    //    let IS_ACTIVED = $(this.field_is_active).val();
         let IS_DELETE_PERMANANT = $(this.field_permanant_del).prop("checked");
+        let IS_ACTIVED = $(this.field_is_active).prop("checked");
 
         this.jsonData = {
             PROGP_ID,
