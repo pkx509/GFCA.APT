@@ -26,6 +26,7 @@ namespace GFCA.APT.DAL.Implements
         private IEmployeeRepository _employeeRepository;
         private IInternalOrderRepository _internalOrderRepository;
         private IOrganizationRepository _organizationRepository;
+        private ICustomerPartyRepository _customerPartyRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -169,6 +170,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public ICustomerPartyRepository CustomerPartyRepository
+        {
+            get
+            {
+                return _customerPartyRepository ?? (_customerPartyRepository = new CustomerPartyRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -187,6 +196,7 @@ namespace GFCA.APT.DAL.Implements
             _employeeRepository = null;
             _internalOrderRepository = null;
             _organizationRepository = null;
+            _customerPartyRepository = null;
         }
 
         public void Commit()
