@@ -9,41 +9,140 @@ namespace GFCA.APT.DAL.Implements
 {
     public class UnitRepository : RepositoryBase, IUnitRepository
     {
-        
+
         public UnitRepository(IDbTransaction transaction): base(transaction) { }
 
-    
-
-        public IRepositories<TB_M_UNITDto> All()
+        public UnitDto GetById(int id)
         {
-            return null;
+            string sqlQuery = @"SELECT * FROM TB_M_UNIT WHERE UNIT_ID = @UNIT_ID;";
+            var query = Connection.Query<UnitDto>(
+                sql: sqlQuery,
+                param: new { UNIT_ID = id }
+                ,transaction: Transaction
+                ).FirstOrDefault();
 
+            return query;
+        }
+        public UnitDto GetByCode(string code)
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_UNIT WHERE UNIT_CODE = @UNIT_CODE;";
+            var query = Connection.Query<UnitDto>(
+                sql: sqlQuery,
+                param: new { UNIT_CODE = code }
+                ,transaction: Transaction
+                ).FirstOrDefault();
+       
+            return query;
+        }
+        public IEnumerable<UnitDto> All()
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_UNIT";
+            var query = Connection.Query<UnitDto>(
+                sql: sqlQuery
+                ,transaction: Transaction
+                ).ToList();
+
+            return query;
         }
 
-        TB_M_UNITDto IRepositories<TB_M_UNITDto>.GetById(int id)
+        public void Insert(UnitDto entity)
         {
-            throw new System.NotImplementedException();
-        }
+            string sqlExecute = @"INSERT INTO TB_M_UNIT
+                                (
+                                  PARENT_ID
+                                , UNIT_CODE
+                                , UNIT_NAME
+                                , UNIT_TYPE
+                                , FACTOR
+                                , UNIT_DESC
+                                , FLAG_ROW
+                                , CREATED_BY
+                                , CREATED_DATE
+                                ) VALUES (
+                                  @PARENT_ID   
+                                , @UNIT_CODE
+                                , @UNIT_NAME   
+                                , @UNIT_TYPE
+                                , @FACTOR
+                                , @UNIT_DESC
+                                , @FLAG_ROW
+                                , @CREATED_BY
+                                , @CREATED_DATE
+                                ); SELECT SCOPE_IDENTITY()
+                                ";
 
-        public void Insert(TB_M_UNITDto entity)
-        {
-            throw new System.NotImplementedException();
-        }
+            var parms = new
+            {
+                PARENT_ID = entity.PARENT_ID,
+                UNIT_CODE = entity.UNIT_CODE,
+                UNIT_NAME = entity.UNIT_NAME,
+                UNIT_TYPE = entity.UNIT_TYPE,
+                FACTOR = entity.FACTOR,
+                UNIT_DESC = entity.UNIT_DESC,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
+            };
 
-        public void Update(TB_M_UNITDto entity)
-        {
-            throw new System.NotImplementedException();
-        }
+            entity.UNIT_ID = Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
 
-        IEnumerable<TB_M_UNITDto> IRepositories<TB_M_UNITDto>.All()
+        }
+        public void Update(UnitDto entity)
         {
-            throw new System.NotImplementedException();
+            string sqlExecute = @"UPDATE TB_M_UNIT
+                                SET
+                                  PARENT_ID     = @PARENT_ID
+                                , UNIT_CODE     = @UNIT_CODE
+                                , UNIT_NAME     = @UNIT_NAME
+                                , UNIT_TYPE     = @UNIT_TYPE
+                                , FACTOR        = @FACTOR
+                                , UNIT_DESC     = @UNIT_DESC
+                                , FLAG_ROW      = @FLAG_ROW
+                                , UPDATED_BY    = @UPDATED_BY
+                                , UPDATED_DATE  = @UPDATED_DATE
+                                WHERE
+                                UNIT_ID = @UNIT_ID;
+                                ";
+
+            var parms = new
+        {
+                UNIT_ID = entity.UNIT_ID,
+                PARENT_ID = entity.PARENT_ID,
+                UNIT_CODE = entity.UNIT_CODE,
+                UNIT_NAME = entity.UNIT_NAME,
+                UNIT_TYPE = entity.UNIT_TYPE,
+                FACTOR = entity.FACTOR,
+                UNIT_DESC = entity.UNIT_DESC,
+                FLAG_ROW = entity.FLAG_ROW,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+            };
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            string sqlExecute = @"DELETE TB_M_UNIT WHERE UNIT_ID = @UNIT_ID;";
+            var parms = new { UNIT_ID = id };
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
         }
+
     }
 
 }

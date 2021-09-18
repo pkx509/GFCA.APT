@@ -263,8 +263,11 @@ namespace GFCA.APT.WEB.Controllers
         [HttpPost]
         public IEnumerable<SelectionItem> GetUnit()
         {
-            // add function get unit
-            List<SelectionItem> ret = new List<SelectionItem>();
+            IBusinessProvider biz = new BusinessProvider();
+            IUnitService svc = biz.UnitService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.UNIT_ID, Text = $"{o.UNIT_CODE} - {o.UNIT_NAME}" });
             return ret;
         }
 
@@ -284,8 +287,23 @@ namespace GFCA.APT.WEB.Controllers
         [HttpPost]
         public IEnumerable<SelectionItem> GetSize()
         {
-            // add function get size
-            List<SelectionItem> ret = new List<SelectionItem>();
+            IBusinessProvider biz = new BusinessProvider();
+            ISizeService svc = biz.SizeService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.SIZE_ID, Text = $"{o.SIZE_CODE} - {o.SIZE_NAME}" });
+            return ret;
+        }
+
+        // POST: api/Selection/GetPack
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetPack()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IPackService svc = biz.PackService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.PACK_ID, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
             return ret;
         }
     }

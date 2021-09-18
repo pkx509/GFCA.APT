@@ -90,7 +90,7 @@ disabled.Add("disabled", "true");
                                                             Document No
                                                         </label>
                                                         <div class="col col-lg-8">
-                                                            @Html.EJS().TextBox("txt-document-no").Placeholder("Document number").Render()
+                                                            @Html.EJS().TextBox("txt-document-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
                                                         </div>
 
                                                     </div>
@@ -414,6 +414,51 @@ disabled.Add("disabled", "true");
                                             <div class="col col-sm-12 col-lg-6">
                                                 <div class="form-group row">
                                                     <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Size
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-size")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetSize")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Pack
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-pack")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetPack")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
                                                         Cost Center
                                                     </label>
                                                     <div class="col col-lg-8">
@@ -443,36 +488,7 @@ disabled.Add("disabled", "true");
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
-                                        <div class="row">
-
-                                            <div class="col col-sm-12 col-lg-6">
-                                                <div class="form-group row">
-                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                        Size
-                                                    </label>
-                                                    <div class="col col-lg-8">
-                                                        @(Html.EJS().ComboBox("cmb-size")
-                                                        .Placeholder("-- Select --")
-                                                        .Autofill(true)
-                                                        .DataSource(o =>
-                                                        {
-                                                            o.Url("/api/Selection/GetSize")
-                                                            .CrossDomain(false)
-                                                            .Adaptor("UrlAdaptor");
-                                                        })
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                        .Render())
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col col-sm-12 col-lg-6"></div>
-
-                                        </div>
-
                                     </div>
 
                                 </div>

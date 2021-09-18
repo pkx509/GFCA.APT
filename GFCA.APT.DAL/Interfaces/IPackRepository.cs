@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface IUnitRepository : IRepositories<UnitDto>
+    public interface IPackRepository : IRepositories<PackDto>
     {
 	}
 }

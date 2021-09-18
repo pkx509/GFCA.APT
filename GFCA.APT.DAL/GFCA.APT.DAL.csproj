@@ -197,6 +197,9 @@
     <Compile Include="FlowItem.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\SizeRepository.cs" />
+    <Compile Include="Implements\UnitRepository.cs" />
+    <Compile Include="Implements\PackRepository.cs" />
     <Compile Include="Implements\DistributorRepository.cs" />
     <Compile Include="Implements\DocumentTypeRepository.cs" />
     <Compile Include="Implements\EmployeeRepository.cs" />
@@ -215,6 +218,9 @@
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
+    <Compile Include="Interfaces\ISizeRepository.cs" />
+    <Compile Include="Interfaces\IUnitRepository.cs" />
+    <Compile Include="Interfaces\IPackRepository.cs" />
     <Compile Include="Interfaces\IDocumentTypeRepository.cs" />
     <Compile Include="Interfaces\IInternalOrderRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
