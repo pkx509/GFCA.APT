@@ -55,7 +55,7 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        public EmissionDto GetById(int Id)
+        public EmissionDto GetByCode(string code)
         {
             try
             {

@@ -7,7 +7,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IEmissionService
     {
         IEnumerable<EmissionDto> GetAll();
-        EmissionDto GetById(int Id);
+        EmissionDto GetByCode(string code);
         BusinessResponse Create(EmissionDto model);
         BusinessResponse Edit(EmissionDto model);
         BusinessResponse Delete(EmissionDto model);

@@ -33,12 +33,12 @@ namespace GFCA.APT.DAL.Implements
             throw new NotImplementedException();
         }
 
-        public EmissionDto GetById(int id)
+        public EmissionDto GetByCode(string code)
         {
-            string sqlQuery = "SELECT * FROM TB_M_EMISSION WHERE BRAND_ID = @EMIS_ID;";
+            string sqlQuery = "SELECT * FROM TB_M_EMISSION WHERE EMIS_CODE = @EMIS_CODE;";
             var query = Connection.Query<EmissionDto>(
                 sql: sqlQuery,
-                param: new { EMIS_ID = id },
+                param: new { EMIS_CODE = code },
                 transaction: Transaction
                 ).FirstOrDefault();
 

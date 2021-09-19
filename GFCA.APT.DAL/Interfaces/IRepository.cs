@@ -5,7 +5,7 @@ namespace GFCA.APT.DAL.Interfaces
     public interface IRepositories<T>
 	{
 		IEnumerable<T> All();
-		T GetById(int id);
+		T GetByCode(string code);
 		void Insert(T entity);
 		void Update(T entity);
 		void Delete(int id);
