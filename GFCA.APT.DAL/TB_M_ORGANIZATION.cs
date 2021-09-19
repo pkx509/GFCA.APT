@@ -17,18 +17,19 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_M_ORGANIZATION()
         {
+            this.TB_M_ORGANIZATION1 = new HashSet<TB_M_ORGANIZATION>();
             this.TB_P_BRAND_ORG = new HashSet<TB_P_BRAND_ORG>();
-            this.TB_P_COST_IO = new HashSet<TB_P_COST_IO>();
             this.TB_P_EMP_ORG = new HashSet<TB_P_EMP_ORG>();
         }
     
-        public int ORG_ID { get; set; }
-        public Nullable<int> COMP_ID { get; set; }
         public string ORG_CODE { get; set; }
-        public string ORG_TYPE { get; set; }
-        public string ORG_DEPARTMENT_NAME { get; set; }
-        public string ORG_POSITION_NAME { get; set; }
+        public string REPORT_TO { get; set; }
+        public string COMP_CODE { get; set; }
+        public string HIERACHY_ID { get; set; }
+        public string ORG_NAME { get; set; }
+        public string ORG_ABBR { get; set; }
         public string ORG_DESC { get; set; }
+        public string FLAG_ORG { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
@@ -37,9 +38,10 @@ namespace GFCA.APT.DAL
     
         public virtual TB_M_COMPANY TB_M_COMPANY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
+        public virtual ICollection<TB_M_ORGANIZATION> TB_M_ORGANIZATION1 { get; set; }
+        public virtual TB_M_ORGANIZATION TB_M_ORGANIZATION2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_COST_IO> TB_P_COST_IO { get; set; }
+        public virtual ICollection<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_P_EMP_ORG> TB_P_EMP_ORG { get; set; }
     }

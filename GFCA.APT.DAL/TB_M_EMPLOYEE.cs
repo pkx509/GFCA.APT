@@ -20,12 +20,12 @@ namespace GFCA.APT.DAL
             this.TB_P_EMP_ORG = new HashSet<TB_P_EMP_ORG>();
         }
     
-        public int EMP_ID { get; set; }
         public string EMP_CODE { get; set; }
         public string PREFIX { get; set; }
         public string NAME_FIRST { get; set; }
         public string NAME_LAST { get; set; }
         public string EMAIL { get; set; }
+        public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }

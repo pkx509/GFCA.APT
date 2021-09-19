@@ -17,14 +17,18 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_T_DOCUMENT()
         {
-            this.TB_T_BUDGET = new HashSet<TB_T_BUDGET>();
-            this.TB_T_FIXED_CONTRACT = new HashSet<TB_T_FIXED_CONTRACT>();
+            this.TB_T_BUDGET_D = new HashSet<TB_T_BUDGET_D>();
+            this.TB_T_BUDGET_H = new HashSet<TB_T_BUDGET_H>();
+            this.TB_T_CLAIM_D = new HashSet<TB_T_CLAIM_D>();
+            this.TB_T_CLAIM_H = new HashSet<TB_T_CLAIM_H>();
+            this.TB_T_FIXED_CONTRACT_D = new HashSet<TB_T_FIXED_CONTRACT_D>();
+            this.TB_T_FIXED_CONTRACT_H = new HashSet<TB_T_FIXED_CONTRACT_H>();
+            this.TB_T_PROMOTION_PLAN_D = new HashSet<TB_T_PROMOTION_PLAN_D>();
             this.TB_T_PROMOTION_PLAN_H = new HashSet<TB_T_PROMOTION_PLAN_H>();
         }
     
-        public int DOC_ID { get; set; }
-        public Nullable<int> DOC_TYPE { get; set; }
-        public string DOC_NO { get; set; }
+        public string DOC_TYPE_CODE { get; set; }
+        public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }
         public string DOC_REV { get; set; }
         public string DOC_MONTH { get; set; }
@@ -36,9 +40,19 @@ namespace GFCA.APT.DAL
     
         public virtual TB_M_DOCUMENT_TYPE TB_M_DOCUMENT_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_BUDGET> TB_T_BUDGET { get; set; }
+        public virtual ICollection<TB_T_BUDGET_D> TB_T_BUDGET_D { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_FIXED_CONTRACT> TB_T_FIXED_CONTRACT { get; set; }
+        public virtual ICollection<TB_T_BUDGET_H> TB_T_BUDGET_H { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_CLAIM_D> TB_T_CLAIM_D { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_CLAIM_H> TB_T_CLAIM_H { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_FIXED_CONTRACT_D> TB_T_FIXED_CONTRACT_D { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_FIXED_CONTRACT_H> TB_T_FIXED_CONTRACT_H { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_PROMOTION_PLAN_D> TB_T_PROMOTION_PLAN_D { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
     }

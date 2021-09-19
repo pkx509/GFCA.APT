@@ -172,12 +172,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActorState.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="APTDbContext.cs" />
     <Compile Include="APTDbModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -194,9 +188,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="FlowItem.cs">
+    <Compile Include="DB_Errors.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\DistributorRepository.cs" />
+    <Compile Include="Implements\DocumentTypeRepository.cs" />
+    <Compile Include="Implements\EmployeeRepository.cs" />
+    <Compile Include="Implements\InternalOrderRepository.cs" />
+    <Compile Include="Implements\OrganizationRepository.cs" />
     <Compile Include="Implements\CustomerRepository.cs" />
     <Compile Include="Implements\CostCenterRepository.cs" />
     <Compile Include="Implements\CompanyRepository.cs" />
@@ -210,6 +209,8 @@
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
+    <Compile Include="Interfaces\IDocumentTypeRepository.cs" />
+    <Compile Include="Interfaces\IInternalOrderRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />
@@ -226,17 +227,8 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ITradeActivityRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="OperatorCondition.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implements\UnitOfWork.cs" />
-    <Compile Include="StateFlowItem.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StateProcess.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_M_ACTIVITY.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -276,10 +268,19 @@
     <Compile Include="TB_M_GL_ACCOUNT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_M_GL_GROUP.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_HOLIDAY.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_M_INTERNAL_ORDER.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_ORGANIZATION.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_PACK.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_PRODUCT.cs">
@@ -288,7 +289,19 @@
     <Compile Include="TB_M_PROMOTION_GROUP.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_M_PROMOTION_PLAN_TYPE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_SIZE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_M_UNIT.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_VENDOR.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_VENDOR_20210819.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_P_BRAND_ORG.cs">
@@ -300,16 +313,34 @@
     <Compile Include="TB_P_CUSTOMER_PARTY.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_P_EMP_CHANNEL.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_P_EMP_ORG.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_P_PRODUCT_GROUP.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_S_EMPLOYEE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_S_ORGANIZATION.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_T_BILLING.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_T_BUDGET.cs">
+    <Compile Include="TB_T_BUDGET_D.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_BUDGET_H.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_CLAIM_D.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_CLAIM_H.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_T_CREDIT_NOTE.cs">
@@ -321,16 +352,34 @@
     <Compile Include="TB_T_DOCUMENT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_T_FIXED_CONTRACT.cs">
+    <Compile Include="TB_T_FIXED_CONTRACT_D.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_T_PROMOTION_INVEST.cs">
+    <Compile Include="TB_T_FIXED_CONTRACT_H.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_T_PROMOTION_PLAN_D.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_T_PROMOTION_PLAN_H.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_T_PROMOTION_SALE.cs">
+    <Compile Include="TB_WM_FLOW_ITEM.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_WM_OPERATION.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_WM_WORKFLOW.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_WM_WORKFLOW_STATE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_WP_STATE_ACTOR.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_WP_STATE_DIRECTION.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DbUtilities.cs" />
@@ -338,18 +387,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_List_TradeActivity.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Workflow.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkflowAction.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkflowActivity.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkflowState.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

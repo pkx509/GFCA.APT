@@ -12,6 +12,8 @@ namespace GFCA.APT.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class APTDbContext : DbContext
     {
@@ -25,12 +27,6 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Actor> Actors { get; set; }
-        public virtual DbSet<ActorState> ActorStates { get; set; }
-        public virtual DbSet<FlowItem> FlowItems { get; set; }
-        public virtual DbSet<OperatorCondition> OperatorConditions { get; set; }
-        public virtual DbSet<StateFlowItem> StateFlowItems { get; set; }
-        public virtual DbSet<StateProcess> StateProcesses { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
         public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }
@@ -44,30 +40,120 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_M_EMISSION> TB_M_EMISSION { get; set; }
         public virtual DbSet<TB_M_EMPLOYEE> TB_M_EMPLOYEE { get; set; }
         public virtual DbSet<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
+        public virtual DbSet<TB_M_GL_GROUP> TB_M_GL_GROUP { get; set; }
+        public virtual DbSet<TB_M_HOLIDAY> TB_M_HOLIDAY { get; set; }
         public virtual DbSet<TB_M_INTERNAL_ORDER> TB_M_INTERNAL_ORDER { get; set; }
         public virtual DbSet<TB_M_ORGANIZATION> TB_M_ORGANIZATION { get; set; }
+        public virtual DbSet<TB_M_PACK> TB_M_PACK { get; set; }
         public virtual DbSet<TB_M_PRODUCT> TB_M_PRODUCT { get; set; }
         public virtual DbSet<TB_M_PROMOTION_GROUP> TB_M_PROMOTION_GROUP { get; set; }
+        public virtual DbSet<TB_M_PROMOTION_PLAN_TYPE> TB_M_PROMOTION_PLAN_TYPE { get; set; }
+        public virtual DbSet<TB_M_SIZE> TB_M_SIZE { get; set; }
         public virtual DbSet<TB_M_UNIT> TB_M_UNIT { get; set; }
+        public virtual DbSet<TB_M_VENDOR> TB_M_VENDOR { get; set; }
         public virtual DbSet<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
         public virtual DbSet<TB_P_COST_IO> TB_P_COST_IO { get; set; }
         public virtual DbSet<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual DbSet<TB_P_EMP_CHANNEL> TB_P_EMP_CHANNEL { get; set; }
         public virtual DbSet<TB_P_EMP_ORG> TB_P_EMP_ORG { get; set; }
         public virtual DbSet<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
         public virtual DbSet<TB_T_BILLING> TB_T_BILLING { get; set; }
-        public virtual DbSet<TB_T_BUDGET> TB_T_BUDGET { get; set; }
+        public virtual DbSet<TB_T_BUDGET_D> TB_T_BUDGET_D { get; set; }
+        public virtual DbSet<TB_T_BUDGET_H> TB_T_BUDGET_H { get; set; }
+        public virtual DbSet<TB_T_CLAIM_D> TB_T_CLAIM_D { get; set; }
+        public virtual DbSet<TB_T_CLAIM_H> TB_T_CLAIM_H { get; set; }
         public virtual DbSet<TB_T_CREDIT_NOTE> TB_T_CREDIT_NOTE { get; set; }
         public virtual DbSet<TB_T_DEBIT_NOTE> TB_T_DEBIT_NOTE { get; set; }
         public virtual DbSet<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
-        public virtual DbSet<TB_T_FIXED_CONTRACT> TB_T_FIXED_CONTRACT { get; set; }
-        public virtual DbSet<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
+        public virtual DbSet<TB_T_FIXED_CONTRACT_D> TB_T_FIXED_CONTRACT_D { get; set; }
+        public virtual DbSet<TB_T_FIXED_CONTRACT_H> TB_T_FIXED_CONTRACT_H { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_PLAN_D> TB_T_PROMOTION_PLAN_D { get; set; }
         public virtual DbSet<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
-        public virtual DbSet<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
-        public virtual DbSet<Workflow> Workflows { get; set; }
-        public virtual DbSet<WorkflowAction> WorkflowActions { get; set; }
-        public virtual DbSet<WorkflowActivity> WorkflowActivities { get; set; }
-        public virtual DbSet<WorkflowState> WorkflowStates { get; set; }
+        public virtual DbSet<TB_WM_FLOW_ITEM> TB_WM_FLOW_ITEM { get; set; }
+        public virtual DbSet<TB_WM_OPERATION> TB_WM_OPERATION { get; set; }
+        public virtual DbSet<TB_WM_WORKFLOW> TB_WM_WORKFLOW { get; set; }
+        public virtual DbSet<TB_WM_WORKFLOW_STATE> TB_WM_WORKFLOW_STATE { get; set; }
+        public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
+        public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
+        public virtual DbSet<DB_Errors> DB_Errors { get; set; }
+        public virtual DbSet<TB_M_VENDOR_20210819> TB_M_VENDOR_20210819 { get; set; }
+        public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
+        public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
         public virtual DbSet<VW_List_Costcenter> VW_List_Costcenter { get; set; }
         public virtual DbSet<VW_List_TradeActivity> VW_List_TradeActivity { get; set; }
+    
+        public virtual int Daily_Job_TB_M_ACTIVITY()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_ACTIVITY");
+        }
+    
+        public virtual int Daily_Job_TB_M_BRAND()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_BRAND");
+        }
+    
+        public virtual int Daily_Job_TB_M_CHANNEL()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_CHANNEL");
+        }
+    
+        public virtual int Daily_Job_TB_M_CLIENT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_CLIENT");
+        }
+    
+        public virtual int Daily_Job_TB_M_COST_CENTER()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_COST_CENTER");
+        }
+    
+        public virtual int Daily_Job_TB_M_CUSTOMER()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_CUSTOMER");
+        }
+    
+        public virtual int Daily_Job_TB_M_GL_ACCOUNT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_GL_ACCOUNT");
+        }
+    
+        public virtual int Daily_Job_TB_M_PACK()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_PACK");
+        }
+    
+        public virtual int Daily_Job_TB_M_PRODUCT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_PRODUCT");
+        }
+    
+        public virtual int Daily_Job_TB_M_SIZE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_SIZE");
+        }
+    
+        public virtual int Daily_Job_TB_M_VENDOR()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Daily_Job_TB_M_VENDOR");
+        }
+    
+        [DbFunction("APTDbContext", "Split")]
+        public virtual IQueryable<string> Split(string @string, string delimiter)
+        {
+            var stringParameter = @string != null ?
+                new ObjectParameter("String", @string) :
+                new ObjectParameter("String", typeof(string));
+    
+            var delimiterParameter = delimiter != null ?
+                new ObjectParameter("Delimiter", delimiter) :
+                new ObjectParameter("Delimiter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[APTDbContext].[Split](@String, @Delimiter)", stringParameter, delimiterParameter);
+        }
+    
+        public virtual int SP_SYNC_ORGANIZATION()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SYNC_ORGANIZATION");
+        }
     }
 }

@@ -240,6 +240,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Enabled(true)
+                                                        .Change("page.cmbPositionChange")
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -399,7 +400,7 @@ ViewBag.Title = "Fixed Contract Document";
                                             </div>
 
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -865,7 +866,7 @@ ViewBag.Title = "Fixed Contract Document";
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -1048,5 +1049,11 @@ ViewBag.Title = "Fixed Contract Document";
         </div>
 
     </form>
+
+}
+@section preScripts
+{
+
+    @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
 
 }

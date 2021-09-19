@@ -14,19 +14,12 @@ namespace GFCA.APT.DAL
     
     public partial class TB_T_PROMOTION_PLAN_H
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_T_PROMOTION_PLAN_H()
-        {
-            this.TB_T_PROMOTION_INVEST = new HashSet<TB_T_PROMOTION_INVEST>();
-            this.TB_T_PROMOTION_SALE = new HashSet<TB_T_PROMOTION_SALE>();
-        }
-    
-        public int PROPL_ID { get; set; }
-        public Nullable<int> DOC_ID { get; set; }
-        public int PROGP_ID { get; set; }
-        public int CLIENT_ID { get; set; }
-        public int CUST_ID { get; set; }
-        public int CHANNEL_ID { get; set; }
+        public int DOC_PROPLH_ID { get; set; }
+        public string DOC_CODE { get; set; }
+        public string PROGP_CODE { get; set; }
+        public string CLIENT_CODE { get; set; }
+        public string CUST_CODE { get; set; }
+        public string CHANNEL_CODE { get; set; }
         public string PROPL_CODE { get; set; }
         public string PROPL_NAME { get; set; }
         public Nullable<System.DateTime> PROPL_BEGIN { get; set; }
@@ -39,9 +32,5 @@ namespace GFCA.APT.DAL
     
         public virtual TB_M_PROMOTION_GROUP TB_M_PROMOTION_GROUP { get; set; }
         public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
     }
 }

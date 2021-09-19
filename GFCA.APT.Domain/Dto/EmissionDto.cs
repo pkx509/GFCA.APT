@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class EmissionDto
+    public class EmissionDto : Auditable
     {
         [Required]
         public int? EMIS_ID { get; set; }
@@ -15,10 +15,8 @@ namespace GFCA.APT.Domain.Dto
         public string EMIS_CODE { get; set; }
         public string EMIS_NAME { get; set; }
         public string EMIS_DESC { get; set; }
+        public bool IS_ACTIVED { get; set; } = true;
+        public bool IS_DELETE_PERMANANT { get; set; } = false;
         public string FLAG_ROW { get; set; }
-        public string CREATED_BY { get; set; }
-        public DateTime? CREATED_DATE { get; set; }
-        public string UPDATED_BY { get; set; }
-        public DateTime? UPDATED_DATE { get; set; }
     }
 }

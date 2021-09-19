@@ -40,5 +40,20 @@ namespace GFCA.APT.BAL.Implements
 
         private ICustomerService _customerService;
         public ICustomerService CustomerService => _customerService ?? (_customerService = Serve.CustomerService.CreateInstant());
+
+        private IDocumentTypeService _documentTypeService;
+        public IDocumentTypeService DocumentTypeService => _documentTypeService ?? (_documentTypeService = Serve.DocumentTypeService.CreateInstant());
+        
+        private IDistributorService _distributorService;
+        public IDistributorService DistributorService => _distributorService ?? (_distributorService = Serve.DistributorService.CreateInstant());
+
+        private IEmployeeService _employeeService;
+        public IEmployeeService EmployeeService => _employeeService ?? (_employeeService = Serve.EmployeeService.CreateInstant());
+
+        private IInternalOrderService _internalOrderService;
+        public IInternalOrderService InternalOrderService => _internalOrderService ?? (_internalOrderService = Serve.InternalOrderService.CreateInstant());
+
+        private IOrganizationService _organizationService;
+        public IOrganizationService OrganizationService => _organizationService ?? (_organizationService = Serve.OrganizationService.CreateInstant());
     }
 }

@@ -1,0 +1,2 @@
+﻿CREATE TYPE [dbo].[T_CODE]
+	FROM varchar(50) NOT NULL

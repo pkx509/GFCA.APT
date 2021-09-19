@@ -20,8 +20,7 @@ namespace GFCA.APT.DAL
             this.TB_P_BRAND_ORG = new HashSet<TB_P_BRAND_ORG>();
         }
     
-        public int BRAND_ID { get; set; }
-        public Nullable<int> CLIENT_ID { get; set; }
+        public string CLIENT_CODE { get; set; }
         public string BRAND_CODE { get; set; }
         public string BRAND_NAME { get; set; }
         public string BRAND_DESC { get; set; }

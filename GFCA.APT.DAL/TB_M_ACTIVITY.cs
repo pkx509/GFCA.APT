@@ -14,8 +14,7 @@ namespace GFCA.APT.DAL
     
     public partial class TB_M_ACTIVITY
     {
-        public int ACTIVITY_ID { get; set; }
-        public Nullable<int> ACC_ID { get; set; }
+        public string ACC_CODE { get; set; }
         public string ACTIVITY_CODE { get; set; }
         public string ACTIVITY_TYPE { get; set; }
         public string ACTIVTITY_NAME { get; set; }

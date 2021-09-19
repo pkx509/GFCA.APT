@@ -15,6 +15,11 @@ namespace GFCA.APT.DAL.Interfaces
 		ICostCenterRepository CostCenterRepository { get; }
 		ICustomerRepository CustomerRepository { get; }
 		IClientRepository ClientRepository { get; }
+		IDistributorRepository DistributorRepository { get; }
+		IDocumentTypeRepository DocumentTypeRepository { get; }
+		IEmployeeRepository EmployeeRepository { get; }
+		IInternalOrderRepository InternalOrderRepository { get; }
+		IOrganizationRepository OrganizationRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

@@ -20,9 +20,8 @@ namespace GFCA.APT.DAL
             this.TB_M_UNIT1 = new HashSet<TB_M_UNIT>();
         }
     
-        public int UNIT_ID { get; set; }
-        public Nullable<int> PARENT_ID { get; set; }
         public string UNIT_CODE { get; set; }
+        public string UNIT_PARENT_CODE { get; set; }
         public string UNIT_NAME { get; set; }
         public string UNIT_TYPE { get; set; }
         public decimal FACTOR { get; set; }

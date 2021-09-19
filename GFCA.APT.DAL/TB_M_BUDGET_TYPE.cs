@@ -17,10 +17,9 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_M_BUDGET_TYPE()
         {
-            this.TB_T_BUDGET = new HashSet<TB_T_BUDGET>();
+            this.TB_T_BUDGET_H = new HashSet<TB_T_BUDGET_H>();
         }
     
-        public int BG_TYPE_ID { get; set; }
         public string BG_TYPE_CODE { get; set; }
         public string BG_TYPE_NAME { get; set; }
         public string BG_TYPE_DESC { get; set; }
@@ -31,6 +30,6 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_BUDGET> TB_T_BUDGET { get; set; }
+        public virtual ICollection<TB_T_BUDGET_H> TB_T_BUDGET_H { get; set; }
     }
 }

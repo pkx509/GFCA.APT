@@ -21,6 +21,11 @@ namespace GFCA.APT.DAL.Implements
         private ICompanyRepository _companyRepository;
         private ICostCenterRepository _costCenterRepository;
         private ICustomerRepository _customerRepository;
+        private IDocumentTypeRepository _documentTypeRepository;
+        private IDistributorRepository _distributorRepository;
+        private IEmployeeRepository _employeeRepository;
+        private IInternalOrderRepository _internalOrderRepository;
+        private IOrganizationRepository _organizationRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -124,6 +129,46 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IDocumentTypeRepository DocumentTypeRepository
+        {
+            get
+            {
+                return _documentTypeRepository ?? (_documentTypeRepository = new DocumentTypeRepository(_transaction));
+            }
+        }
+
+        public IDistributorRepository DistributorRepository
+        {
+            get
+            {
+                return _distributorRepository ?? (_distributorRepository = new DistributorRepository(_transaction));
+            }
+        }
+
+        public IEmployeeRepository EmployeeRepository
+        {
+            get
+            {
+                return _employeeRepository ?? (_employeeRepository = new EmployeeRepository(_transaction));
+            }
+        }
+
+        public IInternalOrderRepository InternalOrderRepository
+        {
+            get
+            {
+                return _internalOrderRepository ?? (_internalOrderRepository = new InternalOrderRepository(_transaction));
+            }
+        }
+
+        public IOrganizationRepository OrganizationRepository
+        {
+            get
+            {
+                return _organizationRepository ?? (_organizationRepository = new OrganizationRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -137,6 +182,11 @@ namespace GFCA.APT.DAL.Implements
             _costCenterRepository = null;
             _customerRepository = null;
             _clientRepository = null;
+            _documentTypeRepository = null;
+            _distributorRepository = null;
+            _employeeRepository = null;
+            _internalOrderRepository = null;
+            _organizationRepository = null;
         }
 
         public void Commit()

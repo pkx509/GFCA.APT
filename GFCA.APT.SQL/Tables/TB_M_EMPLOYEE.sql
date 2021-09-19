@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[TB_M_EMPLOYEE]
+(
+	[EMP_CODE] [dbo].[T_CODE] NOT NULL PRIMARY KEY
+)

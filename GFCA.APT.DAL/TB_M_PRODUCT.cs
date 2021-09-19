@@ -20,7 +20,6 @@ namespace GFCA.APT.DAL
             this.TB_P_PRODUCT_GROUP = new HashSet<TB_P_PRODUCT_GROUP>();
         }
     
-        public int PROD_ID { get; set; }
         public string PROD_CODE { get; set; }
         public string PROD_NAME { get; set; }
         public string CUST_CODE { get; set; }

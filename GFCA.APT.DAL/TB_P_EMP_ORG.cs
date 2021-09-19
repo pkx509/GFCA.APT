@@ -14,9 +14,6 @@ namespace GFCA.APT.DAL
     
     public partial class TB_P_EMP_ORG
     {
-        public int EMP_ID { get; set; }
-        public int ORG_ID { get; set; }
-        public string ORG_TYPE { get; set; }
         public string EMP_CODE { get; set; }
         public string ORG_CODE { get; set; }
         public Nullable<System.DateTime> EFF_FROM { get; set; }

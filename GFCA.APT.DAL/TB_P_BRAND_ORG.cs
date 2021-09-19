@@ -14,8 +14,6 @@ namespace GFCA.APT.DAL
     
     public partial class TB_P_BRAND_ORG
     {
-        public int BRAND_ID { get; set; }
-        public int ORG_ID { get; set; }
         public string BRAND_CODE { get; set; }
         public string ORG_CODE { get; set; }
         public Nullable<System.DateTime> EFF_FROM { get; set; }
