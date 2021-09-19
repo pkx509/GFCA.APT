@@ -14,23 +14,19 @@ namespace GFCA.APT.DAL
     
     public partial class TB_P_CUSTOMER_PARTY
     {
-        public int CUST_ID { get; set; }
-        public int ACC_ID { get; set; }
-        public int DISTB_ID { get; set; }
-        public int CHANNEL_ID { get; set; }
         public string CUST_CODE { get; set; }
         public string ACC_CODE { get; set; }
         public string DISTB_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
+        public string VENDOR_CODE { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_CHANNEL TB_M_CHANNEL { get; set; }
         public virtual TB_M_CUSTOMER TB_M_CUSTOMER { get; set; }
-        public virtual TB_M_DISTRIBUTOR TB_M_DISTRIBUTOR { get; set; }
         public virtual TB_M_GL_ACCOUNT TB_M_GL_ACCOUNT { get; set; }
+        public virtual TB_M_VENDOR TB_M_VENDOR { get; set; }
     }
 }

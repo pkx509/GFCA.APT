@@ -12,11 +12,16 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_PROMOTION_SALE
+    public partial class TB_S_ORGANIZATION
     {
-        public int PROPL_SALE_ID { get; set; }
-        public Nullable<int> PROPL_ID { get; set; }
-    
-        public virtual TB_T_PROMOTION_PLAN_H TB_T_PROMOTION_PLAN_H { get; set; }
+        public string COMP_CODE { get; set; }
+        public string ORG_CODE { get; set; }
+        public string REPORT_TO { get; set; }
+        public string HIERACHY_ID { get; set; }
+        public string ORG_NAME { get; set; }
+        public string FLAG_ORG { get; set; }
+        public string FLAG_ROW { get; set; }
+        public string UPLOAD_BY { get; set; }
+        public Nullable<System.DateTime> UPLOAD_DATE { get; set; }
     }
 }

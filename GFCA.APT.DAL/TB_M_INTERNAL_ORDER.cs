@@ -20,7 +20,6 @@ namespace GFCA.APT.DAL
             this.TB_P_COST_IO = new HashSet<TB_P_COST_IO>();
         }
     
-        public int IO_ID { get; set; }
         public string IO_CODE { get; set; }
         public string IO_NAME { get; set; }
         public string IO_DESC { get; set; }

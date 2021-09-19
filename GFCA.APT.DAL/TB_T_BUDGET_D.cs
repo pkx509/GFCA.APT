@@ -12,19 +12,17 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_BUDGET
+    public partial class TB_T_BUDGET_D
     {
-        public int BG_ID { get; set; }
-        public Nullable<int> DOC_ID { get; set; }
-        public Nullable<int> BG_TYPE_ID { get; set; }
-        public Nullable<int> BRAND_ID { get; set; }
+        public Nullable<int> DOC_BGH_ID { get; set; }
+        public int DOC_BGD_ID { get; set; }
+        public string DOC_CODE { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
+        public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_BUDGET_TYPE TB_M_BUDGET_TYPE { get; set; }
         public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
     }
 }

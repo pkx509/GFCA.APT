@@ -20,7 +20,6 @@ namespace GFCA.APT.DAL
             this.TB_M_ORGANIZATION = new HashSet<TB_M_ORGANIZATION>();
         }
     
-        public int COMP_ID { get; set; }
         public string COMP_CODE { get; set; }
         public string COMP_NAME { get; set; }
         public string ADDRESS { get; set; }

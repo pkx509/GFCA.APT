@@ -20,7 +20,6 @@ namespace GFCA.APT.DAL
             this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
         }
     
-        public int CUST_ID { get; set; }
         public string CUST_CODE { get; set; }
         public string CUST_NAME { get; set; }
         public string CUST_ABV { get; set; }

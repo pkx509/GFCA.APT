@@ -12,20 +12,19 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkflowActivity
+    public partial class TB_WM_OPERATION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WorkflowActivity()
+        public TB_WM_OPERATION()
         {
-            this.StateProcesses = new HashSet<StateProcess>();
+            this.TB_WP_STATE_ACTOR = new HashSet<TB_WP_STATE_ACTOR>();
         }
     
-        public int ActivityId { get; set; }
-        public string ActivityCode { get; set; }
-        public string ActivityName { get; set; }
-        public int ActivityPiority { get; set; }
+        public int OPERATOR_ID { get; set; }
+        public string OPERATOR_CODE { get; set; }
+        public string OPERATOR_DESC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StateProcess> StateProcesses { get; set; }
+        public virtual ICollection<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
     }
 }

@@ -21,11 +21,11 @@ namespace GFCA.APT.DAL
             this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
         }
     
-        public int ACC_ID { get; set; }
-        public Nullable<int> IO_ID { get; set; }
-        public Nullable<int> CENTER_ID { get; set; }
-        public Nullable<int> FUND_ID { get; set; }
-        public Nullable<int> FUND_CENTER_ID { get; set; }
+        public string IO_CODE { get; set; }
+        public string CENTER_CODE { get; set; }
+        public string FUND_ID { get; set; }
+        public string FUND_CENTER_ID { get; set; }
+        public string GRP_CODE { get; set; }
         public string ACC_CODE { get; set; }
         public string ACC_NAME { get; set; }
         public string ACC_TYPE { get; set; }
@@ -43,6 +43,8 @@ namespace GFCA.APT.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
+        public virtual TB_M_COST_CENTER TB_M_COST_CENTER { get; set; }
+        public virtual TB_M_GL_GROUP TB_M_GL_GROUP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
     }

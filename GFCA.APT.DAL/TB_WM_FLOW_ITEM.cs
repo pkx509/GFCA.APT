@@ -12,19 +12,19 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class OperatorCondition
+    public partial class TB_WM_FLOW_ITEM
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OperatorCondition()
+        public TB_WM_FLOW_ITEM()
         {
-            this.ActorStates = new HashSet<ActorState>();
+            this.TB_WP_STATE_DIRECTION = new HashSet<TB_WP_STATE_DIRECTION>();
         }
     
-        public int OperatorConditionId { get; set; }
-        public string OperatorCode { get; set; }
-        public string OperatoDesc { get; set; }
+        public int FLOW_ITEM_ID { get; set; }
+        public string FLOW_ITEM_CODE { get; set; }
+        public string FLOW_ITEM_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActorState> ActorStates { get; set; }
+        public virtual ICollection<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
     }
 }

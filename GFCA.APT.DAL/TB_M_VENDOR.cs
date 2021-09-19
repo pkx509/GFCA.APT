@@ -12,20 +12,25 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Actor
+    public partial class TB_M_VENDOR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Actor()
+        public TB_M_VENDOR()
         {
-            this.ActorStates = new HashSet<ActorState>();
+            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
         }
     
-        public int ActorId { get; set; }
-        public string ActorCode { get; set; }
-        public string ActorName { get; set; }
-        public string ActorEmail { get; set; }
+        public string VENDOR_CODE { get; set; }
+        public string VENDOR_NAME { get; set; }
+        public string VENDOR_ADDR { get; set; }
+        public string VENDOR_DESC { get; set; }
+        public string FLAG_ROW { get; set; }
+        public string CREATED_BY { get; set; }
+        public System.DateTime CREATED_DATE { get; set; }
+        public string UPDATED_BY { get; set; }
+        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActorState> ActorStates { get; set; }
+        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
     }
 }

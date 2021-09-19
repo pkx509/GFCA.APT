@@ -17,19 +17,22 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_M_COST_CENTER()
         {
+            this.TB_M_GL_ACCOUNT = new HashSet<TB_M_GL_ACCOUNT>();
             this.TB_P_COST_IO = new HashSet<TB_P_COST_IO>();
         }
     
-        public int CENTER_ID { get; set; }
         public string CENTER_CODE { get; set; }
         public string CENTER_NAME { get; set; }
         public string CENTER_DESC { get; set; }
+        public string CENTER_KEEPER { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_P_COST_IO> TB_P_COST_IO { get; set; }
     }

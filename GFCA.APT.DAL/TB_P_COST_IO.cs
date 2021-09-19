@@ -14,9 +14,9 @@ namespace GFCA.APT.DAL
     
     public partial class TB_P_COST_IO
     {
-        public int CENTER_ID { get; set; }
-        public int IO_ID { get; set; }
-        public int ORG_ID { get; set; }
+        public string CENTER_CODE { get; set; }
+        public string IO_CODE { get; set; }
+        public string ORG_CODE { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
@@ -25,6 +25,5 @@ namespace GFCA.APT.DAL
     
         public virtual TB_M_COST_CENTER TB_M_COST_CENTER { get; set; }
         public virtual TB_M_INTERNAL_ORDER TB_M_INTERNAL_ORDER { get; set; }
-        public virtual TB_M_ORGANIZATION TB_M_ORGANIZATION { get; set; }
     }
 }

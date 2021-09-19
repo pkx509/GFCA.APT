@@ -14,8 +14,8 @@ namespace GFCA.APT.DAL
     
     public partial class TB_P_PRODUCT_GROUP
     {
-        public int PROGP_ID { get; set; }
-        public int PROD_ID { get; set; }
+        public string PROGP_CODE { get; set; }
+        public string PROD_CODE { get; set; }
         public Nullable<decimal> NORM_SHELF_PRICE { get; set; }
         public Nullable<decimal> NORM_DISCOUNT { get; set; }
         public Nullable<decimal> NORM_GP { get; set; }

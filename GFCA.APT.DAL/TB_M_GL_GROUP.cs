@@ -12,25 +12,26 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Workflow
+    public partial class TB_M_GL_GROUP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Workflow()
+        public TB_M_GL_GROUP()
         {
-            this.WorkflowStates = new HashSet<WorkflowState>();
+            this.TB_M_GL_ACCOUNT = new HashSet<TB_M_GL_ACCOUNT>();
         }
     
-        public int WorkflowId { get; set; }
-        public string WorkflowName { get; set; }
-        public string WorkflowDesc { get; set; }
-        public System.DateTime BeginDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string GRP_CODE { get; set; }
+        public string GRP_NAME { get; set; }
+        public string GRP_DESC { get; set; }
+        public string FLAG_GRP { get; set; }
+        public string GRP_TYPE { get; set; }
+        public string FLAG_ROW { get; set; }
+        public string CREATED_BY { get; set; }
+        public System.DateTime CREATED_DATE { get; set; }
+        public string UPDATED_BY { get; set; }
+        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkflowState> WorkflowStates { get; set; }
+        public virtual ICollection<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
     }
 }

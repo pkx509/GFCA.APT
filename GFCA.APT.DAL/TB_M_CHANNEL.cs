@@ -17,10 +17,10 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TB_M_CHANNEL()
         {
-            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
+            this.TB_P_EMP_CHANNEL = new HashSet<TB_P_EMP_CHANNEL>();
         }
     
-        public int CHANNEL_ID { get; set; }
+        public string EMIS_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }
         public string CHANNEL_DESC { get; set; }
@@ -30,7 +30,8 @@ namespace GFCA.APT.DAL
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
+        public virtual TB_M_EMISSION TB_M_EMISSION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual ICollection<TB_P_EMP_CHANNEL> TB_P_EMP_CHANNEL { get; set; }
     }
 }

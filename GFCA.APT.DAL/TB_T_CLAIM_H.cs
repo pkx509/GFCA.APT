@@ -12,11 +12,17 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_PROMOTION_INVEST
+    public partial class TB_T_CLAIM_H
     {
-        public int PROPL_INVEST_ID { get; set; }
-        public Nullable<int> PROPL_ID { get; set; }
+        public int DOC_CLMH_ID { get; set; }
+        public string DOC_CODE { get; set; }
+        public Nullable<int> DOC_FCD_ID { get; set; }
+        public string FLAG_ROW { get; set; }
+        public string CREATED_BY { get; set; }
+        public System.DateTime CREATED_DATE { get; set; }
+        public string UPDATED_BY { get; set; }
+        public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_T_PROMOTION_PLAN_H TB_T_PROMOTION_PLAN_H { get; set; }
+        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
     }
 }

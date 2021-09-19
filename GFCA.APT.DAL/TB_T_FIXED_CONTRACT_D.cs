@@ -12,16 +12,18 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_FIXED_CONTRACT
+    public partial class TB_T_FIXED_CONTRACT_D
     {
-        public int DOC_FC_ID { get; set; }
-        public Nullable<int> DOC_ID { get; set; }
-        public Nullable<int> ACCOUNT_ID { get; set; }
-        public Nullable<int> CENTER_ID { get; set; }
-        public Nullable<int> ACTIVITY_ID { get; set; }
-        public Nullable<int> BRAND_ID { get; set; }
+        public int DOC_FCH_ID { get; set; }
+        public int DOC_FCD_ID { get; set; }
+        public string DOC_CODE { get; set; }
+        public string BRAND_CODE { get; set; }
+        public string ACTIVITY_CODE { get; set; }
+        public string CENTER_CODE { get; set; }
+        public string ACC_CODE { get; set; }
         public string SIZE { get; set; }
         public string UOM { get; set; }
+        public string PACK { get; set; }
         public string DATE_REF { get; set; }
         public string CONDITION_TYPE { get; set; }
         public string CONTRACT_CATE { get; set; }
@@ -38,11 +40,12 @@ namespace GFCA.APT.DAL
         public Nullable<decimal> M10 { get; set; }
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
+        public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
         public Nullable<System.DateTime> START_DATE { get; set; }
         public Nullable<System.DateTime> END_DATE { get; set; }
         public string CREATED_BY { get; set; }
-        public System.DateTime CREATED_DATE { get; set; }
+        public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     

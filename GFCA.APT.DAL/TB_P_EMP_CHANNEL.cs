@@ -12,25 +12,17 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_PROMOTION_PLAN_H
+    public partial class TB_P_EMP_CHANNEL
     {
-        public int DOC_PROPLH_ID { get; set; }
-        public string DOC_CODE { get; set; }
-        public string PROGP_CODE { get; set; }
-        public string CLIENT_CODE { get; set; }
-        public string CUST_CODE { get; set; }
+        public string EMP_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
-        public string PROPL_CODE { get; set; }
-        public string PROPL_NAME { get; set; }
-        public Nullable<System.DateTime> PROPL_BEGIN { get; set; }
-        public Nullable<System.DateTime> PROPL_END { get; set; }
-        public string FLAG_ROW { get; set; }
+        public Nullable<System.DateTime> EFF_FROM { get; set; }
+        public Nullable<System.DateTime> EFF_TO { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_PROMOTION_GROUP TB_M_PROMOTION_GROUP { get; set; }
-        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
+        public virtual TB_M_CHANNEL TB_M_CHANNEL { get; set; }
     }
 }

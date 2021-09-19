@@ -5,88 +5,101 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6292087b870042ff9f473381f9523913" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Actor" Width="1.5" PointX="6" PointY="13.75" />
-        <EntityTypeShape EntityType="Models.ActorState" Width="1.5" PointX="8.25" PointY="6.75" />
-        <EntityTypeShape EntityType="Models.FlowItem" Width="1.5" PointX="3" PointY="15.625" />
-        <EntityTypeShape EntityType="Models.OperatorCondition" Width="1.5" PointX="6" PointY="11.25" />
-        <EntityTypeShape EntityType="Models.StateFlowItem" Width="1.5" PointX="5.25" PointY="7.25" />
-        <EntityTypeShape EntityType="Models.StateProcess" Width="1.5" PointX="5.25" PointY="2.75" />
-        <EntityTypeShape EntityType="Models.TB_M_ACTIVITY" Width="1.5" PointX="3" PointY="26.5" />
-        <EntityTypeShape EntityType="Models.TB_M_BRAND" Width="1.5" PointX="22" PointY="29" />
-        <EntityTypeShape EntityType="Models.TB_M_BUDGET_TYPE" Width="1.5" PointX="11.75" PointY="7" />
-        <EntityTypeShape EntityType="Models.TB_M_CHANNEL" Width="1.5" PointX="0.75" PointY="17.5" />
-        <EntityTypeShape EntityType="Models.TB_M_CLIENT" Width="1.5" PointX="19.75" PointY="29.25" />
-        <EntityTypeShape EntityType="Models.TB_M_COMPANY" Width="1.5" PointX="16.75" PointY="24.25" />
-        <EntityTypeShape EntityType="Models.TB_M_COST_CENTER" Width="1.5" PointX="19" PointY="15.375" />
-        <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="0.75" PointY="28.25" />
-        <EntityTypeShape EntityType="Models.TB_M_DISTRIBUTOR" Width="1.5" PointX="0.75" PointY="32.25" />
-        <EntityTypeShape EntityType="Models.TB_M_DOCUMENT_TYPE" Width="1.5" PointX="9.5" PointY="3" />
-        <EntityTypeShape EntityType="Models.TB_M_EMISSION" Width="1.5" PointX="1.5" PointY="36.5" />
-        <EntityTypeShape EntityType="Models.TB_M_EMPLOYEE" Width="1.5" PointX="19" PointY="19.125" />
-        <EntityTypeShape EntityType="Models.TB_M_GL_ACCOUNT" Width="1.5" PointX="0.75" PointY="21.5" />
-        <EntityTypeShape EntityType="Models.TB_M_INTERNAL_ORDER" Width="1.5" PointX="19" PointY="33.125" />
-        <EntityTypeShape EntityType="Models.TB_M_ORGANIZATION" Width="1.5" PointX="19" PointY="23.625" />
-        <EntityTypeShape EntityType="Models.TB_M_PRODUCT" Width="1.5" PointX="8.75" PointY="19.625" />
-        <EntityTypeShape EntityType="Models.TB_M_PROMOTION_GROUP" Width="1.5" PointX="8.75" PointY="14.5" />
-        <EntityTypeShape EntityType="Models.TB_M_UNIT" Width="1.5" PointX="5.75" PointY="17.375" />
-        <EntityTypeShape EntityType="Models.TB_P_BRAND_ORG" Width="1.5" PointX="24.25" PointY="24" />
-        <EntityTypeShape EntityType="Models.TB_P_COST_IO" Width="1.5" PointX="21.25" PointY="24.125" />
-        <EntityTypeShape EntityType="Models.TB_P_CUSTOMER_PARTY" Width="1.5" PointX="3" PointY="20.875" />
-        <EntityTypeShape EntityType="Models.TB_P_EMP_ORG" Width="1.5" PointX="21.25" PointY="19" />
-        <EntityTypeShape EntityType="Models.TB_P_PRODUCT_GROUP" Width="1.5" PointX="11" PointY="14.5" />
-        <EntityTypeShape EntityType="Models.TB_T_BILLING" Width="1.5" PointX="16.75" PointY="4.625" />
-        <EntityTypeShape EntityType="Models.TB_T_BUDGET" Width="1.5" PointX="14" PointY="0.75" />
-        <EntityTypeShape EntityType="Models.TB_T_CREDIT_NOTE" Width="1.5" PointX="19" PointY="6.25" />
-        <EntityTypeShape EntityType="Models.TB_T_DEBIT_NOTE" Width="1.5" PointX="19" PointY="2.75" />
-        <EntityTypeShape EntityType="Models.TB_T_DOCUMENT" Width="1.5" PointX="11.75" PointY="1.375" />
-        <EntityTypeShape EntityType="Models.TB_T_FIXED_CONTRACT" Width="1.5" PointX="14" PointY="5.125" />
-        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_INVEST" Width="1.5" PointX="16.25" PointY="16.75" />
-        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_PLAN_H" Width="1.5" PointX="14" PointY="14" />
-        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_SALE" Width="1.5" PointX="16.25" PointY="14.375" />
-        <EntityTypeShape EntityType="Models.Workflow" Width="1.5" PointX="0.75" PointY="7" />
-        <EntityTypeShape EntityType="Models.WorkflowAction" Width="1.5" PointX="3" PointY="12" />
-        <EntityTypeShape EntityType="Models.WorkflowActivity" Width="1.5" PointX="3" PointY="3.25" />
-        <EntityTypeShape EntityType="Models.WorkflowState" Width="1.5" PointX="3" PointY="6.5" />
-        <EntityTypeShape EntityType="Models.VW_List_Costcenter" Width="1.5" PointX="8.75" PointY="11.375" />
-        <EntityTypeShape EntityType="Models.VW_List_TradeActivity" Width="1.5" PointX="10.75" PointY="11.375" />
-        <AssociationConnector Association="Models.FK_ActorState_Actor_ActorId" />
-        <AssociationConnector Association="Models.FK_ActorState_OperatorCondition_OperatorConditionId" />
-        <AssociationConnector Association="Models.FK_ActorState_WorkflowState_WorkflowStateId" />
-        <AssociationConnector Association="Models.FK_StateFlowItem_FlowItem_FlowItemId" />
-        <AssociationConnector Association="Models.FK_StateFlowItem_WorkflowState_WorkflowStateId" />
-        <AssociationConnector Association="Models.FK_StateProcess_WorkflowAction_ActionId" />
-        <AssociationConnector Association="Models.FK_StateProcess_WorkflowActivity_ActivityId" />
-        <AssociationConnector Association="Models.FK_StateProcess_WorkflowState_WorkflowStateId" />
+        <EntityTypeShape EntityType="Models.TB_M_ACTIVITY" Width="1.5" PointX="23.25" PointY="25" />
+        <EntityTypeShape EntityType="Models.TB_M_BRAND" Width="1.5" PointX="13" PointY="16.125" />
+        <EntityTypeShape EntityType="Models.TB_M_BUDGET_TYPE" Width="1.5" PointX="6" PointY="26" />
+        <EntityTypeShape EntityType="Models.TB_M_CHANNEL" Width="1.5" PointX="13" PointY="21.5" />
+        <EntityTypeShape EntityType="Models.TB_M_CLIENT" Width="1.5" PointX="10.75" PointY="16.375" />
+        <EntityTypeShape EntityType="Models.TB_M_COMPANY" Width="1.5" PointX="10.75" PointY="11.375" />
+        <EntityTypeShape EntityType="Models.TB_M_COST_CENTER" Width="1.5" PointX="18.75" PointY="20.75" />
+        <EntityTypeShape EntityType="Models.TB_M_CUSTOMER" Width="1.5" PointX="24" PointY="16.875" />
+        <EntityTypeShape EntityType="Models.TB_M_DISTRIBUTOR" Width="1.5" PointX="13" PointY="25.375" />
+        <EntityTypeShape EntityType="Models.TB_M_DOCUMENT_TYPE" Width="1.5" PointX="0.75" PointY="20" />
+        <EntityTypeShape EntityType="Models.TB_M_EMISSION" Width="1.5" PointX="10.75" PointY="23.375" />
+        <EntityTypeShape EntityType="Models.TB_M_EMPLOYEE" Width="1.5" PointX="16" PointY="15.125" />
+        <EntityTypeShape EntityType="Models.TB_M_GL_ACCOUNT" Width="1.5" PointX="21" PointY="19.5" />
+        <EntityTypeShape EntityType="Models.TB_M_GL_GROUP" Width="1.5" PointX="18.75" PointY="16.75" />
+        <EntityTypeShape EntityType="Models.TB_M_HOLIDAY" Width="1.5" PointX="2.75" PointY="2" />
+        <EntityTypeShape EntityType="Models.TB_M_INTERNAL_ORDER" Width="1.5" PointX="21.75" PointY="15.875" />
+        <EntityTypeShape EntityType="Models.TB_M_ORGANIZATION" Width="1.5" PointX="13" PointY="10.5" />
+        <EntityTypeShape EntityType="Models.TB_M_PACK" Width="1.5" PointX="4.75" PointY="2" />
+        <EntityTypeShape EntityType="Models.TB_M_PRODUCT" Width="1.5" PointX="6" PointY="46.875" />
+        <EntityTypeShape EntityType="Models.TB_M_PROMOTION_GROUP" Width="1.5" PointX="6" PointY="5.625" />
+        <EntityTypeShape EntityType="Models.TB_M_PROMOTION_PLAN_TYPE" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="Models.TB_M_SIZE" Width="1.5" PointX="2.75" PointY="6" />
+        <EntityTypeShape EntityType="Models.TB_M_UNIT" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="Models.TB_M_VENDOR" Width="1.5" PointX="24" PointY="31.75" />
+        <EntityTypeShape EntityType="Models.TB_P_BRAND_ORG" Width="1.5" PointX="15.25" PointY="11.25" />
+        <EntityTypeShape EntityType="Models.TB_P_COST_IO" Width="1.5" PointX="24" PointY="20.75" />
+        <EntityTypeShape EntityType="Models.TB_P_CUSTOMER_PARTY" Width="1.5" PointX="26.25" PointY="20.5" />
+        <EntityTypeShape EntityType="Models.TB_P_EMP_CHANNEL" Width="1.5" PointX="15.25" PointY="21.625" />
+        <EntityTypeShape EntityType="Models.TB_P_EMP_ORG" Width="1.5" PointX="18.25" PointY="11.25" />
+        <EntityTypeShape EntityType="Models.TB_P_PRODUCT_GROUP" Width="1.5" PointX="8.25" PointY="8.625" />
+        <EntityTypeShape EntityType="Models.TB_T_BILLING" Width="1.5" PointX="18.75" PointY="4.25" />
+        <EntityTypeShape EntityType="Models.TB_T_BUDGET_D" Width="1.5" PointX="5.25" PointY="30.625" />
+        <EntityTypeShape EntityType="Models.TB_T_BUDGET_H" Width="1.5" PointX="8.25" PointY="19.875" />
+        <EntityTypeShape EntityType="Models.TB_T_CLAIM_D" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="Models.TB_T_CLAIM_H" Width="1.5" PointX="5.25" PointY="42.625" />
+        <EntityTypeShape EntityType="Models.TB_T_CREDIT_NOTE" Width="1.5" PointX="21" PointY="2.5" />
+        <EntityTypeShape EntityType="Models.TB_T_DEBIT_NOTE" Width="1.5" PointX="21" PointY="6.875" />
+        <EntityTypeShape EntityType="Models.TB_T_DOCUMENT" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="Models.TB_T_FIXED_CONTRACT_D" Width="1.5" PointX="5.25" PointY="34.125" />
+        <EntityTypeShape EntityType="Models.TB_T_FIXED_CONTRACT_H" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_PLAN_D" Width="1.5" PointX="5.25" PointY="17.875" />
+        <EntityTypeShape EntityType="Models.TB_T_PROMOTION_PLAN_H" Width="1.5" PointX="8.25" PointY="14.25" />
+        <EntityTypeShape EntityType="Models.TB_WM_FLOW_ITEM" Width="1.5" PointX="14" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.TB_WM_OPERATION" Width="1.5" PointX="11" PointY="0.75" />
+        <EntityTypeShape EntityType="Models.TB_WM_WORKFLOW" Width="1.5" PointX="8.75" PointY="4.125" />
+        <EntityTypeShape EntityType="Models.TB_WM_WORKFLOW_STATE" Width="1.5" PointX="11" PointY="3.625" />
+        <EntityTypeShape EntityType="Models.TB_WP_STATE_ACTOR" Width="1.5" PointX="13.25" PointY="4.125" />
+        <EntityTypeShape EntityType="Models.TB_WP_STATE_DIRECTION" Width="1.5" PointX="16.25" PointY="4.25" />
+        <EntityTypeShape EntityType="Models.DB_Errors" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="Models.TB_M_VENDOR_20210819" Width="1.5" PointX="20.75" PointY="11" />
+        <EntityTypeShape EntityType="Models.TB_S_EMPLOYEE" Width="1.5" PointX="22.75" PointY="11" />
+        <EntityTypeShape EntityType="Models.TB_S_ORGANIZATION" Width="1.5" PointX="23.75" PointY="2" />
+        <EntityTypeShape EntityType="Models.VW_List_Costcenter" Width="1.5" PointX="13.75" PointY="8" />
+        <EntityTypeShape EntityType="Models.VW_List_TradeActivity" Width="1.5" PointX="15.75" PointY="8" />
         <AssociationConnector Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" />
         <AssociationConnector Association="Models.FK_TB_M_BRAND_TB_M_CLIENT" />
         <AssociationConnector Association="Models.FK_TB_P_BRAND_ORG_TB_M_BRAND" />
-        <AssociationConnector Association="Models.FK_TB_T_BUDGET_TB_M_BUDGET_TYPE" />
-        <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_CHANNEL" />
+        <AssociationConnector Association="Models.FK_TB_T_BUDGET_H_TB_M_BUDGET_TYPE" />
+        <AssociationConnector Association="Models.FK_TB_M_CHANNEL_TB_M_EMISSION1" />
+        <AssociationConnector Association="Models.FK_TB_P_EMP_CHANNEL_TB_M_CHANNEL" />
         <AssociationConnector Association="Models.FK_TB_M_ORGANIZATION_TB_M_COMPANY" />
+        <AssociationConnector Association="Models.FK_TB_M_GL_ACCOUNT_TB_M_COST_CENTER" />
         <AssociationConnector Association="Models.FK_TB_P_COST_IO_TB_M_COST_CENTER" />
         <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_CUSTOMER" />
         <AssociationConnector Association="Models.FK_TB_M_DISTRIBUTOR_TB_M_EMISSION" />
-        <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_DISTRIBUTOR" />
         <AssociationConnector Association="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" />
         <AssociationConnector Association="Models.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" />
+        <AssociationConnector Association="Models.FK_TB_M_GL_ACCOUNT_TB_M_GL_GROUP" />
         <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_GL_ACCOUNT" />
         <AssociationConnector Association="Models.FK_TB_P_COST_IO_TB_M_INTERNAL_ORDER" />
+        <AssociationConnector Association="Models.FK_TB_M_ORGANIZATION_TB_M_ORGANIZATION" />
         <AssociationConnector Association="Models.FK_TB_P_BRAND_ORG_TB_M_ORGANIZATION" />
-        <AssociationConnector Association="Models.FK_TB_P_COST_IO_TB_M_ORGANIZATION" />
         <AssociationConnector Association="Models.FK_TB_P_EMP_ORG_TB_M_ORGANIZATION" />
         <AssociationConnector Association="Models.FK_TB_P_PRODUCT_GROUP_TB_M_PRODUCT" />
         <AssociationConnector Association="Models.FK_TB_P_PRODUCT_GROUP_TB_M_PROMOTION_GROUP" />
-        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_TB_M_PROMOTION_GROUP" />
+        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP" />
+        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE" />
         <AssociationConnector Association="Models.FK_TB_M_UNIT_TB_M_UNIT" />
+        <AssociationConnector Association="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_VENDOR" />
         <AssociationConnector Association="Models.FK_TB_T_CREDIT_NOTE_TB_T_BILLING" />
         <AssociationConnector Association="Models.FK_TB_T_DEBIT_NOTE_TB_T_BILLING" />
-        <AssociationConnector Association="Models.FK_TB_T_BUDGET_TB_T_DOCUMENT" />
-        <AssociationConnector Association="Models.FK_TB_T_FIXED_CONTRACT_TB_T_DOCUMENT" />
-        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT1" />
-        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_PLAN_H" />
-        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_SALE_TB_T_PROMOTION_PLAN_H" />
-        <AssociationConnector Association="Models.FK_WorkflowState_Workflow_WorkflowId" />
-        <AssociationConnector Association="Models.FK_WorkflowState_WorkflowState_PreviousStateId" />
+        <AssociationConnector Association="Models.FK_TB_T_BUDGET_D_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_BUDGET_H_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_CLAIM_D_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_CLAIM_H_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT" />
+        <AssociationConnector Association="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM" />
+        <AssociationConnector Association="Models.FK_TB_WP_STATE_ACTOR_TB_WM_OPERATION" />
+        <AssociationConnector Association="Models.FK_TB_WM_WORKFLOW_STATE_TB_WM_WORKFLOW" />
+        <AssociationConnector Association="Models.FK_TB_WM_WORKFLOW_STATE_TB_WM_WORKFLOW_STATE" />
+        <AssociationConnector Association="Models.FK_TB_WP_STATE_ACTOR_TB_WM_WORKFLOW_STATE" />
+        <AssociationConnector Association="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_WORKFLOW_STATE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

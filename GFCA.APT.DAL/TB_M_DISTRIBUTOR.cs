@@ -14,14 +14,7 @@ namespace GFCA.APT.DAL
     
     public partial class TB_M_DISTRIBUTOR
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_DISTRIBUTOR()
-        {
-            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
-        }
-    
-        public int DISTB_ID { get; set; }
-        public Nullable<int> EMIS_ID { get; set; }
+        public string EMIS_CODE { get; set; }
         public string DISTB_CODE { get; set; }
         public string DISTB_NAME { get; set; }
         public string DISTB_DESC { get; set; }
@@ -32,7 +25,5 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
         public virtual TB_M_EMISSION TB_M_EMISSION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
     }
 }

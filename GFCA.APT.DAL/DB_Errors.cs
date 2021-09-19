@@ -12,16 +12,16 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class StateFlowItem
+    public partial class DB_Errors
     {
-        public int StateFlowItemId { get; set; }
-        public int WorkflowStateId { get; set; }
-        public int FlowItemId { get; set; }
-        public string FlowItemCode { get; set; }
-        public string FlowItemName { get; set; }
-        public int Sort { get; set; }
-    
-        public virtual FlowItem FlowItem { get; set; }
-        public virtual WorkflowState WorkflowState { get; set; }
+        public int ErrorID { get; set; }
+        public string UserName { get; set; }
+        public Nullable<int> ErrorNumber { get; set; }
+        public Nullable<int> ErrorState { get; set; }
+        public Nullable<int> ErrorSeverity { get; set; }
+        public Nullable<int> ErrorLine { get; set; }
+        public string ErrorProcedure { get; set; }
+        public string ErrorMessage { get; set; }
+        public Nullable<System.DateTime> ErrorDateTime { get; set; }
     }
 }
