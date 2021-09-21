@@ -5,9 +5,9 @@ namespace GFCA.APT.Domain.Dto
 {
     public class BrandDto : Auditable
     {
-        [Required]
-        public int? BRAND_ID { get; set; }
-        public int? CLIENT_ID { get; set; }
+        //[Required]
+        //public int? BRAND_ID { get; set; }
+        //public int? CLIENT_ID { get; set; }
         public string CLIENT_CODE { get; set; }
         [Required]
         public string BRAND_CODE { get; set; }

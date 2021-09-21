@@ -4,8 +4,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class DistributorDto : Auditable
     {
-        [Required]
-        public int? DISTB_ID { get; set; }
+        //[Required]
+        //public int? DISTB_ID { get; set; }
         public string EMIS_ID { get; set; }
         public string DISTB_CODE { get; set; }
         public string DISTB_NAME { get; set; }

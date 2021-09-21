@@ -9,8 +9,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class EmissionDto : Auditable
     {
-        [Required]
-        public int? EMIS_ID { get; set; }
+        //[Required]
+        //public int? EMIS_ID { get; set; }
         [Required]
         public string EMIS_CODE { get; set; }
         public string EMIS_NAME { get; set; }

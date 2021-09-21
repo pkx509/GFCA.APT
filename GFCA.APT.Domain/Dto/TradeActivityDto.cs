@@ -5,10 +5,7 @@ namespace GFCA.APT.Domain.Dto
     public class TradeActivityDto : Auditable
     {
         [Required]
-        public int? ACTIVITY_ID { get; set; }
-        [Required]
-        public int? ACC_ID { get; set; }
-        [Required]
+        public string ACC_CODE { get; set; }
         public string ACTIVITY_CODE { get; set; }
         public string ACTIVITY_TYPE { get; set; }
         public string ACTIVTITY_NAME { get; set; }
@@ -26,6 +23,7 @@ namespace GFCA.APT.Domain.Dto
         public string VALUABLE { get; set; }
         public string ACTIVITY_DESC { get; set; }
         public string FLAG_ROW { get; set; }
+
         public bool IS_ACTIVED { get; set; } = true;
         public bool IS_DELETE { get; set; } = false;
     }

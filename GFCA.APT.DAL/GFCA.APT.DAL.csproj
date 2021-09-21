@@ -188,12 +188,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB_Errors.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Implements\DistributorRepository.cs" />
     <Compile Include="Implements\DocumentTypeRepository.cs" />
     <Compile Include="Implements\EmployeeRepository.cs" />
+    <Compile Include="Implements\FixedContractRepository.cs" />
     <Compile Include="Implements\InternalOrderRepository.cs" />
     <Compile Include="Implements\OrganizationRepository.cs" />
     <Compile Include="Implements\CustomerRepository.cs" />
@@ -210,6 +208,7 @@
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
     <Compile Include="Interfaces\IDocumentTypeRepository.cs" />
+    <Compile Include="Interfaces\IFixedContractRepository.cs" />
     <Compile Include="Interfaces\IInternalOrderRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IBrandRepository.cs" />
@@ -301,9 +300,6 @@
     <Compile Include="TB_M_VENDOR.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_M_VENDOR_20210819.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_P_BRAND_ORG.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -383,12 +379,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DbUtilities.cs" />
-    <Compile Include="VW_List_Costcenter.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VW_List_TradeActivity.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

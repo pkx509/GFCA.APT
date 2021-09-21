@@ -5,22 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="DB_Errors">
-          <Key>
-            <PropertyRef Name="ErrorID" />
-          </Key>
-          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="100" />
-          <Property Name="ErrorNumber" Type="int" />
-          <Property Name="ErrorState" Type="int" />
-          <Property Name="ErrorSeverity" Type="int" />
-          <Property Name="ErrorLine" Type="int" />
-          <Property Name="ErrorProcedure" Type="varchar(max)" />
-          <Property Name="ErrorMessage" Type="varchar(max)" />
-          <Property Name="ErrorDateTime" Type="datetime" />
-        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_CODE" />
@@ -28,7 +12,7 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Property Name="ACC_CODE" Type="varchar" MaxLength="50" />
           <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ACTIVITY_TYPE" Type="varchar" MaxLength="50" />
-          <Property Name="ACTIVTITY_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVTITY_NAME" Type="varchar" MaxLength="100" />
           <Property Name="HAS_FIXED_CONTRACT" Type="varchar" MaxLength="1" />
           <Property Name="CAN_DEDUCTABLE" Type="varchar" MaxLength="1" />
           <Property Name="IN_THB_CS" Type="varchar" MaxLength="1" />
@@ -160,7 +144,6 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Key>
             <PropertyRef Name="DOC_TYPE_CODE" />
           </Key>
-          <Property Name="DOC_TYPE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DOC_TYPE_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DOC_TYPE_NAME" Type="varchar" MaxLength="100" />
           <Property Name="DOC_TYPE_DESC" Type="varchar(max)" />
@@ -407,26 +390,6 @@ warning 6013: The table/view 'APT2DB3.dbo.TB_M_SYSTEM' does not have a primary k
           <Key>
             <PropertyRef Name="VENDOR_CODE" />
           </Key>
-          <Property Name="VENDOR_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="VENDOR_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="VENDOR_ADDR" Type="varchar(max)" />
-          <Property Name="VENDOR_DESC" Type="varchar(max)" />
-          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
-          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
-          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2DB3.dbo.TB_M_VENDOR_20210819' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TB_M_VENDOR_20210819">
-          <Key>
-            <PropertyRef Name="VENDOR_ID" />
-            <PropertyRef Name="VENDOR_CODE" />
-            <PropertyRef Name="CREATED_BY" />
-            <PropertyRef Name="CREATED_DATE" />
-          </Key>
-          <Property Name="VENDOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VENDOR_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VENDOR_NAME" Type="varchar" MaxLength="100" />
           <Property Name="VENDOR_ADDR" Type="varchar(max)" />
@@ -754,6 +717,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="M11" Type="numeric" Precision="13" Scale="4" />
           <Property Name="M12" Type="numeric" Precision="13" Scale="4" />
           <Property Name="COMMENT" Type="varchar(max)" />
+          <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="START_DATE" Type="date" />
           <Property Name="END_DATE" Type="date" />
@@ -771,6 +735,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CLIENT_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" />
@@ -886,43 +851,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="DIRECTION_NAME" Type="varchar" MaxLength="100" />
           <Property Name="Sort" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2DB3.dbo.VW_LIST_Channel' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VW_LIST_Channel">
-          <Property Name="Code" Type="nvarchar" MaxLength="20" />
-          <Property Name="Name" Type="nvarchar" MaxLength="71" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2DB3.dbo.VW_List_Costcenter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="VW_List_Costcenter">
-          <Key>
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Code" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="166" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2DB3.dbo.VW_List_Customer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VW_List_Customer">
-          <Property Name="Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="201" />
-          <Property Name="ChannelCode" Type="nvarchar" MaxLength="20" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2DB3.dbo.VW_List_TradeActivity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="VW_List_TradeActivity">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="101" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="VW_List_YEAR">
-          <Property Name="Year" Type="int" />
-        </EntityType>-->
         <Association Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
           <End Role="TB_M_GL_ACCOUNT" Type="Self.TB_M_GL_ACCOUNT" Multiplicity="0..1" />
           <End Role="TB_M_ACTIVITY" Type="Self.TB_M_ACTIVITY" Multiplicity="*" />
@@ -1487,33 +1415,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Self.TB_WM_WORKFLOW_STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Self.TB_WP_STATE_ACTOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Self.TB_WP_STATE_DIRECTION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DB_Errors].[ErrorID] AS [ErrorID], 
-    [DB_Errors].[UserName] AS [UserName], 
-    [DB_Errors].[ErrorNumber] AS [ErrorNumber], 
-    [DB_Errors].[ErrorState] AS [ErrorState], 
-    [DB_Errors].[ErrorSeverity] AS [ErrorSeverity], 
-    [DB_Errors].[ErrorLine] AS [ErrorLine], 
-    [DB_Errors].[ErrorProcedure] AS [ErrorProcedure], 
-    [DB_Errors].[ErrorMessage] AS [ErrorMessage], 
-    [DB_Errors].[ErrorDateTime] AS [ErrorDateTime]
-    FROM [dbo].[DB_Errors] AS [DB_Errors]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TB_M_VENDOR_20210819" EntityType="Self.TB_M_VENDOR_20210819" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TB_M_VENDOR_20210819].[VENDOR_ID] AS [VENDOR_ID], 
-    [TB_M_VENDOR_20210819].[VENDOR_CODE] AS [VENDOR_CODE], 
-    [TB_M_VENDOR_20210819].[VENDOR_NAME] AS [VENDOR_NAME], 
-    [TB_M_VENDOR_20210819].[VENDOR_ADDR] AS [VENDOR_ADDR], 
-    [TB_M_VENDOR_20210819].[VENDOR_DESC] AS [VENDOR_DESC], 
-    [TB_M_VENDOR_20210819].[FLAG_ROW] AS [FLAG_ROW], 
-    [TB_M_VENDOR_20210819].[CREATED_BY] AS [CREATED_BY], 
-    [TB_M_VENDOR_20210819].[CREATED_DATE] AS [CREATED_DATE], 
-    [TB_M_VENDOR_20210819].[UPDATED_BY] AS [UPDATED_BY], 
-    [TB_M_VENDOR_20210819].[UPDATED_DATE] AS [UPDATED_DATE]
-    FROM [dbo].[TB_M_VENDOR_20210819] AS [TB_M_VENDOR_20210819]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Self.TB_S_EMPLOYEE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TB_S_EMPLOYEE].[EMP_CODE] AS [EMP_CODE], 
@@ -1541,18 +1442,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
     [TB_S_ORGANIZATION].[UPLOAD_BY] AS [UPLOAD_BY], 
     [TB_S_ORGANIZATION].[UPLOAD_DATE] AS [UPLOAD_DATE]
     FROM [dbo].[TB_S_ORGANIZATION] AS [TB_S_ORGANIZATION]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="VW_List_Costcenter" EntityType="Self.VW_List_Costcenter" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [VW_List_Costcenter].[Code] AS [Code], 
-    [VW_List_Costcenter].[Name] AS [Name]
-    FROM [dbo].[VW_List_Costcenter] AS [VW_List_Costcenter]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="VW_List_TradeActivity" EntityType="Self.VW_List_TradeActivity" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [VW_List_TradeActivity].[Code] AS [Code], 
-    [VW_List_TradeActivity].[Name] AS [Name]
-    FROM [dbo].[VW_List_TradeActivity] AS [VW_List_TradeActivity]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Self.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
@@ -1788,12 +1677,8 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Models.TB_WM_WORKFLOW_STATE" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Models.TB_WP_STATE_ACTOR" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Models.TB_WP_STATE_DIRECTION" />
-          <EntitySet Name="DB_Errors" EntityType="Models.DB_Errors" />
-          <EntitySet Name="TB_M_VENDOR_20210819" EntityType="Models.TB_M_VENDOR_20210819" />
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Models.TB_S_EMPLOYEE" />
           <EntitySet Name="TB_S_ORGANIZATION" EntityType="Models.TB_S_ORGANIZATION" />
-          <EntitySet Name="VW_List_Costcenter" EntityType="Models.VW_List_Costcenter" />
-          <EntitySet Name="VW_List_TradeActivity" EntityType="Models.VW_List_TradeActivity" />
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
             <End Role="TB_M_GL_ACCOUNT" EntitySet="TB_M_GL_ACCOUNT" />
             <End Role="TB_M_ACTIVITY" EntitySet="TB_M_ACTIVITY" />
@@ -1966,7 +1851,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <Property Name="ACC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVITY_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVITY_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ACTIVTITY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVTITY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="HAS_FIXED_CONTRACT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CAN_DEDUCTABLE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IN_THB_CS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -2110,7 +1995,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <Key>
             <PropertyRef Name="DOC_TYPE_CODE" />
           </Key>
-          <Property Name="DOC_TYPE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DOC_TYPE_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOC_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DOC_TYPE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -2646,6 +2530,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <Property Name="M11" Type="Decimal" Precision="13" Scale="4" />
           <Property Name="M12" Type="Decimal" Precision="13" Scale="4" />
           <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="START_DATE" Type="DateTime" Precision="0" />
           <Property Name="END_DATE" Type="DateTime" Precision="0" />
@@ -2664,6 +2549,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <Property Name="CLIENT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CHANNEL_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
@@ -2796,38 +2682,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <NavigationProperty Name="TB_WM_FLOW_ITEM" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_FLOW_ITEM" />
           <NavigationProperty Name="TB_WM_WORKFLOW_STATE" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_WORKFLOW_STATE" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_WORKFLOW_STATE" />
         </EntityType>
-        <EntityType Name="DB_Errors">
-          <Key>
-            <PropertyRef Name="ErrorID" />
-          </Key>
-          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ErrorNumber" Type="Int32" />
-          <Property Name="ErrorState" Type="Int32" />
-          <Property Name="ErrorSeverity" Type="Int32" />
-          <Property Name="ErrorLine" Type="Int32" />
-          <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TB_M_VENDOR_20210819">
-          <Key>
-            <PropertyRef Name="VENDOR_ID" />
-            <PropertyRef Name="VENDOR_CODE" />
-            <PropertyRef Name="CREATED_BY" />
-            <PropertyRef Name="CREATED_DATE" />
-          </Key>
-          <Property Name="VENDOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VENDOR_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VENDOR_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="VENDOR_ADDR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="VENDOR_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-        </EntityType>
         <EntityType Name="TB_S_EMPLOYEE">
           <Key>
             <PropertyRef Name="EMP_CODE" />
@@ -2857,21 +2711,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="UPLOAD_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPLOAD_DATE" Type="DateTime" Precision="7" />
-        </EntityType>
-        <EntityType Name="VW_List_Costcenter">
-          <Key>
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="166" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="VW_List_TradeActivity">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
           <End Type="Models.TB_M_GL_ACCOUNT" Role="TB_M_GL_ACCOUNT" Multiplicity="0..1" />
@@ -3539,7 +3378,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
                 <ScalarProperty Name="DOC_TYPE_DESC" ColumnName="DOC_TYPE_DESC" />
                 <ScalarProperty Name="DOC_TYPE_NAME" ColumnName="DOC_TYPE_NAME" />
                 <ScalarProperty Name="DOC_TYPE_CODE" ColumnName="DOC_TYPE_CODE" />
-                <ScalarProperty Name="DOC_TYPE_ID" ColumnName="DOC_TYPE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4014,6 +3852,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
                 <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
                 <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
                 <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
                 <ScalarProperty Name="M12" ColumnName="M12" />
                 <ScalarProperty Name="M11" ColumnName="M11" />
@@ -4052,6 +3891,7 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
                 <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
                 <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
                 <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
@@ -4174,37 +4014,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DB_Errors">
-            <EntityTypeMapping TypeName="Models.DB_Errors">
-              <MappingFragment StoreEntitySet="DB_Errors">
-                <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
-                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
-                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_VENDOR_20210819">
-            <EntityTypeMapping TypeName="Models.TB_M_VENDOR_20210819">
-              <MappingFragment StoreEntitySet="TB_M_VENDOR_20210819">
-                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
-                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
-                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
-                <ScalarProperty Name="VENDOR_DESC" ColumnName="VENDOR_DESC" />
-                <ScalarProperty Name="VENDOR_ADDR" ColumnName="VENDOR_ADDR" />
-                <ScalarProperty Name="VENDOR_NAME" ColumnName="VENDOR_NAME" />
-                <ScalarProperty Name="VENDOR_CODE" ColumnName="VENDOR_CODE" />
-                <ScalarProperty Name="VENDOR_ID" ColumnName="VENDOR_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_S_EMPLOYEE">
             <EntityTypeMapping TypeName="Models.TB_S_EMPLOYEE">
               <MappingFragment StoreEntitySet="TB_S_EMPLOYEE">
@@ -4234,22 +4043,6 @@ warning 6013: The table/view 'APT2DB3.dbo.VW_List_YEAR' does not have a primary 
                 <ScalarProperty Name="REPORT_TO" ColumnName="REPORT_TO" />
                 <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
                 <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_List_Costcenter">
-            <EntityTypeMapping TypeName="Models.VW_List_Costcenter">
-              <MappingFragment StoreEntitySet="VW_List_Costcenter">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_List_TradeActivity">
-            <EntityTypeMapping TypeName="Models.VW_List_TradeActivity">
-              <MappingFragment StoreEntitySet="VW_List_TradeActivity">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

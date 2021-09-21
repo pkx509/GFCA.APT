@@ -4,8 +4,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class ChannelDto : Auditable
     {
-        [Required]
-        public int? CHANNEL_ID { get; set; }
+        //[Required]
+        //public int? CHANNEL_ID { get; set; }
         [Required]
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }

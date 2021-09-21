@@ -29,17 +29,17 @@ namespace GFCA.APT.BAL.Implements
 
         }
 
-        public EmployeeDto GetHeaderById(int Id)
+        public FixedContractDto GetHeaderById(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<EmployeeDto> GetDeatilByHeaderId(int Id)
+        public IEnumerable<FixedContractDto> GetDeatilByHeaderId(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public BusinessResponse Create(EmployeeDto model)
+        public BusinessResponse Create(FixedContractDto model)
         {
             BusinessResponse response = null;
             try
@@ -55,7 +55,7 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
-        public BusinessResponse Edit(EmployeeDto model)
+        public BusinessResponse Edit(FixedContractDto model)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        public IEnumerable<EmployeeDto> GetHeaderAll()
+        public IEnumerable<FixedContractDto> GetHeaderAll()
         {
             try
             {
@@ -83,7 +83,7 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        public BusinessResponse Remove(EmployeeDto model)
+        public BusinessResponse Remove(FixedContractDto model)
         {
             try
             {

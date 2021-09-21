@@ -4,8 +4,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class EmployeeDto : Auditable
     {
-        [Required]
-        public int? EMP_ID { get; set; }
+        //[Required]
+        //public int? EMP_ID { get; set; }
         [Required]
         public string EMP_CODE { get; set; }
         public string PREFIX { get; set; }

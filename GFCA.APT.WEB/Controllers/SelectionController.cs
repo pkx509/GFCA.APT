@@ -26,7 +26,7 @@ namespace GFCA.APT.WEB.Controllers
             IEmissionService svc = biz.EmissionService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.EMIS_ID, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" })
+                .Select(o => new SelectionItem { Value = o.EMIS_CODE, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" })
                 .ToList();
 
             if (isOption)
@@ -47,7 +47,7 @@ namespace GFCA.APT.WEB.Controllers
             IBrandService svc = biz.BrandService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.BRAND_ID, Text = $"{o.BRAND_CODE} - {o.BRAND_NAME}" })
+                .Select(o => new SelectionItem { Value = o.BRAND_CODE, Text = $"{o.BRAND_CODE} - {o.BRAND_NAME}" })
                 .ToList();
 
             if (isOption)
@@ -66,7 +66,7 @@ namespace GFCA.APT.WEB.Controllers
             ITradeActivityService svc = biz.TradeActivityService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.ACTIVITY_ID, Text = $"{o.ACTIVITY_CODE} - {o.ACTIVTITY_NAME}" })
+                .Select(o => new SelectionItem { Value = o.ACTIVITY_CODE, Text = $"{o.ACTIVITY_CODE} - {o.ACTIVTITY_NAME}" })
                 .ToList();
 
             if (isOption)
@@ -86,7 +86,7 @@ namespace GFCA.APT.WEB.Controllers
             IClientService svc = biz.ClientService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CLIENT_ID, Text = $"{o.CLIENT_CODE} - {o.CLIENT_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CLIENT_CODE, Text = $"{o.CLIENT_CODE} - {o.CLIENT_NAME}" });
 
             return ret;
         }
@@ -178,7 +178,7 @@ namespace GFCA.APT.WEB.Controllers
             ICustomerService svc = biz.CustomerService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CUST_ID, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" })
+                .Select(o => new SelectionItem { Value = o.CUST_CODE, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" })
                 .ToList();
             /*
             if (isOption)

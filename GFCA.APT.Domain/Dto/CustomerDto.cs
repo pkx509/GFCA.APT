@@ -5,8 +5,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class CustomerDto : Auditable
     {
-        [Required]
-        public int? CUST_ID { get; set; }
+        //[Required]
+        //public int? CUST_ID { get; set; }
         public string CUST_CODE { get; set; }
         public string CUST_NAME { get; set; }
         public string CUST_ABV { get; set; }

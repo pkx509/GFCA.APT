@@ -5,8 +5,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class BudgetTypeDto : Auditable
     {
-        [Required]
-        public int? BG_TYPE_ID { get; set; }
+        //[Required]
+        //public int? BG_TYPE_ID { get; set; }
         [Required]
         public string BG_TYPE_CODE { get; set; }
         public string BG_TYPE_NAME { get; set; }

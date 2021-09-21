@@ -4,12 +4,11 @@ namespace GFCA.APT.Domain.Dto
 {
     public class GLAccountDto : Auditable
     {
-        [Required]
-        public int ACC_ID { get; set; }
-        public int IO_ID { get; set; }
-        public int CENTER_ID { get; set; }
-        public int FUND_ID { get; set; }
+        public string IO_CODE { get; set; }
+        public string CENTER_CODE { get; set; }
+        public string FUND_ID { get; set; }
         public string FUND_CENTER_ID { get; set; }
+        public string GRP_CODE { get; set; }
         [Required]
         public string ACC_CODE { get; set; }
         public string ACC_NAME { get; set; }

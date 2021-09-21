@@ -20,7 +20,6 @@ namespace GFCA.APT.DAL
             this.TB_T_DOCUMENT = new HashSet<TB_T_DOCUMENT>();
         }
     
-        public int DOC_TYPE_ID { get; set; }
         public string DOC_TYPE_CODE { get; set; }
         public string DOC_TYPE_NAME { get; set; }
         public string DOC_TYPE_DESC { get; set; }

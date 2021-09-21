@@ -19,6 +19,7 @@ namespace GFCA.APT.DAL
         public string CLIENT_CODE { get; set; }
         public string CUST_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
+        public string DOC_STATUS { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }

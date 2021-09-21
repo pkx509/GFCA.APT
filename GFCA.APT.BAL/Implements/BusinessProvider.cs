@@ -55,5 +55,9 @@ namespace GFCA.APT.BAL.Implements
 
         private IOrganizationService _organizationService;
         public IOrganizationService OrganizationService => _organizationService ?? (_organizationService = Serve.OrganizationService.CreateInstant());
+
+        private IFixedContractService _fixedContractService;
+        public IFixedContractService FixedContractService => _fixedContractService ?? (_fixedContractService = Serve.FixedContractService.CreateInstant());
+
     }
 }

@@ -41,6 +41,7 @@ namespace GFCA.APT.DAL
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
         public string COMMENT { get; set; }
+        public string DOC_STATUS { get; set; }
         public string FLAG_ROW { get; set; }
         public Nullable<System.DateTime> START_DATE { get; set; }
         public Nullable<System.DateTime> END_DATE { get; set; }

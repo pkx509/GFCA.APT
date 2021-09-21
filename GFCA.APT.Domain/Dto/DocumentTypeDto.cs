@@ -4,8 +4,8 @@ namespace GFCA.APT.Domain.Dto
 {
     public class DocumentTypeDto : Auditable
     {
-        [Required]
-        public int? DOC_TYPE_ID { get; set; }
+        //[Required]
+        //public int? DOC_TYPE_ID { get; set; }
         [Required]
         public string DOC_TYPE_CODE { get; set; }
         public string DOC_TYPE_NAME { get; set; }
