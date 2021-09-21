@@ -188,7 +188,123 @@ namespace GFCA.APT.WEB.Controllers
             */
             return ret;
         }
-        //GetCustomer
 
+        // POST: api/Selection/GetChannel
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetChannel()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IChannelService svc = biz.ChannelService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.CHANNEL_ID, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" });
+
+            return ret;
+        }
+
+        // POST: api/Selection/GetEmployee
+        // POST: api/Selection/GetEmployee/true
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetElmployee(bool isEmployee = true)
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IEmployeeService svc = biz.EmployeeService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.EMP_CODE, Text = $"{o.EMP_CODE} - {o.PREFIX}{o.NAME_FIRST} {o.NAME_LAST}" });
+
+            if (isEmployee)
+            {
+                // show only one employee 
+            }
+            return ret;
+
+        }
+
+        // POST: api/Selection/GetOrganization
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetOrganization()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IOrganizationService svc = biz.OrganizationService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.ORG_CODE, Text = $"{o.ORG_CODE} - {o.ORG_DESC}" });
+            return ret;
+
+        }
+
+        // POST: api/Selection/GetCategory
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetCategory()
+        {
+            List<SelectionItem> ret = new List<SelectionItem>()
+            {
+                new SelectionItem() { Value = 1, Text = "Baht per case" },
+                new SelectionItem() { Value = 1, Text = "Amount" },
+                new SelectionItem() { Value = 1, Text = "Percentage" }
+            };
+            return ret;
+        }
+
+        // POST: api/Selection/GetDateReference
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetDateReference()
+        {
+            List<SelectionItem> ret = new List<SelectionItem>()
+            {
+                new SelectionItem() { Value = 1, Text = "Customer date" },
+                new SelectionItem() { Value = 1, Text = "Own date" }
+            };
+            return ret;
+        }
+
+        // POST: api/Selection/GetUnit
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetUnit()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IUnitService svc = biz.UnitService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.UNIT_ID, Text = $"{o.UNIT_CODE} - {o.UNIT_NAME}" });
+            return ret;
+        }
+
+        // POST: api/Selection/GetCostCenter
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetCostCenter()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            ICostCenterService svc = biz.CostCenterService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.CENTER_ID, Text = $"{o.CENTER_CODE} - {o.CENTER_NAME}" });
+            return ret;
+        }
+
+        // POST: api/Selection/GetSize
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetSize()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            ISizeService svc = biz.SizeService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.SIZE_ID, Text = $"{o.SIZE_CODE} - {o.SIZE_NAME}" });
+            return ret;
+        }
+
+        // POST: api/Selection/GetPack
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetPack()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IPackService svc = biz.PackService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.PACK_ID, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
+            return ret;
+        }
     }
 }

@@ -20,6 +20,9 @@ namespace GFCA.APT.DAL.Interfaces
 		IEmployeeRepository EmployeeRepository { get; }
 		IInternalOrderRepository InternalOrderRepository { get; }
 		IOrganizationRepository OrganizationRepository { get; }
+		IPackRepository PackRepository { get; }
+		IUnitRepository UnitRepository { get; }
+		ISizeRepository SizeRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
