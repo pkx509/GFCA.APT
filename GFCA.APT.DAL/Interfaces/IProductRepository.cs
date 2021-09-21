@@ -6,9 +6,8 @@ namespace GFCA.APT.DAL.Interfaces
     public interface IProductRepository : IRepositories<ProductDto>
     {
         ProductDto GetById(int Id);
-
-
-        void Update(ProductDto _ProductDto);
+        ProductDto GetByCode(string PROD_CODE);
+        //new void Update(ProductDto ProductDto);
 
         IEnumerable<APTProduct> GetMatGroup();
         IEnumerable<APTProduct> GetMatGroup1();

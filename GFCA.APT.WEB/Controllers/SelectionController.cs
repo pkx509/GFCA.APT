@@ -27,7 +27,7 @@ namespace GFCA.APT.WEB.Controllers
             //IEmissionService svc = EmissionService.CreateInstant();
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.EMIS_ID, Text = $"{o.EMIS_CODE} - {o.EMIS_NAME}" });
+                .Select(o => new SelectionItem { Value = o.EMIS_CODE, Text = $"{o.EMIS_CODE}-{o.EMIS_NAME}" });
 
             return ret;
         }
@@ -130,8 +130,8 @@ namespace GFCA.APT.WEB.Controllers
         public IEnumerable<SelectionItem> GetCustomer()
         {
             IBusinessProvider biz = new BusinessProvider();
-            IProductService svc = biz.ProductService;
-            var ret = svc.GetCustomer().Select(o => new SelectionItem { Value = o.CUST_CODE, Text = $"{o.CUST_CODE} - {o.CUST_NAME}" });
+            ITB_M_CUSTOMERService svc = biz.TB_M_CUSTOMERService;
+            var ret = svc.GetAll().Select(o => new SelectionItem { Value = o.CUST_CODE, Text = $"{o.CUST_CODE}-{o.CUST_NAME}" });
             return ret;
         }
         //GetCustomer

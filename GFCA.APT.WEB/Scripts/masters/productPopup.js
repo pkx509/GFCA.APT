@@ -26,14 +26,27 @@ let productPopup = new (function () {
 
     //Model Dto
 
-    this.field_prod_id = "#pop-txt-prod_id";
+    //this.field_prod_id = "#pop-txt-prod_id";
     this.field_prod_code = "#pop-txt-prod_code";
     this.field_prod_name = "#pop-txt-prod_name";
-    this.field_cust_code = "#pop-cmb-cust_code";
+
+
+    this.field_cust_code = "#pop-cmb-cust_code_hidden";
+    this.field_emis_code = "#pop-cmb-emis_code_hidden";
+
+
+    this.field_cust_code_text = "#pop-cmb-cust_code";
+    this.field_emis_code_text = "#pop-cmb-emis_code";
+
+
+
     this.field_mat_code = "#pop-txt-mat_code";
     this.field_org_code = "#pop-txt-org_code";
     this.field_div_code = "#pop-txt-div_code";
-    this.field_emis_code = "#pop-cmb-emis_code";
+
+
+
+
     this.field_mat_group = "#pop-txt-mat_group";
     this.field_mat_group_desc = "#pop-txt-mat_group_desc";
     this.field_mat_group1 = "#pop-txt-mat_group1";
@@ -66,7 +79,7 @@ let productPopup = new (function () {
 
     //Value Dto
     this.jsonData = {
-        PROD_ID: 0,
+      //  PROD_ID: 0,
         PROD_CODE: null,
         PROD_NAME: null,
         CUST_CODE: null,
@@ -93,7 +106,9 @@ let productPopup = new (function () {
         UOM_SIZE: null,
         UOM_SALE: null,
         UNIT_CODE: null,
-        FLAG_ROW: null
+        FLAG_ROW: null,
+        CUST_NAME: null,
+        EMIS_NAME: null
     };
 
     this.callBack = function (data) {
@@ -101,7 +116,7 @@ let productPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            PROD_ID: 0,
+          //  PROD_ID: 0,
             PROD_CODE: null,
             PROD_NAME: null,
             CUST_CODE: null,
@@ -128,7 +143,9 @@ let productPopup = new (function () {
             UOM_SIZE: null,
             UOM_SALE: null,
             UNIT_CODE: null,
-            FLAG_ROW: null
+            FLAG_ROW: null,
+            CUST_NAME: null,
+            EMIS_NAME: null
         };
     }
     this.setHeading = function (headerTitle) {
@@ -148,7 +165,7 @@ let productPopup = new (function () {
             $(this.field_brand_code).prop("disabled", false);
             $(this.field_brand_code).addClass("mandatory");
 
-            this.setHeading("Create New Brand");
+            this.setHeading("Create New Prdouct");
             $(this.button_save).html("Save");
             $(this.button_save).show();
             $(this.button_remove).hide();
@@ -187,7 +204,7 @@ let productPopup = new (function () {
                 productPopup.callBack(this.jsonData);
                 return;
             }
-            $(this.header_title).html("Delete Brand");
+            $(this.header_title).html("Delete Product");
             $(this.button_remove).show();
             $(this.button_del).show();
             $(this.button_save).hide();
@@ -201,10 +218,17 @@ let productPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-        $(this.field_prod_id).val(data.PROD_ID);
+       // $(this.field_prod_id).val(data.PROD_ID);
         $(this.field_cust_code).val(data.CUST_CODE);
-
         $(this.field_emis_code).val(data.EMIS_CODE);
+
+
+
+        $(this.field_emis_code_text).val(data.CUST_NAME);
+
+        $(this.field_emis_code_text).val(data.EMIS_NAME);
+
+      // alert(data.CUST_NAME);
 
         //field_emis_code
 
@@ -270,7 +294,10 @@ let productPopup = new (function () {
 
     }
     this.bindField = function () {
-        let PROD_ID = $(this.field_prod_id).val();
+
+       // alert($(this.field_emis_code).val());
+
+       // let PROD_ID = $(this.field_prod_id).val();
         let PROD_CODE = $(this.field_prod_code).val();
         let PROD_NAME = $(this.field_prod_name).val();
         let CUST_CODE = $(this.field_cust_code).val();
@@ -309,7 +336,7 @@ let productPopup = new (function () {
 
 
         this.jsonData = {
-            PROD_ID,
+          //  PROD_ID,
             PROD_CODE,
             PROD_NAME,
             CUST_CODE,
@@ -479,7 +506,7 @@ let productPopup = new (function () {
         dialogTemp.innerHTML = el;
         let formInstance = form.ej2_instances[0];
         //formInstance.addRules('BRAND_ID', { required: true });
-        formInstance.addRules('BRAND_CODE', { required: true, minLength: 2 }); //adding the form validation rules
+        formInstance.addRules('PROD_CODE', { required: true, minLength: 8 }); //adding the form validation rules
         formInstance.refresh();  // refresh method of the formObj
         let script = document.createElement('script');
         script.type = "text/javascript";

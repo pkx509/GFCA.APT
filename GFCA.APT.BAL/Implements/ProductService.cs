@@ -100,10 +100,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.PROD_ID == 0)
-                    throw new Exception("not existing PROD_ID");
+                if (String.IsNullOrEmpty( model.PROD_CODE))
+                    throw new Exception("not existing PROD_CODE");
 
-                dynamic id = model.PROD_ID;
+                dynamic id = model.PROD_CODE;
                 var dto = _uow.ProductRepository.GetById(id);
 
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
@@ -135,11 +135,11 @@ namespace GFCA.APT.BAL.Implements
             try
             {
 
-                if (model.PROD_ID == 0)
-                    throw new Exception("not existing PROD ID");
+                if (String.IsNullOrEmpty(model.PROD_CODE))
+                    throw new Exception("not existing PROD CODE");
 
-                dynamic id = model.PROD_ID;
-                var dto = _uow.ProductRepository.GetById(id);
+                dynamic id = model.PROD_CODE;
+                ProductDto dto = _uow.ProductRepository.GetByCode(id);
 
 
 
@@ -151,9 +151,13 @@ namespace GFCA.APT.BAL.Implements
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
                 _uow.ProductRepository.Update(dto);
+                _uow.Commit();
 
-                response.Message = $"{typeof(ProductService)} has been changed";
                 response.Success = true;
+                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.Message = $"Product ({model.PROD_CODE}) has been changed";
+
+ 
             }
             catch (Exception ex)
             {
