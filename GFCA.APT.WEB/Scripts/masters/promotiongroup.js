@@ -69,4 +69,8 @@ $(document).ready(function () {
         promotiongroupPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
+    function ChangeClient(){
+
+        alert("Helooo");
+    }
 });

@@ -144,7 +144,7 @@ let promotiongroupPopup = new (function () {
     this.bindDom = function (data) {
 
 
-      //  alert("EDIT");
+      //  alert(data.CLIENT_CODE);
 
      //   this.fieldsDisable();
 
@@ -159,14 +159,19 @@ let promotiongroupPopup = new (function () {
         $(this.field_cust_id).val(data.CUST_ID);
         $(this.field_client_id).val(data.CLIENT_ID);
 
-        $("#pop-cmb-client_id").val(data.CLIENT_ID);
-        $("#pop-cmb-channel_id").val(data.CHANNEL_ID);
-        $("#pop-cmb-cust_id").val(data.CUST_ID);
+     //   $(this.field_client_id).val(data.CLIENT_CODE);
+       // $("#pop-cmb-channel_id").val(data.CHANNEL_ID);
+        $("#pop-cmb-client_id").val(data.CLIENT_CODE);
 
+
+
+       // $("#pop-cmb-client_id").attr("aria-label", "");
+
+        //$("#pop-cmb-client_id").attr("aria-label", "C001-test client 0111");
 
 
       //  $("#pop-cmb-client_id").prop("disabled", true);
-
+        //aria-label="C001 - test client 0111"
 
         if (data.IS_ACTIVED === false) {
             $(this.field_is_active).prop("checked", "");

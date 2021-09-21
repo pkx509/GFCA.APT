@@ -46,6 +46,7 @@
                                         <input type="hidden" id="pop-hid-client_id" />
                                         @(Html.EJS().ComboBox("pop-cmb-client_id")
                                                 .Placeholder("-- Select --")
+                                              //  .Change("ChangeClient")
                                                 .Autofill(true)
                                                 .DataSource(o =>
                                                 {
