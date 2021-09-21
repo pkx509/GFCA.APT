@@ -99,12 +99,9 @@
                                   .RowSelected("clientPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-                                      col.Field("CLIENT_ID").HeaderText("ID").Width("115")
-                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
-                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-                                      col.Field("CLIENT_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CLIENT_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     
+                                      col.Field("CLIENT_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CLIENT_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("CLIENT_DESC").HeaderText("Description").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
                                       col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();

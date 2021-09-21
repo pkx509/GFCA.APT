@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.CLIENT_ID == null || model.CLIENT_ID == 0)
-                    throw new Exception("Please select some one to editing.");
+                if (string.IsNullOrEmpty(model.CLIENT_CODE))
+                    throw new Exception("not existing CLIENT_CODE");
 
-                int id = model.CLIENT_ID ?? 0;
-                var dto = _uow.ClientRepository.GetById(id);
+                string id = model.CLIENT_CODE;
+                var dto = _uow.ClientRepository.GetByCode(id);
 
                 dto.CLIENT_CODE = model.CLIENT_CODE;
                 dto.CLIENT_NAME = model.CLIENT_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.CLIENT_ID == null || model.CLIENT_ID == 0)
-                    throw new Exception("not existing ClientID");
+                if (string.IsNullOrEmpty(model.CLIENT_CODE))
+                    throw new Exception("not existing CLIENT_CODE");
 
-                int id = model.CLIENT_ID ?? 0;
+                string id = model.CLIENT_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.ClientRepository.Delete(id);
+                    _uow.ClientRepository.DeleteByCode(id);
                 }
                 else
                 {
@@ -163,5 +163,10 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
+        public ClientDto GetByCode(string Id)
+        {
+            var dto = _uow.ClientRepository.GetByCode(Id);
+            return dto;
+        }
     }
 }

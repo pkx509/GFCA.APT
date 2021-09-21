@@ -75,7 +75,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.CLIENT_ID = Connection.ExecuteScalar<int>(
+            entity.CLIENT_CODE = Connection.ExecuteScalar<string>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -93,12 +93,12 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                CLIENT_ID = @CLIENT_ID;
+                                CLIENT_CODE = @CLIENT_CODE;
                                 ";
 
             var parms = new
             {
-                CLIENT_ID = entity.CLIENT_ID,
+               
                 CLIENT_CODE = entity.CLIENT_CODE,
                 CLIENT_NAME = entity.CLIENT_NAME,
                 CLIENT_DESC = entity.CLIENT_DESC,
@@ -107,7 +107,7 @@ namespace GFCA.APT.DAL.Implements
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
             };
 
-            Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<string>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -127,6 +127,17 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
+        public void DeleteByCode(string id)
+        {
+            string sqlExecute = @"DELETE TB_M_CLIENT WHERE CLIENT_CODE = @CLIENT_CODE;";
+            var parms = new { CLIENT_CODE = id };
+            Connection.ExecuteScalar<string>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+
+        }
     }
 
 }

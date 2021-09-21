@@ -65,7 +65,7 @@ namespace GFCA.APT.WEB.Controllers
             IClientService svc = biz.ClientService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CLIENT_ID, Text = $"{o.CLIENT_CODE} - {o.CLIENT_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CLIENT_CODE, Text = $"{o.CLIENT_CODE} - {o.CLIENT_NAME}" });
 
             return ret;
         }
