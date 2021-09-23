@@ -45,7 +45,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
 
-                throw new NotImplementedException();
+                
             }
             catch (Exception ex)
             {
