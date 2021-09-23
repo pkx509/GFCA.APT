@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface ITradeActivityService
     {
         IEnumerable<TradeActivityDto> GetAll();
-        TradeActivityDto GetById(int Id);
+        TradeActivityDto GetByCode(string code);
         BusinessResponse Create(TradeActivityDto model);
         BusinessResponse Edit(TradeActivityDto model);
         BusinessResponse Remove(TradeActivityDto model);

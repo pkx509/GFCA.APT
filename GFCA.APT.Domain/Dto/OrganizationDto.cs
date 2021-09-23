@@ -13,7 +13,8 @@ namespace GFCA.APT.Domain.Dto
         public string ORG_ABBR { get; set; }
         public string ORG_DESC { get; set; }
         public string FLAG_ORG { get; set; }
-        
+        //public string FLAG_ROW { get; set; }
+
         public bool IS_ACTIVED { get; set; } = true;
         public bool IS_DELETE_PERMANANT { get; set; } = false;
         public string FLAG_ROW { get; set; }

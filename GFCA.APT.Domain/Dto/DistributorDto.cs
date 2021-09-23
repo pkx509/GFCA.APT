@@ -6,7 +6,8 @@ namespace GFCA.APT.Domain.Dto
     {
         //[Required]
         //public int? DISTB_ID { get; set; }
-        public string EMIS_ID { get; set; }
+        public string EMIS_CODE { get; set; }
+        [Required]
         public string DISTB_CODE { get; set; }
         public string DISTB_NAME { get; set; }
         public string DISTB_DESC { get; set; }

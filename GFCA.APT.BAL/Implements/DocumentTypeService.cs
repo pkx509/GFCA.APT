@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.DocumentTypeRepository.All();
             return dto;
         }
-        public DocumentTypeDto GetById(int Id)
+        public DocumentTypeDto GetByCode(string code)
         {
-            var dto = _uow.DocumentTypeRepository.GetById(Id);
+            var dto = _uow.DocumentTypeRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(DocumentTypeDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.DOC_TYPE_ID == null || model.DOC_TYPE_ID == 0)
+                if (string.IsNullOrEmpty(model.DOC_TYPE_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.DOC_TYPE_ID ?? 0;
-                var dto = _uow.DocumentTypeRepository.GetById(id);
+                string code = model.DOC_TYPE_CODE;
+                var dto = _uow.DocumentTypeRepository.GetByCode(code);
 
                 dto.DOC_TYPE_CODE = model.DOC_TYPE_CODE;
                 dto.DOC_TYPE_NAME = model.DOC_TYPE_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.DOC_TYPE_ID == null || model.DOC_TYPE_ID == 0)
+                if (string.IsNullOrEmpty(model.DOC_TYPE_CODE))
                     throw new Exception("not existing Document type ID");
 
-                int id = model.DOC_TYPE_ID ?? 0;
+                string code = model.DOC_TYPE_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.DocumentTypeRepository.Delete(id);
+                    _uow.DocumentTypeRepository.Delete(code);
                 }
                 else
                 {

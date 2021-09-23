@@ -81,7 +81,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.CUST_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -92,8 +92,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_CUSTOMER
                                 SET
-                                  CUST_CODE   = @CUST_CODE
-                                , CUST_NAME   = @CUST_NAME
+                                  CUST_NAME   = @CUST_NAME
                                 , CUST_ABV    = @CUST_ABV
                                 , CUST_GROUP1 = @CUST_GROUP1
                                 , CUST_DESC   = @CUST_DESC
@@ -101,12 +100,12 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                CUST_ID = @CUST_ID;
+                                CUST_CODE = @CUST_CODE;
                                 ";
 
             var parms = new
         {
-                CUST_ID = entity.CUST_ID,
+                //CUST_ID = entity.CUST_ID,
                 CUST_CODE = entity.CUST_CODE,
                 CUST_NAME = entity.CUST_NAME,
                 CUST_ABV = entity.CUST_ABV,
@@ -125,10 +124,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_CUSTOMER WHERE CUST_ID = @CUST_ID;";
-            var parms = new { CUST_ID = id };
+            string sqlExecute = @"DELETE TB_M_CUSTOMER WHERE CUST_CODE = @CUST_CODE;";
+            var parms = new { CUST_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

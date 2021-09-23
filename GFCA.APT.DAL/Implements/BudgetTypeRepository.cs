@@ -75,30 +75,34 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
+            /*
             entity.BG_TYPE_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
             );
-
+            */
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
         }
         public void Update(BudgetTypeDto entity)
         {
             string sqlExecute = @"UPDATE TB_M_BUDGET_TYPE
                                 SET
-                                    BG_TYPE_CODE   = @BG_TYPE_CODE
-                                    , BG_TYPE_NAME = @BG_TYPE_NAME
+                                      BG_TYPE_NAME = @BG_TYPE_NAME
                                     , BG_TYPE_DESC   = @BG_TYPE_DESC
                                     , FLAG_ROW     = @FLAG_ROW
                                     , UPDATED_BY   = @UPDATED_BY
                                     , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                BG_TYPE_ID = @BG_TYPE_ID;
+                                BG_TYPE_CODE = @BG_TYPE_CODE;
                                 ";
 
             var parms = new
             {
-                BG_TYPE_ID = entity.BG_TYPE_ID,
                 BG_TYPE_CODE = entity.BG_TYPE_CODE,
                 BG_TYPE_NAME = entity.BG_TYPE_NAME,
                 BG_TYPE_DESC = entity.BG_TYPE_DESC,
@@ -115,12 +119,12 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
-            string sqlExecute = @"DELETE TB_M_BUDGET_TYPE WHERE BG_TYPE_ID = @BG_TYPE_ID;";
+            string sqlExecute = @"DELETE TB_M_BUDGET_TYPE WHERE BG_TYPE_CODE = @BG_TYPE_CODE;";
 
-            var parms = new { BG_TYPE_ID = id };
+            var parms = new { BG_TYPE_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

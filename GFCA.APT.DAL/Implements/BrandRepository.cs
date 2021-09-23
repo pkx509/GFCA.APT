@@ -44,7 +44,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"INSERT INTO TB_M_BRAND
                                 (
                                   BRAND_CODE
-                                , CLIENT_ID
+                                , CLIENT_CODE
                                 , BRAND_NAME
                                 , BRAND_DESC
                                 , FLAG_ROW
@@ -52,7 +52,7 @@ namespace GFCA.APT.DAL.Implements
                                 , CREATED_DATE
                                 ) VALUES (
                                   @BRAND_CODE
-                                , @CLIENT_ID
+                                , @CLIENT_CODE
                                 , @BRAND_NAME
                                 , @BRAND_DESC
                                 , @FLAG_ROW
@@ -65,7 +65,7 @@ namespace GFCA.APT.DAL.Implements
             {
                 //BRAND_ID = 0,
                 BRAND_CODE = entity.BRAND_CODE,
-                CLIENT_ID = entity.CLIENT_ID,
+                CLIENT_CODE = entity.CLIENT_CODE,
                 BRAND_NAME = entity.BRAND_NAME,
                 BRAND_DESC = entity.BRAND_DESC,
                 FLAG_ROW = entity.FLAG_ROW,
@@ -75,7 +75,14 @@ namespace GFCA.APT.DAL.Implements
                 //UPDATED_DATE = entity.UPDATED_DATE
             };
 
+            /*
             entity.BRAND_ID = Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms, 
+                transaction: Transaction
+            );
+            */
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -86,22 +93,21 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_BRAND
                                 SET
-                                  BRAND_CODE   = @BRAND_CODE
-                                , CLIENT_ID    = @CLIENT_ID
+                                  CLIENT_CODE  = @CLIENT_CODE
                                 , BRAND_NAME   = @BRAND_NAME
                                 , BRAND_DESC   = @BRAND_DESC
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                BRAND_ID = @BRAND_ID;
+                                BRAND_CODE = @BRAND_CODE;
                                 ";
 
             var parms = new
             {
-                BRAND_ID = entity.BRAND_ID,
+                
                 BRAND_CODE = entity.BRAND_CODE,
-                CLIENT_ID = entity.CLIENT_ID,
+                CLIENT_CODE = entity.CLIENT_CODE,
                 BRAND_NAME = entity.BRAND_NAME,
                 BRAND_DESC = entity.BRAND_DESC,
                 FLAG_ROW = entity.FLAG_ROW,
@@ -120,7 +126,7 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
             string sqlExecute = @"DELETE TB_M_BRAND
@@ -129,8 +135,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
             var parms = new
             {
-                BRAND_ID = id,
-                //BRAND_CODE = entity.BRAND_CODE,
+                BRAND_CODE = code,
                 //BRAND_NAME = entity.BRAND_NAME,
                 //BRAND_DESC = entity.BRAND_DESC,
                 //FLAG_ROW = entity.FLAG_ROW,

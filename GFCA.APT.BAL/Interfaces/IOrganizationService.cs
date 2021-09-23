@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IOrganizationService
     {
         IEnumerable<OrganizationDto> GetAll();
-        OrganizationDto GetById(int Id);
+        OrganizationDto GetByCode(string code);
         BusinessResponse Create(OrganizationDto model);
         BusinessResponse Edit(OrganizationDto model);
         BusinessResponse Remove(OrganizationDto model);

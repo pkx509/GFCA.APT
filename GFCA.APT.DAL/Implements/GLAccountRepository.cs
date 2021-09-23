@@ -15,19 +15,6 @@ namespace GFCA.APT.DAL.Implements
 
         public GLAccountRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public GLAccountDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM [TB_M_GL_ACCOUNT] ";
-            sqlQuery += "WHERE ACC_ID = @ACC_ID;";
-
-            var query = Connection.Query<GLAccountDto>(
-                sql: sqlQuery,
-                param: new { ACC_ID = id }
-                , transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public GLAccountDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM [TB_M_GL_ACCOUNT] ";
@@ -58,10 +45,10 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute =
 @"INSERT INTO [dbo].[TB_M_GL_ACCOUNT]
-           ([IO_ID]
-           ,[CENTER_ID]
-           ,[FUND_ID]
-           ,[FUND_CENTER_ID]
+           ([IO_CODE]
+           ,[CENTER_CODE]
+           ,[FUND_CODE]
+           ,[FUND_CENTER_CODE]
            ,[ACC_CODE]
            ,[ACC_NAME]
            ,[ACC_TYPE]
@@ -75,10 +62,10 @@ namespace GFCA.APT.DAL.Implements
            ,[CREATED_BY]
            ,[CREATED_DATE] )
      VALUES (
-            @IO_ID
-           ,@CENTER_ID
-           ,@FUND_ID
-           ,@FUND_CENTER_ID
+            @IO_CODE
+           ,@CENTER_CODE
+           ,@FUND_CODE
+           ,@FUND_CENTER_CODE
            ,@ACC_CODE
            ,@ACC_NAME
            ,@ACC_TYPE
@@ -97,8 +84,8 @@ namespace GFCA.APT.DAL.Implements
             var parms = new
             {
 
-                IO_ID = entity.IO_ID,
-                CENTER_ID = entity.CENTER_ID,
+                IO_CODE = entity.IO_CODE,
+                CENTER_CODE = entity.CENTER_CODE,
                 FUND_ID = entity.FUND_ID,
                 FUND_CENTER_ID = entity.FUND_CENTER_ID,
                 ACC_CODE = entity.ACC_CODE,
@@ -116,7 +103,7 @@ namespace GFCA.APT.DAL.Implements
 
             };
 
-            entity.ACC_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -128,11 +115,10 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute =
 @"UPDATE [dbo].[TB_M_GL_ACCOUNT]
-   SET [IO_ID] =			@IO_ID			
-      ,[CENTER_ID] =		@CENTER_ID		
-      ,[FUND_ID] =			@FUND_ID			
-      ,[FUND_CENTER_ID] =	@FUND_CENTER_ID	
-      ,[ACC_CODE] =			@ACC_CODE		
+   SET [IO_CODE] =			@IO_CODE			
+      ,[CENTER_CODE] =		@CENTER_CODE		
+      ,[FUND_CODE] =			@FUND_CODE			
+      ,[FUND_CENTER_CODE] =	@FUND_CENTER_CODE	
       ,[ACC_NAME] =			@ACC_NAME		
       ,[ACC_TYPE] =			@ACC_TYPE		
       ,[ACC_TYPE_DESC] =	@ACC_TYPE_DESC	
@@ -144,13 +130,12 @@ namespace GFCA.APT.DAL.Implements
       ,[FLAG_ROW] =			@FLAG_ROW		
       ,[UPDATED_BY] =		@UPDATED_BY		
       ,[UPDATED_DATE] =		@UPDATED_DATE
-WHERE ACC_ID = @ACC_ID; ";
+WHERE ACC_CODE = @ACC_CODE; ";
 
             var parms = new
             {
-                ACC_ID = entity.ACC_ID,
-                IO_ID = entity.IO_ID,
-                CENTER_ID = entity.CENTER_ID,
+                IO_CODE = entity.IO_CODE,
+                CENTER_CODE = entity.CENTER_CODE,
                 FUND_ID = entity.FUND_ID,
                 FUND_CENTER_ID = entity.FUND_CENTER_ID,
                 ACC_CODE = entity.ACC_CODE,
@@ -175,15 +160,15 @@ WHERE ACC_ID = @ACC_ID; ";
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
             string sqlExecute =
 @"DELETE [TB_M_GL_ACCOUNT]
-WHERE ACC_ID = @ACC_ID; ";
+WHERE ACC_CODE = @ACC_CODE; ";
             var parms = new
             {
-                ACC_ID = id, 
+                ACC_CODE = code, 
             };
 
             Connection.ExecuteScalar<int>(

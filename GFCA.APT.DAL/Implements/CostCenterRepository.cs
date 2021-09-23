@@ -12,14 +12,9 @@ namespace GFCA.APT.DAL.Implements
         
         public CostCenterRepository(IDbTransaction transaction): base(transaction) { }
 
-        
-
- 
-
-
         public IEnumerable<CostCenterDto> All()
         {
-            string sqlQuery = "SELECT  *   FROM [dbo].[TB_M_COST_CENTER];";
+            string sqlQuery = "SELECT * FROM TB_M_COST_CENTER;";
             var query = Connection.Query<CostCenterDto>(
                 sql: sqlQuery
                 , transaction: Transaction
@@ -27,8 +22,8 @@ namespace GFCA.APT.DAL.Implements
 
             return query;
         }
-
-        public CostCenterDto GetById(int id)
+        
+        public CostCenterDto GetByCode(string code)
         {
             throw new System.NotImplementedException();
         }
@@ -43,10 +38,11 @@ namespace GFCA.APT.DAL.Implements
             throw new System.NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
             throw new System.NotImplementedException();
         }
+
     }
 
 }

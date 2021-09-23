@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface ICostCenterService
     {
         IEnumerable<CostCenterDto> GetAll();
-        CostCenterDto GetById(int Id);
+        CostCenterDto GetByCode(string code);
         BusinessResponse Create(CostCenterDto model);
         BusinessResponse Edit(CostCenterDto model);
         BusinessResponse Remove(CostCenterDto model);

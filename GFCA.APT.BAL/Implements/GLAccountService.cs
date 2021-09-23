@@ -36,9 +36,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.GLAccountRepository.All();
             return dto;
         }
-        public GLAccountDto GetById(int Id)
+        public GLAccountDto GetByCode(string code)
         {
-            var dto = _uow.GLAccountRepository.GetById(Id);
+            var dto = _uow.GLAccountRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(GLAccountDto model)
@@ -52,8 +52,8 @@ namespace GFCA.APT.BAL.Implements
 
                 var dto = new GLAccountDto();
 
-                dto.IO_ID = model.IO_ID;
-                dto.CENTER_ID = model.CENTER_ID;
+                dto.IO_CODE = model.IO_CODE;
+                dto.CENTER_CODE = model.CENTER_CODE;
                 dto.FUND_ID = model.FUND_ID;
                 dto.FUND_CENTER_ID = model.FUND_CENTER_ID;
                 dto.ACC_CODE = model.ACC_CODE;
@@ -98,14 +98,13 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.ACC_ID == null || model.ACC_ID == 0)
+                if (string.IsNullOrEmpty(model.ACC_CODE))
                     throw new Exception("Please select some one to editing.");
                  
-                var dto = _uow.GLAccountRepository.GetById(model.ACC_ID); 
+                var dto = _uow.GLAccountRepository.GetByCode(model.ACC_CODE); 
                
-
-                dto.IO_ID = model.IO_ID;
-                dto.CENTER_ID = model.CENTER_ID;
+                dto.IO_CODE = model.IO_CODE;
+                dto.CENTER_CODE = model.CENTER_CODE;
                 dto.FUND_ID = model.FUND_ID;
                 dto.FUND_CENTER_ID = model.FUND_CENTER_ID;
                 dto.ACC_CODE = model.ACC_CODE;
@@ -148,7 +147,7 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.ACC_ID == null || model.ACC_ID == 0)
+                if (string.IsNullOrEmpty(model.ACC_CODE))
                     throw new Exception("not existing ACC_ID");
                   
                 var dto = model;
@@ -158,7 +157,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.GLAccountRepository.Delete(model.ACC_ID);
+                    _uow.GLAccountRepository.Delete(model.ACC_CODE);
                 }
                 else
                 {

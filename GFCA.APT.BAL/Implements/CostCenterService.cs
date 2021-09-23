@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.CostCenterRepository.All();
             return dto;
         }
-        public CostCenterDto GetById(int Id)
+        public CostCenterDto GetByCode(string code)
         {
-            var dto = _uow.CostCenterRepository.GetById(Id);
+            var dto = _uow.CostCenterRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(CostCenterDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.CENTER_ID == null || model.CENTER_ID == 0)
+                if (string.IsNullOrEmpty(model.CENTER_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.CENTER_ID ?? 0;
-                var dto = _uow.CostCenterRepository.GetById(id);
+                string code = model.CENTER_CODE;
+                var dto = _uow.CostCenterRepository.GetByCode(code);
 
                 dto.CENTER_CODE = model.CENTER_CODE;
                 dto.CENTER_NAME = model.CENTER_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.CENTER_ID == null || model.CENTER_ID == 0)
+                if (string.IsNullOrEmpty(model.CENTER_CODE))
                     throw new Exception("not existing Cost center ID");
 
-                int id = model.CENTER_ID ?? 0;
+                string code = model.CENTER_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.CostCenterRepository.Delete(id);
+                    _uow.CostCenterRepository.Delete(code);
                 }
                 else
                 {
