@@ -2,6 +2,9 @@
 #if DNX48
 ViewBag.Title = "Fixed Contract Document";
 #endif
+
+Dictionary<string, object> disabled = new Dictionary<string, object>();
+disabled.Add("disabled", "true");
 }
 
 @using GFCA.APT.Domain.HTTP.Controls
@@ -74,7 +77,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                             Company
                                                         </label>
                                                         <div class="col col-lg-8">
-                                                            <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                            @Html.EJS().TextBox("txt-company").Placeholder("Company name").CssClass("mandatory").Render()
                                                         </div>
 
                                                     </div>
@@ -87,7 +90,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                             Document No
                                                         </label>
                                                         <div class="col col-lg-8">
-                                                            <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                            @Html.EJS().TextBox("txt-document-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
                                                         </div>
 
                                                     </div>
@@ -100,7 +103,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                             Version
                                                         </label>
                                                         <div class="col col-lg-8">
-                                                            <input type="text" class="e-control e-textbox e-lib e-input" disabled />
+                                                            @Html.EJS().TextBox("txt-version").HtmlAttributes(disabled).Render()
                                                         </div>
 
                                                     </div>
@@ -113,7 +116,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                             Status
                                                         </label>
                                                         <div class="col col-lg-8">
-                                                            <input type="text" class="e-control e-textbox e-lib e-input" value="Draft" disabled />
+                                                            @Html.EJS().TextBox("txt-status").Value("Draft").HtmlAttributes(disabled).Render()
                                                         </div>
 
                                                     </div>
@@ -201,7 +204,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetEmission")
+                                                            o.Url("/api/Selection/GetChannel")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
@@ -220,7 +223,19 @@ ViewBag.Title = "Fixed Contract Document";
                                                         Requester
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        <input type="text" class="e-control e-textbox e-lib e-input mandatory" />
+                                                        @(Html.EJS().ComboBox("cmb-requester")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetEmployee/false")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,7 +250,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetEmission")
+                                                            o.Url("/api/Selection/GetOrganization")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
@@ -300,7 +315,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                         Apply to All
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                        @Html.EJS().TextBox("txt-apply-to-all").Placeholder("Input number only").Render()
                                                     </div>
                                                 </div>
                                             </div>
@@ -318,7 +333,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetBrand/false")
+                                                            o.Url("/api/Selection/GetTradeActivity")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
@@ -334,7 +349,17 @@ ViewBag.Title = "Fixed Contract Document";
                                                         Category
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                        @(Html.EJS().ComboBox("cmb-category")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCategory")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,7 +373,17 @@ ViewBag.Title = "Fixed Contract Document";
                                                         Date Reference
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                        @(Html.EJS().ComboBox("cmb-date-reference")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetDateReference")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,7 +393,62 @@ ViewBag.Title = "Fixed Contract Document";
                                                         UOM
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        <input type="text" class="e-control e-textbox e-lib e-input" />
+                                                        @(Html.EJS().ComboBox("cmb-uom")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetUnit")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Size
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-size")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetSize")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Pack
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-pack")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetPack")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                                     </div>
                                                 </div>
                                             </div>
@@ -377,7 +467,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetBrand/false")
+                                                            o.Url("/api/Selection/GetCostCenter")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
@@ -398,9 +488,7 @@ ViewBag.Title = "Fixed Contract Document";
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                 </div>

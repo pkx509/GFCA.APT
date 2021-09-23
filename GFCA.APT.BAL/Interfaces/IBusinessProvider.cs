@@ -21,5 +21,8 @@ namespace GFCA.APT.BAL.Interfaces
         IInternalOrderService InternalOrderService { get; }
         IOrganizationService OrganizationService { get; }
         IFixedContractService FixedContractService { get; }
+        IPackService PackService { get; }
+        IUnitService UnitService { get; }
+        ISizeService SizeService { get; }
     }
 }

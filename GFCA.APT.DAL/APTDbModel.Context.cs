@@ -75,6 +75,8 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_WM_WORKFLOW_STATE> TB_WM_WORKFLOW_STATE { get; set; }
         public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
         public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
+        public virtual DbSet<TB_M_ACTIVITY_20210919> TB_M_ACTIVITY_20210919 { get; set; }
+        public virtual DbSet<TB_M_SIZE_20210923> TB_M_SIZE_20210923 { get; set; }
         public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
         public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
     

@@ -14,7 +14,6 @@ namespace GFCA.APT.DAL
     
     public partial class TB_M_SIZE
     {
-        public int SIZE_ID { get; set; }
         public string SIZE_CODE { get; set; }
         public string SIZE_NAME { get; set; }
         public string SIZE_DESC { get; set; }

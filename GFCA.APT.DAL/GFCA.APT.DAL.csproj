@@ -188,6 +188,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Implements\SizeRepository.cs" />
+    <Compile Include="Implements\UnitRepository.cs" />
+    <Compile Include="Implements\PackRepository.cs" />
     <Compile Include="Implements\DistributorRepository.cs" />
     <Compile Include="Implements\DocumentTypeRepository.cs" />
     <Compile Include="Implements\EmployeeRepository.cs" />
@@ -207,6 +210,9 @@
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
+    <Compile Include="Interfaces\ISizeRepository.cs" />
+    <Compile Include="Interfaces\IUnitRepository.cs" />
+    <Compile Include="Interfaces\IPackRepository.cs" />
     <Compile Include="Interfaces\IDocumentTypeRepository.cs" />
     <Compile Include="Interfaces\IFixedContractRepository.cs" />
     <Compile Include="Interfaces\IInternalOrderRepository.cs" />
@@ -229,6 +235,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implements\UnitOfWork.cs" />
     <Compile Include="TB_M_ACTIVITY.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_ACTIVITY_20210919.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_BRAND.cs">
@@ -292,6 +301,9 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_SIZE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_SIZE_20210923.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_UNIT.cs">

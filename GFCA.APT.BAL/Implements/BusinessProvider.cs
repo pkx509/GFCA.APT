@@ -59,5 +59,14 @@ namespace GFCA.APT.BAL.Implements
         private IFixedContractService _fixedContractService;
         public IFixedContractService FixedContractService => _fixedContractService ?? (_fixedContractService = Serve.FixedContractService.CreateInstant());
 
+
+        private IPackService _packService;
+        public IPackService PackService => _packService ?? (_packService = Serve.PackService.CreateInstant());
+
+        private IUnitService _unitService;
+        public IUnitService UnitService => _unitService ?? (_unitService = Serve.UnitService.CreateInstant());
+
+        private ISizeService _sizeService;
+        public ISizeService SizeService => _sizeService ?? (_sizeService = Serve.SizeService.CreateInstant());
     }
 }

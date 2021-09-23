@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'APT2DB3.dbo.TB_M_ACCOUNT_PAYABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TB_M_ACCOUNT_PAYABLE">
+          <Property Name="IO_CODE" Type="int" />
+          <Property Name="CENTER_ID" Type="int" />
+          <Property Name="FUND_ID" Type="int" />
+          <Property Name="FUND_CENTER_ID" Type="int" />
+          <Property Name="MATERIAL" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'APT2DB3.dbo.TB_M_ACCOUNT_RECEIVEABLE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TB_M_ACCOUNT_RECEIVEABLE">
+          <Property Name="IO_CODE" Type="int" />
+          <Property Name="CENTER_ID" Type="int" />
+          <Property Name="FUND_ID" Type="int" />
+          <Property Name="FUND_CENTER_ID" Type="int" />
+          <Property Name="MATERIAL" Type="int" />
+        </EntityType>-->
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_CODE" />
@@ -13,6 +31,35 @@
           <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ACTIVITY_TYPE" Type="varchar" MaxLength="50" />
           <Property Name="ACTIVTITY_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="HAS_FIXED_CONTRACT" Type="varchar" MaxLength="1" />
+          <Property Name="CAN_DEDUCTABLE" Type="varchar" MaxLength="1" />
+          <Property Name="IN_THB_CS" Type="varchar" MaxLength="1" />
+          <Property Name="IN_GROSS_SALE" Type="varchar" MaxLength="1" />
+          <Property Name="IN_NOT_SALE" Type="varchar" MaxLength="1" />
+          <Property Name="OUT_THB_CS" Type="varchar" MaxLength="1" />
+          <Property Name="OUT_GROSS_SALE" Type="varchar" MaxLength="1" />
+          <Property Name="OUT_NOT_SALE" Type="varchar" MaxLength="1" />
+          <Property Name="NO_RELATE_ABS_AMT" Type="varchar" MaxLength="1" />
+          <Property Name="VALUABLE" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVITY_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'APT2DB3.dbo.TB_M_ACTIVITY_20210919' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TB_M_ACTIVITY_20210919">
+          <Key>
+            <PropertyRef Name="ACTIVITY_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
+          </Key>
+          <Property Name="ACC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACTIVITY_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVTITY_NAME" Type="varchar" MaxLength="50" />
           <Property Name="HAS_FIXED_CONTRACT" Type="varchar" MaxLength="1" />
           <Property Name="CAN_DEDUCTABLE" Type="varchar" MaxLength="1" />
           <Property Name="IN_THB_CS" Type="varchar" MaxLength="1" />
@@ -266,9 +313,8 @@
         </EntityType>
         <EntityType Name="TB_M_PACK">
           <Key>
-            <PropertyRef Name="PACK_ID" />
+            <PropertyRef Name="PACK_CODE" />
           </Key>
-          <Property Name="PACK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PACK_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PACK_NAME" Type="varchar" MaxLength="100" />
           <Property Name="PACK_DESC" Type="varchar(max)" />
@@ -345,7 +391,25 @@
         </EntityType>
         <EntityType Name="TB_M_SIZE">
           <Key>
+            <PropertyRef Name="SIZE_CODE" />
+          </Key>
+          <Property Name="SIZE_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SIZE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="SIZE_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'APT2DB3.dbo.TB_M_SIZE_20210923' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TB_M_SIZE_20210923">
+          <Key>
             <PropertyRef Name="SIZE_ID" />
+            <PropertyRef Name="SIZE_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
           </Key>
           <Property Name="SIZE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SIZE_CODE" Type="varchar" MaxLength="50" Nullable="false" />
@@ -1415,6 +1479,43 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Self.TB_WM_WORKFLOW_STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Self.TB_WP_STATE_ACTOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Self.TB_WP_STATE_DIRECTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_ACTIVITY_20210919" EntityType="Self.TB_M_ACTIVITY_20210919" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TB_M_ACTIVITY_20210919].[ACC_CODE] AS [ACC_CODE], 
+    [TB_M_ACTIVITY_20210919].[ACTIVITY_CODE] AS [ACTIVITY_CODE], 
+    [TB_M_ACTIVITY_20210919].[ACTIVITY_TYPE] AS [ACTIVITY_TYPE], 
+    [TB_M_ACTIVITY_20210919].[ACTIVTITY_NAME] AS [ACTIVTITY_NAME], 
+    [TB_M_ACTIVITY_20210919].[HAS_FIXED_CONTRACT] AS [HAS_FIXED_CONTRACT], 
+    [TB_M_ACTIVITY_20210919].[CAN_DEDUCTABLE] AS [CAN_DEDUCTABLE], 
+    [TB_M_ACTIVITY_20210919].[IN_THB_CS] AS [IN_THB_CS], 
+    [TB_M_ACTIVITY_20210919].[IN_GROSS_SALE] AS [IN_GROSS_SALE], 
+    [TB_M_ACTIVITY_20210919].[IN_NOT_SALE] AS [IN_NOT_SALE], 
+    [TB_M_ACTIVITY_20210919].[OUT_THB_CS] AS [OUT_THB_CS], 
+    [TB_M_ACTIVITY_20210919].[OUT_GROSS_SALE] AS [OUT_GROSS_SALE], 
+    [TB_M_ACTIVITY_20210919].[OUT_NOT_SALE] AS [OUT_NOT_SALE], 
+    [TB_M_ACTIVITY_20210919].[NO_RELATE_ABS_AMT] AS [NO_RELATE_ABS_AMT], 
+    [TB_M_ACTIVITY_20210919].[VALUABLE] AS [VALUABLE], 
+    [TB_M_ACTIVITY_20210919].[ACTIVITY_DESC] AS [ACTIVITY_DESC], 
+    [TB_M_ACTIVITY_20210919].[FLAG_ROW] AS [FLAG_ROW], 
+    [TB_M_ACTIVITY_20210919].[CREATED_BY] AS [CREATED_BY], 
+    [TB_M_ACTIVITY_20210919].[CREATED_DATE] AS [CREATED_DATE], 
+    [TB_M_ACTIVITY_20210919].[UPDATED_BY] AS [UPDATED_BY], 
+    [TB_M_ACTIVITY_20210919].[UPDATED_DATE] AS [UPDATED_DATE]
+    FROM [dbo].[TB_M_ACTIVITY_20210919] AS [TB_M_ACTIVITY_20210919]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TB_M_SIZE_20210923" EntityType="Self.TB_M_SIZE_20210923" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TB_M_SIZE_20210923].[SIZE_ID] AS [SIZE_ID], 
+    [TB_M_SIZE_20210923].[SIZE_CODE] AS [SIZE_CODE], 
+    [TB_M_SIZE_20210923].[SIZE_NAME] AS [SIZE_NAME], 
+    [TB_M_SIZE_20210923].[SIZE_DESC] AS [SIZE_DESC], 
+    [TB_M_SIZE_20210923].[FLAG_ROW] AS [FLAG_ROW], 
+    [TB_M_SIZE_20210923].[CREATED_BY] AS [CREATED_BY], 
+    [TB_M_SIZE_20210923].[CREATED_DATE] AS [CREATED_DATE], 
+    [TB_M_SIZE_20210923].[UPDATED_BY] AS [UPDATED_BY], 
+    [TB_M_SIZE_20210923].[UPDATED_DATE] AS [UPDATED_DATE]
+    FROM [dbo].[TB_M_SIZE_20210923] AS [TB_M_SIZE_20210923]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Self.TB_S_EMPLOYEE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TB_S_EMPLOYEE].[EMP_CODE] AS [EMP_CODE], 
@@ -1677,6 +1778,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Models.TB_WM_WORKFLOW_STATE" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Models.TB_WP_STATE_ACTOR" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Models.TB_WP_STATE_DIRECTION" />
+          <EntitySet Name="TB_M_ACTIVITY_20210919" EntityType="Models.TB_M_ACTIVITY_20210919" />
+          <EntitySet Name="TB_M_SIZE_20210923" EntityType="Models.TB_M_SIZE_20210923" />
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Models.TB_S_EMPLOYEE" />
           <EntitySet Name="TB_S_ORGANIZATION" EntityType="Models.TB_S_ORGANIZATION" />
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
@@ -2132,9 +2235,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         </EntityType>
         <EntityType Name="TB_M_PACK">
           <Key>
-            <PropertyRef Name="PACK_ID" />
+            <PropertyRef Name="PACK_CODE" />
           </Key>
-          <Property Name="PACK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PACK_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PACK_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PACK_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -2215,9 +2317,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         </EntityType>
         <EntityType Name="TB_M_SIZE">
           <Key>
-            <PropertyRef Name="SIZE_ID" />
+            <PropertyRef Name="SIZE_CODE" />
           </Key>
-          <Property Name="SIZE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SIZE_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SIZE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="SIZE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -2681,6 +2782,50 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="Sort" Type="Int32" />
           <NavigationProperty Name="TB_WM_FLOW_ITEM" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_FLOW_ITEM" />
           <NavigationProperty Name="TB_WM_WORKFLOW_STATE" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_WORKFLOW_STATE" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_WORKFLOW_STATE" />
+        </EntityType>
+        <EntityType Name="TB_M_ACTIVITY_20210919">
+          <Key>
+            <PropertyRef Name="ACTIVITY_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
+          </Key>
+          <Property Name="ACC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVTITY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HAS_FIXED_CONTRACT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CAN_DEDUCTABLE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IN_THB_CS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IN_GROSS_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IN_NOT_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OUT_THB_CS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OUT_GROSS_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OUT_NOT_SALE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="NO_RELATE_ABS_AMT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="VALUABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_SIZE_20210923">
+          <Key>
+            <PropertyRef Name="SIZE_ID" />
+            <PropertyRef Name="SIZE_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
+          </Key>
+          <Property Name="SIZE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SIZE_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SIZE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SIZE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="TB_S_EMPLOYEE">
           <Key>
@@ -3510,7 +3655,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="PACK_DESC" ColumnName="PACK_DESC" />
                 <ScalarProperty Name="PACK_NAME" ColumnName="PACK_NAME" />
                 <ScalarProperty Name="PACK_CODE" ColumnName="PACK_CODE" />
-                <ScalarProperty Name="PACK_ID" ColumnName="PACK_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3593,7 +3737,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="SIZE_DESC" ColumnName="SIZE_DESC" />
                 <ScalarProperty Name="SIZE_NAME" ColumnName="SIZE_NAME" />
                 <ScalarProperty Name="SIZE_CODE" ColumnName="SIZE_CODE" />
-                <ScalarProperty Name="SIZE_ID" ColumnName="SIZE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4011,6 +4154,47 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="STATE_CODE" ColumnName="STATE_CODE" />
                 <ScalarProperty Name="FLOW_ITEM_ID" ColumnName="FLOW_ITEM_ID" />
                 <ScalarProperty Name="WF_STATE_ID" ColumnName="WF_STATE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_ACTIVITY_20210919">
+            <EntityTypeMapping TypeName="Models.TB_M_ACTIVITY_20210919">
+              <MappingFragment StoreEntitySet="TB_M_ACTIVITY_20210919">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="ACTIVITY_DESC" ColumnName="ACTIVITY_DESC" />
+                <ScalarProperty Name="VALUABLE" ColumnName="VALUABLE" />
+                <ScalarProperty Name="NO_RELATE_ABS_AMT" ColumnName="NO_RELATE_ABS_AMT" />
+                <ScalarProperty Name="OUT_NOT_SALE" ColumnName="OUT_NOT_SALE" />
+                <ScalarProperty Name="OUT_GROSS_SALE" ColumnName="OUT_GROSS_SALE" />
+                <ScalarProperty Name="OUT_THB_CS" ColumnName="OUT_THB_CS" />
+                <ScalarProperty Name="IN_NOT_SALE" ColumnName="IN_NOT_SALE" />
+                <ScalarProperty Name="IN_GROSS_SALE" ColumnName="IN_GROSS_SALE" />
+                <ScalarProperty Name="IN_THB_CS" ColumnName="IN_THB_CS" />
+                <ScalarProperty Name="CAN_DEDUCTABLE" ColumnName="CAN_DEDUCTABLE" />
+                <ScalarProperty Name="HAS_FIXED_CONTRACT" ColumnName="HAS_FIXED_CONTRACT" />
+                <ScalarProperty Name="ACTIVTITY_NAME" ColumnName="ACTIVTITY_NAME" />
+                <ScalarProperty Name="ACTIVITY_TYPE" ColumnName="ACTIVITY_TYPE" />
+                <ScalarProperty Name="ACTIVITY_CODE" ColumnName="ACTIVITY_CODE" />
+                <ScalarProperty Name="ACC_CODE" ColumnName="ACC_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_SIZE_20210923">
+            <EntityTypeMapping TypeName="Models.TB_M_SIZE_20210923">
+              <MappingFragment StoreEntitySet="TB_M_SIZE_20210923">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="SIZE_DESC" ColumnName="SIZE_DESC" />
+                <ScalarProperty Name="SIZE_NAME" ColumnName="SIZE_NAME" />
+                <ScalarProperty Name="SIZE_CODE" ColumnName="SIZE_CODE" />
+                <ScalarProperty Name="SIZE_ID" ColumnName="SIZE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

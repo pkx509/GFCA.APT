@@ -12,11 +12,12 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_PACK
+    public partial class TB_M_SIZE_20210923
     {
-        public string PACK_CODE { get; set; }
-        public string PACK_NAME { get; set; }
-        public string PACK_DESC { get; set; }
+        public int SIZE_ID { get; set; }
+        public string SIZE_CODE { get; set; }
+        public string SIZE_NAME { get; set; }
+        public string SIZE_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
