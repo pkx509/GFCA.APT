@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
 
         public SizeRepository(IDbTransaction transaction): base(transaction) { }
 
-        public SizeDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_SIZE WHERE SIZE_ID = @SIZE_ID;";
-            var query = Connection.Query<SizeDto>(
-                sql: sqlQuery,
-                param: new { SIZE_ID = id }
-                ,transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public SizeDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_SIZE WHERE SIZE_CODE = @SIZE_CODE;";
@@ -75,7 +64,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.SIZE_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -93,12 +82,11 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                SIZE_ID = @SIZE_ID;
+                                SIZE_CODE = @SIZE_CODE;
                                 ";
 
             var parms = new
-        {
-                SIZE_ID = entity.SIZE_ID,
+            {
                 SIZE_CODE = entity.SIZE_CODE,
                 SIZE_NAME = entity.SIZE_NAME,
                 SIZE_DESC = entity.SIZE_DESC,
@@ -115,10 +103,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_SIZE WHERE SIZE_ID = @SIZE_ID;";
-            var parms = new { SIZE_ID = id };
+            string sqlExecute = @"DELETE TB_M_SIZE WHERE SIZE_code = @SIZE_CODE;";
+            var parms = new { SIZE_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

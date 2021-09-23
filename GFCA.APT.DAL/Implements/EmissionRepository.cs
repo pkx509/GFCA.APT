@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
 
         public EmissionRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public EmissionDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_EMISSION WHERE EMIS_ID = @EMIS_ID;";
-            var query = Connection.Query<EmissionDto>(
-                sql: sqlQuery,
-                param: new { EMIS_ID = id }
-                , transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public EmissionDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_EMISSION WHERE EMIS_CODE = @EMIS_CODE;";
@@ -75,7 +64,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.EMIS_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -86,19 +75,17 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_EMISSION
                                 SET
-                                  EMIS_CODE   = @EMIS_CODE
-                                , EMIS_NAME   = @EMIS_NAME
+                                  EMIS_NAME   = @EMIS_NAME
                                 , EMIS_DESC   = @EMIS_DESC
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                EMIS_ID = @EMIS_ID;
+                                EMIS_CODE = @EMIS_CODE;
                                 ";
 
             var parms = new
             {
-                EMIS_ID = entity.EMIS_ID,
                 EMIS_CODE = entity.EMIS_CODE,
                 EMIS_NAME = entity.EMIS_NAME,
                 EMIS_DESC = entity.EMIS_DESC,
@@ -115,10 +102,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_EMISSION WHERE EMIS_ID = @EMIS_ID;";
-            var parms = new { EMIS_ID = id };
+            string sqlExecute = @"DELETE TB_M_EMISSION WHERE EMIS_CODE = @EMIS_CODE;";
+            var parms = new { EMIS_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

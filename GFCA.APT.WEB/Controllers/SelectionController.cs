@@ -216,7 +216,7 @@ namespace GFCA.APT.WEB.Controllers
             IChannelService svc = biz.ChannelService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CHANNEL_ID, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CHANNEL_CODE, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" });
 
             return ret;
         }
@@ -286,7 +286,7 @@ namespace GFCA.APT.WEB.Controllers
             IUnitService svc = biz.UnitService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.UNIT_ID, Text = $"{o.UNIT_CODE} - {o.UNIT_NAME}" });
+                .Select(o => new SelectionItem { Value = o.UNIT_CODE, Text = $"{o.UNIT_CODE} - {o.UNIT_NAME}" });
             return ret;
         }
 
@@ -298,7 +298,7 @@ namespace GFCA.APT.WEB.Controllers
             ICostCenterService svc = biz.CostCenterService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CENTER_ID, Text = $"{o.CENTER_CODE} - {o.CENTER_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CENTER_CODE, Text = $"{o.CENTER_CODE} - {o.CENTER_NAME}" });
             return ret;
         }
 

@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.OrganizationRepository.All();
             return dto;
         }
-        public OrganizationDto GetById(int Id)
+        public OrganizationDto GetByCode(string code)
         {
-            var dto = _uow.OrganizationRepository.GetById(Id);
+            var dto = _uow.OrganizationRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(OrganizationDto model)
@@ -50,14 +50,16 @@ namespace GFCA.APT.BAL.Implements
 
                 var dto = new OrganizationDto();
 
-                dto.COMP_ID = model.COMP_ID;
                 dto.ORG_CODE = model.ORG_CODE;
-                dto.ORG_TYPE = model.ORG_TYPE;
-                dto.ORG_DEPARTMENT_NAME = model.ORG_DEPARTMENT_NAME;
-                dto.ORG_POSITION_NAME = model.ORG_POSITION_NAME;
+                dto.REPORT_TO = model.REPORT_TO;
+                dto.COMP_CODE = model.COMP_CODE;
+                dto.HIERACHY_ID = model.HIERACHY_ID;
+                dto.ORG_NAME = model.ORG_NAME;
+                dto.ORG_ABBR = model.ORG_ABBR;
                 dto.ORG_DESC = model.ORG_DESC;
-                dto.FLAG_ROW = FLAG_ROW.SHOW;
-                dto.CREATED_BY = _currentUser.UserName ?? "SYSTEM";
+                dto.FLAG_ORG = model.FLAG_ORG;
+                dto.FLAG_ROW     = FLAG_ROW.SHOW;
+                dto.CREATED_BY   = _currentUser.UserName ?? "SYSTEM";
                 dto.CREATED_DATE = DateTime.UtcNow;
 
                 _uow.OrganizationRepository.Insert(dto);
@@ -87,18 +89,20 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.ORG_ID == null || model.ORG_ID == 0)
+                if (string.IsNullOrEmpty(model.ORG_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.ORG_ID ?? 0;
-                var dto = _uow.OrganizationRepository.GetById(id);
+                string code = model.ORG_CODE;
+                var dto = _uow.OrganizationRepository.GetByCode(code);
 
-                dto.COMP_ID = model.COMP_ID;
                 dto.ORG_CODE = model.ORG_CODE;
-                dto.ORG_TYPE = model.ORG_TYPE;
-                dto.ORG_DEPARTMENT_NAME = model.ORG_DEPARTMENT_NAME;
-                dto.ORG_POSITION_NAME = model.ORG_POSITION_NAME;
+                dto.REPORT_TO = model.REPORT_TO;
+                dto.COMP_CODE = model.COMP_CODE;
+                dto.HIERACHY_ID = model.HIERACHY_ID;
+                dto.ORG_NAME = model.ORG_NAME;
+                dto.ORG_ABBR = model.ORG_ABBR;
                 dto.ORG_DESC = model.ORG_DESC;
+                dto.FLAG_ORG = model.FLAG_ORG;
                 dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.UPDATED_DATE = DateTime.UtcNow;
@@ -129,10 +133,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.ORG_ID == null || model.ORG_ID == 0)
+                if (string.IsNullOrEmpty(model.ORG_CODE))
                     throw new Exception("not existing Organization ID");
 
-                int id = model.ORG_ID ?? 0;
+                string code = model.ORG_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -140,7 +144,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.OrganizationRepository.Delete(id);
+                    _uow.OrganizationRepository.Delete(code);
                 }
                 else
                 {

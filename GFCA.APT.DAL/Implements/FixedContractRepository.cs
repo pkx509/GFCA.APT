@@ -24,6 +24,11 @@ namespace GFCA.APT.DAL.Implements
             throw new NotImplementedException();
         }
 
+        public void Delete(string code)
+        {
+            throw new NotImplementedException();
+        }
+
         public FixedContractDto GetByCode(string code)
         {
             throw new NotImplementedException();

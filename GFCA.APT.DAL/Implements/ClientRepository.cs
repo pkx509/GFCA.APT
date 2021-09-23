@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
 
         public ClientRepository(IDbTransaction transaction): base(transaction) { }
 
-        public ClientDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_CLIENT WHERE CLIENT_ID = @CLIENT_ID;";
-            var query = Connection.Query<ClientDto>(
-                sql: sqlQuery,
-                param: new { CLIENT_ID = id }
-                ,transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public ClientDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_CLIENT WHERE CLIENT_CODE = @CLIENT_CODE";
@@ -75,7 +64,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.CLIENT_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -97,8 +86,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-        {
-                CLIENT_ID = entity.CLIENT_ID,
+            {
                 CLIENT_CODE = entity.CLIENT_CODE,
                 CLIENT_NAME = entity.CLIENT_NAME,
                 CLIENT_DESC = entity.CLIENT_DESC,
@@ -115,10 +103,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_CLIENT WHERE CLIENT_ID = @CLIENT_ID;";
-            var parms = new { CLIENT_ID = id };
+            string sqlExecute = @"DELETE TB_M_CLIENT WHERE CLIENT_CODE = @CLIENT_CODE;";
+            var parms = new { CLIENT_CODE = code };
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,

@@ -32,16 +32,16 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
-        public TradeActivityDto GetById(int id)
+        public TradeActivityDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT * FROM TB_M_ACTIVITY WHERE ACTIVITY_ID = @ACTIVITY_ID;";
+            string sqlQuery = @"SELECT * FROM TB_M_ACTIVITY WHERE ACTIVITY_CODE = @ACTIVITY_CODE;";
 
             try
             {
 
                 var parms = new
                 {
-                    ACTIVITY_ID = id
+                    ACTIVITY_CODE = code
                 };
                 var query = Connection.Query<TB_M_ACTIVITY>(
                     sql: sqlQuery
@@ -62,7 +62,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"INSERT INTO TB_M_ACTIVITY 
                                 (
-                                      ACC_ID
+                                      ACC_CODE
                                     , ACTIVITY_CODE
                                     , ACTIVITY_TYPE
                                     , ACTIVTITY_NAME
@@ -83,7 +83,7 @@ namespace GFCA.APT.DAL.Implements
                                 ) 
                                 VALUES 
                                 (
-                                      @ACC_ID
+                                      @ACC_CODE
                                     , @ACTIVITY_CODE
                                     , @ACTIVITY_TYPE
                                     , @ACTIVTITY_NAME
@@ -109,8 +109,7 @@ namespace GFCA.APT.DAL.Implements
                 var entity = dto.ToEntity();
                 var parms = new
                 {
-                      ACTIVITY_ID        = entity.ACTIVITY_ID
-                    , ACC_ID             = entity.ACC_ID
+                      ACC_CODE           = entity.ACC_CODE
                     , ACTIVITY_CODE      = entity.ACTIVITY_CODE
                     , ACTIVITY_TYPE      = entity.ACTIVITY_TYPE
                     , ACTIVTITY_NAME     = entity.ACTIVTITY_NAME
@@ -149,7 +148,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_ACTIVITY
                                 SET
-                                      ACC_ID             = @ACC_ID
+                                      ACC_CODE           = @ACC_CODE
                                     , ACTIVITY_CODE      = @ACTIVITY_CODE
                                     , ACTIVITY_TYPE      = @ACTIVITY_TYPE
                                     , ACTIVTITY_NAME     = @ACTIVTITY_NAME
@@ -174,8 +173,7 @@ namespace GFCA.APT.DAL.Implements
                 var entity = dto.ToEntity();
                 var parms = new 
                 {
-                      ACTIVITY_ID        = entity.ACTIVITY_ID
-                    , ACC_ID             = entity.ACC_ID
+                      ACC_CODE           = entity.ACC_CODE
                     , ACTIVITY_CODE      = entity.ACTIVITY_CODE
                     , ACTIVITY_TYPE      = entity.ACTIVITY_TYPE
                     , ACTIVTITY_NAME     = entity.ACTIVTITY_NAME
@@ -208,15 +206,15 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE FROM TB_M_ACTIVITY WHERE ACTIVITY_ID = @ACTIVITY_ID;";
+            string sqlExecute = @"DELETE FROM TB_M_ACTIVITY WHERE ACTIVITY_CODE = @ACTIVITY_CODE;";
 
             try
             {
                 var parms = new
                 {
-                     ACTIVITY_ID = id
+                     ACTIVITY_CODE = code
                 };
                 Connection.ExecuteScalar<int>(
                     sql: sqlExecute
@@ -238,8 +236,8 @@ namespace GFCA.APT.DAL.Implements
         public static TB_M_ACTIVITY ToEntity(this TradeActivityDto self)
         {
             var entity = new TB_M_ACTIVITY();
-            entity.ACTIVITY_ID         = self.ACTIVITY_ID??0;
-            entity.ACC_ID              = self.ACC_ID;
+            //entity.ACTIVITY_ID         = self.ACTIVITY_ID??0;
+            entity.ACC_CODE            = self.ACC_CODE;
             entity.ACTIVITY_CODE       = self.ACTIVITY_CODE;
             entity.ACTIVITY_TYPE       = self.ACTIVITY_TYPE;
             entity.ACTIVTITY_NAME      = self.ACTIVTITY_NAME;
@@ -266,7 +264,7 @@ namespace GFCA.APT.DAL.Implements
         public static TradeActivityDto ToDto(this TB_M_ACTIVITY self)
         {
             var dto = new TradeActivityDto();
-            dto.ACC_ID             = self.ACC_ID;
+            dto.ACC_CODE           = self.ACC_CODE;
             dto.ACTIVITY_CODE      = self.ACTIVITY_CODE;
             dto.ACTIVITY_TYPE      = self.ACTIVITY_TYPE;
             dto.ACTIVTITY_NAME     = self.ACTIVTITY_NAME;

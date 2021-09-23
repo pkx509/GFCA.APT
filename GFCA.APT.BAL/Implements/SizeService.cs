@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.SizeRepository.All();
             return dto;
         }
-        public SizeDto GetById(int Id)
+        public SizeDto GetByCode(string code)
         {
-            var dto = _uow.SizeRepository.GetById(Id);
+            var dto = _uow.SizeRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(SizeDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.SIZE_ID == null || model.SIZE_ID == 0)
+                if (string.IsNullOrEmpty(model.SIZE_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.SIZE_ID ?? 0;
-                var dto = _uow.SizeRepository.GetById(id);
+                string code = model.SIZE_CODE;
+                var dto = _uow.SizeRepository.GetByCode(code);
 
                 dto.SIZE_CODE = model.SIZE_CODE;
                 dto.SIZE_NAME = model.SIZE_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.SIZE_ID == null || model.SIZE_ID == 0)
+                if (string.IsNullOrEmpty(model.SIZE_CODE))
                     throw new Exception("not existing Size ID");
 
-                int id = model.SIZE_ID ?? 0;
+                string code = model.SIZE_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.SizeRepository.Delete(id);
+                    _uow.SizeRepository.Delete(code);
                 }
                 else
                 {

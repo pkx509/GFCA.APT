@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
         
         public CompanyRepository(IDbTransaction transaction): base(transaction) { }
 
-        public CompanyDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_COMPANY WHERE COMP_ID = @COMP_ID;";
-            var query = Connection.Query<CompanyDto>(
-                sql: sqlQuery,
-                param: new { COMPANY_ID = id }
-                ,transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public CompanyDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_COMPANY WHERE COMP_CODE = @COMP_CODE;";
@@ -75,7 +64,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.COMP_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -86,19 +75,17 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_COMPANY
                                 SET
-                                  COMP_CODE   = @COMP_CODE
                                 , COMP_NAME   = @COMP_NAME
                                 , ADDRESS   = @ADDRESS
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                COMP_ID = @COMP_ID;
+                                COMP_CODE = @COMP_CODE;
                                 ";
 
             var parms = new
             {
-                COMP_ID = entity.COMP_ID,
                 COMP_CODE = entity.COMP_CODE,
                 COMP_NAME = entity.COMP_NAME,
                 ADDRESS = entity.ADDRESS,
@@ -115,10 +102,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_COMPANY WHERE COMP_ID = @COMP_ID;";
-            var parms = new { COMP_ID = id };
+            string sqlExecute = @"DELETE TB_M_COMPANY WHERE COMP_CODE = @COMP_CODE;";
+            var parms = new { COMP_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

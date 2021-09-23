@@ -15,7 +15,7 @@ namespace GFCA.APT.DAL.Implements
         public BrandDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT a.*
-                            , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+                            , (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
                             FROM TB_M_BRAND a
                             WHERE a.BRAND_CODE = @BRAND_CODE;";
             var query = Connection.Query<BrandDto>(
@@ -29,7 +29,7 @@ namespace GFCA.APT.DAL.Implements
         public IEnumerable<BrandDto> All()
         {
             string sqlQuery = @"SELECT a.*
-                            , (SELECT TOP 1 b.CLIENT_CODE FROM TB_M_CLIENT b WHERE b.CLIENT_ID = a.CLIENT_ID) CLIENT_CODE
+                            , (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
                             FROM TB_M_BRAND a;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery
@@ -44,7 +44,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"INSERT INTO TB_M_BRAND
                                 (
                                   BRAND_CODE
-                                , CLIENT_ID
+                                , CLIENT_CODE
                                 , BRAND_NAME
                                 , BRAND_DESC
                                 , FLAG_ROW
@@ -52,7 +52,7 @@ namespace GFCA.APT.DAL.Implements
                                 , CREATED_DATE
                                 ) VALUES (
                                   @BRAND_CODE
-                                , @CLIENT_ID
+                                , @CLIENT_CODE
                                 , @BRAND_NAME
                                 , @BRAND_DESC
                                 , @FLAG_ROW
@@ -63,19 +63,19 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                //BRAND_ID = 0,
-                BRAND_CODE = entity.BRAND_CODE,
-                CLIENT_ID = entity.CLIENT_ID,
-                BRAND_NAME = entity.BRAND_NAME,
-                BRAND_DESC = entity.BRAND_DESC,
-                FLAG_ROW = entity.FLAG_ROW,
-                CREATED_BY = entity.CREATED_BY,
-                CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
-                //UPDATED_BY = entity.UPDATED_BY,
+                //BRAND_ID     = 0,
+                BRAND_CODE     = entity.BRAND_CODE,
+                CLIENT_CODE    = entity.CLIENT_CODE,
+                BRAND_NAME     = entity.BRAND_NAME,
+                BRAND_DESC     = entity.BRAND_DESC,
+                FLAG_ROW       = entity.FLAG_ROW,
+                CREATED_BY     = entity.CREATED_BY,
+                CREATED_DATE   = entity.CREATED_DATE?.ToDateTime2(),
+                //UPDATED_BY   = entity.UPDATED_BY,
                 //UPDATED_DATE = entity.UPDATED_DATE
             };
 
-            entity.BRAND_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -87,7 +87,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"UPDATE TB_M_BRAND
                                 SET
                                   BRAND_CODE   = @BRAND_CODE
-                                , CLIENT_ID    = @CLIENT_ID
+                                , CLIENT_CODE  = @CLIENT_CODE
                                 , BRAND_NAME   = @BRAND_NAME
                                 , BRAND_DESC   = @BRAND_DESC
                                 , FLAG_ROW     = @FLAG_ROW
@@ -99,17 +99,16 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                BRAND_ID = entity.BRAND_ID,
-                BRAND_CODE = entity.BRAND_CODE,
-                CLIENT_ID = entity.CLIENT_ID,
-                BRAND_NAME = entity.BRAND_NAME,
-                BRAND_DESC = entity.BRAND_DESC,
-                FLAG_ROW = entity.FLAG_ROW,
-                //CREATED_BY = entity.CREATED_BY,
+                BRAND_CODE     = entity.BRAND_CODE,
+                CLIENT_CODE    = entity.CLIENT_CODE,
+                BRAND_NAME     = entity.BRAND_NAME,
+                BRAND_DESC     = entity.BRAND_DESC,
+                FLAG_ROW       = entity.FLAG_ROW,
+                //CREATED_BY   = entity.CREATED_BY,
                 //CREATED_DATE = entity.CREATED_DATE,
-                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_BY     = entity.UPDATED_BY,
                 //UPDATED_DATE = entity.UPDATED_DATE
-                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+                UPDATED_DATE   = entity.UPDATED_DATE?.ToDateTime2()
             };
 
             Connection.ExecuteScalar<int>(
@@ -120,16 +119,16 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
             string sqlExecute = @"DELETE TB_M_BRAND
                                 WHERE
-                                BRAND_ID = @BRAND_ID;
+                                BRAND_CODE = @BRAND_CODE;
                                 ";
             var parms = new
             {
-                BRAND_ID = id,
+                BRAND_CODE = code,
                 //BRAND_CODE = entity.BRAND_CODE,
                 //BRAND_NAME = entity.BRAND_NAME,
                 //BRAND_DESC = entity.BRAND_DESC,

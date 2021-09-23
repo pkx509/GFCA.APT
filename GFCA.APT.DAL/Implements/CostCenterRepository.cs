@@ -28,7 +28,7 @@ namespace GFCA.APT.DAL.Implements
             return query;
         }
 
-        public CostCenterDto GetById(int id)
+        public CostCenterDto GetByCode(string code)
         {
             throw new System.NotImplementedException();
         }
@@ -43,10 +43,11 @@ namespace GFCA.APT.DAL.Implements
             throw new System.NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
             throw new System.NotImplementedException();
         }
+
     }
 
 }

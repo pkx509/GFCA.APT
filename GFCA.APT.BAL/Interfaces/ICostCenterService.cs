@@ -1,19 +1,9 @@
 ﻿using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Interfaces
 {
-    public interface ICostCenterService
+    public interface ICostCenterService : IServices<CostCenterDto>
     {
-        IEnumerable<CostCenterDto> GetAll();
-        CostCenterDto GetById(int Id);
-        BusinessResponse Create(CostCenterDto model);
-        BusinessResponse Edit(CostCenterDto model);
-        BusinessResponse Remove(CostCenterDto model);
+
     }
 }

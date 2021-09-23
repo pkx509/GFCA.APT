@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
 
         public InternalOrderRepository(IDbTransaction transaction): base(transaction) { }
 
-        public InternalOrderDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_INTERNAL_ORDER WHERE IO_ID = @IO_ID;";
-            var query = Connection.Query<InternalOrderDto>(
-                sql: sqlQuery,
-                param: new { IO_ID = id }
-                ,transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public InternalOrderDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_INTERNAL_ORDER WHERE IO_CODE = @IO_CODE;";
@@ -86,19 +75,17 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_INTERNAL_ORDER
                                 SET
-                                  IO_CODE   = @IO_CODE
-                                , IO_NAME   = @IO_NAME
+                                  IO_NAME   = @IO_NAME
                                 , IO_DESC   = @IO_DESC
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                IO_ID = @IO_ID;
+                                IO_CODE = @IO_CODE;
                                 ";
 
             var parms = new
-        {
-                IO_ID = entity.IO_ID,
+            {
                 IO_CODE = entity.IO_CODE,
                 IO_NAME = entity.IO_NAME,
                 IO_DESC = entity.IO_DESC,
@@ -115,10 +102,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_INTERNAL_ORDER WHERE IO_ID = @IO_ID;";
-            var parms = new { IO_ID = id };
+            string sqlExecute = @"DELETE TB_M_INTERNAL_ORDER WHERE IO_CODE = @IO_CODE;";
+            var parms = new { IO_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

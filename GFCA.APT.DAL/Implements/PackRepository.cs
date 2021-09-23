@@ -12,17 +12,6 @@ namespace GFCA.APT.DAL.Implements
 
         public PackRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public PackDto GetById(int id)
-        {
-            string sqlQuery = @"SELECT * FROM TB_M_PACK WHERE PACK_ID = @PACK_ID;";
-            var query = Connection.Query<PackDto>(
-                sql: sqlQuery,
-                param: new { PACK_ID = id }
-                , transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public PackDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_PACK WHERE PACK_CODE = @PACK_CODE;";
@@ -75,7 +64,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            entity.PACK_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -86,19 +75,17 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_PACK
                                 SET
-                                  PACK_CODE     = @PACK_CODE
-                                , PACK_NAME     = @PACK_NAME
+                                  PACK_NAME     = @PACK_NAME
                                 , PACK_DESC     = @PACK_DESC
                                 , FLAG_ROW      = @FLAG_ROW
                                 , UPDATED_BY    = @UPDATED_BY
                                 , UPDATED_DATE  = @UPDATED_DATE
                                 WHERE
-                                PACK_ID = @PACK_ID;
+                                PACK_CODE = @PACK_CODE;
                                 ";
 
             var parms = new
             {
-                PACK_ID = entity.PACK_ID,
                 PACK_CODE = entity.PACK_CODE,
                 PACK_NAME = entity.PACK_NAME,
                 PACK_DESC = entity.PACK_DESC,
@@ -115,10 +102,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
-            string sqlExecute = @"DELETE TB_M_PACK WHERE PACK_ID = @PACK_ID;";
-            var parms = new { PACK_ID = id };
+            string sqlExecute = @"DELETE TB_M_PACK WHERE PACK_CODE = @PACK_CODE;";
+            var parms = new { PACK_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

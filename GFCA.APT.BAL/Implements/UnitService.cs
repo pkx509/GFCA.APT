@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.UnitRepository.All();
             return dto;
         }
-        public UnitDto GetById(int Id)
+        public UnitDto GetByCode(string code)
         {
-            var dto = _uow.UnitRepository.GetById(Id);
+            var dto = _uow.UnitRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(UnitDto model)
@@ -50,15 +50,15 @@ namespace GFCA.APT.BAL.Implements
 
                 var dto = new UnitDto();
 
-                dto.PARENT_ID   = model.PARENT_ID;
-                dto.UNIT_CODE   = model.UNIT_CODE;
-                dto.UNIT_NAME   = model.UNIT_NAME;
-                dto.UNIT_TYPE   = model.UNIT_TYPE;
-                dto.FACTOR      = model.FACTOR; 
-                dto.UNIT_DESC = model.UNIT_DESC;
-                dto.FLAG_ROW = FLAG_ROW.SHOW;
-                dto.CREATED_BY = _currentUser.UserName ?? "SYSTEM";
-                dto.CREATED_DATE = DateTime.UtcNow;
+                dto.UNIT_CODE        = model.UNIT_CODE;
+                dto.UNIT_PARENT_CODE = model.UNIT_PARENT_CODE;
+                dto.UNIT_NAME        = model.UNIT_NAME;
+                dto.UNIT_TYPE        = model.UNIT_TYPE;
+                dto.FACTOR           = model.FACTOR;
+                dto.UNIT_DESC        = model.UNIT_DESC;
+                dto.FLAG_ROW         = FLAG_ROW.SHOW;
+                dto.CREATED_BY       = _currentUser.UserName ?? "SYSTEM";
+                dto.CREATED_DATE     = DateTime.UtcNow;
 
                 _uow.UnitRepository.Insert(dto);
                 _uow.Commit();
@@ -87,19 +87,19 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.UNIT_ID == null || model.UNIT_ID == 0)
+                if (string.IsNullOrEmpty(model.UNIT_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.UNIT_ID ?? 0;
-                var dto = _uow.UnitRepository.GetById(id);
+                string code = model.UNIT_CODE;
+                var dto = _uow.UnitRepository.GetByCode(code);
 
-                dto.PARENT_ID   = model.PARENT_ID;
-                dto.UNIT_CODE   = model.UNIT_CODE;
-                dto.UNIT_NAME   = model.UNIT_NAME;
-                dto.UNIT_TYPE   = model.UNIT_TYPE;
-                dto.FACTOR      = model.FACTOR; 
-                dto.UNIT_DESC   = model.UNIT_DESC;
-                dto.FLAG_ROW    = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
+                dto.UNIT_CODE        = model.UNIT_CODE;
+                dto.UNIT_PARENT_CODE = model.UNIT_PARENT_CODE;
+                dto.UNIT_NAME        = model.UNIT_NAME;
+                dto.UNIT_TYPE        = model.UNIT_TYPE;
+                dto.FACTOR           = model.FACTOR;
+                dto.UNIT_DESC        = model.UNIT_DESC;
+                dto.FLAG_ROW         = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
 
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.UPDATED_DATE = DateTime.UtcNow;
@@ -130,10 +130,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.UNIT_ID == null || model.UNIT_ID == 0)
+                if (string.IsNullOrEmpty(model.UNIT_CODE))
                     throw new Exception("not existing Unit ID");
 
-                int id = model.UNIT_ID ?? 0;
+                string code = model.UNIT_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -141,7 +141,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.UnitRepository.Delete(id);
+                    _uow.UnitRepository.Delete(code);
                 }
                 else
                 {

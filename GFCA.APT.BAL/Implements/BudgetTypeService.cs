@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.BudgetTypeRepository.All();
             return dto;
         }
-        public BudgetTypeDto GetById(int Id)
+        public BudgetTypeDto GetByCode(string code)
         {
-            var dto = _uow.BudgetTypeRepository.GetById(Id);
+            var dto = _uow.BudgetTypeRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(BudgetTypeDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.BG_TYPE_ID == null || model.BG_TYPE_ID == 0)
+                if (string.IsNullOrEmpty(model.BG_TYPE_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.BG_TYPE_ID ?? 0;
-                var dto = _uow.BudgetTypeRepository.GetById(id);
+                string code = model.BG_TYPE_CODE;
+                var dto = _uow.BudgetTypeRepository.GetByCode(code);
 
                 dto.BG_TYPE_CODE = model.BG_TYPE_CODE;
                 dto.BG_TYPE_NAME = model.BG_TYPE_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.BG_TYPE_ID == null || model.BG_TYPE_ID == 0)
+                if (string.IsNullOrEmpty(model.BG_TYPE_CODE))
                     throw new Exception("not existing Budget type ID");
 
-                int id = model.BG_TYPE_ID ?? 0;
+                string code = model.BG_TYPE_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.BudgetTypeRepository.Delete(id);
+                    _uow.BudgetTypeRepository.Delete(code);
                 }
                 else
                 {

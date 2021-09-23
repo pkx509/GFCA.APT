@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.InternalOrderRepository.All();
             return dto;
         }
-        public InternalOrderDto GetById(int Id)
+        public InternalOrderDto GetByCode(string code)
         {
-            var dto = _uow.InternalOrderRepository.GetById(Id);
+            var dto = _uow.InternalOrderRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(InternalOrderDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.IO_ID == null || model.IO_ID == 0)
+                if (string.IsNullOrEmpty(model.IO_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.IO_ID ?? 0;
-                var dto = _uow.InternalOrderRepository.GetById(id);
+                string code = model.IO_CODE;
+                var dto = _uow.InternalOrderRepository.GetByCode(code);
 
                 dto.IO_CODE = model.IO_CODE;
                 dto.IO_NAME = model.IO_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.IO_ID == null || model.IO_ID == 0)
+                if (string.IsNullOrEmpty(model.IO_CODE))
                     throw new Exception("not existing Internal order ID");
 
-                int id = model.IO_ID ?? 0;
+                string code = model.IO_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.InternalOrderRepository.Delete(id);
+                    _uow.InternalOrderRepository.Delete(code);
                 }
                 else
                 {

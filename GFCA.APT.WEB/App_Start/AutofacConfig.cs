@@ -1,7 +1,10 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using GFCA.APT.BAL.Implements;
+using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
