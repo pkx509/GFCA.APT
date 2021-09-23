@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IBudgetTypeService
     {
         IEnumerable<BudgetTypeDto> GetAll();
-        BudgetTypeDto GetByCode(string code);
+        BudgetTypeDto GetById(int Id);
         BusinessResponse Create(BudgetTypeDto model);
         BusinessResponse Edit(BudgetTypeDto model);
         BusinessResponse Remove(BudgetTypeDto model);

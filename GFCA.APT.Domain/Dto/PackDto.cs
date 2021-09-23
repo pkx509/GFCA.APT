@@ -5,6 +5,8 @@ namespace GFCA.APT.Domain.Dto
     public class PackDto : Auditable
     {
         [Required]
+        public int? PACK_ID { get; set; }
+        [Required]
         public string PACK_CODE { get; set; }
         public string PACK_NAME { get; set; }
         public string PACK_DESC { get; set; }

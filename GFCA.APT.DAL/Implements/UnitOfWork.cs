@@ -26,7 +26,6 @@ namespace GFCA.APT.DAL.Implements
         private IEmployeeRepository _employeeRepository;
         private IInternalOrderRepository _internalOrderRepository;
         private IOrganizationRepository _organizationRepository;
-        private IFixedContractRepository _fixedContractRepository;
         private IPackRepository _packRepository;
         private IUnitRepository _unitRepository;
         private ISizeRepository _sizeRepository;
@@ -58,6 +57,7 @@ namespace GFCA.APT.DAL.Implements
                 return _glaccountRepository ?? (_glaccountRepository = new GLAccountRepository(_transaction));
             }
         }
+
         public IBrandRepository BrandRepository
         {
             get
@@ -107,6 +107,7 @@ namespace GFCA.APT.DAL.Implements
                 return _clientRepository ?? (_clientRepository = new ClientRepository(_transaction));
             }
         }
+
         public ICompanyRepository CompanyRepository
         {
             get
@@ -114,6 +115,7 @@ namespace GFCA.APT.DAL.Implements
                 return _companyRepository ?? (_companyRepository = new CompanyRepository(_transaction));
             }
         }
+
         public ICostCenterRepository CostCenterRepository
         {
             get
@@ -121,6 +123,7 @@ namespace GFCA.APT.DAL.Implements
                 return _costCenterRepository ?? (_costCenterRepository = new CostCenterRepository(_transaction));
             }
         }
+
         public ICustomerRepository CustomerRepository
         {
             get
@@ -128,6 +131,7 @@ namespace GFCA.APT.DAL.Implements
                 return _customerRepository ?? (_customerRepository = new CustomerRepository(_transaction));
             }
         }
+
         public IDocumentTypeRepository DocumentTypeRepository
         {
             get
@@ -135,6 +139,7 @@ namespace GFCA.APT.DAL.Implements
                 return _documentTypeRepository ?? (_documentTypeRepository = new DocumentTypeRepository(_transaction));
             }
         }
+
         public IDistributorRepository DistributorRepository
         {
             get
@@ -142,6 +147,7 @@ namespace GFCA.APT.DAL.Implements
                 return _distributorRepository ?? (_distributorRepository = new DistributorRepository(_transaction));
             }
         }
+
         public IEmployeeRepository EmployeeRepository
         {
             get
@@ -149,6 +155,7 @@ namespace GFCA.APT.DAL.Implements
                 return _employeeRepository ?? (_employeeRepository = new EmployeeRepository(_transaction));
             }
         }
+
         public IInternalOrderRepository InternalOrderRepository
         {
             get
@@ -156,18 +163,12 @@ namespace GFCA.APT.DAL.Implements
                 return _internalOrderRepository ?? (_internalOrderRepository = new InternalOrderRepository(_transaction));
             }
         }
+
         public IOrganizationRepository OrganizationRepository
         {
             get
             {
                 return _organizationRepository ?? (_organizationRepository = new OrganizationRepository(_transaction));
-            }
-        }
-        public IFixedContractRepository FixedContractRepository
-        {
-            get
-            {
-                return _fixedContractRepository ?? (_fixedContractRepository = new FixedContractRepository(_transaction));
             }
         }
 
@@ -216,7 +217,6 @@ namespace GFCA.APT.DAL.Implements
             _packRepository = null;
             _unitRepository = null;
             _sizeRepository = null;
-            _fixedContractRepository = null;
         }
 
         public void Commit()

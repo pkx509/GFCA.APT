@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.DocumentTypeRepository.All();
             return dto;
         }
-        public DocumentTypeDto GetByCode(string code)
+        public DocumentTypeDto GetById(int Id)
         {
-            var dto = _uow.DocumentTypeRepository.GetByCode(code);
+            var dto = _uow.DocumentTypeRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(DocumentTypeDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.DOC_TYPE_CODE))
+                if (model.DOC_TYPE_ID == null || model.DOC_TYPE_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.DOC_TYPE_CODE;
-                var dto = _uow.DocumentTypeRepository.GetByCode(code);
+                int id = model.DOC_TYPE_ID ?? 0;
+                var dto = _uow.DocumentTypeRepository.GetById(id);
 
                 dto.DOC_TYPE_CODE = model.DOC_TYPE_CODE;
                 dto.DOC_TYPE_NAME = model.DOC_TYPE_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.DOC_TYPE_CODE))
+                if (model.DOC_TYPE_ID == null || model.DOC_TYPE_ID == 0)
                     throw new Exception("not existing Document type ID");
 
-                string code = model.DOC_TYPE_CODE;
+                int id = model.DOC_TYPE_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.DocumentTypeRepository.Delete(code);
+                    _uow.DocumentTypeRepository.Delete(id);
                 }
                 else
                 {

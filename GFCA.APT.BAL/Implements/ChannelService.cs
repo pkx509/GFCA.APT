@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.ChannelRepository.All();
             return dto;
         }
-        public ChannelDto GetByCode(string code)
+        public ChannelDto GetById(int Id)
         {
-            var dto = _uow.ChannelRepository.GetByCode(code);
+            var dto = _uow.ChannelRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(ChannelDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.CHANNEL_CODE))
+                if (model.CHANNEL_ID == null || model.CHANNEL_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.CHANNEL_CODE;
-                var dto = _uow.ChannelRepository.GetByCode(code);
+                int id = model.CHANNEL_ID ?? 0;
+                var dto = _uow.ChannelRepository.GetById(id);
 
                 dto.CHANNEL_CODE = model.CHANNEL_CODE;
                 dto.CHANNEL_NAME = model.CHANNEL_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.CHANNEL_CODE))
+                if (model.CHANNEL_ID == null || model.CHANNEL_ID == 0)
                     throw new Exception("not existing Channel ID");
 
-                string code = model.CHANNEL_CODE;
+                int id = model.CHANNEL_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.ChannelRepository.Delete(code);
+                    _uow.ChannelRepository.Delete(id);
                 }
                 else
                 {

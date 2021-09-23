@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.EmployeeRepository.All();
             return dto;
         }
-        public EmployeeDto GetByCode(string code)
+        public EmployeeDto GetById(int Id)
         {
-            var dto = _uow.EmployeeRepository.GetByCode(code);
+            var dto = _uow.EmployeeRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(EmployeeDto model)
@@ -86,11 +86,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.EMP_CODE))
+                if (model.EMP_ID == null || model.EMP_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.EMP_CODE;
-                var dto = _uow.EmployeeRepository.GetByCode(code);
+                int id = model.EMP_ID ?? 0;
+                var dto = _uow.EmployeeRepository.GetById(id);
 
                 dto.EMP_CODE = model.EMP_CODE;
                 dto.PREFIX = model.PREFIX;
@@ -128,10 +128,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.EMP_CODE))
+                if (model.EMP_ID == null || model.EMP_ID == 0)
                     throw new Exception("not existing Employee ID");
 
-                string code = model.EMP_CODE;
+                int id = model.EMP_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -139,7 +139,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.EmployeeRepository.Delete(code);
+                    _uow.EmployeeRepository.Delete(id);
                 }
                 else
                 {

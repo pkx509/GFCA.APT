@@ -12,6 +12,17 @@ namespace GFCA.APT.DAL.Implements
 
         public DocumentTypeRepository(IDbTransaction transaction): base(transaction) { }
 
+        public DocumentTypeDto GetById(int id)
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_ID = @DOC_TYPE_ID;";
+            var query = Connection.Query<DocumentTypeDto>(
+                sql: sqlQuery,
+                param: new { DOC_TYPE_ID = id }
+                ,transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
         public DocumentTypeDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @DOC_TYPE_CODE;";
@@ -63,35 +74,31 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
-            /*
+
             entity.DOC_TYPE_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
             );
-            */
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
-                param: parms,
-                transaction: Transaction
-            );
+
         }
         public void Update(DocumentTypeDto entity)
         {
             string sqlExecute = @"UPDATE TB_M_DOCUMENT_TYPE
                                 SET
-                                  DOC_TYPE_NAME   = @DOC_TYPE_NAME
+                                  DOC_TYPE_CODE   = @DOC_TYPE_CODE
+                                , DOC_TYPE_NAME   = @DOC_TYPE_NAME
                                 , DOC_TYPE_DESC   = @DOC_TYPE_DESC
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                DOC_TYPE_CODE = @DOC_TYPE_CODE;
+                                DOC_TYPE_ID = @DOC_TYPE_ID;
                                 ";
 
             var parms = new
         {
-                //DOC_TYPE_ID = entity.DOC_TYPE_ID,
+                DOC_TYPE_ID = entity.DOC_TYPE_ID,
                 DOC_TYPE_CODE = entity.DOC_TYPE_CODE,
                 DOC_TYPE_NAME = entity.DOC_TYPE_NAME,
                 DOC_TYPE_DESC = entity.DOC_TYPE_DESC,
@@ -108,10 +115,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(string code)
+        public void Delete(int id)
         {
-            string sqlExecute = @"DELETE TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @DOC_TYPE_CODE;";
-            var parms = new { DOC_TYPE_CODE = code };
+            string sqlExecute = @"DELETE TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_ID = @DOC_TYPE_ID;";
+            var parms = new { DOC_TYPE_ID = id };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

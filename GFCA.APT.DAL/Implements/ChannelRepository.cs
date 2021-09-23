@@ -12,6 +12,17 @@ namespace GFCA.APT.DAL.Implements
 
         public ChannelRepository(IDbTransaction transaction): base(transaction) { }
 
+        public ChannelDto GetById(int id)
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL WHERE CHANNEL_ID = @CHANNEL_ID;";
+            var query = Connection.Query<ChannelDto>(
+                sql: sqlQuery,
+                param: new { CHANNEL_ID = id }
+                ,transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
         public ChannelDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_CHANNEL WHERE CHANNEL_CODE = @CHANNEL_CODE;";
@@ -64,35 +75,30 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            /*
             entity.CHANNEL_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
             );
-            */
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
-                param: parms,
-                transaction: Transaction
-            );
+
         }
         public void Update(ChannelDto entity)
         {
             string sqlExecute = @"UPDATE TB_M_CHANNEL
                                 SET
-                                  CHANNEL_NAME   = @CHANNEL_NAME
+                                  CHANNEL_CODE   = @CHANNEL_CODE
+                                , CHANNEL_NAME   = @CHANNEL_NAME
                                 , CHANNEL_DESC   = @CHANNEL_DESC
                                 , FLAG_ROW     = @FLAG_ROW
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                CHANNEL_CODE = @CHANNEL_CODE;
+                                CHANNEL_ID = @CHANNEL_ID;
                                 ";
 
             var parms = new
         {
-                //CHANNEL_ID = entity.CHANNEL_ID,
+                CHANNEL_ID = entity.CHANNEL_ID,
                 CAHNNEL_CODE = entity.CHANNEL_CODE,
                 CHANNEL_NAME = entity.CHANNEL_NAME,
                 CHANNEL_DESC = entity.CHANNEL_DESC,
@@ -109,10 +115,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(string code)
+        public void Delete(int id)
         {
-            string sqlExecute = @"DELETE TB_M_CHANNEL WHERE CHANNEL_CODE = @CHANNEL_CODE;";
-            var parms = new { CHANNEL_CODE = code };
+            string sqlExecute = @"DELETE TB_M_CHANNEL WHERE CHANNEL_ID = @CHANNEL_ID;";
+            var parms = new { CHANNEL_ID = id };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

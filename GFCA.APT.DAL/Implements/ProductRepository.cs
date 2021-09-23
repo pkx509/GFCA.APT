@@ -52,6 +52,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = "INSERT INTO TB_M_PRODUCT(PROD_CODE,PROD_NAME,CUST_CODE,MAT_CODE,ORG_CODE,DIV_CODE,EMIS_CODE,MAT_GROUP,MAT_GROUP_DESC,MAT_GROUP1,MAT_GROUP1_DESC,MAT_GROUP2,MAT_GROUP2_DESC,MAT_GROUP3,MAT_GROUP3_DESC,FORMULA,PACK,PACK_DESC,UNIT_CODE,FLAG_ROW,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE) VALUES (@PROD_CODE,@PROD_NAME,@CUST_CODE,@MAT_CODE,@ORG_CODE,@DIV_CODE,@EMIS_CODE,@MAT_GROUP,@MAT_GROUP_DESC,@MAT_GROUP1,@MAT_GROUP1_DESC,@MAT_GROUP2,@MAT_GROUP2_DESC,@MAT_GROUP3,@MAT_GROUP3_DESC,@FORMULA,@PACK,@PACK_DESC,@UNIT_CODE,@FLAG_ROW,@CREATED_BY,@CREATED_DATE,@UPDATED_BY,@UPDATED_DATE);";
             var parameters = new
             {
+                PROD_ID = entity.PROD_ID,
                 PROD_CODE = entity.PROD_CODE,
                 PROD_NAME = entity.PROD_NAME,
                 CUST_CODE = entity.CUST_CODE,
@@ -78,7 +79,7 @@ namespace GFCA.APT.DAL.Implements
                 UPDATED_DATE = entity.UPDATED_DATE,
             };
 
-            Connection.ExecuteScalar<int>(
+            entity.PROD_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parameters,
                 transaction: Transaction
@@ -90,16 +91,17 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute =
 @"UPDATE TB_M_PRODUCT
 SET  
-  CUST_CODE   = @CUST_CODE
+CUST_CODE   = @CUST_CODE
 , EMIS_CODE   = @EMIS_CODE
 , UPDATED_BY   = @UPDATED_BY
 , UPDATED_DATE = @UPDATED_DATE
 WHERE
-PROD_CODE = @PROD_CODE;
+PROD_ID = @PROD_ID;
 ";
 
             var parms = new
             {
+                PROD_ID = entity.PROD_ID,
                 CUST_CODE = entity.CUST_CODE,
                 FLAG_ROW = entity.FLAG_ROW,
                 EMIS_CODE = entity.EMIS_CODE,
@@ -115,15 +117,26 @@ PROD_CODE = @PROD_CODE;
 
         }
 
-        public void Delete(string code)
+        public void Delete(int id)
         {
 
             string sqlExecute =
 @"DELETE TB_M_PRODUCT
 WHERE
-PROD_CODE = @PROD_CODE;
+BRAND_ID = @BRAND_ID;
 ";
-            var parms = new{ PROD_CODE = code };
+            var parms = new
+            {
+                PROD_ID = id,
+                //BRAND_CODE = entity.BRAND_CODE,
+                //BRAND_NAME = entity.BRAND_NAME,
+                //FLAG_ROW = entity.FLAG_ROW,
+                //CREATED_BY = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                //UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+                //UPDATED_DATE = DateTime.UtcNow
+            };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

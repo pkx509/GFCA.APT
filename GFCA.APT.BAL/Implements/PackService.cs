@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.PackRepository.All();
             return dto;
         }
-        public PackDto GetByCode(String code)
+        public PackDto GetById(int Id)
         {
-            var dto = _uow.PackRepository.GetByCode(code);
+            var dto = _uow.PackRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(PackDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (String.IsNullOrEmpty(model.PACK_CODE))
+                if (model.PACK_ID == null || model.PACK_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.PACK_CODE;
-                var dto = _uow.PackRepository.GetByCode(code);
+                int id = model.PACK_ID ?? 0;
+                var dto = _uow.PackRepository.GetById(id);
 
                 dto.PACK_CODE = model.PACK_CODE;
                 dto.PACK_NAME = model.PACK_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.PACK_CODE))
+                if (model.PACK_ID == null || model.PACK_ID == 0)
                     throw new Exception("not existing Pack ID");
 
-                string code = model.PACK_CODE;
+                int id = model.PACK_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.PackRepository.Delete(code);
+                    _uow.PackRepository.Delete(id);
                 }
                 else
                 {

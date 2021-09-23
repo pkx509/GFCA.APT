@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IDistributorService
     {
         IEnumerable<DistributorDto> GetAll();
-        DistributorDto GetByCode(string code);
+        DistributorDto GetById(int Id);
         BusinessResponse Create(DistributorDto model);
         BusinessResponse Edit(DistributorDto model);
         BusinessResponse Remove(DistributorDto model);

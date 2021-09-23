@@ -19,7 +19,7 @@ namespace GFCA.APT.DAL.Implements
             throw new NotImplementedException();
         }
 
-        public void Delete(string code)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

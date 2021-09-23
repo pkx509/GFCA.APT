@@ -12,7 +12,7 @@ namespace GFCA.APT.BAL.Interfaces
     {
 
         IEnumerable<ProductDto> GetAll();
-        ProductDto GetByCode(string code);
+        ProductDto GetById(int Id);
         BusinessResponse Create(ProductDto model);
         BusinessResponse Edit(ProductDto model);
         BusinessResponse Remove(ProductDto model);

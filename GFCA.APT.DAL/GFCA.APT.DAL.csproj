@@ -237,9 +237,6 @@
     <Compile Include="TB_M_ACTIVITY.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_M_ACTIVITY_20210919.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_M_BRAND.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -301,9 +298,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_SIZE.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_SIZE_20210923.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_UNIT.cs">

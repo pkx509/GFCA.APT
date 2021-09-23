@@ -34,13 +34,11 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.EmissionRepository.All();
             return dto;
         }
-
-        public EmissionDto GetByCode(string code)
+        public EmissionDto GetById(int Id)
         {
-            var dto = _uow.EmissionRepository.GetByCode(code);
+            var dto = _uow.EmissionRepository.GetById(Id);
             return dto;
         }
-
         public BusinessResponse Create(EmissionDto model)
         {
             var response = new BusinessResponse();
@@ -86,12 +84,13 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.EMIS_CODE))
+                if (model.EMIS_ID == null || model.EMIS_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                var dto = _uow.EmissionRepository.GetByCode(model.EMIS_CODE);
+                int id = model.EMIS_ID ?? 0;
+                var dto = _uow.EmissionRepository.GetById(id);
 
-                //dto.EMIS_CODE = model.EMIS_CODE;
+                dto.EMIS_CODE = model.EMIS_CODE;
                 dto.EMIS_NAME = model.EMIS_NAME;
                 dto.EMIS_DESC = model.EMIS_DESC;
                 dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
@@ -125,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.EMIS_CODE))
+                if (model.EMIS_ID == null || model.EMIS_ID == 0)
                     throw new Exception("not existing Emission ID");
 
-                string code = model.EMIS_CODE;
+                int id = model.EMIS_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -136,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.EmissionRepository.Delete(code);
+                    _uow.EmissionRepository.Delete(id);
                 }
                 else
                 {

@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IEmployeeService
     {
         IEnumerable<EmployeeDto> GetAll();
-        EmployeeDto GetByCode(string code);
+        EmployeeDto GetById(int Id);
         BusinessResponse Create(EmployeeDto model);
         BusinessResponse Edit(EmployeeDto model);
         BusinessResponse Remove(EmployeeDto model);

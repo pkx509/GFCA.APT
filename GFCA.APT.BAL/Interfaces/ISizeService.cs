@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface ISizeService
     {
         IEnumerable<SizeDto> GetAll();
-        SizeDto GetByCode(String Code);
+        SizeDto GetById(int Id);
         BusinessResponse Create(SizeDto model);
         BusinessResponse Edit(SizeDto model);
         BusinessResponse Remove(SizeDto model);

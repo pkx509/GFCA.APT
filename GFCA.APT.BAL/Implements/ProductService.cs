@@ -36,10 +36,10 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.ProductRepository.All();
             return dto;
         }
-        public ProductDto GetByCode(string code)
+        public ProductDto GetById(int Id)
         {
 
-            var dto = _uow.ProductRepository.GetByCode(code);
+            var dto = _uow.ProductRepository.GetById(Id);
             return dto;
         }
 
@@ -100,11 +100,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.PROD_CODE))
+                if (model.PROD_ID == 0)
                     throw new Exception("not existing PROD_ID");
 
-                string code = model.PROD_CODE;
-                var dto = _uow.ProductRepository.GetByCode(code);
+                dynamic id = model.PROD_ID;
+                var dto = _uow.ProductRepository.GetById(id);
 
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
@@ -135,12 +135,15 @@ namespace GFCA.APT.BAL.Implements
             try
             {
 
-                if (string.IsNullOrEmpty(model.PROD_CODE))
+                if (model.PROD_ID == 0)
                     throw new Exception("not existing PROD ID");
 
-                string code = model.PROD_CODE;
-                var dto = _uow.ProductRepository.GetByCode(code);
+                dynamic id = model.PROD_ID;
+                var dto = _uow.ProductRepository.GetById(id);
 
+
+
+              
                 dto.CUST_CODE = model.CUST_CODE;
 
                 dto.EMIS_CODE = model.EMIS_CODE;

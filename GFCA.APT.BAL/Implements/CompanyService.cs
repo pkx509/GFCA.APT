@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.CompanyRepository.All();
             return dto;
         }
-        public CompanyDto GetByCode(string code)
+        public CompanyDto GetById(int Id)
         {
-            var dto = _uow.CompanyRepository.GetByCode(code);
+            var dto = _uow.CompanyRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(CompanyDto model)
@@ -84,11 +84,11 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.COMP_CODE))
+                if (model.COMP_ID == null || model.COMP_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.COMP_CODE;
-                var dto = _uow.CompanyRepository.GetByCode(code);
+                int id = model.COMP_ID ?? 0;
+                var dto = _uow.CompanyRepository.GetById(id);
 
                 dto.COMP_CODE = model.COMP_CODE;
                 dto.COMP_NAME = model.COMP_NAME;
@@ -124,10 +124,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.COMP_CODE))
+                if (model.COMP_ID == null || model.COMP_ID == 0)
                     throw new Exception("not existing Company ID");
 
-                string code = model.COMP_CODE;
+                int id = model.COMP_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -135,7 +135,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.CompanyRepository.Delete(code);
+                    _uow.CompanyRepository.Delete(id);
                 }
                 else
                 {

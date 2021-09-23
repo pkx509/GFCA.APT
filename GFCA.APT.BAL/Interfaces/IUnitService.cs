@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IUnitService
     {
         IEnumerable<UnitDto> GetAll();
-        UnitDto GetByCode(string code);
+        UnitDto GetById(int Id);
         BusinessResponse Create(UnitDto model);
         BusinessResponse Edit(UnitDto model);
         BusinessResponse Remove(UnitDto model);

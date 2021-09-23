@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.BrandRepository.All();
             return dto;
         }
-        public BrandDto GetByCode(string code)
+        public BrandDto GetById(int Id)
         {
-            var dto = _uow.BrandRepository.GetByCode(code);
+            var dto = _uow.BrandRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(BrandDto model)
@@ -52,7 +52,7 @@ namespace GFCA.APT.BAL.Implements
 
                 //dto.BRAND_ID = 0;
                 dto.BRAND_CODE = model.BRAND_CODE;
-                dto.CLIENT_CODE = model.CLIENT_CODE;
+                dto.CLIENT_ID = model.CLIENT_ID;
                 dto.BRAND_NAME = model.BRAND_NAME;
                 dto.BRAND_DESC = model.BRAND_DESC;
                 dto.FLAG_ROW = FLAG_ROW.SHOW;
@@ -86,13 +86,14 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.BRAND_CODE))
+                if (model.BRAND_ID == null || model.BRAND_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.BRAND_CODE;
-                var dto = _uow.BrandRepository.GetByCode(code);
+                int id = model.BRAND_ID ?? 0;
+                var dto = _uow.BrandRepository.GetById(id);
 
                 dto.BRAND_CODE = model.BRAND_CODE;
+                dto.CLIENT_ID = model.CLIENT_ID;
                 dto.BRAND_NAME = model.BRAND_NAME;
                 dto.BRAND_DESC = model.BRAND_DESC;
                 dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
@@ -126,10 +127,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.BRAND_CODE))
+                if (model.BRAND_ID == null || model.BRAND_ID == 0)
                     throw new Exception("not existing BrandID");
 
-                string code = model.BRAND_CODE;
+                int id = model.BRAND_ID ?? 0;
                 //var dto = _uow.BrandRepository.GetById(id);
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
@@ -138,7 +139,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.BrandRepository.Delete(code);
+                    _uow.BrandRepository.Delete(id);
                 }
                 else
                 {

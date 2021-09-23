@@ -8,7 +8,7 @@ namespace GFCA.APT.DAL.Interfaces
 		T GetByCode(string code);
 		void Insert(T entity);
 		void Update(T entity);
-		void Delete(string code);
+		void Delete(int id);
 
 	}
 }

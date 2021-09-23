@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IChannelService
     {
         IEnumerable<ChannelDto> GetAll();
-        ChannelDto GetByCode(string code);
+        ChannelDto GetById(int Id);
         BusinessResponse Create(ChannelDto model);
         BusinessResponse Edit(ChannelDto model);
         BusinessResponse Remove(ChannelDto model);

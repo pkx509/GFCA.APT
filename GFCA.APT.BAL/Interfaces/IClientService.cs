@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IClientService
     {
         IEnumerable<ClientDto> GetAll();
-        ClientDto GetByCode(string code);
+        ClientDto GetById(int Id);
         BusinessResponse Create(ClientDto model);
         BusinessResponse Edit(ClientDto model);
         BusinessResponse Remove(ClientDto model);

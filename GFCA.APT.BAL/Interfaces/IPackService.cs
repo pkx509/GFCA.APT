@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IPackService
     {
         IEnumerable<PackDto> GetAll();
-        PackDto GetByCode(String code);
+        PackDto GetById(int Id);
         BusinessResponse Create(PackDto model);
         BusinessResponse Edit(PackDto model);
         BusinessResponse Remove(PackDto model);

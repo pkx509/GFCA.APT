@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.DistributorRepository.All();
             return dto;
         }
-        public DistributorDto GetByCode(string code)
+        public DistributorDto GetById(int Id)
         {
-            var dto = _uow.DistributorRepository.GetByCode(code);
+            var dto = _uow.DistributorRepository.GetById(Id);
             return dto;
         }
         public BusinessResponse Create(DistributorDto model)
@@ -50,7 +50,7 @@ namespace GFCA.APT.BAL.Implements
 
                 var dto = new DistributorDto();
 
-                dto.EMIS_CODE = model.EMIS_CODE;
+                dto.EMIS_ID = model.EMIS_ID;
                 dto.DISTB_CODE = model.DISTB_CODE;
                 dto.DISTB_NAME = model.DISTB_NAME;
                 dto.DISTB_DESC = model.DISTB_DESC;
@@ -85,13 +85,13 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.DISTB_CODE))
+                if (model.DISTB_ID == null || model.DISTB_ID == 0)
                     throw new Exception("Please select some one to editing.");
 
-                string code = model.DISTB_CODE;
-                var dto = _uow.DistributorRepository.GetByCode(code);
+                int id = model.DISTB_ID ?? 0;
+                var dto = _uow.DistributorRepository.GetById(id);
 
-                dto.EMIS_CODE = model.EMIS_CODE;
+                dto.EMIS_ID = model.EMIS_ID;
                 dto.DISTB_CODE = model.DISTB_CODE;
                 dto.DISTB_NAME = model.DISTB_NAME;
                 dto.DISTB_DESC = model.DISTB_DESC;
@@ -126,10 +126,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (string.IsNullOrEmpty(model.DISTB_CODE))
+                if (model.DISTB_ID == null || model.DISTB_ID == 0)
                     throw new Exception("not existing Distributor ID");
 
-                string code = model.DISTB_CODE;
+                int id = model.DISTB_ID ?? 0;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -137,7 +137,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.DistributorRepository.Delete(code);
+                    _uow.DistributorRepository.Delete(id);
                 }
                 else
                 {

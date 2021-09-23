@@ -12,6 +12,17 @@ namespace GFCA.APT.DAL.Implements
 
         public SizeRepository(IDbTransaction transaction): base(transaction) { }
 
+        public SizeDto GetById(int id)
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_SIZE WHERE SIZE_ID = @SIZE_ID;";
+            var query = Connection.Query<SizeDto>(
+                sql: sqlQuery,
+                param: new { SIZE_ID = id }
+                ,transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
         public SizeDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_SIZE WHERE SIZE_CODE = @SIZE_CODE;";
@@ -104,10 +115,10 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(string code)
+        public void Delete(int id)
         {
-            string sqlExecute = @"DELETE TB_M_SIZE WHERE SIZE_CODE = @SIZE_CODE;";
-            var parms = new { SIZE_CODE = code };
+            string sqlExecute = @"DELETE TB_M_SIZE WHERE SIZE_ID = @SIZE_ID;";
+            var parms = new { SIZE_ID = id };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

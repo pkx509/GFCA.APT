@@ -7,7 +7,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IBrandService
     {
         IEnumerable<BrandDto> GetAll();
-        BrandDto GetByCode(string code);
+        BrandDto GetById(int Id);
         BusinessResponse Create(BrandDto model);
         BusinessResponse Edit(BrandDto model);
         BusinessResponse Remove(BrandDto model);

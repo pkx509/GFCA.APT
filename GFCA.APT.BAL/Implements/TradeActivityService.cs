@@ -35,9 +35,9 @@ namespace GFCA.APT.BAL.Implements
             return dto;
         }
 
-        public TradeActivityDto GetByCode(string code)
+        public TradeActivityDto GetById(int Id)
         {
-            var dto = _uow.TradeActivityRepository.GetByCode(code);
+            var dto = _uow.TradeActivityRepository.GetById(Id);
             return dto;
         }
 
@@ -94,7 +94,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 //start process
-                if (string.IsNullOrEmpty(model.ACTIVITY_CODE))
+                if (model.ACTIVITY_ID == null || model.ACTIVITY_ID == 0)
                     throw new DataNoSelectionException();
 
                 var data = model;
@@ -142,8 +142,8 @@ namespace GFCA.APT.BAL.Implements
                 var data = model;
                 if (model.IS_DELETE)
                 {
-                    string code = model.ACTIVITY_CODE;
-                    _uow.TradeActivityRepository.Delete(code);
+                    int id = model.ACTIVITY_ID ?? 0;
+                    _uow.TradeActivityRepository.Delete(id);
                 }
                 else
                 {

@@ -12,6 +12,17 @@ namespace GFCA.APT.DAL.Implements
 
         public EmployeeRepository(IDbTransaction transaction): base(transaction) { }
 
+        public EmployeeDto GetById(int id)
+        {
+            string sqlQuery = @"SELECT * FROM TB_M_EMPLOYEE WHERE EMP_ID = @EMP_ID;";
+            var query = Connection.Query<EmployeeDto>(
+                sql: sqlQuery,
+                param: new { EMP_ID = id }
+                ,transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
         public EmployeeDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_M_EMPLOYEE WHERE EMP_CODE = @EMP_CODE;";
@@ -70,7 +81,7 @@ namespace GFCA.APT.DAL.Implements
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            Connection.ExecuteScalar<int>(
+            entity.EMP_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -81,7 +92,8 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_M_EMPLOYEE
                                 SET
-                                  PREFIX        = @PREFIX
+                                  EMP_CODE      = @EMP_CODE
+                                , PREFIX        = @PREFIX
                                 , NAME_FIRST    = @NAME_FIRST
                                 , NAME_LAST     = @NAME_LAST
                                 , EMAIL         = @EMAIL
@@ -89,11 +101,12 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY    = @UPDATED_BY
                                 , UPDATED_DATE  = @UPDATED_DATE
                                 WHERE
-                                EMP_CODE = @EMP_CODE;
+                                EMP_ID = @EMP_ID;
                                 ";
 
             var parms = new
-            {
+        {
+                EMP_ID = entity.EMP_ID,
                 EMP_CODE = entity.EMP_CODE,
                 PREFIX = entity.PREFIX,
                 NAME_FIRST = entity.NAME_FIRST,
@@ -111,10 +124,11 @@ namespace GFCA.APT.DAL.Implements
             );
 
         }
-        public void Delete(string code)
+
+        public void Delete(int id)
         {
-            string sqlExecute = @"DELETE TB_M_EMPLOYEE WHERE EMP_CODE = @EMP_CODE;";
-            var parms = new { EMP_CODE = code };
+            string sqlExecute = @"DELETE TB_M_EMPLOYEE WHERE EMP_ID = @EMP_ID;";
+            var parms = new { EMP_ID = id };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

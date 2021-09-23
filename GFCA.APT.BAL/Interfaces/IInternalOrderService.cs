@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
     public interface IInternalOrderService
     {
         IEnumerable<InternalOrderDto> GetAll();
-        InternalOrderDto GetByCode(string code);
+        InternalOrderDto GetById(int Id);
         BusinessResponse Create(InternalOrderDto model);
         BusinessResponse Edit(InternalOrderDto model);
         BusinessResponse Remove(InternalOrderDto model);

@@ -197,7 +197,7 @@ namespace GFCA.APT.WEB.Controllers
             IChannelService svc = biz.ChannelService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CHANNEL_CODE, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CHANNEL_ID, Text = $"{o.CHANNEL_CODE} - {o.CHANNEL_NAME}" });
 
             return ret;
         }
@@ -279,7 +279,7 @@ namespace GFCA.APT.WEB.Controllers
             ICostCenterService svc = biz.CostCenterService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.CENTER_CODE, Text = $"{o.CENTER_CODE} - {o.CENTER_NAME}" });
+                .Select(o => new SelectionItem { Value = o.CENTER_ID, Text = $"{o.CENTER_CODE} - {o.CENTER_NAME}" });
             return ret;
         }
 
@@ -303,7 +303,7 @@ namespace GFCA.APT.WEB.Controllers
             IPackService svc = biz.PackService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.PACK_CODE, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
+                .Select(o => new SelectionItem { Value = o.PACK_ID, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
             return ret;
         }
     }
