@@ -38,7 +38,11 @@ namespace GFCA.APT.DAL.Implements
         }
         public IEnumerable<ProductDto> All()
         {
-            string sqlQuery = "SELECT * FROM TB_M_PRODUCT;";
+            string sqlQuery = @"SELECT P.*,
+                                          (SELECT TOP 1 C.CUST_CODE + '-' + C.CUST_NAME  FROM TB_M_CUSTOMER as C WHERE P.CUST_CODE = C.CUST_CODE) as CUST_NAME,
+		                                  (SELECT TOP 1 C.EMIS_CODE + '-' + C.EMIS_NAME  FROM TB_M_EMISSION as C WHERE P.EMIS_CODE = C.EMIS_CODE) as EMIS_NAME
+                             FROM TB_M_PRODUCT  as P";
+
             var query = Connection.Query<ProductDto>(
                 sql: sqlQuery,
                 transaction: Transaction
@@ -52,7 +56,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = "INSERT INTO TB_M_PRODUCT(PROD_CODE,PROD_NAME,CUST_CODE,MAT_CODE,ORG_CODE,DIV_CODE,EMIS_CODE,MAT_GROUP,MAT_GROUP_DESC,MAT_GROUP1,MAT_GROUP1_DESC,MAT_GROUP2,MAT_GROUP2_DESC,MAT_GROUP3,MAT_GROUP3_DESC,FORMULA,PACK,PACK_DESC,UNIT_CODE,FLAG_ROW,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE) VALUES (@PROD_CODE,@PROD_NAME,@CUST_CODE,@MAT_CODE,@ORG_CODE,@DIV_CODE,@EMIS_CODE,@MAT_GROUP,@MAT_GROUP_DESC,@MAT_GROUP1,@MAT_GROUP1_DESC,@MAT_GROUP2,@MAT_GROUP2_DESC,@MAT_GROUP3,@MAT_GROUP3_DESC,@FORMULA,@PACK,@PACK_DESC,@UNIT_CODE,@FLAG_ROW,@CREATED_BY,@CREATED_DATE,@UPDATED_BY,@UPDATED_DATE);";
             var parameters = new
             {
-                PROD_ID = entity.PROD_ID,
+               
                 PROD_CODE = entity.PROD_CODE,
                 PROD_NAME = entity.PROD_NAME,
                 CUST_CODE = entity.CUST_CODE,
@@ -79,7 +83,7 @@ namespace GFCA.APT.DAL.Implements
                 UPDATED_DATE = entity.UPDATED_DATE,
             };
 
-            entity.PROD_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parameters,
                 transaction: Transaction
@@ -91,17 +95,17 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute =
 @"UPDATE TB_M_PRODUCT
 SET  
-CUST_CODE   = @CUST_CODE
+  CUST_CODE   = @CUST_CODE
 , EMIS_CODE   = @EMIS_CODE
 , UPDATED_BY   = @UPDATED_BY
 , UPDATED_DATE = @UPDATED_DATE
 WHERE
-PROD_ID = @PROD_ID;
+PROD_CODE = @PROD_CODE;
 ";
 
             var parms = new
             {
-                PROD_ID = entity.PROD_ID,
+                PROD_CODE= entity.PROD_CODE,
                 CUST_CODE = entity.CUST_CODE,
                 FLAG_ROW = entity.FLAG_ROW,
                 EMIS_CODE = entity.EMIS_CODE,
@@ -109,7 +113,7 @@ PROD_ID = @PROD_ID;
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
             };
 
-            Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<string>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -117,26 +121,15 @@ PROD_ID = @PROD_ID;
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
             string sqlExecute =
 @"DELETE TB_M_PRODUCT
 WHERE
-BRAND_ID = @BRAND_ID;
+PROD_CODE = @PROD_CODE;
 ";
-            var parms = new
-            {
-                PROD_ID = id,
-                //BRAND_CODE = entity.BRAND_CODE,
-                //BRAND_NAME = entity.BRAND_NAME,
-                //FLAG_ROW = entity.FLAG_ROW,
-                //CREATED_BY = entity.CREATED_BY,
-                //CREATED_DATE = entity.CREATED_DATE,
-                //UPDATED_BY = entity.UPDATED_BY,
-                //UPDATED_DATE = entity.UPDATED_DATE
-                //UPDATED_DATE = DateTime.UtcNow
-            };
+            var parms = new{ PROD_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

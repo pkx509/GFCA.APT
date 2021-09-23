@@ -151,9 +151,13 @@ namespace GFCA.APT.BAL.Implements
                 dto.UPDATED_DATE = DateTime.UtcNow;
 
                 _uow.ProductRepository.Update(dto);
+                _uow.Commit();
 
-                response.Message = $"{typeof(ProductService)} has been changed";
                 response.Success = true;
+                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.Message = $"Product ({model.PROD_CODE}) has been changed";
+
+ 
             }
             catch (Exception ex)
             {

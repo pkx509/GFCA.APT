@@ -26,5 +26,6 @@ namespace GFCA.APT.Domain.Dto
 
         public bool IS_ACTIVED { get; set; } = true;
         public bool IS_DELETE { get; set; } = false;
+
     }
 }

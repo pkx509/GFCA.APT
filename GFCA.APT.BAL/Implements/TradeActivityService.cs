@@ -97,6 +97,7 @@ namespace GFCA.APT.BAL.Implements
                 if (model.ACTIVITY_ID == null || model.ACTIVITY_ID == 0)
                     throw new DataNoSelectionException();
 
+                model.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
                 var data = model;
                 _uow.TradeActivityRepository.Update(model);
                 _uow.Commit();

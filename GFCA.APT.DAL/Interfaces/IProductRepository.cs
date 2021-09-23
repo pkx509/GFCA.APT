@@ -7,9 +7,8 @@ namespace GFCA.APT.DAL.Interfaces
     {
         /*
         ProductDto GetById(int Id);
-
-
-        void Update(ProductDto _ProductDto);
+        ProductDto GetByCode(string PROD_CODE);
+        //new void Update(ProductDto ProductDto);
 
         IEnumerable<APTProduct> GetMatGroup();
         IEnumerable<APTProduct> GetMatGroup1();

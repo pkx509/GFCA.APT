@@ -77,9 +77,8 @@ ViewBag.Title = "Product";
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
                                   .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-excelexport" },
+                                     
                                       new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "" },
                                       new { text = "ExcelExport" }
                                   })
                                   .ToolbarClick("productPopup.OnExcelExportClick")
@@ -103,14 +102,13 @@ ViewBag.Title = "Product";
                                   .Columns(col =>
                                   {
 
-                                      col.Field("PROD_ID").HeaderText("PROD_ID").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("PROD_CODE").HeaderText("PROD Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("PROD_NAME").HeaderText("PROD Name").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CUST_CODE").HeaderText("CUST_CODE ").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("PROD_NAME").HeaderText("PROD Name").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_NAME").HeaderText("CUST_NAME ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("MAT_CODE").HeaderText("MAT_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("ORG_CODE").HeaderText("ORG_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("DIV_CODE").HeaderText("DIV_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("EMIS_CODE").HeaderText("EMIS_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("EMIS_NAME").HeaderText("EMIS_NAME").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("MAT_GROUP").HeaderText("MAT_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("MAT_GROUP_DESC ").HeaderText("MAT_GROUP_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
