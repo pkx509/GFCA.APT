@@ -19,6 +19,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         {
             _biz = biz;
         }
+        /*
         public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
@@ -48,7 +49,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
-
+        */
         [HttpGet]
         public ActionResult Index()
         {

@@ -293,9 +293,11 @@
     <Compile Include="Areas\Masters\Controllers\CostCenterController.cs" />
     <Compile Include="Areas\Masters\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Masters\Controllers\GLAccountController.cs" />
+    <Compile Include="Areas\Masters\Controllers\PackController.cs" />
     <Compile Include="Areas\Masters\Controllers\ProductController.cs" />
     <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\TradeActivityController.cs" />
+    <Compile Include="Areas\Masters\Controllers\UnitController.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Areas\Transactions\Controllers\BudgetPlanController.cs" />
     <Compile Include="Areas\Transactions\Controllers\DefaultController.cs" />
