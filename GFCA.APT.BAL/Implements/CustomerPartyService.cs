@@ -34,9 +34,9 @@ namespace GFCA.APT.BAL.Implements
             var dto = _uow.CustomerPartyRepository.All();
             return dto;
         }
-        public CustomerPartyDto GetById(int Id)
+        public CustomerPartyDto GetByCode(string code)
         {
-            var dto = _uow.CustomerPartyRepository.GetById(Id);
+            var dto = _uow.CustomerPartyRepository.GetByCode(code);
             return dto;
         }
         public BusinessResponse Create(CustomerPartyDto model)
@@ -50,11 +50,6 @@ namespace GFCA.APT.BAL.Implements
 
                 var dto = new CustomerPartyDto();
 
-                dto.CUST_ID = model.CUST_ID;
-                dto.ACC_ID = model.ACC_ID;
-                dto.DISTB_ID = model.DISTB_ID;
-                dto.CHANNEL_ID = model.CHANNEL_ID;
-                dto.VENDOR_ID = model.VENDOR_ID;
                 dto.CUST_CODE = model.CUST_CODE;
                 dto.ACC_CODE = model.ACC_CODE;
                 dto.DISTB_CODE = model.DISTB_CODE;
@@ -69,7 +64,7 @@ namespace GFCA.APT.BAL.Implements
 
                 response.Success = true;
                 response.MessageType = TOAST_TYPE.SUCCESS;
-                response.Message = $"Customer party {model.PARTY_ID} has been created";
+                response.Message = $"Customer party {model.CUST_CODE} has been created";
             }
             catch (Exception ex)
             {
@@ -91,15 +86,12 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.PARTY_ID == null || model.PARTY_ID == 0)
+                if (string.IsNullOrEmpty(model.CUST_CODE))
                     throw new Exception("Please select some one to editing.");
 
-                int id = model.PARTY_ID ?? 0;
-                var dto = _uow.CustomerPartyRepository.GetById(id);
+                string code = model.CUST_CODE;
+                var dto = _uow.CustomerPartyRepository.GetByCode(code);
 
-                dto.ACC_ID = model.ACC_ID;
-                dto.DISTB_ID = model.DISTB_ID;
-                dto.CHANNEL_ID = model.CHANNEL_ID;
                 dto.CUST_CODE = model.CUST_CODE;
                 dto.ACC_CODE = model.ACC_CODE;
                 dto.DISTB_CODE = model.DISTB_CODE;
@@ -114,7 +106,7 @@ namespace GFCA.APT.BAL.Implements
 
                 response.Success = true;
                 response.MessageType = TOAST_TYPE.SUCCESS;
-                response.Message = $"Customer party {model.PARTY_ID} has been changed";
+                response.Message = $"Customer party {model.CUST_CODE} has been changed";
             }
             catch (Exception ex)
             {
@@ -135,10 +127,10 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (model.PARTY_ID == null || model.PARTY_ID == 0)
+                if (string.IsNullOrEmpty(model.CUST_CODE))
                     throw new Exception("not existing Customer party ID");
 
-                int id = model.PARTY_ID ?? 0;
+                string code = model.CUST_CODE;
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
                 dto.UPDATED_BY = _currentUser.UserName ?? "System";
@@ -146,7 +138,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.CustomerPartyRepository.Delete(id);
+                    _uow.CustomerPartyRepository.Delete(code);
                 }
                 else
                 {

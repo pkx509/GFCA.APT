@@ -12,13 +12,13 @@ namespace GFCA.APT.DAL.Implements
         
         public CustomerPartyRepository(IDbTransaction transaction): base(transaction) { }
 
-        public CustomerPartyDto GetById(int id)
+        public CustomerPartyDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT * FROM TB_P_CUSTOMER_PARTY
-                                WHERE PARTY_ID = @PARTY_ID;";
+                                WHERE PARTY_CODE = @PARTY_CODE;";
             var query = Connection.Query<CustomerPartyDto>(
                 sql: sqlQuery,
-                param: new { PARTY_ID = id }
+                param: new { PARTY_CODE = code }
                 ,transaction: Transaction
                 ).FirstOrDefault();
 
@@ -40,12 +40,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"INSERT INTO TB_P_CUSTOMER_PARTY
                                 (
-                                  CUST_ID
-                                , ACC_ID
-                                , DISTB_ID
-                                , CHANNEL_ID
-                                , VENDOR_ID
-                                , CUST_CODE
+                                  CUST_CODE
                                 , ACC_CODE
                                 , DISTB_CODE
                                 , CHANNEL_CODE
@@ -54,12 +49,7 @@ namespace GFCA.APT.DAL.Implements
                                 , CREATED_BY
                                 , CREATED_DATE
                                 ) VALUES (
-                                  @CUST_ID
-                                , @ACC_ID
-                                , @DISTB_ID
-                                , @CHANNEL_ID
-                                , @VENDOR_ID
-                                , @CUST_CODE
+                                  @CUST_CODE
                                 , @ACC_CODE
                                 , @DISTB_CODE
                                 , @CHANNEL_CODE
@@ -72,22 +62,17 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                CUST_ID = entity.CUST_ID,
-                ACC_ID = entity.ACC_ID,
-                DISTB_ID = entity.DISTB_ID,
-                CHANNEL_ID = entity.CHANNEL_ID,
-                VENDOR_ID = entity.VENDOR_ID,
-                CUST_CODE = entity.CUST_CODE,
-                ACC_CODE = entity.ACC_CODE,
-                DISTB_CODE = entity.DISTB_CODE,
+                CUST_CODE    = entity.CUST_CODE,
+                ACC_CODE     = entity.ACC_CODE,
+                DISTB_CODE   = entity.DISTB_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
-                VENDOR_CODE = entity.VENDOR_CODE,
-                FLAG_ROW = entity.FLAG_ROW,
-                CREATED_BY = entity.CREATED_BY,
+                VENDOR_CODE  = entity.VENDOR_CODE,
+                FLAG_ROW     = entity.FLAG_ROW,
+                CREATED_BY   = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2()
             };
 
-            entity.PARTY_ID = Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
@@ -98,10 +83,7 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"UPDATE TB_P_CUSTOMER_PARTY
                                 SET
-                                     ACC_ID         = @ACC_ID
-                                    , DISTB_ID      = @DISTB_ID
-                                    , CHANNEL_ID    = @CHANNEL_ID
-                                    , CUST_CODE     = @CUST_CODE
+                                      CUST_CODE     = @CUST_CODE
                                     , ACC_CODE      = @ACC_CODE
                                     , DISTB_CODE    = @DISTB_CODE
                                     , CHANNEL_CODE  = @CHANNEL_CODE
@@ -115,17 +97,13 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                PARTY_ID = entity.PARTY_ID,
-                ACC_ID = entity.ACC_ID,
-                DISTB_ID = entity.DISTB_ID,
-                CHANNEL_ID = entity.CHANNEL_ID,
-                CUST_CODE = entity.CUST_CODE,
-                ACC_CODE = entity.ACC_CODE,
-                DISTB_CODE = entity.DISTB_CODE,
+                CUST_CODE    = entity.CUST_CODE,
+                ACC_CODE     = entity.ACC_CODE,
+                DISTB_CODE   = entity.DISTB_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
-                VENDOR_CODE = entity.VENDOR_CODE,
-                FLAG_ROW = entity.FLAG_ROW,
-                UPDATED_BY = entity.UPDATED_BY,
+                VENDOR_CODE  = entity.VENDOR_CODE,
+                FLAG_ROW     = entity.FLAG_ROW,
+                UPDATED_BY   = entity.UPDATED_BY,
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
             };
 
@@ -137,14 +115,14 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void Delete(int id)
+        public void Delete(string code)
         {
 
             string sqlExecute = @"DELETE TB_P_CUSTOMER_PARTY
                                 WHERE
-                                PARTY_ID = @PARTY_ID;
+                                PARTY_CODE = @PARTY_CODE;
                                 ";
-            var parms = new { PARTY_ID = id };
+            var parms = new { PARTY_CODE = code };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,

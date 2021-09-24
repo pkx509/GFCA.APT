@@ -4,12 +4,8 @@ using System.Collections.Generic;
 
 namespace GFCA.APT.BAL.Interfaces
 {
-    public interface ICustomerPartyService
+    public interface ICustomerPartyService : IServices<CustomerPartyDto>
     {
-        IEnumerable<CustomerPartyDto> GetAll();
-        CustomerPartyDto GetById(int Id);
-        BusinessResponse Create(CustomerPartyDto model);
-        BusinessResponse Edit(CustomerPartyDto model);
-        BusinessResponse Remove(CustomerPartyDto model);
+
     }
 }
