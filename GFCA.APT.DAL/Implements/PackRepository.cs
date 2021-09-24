@@ -96,8 +96,7 @@ namespace GFCA.APT.DAL.Implements
                                 ";
 
             var parms = new
-        {
-                PACK_ID = entity.PACK_ID,
+            {
                 PACK_CODE = entity.PACK_CODE,
                 PACK_NAME = entity.PACK_NAME,
                 PACK_DESC = entity.PACK_DESC,
