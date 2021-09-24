@@ -26,12 +26,8 @@ namespace GFCA.APT.DAL.Implements
         }
 
 
-        public void Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public SizeDto GetById(int id)
+        public SizeDto GetByCode(string code)
         {
             throw new System.NotImplementedException();
         }
@@ -45,6 +41,12 @@ namespace GFCA.APT.DAL.Implements
         {
             throw new System.NotImplementedException();
         }
+
+        public void Delete(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 
 }
