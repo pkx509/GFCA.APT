@@ -138,6 +138,7 @@
     <Compile Include="Implements\UnitService.cs" />
     <Compile Include="Implements\PackService.cs" />
     <Compile Include="Implements\CustomerPartyService.cs" />
+    <Compile Include="Implements\PromotionGroupService.cs" />
     <Compile Include="Implements\DocumentTypeService.cs" />
     <Compile Include="Implements\DistributorService.cs" />
     <Compile Include="Implements\EmployeeService.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Interfaces\IUnitService.cs" />
     <Compile Include="Interfaces\IPackService.cs" />
     <Compile Include="Interfaces\ICustomerPartyService.cs" />
+    <Compile Include="Interfaces\IPromotionGroupService.cs" />
     <Compile Include="Interfaces\IDocumentTypeService.cs" />
     <Compile Include="Interfaces\IDistributorService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />

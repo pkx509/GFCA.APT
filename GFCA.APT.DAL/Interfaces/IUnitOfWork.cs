@@ -24,6 +24,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IUnitRepository UnitRepository { get; }
 		ISizeRepository SizeRepository { get; }
 		ICustomerPartyRepository CustomerPartyRepository { get; }
+		IPromotionGroupRepository PromotionGroupRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

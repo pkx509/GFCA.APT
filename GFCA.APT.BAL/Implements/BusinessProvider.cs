@@ -70,5 +70,8 @@ namespace GFCA.APT.BAL.Implements
 
         private ICustomerPartyService _customerPartyService;
         public ICustomerPartyService CustomerPartyService => _customerPartyService ?? (_customerPartyService = Serve.CustomerPartyService.CreateInstant());
+
+        private IPromotionGroupService _promotiongroupService;
+        public IPromotionGroupService PromotionGroupService => _promotiongroupService ?? (_promotiongroupService = Serve.PromotionGroupService.CreateInstant());
     }
 }

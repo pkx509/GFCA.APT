@@ -30,6 +30,10 @@ namespace GFCA.APT.DAL.Implements
         private IUnitRepository _unitRepository;
         private ISizeRepository _sizeRepository;
         private ICustomerPartyRepository _customerPartyRepository;
+        private IPromotionGroupRepository _promotiongrouprepository;
+
+        
+
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -205,6 +209,19 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public IPromotionGroupRepository PromotionGroupRepository
+        {
+            get
+            {
+                return _promotiongrouprepository ?? (_promotiongrouprepository = new PromotionGroupRepository(_transaction));
+            }
+
+
+        }
+
+
+         
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -227,6 +244,8 @@ namespace GFCA.APT.DAL.Implements
             _unitRepository = null;
             _sizeRepository = null;
             _customerPartyRepository = null;
+            _promotiongrouprepository = null;
+
         }
 
         public void Commit()

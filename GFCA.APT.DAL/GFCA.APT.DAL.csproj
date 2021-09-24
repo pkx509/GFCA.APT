@@ -208,6 +208,7 @@
     <Compile Include="Implements\EmissionRepository.cs" />
     <Compile Include="Implements\GLAccountRepository.cs" />
     <Compile Include="Implements\ProductRepository.cs" />
+    <Compile Include="Implements\PromotionGroupRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Interfaces\ICustomerPartyRepository.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
@@ -232,6 +233,8 @@
     <Compile Include="Interfaces\IOrganizationRepository.cs" />
     <Compile Include="Interfaces\IProductGroupRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IPromotionGroupRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ITradeActivityRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

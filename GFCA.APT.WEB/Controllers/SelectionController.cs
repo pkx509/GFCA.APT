@@ -190,6 +190,8 @@ namespace GFCA.APT.WEB.Controllers
 
         // POST: api/Selection/GetCustomer
         // POST: api/Selection/GetCustomer/true
+
+
         [HttpPost]
         public IEnumerable<SelectionItem> GetCustomer(bool isOption = false)
         {
@@ -313,6 +315,8 @@ namespace GFCA.APT.WEB.Controllers
                 .Select(o => new SelectionItem { Value = o.SIZE_CODE, Text = $"{o.SIZE_CODE} - {o.SIZE_NAME}" });
             return ret;
         }
+
+
 
         // POST: api/Selection/GetPack
         [HttpPost]

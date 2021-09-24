@@ -25,5 +25,6 @@ namespace GFCA.APT.BAL.Interfaces
         IUnitService UnitService { get; }
         ISizeService SizeService { get; }
         ICustomerPartyService CustomerPartyService { get; }
+        IPromotionGroupService PromotionGroupService { get; }
     }
 }
