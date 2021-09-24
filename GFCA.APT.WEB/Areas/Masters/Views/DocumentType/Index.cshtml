@@ -1,0 +1,171 @@
+﻿<!--
+           Last update to git 05/09/2021 By  Jirasak.M
+        -->
+
+@{ ViewBag.Title = "DocumentType"; }
+@{ #if DNX48
+ViewBag.Title = "DocumentType";
+#endif
+}
+@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 250px;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 552px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
+                min-width: 300px !important;
+                min-height: 180px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+}
+
+@section DialogPlaceholder
+{
+    <!-- BEGIN DialogPlaceholder -->
+    <script id='dialogtemplate' type="text/x-template">
+        <div id="dialogTemp" style="width:650px; height:300px;">
+        </div>
+    </script>
+
+    <!-- BEGIN DialogPlaceholder -->
+}
+
+@section ContentPlaceholder
+{
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
+                            @(Html.EJS()
+                                  .Grid("grdDocumenttype")
+                                  .Height("450")
+                                  .DataSource(ds =>
+                                  {
+
+                                      ds
+                                      .Url(@Url.Action("UrlDatasource", "DocumentType", new { Area = "Masters" }))
+                                      //.InsertUrl(@Url.Action("Add", "Brand", new { Area = "Masters" }))
+                                      //.UpdateUrl(@Url.Action("Update", "Brand", new { Area = "Masters" }))
+                                      .RemoveUrl(@Url.Action("Delete", "DocumentType", new { Area = "Masters" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+
+                                      new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { text = "Print", prefixIcon = "e-icons e-print" },
+                                  })
+                                  .ToolbarClick("documenttypePopup.OnToolbarClick")
+                                 .EditSettings(edit =>
+                                 {
+
+
+
+
+
+                                 })
+                                  .DataBound("documenttypePopup.OnDataBound")
+                                  .RowDeselected("documenttypePopup.OnRowDeselected")
+                                  .RowSelected("documenttypePopup.OnRowSelected")
+                                  .Columns(col =>
+                                  {
+                                      col.Field("DOC_TYPE_CODE").HeaderText("DOC_TYPE_CODE").Width("150")
+                                      .ForeignKeyField("DOC_TYPE_ID")
+                                      .ForeignKeyValue("DOC_TYPE_CODE")
+                                      .ValidationRules(new { required = false })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center);
+
+                                      col.Field("DOC_TYPE_ID").HeaderText("ID").Width("120")
+                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
+                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+                                      col.Field("DOC_TYPE_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_TYPE_NAME").HeaderText("Name").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_TYPE_DESC").HeaderText("Description").Width("400").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                  })
+                                  .Render())
+
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    @Html.Partial("~/Areas/Masters/Views/DocumentType/_Popup_DocumentType.cshtml")
+}
+
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
+
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "DocumentType", new { Area = "Masters" })",
+            Add       : "@Url.Action("Add", "DocumentType", new { Area = "Masters" })",
+            Edit      : "@Url.Action("Edit", "DocumentType", new { Area = "Masters" })",
+            Delete    : "@Url.Action("Delete", "DocumentType", new { Area = "Masters" })",
+        }
+
+        var argruments = {
+            data: null,
+        }
+    </script>
+
+    @Scripts.Render("~/Scripts/masters/documenttypePopup.js")
+    <!-- END preScripts -->
+
+}
+
+@section scripts
+{
+
+    @Scripts.Render("~/Scripts/masters/documenttype.js")
+
+}
+
+
