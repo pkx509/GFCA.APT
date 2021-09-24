@@ -188,7 +188,7 @@ namespace GFCA.APT.BAL.Implements
                 if (model.PROGP_ID == 0)
                     throw new Exception("not existing PROGP_ID");
 
-                int id = model.PROGP_ID;
+                string code = model.PROGP_CODE;
                 //var dto = _uow.BrandRepository.GetById(id);
                 var dto = model;
                 dto.FLAG_ROW = FLAG_ROW.DELETE;
@@ -197,7 +197,7 @@ namespace GFCA.APT.BAL.Implements
 
                 if (model.IS_DELETE_PERMANANT)
                 {
-                    _uow.PromotionGroupRepository.Delete(id);
+                    _uow.PromotionGroupRepository.Delete(code);
                 }
                 else
                 {
