@@ -310,7 +310,7 @@ namespace GFCA.APT.WEB.Controllers
             ISizeService svc = biz.SizeService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.SIZE_ID, Text = $"{o.SIZE_CODE} - {o.SIZE_NAME}" });
+                .Select(o => new SelectionItem { Value = o.SIZE_CODE, Text = $"{o.SIZE_CODE} - {o.SIZE_NAME}" });
             return ret;
         }
 
@@ -322,7 +322,7 @@ namespace GFCA.APT.WEB.Controllers
             IPackService svc = biz.PackService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.PACK_ID, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
+                .Select(o => new SelectionItem { Value = o.PACK_CODE, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
             return ret;
         }
     }
