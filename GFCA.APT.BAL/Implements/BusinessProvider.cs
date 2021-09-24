@@ -67,5 +67,8 @@ namespace GFCA.APT.BAL.Implements
 
         private ISizeService _sizeService;
         public ISizeService SizeService => _sizeService ?? (_sizeService = Serve.SizeService.CreateInstant());
+
+        private ICustomerPartyService _customerPartyService;
+        public ICustomerPartyService CustomerPartyService => _customerPartyService ?? (_customerPartyService = Serve.CustomerPartyService.CreateInstant());
     }
 }

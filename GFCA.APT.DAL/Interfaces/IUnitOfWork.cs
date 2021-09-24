@@ -23,6 +23,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IPackRepository PackRepository { get; }
 		IUnitRepository UnitRepository { get; }
 		ISizeRepository SizeRepository { get; }
+		ICustomerPartyRepository CustomerPartyRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

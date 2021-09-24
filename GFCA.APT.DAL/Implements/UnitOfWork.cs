@@ -29,6 +29,7 @@ namespace GFCA.APT.DAL.Implements
         private IPackRepository _packRepository;
         private IUnitRepository _unitRepository;
         private ISizeRepository _sizeRepository;
+        private ICustomerPartyRepository _customerPartyRepository;
 
         private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
@@ -196,6 +197,14 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
+        public ICustomerPartyRepository CustomerPartyRepository
+        {
+            get
+            {
+                return _customerPartyRepository ?? (_customerPartyRepository = new CustomerPartyRepository(_transaction));
+            }
+        }
+
         private void resetRepositories()
         {
             _brandRepository = null;
@@ -217,6 +226,7 @@ namespace GFCA.APT.DAL.Implements
             _packRepository = null;
             _unitRepository = null;
             _sizeRepository = null;
+            _customerPartyRepository = null;
         }
 
         public void Commit()
