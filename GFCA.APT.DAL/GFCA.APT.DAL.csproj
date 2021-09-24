@@ -188,6 +188,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\SizeRepository.cs" />
     <Compile Include="Implements\UnitRepository.cs" />
     <Compile Include="Implements\PackRepository.cs" />
