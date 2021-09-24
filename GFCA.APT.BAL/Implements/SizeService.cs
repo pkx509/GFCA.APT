@@ -56,7 +56,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.FLAG_ROW = FLAG_ROW.SHOW;
                 dto.CREATED_BY = _currentUser.UserName ?? "SYSTEM";
                 dto.CREATED_DATE = DateTime.UtcNow;
-
+ 
                 _uow.SizeRepository.Insert(dto);
                 _uow.Commit();
 
@@ -65,17 +65,17 @@ namespace GFCA.APT.BAL.Implements
                 response.Message = $"Size ({model.SIZE_CODE}) has been created";
             }
             catch (Exception ex)
-            {
+        {
                 response.Success = false;
                 response.MessageType = TOAST_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
 
-            }
+        }
             finally
-            {
+        {
                 base.Dispose();
-            }
+        }
 
             return response;
         }
@@ -115,7 +115,7 @@ namespace GFCA.APT.BAL.Implements
             finally
             {
                 base.Dispose();
-            }
+        }
 
             return response;
         }

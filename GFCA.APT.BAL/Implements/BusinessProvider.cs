@@ -28,7 +28,7 @@ namespace GFCA.APT.BAL.Implements
 
         private ITradeActivityService _tradeActivityService;
         public ITradeActivityService TradeActivityService => _tradeActivityService ?? (_tradeActivityService = Serve.TradeActivityService.CreateInstant());
-        
+
         private IChannelService _channelService;
         public IChannelService ChannelService => _channelService ?? (_channelService = Serve.ChannelService.CreateInstant());
 
@@ -43,7 +43,7 @@ namespace GFCA.APT.BAL.Implements
 
         private IDocumentTypeService _documentTypeService;
         public IDocumentTypeService DocumentTypeService => _documentTypeService ?? (_documentTypeService = Serve.DocumentTypeService.CreateInstant());
-        
+
         private IDistributorService _distributorService;
         public IDistributorService DistributorService => _distributorService ?? (_distributorService = Serve.DistributorService.CreateInstant());
 
@@ -58,7 +58,6 @@ namespace GFCA.APT.BAL.Implements
 
         private IFixedContractService _fixedContractService;
         public IFixedContractService FixedContractService => _fixedContractService ?? (_fixedContractService = Serve.FixedContractService.CreateInstant());
-
 
         private IPackService _packService;
         public IPackService PackService => _packService ?? (_packService = Serve.PackService.CreateInstant());
