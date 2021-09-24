@@ -40,27 +40,26 @@ namespace GFCA.APT.BAL.Implements
             var response = new BusinessResponse();
             try
             {
-                if (_uow.ClientRepository.All().Where(w => w.CLIENT_ID == model.CLIENT_ID).Count() < 1)
-                {
 
+                if (string.IsNullOrEmpty(model.CLIENT_CODE))
                     throw new Exception("Client not exist.");
-                }
 
-                if (_uow.CustomerRepository.All().Where(w => w.CUST_ID == model.CUST_ID).Count() < 1)
-                {
-
+                if (string.IsNullOrEmpty(model.CUST_CODE))
                     throw new Exception("Customer not exist.");
-                }
 
-                if (_uow.ChannelRepository.All().Where(w => w.CHANNEL_ID == model.CHANNEL_ID).Count() < 1)
-                {
-
+                if (string.IsNullOrEmpty(model.CHANNEL_CODE))
                     throw new Exception("Channel not exist.");
-                }
 
+                if (string.IsNullOrEmpty(model.PROGP_CODE))
+                    throw new Exception("Promotion Group not exist.");
 
-
-                var objDuplicate = _uow.PromotionGroupRepository.All().Where(w =>   w.PROGP_CODE != null  && w.PROGP_CODE.Equals(model.PROGP_CODE)).FirstOrDefault();
+                var objDuplicate = _uow.PromotionGroupRepository.All()
+                    .Where(w => 
+                    w.CLIENT_CODE.ToUpper().Equals(model.CLIENT_CODE.ToUpper()) &&
+                    w.CUST_CODE.ToUpper().Equals(model.CUST_CODE.ToUpper()) &&
+                    w.CHANNEL_CODE.ToUpper().Equals(model.CHANNEL_CODE.ToUpper()) &&
+                    w.PROGP_CODE.ToUpper().Equals(model.PROGP_CODE.ToUpper()))
+                    .FirstOrDefault();
                 if (objDuplicate != null)
                     throw new Exception("Is duplicate data");
 
@@ -119,27 +118,27 @@ namespace GFCA.APT.BAL.Implements
                     throw new Exception("Please select some one to editing.");
 
 
-                if (_uow.ClientRepository.All().Where(w => w.CLIENT_ID == model.CLIENT_ID).Count() < 1)
+                if (_uow.ClientRepository.All().Where(w => w.CLIENT_CODE == model.CLIENT_CODE).Count() < 1)
                 {
 
                     throw new Exception("Client not exist.");
                 }
 
-                if (_uow.CustomerRepository.All().Where(w => w.CUST_ID == model.CUST_ID).Count() < 1)
+                if (_uow.CustomerRepository.All().Where(w => w.CUST_CODE == model.CUST_CODE).Count() < 1)
                 {
 
                     throw new Exception("Customer not exist.");
                 }
 
-                if (_uow.ChannelRepository.All().Where(w => w.CHANNEL_ID == model.CHANNEL_ID).Count() < 1)
+                if (_uow.ChannelRepository.All().Where(w => w.CHANNEL_CODE == model.CHANNEL_CODE).Count() < 1)
                 {
 
                     throw new Exception("Channel not exist.");
                 }
 
 
-                int id = model.PROGP_ID;
-                var dto = _uow.PromotionGroupRepository.GetById(id);
+                string code = model.PROGP_CODE;
+                var dto = _uow.PromotionGroupRepository.GetByCode(code);
 
 
 

@@ -281,7 +281,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Masters\Controllers\SizeController.cs" />
     <Compile Include="Areas\Masters\Controllers\CustomerPartyController.cs" />
-    <Compile Include="Areas\Masters\Controllers\PromotionGroupController.cs" />
     <Compile Include="Areas\Masters\Controllers\EmissionController.cs" />
     <Compile Include="Areas\Masters\Controllers\DistributorController.cs" />
     <Compile Include="Areas\Masters\Controllers\DocumentTypeController.cs" />

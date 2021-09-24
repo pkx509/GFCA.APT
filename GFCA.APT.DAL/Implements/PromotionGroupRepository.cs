@@ -29,51 +29,6 @@ namespace GFCA.APT.DAL.Implements
             return query;
         }
 
-        public void Delete(int id)
-        {
-            string sqlExecute = @"DELETE TB_M_PROMOTION_GROUP
-                                WHERE
-                                PROGP_ID = @PROGP_ID;
-                                ";
-            var parms = new
-            {
-                PROGP_ID = id,
-                //BRAND_CODE = entity.BRAND_CODE,
-                //BRAND_NAME = entity.BRAND_NAME,
-                //BRAND_DESC = entity.BRAND_DESC,
-                //FLAG_ROW = entity.FLAG_ROW,
-                //CREATED_BY = entity.CREATED_BY,
-                //CREATED_DATE = entity.CREATED_DATE,
-                //UPDATED_BY = entity.UPDATED_BY,
-                //UPDATED_DATE = entity.UPDATED_DATE
-                //UPDATED_DATE = DateTime.UtcNow
-            };
-
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
-                param: parms,
-                transaction: Transaction
-            );
-        }
-
-       
-
-        public PromotionGroupDto GetById(int id)
-        {
-                     
-            string sqlQuery = @"SELECT A.*,A.[CHANNEL_ID] ,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_ID] = A.[CHANNEL_ID]) as [CHANNEL_CODE] 
-      ,A.[CUST_ID] ,(SELECT TOP 1 CUST_CODE + '-' + CUST_NAME  from [dbo].[TB_M_CUSTOMER] where [CUST_ID] = A.[CUST_ID]) as CUST_CODE 
-      ,A.[CLIENT_ID] ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where [CLIENT_ID] = A.[CLIENT_ID]) as CLIENT_CODE 
-      ,A.[UPDATED_DATE]
-  FROM [dbo].[TB_M_PROMOTION_GROUP]  AS A WHERE  A.PROGP_ID = @PROGP_ID;";
-            var query = Connection.Query<PromotionGroupDto>(
-                sql: sqlQuery,
-                param: new { PROGP_ID = id }
-                , transaction: Transaction
-                ).FirstOrDefault();
-
-            return query;
-        }
         public PromotionGroupDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT A.*,A.[CHANNEL_ID] ,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_ID] = A.[CHANNEL_ID]) as [CHANNEL_CODE] 
@@ -159,6 +114,33 @@ namespace GFCA.APT.DAL.Implements
 
 
  
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public void Delete(string code)
+        {
+            string sqlExecute = @"DELETE TB_M_PROMOTION_GROUP
+                                WHERE
+                                PROGP_ID = @PROGP_ID;
+                                ";
+            var parms = new
+            {
+                PROGP_ID = code,
+                //BRAND_CODE = entity.BRAND_CODE,
+                //BRAND_NAME = entity.BRAND_NAME,
+                //BRAND_DESC = entity.BRAND_DESC,
+                //FLAG_ROW = entity.FLAG_ROW,
+                //CREATED_BY = entity.CREATED_BY,
+                //CREATED_DATE = entity.CREATED_DATE,
+                //UPDATED_BY = entity.UPDATED_BY,
+                //UPDATED_DATE = entity.UPDATED_DATE
+                //UPDATED_DATE = DateTime.UtcNow
+            };
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
