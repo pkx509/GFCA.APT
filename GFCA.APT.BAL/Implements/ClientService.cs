@@ -163,5 +163,10 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
+        public ClientDto GetByCode(string Id)
+        {
+            var dto = _uow.ClientRepository.GetByCode(Id);
+            return dto;
+        }
     }
 }

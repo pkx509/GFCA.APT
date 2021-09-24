@@ -82,7 +82,7 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                CLIENT_ID = @CLIENT_ID;
+                                CLIENT_CODE = @CLIENT_CODE;
                                 ";
 
             var parms = new

@@ -4,6 +4,9 @@
     DELETE: 3
 });
 
+
+// 20210921 Jirsak
+
 let clientPopup = new (function () {
 
     let _args = null;
@@ -23,7 +26,7 @@ let clientPopup = new (function () {
     this.isCreateState = true;
 
     //Model Dto
-    this.field_client_id      = "#pop-txt-client-id";
+  
     this.field_client_code    = "#pop-txt-client-code";
     this.field_client_name    = "#pop-txt-client-name";
     this.field_client_desc    = "textarea[name='pop-txt-client-desc']";
@@ -32,7 +35,7 @@ let clientPopup = new (function () {
 
     //Value Dto
     this.jsonData = {
-        CLIENT_ID           : 0,
+       
         CLIENT_CODE        : null,
         CLIENT_NAME        : null,
         CLIENT_DESC         : null,
@@ -46,7 +49,7 @@ let clientPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            CLIENT_ID           : 0,
+            
             CLIENT_CODE         : null,
             CLIENT_NAME         : null,
             CLIENT_DESC         : null,
@@ -124,7 +127,7 @@ let clientPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-        $(this.field_client_id).val(data.CLIENT_ID);
+       
         $(this.field_client_code).val(data.CLIENT_CODE);
         $(this.field_client_name).val(data.CLIENT_NAME);
         $(this.field_client_desc).val(data.CLIENT_DESC);
@@ -141,7 +144,7 @@ let clientPopup = new (function () {
     }
     }
     this.bindField = function () {
-        let CLIENT_ID            = $(this.field_client_id).val();
+       
         let CLIENT_CODE          = $(this.field_client_code).val();
         let CLIENT_NAME          = $(this.field_client_name).val();
         let CLIENT_DESC          = $(this.field_client_desc).val();
@@ -149,7 +152,7 @@ let clientPopup = new (function () {
         let IS_DELETE_PERMANANT = $(this.field_permanant_del).prop("checked");
 
         this.jsonData = {
-            CLIENT_ID, CLIENT_CODE, CLIENT_NAME, CLIENT_DESC, IS_ACTIVED, IS_DELETE_PERMANANT
+             CLIENT_CODE, CLIENT_NAME, CLIENT_DESC, IS_ACTIVED, IS_DELETE_PERMANANT
         };
     }
     this.fieldsDisable = function () {
