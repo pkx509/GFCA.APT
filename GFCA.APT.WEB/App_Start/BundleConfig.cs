@@ -42,8 +42,8 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/summernote/summernote-bs4.min.css")
                 //.Include("~/Content/bootstrap.css")
                 .Include("~/Content/ej2/bootstrap4.css")
-                .Include("~/Content/Site.css")
                 .Include("~/Scripts/bs4-toast/dist/toast.min.css")
+                .Include("~/Content/Site.css")
                 ;
             bundles.Add(csslteStyle);
 
