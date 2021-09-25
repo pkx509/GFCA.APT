@@ -104,15 +104,7 @@ ViewBag.Title = "DocumentType";
                                   .RowSelected("documenttypePopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-                                      col.Field("DOC_TYPE_CODE").HeaderText("DOC_TYPE_CODE").Width("150")
-                                      .ForeignKeyField("DOC_TYPE_ID")
-                                      .ForeignKeyValue("DOC_TYPE_CODE")
-                                      .ValidationRules(new { required = false })
-                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center);
-
-                                      col.Field("DOC_TYPE_ID").HeaderText("ID").Width("120")
-                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
-                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                     
 
                                       col.Field("DOC_TYPE_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("DOC_TYPE_NAME").HeaderText("Name").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
