@@ -1,0 +1,103 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<!-- <button type="button" class="btn btn-primary" hidden="hidden" data-toggle="modal" data-target=".bd-brand-modal-lg" data-backdrop="static" data-keyboard="true" data-show="true">popup manage item</button> -->
+<form class="form-horizontal" id="pop-form-pack" autocomplete="off">
+    <div id="popup-pack" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BRAND</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
+
+                        
+                        <div class="row">
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Code
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        <input type="hidden" id="pop-hid-client-id" />
+                                        @Html.EJS().TextBox("pop-txt-pack-code").Placeholder("Pack Code").CssClass("mandatory").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Name
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-pack-name").Placeholder("Pack Name").Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-txt-brand-desc">
+                                        Description
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-pack-desc").Multiline(true).Render()
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label" for="pop-ckb-is-active">
+                                        Active
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                        <!-- input id="pop-ckb-is-active" type="checkbox" class="e-control e-checkbox e-lib" / -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="pop-btn-del" type="button" class="btn e-control e-btn e-lib e-danger" data-loading-text="Processing..." onclick="javascript:packPopup.onDelete(this)">Delete</button>
+                    <button id="pop-btn-save" type="button" class="btn e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:packPopup.onSave(this)">Save</button>
+                    <button type="button" class="btn e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:packPopup.close(this)">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
