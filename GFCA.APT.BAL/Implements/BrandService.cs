@@ -150,7 +150,8 @@ namespace GFCA.APT.BAL.Implements
 
                 response.Success = true;
                 response.MessageType = TOAST_TYPE.SUCCESS;
-                response.Message = $"{typeof(BrandService)} has been deleted";
+          
+                response.Message = $"Brand ({model.BRAND_CODE}) has been deleted";
             }
             catch (Exception ex)
             {

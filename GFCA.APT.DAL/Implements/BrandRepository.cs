@@ -14,8 +14,8 @@ namespace GFCA.APT.DAL.Implements
 
         public BrandDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT a.*
-                            , (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
+            string sqlQuery = @"	  SELECT a.*
+                            ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where CLIENT_CODE = A.CLIENT_CODE) as CLIENT_NAME 
                             FROM TB_M_BRAND a
                             WHERE a.BRAND_CODE = @BRAND_CODE;";
             var query = Connection.Query<BrandDto>(
@@ -29,8 +29,8 @@ namespace GFCA.APT.DAL.Implements
         public IEnumerable<BrandDto> All()
         {
             string sqlQuery = @"SELECT a.*
-                            , (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
-                            FROM TB_M_BRAND a;";
+        ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where CLIENT_CODE = A.CLIENT_CODE) as CLIENT_NAME 
+      FROM TB_M_BRAND a;";
             var query = Connection.Query<BrandDto>(
                 sql: sqlQuery
                 ,transaction: Transaction
@@ -94,7 +94,7 @@ namespace GFCA.APT.DAL.Implements
                                 , UPDATED_BY   = @UPDATED_BY
                                 , UPDATED_DATE = @UPDATED_DATE
                                 WHERE
-                                BRAND_ID = @BRAND_ID;
+                                BRAND_CODE = @BRAND_CODE;
                                 ";
 
             var parms = new
@@ -111,7 +111,7 @@ namespace GFCA.APT.DAL.Implements
                 UPDATED_DATE   = entity.UPDATED_DATE?.ToDateTime2()
             };
 
-            Connection.ExecuteScalar<int>(
+            Connection.ExecuteScalar<string>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction

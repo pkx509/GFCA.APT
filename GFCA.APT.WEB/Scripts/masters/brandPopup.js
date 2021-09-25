@@ -23,19 +23,20 @@ let brandPopup = new (function () {
     this.isCreateState = true;
 
     //Model Dto
-    this.field_brand_id      = "#pop-txt-brand-id";
-    this.field_client_code   = "#pop-cmb-client-code";
-    this.field_client_id     = "#pop-hid-client-id";
+ 
+    this.field_client_code = "#pop-cmb-client-code";
+    this.field_client_code_value = "#pop-cmb-client-code_hidden";
+
+
     this.field_brand_code    = "#pop-txt-brand-code";
     this.field_brand_name    = "#pop-txt-brand-name";
     this.field_brand_desc    = "textarea[name='pop-txt-brand-desc']";
     this.field_is_active     = "input[id='pop-ckb-is-active']";
     this.field_permanant_del = "input[id='pop-ckb-is-del-perm]";
-
+    //pop-cmb-client-code_hidden
     //Value Dto
     this.jsonData = {
-        BRAND_ID           : 0,
-        CLIENT_ID          : null,
+      
         CLIENT_CODE        : null,
         CLIENT_NAME        : null,
         BRAND_CODE         : null,
@@ -51,8 +52,7 @@ let brandPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            BRAND_ID           : 0,
-            CLIENT_ID          : null,
+         
             CLIENT_CODE        : null,
             CLIENT_NAME        : null,
             BRAND_CODE         : null,
@@ -132,9 +132,12 @@ let brandPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-        $(this.field_brand_id).val(data.BRAND_ID);
-        $(this.field_client_code).val(data.CLIENT_CODE);
-        $(this.field_client_id).val(data.CLIENT_ID);
+       // alert(data.CLIENT_NAME);
+      
+        $(this.field_client_code).val(data.CLIENT_NAME);
+        $(this.field_client_code_value).val(data.CLIENT_CODE);
+
+
         $(this.field_brand_code).val(data.BRAND_CODE);
         $(this.field_brand_name).val(data.BRAND_NAME);
         $(this.field_brand_desc).val(data.BRAND_DESC);
@@ -158,9 +161,14 @@ let brandPopup = new (function () {
         */
     }
     this.bindField = function () {
-        let BRAND_ID            = $(this.field_brand_id).val();
-        let CLIENT_CODE         = $(this.field_client_code).val();
-        let CLIENT_ID           = $(this.field_client_id).val();
+
+ 
+
+        let CLIENT_CODE = $(this.field_client_code_value).val();
+     
+
+        //field_client_code_text
+
         let BRAND_CODE          = $(this.field_brand_code).val();
         let BRAND_NAME          = $(this.field_brand_name).val();
         let BRAND_DESC          = $(this.field_brand_desc).val();
@@ -168,14 +176,14 @@ let brandPopup = new (function () {
         let IS_DELETE_PERMANANT = $(this.field_permanant_del).prop("checked");
 
         this.jsonData = {
-            BRAND_ID, CLIENT_CODE, CLIENT_ID, BRAND_CODE, BRAND_NAME, BRAND_DESC,
+             CLIENT_CODE, BRAND_CODE, BRAND_NAME, BRAND_DESC,
             IS_ACTIVED, IS_DELETE_PERMANANT
         };
     }
     this.fieldsDisable = function () {
         //$(this.field_brand_id).prop("disabled", true);
         //$(this.field_client_code).prop("disabled", true);
-        $(this.field_client_id).prop("disabled", true);
+        $(this.field_client_code).prop("disabled", true);
         $(this.field_brand_code).prop("disabled", true);
         $(this.field_brand_name).prop("disabled", true);
         $(this.field_brand_desc).prop("disabled", true);
@@ -185,7 +193,7 @@ let brandPopup = new (function () {
     this.fieldsEnable = function () {
         //$(this.field_brand_id).prop("disabled", true);
         //$(this.field_client_code).prop("disabled", true);
-        $(this.field_client_id).prop("disabled", false);
+       
         $(this.field_brand_code).prop("disabled", false);
         $(this.field_brand_name).prop("disabled", false);
         $(this.field_brand_desc).prop("disabled", false);

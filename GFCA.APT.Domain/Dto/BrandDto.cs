@@ -9,6 +9,7 @@ namespace GFCA.APT.Domain.Dto
         //public int? BRAND_ID { get; set; }
         //public int? CLIENT_ID { get; set; }
         public string CLIENT_CODE { get; set; }
+        public string CLIENT_NAME { get; set; }
         [Required]
         public string BRAND_CODE { get; set; }
         public string BRAND_NAME { get; set; }
