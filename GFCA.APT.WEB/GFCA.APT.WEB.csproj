@@ -279,6 +279,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Masters\Controllers\AccountpaybleController.cs" />
     <Compile Include="Areas\Masters\Controllers\SizeController.cs" />
     <Compile Include="Areas\Masters\Controllers\CustomerPartyController.cs" />
     <Compile Include="Areas\Masters\Controllers\EmissionController.cs" />
@@ -4107,6 +4108,8 @@
     <Content Include="Areas\Masters\Views\PromotionGroup\_Popup_PromotionGroup.cshtml" />
     <Content Include="Areas\Masters\Views\Pack\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Pack\_Popup_Pack.cshtml" />
+    <Content Include="Areas\Masters\Views\Accountpayble\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Unit\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
