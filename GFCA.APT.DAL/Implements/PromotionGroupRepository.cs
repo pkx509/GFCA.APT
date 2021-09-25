@@ -16,9 +16,9 @@ namespace GFCA.APT.DAL.Implements
 
         public IEnumerable<PromotionGroupDto> All()
         {
-            string sqlQuery = @"SELECT A.*,A.[CHANNEL_ID] ,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_ID] = A.[CHANNEL_ID]) as [CHANNEL_CODE] 
-      ,A.[CUST_ID] ,(SELECT TOP 1 CUST_CODE + '-' + CUST_NAME  from [dbo].[TB_M_CUSTOMER] where [CUST_ID] = A.[CUST_ID]) as CUST_CODE 
-      ,A.[CLIENT_ID] ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where [CLIENT_ID] = A.[CLIENT_ID]) as CLIENT_CODE 
+            string sqlQuery = @"SELECT A.*,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_CODE] = A.CHANNEL_CODE) as [CHANNEL_CODE] 
+      ,(SELECT TOP 1 CUST_CODE + '-' + CUST_NAME  from [dbo].[TB_M_CUSTOMER] where [CUST_CODE] = A.[CUST_CODE]) as CUST_CODE 
+      ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where CLIENT_CODE = A.CLIENT_CODE) as CLIENT_CODE 
       ,A.[UPDATED_DATE]
   FROM [dbo].[TB_M_PROMOTION_GROUP]  AS A;";
             var query = Connection.Query<PromotionGroupDto>(
@@ -31,11 +31,11 @@ namespace GFCA.APT.DAL.Implements
 
         public PromotionGroupDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT A.*,A.[CHANNEL_ID] ,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_ID] = A.[CHANNEL_ID]) as [CHANNEL_CODE] 
-      ,A.[CUST_ID] ,(SELECT TOP 1 CUST_CODE + '-' + CUST_NAME  from [dbo].[TB_M_CUSTOMER] where [CUST_ID] = A.[CUST_ID]) as CUST_CODE 
-      ,A.[CLIENT_ID] ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where [CLIENT_ID] = A.[CLIENT_ID]) as CLIENT_CODE 
+            string sqlQuery = @"SSELECT A.*,(SELECT TOP 1 CHANNEL_CODE + '-' + CHANNEL_NAME  FROM [TB_M_CHANNEL] where [CHANNEL_CODE] = A.CHANNEL_CODE) as [CHANNEL_CODE] 
+      ,(SELECT TOP 1 CUST_CODE + '-' + CUST_NAME  from [dbo].[TB_M_CUSTOMER] where [CUST_CODE] = A.[CUST_CODE]) as CUST_CODE 
+      ,(SELECT TOP 1 CLIENT_CODE + '-' + CLIENT_NAME  from [dbo].[TB_M_CLIENT] where CLIENT_CODE = A.CLIENT_CODE) as CLIENT_CODE 
       ,A.[UPDATED_DATE]
-  FROM [dbo].[TB_M_PROMOTION_GROUP]  AS A WHERER  PROGP_CODE = @PROGP_CODE;";
+  FROM [dbo].[TB_M_PROMOTION_GROUP]  AS A WHERE A.PROGP_CODE = @PROGP_CODE;";
             var query = Connection.Query<PromotionGroupDto>(
                 sql: sqlQuery,
                 param: new { BRAND_CODE = code }
