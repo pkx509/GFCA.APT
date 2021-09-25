@@ -31,7 +31,7 @@ namespace GFCA.APT.WEB.Areas.Masters.Controllers
         public JsonResult UrlDataSource(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
-            IEnumerable dataSource = _biz.TB_M_ACCOUNT_PAYABLEService.GetAll();
+            IEnumerable dataSource = null;// _biz.TB_M_ACCOUNT_PAYABLEService.GetAll();
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0)
