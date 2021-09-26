@@ -8,7 +8,7 @@ namespace GFCA.APT.BAL.Interfaces
     {
         IEnumerable<FixedContractDto> GetHeaderAll();
         FixedContractDto GetHeaderById(int Id);
-        IEnumerable<FixedContractDto> GetDeatilByHeaderId(int Id);
+        IEnumerable<FixedContractDto> GetDetailByHeaderId(int Id);
         BusinessResponse Create(FixedContractDto model);
         BusinessResponse Edit(FixedContractDto model);
         BusinessResponse Remove(FixedContractDto model);

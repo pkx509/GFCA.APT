@@ -250,7 +250,7 @@ namespace GFCA.APT.WEB.Controllers
             IOrganizationService svc = biz.OrganizationService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.ORG_CODE, Text = $"{o.ORG_CODE} - {o.ORG_DESC}" });
+                .Select(o => new SelectionItem { Value = o.ORG_CODE, Text = $"{o.ORG_CODE} - {o.ORG_NAME}" });
             return ret;
 
         }

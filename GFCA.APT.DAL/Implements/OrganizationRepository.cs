@@ -43,7 +43,7 @@ namespace GFCA.APT.DAL.Implements
         public IEnumerable<OrganizationDto> All()
         {
             string sqlQuery = @"SELECT a.*
-                            , (SELECT TOP 1 b.COMP_CODE FROM TB_M_COMPANY b WHERE b.COMP_ID = a.COMP_ID) COMP_CODE
+                            , (SELECT TOP 1 b.COMP_CODE FROM TB_M_COMPANY b WHERE b.COMP_CODE = a.COMP_CODE) COMP_CODE
                             FROM TB_M_ORGANIZATION a;";
             var query = Connection.Query<OrganizationDto>(
                 sql: sqlQuery
