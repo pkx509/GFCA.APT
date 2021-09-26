@@ -70,8 +70,14 @@ ViewBag.Title = "Brand";
                                   {
                                       ds
                                       .Url(@Url.Action("UrlDatasource", "Brand", new { Area = "Masters" }))
+                                      .RemoveUrl(@Url.Action("Delete", "Brand", new { Area = "Masters" }))
                                       .Adaptor("UrlAdaptor")
                                       ;
+
+                                     
+  
+
+
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
@@ -100,7 +106,7 @@ ViewBag.Title = "Brand";
                                   .RowSelected("brandPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-                                                                          
+
                                       col.Field("CLIENT_NAME").HeaderText("Client").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("BRAND_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("BRAND_NAME").HeaderText("Name").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
