@@ -141,7 +141,15 @@ let brandPopup = new (function () {
         $(this.field_brand_code).val(data.BRAND_CODE);
         $(this.field_brand_name).val(data.BRAND_NAME);
         $(this.field_brand_desc).val(data.BRAND_DESC);
-        if (data.IS_ACTIVED === false) {
+
+
+     
+
+       
+
+        if (data.FLAG_ROW == 'D') {
+
+          
             $(this.field_is_active).prop("checked", "");
             $(this.field_is_active).parent().parent().attr("aria-checked", "false");
             $(this.field_is_active).parent().children().removeClass("e-check");
