@@ -1,5 +1,10 @@
-﻿@{
-#if DNX48
+﻿
+@{
+    ViewBag.Title = "Brand";
+}
+
+
+@{ #if DNX48
 ViewBag.Title = "Brand";
 #endif
 }
@@ -74,8 +79,8 @@ ViewBag.Title = "Brand";
                                       .Adaptor("UrlAdaptor")
                                       ;
 
-                                     
-  
+
+
 
 
                                   })
@@ -157,5 +162,5 @@ ViewBag.Title = "Brand";
 {
 
     @Scripts.Render("~/Scripts/masters/brand.js")
-    
+
 }
