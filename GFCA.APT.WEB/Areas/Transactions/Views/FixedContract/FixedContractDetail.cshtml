@@ -1,0 +1,1094 @@
+﻿@{
+#if DNX48
+ViewBag.Title = "Fixed Contract Document";
+#endif
+
+Dictionary<string, object> disabled = new Dictionary<string, object>();
+disabled.Add("disabled", "true");
+}
+
+@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 250px;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 552px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
+                min-width: 300px !important;
+                min-height: 180px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+}
+
+@section ContentPlaceholder
+{
+    <form autocomplete="off" class="form-horizontal">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-body">
+
+                                <div>
+
+                                    <div data-alerts="alerts"
+                                         data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                                         data-ids="myid"
+                                         data-fade="4000"
+                                         data-usebullets="true"></div>
+
+                                    <div class="row justify-content-center">
+                                        <div class="col col-sm-12 col-lg-12">
+
+                                            <div class="row">
+
+                                                <div class="col col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col col-lg-4 control-label text-right">
+                                                            Company
+                                                        </label>
+                                                        <div class="col col-lg-8">
+                                                            @Html.EJS().TextBox("txt-company").Placeholder("Company name").CssClass("mandatory").Render()
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col col-lg-4 control-label text-right">
+                                                            Document No
+                                                        </label>
+                                                        <div class="col col-lg-8">
+                                                            @Html.EJS().TextBox("txt-document-no").Value("FC-20210901-00001").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col col-lg-4 control-label text-right">
+                                                            Version
+                                                        </label>
+                                                        <div class="col col-lg-8">
+                                                            @Html.EJS().TextBox("txt-version").HtmlAttributes(disabled).Render()
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col col-sm-12 col-md-6 col-lg-3">
+                                                    <div class="form-group row">
+
+                                                        <label class="col col-lg-4 control-label text-right">
+                                                            Status
+                                                        </label>
+                                                        <div class="col col-lg-8">
+                                                            @Html.EJS().TextBox("txt-status").Value("Draft").HtmlAttributes(disabled).Render()
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                @Html.Partial("~/Areas/Transactions/Views/FixedContract/FixedContractHeader.cshtml")
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h6>Fixed contract detail</h6>
+                            </div>
+                            <div class="card-header">
+
+                                <div class="justify-content-start">
+
+                                    <div class="col col-sm-12 col-lg-10">
+
+                                        <div class="row">
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Detail No
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @Html.EJS().TextBox("txt-detail-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Brand
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-brand")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("C28")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetBrand/true")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Apply to All
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @Html.EJS().TextBox("txt-apply-to-all").Change("page.txtApplyAllChange").Placeholder("Input number only").Render()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Trade Activity
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-trade-activity")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("38")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetTradeActivity")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Category
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-category")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCategory")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Date Reference
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-date-reference")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetDateReference")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        UOM
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-uom")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetUnit")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Size
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-size")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("1000")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetSize")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Pack
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-pack")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetPack")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Cost Center
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        @(Html.EJS().ComboBox("cmb-cost-center")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCostCenter")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-sm-12 col-lg-6">
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                        Remark
+                                                    </label>
+                                                    <div class="col col-lg-8">
+                                                        <textarea name="des" cols="2" rows="2" class="e-control e-textbox e-lib e-input"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div>
+
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6>Q1</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-1">
+
+                                                            <div class="col col-lg-3 offset-lg-2 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Duration
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                January
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-jan").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpJan")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                February
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-feb").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpFeb")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                March
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-mar").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpMar")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col col-lg-2 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col col-lg-3">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col col-lg-3">
+                                                            <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6>Q2</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-1">
+
+                                                            <div class="col col-lg-3 offset-lg-2 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Duration
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                April
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-apr").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpApr")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                May
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-may").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpMay")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                June
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-jun").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpJun")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col col-lg-2 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6>Q3</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-1">
+
+                                                            <div class="col col-lg-3 offset-lg-2 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Duration
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                July
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-jul").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpJul")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                August
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-aug").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpAug")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                September
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-sep").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpSep")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col col-lg-2 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6>Q4</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col col-lg-12 align-content-center">
+
+                                                        <div class="form-group row mb-1">
+
+                                                            <div class="col col-lg-3 offset-lg-2 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Plan
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Actual
+                                                                </label>
+                                                            </div>
+                                                            <div class="col col-lg-3 align-content-center">
+                                                                <label class="control-label text-center e-text-center">
+                                                                    Duration
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                October
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-oct").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpOct")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                November
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-nov").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpNov")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col col-lg-2 control-label text-lg-right text-md-right text-sm-left">
+                                                                December
+                                                            </label>
+                                                            <div class="col col-lg-3">
+                                                                @Html.EJS().TextBox("txt-plan-dec").Render()
+                                                            </div>
+                                                            <div class="col col-lg-3">
+                                                                <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                            </div>
+                                                            <label class="col col-lg-4 control-label text-right">
+                                                                @(Html.EJS().DateRangePicker("drpDec")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .StartDate(new DateTime(2021, 1, 1))
+                                                                    .EndDate(new DateTime(2021, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="form-group row mb-0">
+                                                        <label class="col col-lg-2 control-label text-right">
+                                                            Accumulate
+                                                        </label>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                        <div class="col col-lg-3">
+                                                            <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-3 offset-lg-9">
+
+                                            <!-- Confirm State -->
+                                            <button class="btn btn-primary">Save</button>
+                                            <button class="btn btn-default">Cancel</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Fixed contract detail list</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    @(Html.EJS()
+                                  .Grid("grdBrand")
+                                  .Height("450")
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+                                      new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { text = "Print", prefixIcon = "e-icons e-print" },
+                                  })
+                                  
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(true)
+                                      .AllowEditing(true)
+                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .Mode(EditMode.Dialog)
+                                      .Template("#dialogtemplate");
+                                  })
+                                  .Columns(col =>
+                                  {
+
+                                      col.Field("Brand").HeaderText("Brand").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("Trade_Activity").HeaderText("Trade Activity").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Category").HeaderText("Category").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Date_Reference").HeaderText("Date Reference").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Size").HeaderText("Size").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Pack").HeaderText("Pack").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Cost_center").HeaderText("Cost center").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Remark").HeaderText("Remark").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("Q1-Jan").HeaderText("Jan").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Q1-Feb").HeaderText("Feb").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Q1-Mach").HeaderText("Mach").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Q1-Apr").HeaderText("Apr").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Q1-May").HeaderText("May").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("Q1-Jun").HeaderText("Jun").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      // col.Field("CREATED_DATE").HeaderText("UOM").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      // col.Field("UPDATED_DATE").HeaderText("Pack").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                  })
+                                  .Render())
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Claim</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Approval</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-lg-9">
+                                        <div class="form-group row">
+                                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-3">
+                                        <div class="form-group row">
+
+                                            <!-- Approval State -->
+                                            <button class="btn btn-primary">Approve</button>
+                                            <button class="btn btn-danger">Reject</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Reviewer</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-lg-9">
+                                        <div class="form-group row">
+                                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-3">
+                                        <div class="form-group row">
+
+                                            <!-- Review State -->
+                                            <button class="btn btn-info">Review</button>
+                                            <button class="btn btn-success">Commit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col col-lg-12 p-1">
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5>Audit &amp; History</h5>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+
+                                    <!-- Main node for this component -->
+                                    <div class="timeline">
+                                        <!-- Timeline time label -->
+                                        <div class="time-label">
+                                            <span class="bg-gradient-gray">History</span>
+                                        </div>
+                                        <div>
+                                            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                                            <i class="fas fa-envelope bg-blue"></i>
+                                            <!-- Timeline item -->
+                                            <div class="timeline-item">
+                                                <!-- Time -->
+                                                <span class="time"><i class="fas fa-clock"></i> 21/08/2021 12:05</span>
+                                                <!-- Header. Optional -->
+                                                <h3 class="timeline-header"><a href="#">Panupong K [Sale Team A]</a> has submited request</h3>
+                                                <!-- Body -->
+                                                <div class="timeline-body">
+                                                    Fixed contract no 1234556789 has been created. Cocomax at Tesco lotus pattanakarn Rd.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                                            <i class="far fa-check-circle bg-green"></i>
+                                            <!-- Timeline item -->
+                                            <div class="timeline-item">
+                                                <!-- Time -->
+                                                <span class="time"><i class="fas fa-clock"></i> 22/08/2021 12:05</span>
+                                                <!-- Header. Optional -->
+                                                <h3 class="timeline-header"><a href="#">Panupong K [Sale Manager]</a> has approved on SM Approval Process</h3>
+                                                <!-- Body -->
+                                                <div class="timeline-body">
+                                                    It's very good. too fast
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                                            <i class="fas fa-undo-alt bg-gradient-gray"></i>
+                                            <!-- Timeline item -->
+                                            <div class="timeline-item">
+                                                <!-- Time -->
+                                                <span class="time"><i class="fas fa-clock"></i> 23/08/2021 12:05</span>
+                                                <!-- Header. Optional -->
+                                                <h3 class="timeline-header"><a href="#">Panupong K [General Manager]</a> has rejected on GM Approval Process</h3>
+                                                <!-- Body -->
+                                                <div class="timeline-body">
+                                                    It's very good. too fast
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                                            <i class="fas fa-power-off bg-gradient-red"></i>
+                                            <!-- Timeline item -->
+                                            <div class="timeline-item">
+                                                <!-- Time -->
+                                                <span class="time"><i class="fas fa-clock"></i> 24/08/2021 12:05</span>
+                                                <!-- Header. Optional -->
+                                                <h3 class="timeline-header"><a href="#">Panupong K [Chief Executive Officer]</a> has cancelled on CEO Approval Process</h3>
+                                                <!-- Body -->
+                                                <div class="timeline-body">
+                                                    It's cool
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                                            <i class="fas fa-search-dollar bg-gradient-yellow"></i>
+                                            <!-- Timeline item -->
+                                            <div class="timeline-item">
+                                                <!-- Time -->
+                                                <span class="time"><i class="fas fa-clock"></i> 24/08/2021 12:05</span>
+                                                <!-- Header. Optional -->
+                                                <h3 class="timeline-header"><a href="#">Panupong K [Accountant]</a> has committed on Accountant Reviewer Process</h3>
+                                                <!-- Body -->
+                                                <div class="timeline-body">
+                                                    It's very good. too fast
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The last icon means the story is complete -->
+                                        <!--
+                            <div>
+                                <i class="fas fa-clock bg-gray"></i>
+                            </div>
+                            -->
+                                        <div>
+                                            <i class="fas fa-star bg-gradient-blue" title="Completed"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </form>
+
+}
+@section preScripts
+{
+
+    @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
+
+}

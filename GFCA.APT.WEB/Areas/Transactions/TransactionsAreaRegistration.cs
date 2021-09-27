@@ -15,11 +15,18 @@ namespace GFCA.APT.WEB.Areas.Transactions
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Transactions_FixedContract_Id",
-                "T/FixedContract/{id}",
-                new { controller = "FixedContract", action = "DocumentItem" }
+                "Transactions_FixedContract_List",
+                "T/FixedContract",
+                new { controller = "FixedContract", action = "Index" }
             );
 
+            context.MapRoute(
+                "Transactions_FixedContract_Detail",
+                "T/FixedContract/{DocCode}",
+                new { controller = "FixedContract", DocCode = UrlParameter.Optional, action = "FixedContractDetail" }
+            );
+
+            /*
             context.MapRoute(
                 "Transactions_default",
                 "T/{controller}/{action}/{id}",
@@ -31,6 +38,7 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 "T/{controller}/{action}/{id}",
                 new {controller = "default", action = "Index", id = UrlParameter.Optional }
             );
+            */
         }
     }
 }
