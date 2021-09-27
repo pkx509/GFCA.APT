@@ -854,7 +854,7 @@ disabled.Add("disabled", "true");
                                       new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
                                       new { text = "Print", prefixIcon = "e-icons e-print" },
                                   })
-                                  
+
                                   .EditSettings(edit =>
                                   {
                                       edit
@@ -893,26 +893,28 @@ disabled.Add("disabled", "true");
                     </div>
                 </div>
 
-                <div class="row mb-2">
-                    <div class="col col-lg-12 p-1">
-                        <div class="card card-info card-outline">
-                            <div class="card-header">
-                                <h5>Claim</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
+                @*
+        <div class="row mb-2">
+            <div class="col col-lg-12 p-1">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h5>Claim</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+                *@
 
                 <div class="row mb-2">
                     <div class="col col-lg-12 p-1">
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <h5>Approval</h5>
+                                <h5>Approval (Display when status approval)</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -940,7 +942,7 @@ disabled.Add("disabled", "true");
                     <div class="col col-lg-12 p-1">
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <h5>Reviewer</h5>
+                                <h5>Reviewer (Display when status accounting review)</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -962,6 +964,7 @@ disabled.Add("disabled", "true");
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row mb-2">
                     <div class="col col-lg-12 p-1">
@@ -1081,14 +1084,14 @@ disabled.Add("disabled", "true");
 
 
             </div>
-        </div>
+                </div>
 
-    </form>
+            </form>
 
-}
-@section preScripts
-{
+        }
+        @section preScripts
+        {
 
-    @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
+            @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
 
-}
+        }
