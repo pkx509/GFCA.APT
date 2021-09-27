@@ -15,7 +15,20 @@ namespace GFCA.APT.DAL.Implements
 
         public IEnumerable<FixedContractDto> All()
         {
-            throw new NotImplementedException();
+            string sqlQuery = @"SELECT FCH.DOC_CODE,
+                                (SELECT TOP 1 CHANNEL_NAME  from [dbo].[TB_M_CHANNEL] where CHANNEL_CODE = FCH.CHANNEL_CODE) as CHANNEL_NAME,
+                                FCH.CREATED_BY AS REQUESTER,
+                                (SELECT TOP 1 CLIENT_NAME  from [dbo].[TB_M_CLIENT] where CLIENT_CODE = FCH.CLIENT_CODE) as CLIENT_NAME,
+                                FCH.CREATED_DATE
+                                FROM TB_T_FIXED_CONTRACT_H FCH";
+
+            var query = Connection.Query<FixedContractDto>(
+                sql: sqlQuery
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+
         }
 
         public void Delete(int id)

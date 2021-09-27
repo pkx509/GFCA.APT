@@ -32,8 +32,10 @@ namespace GFCA.APT.Domain.Dto
         public int DOC_FCH_ID { get; set; }
         //public string DOC_CODE { get; set; }
         public string CLIENT_CODE { get; set; }
+        public string CLIENT_NAME { get; set; }
         public string CUST_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
+        public string CHANNEL_NAME { get; set; }
         public string FLAG_ROW { get; set; }
     }
 

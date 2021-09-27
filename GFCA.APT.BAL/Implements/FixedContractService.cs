@@ -73,7 +73,8 @@ namespace GFCA.APT.BAL.Implements
         {
             try
             {
-                throw new NotImplementedException();
+                var dto = _uow.FixedContractRepository.All();
+                return dto;
             }
             catch (Exception ex)
             {

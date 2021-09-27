@@ -326,7 +326,7 @@ namespace GFCA.APT.WEB.Controllers
             IPackService svc = biz.PackService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.PACK_CODE, Text = $"{o.PACK_CODE} -{o.PACK_NAME}" });
+                .Select(o => new SelectionItem { Value = o.PACK_CODE, Text = $"{o.PACK_NAME}" });
             return ret;
         }
     }

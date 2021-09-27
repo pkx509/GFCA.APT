@@ -4,11 +4,7 @@ using Syncfusion.EJ2.Base;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using GFCA.APT.Domain.Models;
 using GFCA.APT.BAL.Interfaces;
-using System.Reflection;
-using log4net;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
@@ -29,9 +25,15 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         {
             return View();
         }
+        public ActionResult FixedContractDetail(string DocCode)
+        {
+            // logger.Debug($"QueryString is {id}");
+            return View();
+        }
+
 
         //[HttpGet]
-        public JsonResult UrlDataSource(DataManagerRequest dm)
+        public JsonResult UrlDataSourceHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlDataSource");
             IEnumerable dataSource = _biz.FixedContractService.GetHeaderAll();
@@ -49,7 +51,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             {
                 dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
             }
-            int count = dataSource.Cast<ChannelDto>().Count();
+            int count = dataSource.Cast<FixedContractDto>().Count();
             if (dm.Skip != 0) // Paging
             {
                 dataSource = operation.PerformSkip(dataSource, dm.Skip);
@@ -61,10 +63,6 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
-        public ActionResult DocumentItem(int id)
-        {
-            // logger.Debug($"QueryString is {id}");
-            return View();
-        }
+        
     }
 }
