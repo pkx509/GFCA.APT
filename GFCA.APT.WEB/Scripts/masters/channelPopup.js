@@ -25,23 +25,23 @@ let channelPopup = new (function () {
     this.isCreateState = true;
 
     //Model Dto
-    this.field_brand_id      = "#pop-txt-brand-id";
-    this.field_client_code   = "#pop-cmb-client-code";
-    this.field_client_id     = "#pop-hid-client-id";
-    this.field_brand_code    = "#pop-txt-brand-code";
-    this.field_brand_name    = "#pop-txt-brand-name";
-    this.field_brand_desc    = "textarea[name='pop-txt-brand-desc']";
+  
+    this.field_emis_code_text = "#pop-cmb-emis-code";
+    this.field_emis_code_value = "#pop-cmb-emis-code_hidden";
+
+    this.field_channel_code = "#pop-txt-channel-code";
+    this.field_channel_name = "#pop-txt-channel-name";
+    this.field_channel_desc = "textarea[name='pop-txt-channel-desc']";
     this.field_is_active     = "input[id='pop-ckb-is-active']";
     this.field_permanant_del = "#pop-hid-permanant-del";
 
     //Value Dto
     this.jsonData = {
-        BRAND_ID           : 0,
-        CLIENT_ID          : null,
-        CLIENT_CODE        : null,
-        BRAND_CODE         : null,
+        EMIS_CODE          : null,
+        CHANNEL_CODE          : null,
+        CHANNEL_NAME        : null,
+        CHANNEL_DESC         : null,
         BRAND_NAME         : null,
-        BRAND_DESC         : null,
         FLAG_ROW           : null,
         IS_ACTIVED         : null,
         IS_DELETE_PERMANANT: null,
@@ -52,12 +52,11 @@ let channelPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            BRAND_ID           : 0,
-            CLIENT_ID          : null,
-            CLIENT_CODE        : null,
-            BRAND_CODE         : null,
-            BRAND_NAME         : null,
-            BRAND_DESC         : null,
+            EMIS_CODE: null,
+            CHANNEL_CODE: null,
+            CHANNEL_NAME: null,
+            CHANNEL_DESC: null,
+            BRAND_NAME: null,
             FLAG_ROW           : null,
             IS_ACTIVED         : null,
             IS_DELETE_PERMANANT: null,
@@ -73,14 +72,15 @@ let channelPopup = new (function () {
     }
     this.open = function (popupMode, dataSelection, fn) {
         if (popupMode === POPUP_MODE.CREATE) {
+           
             //this.jsonData = dataSelection;
             this.init();
             this.callBack = fn;
 
-            $(this.field_brand_code).prop("disabled", false);
-            $(this.field_brand_code).addClass("mandatory");
+            $(this.field_channel_code).prop("disabled", false);
+            $(this.field_channel_code).addClass("mandatory");
 
-            this.setHeading("Create New Brand");
+            this.setHeading("Create New Channel");
             $(this.button_save).html("Save");
             $(this.button_save).show();
             $(this.button_remove).hide();
@@ -89,6 +89,7 @@ let channelPopup = new (function () {
 
         }
         if (popupMode === POPUP_MODE.EDIT) {
+          
             this.jsonData = dataSelection;
             this.callBack = fn;
 
@@ -99,10 +100,13 @@ let channelPopup = new (function () {
             }
             this.bindDom(this.jsonData);
 
-            $(this.field_brand_code).prop("disabled", true);
-            $(this.field_brand_code).removeClass("mandatory");
+            $(this.field_channel_code).prop("disabled", true);
+            $(this.field_channel_code).parent().addClass("e-disabled")
+            $(this.field_channel_code).parent().removeClass("mandatory");
 
-            $(this.header_title).html("Edit Brand");
+ 
+
+            $(this.header_title).html("Edit Channel");
             $(this.button_save).html("Save Changes");
             $(this.button_save).show();
             $(this.button_remove).hide();
@@ -110,6 +114,7 @@ let channelPopup = new (function () {
             $(this.popup_id).modal("show");
 
         }
+
         if (popupMode === POPUP_MODE.DELETE) {
             this.jsonData = dataSelection;
             this.callBack = fn;
@@ -119,13 +124,10 @@ let channelPopup = new (function () {
                 channelPopup.callBack(this.jsonData);
                 return;
             }
-            $(this.header_title).html("Delete Brand");
-            $(this.button_remove).show();
-            $(this.button_del).show();
-            $(this.button_save).hide();
-            $(this.popup_id).modal("show");
-
+            this.openFormDeletePermanent(this.jsonData);
         }
+
+ 
     }
     this.close = function () {
         this.clearValue();
@@ -133,27 +135,55 @@ let channelPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-        $(this.field_brand_id).val(data.BRAND_ID);
-        $(this.field_client_code).val(data.CLIENT_CODE);
-        $(this.field_client_id).val(data.CLIENT_ID);
-        $(this.field_brand_code).val(data.BRAND_CODE);
-        $(this.field_brand_name).val(data.BRAND_NAME);
-        $(this.field_brand_desc).val(data.BRAND_DESC);
-        $(this.field_is_active).prop("checked", data.IS_ACTIVED);
+        
+
+        $(this.field_emis_code_text).empty();
+        var o = new Option(data.EMIS_NAME, data.EMIS_CODE,true);    
+        $(this.field_emis_code_text).append(o);
+        $(this.field_emis_code_text).val(data.EMIS_NAME);
+        $(this.field_emis_code_text).attr("aria-label", data.EMIS_NAME);
+
+        $(this.field_channel_code).val(data.CHANNEL_CODE);
+        $(this.field_channel_name).val(data.CHANNEL_NAME);
+        $(this.field_channel_desc).val(data.CHANNEL_DESC);
         $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
+
+
+        if (data.FLAG_ROW == 'D') {
+
+
+            $(this.field_is_active).prop("checked", "");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "false");
+            $(this.field_is_active).parent().children().removeClass("e-check");
+
+        } else {
+            $(this.field_is_active).prop("checked", "checked");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "true");
+            $(this.field_is_active).parent().children().addClass("e-check");
+            $(this.field_is_active).removeClass("e-check");
+        }
+
+
     }
     this.bindField = function () {
-        let BRAND_ID            = $(this.field_brand_id).val();
-        let CLIENT_CODE         = $(this.field_client_code).val();
-        let CLIENT_ID           = $(this.field_client_id).val();
-        let BRAND_CODE          = $(this.field_brand_code).val();
-        let BRAND_NAME          = $(this.field_brand_name).val();
-        let BRAND_DESC          = $(this.field_brand_desc).val();
-        let IS_ACTIVED          = $(this.field_is_active).val();
+
+      
+        let EMIS_CODE = $(this.field_emis_code_value).val();
+        let EMIS_NAME = $(this.field_emis_code_text).val();
+
+      //  alert(EMIS_CODE);
+       // alert(EMIS_NAME);
+
+        let CHANNEL_CODE          = $(this.field_channel_code).val();
+        let CHANNEL_NAME          = $(this.field_channel_name).val();
+        let CHANNEL_DESC          = $(this.field_channel_desc).val();
+    //    let IS_ACTIVED = $(this.field_is_active).val();
+        let IS_ACTIVED = $(this.field_is_active).prop("checked");
+
         let IS_DELETE_PERMANANT = $(this.field_permanant_del).val();
 
         this.jsonData = {
-            BRAND_ID, CLIENT_CODE, CLIENT_ID, BRAND_CODE, BRAND_NAME, BRAND_DESC,
+            EMIS_CODE, EMIS_NAME, CHANNEL_CODE, CHANNEL_NAME, CHANNEL_DESC,
             IS_ACTIVED, IS_DELETE_PERMANANT
         };
     }
@@ -288,12 +318,53 @@ let channelPopup = new (function () {
         }
     }
 
+    this.openFormDeletePermanent = function () {
+        let json = channelPopup.jsonData;
+        BootstrapDialog.show({
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            closable: true,
+            closeByBackdrop: true,
+            closeByKeyboard: true,
+            draggable: true,
+            title: 'Confirmation',
+            message: `<label><input type="checkbox" class="e-control"></input> You're deleting a Channel  "${json.CHANNEL_CODE}", Are you? </label>`,
+            buttons: [
+                {
+                    label: 'Delete',
+                    cssClass: 'btn btn-danger',
+                    icon: 'fas fa-paper-plane',
+                    action: function (self) {
+                        let chkAgree = self.getModalBody().find('input').prop("checked");
+                        let IS_DELETE_PERMANANT = chkAgree;
+                        json = {
+                            ...json,
+                            IS_DELETE_PERMANANT
+                        };
+                        self.enableButtons(false);
+                        self.setClosable(false);
+                        self.getModalBody().html('Processing...');
+                        setTimeout(function () {
+                            channelPopup.callBack(json);
+                            self.close();
+                        }, 1500);
+                    }
+                },
+                {
+                    label: 'Close',
+                    action: function (self) {
+                        self.close();
+                    }
+                }
+            ]
+        });
+    }
     let appendElement = function (el, form) {
         let dialogTemp = form.querySelector("#dialogTemp");
         dialogTemp.innerHTML = el;
         let formInstance = form.ej2_instances[0];
         //formInstance.addRules('BRAND_ID', { required: true });
-        formInstance.addRules('BRAND_CODE', { required: true, minLength: 2 }); //adding the form validation rules
+        formInstance.addRules('CHANNEL_CODE', { required: true, minLength: 10 }); //adding the form validation rules
         formInstance.refresh();  // refresh method of the formObj
         let script = document.createElement('script');
         script.type = "text/javascript";
@@ -313,5 +384,7 @@ let channelPopup = new (function () {
             gridObj.excelExport();
         }
     }
+
+
 
 })();

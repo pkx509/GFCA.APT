@@ -64,10 +64,24 @@ $(document).ready(function () {
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.Delete, data);
         };
 
         channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });
+
+function setCombobox(comboboxName, comboboxText,text,value) {
+
+   // $(id).prop("checked", "");
+
+    alert(text);
+    $(comboboxText).empty();
+    var o = new Option(text, value, true);
+    $(comboboxText).append(o);
+
+    $(comboboxText).val(value);
+    $(comboboxText).attr("aria-label", value);
+
+}

@@ -49,7 +49,7 @@ namespace GFCA.APT.BAL.Implements
                     throw new Exception("Is duplicate data");
 
                 var dto = new ChannelDto();
-
+                dto.EMIS_CODE = model.EMIS_CODE;
                 dto.CHANNEL_CODE = model.CHANNEL_CODE;
                 dto.CHANNEL_NAME = model.CHANNEL_NAME;
                 dto.CHANNEL_DESC = model.CHANNEL_DESC;
@@ -89,7 +89,7 @@ namespace GFCA.APT.BAL.Implements
 
                 string code = model.CHANNEL_CODE;
                 var dto = _uow.ChannelRepository.GetByCode(code);
-
+                dto.EMIS_CODE = model.EMIS_CODE;
                 dto.CHANNEL_CODE = model.CHANNEL_CODE;
                 dto.CHANNEL_NAME = model.CHANNEL_NAME;
                 dto.CHANNEL_DESC = model.CHANNEL_DESC;
@@ -146,7 +146,8 @@ namespace GFCA.APT.BAL.Implements
 
                 response.Success = true;
                 response.MessageType = TOAST_TYPE.SUCCESS;
-                response.Message = $"{typeof(ChannelService)} has been deleted";
+  
+                response.Message = $"Channel ({model.CHANNEL_CODE}) has been deleted";
             }
             catch (Exception ex)
             {

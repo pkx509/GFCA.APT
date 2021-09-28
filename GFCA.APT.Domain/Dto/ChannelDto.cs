@@ -6,6 +6,8 @@ namespace GFCA.APT.Domain.Dto
     {
         //[Required]
         //public int? CHANNEL_ID { get; set; }
+        public string EMIS_CODE { get; set; }
+        public string EMIS_NAME { get; set; }
         [Required]
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }

@@ -92,19 +92,19 @@ ViewBag.Title = "Channel";
                                       .Mode(EditMode.Dialog)
                                       .Template("#dialogtemplate");
                                   })
-                                  // .DataBound("channelPopup.OnDataBound")
-                                  //.ActionComplete("brandPopup.OnActionComplete")
-                                  //.ActionBegin("brandPopup.OnActionBegin")
-                                  //.ActionFailure("brandPopup.OnActionFailure")
-                                  //.RowSelecting("brandPopup.OnRowSelecting")
-                                  // .RowDeselected("channelPopup.OnRowDeselected")
-                                  //.RowSelected("channelPopup.OnRowSelected")
+                                   .DataBound("channelPopup.OnDataBound")
+                                  .RowDeselected("channelPopup.OnRowDeselected")
+                                  .RowSelected("channelPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
 
                                       col.Field("CHANNEL_CODE").HeaderText("Code").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CHANNEL_NAME").HeaderText("Name").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CHANNEL_DESC").HeaderText("Description").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                               
+                                      col.Field("EMIS_NAME").HeaderText("EMIS Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
                                       col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CREATED_DATE").HeaderText("Created Date").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy HH:mm:ss").Add();
                                       col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();

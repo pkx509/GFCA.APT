@@ -14,7 +14,11 @@ namespace GFCA.APT.DAL.Implements
 
         public ChannelDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL WHERE CHANNEL_CODE = @CHANNEL_CODE;";
+            string sqlQuery = @"SELECT  C.*
+        
+       ,(SELECT TOP 1 E.EMIS_CODE + '-' + E.EMIS_NAME FROM TB_M_EMISSION AS E WHERE E.EMIS_CODE=C.EMIS_CODE) as EMIS_NAME
+FROM TB_M_CHANNEL AS C 
+WHERE C.CHANNEL_CODE = @CHANNEL_CODE;";
             var query = Connection.Query<ChannelDto>(
                 sql: sqlQuery,
                 param: new { CHANNEL_CODE = code }
@@ -25,7 +29,9 @@ namespace GFCA.APT.DAL.Implements
         }
         public IEnumerable<ChannelDto> All()
         {
-            string sqlQuery = @"SELECT * FROM TB_M_CHANNEL";
+            string sqlQuery = @"SELECT  C.*     
+                             ,(SELECT TOP 1 E.EMIS_CODE + '-' + E.EMIS_NAME FROM TB_M_EMISSION AS E WHERE E.EMIS_CODE=C.EMIS_CODE) as EMIS_NAME
+                             FROM TB_M_CHANNEL AS C;";
             var query = Connection.Query<ChannelDto>(
                 sql: sqlQuery
                 ,transaction: Transaction
@@ -39,6 +45,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"INSERT INTO TB_M_CHANNEL
                                 (
                                   CHANNEL_CODE
+                                , EMIS_CODE
                                 , CHANNEL_NAME
                                 , CHANNEL_DESC
                                 , FLAG_ROW
@@ -46,6 +53,7 @@ namespace GFCA.APT.DAL.Implements
                                 , CREATED_DATE
                                 ) VALUES (
                                   @CHANNEL_CODE
+                                , @EMIS_CODE
                                 , @CHANNEL_NAME
                                 , @CHANNEL_DESC
                                 , @FLAG_ROW
@@ -56,6 +64,7 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
+                EMIS_CODE=entity.EMIS_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
                 CHANNEL_NAME = entity.CHANNEL_NAME,
                 CHANNEL_DESC = entity.CHANNEL_DESC,
@@ -76,6 +85,7 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"UPDATE TB_M_CHANNEL
                                 SET
                                   CHANNEL_CODE = @CHANNEL_CODE
+                                , EMIS_CODE = @EMIS_CODE
                                 , CHANNEL_NAME = @CHANNEL_NAME
                                 , CHANNEL_DESC = @CHANNEL_DESC
                                 , FLAG_ROW     = @FLAG_ROW
@@ -87,7 +97,8 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                CAHNNEL_CODE = entity.CHANNEL_CODE,
+                CHANNEL_CODE = entity.CHANNEL_CODE,
+                EMIS_CODE = entity.EMIS_CODE,
                 CHANNEL_NAME = entity.CHANNEL_NAME,
                 CHANNEL_DESC = entity.CHANNEL_DESC,
                 FLAG_ROW     = entity.FLAG_ROW,
