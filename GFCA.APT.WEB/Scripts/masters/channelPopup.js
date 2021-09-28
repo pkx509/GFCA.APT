@@ -94,7 +94,7 @@ let channelPopup = new (function () {
 
             if (!dataSelection) //validate selected item
             {
-                brandPopup.callBack(this.jsonData);
+                channelPopup.callBack(this.jsonData);
                 return;
             }
             this.bindDom(this.jsonData);
@@ -116,7 +116,7 @@ let channelPopup = new (function () {
 
             if (!dataSelection) //validate selected item
             {
-                brandPopup.callBack(this.jsonData);
+                channelPopup.callBack(this.jsonData);
                 return;
             }
             $(this.header_title).html("Delete Brand");
@@ -204,8 +204,8 @@ let channelPopup = new (function () {
                 ...this.jsonData,
                 IS_DELETE_PERMANANT
             };
-            brandPopup.callBack(this.jsonData);
-            brandPopup.close();
+            channelPopup.callBack(this.jsonData);
+            channelPopup.close();
         }
 
     }
@@ -215,8 +215,8 @@ let channelPopup = new (function () {
             ...this.jsonData,
             IS_ACTIVED
         };
-        brandPopup.callBack(this.jsonData);
-        //brandPopup.close();
+        channelPopup.callBack(this.jsonData);
+        //channelPopup.close();
     }
 
     this.onDeletePerm = function (e) {
@@ -225,8 +225,8 @@ let channelPopup = new (function () {
             ...this.jsonData,
             IS_DELETE_PERMANANT
         };
-        brandPopup.callBack(this.jsonData);
-        //brandPopup.close();
+        channelPopup.callBack(this.jsonData);
+        //channelPopup.close();
     }
 
     this.onTestNestModal = function (e) {
