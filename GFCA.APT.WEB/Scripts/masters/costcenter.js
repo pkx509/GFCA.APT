@@ -23,7 +23,7 @@ $(document).ready(function () {
                 });
 
                 if (res.Success === true) {
-                    brandPopup.close();
+                    costcenterPopup.close();
                     let objGrid = document.getElementById("grdBrand").ej2_instances[0];
                     if (objGrid) {
                         objGrid.refresh();
@@ -50,7 +50,7 @@ $(document).ready(function () {
             sendPost(urlServices.Add, data);
         };
 
-        brandPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+        costcenterPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
 
     });
     $("#toolbar_edit").click(function (e) {
@@ -59,7 +59,7 @@ $(document).ready(function () {
             sendPost(urlServices.Edit, data);
         };
 
-        brandPopup.open(POPUP_MODE.EDIT, argruments.data, callBack);
+        costcenterPopup.open(POPUP_MODE.EDIT, argruments.data, callBack);
     });
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
@@ -67,7 +67,7 @@ $(document).ready(function () {
             sendPost(urlServices.Edit, data);
         };
 
-        brandPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+        costcenterPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });

@@ -1,5 +1,7 @@
-﻿@{
-#if DNX48
+﻿@{ ViewBag.Title = "Costcenter"; }
+
+
+@{ #if DNX48
 ViewBag.Title = "Costcenter";
 #endif
 }
@@ -64,24 +66,21 @@ ViewBag.Title = "Costcenter";
                             @(Html.EJS()
                                   .Grid("grdCostcenter")
                                   .Height("450")
-                           
                                   .DataSource(ds =>
                                   {
                                       ds
                                       .Url(@Url.Action("UrlDatasource", "CostCenter", new { Area = "Masters" }))
+                                      .RemoveUrl(@Url.Action("Delete", "CostCenter", new { Area = "Masters" }))
                                       .Adaptor("UrlAdaptor")
                                       ;
                                   })
+
+
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
-                                  .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-excelexport" },
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "" },
-                                      new { text = "ExcelExport" }
-                                  })
+                                 .Toolbar(new List<string>() { "Add", "Edit", "Delete", "ExcelExport", "Print" })
                                   .ToolbarClick("costcenterPopup.OnExcelExportClick")
                                   .EditSettings(edit =>
                                   {
@@ -93,25 +92,18 @@ ViewBag.Title = "Costcenter";
                                       .Mode(EditMode.Dialog)
                                       .Template("#dialogtemplate");
                                   })
-                                  .DataBound("costcenterPopup.OnDataBound")
-                                  //.ActionComplete("brandPopup.OnActionComplete")
-                                  //.ActionBegin("brandPopup.OnActionBegin")
-                                  //.ActionFailure("brandPopup.OnActionFailure")
-                                  //.RowSelecting("brandPopup.OnRowSelecting")
-                                  .RowDeselected("costcenterPopup.OnRowDeselected")
-                                  .RowSelected("costcenterPopup.OnRowSelected")
-                                  .Columns(col =>
-                                  {
-                                     
-                                      col.Field("CENTER_CODE").HeaderText("Code").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CENTER_NAME").HeaderText("Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CENTER_DESC").HeaderText("Description").Width("400").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FLAG_ROW").HeaderText("Status").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                  })
+                                 .Columns(col =>
+                                 {
+
+                                     col.Field("CENTER_CODE").HeaderText("Code").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("CENTER_NAME").HeaderText("Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("CENTER_DESC").HeaderText("Description").Width("400").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("FLAG_ROW").HeaderText("Status").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                     col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                     col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                 })
                                   .Render())
 
                         </div>
@@ -123,7 +115,7 @@ ViewBag.Title = "Costcenter";
     </div>
     <!-- /.content-header -->
 
-  
+
 }
 
 @section preScripts
