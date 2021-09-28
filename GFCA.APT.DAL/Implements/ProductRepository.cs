@@ -27,7 +27,16 @@ namespace GFCA.APT.DAL.Implements
         }
         public ProductDto GetByCode(string code)
         {
-            string sqlQuery = "SELECT * FROM TB_M_PRODUCT WHERE PROD_CODE = @PROD_CODE;";
+            string sqlQuery = @"  SELECT  P.*  
+                            ,(SELECT TOP 1  C.CustomerName  FROM Customer AS C) AS CUST_NAME
+                            ,(SELECT TOP 1  O.ORG_NAME  FROM TB_M_ORGANIZATION AS O) AS ORG_NAME
+                            ,(SELECT TOP 1  E.EMIS_NAME  FROM TB_M_EMISSION AS E) AS EMIS_NAME
+
+		                    ,(SELECT TOP 1 P.CUST_CODE + '-' + C.CustomerName  FROM Customer AS C) AS CUST_CODE_NAME
+                            ,(SELECT TOP 1 P.ORG_CODE + '-' + O.ORG_NAME  FROM TB_M_ORGANIZATION AS O) AS ORG_CODE_NAME
+                            ,(SELECT TOP 1 P.EMIS_CODE + '-' + E.EMIS_NAME  FROM TB_M_EMISSION AS E) AS EMIS_CODE_NAME
+                             FROM TB_M_PRODUCT  AS P
+                             WHERE PROD_CODE = @PROD_CODE";
             var query = Connection.Query<ProductDto>(
                 sql: sqlQuery,
                 param: new { PROD_CODE = code },
@@ -38,10 +47,14 @@ namespace GFCA.APT.DAL.Implements
         }
         public IEnumerable<ProductDto> All()
         {
-            string sqlQuery = @"SELECT P.*,
-                                          (SELECT TOP 1 C.CUST_CODE + '-' + C.CUST_NAME  FROM TB_M_CUSTOMER as C WHERE P.CUST_CODE = C.CUST_CODE) as CUST_NAME,
-		                                  (SELECT TOP 1 C.EMIS_CODE + '-' + C.EMIS_NAME  FROM TB_M_EMISSION as C WHERE P.EMIS_CODE = C.EMIS_CODE) as EMIS_NAME
-                             FROM TB_M_PRODUCT  as P";
+            string sqlQuery = @"  SELECT  P.*  
+                            ,(SELECT TOP 1  C.CustomerName  FROM Customer AS C) AS CUST_NAME
+                            ,(SELECT TOP 1  O.ORG_NAME  FROM TB_M_ORGANIZATION AS O) AS ORG_NAME
+                            ,(SELECT TOP 1  E.EMIS_NAME  FROM TB_M_EMISSION AS E) AS EMIS_NAME
+		                    ,(SELECT TOP 1 P.CUST_CODE + '-' + C.CustomerName  FROM Customer AS C) AS CUST_CODE_NAME
+                            ,(SELECT TOP 1 P.ORG_CODE + '-' + O.ORG_NAME  FROM TB_M_ORGANIZATION AS O) AS ORG_CODE_NAME
+                            ,(SELECT TOP 1 P.EMIS_CODE + '-' + E.EMIS_NAME  FROM TB_M_EMISSION AS E) AS EMIS_CODE_NAME
+                             FROM TB_M_PRODUCT  AS P";
 
             var query = Connection.Query<ProductDto>(
                 sql: sqlQuery,
