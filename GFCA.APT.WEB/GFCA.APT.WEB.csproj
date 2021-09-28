@@ -4183,6 +4183,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\masters\accountpayble.js" />
     <Content Include="Scripts\masters\accountpayblePopup.js" />
+    <Content Include="Scripts\masters\channel.js" />
+    <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\transactions\fixedContract.js" />
     <Content Include="Scripts\masters\pack.js" />
     <Content Include="Scripts\masters\packPopup.js" />
@@ -4190,16 +4192,12 @@
     <Content Include="Scripts\masters\tradeactivityPopup.js" />
     <Content Include="Scripts\masters\size.js" />
     <Content Include="Scripts\masters\sizePopup.js" />
-    <Content Include="Scripts\masters\channel.js" />
-    <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\masters\accountpayble.js" />
     <Content Include="Scripts\masters\accountpayblePopup.js" />
     <Content Include="Scripts\masters\documenttype.js" />
     <Content Include="Scripts\masters\documenttypePopup.js" />
     <Content Include="Scripts\masters\promotiongroup.js" />
     <Content Include="Scripts\masters\promotiongroupPopup.js" />
-    <Content Include="Scripts\masters\channel.js" />
-    <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\masters\clientPopup.js" />
     <Content Include="Scripts\masters\client.js" />
     <Content Include="Scripts\masters\costcenter.js" />
