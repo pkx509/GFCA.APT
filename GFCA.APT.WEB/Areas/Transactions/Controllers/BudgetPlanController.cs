@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GFCA.APT.BAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +7,20 @@ using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
-    public class BudgetPlanController : Controller
+    public class BudgetPlanController : ControllerWebBase
     {
-        // GET: Transactions/BudgetPlan
+        private readonly IBusinessProvider _biz;
+        public BudgetPlanController(IBusinessProvider biz)
+        {
+            _biz = biz;
+        }
+
+        // GET: T/BudgetPlan
+        [HttpGet()]
         public ActionResult Index()
         {
             return View();
         }
+
     }
 }
