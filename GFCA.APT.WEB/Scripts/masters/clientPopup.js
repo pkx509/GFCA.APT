@@ -12,35 +12,35 @@ let clientPopup = new (function () {
     let _args = null;
 
     //UI
-    this.popup_id      = "#popup-client";
-    this.header_title  = "#pop-lbl-header-title";
-    this.button_del    = "#pop-btn-del";
-    this.button_save   = "#pop-btn-save";
+    this.popup_id = "#popup-client";
+    this.header_title = "#pop-lbl-header-title";
+    this.button_del = "#pop-btn-del";
+    this.button_save = "#pop-btn-save";
 
     this.MODE_TYPE = {
-        CREATE : 1,
-        EDIT   : 2,
-        DELETE : 3
+        CREATE: 1,
+        EDIT: 2,
+        DELETE: 3
     }
 
     this.isCreateState = true;
 
     //Model Dto
-  
-    this.field_client_code    = "#pop-txt-client-code";
-    this.field_client_name    = "#pop-txt-client-name";
-    this.field_client_desc    = "textarea[name='pop-txt-client-desc']";
-    this.field_is_active     = "input[id='pop-ckb-is-active']";
+
+    this.field_client_code = "#pop-txt-client-code";
+    this.field_client_name = "#pop-txt-client-name";
+    this.field_client_desc = "textarea[name='pop-txt-client-desc']";
+    this.field_is_active = "input[id='pop-ckb-is-active']";
     this.field_permanant_del = "input[id='pop-ckb-is-del-perm]";
 
     //Value Dto
     this.jsonData = {
-       
-        CLIENT_CODE        : null,
-        CLIENT_NAME        : null,
-        CLIENT_DESC         : null,
-        FLAG_ROW           : null,
-        IS_ACTIVED         : true,
+
+        CLIENT_CODE: null,
+        CLIENT_NAME: null,
+        CLIENT_DESC: null,
+        FLAG_ROW: null,
+        IS_ACTIVED: true,
         IS_DELETE_PERMANANT: false,
     };
 
@@ -49,12 +49,12 @@ let clientPopup = new (function () {
     }
     this.clearValue = function () {
         this.jsonData = {
-            
-            CLIENT_CODE         : null,
-            CLIENT_NAME         : null,
-            CLIENT_DESC         : null,
-            FLAG_ROW           : null,
-            IS_ACTIVED         : true,
+
+            CLIENT_CODE: null,
+            CLIENT_NAME: null,
+            CLIENT_DESC: null,
+            FLAG_ROW: null,
+            IS_ACTIVED: true,
             IS_DELETE_PERMANANT: false,
         };
     }
@@ -127,11 +127,14 @@ let clientPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-       
+
         $(this.field_client_code).val(data.CLIENT_CODE);
         $(this.field_client_name).val(data.CLIENT_NAME);
         $(this.field_client_desc).val(data.CLIENT_DESC);
-        if (data.IS_ACTIVED === false) {
+
+        if (data.FLAG_ROW == 'D') {
+
+
             $(this.field_is_active).prop("checked", "");
             $(this.field_is_active).parent().parent().attr("aria-checked", "false");
             $(this.field_is_active).parent().children().removeClass("e-check");
@@ -141,18 +144,19 @@ let clientPopup = new (function () {
             $(this.field_is_active).parent().parent().attr("aria-checked", "true");
             $(this.field_is_active).parent().children().addClass("e-check");
             $(this.field_is_active).removeClass("e-check");
-    }
+        }
+
     }
     this.bindField = function () {
-       
-        let CLIENT_CODE          = $(this.field_client_code).val();
-        let CLIENT_NAME          = $(this.field_client_name).val();
-        let CLIENT_DESC          = $(this.field_client_desc).val();
-        let IS_ACTIVED          = $(this.field_is_active).prop("checked");
+
+        let CLIENT_CODE = $(this.field_client_code).val();
+        let CLIENT_NAME = $(this.field_client_name).val();
+        let CLIENT_DESC = $(this.field_client_desc).val();
+        let IS_ACTIVED = $(this.field_is_active).prop("checked");
         let IS_DELETE_PERMANANT = $(this.field_permanant_del).prop("checked");
 
         this.jsonData = {
-             CLIENT_CODE, CLIENT_NAME, CLIENT_DESC, IS_ACTIVED, IS_DELETE_PERMANANT
+            CLIENT_CODE, CLIENT_NAME, CLIENT_DESC, IS_ACTIVED, IS_DELETE_PERMANANT
         };
     }
     this.fieldsDisable = function () {
@@ -198,7 +202,7 @@ let clientPopup = new (function () {
             };
             clientPopup.callBack(this.jsonData);
             clientPopup.close();
-    }
+        }
 
     }
 

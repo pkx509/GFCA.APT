@@ -32,10 +32,9 @@ let productPopup = new (function () {
 
 
     this.field_cust_code = "#pop-cmb-cust_code_hidden";
-    this.field_emis_code = "#pop-cmb-emis_code_hidden";
-
-
     this.field_cust_code_text = "#pop-cmb-cust_code";
+
+    this.field_emis_code = "#pop-cmb-emis_code_hidden";
     this.field_emis_code_text = "#pop-cmb-emis_code";
 
 
@@ -67,7 +66,10 @@ let productPopup = new (function () {
     this.field_conv_l = "#pop-txt-conv_l";
 
 
-    this.field_flag_row = "#pop-txt-flag_row";
+    this.field_is_active = "input[id='pop-ckb-is-active']";
+    this.field_permanant_del = "input[id='pop-ckb-is-del-perm]";
+
+ 
 
     this.field_created_by = "#pop-txt-created_by";
     this.field_created_date = "#pop-txt-created_date";
@@ -218,15 +220,32 @@ let productPopup = new (function () {
     }
     this.bindDom = function (data) {
 
-       // $(this.field_prod_id).val(data.PROD_ID);
+        $(this.field_emis_code_text).empty();
+        var o = new Option(data.EMIS_CODE_NAME, data.EMIS_CODE, true);
+        $(this.field_emis_code_text).append(o);
+        $(this.field_emis_code_text).val(data.EMIS_CODE_NAME);
+        $(this.field_emis_code_text).attr("aria-label", data.EMIS_CODE_NAME);
+
+
+
+
+        $(this.field_cust_code_text).empty();
+        var u = new Option(data.CUST_CODE_NAME, data.CUST_CODE, true);
+        $(this.field_cust_code_text).append(u);
+        $(this.field_cust_code_text).val(data.CUST_CODE_NAME);
+        $(this.field_cust_code_text).attr("aria-label", data.CUST_CODE_NAME);
+
+
+
+
         $(this.field_cust_code).val(data.CUST_CODE);
         $(this.field_emis_code).val(data.EMIS_CODE);
 
 
 
-        $(this.field_emis_code_text).val(data.CUST_NAME);
+       // $(this.field_cust_code_text).val(data.CUST_CODE_NAME);
 
-        $(this.field_emis_code_text).val(data.EMIS_NAME);
+       // $(this.field_emis_code_text).val(data.EMIS_CODE_NAME);
 
       // alert(data.CUST_NAME);
 
@@ -287,8 +306,24 @@ let productPopup = new (function () {
 
  
 
-        $(this.field_flag_row).val(data.FLAG_ROW);
+       // $(this.field_flag_row).val(data.FLAG_ROW);
         $(this.field_uom_sale).val(data.UOM_SALE);
+
+
+
+        if (data.FLAG_ROW == 'D') {
+
+
+            $(this.field_is_active).prop("checked", "");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "false");
+            $(this.field_is_active).parent().children().removeClass("e-check");
+
+        } else {
+            $(this.field_is_active).prop("checked", "checked");
+            $(this.field_is_active).parent().parent().attr("aria-checked", "true");
+            $(this.field_is_active).parent().children().addClass("e-check");
+            $(this.field_is_active).removeClass("e-check");
+        }
 
   
 

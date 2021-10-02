@@ -94,14 +94,18 @@
 .Columns(col =>
 {
     col.Field("CUST_CODE").HeaderText("Code").IsPrimaryKey(true).ValidationRules(new { required = true, number = true }).Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("CUST_NAME").HeaderText("CUST_NAME").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CUST_ABV").HeaderText("CUST_ABV").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CUST_DESC").HeaderText("CUST_DESC").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("FLAG_ROW").HeaderText("Status").Width("90").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CUST_NAME").HeaderText("Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CUST_ABV").HeaderText("Abv").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CUST_DESC").HeaderText("Description").Width("120").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
     col.Field("CREATED_BY").HeaderText("Created By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy HH:mm:ss").Add();
     col.Field("UPDATED_BY").HeaderText("Updated By").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MM-yyyy HH:mm:ss").Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("108").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy HH:mm:ss").Add();
+
+    col.Field("FLAG_ROW").HeaderText("Status").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+
+
 })
 .Render())
 

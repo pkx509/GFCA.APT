@@ -36,6 +36,13 @@ namespace GFCA.APT.Domain.Dto
         public Nullable<decimal> CONV_L { get; set; }
         public string FLAG_ROW { get; set; }
 
+        public string CUST_NAME { get; set; }
+        public string ORG_NAME { get; set; }
+        public string EMIS_NAME { get; set; }
+
+        public string CUST_CODE_NAME { get; set; }
+        public string ORG_CODE_NAME { get; set; }
+        public string EMIS_CODE_NAME { get; set; }
 
     }
 }

@@ -1,4 +1,9 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Product";
+}
+
+@{
 #if DNX48
 ViewBag.Title = "Product";
 #endif
@@ -76,19 +81,23 @@ ViewBag.Title = "Product";
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
-                                  .Toolbar(new List<object>() {
-                                     
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
-                                      new { text = "ExcelExport" }
+
+                                  .Toolbar(new List<object>() { new { text = "Add", prefixIcon = "e-icons e-add" },
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+                                      new { text = "Delete", prefixIcon = "e-icons e-delete" },
+                                      new { text = "ExcelExport" },
+                                      new { text = "Print" }
                                   })
+
+
                                   .ToolbarClick("productPopup.OnExcelExportClick")
                                   .EditSettings(edit =>
                                   {
                                       edit
                                       .AllowEditOnDblClick(false)
-                                      .AllowAdding(true)
+                                      .AllowAdding(false)
                                       .AllowEditing(true)
-                                      .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog)
                                       .Template("#dialogtemplate");
                                   })
@@ -102,56 +111,73 @@ ViewBag.Title = "Product";
                                   .Columns(col =>
                                   {
 
-                                      col.Field("PROD_CODE").HeaderText("PROD Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("PROD_NAME").HeaderText("PROD Name").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CUST_NAME").HeaderText("CUST_NAME ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("MAT_CODE").HeaderText("MAT_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("ORG_CODE").HeaderText("ORG_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("DIV_CODE").HeaderText("DIV_CODE").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("EMIS_NAME").HeaderText("EMIS_NAME").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP").HeaderText("MAT_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP_DESC ").HeaderText("MAT_GROUP_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("PROD_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
 
-                                      col.Field("MAT_GROUP").HeaderText("MAT_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP_DESC ").HeaderText("MAT_GROUP_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP1").HeaderText("MAT1_GROUP").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROU1_DESC ").HeaderText("MAT_GROUP1_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP2").HeaderText("MAT_GROUP2").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP2_DESC ").HeaderText("MAT_GROUP2_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP3").HeaderText("MAT_GROUP3").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP3_DESC ").HeaderText("MAT_GROUP3_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP4").HeaderText("MAT_GROUP4").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("MAT_GROUP4_DESC ").HeaderText("MAT_GROUP4_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                      
+                                      col.Field("PROD_NAME").HeaderText("Name").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("MAT_CODE").HeaderText("Mat. Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DIV_CODE").HeaderText("Div. Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DIV_NAME").HeaderText("Div. Name").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_CODE").HeaderText("Cust. Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CUST_NAME").HeaderText("Cust. Name").Width("350").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("ORG_CODE").HeaderText("Org. Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ORG_NAME").HeaderText("Org. Name").Width("300").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("EMIS_CODE").HeaderText("EMIS Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("EMIS_NAME").HeaderText("EMIS Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
-                                      col.Field("FORMULA").HeaderText("FORMULA").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("PACK ").HeaderText("PACK ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-
-                                      col.Field("PACK_DESC ").HeaderText("PACK_DESC ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP").HeaderText("Mat. Grp").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP_DESC ").HeaderText("Mat.Grp. Desc").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
+                                      col.Field("MAT_GROUP1").HeaderText("Mat. Grp1").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROU1_DESC ").HeaderText("Mat.Grp1. Desc ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("MAT_GROUP2").HeaderText("Mat. Grp2").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROU2_DESC ").HeaderText("Mat.Grp2. Desc ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
 
+                                      col.Field("MAT_GROUP3").HeaderText("Mat. Grp3").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROU3_DESC ").HeaderText("Mat.Grp3. Desc ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
-                                      col.Field("SIZE").HeaderText("SIZE ").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UOM_SIZE").HeaderText("UOM_SIZE").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROUP4").HeaderText("Mat. Grp4").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("MAT_GROU4_DESC ").HeaderText("Mat.Grp4. Desc ").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
 
-                                      col.Field("UOM_SALE").HeaderText("UOM_SALE ").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                   
 
-                                      col.Field("UNIT_CODE").HeaderText("UNIT_CODE ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FLAG_ROW").HeaderText("FLAG_ROW").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FORMULA").HeaderText("Formula").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("PACK ").HeaderText("Pack").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("PACK_DESC ").HeaderText("Pack Desc").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+
+
+
+
+
+                                      col.Field("SIZE").HeaderText("Size").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UOM_SIZE").HeaderText("Uom Size").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("UOM_SALE").HeaderText("Uom Sale").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+
+                                      col.Field("UNIT_CODE").HeaderText("Unit Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
                                       col.Field("CONV_FCL").HeaderText("CONV FCL ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("CONV_L").HeaderText("CONV L ").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
-                                      col.Field("CREATED_BY").HeaderText("Create By").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
-                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                      col.Field("CREATED_BY").HeaderText("Create By").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                      col.Field("UPDATED_BY").HeaderText("Updated By").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Format("dd-MMM-yyyy hh:mm:ss").Add();
+                                      col.Field("FLAG_ROW").HeaderText("Status").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+
                                   })
                                   .Render())
 
