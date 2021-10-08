@@ -76,6 +76,7 @@
     <Compile Include="Dto\Auditable.cs" />
     <Compile Include="Dto\CustomerPartyDto.cs" />
     <Compile Include="Dto\BudgetTypeDto.cs" />
+    <Compile Include="Dto\DocumentDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
     <Compile Include="Dto\UnitDto.cs" />
     <Compile Include="Dto\PackDto.cs" />

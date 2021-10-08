@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace GFCA.APT.Domain.Dto
 {
@@ -16,18 +14,23 @@ namespace GFCA.APT.Domain.Dto
 
     public class FixedContractHeaderDto : Auditable
     {
+        [Required]
         /* Document */
         public string DOC_TYPE_CODE { get; set; }
+        [Required]
         public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }
         public string DOC_REV { get; set; }
+        [Required]
         public string DOC_MONTH { get; set; }
+        [Required]
         public string DOC_YEAR { get; set; }
         public string DOC_STATUS { get; set; }
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }
         public string REQUESTER { get; set; }
 
+        [Required]
         /* Fixed contract header */
         public int DOC_FCH_ID { get; set; }
         //public string DOC_CODE { get; set; }
@@ -41,8 +44,11 @@ namespace GFCA.APT.Domain.Dto
 
     public class FixedContractDetailDto : Auditable
     {
+        [Required]
         public int DOC_FCH_ID { get; set; }
+        [Required]
         public int DOC_FCD_ID { get; set; }
+        [Required]
         public string DOC_CODE { get; set; }
         public string BRAND_CODE { get; set; }
         public string ACTIVITY_CODE { get; set; }
@@ -68,6 +74,9 @@ namespace GFCA.APT.Domain.Dto
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
         public string COMMENT { get; set; }
+        public string DOC_STATUS { get; set; }
+        public Nullable<DateTime> START_DATE { get; set; }
+        public Nullable<DateTime> END_DATE { get; set; }
         public string FLAG_ROW { get; set; }
 
     }

@@ -1,13 +1,13 @@
 ﻿using GFCA.APT.Domain.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.DAL.Interfaces
 {
-    public interface IFixedContractRepository : IRepositories<FixedContractDto>
+    public interface IFixedContractRepository //: IRepositories<FixedContractDto>
     {
+        int GenerateVersionNo(string documentType, string year, string month);
+        int GenerateRevisionNo(string documentType, string year, string month);
+
+        void InsertHeader(FixedContractHeaderDto entity);
+        void InsertDetail(FixedContractDetailDto entity);
     }
 }
