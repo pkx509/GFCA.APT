@@ -6,11 +6,19 @@ namespace GFCA.APT.BAL.Interfaces
 {
     public interface IFixedContractService
     {
-        IEnumerable<FixedContractDto> GetHeaderAll();
-        FixedContractDto GetHeaderById(int Id);
-        IEnumerable<FixedContractDto> GetDetailByHeaderId(int Id);
-        BusinessResponse Create(FixedContractDto model);
-        BusinessResponse Edit(FixedContractDto model);
-        BusinessResponse Remove(FixedContractDto model);
+        IEnumerable<FixedContractHeaderDto> GetHeaderAll();
+        FixedContractHeaderDto GetHeaderById(int headerId);
+        
+        IEnumerable<FixedContractDetailDto> GetDetailByCode(string code, int ver = -1, int rev = -1);
+        IEnumerable<FixedContractDetailDto> GetDetailAll();
+        FixedContractDetailDto GetDetailById(int detailId);
+        
+        BusinessResponse CreateHeader(FixedContractHeaderDto model);
+        BusinessResponse EditHeader(FixedContractHeaderDto model);
+        
+        BusinessResponse CreateDetail(FixedContractDto model);
+        BusinessResponse EditDetail(FixedContractDto model);
+        
+        BusinessResponse RemoveDetail(FixedContractDetailDto model);
     }
 }

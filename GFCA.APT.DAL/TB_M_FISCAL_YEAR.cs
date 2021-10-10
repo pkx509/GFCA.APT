@@ -12,22 +12,15 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_FIXED_CONTRACT_H
+    public partial class TB_M_FISCAL_YEAR
     {
-        public int DOC_FCH_ID { get; set; }
-        public int DOC_FCD_ID { get; set; }
-        public string DOC_CODE { get; set; }
-        public string CLIENT_CODE { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CHANNEL_CODE { get; set; }
-        public string DOC_STATUS { get; set; }
-        public string COMMENT { get; set; }
+        public string YYYY { get; set; }
+        public string MM { get; set; }
+        public string QUATER { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
-    
-        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
     }
 }

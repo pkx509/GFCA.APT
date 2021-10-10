@@ -12,28 +12,24 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_M_VENDOR
+    public partial class TB_M_SOURCE_FUND
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_M_VENDOR()
+        public TB_M_SOURCE_FUND()
         {
-            this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
+            this.TB_M_VENDOR = new HashSet<TB_M_VENDOR>();
         }
     
         public string FUND_CODE { get; set; }
-        public string CENTER_CODE { get; set; }
-        public string VENDOR_CODE { get; set; }
-        public string VENDOR_NAME { get; set; }
-        public string VENDOR_ADDR { get; set; }
-        public string VENDOR_DESC { get; set; }
+        public string FUND_NAME { get; set; }
+        public string FUND_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_M_SOURCE_FUND TB_M_SOURCE_FUND { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
+        public virtual ICollection<TB_M_VENDOR> TB_M_VENDOR { get; set; }
     }
 }

@@ -5,6 +5,46 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DB_Errors">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="ErrorNumber" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorProcedure" Type="varchar(max)" />
+          <Property Name="ErrorMessage" Type="varchar(max)" />
+          <Property Name="ErrorDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DeviceCodes">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DeviceCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersistedGrants">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_CODE" />
@@ -178,6 +218,21 @@
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_M_FISCAL_YEAR">
+          <Key>
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="QUATER" />
+          </Key>
+          <Property Name="YYYY" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MM" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="QUATER" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" />
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
@@ -355,6 +410,19 @@
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_SOURCE_FUND">
+          <Key>
+            <PropertyRef Name="FUND_CODE" />
+          </Key>
+          <Property Name="FUND_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FUND_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="FUND_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'APT2DB3.dbo.TB_M_SYSTEM' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="TB_M_SYSTEM">
@@ -388,6 +456,8 @@ warning 6013: The table/view 'APT2DB3.dbo.TB_M_SYSTEM' does not have a primary k
           <Key>
             <PropertyRef Name="VENDOR_CODE" />
           </Key>
+          <Property Name="FUND_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CENTER_CODE" Type="varchar" MaxLength="50" />
           <Property Name="VENDOR_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VENDOR_NAME" Type="varchar" MaxLength="100" />
           <Property Name="VENDOR_ADDR" Type="varchar(max)" />
@@ -686,11 +756,13 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         </EntityType>
         <EntityType Name="TB_T_FIXED_CONTRACT_D">
           <Key>
+            <PropertyRef Name="DOC_FCH_ID" />
             <PropertyRef Name="DOC_FCD_ID" />
+            <PropertyRef Name="DOC_CODE" />
           </Key>
           <Property Name="DOC_FCH_ID" Type="int" Nullable="false" />
           <Property Name="DOC_FCD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" />
           <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CENTER_CODE" Type="varchar" MaxLength="50" />
@@ -714,7 +786,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="M10" Type="numeric" Precision="13" Scale="4" />
           <Property Name="M11" Type="numeric" Precision="13" Scale="4" />
           <Property Name="M12" Type="numeric" Precision="13" Scale="4" />
-          <Property Name="COMMENT" Type="varchar(max)" />
+          <Property Name="REMARK" Type="varchar(max)" />
           <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="START_DATE" Type="date" />
@@ -727,13 +799,17 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         <EntityType Name="TB_T_FIXED_CONTRACT_H">
           <Key>
             <PropertyRef Name="DOC_FCH_ID" />
+            <PropertyRef Name="DOC_FCD_ID" />
+            <PropertyRef Name="DOC_CODE" />
           </Key>
           <Property Name="DOC_FCH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_FCD_ID" Type="int" Nullable="false" />
+          <Property Name="DOC_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CLIENT_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" />
           <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="COMMENT" Type="varchar(max)" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" />
@@ -954,6 +1030,18 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Principal>
             <Dependent Role="TB_M_UNIT1">
               <PropertyRef Name="UNIT_PARENT_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
+          <End Role="TB_M_SOURCE_FUND" Type="Self.TB_M_SOURCE_FUND" Multiplicity="0..1" />
+          <End Role="TB_M_VENDOR" Type="Self.TB_M_VENDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_SOURCE_FUND">
+              <PropertyRef Name="FUND_CODE" />
+            </Principal>
+            <Dependent Role="TB_M_VENDOR">
+              <PropertyRef Name="FUND_CODE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1198,7 +1286,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="1" />
           <End Role="TB_T_FIXED_CONTRACT_D" Type="Self.TB_T_FIXED_CONTRACT_D" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_T_DOCUMENT">
@@ -1210,7 +1298,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT">
-          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="1" />
           <End Role="TB_T_FIXED_CONTRACT_H" Type="Self.TB_T_FIXED_CONTRACT_H" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_T_DOCUMENT">
@@ -1352,6 +1440,11 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         <Function Name="Daily_Job_TB_M_PRODUCT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Daily_Job_TB_M_SIZE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Daily_Job_TB_M_VENDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GENERATE_DOC_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DOC_TYPE_CODE" Type="varchar" Mode="In" />
+          <Parameter Name="DOC_YEAR" Type="int" Mode="In" />
+          <Parameter Name="DOC_MONTH" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_SYNC_ORGANIZATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="String" Type="varchar(max)" Mode="In" />
@@ -1365,6 +1458,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           </ReturnType>
         </Function>
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="DeviceCodes" EntityType="Self.DeviceCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersistedGrants" EntityType="Self.PersistedGrants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Self.TB_M_BUDGET_TYPE" Schema="dbo" store:Type="Tables" />
@@ -1377,6 +1472,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Self.TB_M_DOCUMENT_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_EMISSION" EntityType="Self.TB_M_EMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_EMPLOYEE" EntityType="Self.TB_M_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_FISCAL_YEAR" EntityType="Self.TB_M_FISCAL_YEAR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Self.TB_M_GL_ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_GL_GROUP" EntityType="Self.TB_M_GL_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_HOLIDAY" EntityType="Self.TB_M_HOLIDAY" Schema="dbo" store:Type="Tables" />
@@ -1387,6 +1483,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Self.TB_M_PROMOTION_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_PROMOTION_PLAN_TYPE" EntityType="Self.TB_M_PROMOTION_PLAN_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_SIZE" EntityType="Self.TB_M_SIZE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_M_SOURCE_FUND" EntityType="Self.TB_M_SOURCE_FUND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_UNIT" EntityType="Self.TB_M_UNIT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_VENDOR" EntityType="Self.TB_M_VENDOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_P_BRAND_ORG" EntityType="Self.TB_P_BRAND_ORG" Schema="dbo" store:Type="Tables" />
@@ -1413,6 +1510,19 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Self.TB_WM_WORKFLOW_STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Self.TB_WP_STATE_ACTOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Self.TB_WP_STATE_DIRECTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DB_Errors].[ErrorID] AS [ErrorID], 
+    [DB_Errors].[UserName] AS [UserName], 
+    [DB_Errors].[ErrorNumber] AS [ErrorNumber], 
+    [DB_Errors].[ErrorState] AS [ErrorState], 
+    [DB_Errors].[ErrorSeverity] AS [ErrorSeverity], 
+    [DB_Errors].[ErrorLine] AS [ErrorLine], 
+    [DB_Errors].[ErrorProcedure] AS [ErrorProcedure], 
+    [DB_Errors].[ErrorMessage] AS [ErrorMessage], 
+    [DB_Errors].[ErrorDateTime] AS [ErrorDateTime]
+    FROM [dbo].[DB_Errors] AS [DB_Errors]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Self.TB_S_EMPLOYEE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TB_S_EMPLOYEE].[EMP_CODE] AS [EMP_CODE], 
@@ -1476,6 +1586,10 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <AssociationSet Name="FK_TB_M_UNIT_TB_M_UNIT" Association="Self.FK_TB_M_UNIT_TB_M_UNIT">
             <End Role="TB_M_UNIT" EntitySet="TB_M_UNIT" />
             <End Role="TB_M_UNIT1" EntitySet="TB_M_UNIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND" Association="Self.FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
+            <End Role="TB_M_SOURCE_FUND" EntitySet="TB_M_SOURCE_FUND" />
+            <End Role="TB_M_VENDOR" EntitySet="TB_M_VENDOR" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_BRAND" Association="Self.FK_TB_P_BRAND_ORG_TB_M_BRAND">
             <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
@@ -1627,6 +1741,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <Parameter Name="Delimiter" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_SYNC_ORGANIZATION" />
+          <EntitySet Name="DeviceCodes" EntityType="Models.DeviceCode" />
+          <EntitySet Name="PersistedGrants" EntityType="Models.PersistedGrant" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
           <EntitySet Name="TB_M_BUDGET_TYPE" EntityType="Models.TB_M_BUDGET_TYPE" />
@@ -1639,6 +1755,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_DOCUMENT_TYPE" EntityType="Models.TB_M_DOCUMENT_TYPE" />
           <EntitySet Name="TB_M_EMISSION" EntityType="Models.TB_M_EMISSION" />
           <EntitySet Name="TB_M_EMPLOYEE" EntityType="Models.TB_M_EMPLOYEE" />
+          <EntitySet Name="TB_M_FISCAL_YEAR" EntityType="Models.TB_M_FISCAL_YEAR" />
           <EntitySet Name="TB_M_GL_ACCOUNT" EntityType="Models.TB_M_GL_ACCOUNT" />
           <EntitySet Name="TB_M_GL_GROUP" EntityType="Models.TB_M_GL_GROUP" />
           <EntitySet Name="TB_M_HOLIDAY" EntityType="Models.TB_M_HOLIDAY" />
@@ -1649,6 +1766,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Models.TB_M_PROMOTION_GROUP" />
           <EntitySet Name="TB_M_PROMOTION_PLAN_TYPE" EntityType="Models.TB_M_PROMOTION_PLAN_TYPE" />
           <EntitySet Name="TB_M_SIZE" EntityType="Models.TB_M_SIZE" />
+          <EntitySet Name="TB_M_SOURCE_FUND" EntityType="Models.TB_M_SOURCE_FUND" />
           <EntitySet Name="TB_M_UNIT" EntityType="Models.TB_M_UNIT" />
           <EntitySet Name="TB_M_VENDOR" EntityType="Models.TB_M_VENDOR" />
           <EntitySet Name="TB_P_BRAND_ORG" EntityType="Models.TB_P_BRAND_ORG" />
@@ -1675,6 +1793,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WM_WORKFLOW_STATE" EntityType="Models.TB_WM_WORKFLOW_STATE" />
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Models.TB_WP_STATE_ACTOR" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Models.TB_WP_STATE_DIRECTION" />
+          <EntitySet Name="DB_Errors" EntityType="Models.DB_Errors" />
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Models.TB_S_EMPLOYEE" />
           <EntitySet Name="TB_S_ORGANIZATION" EntityType="Models.TB_S_ORGANIZATION" />
           <AssociationSet Name="FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT" Association="Models.FK_TB_M_ACTIVITY_TB_M_GL_ACCOUNT">
@@ -1769,6 +1888,10 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_M_PROMOTION_PLAN_TYPE" EntitySet="TB_M_PROMOTION_PLAN_TYPE" />
             <End Role="TB_T_PROMOTION_PLAN_D" EntitySet="TB_T_PROMOTION_PLAN_D" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND" Association="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
+            <End Role="TB_M_SOURCE_FUND" EntitySet="TB_M_SOURCE_FUND" />
+            <End Role="TB_M_VENDOR" EntitySet="TB_M_VENDOR" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_M_UNIT_TB_M_UNIT" Association="Models.FK_TB_M_UNIT_TB_M_UNIT">
             <End Role="TB_M_UNIT" EntitySet="TB_M_UNIT" />
             <End Role="TB_M_UNIT1" EntitySet="TB_M_UNIT" />
@@ -1841,7 +1964,36 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_WM_WORKFLOW_STATE" EntitySet="TB_WM_WORKFLOW_STATE" />
             <End Role="TB_WP_STATE_DIRECTION" EntitySet="TB_WP_STATE_DIRECTION" />
           </AssociationSet>
+          <FunctionImport Name="SP_GENERATE_DOC_CODE" ReturnType="Collection(String)">
+            <Parameter Name="DOC_TYPE_CODE" Mode="In" Type="String" />
+            <Parameter Name="DOC_YEAR" Mode="In" Type="Int32" />
+            <Parameter Name="DOC_MONTH" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
+        <EntityType Name="DeviceCode">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceCode1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PersistedGrant">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Precision="7" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TB_M_ACTIVITY">
           <Key>
             <PropertyRef Name="ACTIVITY_CODE" />
@@ -2034,6 +2186,21 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TB_P_EMP_ORG" Relationship="Models.FK_TB_P_EMP_ORG_TB_M_EMPLOYEE" FromRole="TB_M_EMPLOYEE" ToRole="TB_P_EMP_ORG" />
         </EntityType>
+        <EntityType Name="TB_M_FISCAL_YEAR">
+          <Key>
+            <PropertyRef Name="YYYY" />
+            <PropertyRef Name="MM" />
+            <PropertyRef Name="QUATER" />
+          </Key>
+          <Property Name="YYYY" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MM" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="QUATER" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+        </EntityType>
         <EntityType Name="TB_M_GL_ACCOUNT">
           <Key>
             <PropertyRef Name="ACC_CODE" />
@@ -2223,6 +2390,20 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
         </EntityType>
+        <EntityType Name="TB_M_SOURCE_FUND">
+          <Key>
+            <PropertyRef Name="FUND_CODE" />
+          </Key>
+          <Property Name="FUND_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FUND_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_VENDOR" Relationship="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND" FromRole="TB_M_SOURCE_FUND" ToRole="TB_M_VENDOR" />
+        </EntityType>
         <EntityType Name="TB_M_UNIT">
           <Key>
             <PropertyRef Name="UNIT_CODE" />
@@ -2245,6 +2426,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Key>
             <PropertyRef Name="VENDOR_CODE" />
           </Key>
+          <Property Name="FUND_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CENTER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VENDOR_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VENDOR_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VENDOR_ADDR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -2254,6 +2437,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_M_SOURCE_FUND" Relationship="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND" FromRole="TB_M_VENDOR" ToRole="TB_M_SOURCE_FUND" />
           <NavigationProperty Name="TB_P_CUSTOMER_PARTY" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_VENDOR" FromRole="TB_M_VENDOR" ToRole="TB_P_CUSTOMER_PARTY" />
         </EntityType>
         <EntityType Name="TB_P_BRAND_ORG">
@@ -2497,11 +2681,13 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         </EntityType>
         <EntityType Name="TB_T_FIXED_CONTRACT_D">
           <Key>
+            <PropertyRef Name="DOC_FCH_ID" />
             <PropertyRef Name="DOC_FCD_ID" />
+            <PropertyRef Name="DOC_CODE" />
           </Key>
           <Property Name="DOC_FCH_ID" Type="Int32" Nullable="false" />
           <Property Name="DOC_FCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BRAND_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVITY_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CENTER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2525,7 +2711,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="M10" Type="Decimal" Precision="13" Scale="4" />
           <Property Name="M11" Type="Decimal" Precision="13" Scale="4" />
           <Property Name="M12" Type="Decimal" Precision="13" Scale="4" />
-          <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="START_DATE" Type="DateTime" Precision="0" />
@@ -2539,13 +2725,17 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
         <EntityType Name="TB_T_FIXED_CONTRACT_H">
           <Key>
             <PropertyRef Name="DOC_FCH_ID" />
+            <PropertyRef Name="DOC_FCD_ID" />
+            <PropertyRef Name="DOC_CODE" />
           </Key>
           <Property Name="DOC_FCH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_FCD_ID" Type="Int32" Nullable="false" />
+          <Property Name="DOC_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CLIENT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CHANNEL_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
@@ -2677,6 +2867,20 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="Sort" Type="Int32" />
           <NavigationProperty Name="TB_WM_FLOW_ITEM" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_FLOW_ITEM" />
           <NavigationProperty Name="TB_WM_WORKFLOW_STATE" Relationship="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_WORKFLOW_STATE" FromRole="TB_WP_STATE_DIRECTION" ToRole="TB_WM_WORKFLOW_STATE" />
+        </EntityType>
+        <EntityType Name="DB_Errors">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorNumber" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorLine" Type="Int32" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TB_S_EMPLOYEE">
           <Key>
@@ -2984,6 +3188,18 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
+          <End Type="Models.TB_M_SOURCE_FUND" Role="TB_M_SOURCE_FUND" Multiplicity="0..1" />
+          <End Type="Models.TB_M_VENDOR" Role="TB_M_VENDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_M_SOURCE_FUND">
+              <PropertyRef Name="FUND_CODE" />
+            </Principal>
+            <Dependent Role="TB_M_VENDOR">
+              <PropertyRef Name="FUND_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_M_UNIT_TB_M_UNIT">
           <End Type="Models.TB_M_UNIT" Role="TB_M_UNIT" Multiplicity="0..1" />
           <End Type="Models.TB_M_UNIT" Role="TB_M_UNIT1" Multiplicity="*" />
@@ -3081,7 +3297,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="1" />
           <End Type="Models.TB_T_FIXED_CONTRACT_D" Role="TB_T_FIXED_CONTRACT_D" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_T_DOCUMENT">
@@ -3093,7 +3309,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT">
-          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="0..1" />
+          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="1" />
           <End Type="Models.TB_T_FIXED_CONTRACT_H" Role="TB_T_FIXED_CONTRACT_H" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_T_DOCUMENT">
@@ -3219,6 +3435,32 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <FunctionImportMapping FunctionImportName="Daily_Job_TB_M_VENDOR" FunctionName="Models.Store.Daily_Job_TB_M_VENDOR" />
           <FunctionImportMapping FunctionImportName="Split" FunctionName="Models.Store.Split" />
           <FunctionImportMapping FunctionImportName="SP_SYNC_ORGANIZATION" FunctionName="Models.Store.SP_SYNC_ORGANIZATION" />
+          <EntitySetMapping Name="DeviceCodes">
+            <EntityTypeMapping TypeName="Models.DeviceCode">
+              <MappingFragment StoreEntitySet="DeviceCodes">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="DeviceCode1" ColumnName="DeviceCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersistedGrants">
+            <EntityTypeMapping TypeName="Models.PersistedGrant">
+              <MappingFragment StoreEntitySet="PersistedGrants">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_ACTIVITY">
             <EntityTypeMapping TypeName="Models.TB_M_ACTIVITY">
               <MappingFragment StoreEntitySet="TB_M_ACTIVITY">
@@ -3407,6 +3649,20 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_FISCAL_YEAR">
+            <EntityTypeMapping TypeName="Models.TB_M_FISCAL_YEAR">
+              <MappingFragment StoreEntitySet="TB_M_FISCAL_YEAR">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="QUATER" ColumnName="QUATER" />
+                <ScalarProperty Name="MM" ColumnName="MM" />
+                <ScalarProperty Name="YYYY" ColumnName="YYYY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_GL_ACCOUNT">
             <EntityTypeMapping TypeName="Models.TB_M_GL_ACCOUNT">
               <MappingFragment StoreEntitySet="TB_M_GL_ACCOUNT">
@@ -3591,6 +3847,20 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_SOURCE_FUND">
+            <EntityTypeMapping TypeName="Models.TB_M_SOURCE_FUND">
+              <MappingFragment StoreEntitySet="TB_M_SOURCE_FUND">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="FUND_DESC" ColumnName="FUND_DESC" />
+                <ScalarProperty Name="FUND_NAME" ColumnName="FUND_NAME" />
+                <ScalarProperty Name="FUND_CODE" ColumnName="FUND_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_UNIT">
             <EntityTypeMapping TypeName="Models.TB_M_UNIT">
               <MappingFragment StoreEntitySet="TB_M_UNIT">
@@ -3620,6 +3890,8 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="VENDOR_ADDR" ColumnName="VENDOR_ADDR" />
                 <ScalarProperty Name="VENDOR_NAME" ColumnName="VENDOR_NAME" />
                 <ScalarProperty Name="VENDOR_CODE" ColumnName="VENDOR_CODE" />
+                <ScalarProperty Name="CENTER_CODE" ColumnName="CENTER_CODE" />
+                <ScalarProperty Name="FUND_CODE" ColumnName="FUND_CODE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3847,7 +4119,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
                 <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
-                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
                 <ScalarProperty Name="M12" ColumnName="M12" />
                 <ScalarProperty Name="M11" ColumnName="M11" />
                 <ScalarProperty Name="M10" ColumnName="M10" />
@@ -3885,11 +4157,13 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
                 <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
                 <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
                 <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
                 <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
                 <ScalarProperty Name="DOC_CODE" ColumnName="DOC_CODE" />
+                <ScalarProperty Name="DOC_FCD_ID" ColumnName="DOC_FCD_ID" />
                 <ScalarProperty Name="DOC_FCH_ID" ColumnName="DOC_FCH_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4008,6 +4282,21 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DB_Errors">
+            <EntityTypeMapping TypeName="Models.DB_Errors">
+              <MappingFragment StoreEntitySet="DB_Errors">
+                <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TB_S_EMPLOYEE">
             <EntityTypeMapping TypeName="Models.TB_S_EMPLOYEE">
               <MappingFragment StoreEntitySet="TB_S_EMPLOYEE">
@@ -4040,6 +4329,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GENERATE_DOC_CODE" FunctionName="Models.Store.SP_GENERATE_DOC_CODE" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
