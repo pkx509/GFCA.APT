@@ -28,11 +28,18 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 new { controller = "FixedContract", DocCode = UrlParameter.Optional, action = "FixedContractDetail" }
             );
             */
-
+            
             context.MapRoute(
                 name      : "Transaction_mutate", 
                 url       : "T/Document/{action}/{yyyy}",
                 defaults  : new { controller = "Default", action = "Index", yyyy = UrlParameter.Optional }, 
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_FixedContract_Item",
+                url: "T/FixedContracts/{DocCode}",
+                defaults: new { controller = "FixedContract", action = "FixedContractDetail", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 

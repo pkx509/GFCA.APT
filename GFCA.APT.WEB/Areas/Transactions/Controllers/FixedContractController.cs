@@ -22,16 +22,16 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             _biz = biz;
         }
 
-        // GET: T/FixedContract
+        // GET: T/FixedContracts
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: T/FixedContract/{DocCode}
+        // GET: T/FixedContracts/{DocCode}
         [HttpGet]
-        public JsonResult FixedContractDetail(string DocCode)
+        public ActionResult FixedContractDetail(string DocCode)
         {
             _biz.LogService.Debug("FixedContractDetail");
             dynamic d = new BusinessResponse();
@@ -46,7 +46,8 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             {
 
             }
-            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            //return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            return View();
         }
 
         [HttpGet]
