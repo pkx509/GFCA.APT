@@ -187,7 +187,7 @@ namespace GFCA.APT.DAL.Implements
                 M10 = entity.M10,
                 M11 = entity.M11,
                 M12 = entity.M12,
-                COMMENT = entity.COMMENT,
+                COMMENT = entity.REMARK,
                 DOC_STATUS = entity.DOC_STATUS,
                 START_DATE = entity.START_DATE,
                 END_DATE = entity.END_DATE,
@@ -271,7 +271,7 @@ AND DOC_FCD_ID = @DOC_FCD_ID
                 M10 = entity.M10,
                 M11 = entity.M11,
                 M12 = entity.M12,
-                COMMENT = entity.COMMENT,
+                COMMENT = entity.REMARK,
                 DOC_STATUS = entity.DOC_STATUS,
                 START_DATE = entity.START_DATE,
                 END_DATE = entity.END_DATE,
@@ -288,5 +288,19 @@ AND DOC_FCD_ID = @DOC_FCD_ID
 
         }
 
+        public IEnumerable<FixedContractDetailDto> GetDetailAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FixedContractDto GetDetailItem(string docCode, int docVer = -1, int docRev = -1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

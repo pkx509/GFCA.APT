@@ -132,7 +132,7 @@ namespace GFCA.APT.BAL.Implements
                 var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.DOC_YEAR, doch.DOC_MONTH);
                 //generate document no
 
-                doc.DOC_STATUS = "Draft";
+                doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
                 doc.FLOW_CURRENT = "";
                 doc.FLOW_NEXT = "";
                 doc.REQUESTER = "System";

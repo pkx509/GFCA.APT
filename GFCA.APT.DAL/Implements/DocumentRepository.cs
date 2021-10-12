@@ -18,6 +18,12 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
+        
+        public DocumentDto GenerateDocNo(string docTypeCode, string docCode)
+        {
+            throw new NotImplementedException();
+        }
+
         public DocumentDto GenerateDocNo(string docTypeCode, string docYear, string docMonth)
         {
             //string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH";
