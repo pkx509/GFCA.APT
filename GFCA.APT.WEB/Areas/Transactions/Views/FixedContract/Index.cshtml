@@ -67,7 +67,7 @@ ViewBag.Title = "Fixed contract";
                                   .DataSource(ds =>
                                   {
                                       ds
-                                      .Url(@Url.Action("UrlDataSourceHeaderList", "FixedContract", new { Area = "Transactions" }))
+                                      .Url(@Url.Action("UrlFixedContractHeaderList", "FixedContract", new { Area = "Transactions" }))
                                       .Adaptor("UrlAdaptor")
                                       ;
                                   })
@@ -89,10 +89,10 @@ ViewBag.Title = "Fixed contract";
                                       .AllowAdding(false)
                                       .AllowEditing(false)
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
-                                      .Mode(EditMode.Dialog)
-                                      .Template("#dialogtemplate");
+                                      .Mode(EditMode.Dialog);
+                                      // .Template("#dialogtemplate");
                                   })
-                                 
+
                                   .Columns(col =>
                                   {
                                       col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
@@ -111,15 +111,31 @@ ViewBag.Title = "Fixed contract";
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    @Html.Partial("~/Areas/Transactions/Views/FixedContract/_Popup_FixedContractHeader.cshtml")
 }
 
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "FixedContract", new { Area = "Transactions" })",
+            Add: "@Url.Action("Add", "FixedContract", new { Area = "Transactions" })",
+            AddHeader: "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
+            Edit: "@Url.Action("Edit", "FixedContract", new { Area = "Transactions" })",
+            Delete: "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
+        }
+        var argruments = {
+            data: null,
+        }
+    </script>
+
+    @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
+}
 
 @section scripts
 {
-
     @Scripts.Render("~/Scripts/transactions/fixedContract.js")
-
 }
 
 

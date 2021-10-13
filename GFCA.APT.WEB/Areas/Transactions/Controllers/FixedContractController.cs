@@ -29,28 +29,6 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
-        // GET: T/FixedContracts/{DocCode}
-        [HttpGet]
-        public ActionResult FixedContractDetail(string DocCode)
-        {
-            _biz.LogService.Debug("FixedContractDetail");
-            dynamic d = new BusinessResponse();
-
-            try
-            {
-                var biz = _biz.FixedContractService.GetDetailByCode(DocCode);
-                d = JsonConvert.SerializeObject(biz);
-                //FixedContractDto
-            }
-            catch
-            {
-
-            }
-            //return Json(new { data = d, JsonRequestBehavior.AllowGet });
-            return View();
-        }
-
-        [HttpGet]
         public JsonResult UrlFixedContractHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlFixedContractHeaderList");
@@ -80,6 +58,28 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
+
+        // GET: T/FixedContracts/{DocCode}
+        [HttpGet]
+        public ActionResult FixedContractDetail(string DocCode)
+        {
+            _biz.LogService.Debug("FixedContractDetail");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.FixedContractService.GetDetailByCode(DocCode);
+                d = JsonConvert.SerializeObject(biz);
+                //FixedContractDto
+            }
+            catch
+            {
+
+            }
+            //return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            return View();
+        }
+
         [HttpGet]
         public JsonResult UrlFixedContractDetailList(DataManagerRequest dm)
         {
@@ -182,6 +182,5 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             }
             return Json(new { data = d, JsonRequestBehavior.AllowGet });
         }
-
     }
 }

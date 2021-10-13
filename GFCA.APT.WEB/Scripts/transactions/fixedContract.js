@@ -23,7 +23,7 @@ $(document).ready(function () {
                 });
 
                 if (res.Success === true) {
-                    channelPopup.close();
+                    fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
                     if (objGrid) {
                         objGrid.refresh();
@@ -47,10 +47,10 @@ $(document).ready(function () {
     $("#toolbar_add").click(function (e) {
         e.preventDefault();
         let callBack = function (data) {
-            sendPost(urlServices.Add, data);
+            sendPost(urlServices.AddHeader, data);
         };
 
-        // channelPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+        fixedContractHeaderPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
 
     });
     $("#toolbar_edit").click(function (e) {

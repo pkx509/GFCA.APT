@@ -4115,6 +4115,7 @@
     <Content Include="Areas\Transactions\Views\FixedContract\FixedContractHeader.cshtml" />
     <Content Include="Areas\Masters\Views\Company\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Vender\Index.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\_Popup_FixedContractHeader.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4188,6 +4189,7 @@
     <Content Include="Scripts\masters\accountpayblePopup.js" />
     <Content Include="Scripts\masters\channel.js" />
     <Content Include="Scripts\masters\channelPopup.js" />
+    <Content Include="Scripts\transactions\fixedContractHeaderPopup.js" />
     <Content Include="Scripts\transactions\fixedContract.js" />
     <Content Include="Scripts\masters\pack.js" />
     <Content Include="Scripts\masters\packPopup.js" />
