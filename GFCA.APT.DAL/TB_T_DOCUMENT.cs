@@ -29,10 +29,10 @@ namespace GFCA.APT.DAL
     
         public string DOC_TYPE_CODE { get; set; }
         public string DOC_CODE { get; set; }
-        public string DOC_VER { get; set; }
-        public string DOC_REV { get; set; }
-        public string DOC_MONTH { get; set; }
-        public string DOC_YEAR { get; set; }
+        public Nullable<int> DOC_VER { get; set; }
+        public Nullable<int> DOC_REV { get; set; }
+        public Nullable<int> DOC_MONTH { get; set; }
+        public Nullable<int> DOC_YEAR { get; set; }
         public string DOC_STATUS { get; set; }
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }

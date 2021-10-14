@@ -138,7 +138,7 @@ namespace GFCA.APT.BAL.Implements
                 doc.REQUESTER = "System";
 
                 _uow.DocumentRepository.Insert(doc);
-                doch.DOC_FCH_ID = doc.DOC_VER;
+                doch.DOC_VER = doc.DOC_VER;
                 doch.DOC_CODE = doc.DOC_CODE;
                 /*
                 doch.DOC_TYPE_CODE = "";

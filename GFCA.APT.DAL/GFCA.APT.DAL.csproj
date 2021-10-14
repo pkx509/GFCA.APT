@@ -188,10 +188,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>APTDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB_Errors.cs">
+    <Compile Include="AspNetRole.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DeviceCode.cs">
+    <Compile Include="AspNetRoleClaim.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserToken.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB_Errors.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Implements\CustomerPartyRepository.cs" />
@@ -304,6 +319,9 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_PACK.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_PACK_20210923.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_PRODUCT.cs">

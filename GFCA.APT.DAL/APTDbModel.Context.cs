@@ -27,7 +27,12 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DeviceCode> DeviceCodes { get; set; }
+        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
@@ -80,6 +85,7 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
         public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
         public virtual DbSet<DB_Errors> DB_Errors { get; set; }
+        public virtual DbSet<TB_M_PACK_20210923> TB_M_PACK_20210923 { get; set; }
         public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
         public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
     
