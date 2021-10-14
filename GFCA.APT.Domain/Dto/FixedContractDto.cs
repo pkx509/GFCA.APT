@@ -53,6 +53,8 @@ namespace GFCA.APT.Domain.Dto
         public int DOC_FCD_ID { get; set; }
         [Required]
         public string DOC_CODE { get; set; }
+        public int DOC_VER { get; set; }
+        public int DOC_REV { get; set; }
         public string BRAND_CODE { get; set; }
         public string ACTIVITY_CODE { get; set; }
         public string CENTER_CODE { get; set; }

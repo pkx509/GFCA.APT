@@ -12,14 +12,13 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class DeviceCode
+    public partial class AspNetRoleClaim
     {
-        public string UserCode { get; set; }
-        public string DeviceCode1 { get; set; }
-        public string SubjectId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime CreationTime { get; set; }
-        public System.DateTime Expiration { get; set; }
-        public string Data { get; set; }
+        public int Id { get; set; }
+        public int RoleId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+    
+        public virtual AspNetRole AspNetRole { get; set; }
     }
 }

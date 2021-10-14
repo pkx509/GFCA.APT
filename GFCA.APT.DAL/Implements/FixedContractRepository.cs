@@ -40,22 +40,26 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_H
 (
-  DOC_FCH_ID
-, DOC_CODE
+  DOC_CODE
+, DOC_VER
+, DOC_REV
 , CLIENT_CODE
 , CUST_CODE
 , CHANNEL_CODE
 , DOC_STATUS
+, COMMENT
 , FLAG_ROW
 , CREATED_BY
 , CREATED_DATE
 ) VALUES (
-  @DOC_FCH_ID
-, @DOC_CODE
+  @DOC_CODE
+, @DOC_VER
+, @DOC_REV
 , @CLIENT_CODE
 , @CUST_CODE
 , @CHANNEL_CODE
 , @DOC_STATUS
+, @COMMENT
 , @FLAG_ROW
 , @CREATED_BY
 , @CREATED_DATE
@@ -63,12 +67,14 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                DOC_FCH_ID   = entity.DOC_FCH_ID,
                 DOC_CODE     = entity.DOC_CODE,
+                DOC_VER      = entity.DOC_VER,
+                DOC_REV      = entity.DOC_REV,
                 CLIENT_CODE  = entity.CLIENT_CODE,
                 CUST_CODE    = entity.CUST_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
                 DOC_STATUS   = entity.DOC_STATUS,
+                COMMENT      = entity.COMMENT,
                 FLAG_ROW     = entity.FLAG_ROW,
                 CREATED_BY   = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
@@ -83,7 +89,41 @@ namespace GFCA.APT.DAL.Implements
         }
         public void UpdateHeader(FixedContractHeaderDto entity)
         {
-            throw new NotImplementedException();
+            string sqlExecute = @"UPDATE TB_T_FIXED_CONTRACT_H
+SET
+ DOC_CODE     = @DOC_CODE
+,DOC_VER      = @DOC_VER
+,DOC_REV      = @DOC_REV
+,CLIENT_CODE  = @CLIENT_CODE
+,CUST_CODE    = @CUST_CODE
+,CHANNEL_CODE = @CHANNEL_CODE
+,DOC_STATUS   = @DOC_STATUS
+,COMMENT      = @COMMENT
+,FLAG_ROW     = @FLAG_ROW
+,UPDATED_BY   = @UPDATED_BY
+,UPDATED_DATE = @UPDATED_DATE
+WHERE DOC_FCH_ID = @DOC_FCH_ID;";
+
+            var parms = new
+            {
+                DOC_CODE     = entity.DOC_CODE,
+                DOC_VER      = entity.DOC_VER,
+                DOC_REV      = entity.DOC_REV,
+                CLIENT_CODE  = entity.CLIENT_CODE,
+                CUST_CODE    = entity.CUST_CODE,
+                CHANNEL_CODE = entity.CHANNEL_CODE,
+                DOC_STATUS   = entity.DOC_STATUS,
+                COMMENT      = entity.COMMENT,
+                FLAG_ROW     = entity.FLAG_ROW,
+                CREATED_BY   = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
+            };
+
+            Connection.ExecuteScalar<int>(
+                sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
         }
 
         public void InsertDetail(FixedContractDetailDto entity)
@@ -91,8 +131,9 @@ namespace GFCA.APT.DAL.Implements
             string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_D
 (
   DOC_FCH_ID
-, DOC_FCD_ID
 , DOC_CODE
+, DOC_VER
+, DOC_REV
 , BRAND_CODE
 , ACTIVITY_CODE
 , CENTER_CODE
@@ -116,7 +157,7 @@ namespace GFCA.APT.DAL.Implements
 , M10
 , M11
 , M12
-, COMMENT
+, REMARK
 , DOC_STATUS
 , FLAG_ROW
 , START_DATE
@@ -125,8 +166,9 @@ namespace GFCA.APT.DAL.Implements
 , CREATED_DATE
 ) VALUES (
   @DOC_FCH_ID
-, @DOC_FCD_ID
 , @DOC_CODE
+, @DOC_VER
+, @DOC_REV
 , @BRAND_CODE
 , @ACTIVITY_CODE
 , @CENTER_CODE
@@ -150,7 +192,7 @@ namespace GFCA.APT.DAL.Implements
 , @M10
 , @M11
 , @M12
-, @COMMENT
+, @REMARK
 , @DOC_STATUS
 , @FLAG_ROW
 , @START_DATE
@@ -161,9 +203,11 @@ namespace GFCA.APT.DAL.Implements
 
             var parms = new
             {
-                DOC_FCH_ID = entity.DOC_FCH_ID,
+                //DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
                 DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
                 BRAND_CODE = entity.BRAND_CODE,
                 ACTIVITY_CODE = entity.ACTIVITY_CODE,
                 CENTER_CODE = entity.CENTER_CODE,
@@ -187,7 +231,7 @@ namespace GFCA.APT.DAL.Implements
                 M10 = entity.M10,
                 M11 = entity.M11,
                 M12 = entity.M12,
-                COMMENT = entity.REMARK,
+                REMARK = entity.REMARK,
                 DOC_STATUS = entity.DOC_STATUS,
                 START_DATE = entity.START_DATE,
                 END_DATE = entity.END_DATE,
@@ -247,18 +291,20 @@ AND DOC_FCD_ID = @DOC_FCD_ID
             {
                 DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
-                DOC_CODE = entity.DOC_CODE,
-                BRAND_CODE = entity.BRAND_CODE,
-                ACTIVITY_CODE = entity.ACTIVITY_CODE,
-                CENTER_CODE = entity.CENTER_CODE,
-                ACC_CODE = entity.ACC_CODE,
-                SIZE = entity.SIZE,
-                UOM = entity.UOM,
-                PACK = entity.PACK,
-                DATE_REF = entity.DATE_REF,
+                DOC_CODE       = entity.DOC_CODE,
+                DOC_VER        = entity.DOC_VER,
+                DOC_REV        = entity.DOC_REV,
+                BRAND_CODE     = entity.BRAND_CODE,
+                ACTIVITY_CODE  = entity.ACTIVITY_CODE,
+                CENTER_CODE    = entity.CENTER_CODE,
+                ACC_CODE       = entity.ACC_CODE,
+                SIZE           = entity.SIZE,
+                UOM            = entity.UOM,
+                PACK           = entity.PACK,
+                DATE_REF       = entity.DATE_REF,
                 CONDITION_TYPE = entity.CONDITION_TYPE,
-                CONTRACT_CATE = entity.CONTRACT_CATE,
-                CONTRACT_DESC = entity.CONTRACT_DESC,
+                CONTRACT_CATE  = entity.CONTRACT_CATE,
+                CONTRACT_DESC  = entity.CONTRACT_DESC,
                 M01 = entity.M01,
                 M02 = entity.M02,
                 M03 = entity.M03,
@@ -271,7 +317,7 @@ AND DOC_FCD_ID = @DOC_FCD_ID
                 M10 = entity.M10,
                 M11 = entity.M11,
                 M12 = entity.M12,
-                COMMENT = entity.REMARK,
+                REMARK = entity.REMARK,
                 DOC_STATUS = entity.DOC_STATUS,
                 START_DATE = entity.START_DATE,
                 END_DATE = entity.END_DATE,

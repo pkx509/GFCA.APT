@@ -12,23 +12,16 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_FIXED_CONTRACT_H
+    public partial class TB_M_PACK_20210923
     {
-        public int DOC_FCH_ID { get; set; }
-        public string DOC_CODE { get; set; }
-        public int DOC_VER { get; set; }
-        public int DOC_REV { get; set; }
-        public string CLIENT_CODE { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CHANNEL_CODE { get; set; }
-        public string DOC_STATUS { get; set; }
-        public string COMMENT { get; set; }
+        public int PACK_ID { get; set; }
+        public string PACK_CODE { get; set; }
+        public string PACK_NAME { get; set; }
+        public string PACK_DESC { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
-        public Nullable<System.DateTime> CREATED_DATE { get; set; }
+        public System.DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
-    
-        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
     }
 }
