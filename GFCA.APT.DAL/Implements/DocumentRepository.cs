@@ -24,7 +24,7 @@ namespace GFCA.APT.DAL.Implements
             throw new NotImplementedException();
         }
 
-        public DocumentDto GenerateDocNo(string docTypeCode, string docYear, string docMonth)
+        public DocumentDto GenerateDocNo(string docTypeCode, string docYear, string docMonth, string clientCode, string channelCode, string custCode)
         {
             //string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH";
             string sqlQuery = @"SP_GENERATE_DOC_CODE";
@@ -35,6 +35,9 @@ namespace GFCA.APT.DAL.Implements
                     DOC_TYPE_CODE = docTypeCode,
                     DOC_YEAR = docYear,
                     DOC_MONTH = docMonth,
+                    CLIENT_CODE = clientCode,
+                    CHANNEL_CODE = channelCode,
+                    CUST_CODE = custCode
                 },
                 commandType: CommandType.StoredProcedure,
                 transaction: Transaction

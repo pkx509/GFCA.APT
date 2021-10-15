@@ -38,6 +38,7 @@ namespace GFCA.APT.Domain.Dto
         public string CLIENT_CODE { get; set; }
         public string CLIENT_NAME { get; set; }
         public string CUST_CODE { get; set; }
+        public string CUST_NAME { get; set; }
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }
         public string COMMENT { get; set; }
