@@ -33,6 +33,7 @@ namespace GFCA.APT.DAL
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
+        public virtual DbSet<DeviceCode> DeviceCodes { get; set; }
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
@@ -85,7 +86,6 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
         public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
         public virtual DbSet<DB_Errors> DB_Errors { get; set; }
-        public virtual DbSet<TB_M_PACK_20210923> TB_M_PACK_20210923 { get; set; }
         public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
         public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
     
@@ -163,7 +163,7 @@ namespace GFCA.APT.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SYNC_ORGANIZATION");
         }
     
-        public virtual ObjectResult<string> SP_GENERATE_DOC_CODE(string dOC_TYPE_CODE, Nullable<int> dOC_YEAR, Nullable<int> dOC_MONTH)
+        public virtual ObjectResult<string> SP_GENERATE_DOC_CODE(string dOC_TYPE_CODE, Nullable<int> dOC_YEAR, Nullable<int> dOC_MONTH, string cLIENT_CODE, string cHANNEL_CODE, string cUST_CODE)
         {
             var dOC_TYPE_CODEParameter = dOC_TYPE_CODE != null ?
                 new ObjectParameter("DOC_TYPE_CODE", dOC_TYPE_CODE) :
@@ -177,7 +177,19 @@ namespace GFCA.APT.DAL
                 new ObjectParameter("DOC_MONTH", dOC_MONTH) :
                 new ObjectParameter("DOC_MONTH", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_GENERATE_DOC_CODE", dOC_TYPE_CODEParameter, dOC_YEARParameter, dOC_MONTHParameter);
+            var cLIENT_CODEParameter = cLIENT_CODE != null ?
+                new ObjectParameter("CLIENT_CODE", cLIENT_CODE) :
+                new ObjectParameter("CLIENT_CODE", typeof(string));
+    
+            var cHANNEL_CODEParameter = cHANNEL_CODE != null ?
+                new ObjectParameter("CHANNEL_CODE", cHANNEL_CODE) :
+                new ObjectParameter("CHANNEL_CODE", typeof(string));
+    
+            var cUST_CODEParameter = cUST_CODE != null ?
+                new ObjectParameter("CUST_CODE", cUST_CODE) :
+                new ObjectParameter("CUST_CODE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_GENERATE_DOC_CODE", dOC_TYPE_CODEParameter, dOC_YEARParameter, dOC_MONTHParameter, cLIENT_CODEParameter, cHANNEL_CODEParameter, cUST_CODEParameter);
         }
     }
 }

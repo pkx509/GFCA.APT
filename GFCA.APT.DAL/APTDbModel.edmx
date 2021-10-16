@@ -97,6 +97,18 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Property Name="ErrorMessage" Type="varchar(max)" />
           <Property Name="ErrorDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="DeviceCodes">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DeviceCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersistedGrants">
           <Key>
             <PropertyRef Name="Key" />
@@ -387,25 +399,6 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Key>
             <PropertyRef Name="PACK_CODE" />
           </Key>
-          <Property Name="PACK_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PACK_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="PACK_DESC" Type="varchar(max)" />
-          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
-          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
-          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'APT2DB3.dbo.TB_M_PACK_20210923' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TB_M_PACK_20210923">
-          <Key>
-            <PropertyRef Name="PACK_ID" />
-            <PropertyRef Name="PACK_CODE" />
-            <PropertyRef Name="CREATED_BY" />
-            <PropertyRef Name="CREATED_DATE" />
-          </Key>
-          <Property Name="PACK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PACK_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PACK_NAME" Type="varchar" MaxLength="100" />
           <Property Name="PACK_DESC" Type="varchar(max)" />
@@ -832,6 +825,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="DOC_REV" Type="int" />
           <Property Name="DOC_MONTH" Type="int" />
           <Property Name="DOC_YEAR" Type="int" />
+          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
           <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
           <Property Name="FLOW_CURRENT" Type="varchar" MaxLength="50" />
           <Property Name="FLOW_NEXT" Type="varchar" MaxLength="50" />
@@ -1610,6 +1604,9 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Parameter Name="DOC_TYPE_CODE" Type="varchar" Mode="In" />
           <Parameter Name="DOC_YEAR" Type="int" Mode="In" />
           <Parameter Name="DOC_MONTH" Type="int" Mode="In" />
+          <Parameter Name="CLIENT_CODE" Type="varchar" Mode="In" />
+          <Parameter Name="CHANNEL_CODE" Type="varchar" Mode="In" />
+          <Parameter Name="CUST_CODE" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_SYNC_ORGANIZATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1631,6 +1628,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserTokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceCodes" EntityType="Self.DeviceCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersistedGrants" EntityType="Self.PersistedGrants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
@@ -1694,19 +1692,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
     [DB_Errors].[ErrorMessage] AS [ErrorMessage], 
     [DB_Errors].[ErrorDateTime] AS [ErrorDateTime]
     FROM [dbo].[DB_Errors] AS [DB_Errors]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TB_M_PACK_20210923" EntityType="Self.TB_M_PACK_20210923" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TB_M_PACK_20210923].[PACK_ID] AS [PACK_ID], 
-    [TB_M_PACK_20210923].[PACK_CODE] AS [PACK_CODE], 
-    [TB_M_PACK_20210923].[PACK_NAME] AS [PACK_NAME], 
-    [TB_M_PACK_20210923].[PACK_DESC] AS [PACK_DESC], 
-    [TB_M_PACK_20210923].[FLAG_ROW] AS [FLAG_ROW], 
-    [TB_M_PACK_20210923].[CREATED_BY] AS [CREATED_BY], 
-    [TB_M_PACK_20210923].[CREATED_DATE] AS [CREATED_DATE], 
-    [TB_M_PACK_20210923].[UPDATED_BY] AS [UPDATED_BY], 
-    [TB_M_PACK_20210923].[UPDATED_DATE] AS [UPDATED_DATE]
-    FROM [dbo].[TB_M_PACK_20210923] AS [TB_M_PACK_20210923]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Self.TB_S_EMPLOYEE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1954,6 +1939,9 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <Parameter Name="DOC_TYPE_CODE" Mode="In" Type="String" />
             <Parameter Name="DOC_YEAR" Mode="In" Type="Int32" />
             <Parameter Name="DOC_MONTH" Mode="In" Type="Int32" />
+            <Parameter Name="CLIENT_CODE" Mode="In" Type="String" />
+            <Parameter Name="CHANNEL_CODE" Mode="In" Type="String" />
+            <Parameter Name="CUST_CODE" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="AspNetRoleClaims" EntityType="Models.AspNetRoleClaim" />
           <EntitySet Name="AspNetRoles" EntityType="Models.AspNetRole" />
@@ -1961,6 +1949,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="AspNetUserLogins" EntityType="Models.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Models.AspNetUser" />
           <EntitySet Name="AspNetUserTokens" EntityType="Models.AspNetUserToken" />
+          <EntitySet Name="DeviceCodes" EntityType="Models.DeviceCode" />
           <EntitySet Name="PersistedGrants" EntityType="Models.PersistedGrant" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
@@ -2013,7 +2002,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Models.TB_WP_STATE_ACTOR" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Models.TB_WP_STATE_DIRECTION" />
           <EntitySet Name="DB_Errors" EntityType="Models.DB_Errors" />
-          <EntitySet Name="TB_M_PACK_20210923" EntityType="Models.TB_M_PACK_20210923" />
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Models.TB_S_EMPLOYEE" />
           <EntitySet Name="TB_S_ORGANIZATION" EntityType="Models.TB_S_ORGANIZATION" />
           <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Models.FK_AspNetRoleClaims_AspNetRoles_RoleId">
@@ -2282,6 +2270,18 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="Name" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Models.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUserToken" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="DeviceCode">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceCode1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersistedGrant">
           <Key>
@@ -2966,6 +2966,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="DOC_REV" Type="Int32" />
           <Property Name="DOC_MONTH" Type="Int32" />
           <Property Name="DOC_YEAR" Type="Int32" />
+          <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLOW_CURRENT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLOW_NEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -3181,23 +3182,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TB_M_PACK_20210923">
-          <Key>
-            <PropertyRef Name="PACK_ID" />
-            <PropertyRef Name="PACK_CODE" />
-            <PropertyRef Name="CREATED_BY" />
-            <PropertyRef Name="CREATED_DATE" />
-          </Key>
-          <Property Name="PACK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PACK_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PACK_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PACK_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="TB_S_EMPLOYEE">
           <Key>
@@ -3884,6 +3868,19 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DeviceCodes">
+            <EntityTypeMapping TypeName="Models.DeviceCode">
+              <MappingFragment StoreEntitySet="DeviceCodes">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="DeviceCode1" ColumnName="DeviceCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PersistedGrants">
             <EntityTypeMapping TypeName="Models.PersistedGrant">
               <MappingFragment StoreEntitySet="PersistedGrants">
@@ -4535,6 +4532,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="FLOW_NEXT" ColumnName="FLOW_NEXT" />
                 <ScalarProperty Name="FLOW_CURRENT" ColumnName="FLOW_CURRENT" />
                 <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
+                <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
                 <ScalarProperty Name="DOC_YEAR" ColumnName="DOC_YEAR" />
                 <ScalarProperty Name="DOC_MONTH" ColumnName="DOC_MONTH" />
                 <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
@@ -4733,21 +4731,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_PACK_20210923">
-            <EntityTypeMapping TypeName="Models.TB_M_PACK_20210923">
-              <MappingFragment StoreEntitySet="TB_M_PACK_20210923">
-                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
-                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
-                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
-                <ScalarProperty Name="PACK_DESC" ColumnName="PACK_DESC" />
-                <ScalarProperty Name="PACK_NAME" ColumnName="PACK_NAME" />
-                <ScalarProperty Name="PACK_CODE" ColumnName="PACK_CODE" />
-                <ScalarProperty Name="PACK_ID" ColumnName="PACK_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

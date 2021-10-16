@@ -33,6 +33,7 @@ namespace GFCA.APT.DAL
         public Nullable<int> DOC_REV { get; set; }
         public Nullable<int> DOC_MONTH { get; set; }
         public Nullable<int> DOC_YEAR { get; set; }
+        public string CUST_CODE { get; set; }
         public string DOC_STATUS { get; set; }
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }

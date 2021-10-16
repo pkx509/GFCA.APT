@@ -24,7 +24,7 @@ namespace GFCA.APT.DAL.Implements
             throw new NotImplementedException();
         }
 
-        public DocumentDto GenerateDocNo(string docTypeCode, string docYear, string docMonth, string clientCode, string channelCode, string custCode)
+        public DocumentDto GenerateDocNo(string docTypeCode, int docYear, int docMonth, string clientCode, string channelCode, string custCode)
         {
             string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH, @CLIENT_CODE, @CHANNEL_CODE, @CUST_CODE";
             //string sqlQuery = @"SP_GENERATE_DOC_CODE";
@@ -39,7 +39,7 @@ namespace GFCA.APT.DAL.Implements
                     CHANNEL_CODE = channelCode,
                     CUST_CODE = custCode
                 },
-                commandType: CommandType.StoredProcedure,
+                commandType: CommandType.Text,
                 transaction: Transaction
                 ).FirstOrDefault()
                 ;
@@ -56,6 +56,7 @@ namespace GFCA.APT.DAL.Implements
       ,a.DOC_REV
       ,a.DOC_MONTH
       ,a.DOC_YEAR
+      ,a.CUST_CODE
       ,a.DOC_STATUS
       ,a.FLOW_CURRENT
       ,a.FLOW_NEXT
@@ -78,6 +79,7 @@ FROM TB_T_DOCUMENT a;";
       ,a.DOC_REV
       ,a.DOC_MONTH
       ,a.DOC_YEAR
+      ,a.CUST_CODE
       ,a.DOC_STATUS
       ,a.FLOW_CURRENT
       ,a.FLOW_NEXT
@@ -103,6 +105,7 @@ WHERE a.DOC_CODE = @DOC_CODE;";
 , DOC_REV
 , DOC_MONTH
 , DOC_YEAR
+, CUST_CODE
 , DOC_STATUS
 , FLOW_CURRENT
 , FLOW_NEXT
@@ -114,6 +117,7 @@ WHERE a.DOC_CODE = @DOC_CODE;";
 , @DOC_REV
 , @DOC_MONTH
 , @DOC_YEAR
+, @CUST_CODE
 , @DOC_STATUS
 , @FLOW_CURRENT
 , @FLOW_NEXT
@@ -128,6 +132,7 @@ WHERE a.DOC_CODE = @DOC_CODE;";
                 DOC_REV = entity.DOC_REV,
                 DOC_MONTH = entity.DOC_MONTH,
                 DOC_YEAR = entity.DOC_YEAR,
+                CUST_CODE = entity.CUST_CODE,
                 DOC_STATUS = entity.DOC_STATUS,
                 FLOW_CURRENT = entity.FLOW_CURRENT,
                 FLOW_NEXT = entity.FLOW_NEXT,
@@ -152,6 +157,7 @@ SET
 , DOC_REV       = @DOC_REV
 , DOC_MONTH     = @DOC_MONTH
 , DOC_YEAR      = @DOC_YEAR
+, CUST_CODE     = @CUST_CODE
 , DOC_STATUS    = @DOC_STATUS
 , FLOW_CURRENT  = @FLOW_CURRENT
 , FLOW_NEXT     = @FLOW_NEXT
@@ -169,6 +175,7 @@ and DOC_REV    = @DOC_REV
                 DOC_REV       = entity.DOC_REV,
                 DOC_MONTH     = entity.DOC_MONTH,
                 DOC_YEAR      = entity.DOC_YEAR,
+                CUST_CODE     = entity.CUST_CODE,
                 DOC_STATUS    = entity.DOC_STATUS,
                 FLOW_CURRENT  = entity.FLOW_CURRENT,
                 FLOW_NEXT     = entity.FLOW_NEXT,
