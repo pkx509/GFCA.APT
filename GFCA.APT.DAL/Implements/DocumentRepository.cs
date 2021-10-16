@@ -26,8 +26,8 @@ namespace GFCA.APT.DAL.Implements
 
         public DocumentDto GenerateDocNo(string docTypeCode, string docYear, string docMonth, string clientCode, string channelCode, string custCode)
         {
-            //string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH";
-            string sqlQuery = @"SP_GENERATE_DOC_CODE";
+            string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH, @CLIENT_CODE, @CHANNEL_CODE, @CUST_CODE";
+            //string sqlQuery = @"SP_GENERATE_DOC_CODE";
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery,
                 param: new
