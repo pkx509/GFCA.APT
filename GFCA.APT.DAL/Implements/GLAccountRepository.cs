@@ -17,8 +17,11 @@ namespace GFCA.APT.DAL.Implements
 
         public GLAccountDto GetByCode(string code)
         {
-            string sqlQuery = @"SELECT * FROM [TB_M_GL_ACCOUNT] ";
-            sqlQuery += "WHERE ACC_CODE = @ACC_CODE;";
+            string sqlQuery = @"SELECT      (SELECT TOP 1 (G.CENTER_CODE + '_' + C.CENTER_NAME) FROM TB_M_COST_CENTER AS C WHERE C.CENTER_CODE= G.CENTER_CODE) as CENTER_CODE_NAME 
+		  , (SELECT TOP 1 (G.GRP_CODE + '_' + GL.GRP_NAME) FROM TB_M_GL_GROUP AS GL WHERE GL.GRP_CODE= G.GRP_CODE) as GRP_CODE_NAME 
+		  ,G.* 
+         FROM TB_M_GL_ACCOUNT AS G WHERE G.ACC_CODE = @ACC_CODE;";
+            
 
 
             var query = Connection.Query<GLAccountDto>(
@@ -31,7 +34,10 @@ namespace GFCA.APT.DAL.Implements
         }
         public IEnumerable<GLAccountDto> All()
         {
-            string sqlQuery = @"SELECT * FROM [TB_M_GL_ACCOUNT] "; 
+            string sqlQuery = @"SELECT      (SELECT TOP 1 (G.CENTER_CODE + '_' + C.CENTER_NAME) FROM TB_M_COST_CENTER AS C WHERE C.CENTER_CODE= G.CENTER_CODE) as CENTER_CODE_NAME 
+		  , (SELECT TOP 1 (G.GRP_CODE + '_' + GL.GRP_NAME) FROM TB_M_GL_GROUP AS GL WHERE GL.GRP_CODE= G.GRP_CODE) as GRP_CODE_NAME 
+		  ,G.* 
+         FROM TB_M_GL_ACCOUNT AS G"; 
 
             var query = Connection.Query<GLAccountDto>(
                 sql: sqlQuery
