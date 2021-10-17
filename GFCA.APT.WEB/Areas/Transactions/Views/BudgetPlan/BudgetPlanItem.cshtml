@@ -1,12 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "Sale forecast";
+﻿@{
+    ViewBag.Title = "BudgetPlanDetail";
 }
 
-@using GFCA.APT.Domain.HTTP.Controls
-@using Syncfusion.EJ2.Popups
-@using Syncfusion.EJ2.Grids
-@using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
 
 @section styles
@@ -41,22 +36,28 @@
     </style>
 }
 
-@section ContentPlaceholder
-{
-    <form autocomplete="off" class="form-horizontal">
-        <div class="content-header">
-            <div class="container-fluid">
-                @*----------------- document header -----------------*@
+<form autocomplete="off" class="form-horizontal">
+    <div class="content-header">
+        <div class="container-fluid">
+            @*----------------- document header -----------------*@
+            @Html.Partial("../Default/ItemHeaderPartial")
 
-                @*----------------- Promotion planning header -----------------*@
+            @*----------------- bugdet planning header -----------------*@
+            @Html.Partial("ItemHeaderPartial")
 
-                @*----------------- Promotion planning detail -----------------*@
+            @*----------------- bugdet planning detail -----------------*@
+            @Html.Partial("ItemDetailPartial")
 
-                @*----------------- Promotion planning footer -----------------*@
-
-
-            </div>
+            @*----------------- bugdet planning footer -----------------*@
+            @Html.Partial("../Default/ItemFooterPartial")
         </div>
-    </form>
+    </div>
+</form>
+
+@section scripts
+{
+
+    @Scripts.Render("~/Scripts/transactions/budgetplan.js")
+
 }
 

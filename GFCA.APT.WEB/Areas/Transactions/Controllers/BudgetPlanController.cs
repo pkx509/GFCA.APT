@@ -15,11 +15,37 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             _biz = biz;
         }
 
-        // GET: T/BudgetPlan
-        [HttpGet()]
+        // GET: T/BudgetPlans
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
+        }
+        
+        [HttpGet]
+        public ViewResult BudgetPlanItem(string DocCode)
+        {
+            return View();
+        }
+        [HttpGet]
+        public PartialViewResult ItemHeaderPartial(string DocCode)
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailPartial(string DocCode)
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailGridSalePartial(string DocCode)
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailGridInvestmentPartial(string DocCode)
+        {
+            return PartialView();
         }
 
     }

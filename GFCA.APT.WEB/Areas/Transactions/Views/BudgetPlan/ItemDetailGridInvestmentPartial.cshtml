@@ -1,0 +1,49 @@
+﻿@using Syncfusion.EJ2.Grids
+@(Html.EJS()
+.Grid("grdBudgetPlanInvestment")
+.Height("450")
+//.DataSource(ds =>
+//{
+//    ds
+//    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
+//    .Adaptor("UrlAdaptor")
+//    ;
+//})
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport()
+.Toolbar(new List<object>() {
+    new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+    new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+    new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+    //new { text = "Print", prefixIcon = "e-icons e-print" },
+})
+
+.EditSettings(edit =>
+{
+    edit
+    .AllowEditOnDblClick(false)
+    .AllowAdding(true)
+    .AllowEditing(true)
+    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .Mode(EditMode.Dialog)
+    //.Template("#dialogtemplate")
+    ;
+})
+.Columns(col =>
+{
+
+    col.Field("Brand").HeaderText("Channel").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("Trade_Activity").HeaderText("Customer").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Category").HeaderText("Brand").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Date_Reference").HeaderText("Trade Invesment Category").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Size").HeaderText("Cost Center").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Pack").HeaderText("Source of Fund").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Cost_center").HeaderText("Actual Last Year (THB)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("Type").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("Value (THB / %)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("Target Current Year (THB)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("% Contribution").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+})
+.Render())

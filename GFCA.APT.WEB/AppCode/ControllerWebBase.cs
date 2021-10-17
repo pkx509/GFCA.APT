@@ -35,7 +35,7 @@ namespace GFCA.APT.WEB
             {
                 Environment = Environment.GetEnvironmentVariable("DEV_ENVIRONMENT") == "1"? "Development": "Production",
                 SystemVersion = versionInfo.FileVersion,
-                DatabaseVersion = "0.0.1"
+                DatabaseVersion = "0.0.2"
             };
 
             base.OnActionExecuting(filterContext);

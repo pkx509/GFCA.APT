@@ -28,5 +28,18 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             _biz.LogService.Debug($"Documents List {yyyy}");
             return View();
         }
+
+        [HttpGet]
+        public PartialViewResult ItemHeaderPartial(string DocCode)
+        {
+            return PartialView();
+        }
+
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial(string DocCode)
+        {
+            return PartialView();
+        }
+
     }
 }

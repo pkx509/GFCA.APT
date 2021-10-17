@@ -1,0 +1,53 @@
+﻿@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2
+@(Html.EJS()
+.Grid("grdSummary")
+.Height("450")
+//.DataSource(ds =>
+//{
+//    ds
+//    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
+//    .Adaptor("UrlAdaptor")
+//    ;
+//})
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport()
+/*
+.Toolbar(new List<object>() {
+new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+})
+*/
+.EditSettings(edit =>
+{
+edit
+.AllowEditOnDblClick(false)
+.AllowAdding(true)
+.AllowEditing(false)
+.AllowDeleting(false).ShowConfirmDialog(false).ShowDeleteConfirmDialog(false)
+.Mode(EditMode.Dialog)
+//.Template("#dialogtemplate")
+;
+})
+.Columns(col =>
+{
+
+    col.Field("Brand").HeaderText("Trade Activity").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("Trade_Activity").HeaderText("Type").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Category").HeaderText("January").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Date_Reference").HeaderText("February").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Size").HeaderText("March").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Pack").HeaderText("April").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Cost_center").HeaderText("May").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("June").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("July").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("August").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("September").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("October").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("November").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("Remark").HeaderText("December").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+})
+.Render())

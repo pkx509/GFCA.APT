@@ -10,7 +10,7 @@ namespace GFCA.APT.Domain.Enums
         [EnumMember(Value = "APPROVAL")] APPROVAL = 2,
         [EnumMember(Value = "REVIEW")] REVIEW = 3,
         [EnumMember(Value = "COMPLETED")] COMPLETED = 4,
-        [EnumMember(Value = "REJECTED")] REJECTED = 5,
+        [EnumMember(Value = "REVISED")] REVISED = 5,
         [EnumMember(Value = "CANCELLED")] CANCELLED = -1,
     }
     /*

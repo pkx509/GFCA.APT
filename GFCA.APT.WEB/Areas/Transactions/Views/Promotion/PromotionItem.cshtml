@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Budget Planing";
+﻿@using Syncfusion.EJ2
+@{
+    ViewBag.Title = "PromotionItem";
 }
 
 @section styles
@@ -34,21 +35,27 @@
     </style>
 }
 
-@section ContentPlaceholder
-{
 <form autocomplete="off" class="form-horizontal">
-<div class="content-header">
-    <div class="container-fluid">
-        @*----------------- document header -----------------*@
-        
-        @*----------------- bugdet planing header -----------------*@
-        
-        @*----------------- bugdet planing detail -----------------*@
-        
-        @*----------------- bugdet planing footer -----------------*@
-        
+    <div class="content-header">
+        <div class="container-fluid">
+            @*----------------- document header -----------------*@
+            @Html.Partial("../Default/ItemHeaderPartial")
 
+            @*----------------- Promotion planning header -----------------*@
+            @Html.Partial("ItemHeaderPartial")
+
+            @*----------------- Promotion planning detail -----------------*@
+            @Html.Partial("ItemDetailPartial")
+
+            @*----------------- Promotion planning footer -----------------*@
+            @Html.Partial("../Default/ItemFooterPartial")
+        </div>
     </div>
-</div>
 </form>
+
+@section scripts
+{
+
+    @Scripts.Render("~/Scripts/transactions/promotionplan.js")
+
 }

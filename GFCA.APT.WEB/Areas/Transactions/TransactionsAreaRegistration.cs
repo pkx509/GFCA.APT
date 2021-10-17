@@ -15,20 +15,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
-            /*
-            context.MapRoute(
-                "Transactions_FixedContract_List",
-                "T/FixedContract",
-                new { controller = "FixedContract", action = "Index" }
-            );
+            /* Document List Route */
 
-            context.MapRoute(
-                "Transactions_FixedContract_Detail",
-                "T/FixedContract/{DocCode}",
-                new { controller = "FixedContract", DocCode = UrlParameter.Optional, action = "FixedContractDetail" }
-            );
-            */
-            
             context.MapRoute(
                 name      : "Transaction_mutate", 
                 url       : "T/Document/{action}/{yyyy}",
@@ -37,6 +25,7 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 );
 
 
+            /* Fixed Contract Route */
             context.MapRoute(
                 name: "Transaction_FixedContract_List",
                 url: "T/FixedContracts",
@@ -47,10 +36,57 @@ namespace GFCA.APT.WEB.Areas.Transactions
             context.MapRoute(
                 name: "Transaction_FixedContract_Item",
                 url: "T/FixedContracts/{DocCode}",
-                defaults: new { controller = "FixedContract", action = "FixedContractDetail", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "FixedContract", action = "FixedContractItem", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
+
+            /* Budget Planing Route */
+            context.MapRoute(
+                name: "Transaction_BudgetPlan_List",
+                url: "T/BudgetPlans",
+                defaults: new { controller = "BudgetPlan", action = "Index" },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_BudgetPlans_Item",
+                url: "T/BudgetPlans/{DocCode}",
+                defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DocCode = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            /* Promotion Planing Route */
+            context.MapRoute(
+                name: "Transaction_PromotionPlan_List",
+                url: "T/Promotions",
+                defaults: new { controller = "Promotion", action = "Index" },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_PromotionPlan_Item",
+                url: "T/Promotions/{DocCode}",
+                defaults: new { controller = "Promotion", action = "PromotionItem", DocCode = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            /* Sale forecaset Route */
+            context.MapRoute(
+                name: "Transaction_Saleforecast_List",
+                url: "T/Promotions",
+                defaults: new { controller = "SaleForecast", action = "Index" },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_Saleforecast_Item",
+                url: "T/SaleForecasts/{DocCode}",
+                defaults: new { controller = "SaleForecast", action = "SaleForecastItem", DocCode = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            /* Default Route */
             context.MapRoute(
                 name : "Transactions_default",
                 url: "T/{controller}/{action}/{DocCode}",
@@ -58,19 +94,6 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 namespaces: new[] { __nameSpace }
             );
 
-            /*
-            context.MapRoute(
-                "Transactions_default",
-                "T/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
-
-            context.MapRoute(
-                "Transactions_default1",
-                "T/{controller}/{action}/{id}",
-                new {controller = "default", action = "Index", id = UrlParameter.Optional }
-            );
-            */
         }
     }
 }
