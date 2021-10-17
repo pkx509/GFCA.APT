@@ -20,6 +20,8 @@ namespace GFCA.APT.DAL
             this.TB_P_CUSTOMER_PARTY = new HashSet<TB_P_CUSTOMER_PARTY>();
         }
     
+        public string FUND_CODE { get; set; }
+        public string CENTER_CODE { get; set; }
         public string VENDOR_CODE { get; set; }
         public string VENDOR_NAME { get; set; }
         public string VENDOR_ADDR { get; set; }
@@ -30,6 +32,7 @@ namespace GFCA.APT.DAL
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
+        public virtual TB_M_SOURCE_FUND TB_M_SOURCE_FUND { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_P_CUSTOMER_PARTY> TB_P_CUSTOMER_PARTY { get; set; }
     }

@@ -27,6 +27,13 @@ namespace GFCA.APT.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
+        public virtual DbSet<PersistedGrant> PersistedGrants { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
         public virtual DbSet<TB_M_BUDGET_TYPE> TB_M_BUDGET_TYPE { get; set; }
@@ -39,6 +46,7 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_M_DOCUMENT_TYPE> TB_M_DOCUMENT_TYPE { get; set; }
         public virtual DbSet<TB_M_EMISSION> TB_M_EMISSION { get; set; }
         public virtual DbSet<TB_M_EMPLOYEE> TB_M_EMPLOYEE { get; set; }
+        public virtual DbSet<TB_M_FISCAL_YEAR> TB_M_FISCAL_YEAR { get; set; }
         public virtual DbSet<TB_M_GL_ACCOUNT> TB_M_GL_ACCOUNT { get; set; }
         public virtual DbSet<TB_M_GL_GROUP> TB_M_GL_GROUP { get; set; }
         public virtual DbSet<TB_M_HOLIDAY> TB_M_HOLIDAY { get; set; }
@@ -49,6 +57,7 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_M_PROMOTION_GROUP> TB_M_PROMOTION_GROUP { get; set; }
         public virtual DbSet<TB_M_PROMOTION_PLAN_TYPE> TB_M_PROMOTION_PLAN_TYPE { get; set; }
         public virtual DbSet<TB_M_SIZE> TB_M_SIZE { get; set; }
+        public virtual DbSet<TB_M_SOURCE_FUND> TB_M_SOURCE_FUND { get; set; }
         public virtual DbSet<TB_M_UNIT> TB_M_UNIT { get; set; }
         public virtual DbSet<TB_M_VENDOR> TB_M_VENDOR { get; set; }
         public virtual DbSet<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
@@ -75,6 +84,8 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_WM_WORKFLOW_STATE> TB_WM_WORKFLOW_STATE { get; set; }
         public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
         public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
+        public virtual DbSet<DB_Errors> DB_Errors { get; set; }
+        public virtual DbSet<TB_M_PACK_20210923> TB_M_PACK_20210923 { get; set; }
         public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
         public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
     
@@ -150,6 +161,23 @@ namespace GFCA.APT.DAL
         public virtual int SP_SYNC_ORGANIZATION()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SYNC_ORGANIZATION");
+        }
+    
+        public virtual ObjectResult<string> SP_GENERATE_DOC_CODE(string dOC_TYPE_CODE, Nullable<int> dOC_YEAR, Nullable<int> dOC_MONTH)
+        {
+            var dOC_TYPE_CODEParameter = dOC_TYPE_CODE != null ?
+                new ObjectParameter("DOC_TYPE_CODE", dOC_TYPE_CODE) :
+                new ObjectParameter("DOC_TYPE_CODE", typeof(string));
+    
+            var dOC_YEARParameter = dOC_YEAR.HasValue ?
+                new ObjectParameter("DOC_YEAR", dOC_YEAR) :
+                new ObjectParameter("DOC_YEAR", typeof(int));
+    
+            var dOC_MONTHParameter = dOC_MONTH.HasValue ?
+                new ObjectParameter("DOC_MONTH", dOC_MONTH) :
+                new ObjectParameter("DOC_MONTH", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_GENERATE_DOC_CODE", dOC_TYPE_CODEParameter, dOC_YEARParameter, dOC_MONTHParameter);
         }
     }
 }

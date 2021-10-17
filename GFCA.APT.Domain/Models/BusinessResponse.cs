@@ -20,4 +20,23 @@ namespace GFCA.APT.Domain.Models
             Message = message;
         }
     }
+
+    public class WorkflowResponse
+    {
+        public bool Success { get; set; } = false;
+        public MESSAGE_TYPE MessageType { get; set; } = MESSAGE_TYPE.WARNING;
+        public string Message { get; set; } = string.Empty;
+        public dynamic Data { get; set; }
+
+        public WorkflowResponse()
+        {
+
+        }
+        public WorkflowResponse(bool isSuccess, MESSAGE_TYPE messageType, string message)
+        {
+            Success = isSuccess;
+            MessageType = messageType;
+            Message = message;
+        }
+    }
 }

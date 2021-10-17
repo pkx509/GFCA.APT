@@ -17,6 +17,8 @@ namespace GFCA.APT.DAL
         public int DOC_FCH_ID { get; set; }
         public int DOC_FCD_ID { get; set; }
         public string DOC_CODE { get; set; }
+        public int DOC_VER { get; set; }
+        public int DOC_REV { get; set; }
         public string BRAND_CODE { get; set; }
         public string ACTIVITY_CODE { get; set; }
         public string CENTER_CODE { get; set; }
@@ -40,7 +42,7 @@ namespace GFCA.APT.DAL
         public Nullable<decimal> M10 { get; set; }
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
-        public string COMMENT { get; set; }
+        public string REMARK { get; set; }
         public string DOC_STATUS { get; set; }
         public string FLAG_ROW { get; set; }
         public Nullable<System.DateTime> START_DATE { get; set; }

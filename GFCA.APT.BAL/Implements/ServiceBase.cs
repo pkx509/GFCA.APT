@@ -1,5 +1,6 @@
 ﻿using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,31 @@ namespace GFCA.APT.BAL.Implements
         }
         #endregion [ Warn ]
         */
+
+        protected void GenerateNextState(DOCUMENT_STATUS documentStatus, COMMAND_TYPE documentTypeAction, ref DocumentDto document)
+        {
+            
+            if (documentTypeAction == COMMAND_TYPE.CONFIRM)
+            {
+                //Version + 1
+                document.DOC_VER += 1;
+
+                if (document.DOC_STATUS == DOCUMENT_STATUS.DRAFT)
+                {
+                    //document.FLOW_NEXT = "";
+                }
+
+            }
+
+            if (documentTypeAction == COMMAND_TYPE.SUBMIT || 
+                documentTypeAction == COMMAND_TYPE.APPROVE || 
+                documentTypeAction == COMMAND_TYPE.REVIEW)
+            {
+                //Revision + 1
+                document.DOC_REV += 1;
+            }
+        }
+
         public void Dispose()
         {
             _uow.Dispose();

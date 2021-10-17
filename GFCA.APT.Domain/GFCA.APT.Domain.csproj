@@ -65,6 +65,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +77,7 @@
     <Compile Include="Dto\Auditable.cs" />
     <Compile Include="Dto\CustomerPartyDto.cs" />
     <Compile Include="Dto\BudgetTypeDto.cs" />
+    <Compile Include="Dto\DocumentDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
     <Compile Include="Dto\UnitDto.cs" />
     <Compile Include="Dto\PackDto.cs" />
@@ -101,6 +103,8 @@
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
     <Compile Include="Dto\UserLoginDto.cs" />
+    <Compile Include="Dto\VenderDto.cs" />
+    <Compile Include="Enums\COMMAND_TYPE.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />
     <Compile Include="Enums\FLAG_DEL.cs" />
