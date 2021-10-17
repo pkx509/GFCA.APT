@@ -100,37 +100,31 @@ ViewBag.Title = "GL-Account";
                                   .RowSelected("gl_accountPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-                                      //col.Field("CLIENT_CODE").HeaderText("Client Code").Width("150")
-                                      //.ForeignKeyField("CLIENT_ID")
-                                      //.ForeignKeyValue("CLIENT_CODE")
-                                      //.ValidationRules(new { required = false })
-                                      //.HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center)
-                                      //.Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
 
-                                      col.Field("ACC_ID").HeaderText("ID").Width("115")
-                                      .IsPrimaryKey(true).ValidationRules(new { required = true, number = true })
-                                      .HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
 
-                                      col.Field("IO_ID").HeaderText("IO_ID").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CENTER_ID").HeaderText("CENTER_ID").Width("308").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FUND_ID").HeaderText("FUND_ID").Width("558").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("FUND_CENTER_ID").HeaderText("FUND_CENTER_ID").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+                                      col.Field("ACC_CODE").HeaderText("Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Left).Add();
+                                      col.Field("ACC_NAME").HeaderText("Name").Width("400").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_TYPE").HeaderText("Type").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("IO_CODE").HeaderText("IO Code").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CENTER_CODE").HeaderText("Center Code").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FUND_ID").HeaderText("Fund Id").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("FUND_CENTER_ID").HeaderText("Fund Center Id").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
-                                      col.Field("ACC_CODE").HeaderText("StaACC_CODEtus").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_NAME").HeaderText("ACC_NAME").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_TYPE").HeaderText("ACC_TYPE").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_TYPE_DESC").HeaderText("ACC_TYPE_DESC").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_GROUP1").HeaderText("ACC_GROUP1").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_GROUP1_DESC").HeaderText("ACC_GROUP1_DESC").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_GROUP2").HeaderText("ACC_GROUP2").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_GROUP2_DESC").HeaderText("ACC_GROUP2_DESC").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("ACC_REMARK").HeaderText("ACC_REMARK").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
-                                      col.Field("FLAG_ROW").HeaderText("FLAG_ROW").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+                                      col.Field("ACC_TYPE_DESC").HeaderText("Acc. Type Desc.").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_GROUP1").HeaderText("Acc. Grp.1").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_GROUP1_DESC").HeaderText("Acc. Grp1 Desc.").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_GROUP2").HeaderText("Acc. Grp2").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_GROUP2_DESC").HeaderText("Acc. Grp2 Desc.").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("ACC_REMARK").HeaderText("Remark").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
 
                                       col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("250").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                       col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("250").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("FLAG_ROW").HeaderText("FLAG_ROW").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Freeze(Syncfusion.EJ2.Grids.FreezeDirection.Right).Add();
+
                                   })
                                   .Render())
 
