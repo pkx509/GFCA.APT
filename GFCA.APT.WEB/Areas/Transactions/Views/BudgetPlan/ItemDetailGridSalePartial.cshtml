@@ -15,10 +15,11 @@
 .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
 .AllowExcelExport()
 .Toolbar(new List<object>() {
-new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
-new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
-//new { text = "Print", prefixIcon = "e-icons e-print" },
+    new { id ="toolbar_add_sale_grid", text = "Add", prefixIcon = "e-icons e-add" },
+    new { id ="toolbar_edit_sale_grid", text = "Edit", prefixIcon = "e-icons e-edit" },
+    new { id ="toolbar_del_sale_grid", text = "Delete", prefixIcon = "e-icons e-delete" },
+    new { id ="toolbar_excel_sale_grid", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+    //new { text = "Print", prefixIcon = "e-icons e-print" },
 })
 
 .EditSettings(edit =>
