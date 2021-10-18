@@ -1,0 +1,329 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<form class="form-horizontal" id="pop-form-channel">
+    <div id="popup-detailGridInvestmentPartial" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-investment-header-title">Create New Investment</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Channel
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-channel")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetChannel")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Customer
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-customer")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCustomer")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Brand
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-brand")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("C28")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetBrand/true")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Pack
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-pack")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetPack")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Size
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-size")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("1000")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetSize")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Trade Activity
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-trade-activity")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("1000")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetTradeActivity")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Cost Center
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-cost-center")
+                                                        .Placeholder("-- Select --")
+                                                        .Value("1000")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCostCenter")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Source Of Fund
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-source-of-fund")
+                                                    .Enabled(true)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Actual investment last year (THB)
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-actual-last-year-thb")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(false)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Target Current Year (THB)
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-target-current-year-thb")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(false)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Category
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().ComboBox("cmb-investment-grid-category")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCategory")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Value
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-value")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        % Contribution
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-percent-contribution")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(false)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-md-4 col-lg-5 control-label">
+                                        Ratio
+                                    </label>
+                                    <div class="col-sm-7 col-md-8 col-lg-7">
+                                        @(Html.EJS().TextBox("txt-investment-grid-ratio")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" id="pop-hid-permanant-del" />
+                    <button id="pop-btn-investment-save" type="button" class="e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:detailGridInvestmentPartialPopup.onSave(this)">Save</button>
+                    <button type="button" class="e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:detailGridInvestmentPartialPopup.close(this)">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

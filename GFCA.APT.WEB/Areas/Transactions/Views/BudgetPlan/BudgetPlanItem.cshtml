@@ -53,11 +53,35 @@
         </div>
     </div>
 </form>
+@Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_DetailGridInvestmentPartial.cshtml")
+@Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_DetailGridSalePartial.cshtml")
+
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
+
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
+            Add: "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
+            Edit: "@Url.Action("Edit", "BudgetPlan", new { Area = "Transactions" })",
+            Delete: "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
+        }
+
+        var argruments = {
+            data: null,
+        }
+    </script>
+
+    @Scripts.Render("~/Scripts/transactions/budgetPlanPopup.js")
+    <!-- END preScripts -->
+
+}
 
 @section scripts
 {
 
-    @Scripts.Render("~/Scripts/transactions/budgetplan.js")
+    @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
 
 }
 
