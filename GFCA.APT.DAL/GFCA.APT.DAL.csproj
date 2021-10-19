@@ -209,6 +209,9 @@
     <Compile Include="DB_Errors.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeviceCode.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\DocumentRepository.cs" />
     <Compile Include="Implements\SizeRepository.cs" />
@@ -319,9 +322,6 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_PACK.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_M_PACK_20210923.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_PRODUCT.cs">
