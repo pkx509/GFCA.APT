@@ -90,4 +90,10 @@
   <ItemGroup>
     <RefactorLog Include="GFCA.APT.SQL.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
 </Project>

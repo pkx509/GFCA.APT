@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("GFCA.APT.WEB")]
 [assembly: AssemblyDescription("APT System")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Smart IT")]
+[assembly: AssemblyCompany("IT Smart Ltd.")]
 [assembly: AssemblyProduct("GFCA.APT.WEB")]
 [assembly: AssemblyCopyright("Copyright © 2021")]
 [assembly: AssemblyTrademark("Smart IT Team")]
