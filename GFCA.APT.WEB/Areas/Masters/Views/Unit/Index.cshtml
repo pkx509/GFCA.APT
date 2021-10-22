@@ -78,10 +78,10 @@ ViewBag.Title = "Unit";
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
                                   .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-excelexport" },
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "" },
-                                      new { text = "ExcelExport" }
+                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+                                      new { id ="toolbar_excel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" }
                                   })
                                   .ToolbarClick("brandPopup.OnExcelExportClick")
                                   .EditSettings(edit =>
