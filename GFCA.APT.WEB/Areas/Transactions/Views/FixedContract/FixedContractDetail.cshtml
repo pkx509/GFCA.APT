@@ -1100,7 +1100,14 @@ ViewBag.Title = "Fixed Contract Document";
 }
 @section preScripts
         {
-
+    <script>
+        var urlServices = {
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
+        }
+        var argruments = {
+            data: null,
+        }
+    </script>
     @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
 
 }
