@@ -1,4 +1,6 @@
-﻿<div class="row mb-2">
+﻿@Model GFCA.APT.Domain.Dto.FixedContractHeaderDto;
+
+<div class="row mb-2">
     <div class="col col-lg p-1">
         <div class="card card-info card-outline">
             <div class="card-header">
@@ -25,8 +27,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
+                                                        .Enabled(false)
                                                         .CssClass("mandatory")
+                                                        .Value(Model.client_code)
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
@@ -47,7 +50,7 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
+                                                        .Enabled(false)
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -69,7 +72,7 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
+                                                        .Enabled(false)
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -86,7 +89,7 @@
                                     <div class="col col-lg-8">
                                         @(Html.EJS().ComboBox("cmb-requester")
                                                         .Placeholder("-- Select --")
-                                                        .Autofill(true)
+                                                        .Autofill(false)
                                                         .DataSource(o =>
                                                         {
                                                             o.Url("/api/Selection/GetEmployee/false")
@@ -115,8 +118,8 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
-                                                        .Change("page.cmbPositionChange")
+                                                        .Enabled(false)
+                                                        .Change("fixedContractDetail.cmbPositionChange")
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())

@@ -4207,6 +4207,7 @@
     <Content Include="Scripts\masters\channelPopup.js" />
     <Content Include="Scripts\transactions\budgetPlanPopup.js" />
     <Content Include="Scripts\transactions\budgetPlan.js" />
+    <Content Include="Scripts\transactions\FixedContractDetail.js" />
     <Content Include="Scripts\transactions\fixedContractHeaderPopup.js" />
     <Content Include="Scripts\transactions\fixedContract.js" />
     <Content Include="Scripts\masters\pack.js" />

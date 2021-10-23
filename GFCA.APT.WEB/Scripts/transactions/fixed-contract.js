@@ -1,5 +1,4 @@
 ﻿let page = new (function () {
-
     this.field_plan_jan = "#txt-plan-jan";
     this.field_plan_feb = "#txt-plan-feb";
     this.field_plan_mar = "#txt-plan-mar";
@@ -24,7 +23,7 @@
     }
 
     $("#txt-apply-to-all").keyup(function (e) {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g,'$1');
+        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
         let value = $(page.field_apply_to_all).val();
         monthPlans.val(value);
     });
@@ -32,5 +31,19 @@
     monthPlans.keyup(function (e) {
         this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
+
+    /*
+     console.log('link...', window.location.href);
+
+    this.init = function () {
+        console.log('init>>>>>');
+        // this.clearValue();
+        // this.bindDom(this.jsonData);
+    }
+    */
+    this.open = function (popupMode, dataSelection, fn) {
+        // this.jsonData = dataSelection;
+    }
+
 
 })();

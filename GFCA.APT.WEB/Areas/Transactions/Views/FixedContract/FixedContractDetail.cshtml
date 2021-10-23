@@ -1,10 +1,13 @@
-﻿@{
+﻿@Model GFCA.APT.Domain.Dto.FixedContractHeaderDto;
+
+@{
 #if DNX48
+ViewBag.Title = "Fixed Contract Document";
 ViewBag.Title = "Fixed Contract Document";
 #endif
 
-Dictionary<string, object> disabled = new Dictionary<string, object>();
-disabled.Add("disabled", "true");
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
 }
 
 @using GFCA.APT.Domain.HTTP.Controls
@@ -183,6 +186,7 @@ disabled.Add("disabled", "true");
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
+                                                        .Change("fixedContractDetail.OnBrandChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -194,7 +198,7 @@ disabled.Add("disabled", "true");
                                                         Apply to All
                                                     </label>
                                                     <div class="col col-lg-8">
-                                                        @Html.EJS().TextBox("txt-apply-to-all").Change("page.txtApplyAllChange").Placeholder("Input number only").Render()
+                                                        @Html.EJS().TextBox("txt-apply-to-all").Change("fixedContractDetail.txtApplyAllChange").Placeholder("Input number only").Render()
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,6 +222,7 @@ disabled.Add("disabled", "true");
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
+                                                        .Change("fixedContractDetail.OnTradeActivityChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -238,6 +243,7 @@ disabled.Add("disabled", "true");
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
+                                                        .Change("fixedContractDetail.OnCategoryChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -282,6 +288,7 @@ disabled.Add("disabled", "true");
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
+                                                        .Change("fixedContractDetail.OnUOMChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -307,6 +314,7 @@ disabled.Add("disabled", "true");
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
+                                                        .Change("fixedContractDetail.OnSizeChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -328,6 +336,7 @@ disabled.Add("disabled", "true");
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
+                                                        .Change("fixedContractDetail.OnPackChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -353,6 +362,7 @@ disabled.Add("disabled", "true");
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
+                                                        .Change("fixedContractDetail.OnCostCenterChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                                     </div>
@@ -812,10 +822,9 @@ disabled.Add("disabled", "true");
 
                                     <div class="row">
                                         <div class="col col-sm-12 col-lg-3 offset-lg-9">
-
                                             <!-- Confirm State -->
-                                            <button class="btn btn-primary">Save</button>
-                                            <button class="btn btn-default">Cancel</button>
+                                            <button id="pop-btn-save" type="button" class="btn btn-primary" data-loading-text="Processing..." onclick="javascript:fixedContractDetail.onSave(this)">Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:fixedContractDetail.close(this)">Close</button>
 
                                         </div>
                                     </div>
@@ -894,20 +903,20 @@ disabled.Add("disabled", "true");
                 </div>
 
                 @*
-        <div class="row mb-2">
-            <div class="col col-lg-12 p-1">
-                <div class="card card-info card-outline">
-                    <div class="card-header">
-                        <h5>Claim</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
+                    <div class="row mb-2">
+                        <div class="col col-lg-12 p-1">
+                            <div class="card card-info card-outline">
+                                <div class="card-header">
+                                    <h5>Claim</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
                 *@
 
                 <div class="row mb-2">
@@ -1064,10 +1073,10 @@ disabled.Add("disabled", "true");
 
                                         <!-- The last icon means the story is complete -->
                                         <!--
-                            <div>
-                                <i class="fas fa-clock bg-gray"></i>
-                            </div>
-                            -->
+                                        <div>
+                                            <i class="fas fa-clock bg-gray"></i>
+                                        </div>
+                                        -->
                                         <div>
                                             <i class="fas fa-star bg-gradient-blue" title="Completed"></i>
                                         </div>
@@ -1084,14 +1093,14 @@ disabled.Add("disabled", "true");
 
 
             </div>
-                </div>
+        </div>
 
-            </form>
+    </form>
 
-        }
-        @section preScripts
+}
+@section preScripts
         {
 
-            @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
+    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
 
-        }
+}

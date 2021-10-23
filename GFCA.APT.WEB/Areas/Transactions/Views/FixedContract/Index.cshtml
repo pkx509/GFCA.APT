@@ -92,6 +92,8 @@ ViewBag.Title = "Fixed contract";
                                       .Mode(EditMode.Dialog);
                                       // .Template("#dialogtemplate");
                                   })
+                                  .RowDeselected("fixedContractDetail.OnRowDeselected")
+                                  .RowSelected("fixedContractDetail.OnRowSelected")
 
                                   .Columns(col =>
                                   {
@@ -121,8 +123,8 @@ ViewBag.Title = "Fixed contract";
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "FixedContract", new { Area = "Transactions" })",
             Add: "@Url.Action("Add", "FixedContract", new { Area = "Transactions" })",
-            AddHeader: "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
-            Edit: "@Url.Action("Edit", "FixedContract", new { Area = "Transactions" })",
+            AddHeader: "@Url.Action("FixedContractDetail", "FixedContract", new { Area = "Transactions" })",
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })",
             Delete: "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
         }
         var argruments = {
@@ -131,6 +133,7 @@ ViewBag.Title = "Fixed contract";
     </script>
 
     @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
+    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
 }
 
 @section scripts

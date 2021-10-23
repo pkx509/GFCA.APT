@@ -29,6 +29,12 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
+        // GET: T/FixedContracts/{id}
+        public ActionResult CreateFixedContractDetail()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         public JsonResult UrlFixedContractHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlFixedContractHeaderList");
@@ -59,10 +65,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
-        // GET: T/FixedContracts/{DocCode}
+        // GET: T/FixedContracts/{DocCode}]
         [HttpGet]
         public ActionResult FixedContractDetail(string DocCode)
         {
+            /*
             _biz.LogService.Debug("FixedContractDetail");
             dynamic d = new BusinessResponse();
 
@@ -76,6 +83,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             {
 
             }
+            */
             //return Json(new { data = d, JsonRequestBehavior.AllowGet });
             return View();
         }
@@ -181,6 +189,17 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             }
             return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+
+        // GET: T/FixedContracts/{DocCode}]
+        [HttpGet]
+        public ActionResult getFixedContractHeader(string DocCode)
+        {
+            var header = new GFCA.APT.Domain.Dto.FixedContractHeaderDto();
+            header = _biz.FixedContractService.GetHeaderById(2);
+
+            return View(header);
         }
     }
 }
