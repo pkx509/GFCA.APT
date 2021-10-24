@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumeriable<GFCA.APT.Domain.FixedContractDetailDto>
+@{
 #if DNX48
 ViewBag.Title = "Fixed Contract Document";
 #endif
@@ -942,7 +943,7 @@ disabled.Add("disabled", "true");
                     <div class="col col-lg-12 p-1">
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <h5>Reviewer (Display when status accounting review)</h5>
+                                <h5>Reviewer</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -1088,10 +1089,10 @@ disabled.Add("disabled", "true");
 
             </form>
 
-        }
-        @section preScripts
-        {
+}
+@section preScripts
+{
 
-            @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
+    @Scripts.Render("~/Scripts/transactions/fixed-contract.js")
 
-        }
+}

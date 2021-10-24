@@ -130,6 +130,11 @@ ViewBag.Title = "Fixed contract";
         }
     </script>
 
+    <script id="template" type="text/x-template">
+        <div>
+            <a href="@Url.Content("~/T/FixedContracts/${DOC_CODE}")" title="${DOC_CODE}">EDIT</a>
+        </div>
+    </script>
     @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
 }
 
