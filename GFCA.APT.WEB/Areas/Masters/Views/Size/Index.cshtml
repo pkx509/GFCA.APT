@@ -81,9 +81,8 @@ ViewBag.Title = "Brand";
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
                                   .Toolbar(new List<object>() {
-                                      
-                                      new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
-                                      new { text = "Print", prefixIcon = "e-icons e-print" },
+                                      new { id ="toolbar_excel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { id = "toolbar_print", text = "Print", prefixIcon = "e-icons e-print" }
                                   })
                                   .ToolbarClick("sizePopup.OnToolbarClick")
                                   .EditSettings(edit =>

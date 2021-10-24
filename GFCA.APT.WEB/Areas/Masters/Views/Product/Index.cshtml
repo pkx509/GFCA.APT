@@ -82,11 +82,12 @@ ViewBag.Title = "Product";
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
 
-                                  .Toolbar(new List<object>() { new { text = "Add", prefixIcon = "e-icons e-add" },
+                                  .Toolbar(new List<object>() { 
+                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
                                       new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-                                      new { text = "Delete", prefixIcon = "e-icons e-delete" },
-                                      new { text = "ExcelExport" },
-                                      new { text = "Print" }
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+                                      new { id ="toolbar_excel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" },
+                                      new { id = "toolbar_print", text = "Print", prefixIcon = "e-icons e-print" }
                                   })
 
 
