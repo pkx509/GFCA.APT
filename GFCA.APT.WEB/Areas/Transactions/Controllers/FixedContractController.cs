@@ -158,7 +158,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateFixedContractDetail(FixedContractDto data)
+        public JsonResult CreateFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("CreateFixedContractDetail");
             dynamic d = new BusinessResponse();
@@ -176,7 +176,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditFixedContractDetail(FixedContractDto data)
+        public JsonResult EditFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("EditFixedContractDetail");
             dynamic d = new BusinessResponse();

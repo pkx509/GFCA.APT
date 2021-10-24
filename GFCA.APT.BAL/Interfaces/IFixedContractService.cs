@@ -9,17 +9,17 @@ namespace GFCA.APT.BAL.Interfaces
         IEnumerable<FixedContractHeaderDto> GetHeaderAll();
         FixedContractHeaderDto GetHeaderById(int headerId);
         FixedContractHeaderDto GetHeaderByCode(string docCode);
-        
+
         IEnumerable<FixedContractDetailDto> GetDetailByCode(string code, int ver = -1, int rev = -1);
         IEnumerable<FixedContractDetailDto> GetDetailAll();
         FixedContractDetailDto GetDetailById(int detailId);
 
         BusinessResponse CreateHeader(FixedContractHeaderDto model);
         BusinessResponse EditHeader(FixedContractHeaderDto model);
-        
-        BusinessResponse CreateDetail(FixedContractDto model);
-        BusinessResponse EditDetail(FixedContractDto model);
-        
+
+        BusinessResponse CreateDetail(FixedContractDetailDto model);
+        BusinessResponse EditDetail(FixedContractDetailDto model);
+
         BusinessResponse RemoveDetail(FixedContractDetailDto model);
     }
 }

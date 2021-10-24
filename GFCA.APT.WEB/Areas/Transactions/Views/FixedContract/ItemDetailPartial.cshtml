@@ -242,7 +242,7 @@
                                         Remark
                                     </label>
                                     <div class="col col-lg-8">
-                                        <textarea name="des" cols="2" rows="2" class="e-control e-textbox e-lib e-input"></textarea>
+                                        @Html.EJS().TextBox("txt-remark").Multiline(true).Render()
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Implements
 {
-    public class FixedContractService: ServiceBase, IFixedContractService
+    public class FixedContractService : ServiceBase, IFixedContractService
     {
         private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         internal static FixedContractService CreateInstant()
@@ -43,7 +43,7 @@ namespace GFCA.APT.BAL.Implements
                 throw ex;
             }
         }
-        
+
         public FixedContractHeaderDto GetHeaderById(int headerId)
         {
             try
@@ -59,7 +59,7 @@ namespace GFCA.APT.BAL.Implements
                 throw ex;
             }
         }
-        
+
         public FixedContractHeaderDto GetHeaderByCode(string docCode)
         {
             try
@@ -87,7 +87,7 @@ namespace GFCA.APT.BAL.Implements
                     .Where(w => w.DOC_CODE.Contains(docCode));
 
 
-                if (ver > 0) 
+                if (ver > 0)
                 {
                     string docVersion = $"{docCode}-{ver.ToString("00")}";
                     docd = docd.Where(w => w.DOC_CODE.Contains(docVersion));
@@ -194,26 +194,25 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
-        public BusinessResponse CreateDetail(FixedContractDto model)
+        public BusinessResponse CreateDetail(FixedContractDetailDto model)
         {
             BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
             try
             {
-                var doch = model.Header;
-                var docd = model.Detail;
+                var docd = model;
 
                 //validate new document
-                //docd.DOC_FCD_ID = 1;
-                docd.DOC_FCH_ID = doch.DOC_FCH_ID;
-                docd.DOC_CODE = doch.DOC_CODE;
-                //docd.DOC_VER = doch.DOC_VER;
-                //docd.DOC_REV = doch.DOC_REV;
+                docd.DOC_FCD_ID = 1;
+                // docd.DOC_FCH_ID = DOC_FCH_ID;
+                // docd.DOC_CODE = 'FC';
+                docd.DOC_VER = '1';
+                docd.DOC_REV = '1';
 
-                docd.CREATED_BY = doch.REQUESTER;
+                // docd.CREATED_BY = doch.REQUESTER;
                 docd.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.InsertDetail(docd);
 
-                
+
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = TOAST_TYPE.SUCCESS;
@@ -229,23 +228,22 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
-        public BusinessResponse EditDetail(FixedContractDto model)
+        public BusinessResponse EditDetail(FixedContractDetailDto model)
         {
             BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
             try
             {
-                var doch = model.Header;
-                var docd = model.Detail;
+                var docd = model;
 
                 //validate new document
-                docd.DOC_FCD_ID = docd.DOC_FCD_ID;
-                docd.DOC_FCH_ID = doch.DOC_FCH_ID;
-                docd.DOC_CODE = doch.DOC_CODE;
+                // docd.DOC_FCD_ID = docd.DOC_FCD_ID;
+                // docd.DOC_FCH_ID = doch.DOC_FCH_ID;
+                // docd.DOC_CODE = doch.DOC_CODE;
                 //docd.DOC_VER = doch.DOC_VER;
                 //docd.DOC_REV = doch.DOC_REV;
 
-                docd.CREATED_BY = doch.REQUESTER;
-                docd.CREATED_DATE = DateTime.UtcNow;
+                // docd.CREATED_BY = doch.REQUESTER;
+                // docd.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.UpdateDetail(docd);
 
 
@@ -283,7 +281,7 @@ namespace GFCA.APT.BAL.Implements
                 _uow.DocumentRepository.Insert(doc);
                 doch.DOC_FCH_ID = doc.DOC_VER;
                 doch.DOC_CODE = doc.DOC_CODE;
-                
+
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.InsertHeader(doch);

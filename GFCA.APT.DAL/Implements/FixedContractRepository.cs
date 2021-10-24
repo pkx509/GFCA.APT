@@ -218,7 +218,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 
             var parms = new
             {
-                //DOC_FCH_ID = entity.DOC_FCH_ID,
+                DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
                 DOC_CODE = entity.DOC_CODE,
                 DOC_VER = entity.DOC_VER,
