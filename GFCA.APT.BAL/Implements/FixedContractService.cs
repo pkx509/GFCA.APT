@@ -151,7 +151,6 @@ namespace GFCA.APT.BAL.Implements
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
                 doc.FLOW_CURRENT = "";
                 doc.FLOW_NEXT = "";
-                doc.REQUESTER = "System";
 
                 _uow.DocumentRepository.Insert(doc);
                 doch.DOC_VER = doc.DOC_VER;
@@ -175,7 +174,6 @@ namespace GFCA.APT.BAL.Implements
                 doch.CHANNEL_NAME  = "";
                 doch.FLAG_ROW      = "S";
                 */
-                doch.REQUESTER = doc.REQUESTER;
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.InsertHeader(doch);
@@ -281,13 +279,11 @@ namespace GFCA.APT.BAL.Implements
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
                 doc.FLOW_CURRENT = "";
                 doc.FLOW_NEXT = "";
-                doc.REQUESTER = "System";
 
                 _uow.DocumentRepository.Insert(doc);
                 doch.DOC_FCH_ID = doc.DOC_VER;
                 doch.DOC_CODE = doc.DOC_CODE;
                 
-                doch.REQUESTER = doc.REQUESTER;
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.InsertHeader(doch);

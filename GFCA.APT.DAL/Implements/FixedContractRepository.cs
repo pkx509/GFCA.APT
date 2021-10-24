@@ -17,9 +17,9 @@ namespace GFCA.APT.DAL.Implements
         {
             string sqlQuery = @"SELECT FCH.DOC_CODE,
                                 (SELECT TOP 1 CHANNEL_NAME  from TB_M_CHANNEL where CHANNEL_CODE = FCH.CHANNEL_CODE) as CHANNEL_NAME,
-                                FCH.CREATED_BY AS REQUESTER,
+                                FCH.CREATED_BY, FCH.REQUESTER,
                                 (SELECT TOP 1 CLIENT_NAME  from TB_M_CLIENT where CLIENT_CODE = FCH.CLIENT_CODE) as CLIENT_NAME,
-                                FCH.CREATED_DATE
+                                FCH.CREATED_DATE, FCH.ORG_CODE, FCH.COMP_CODE
                                 FROM TB_T_FIXED_CONTRACT_H FCH";
 
             var query = Connection.Query<FixedContractDto>(
@@ -51,6 +51,9 @@ namespace GFCA.APT.DAL.Implements
 , FLAG_ROW
 , CREATED_BY
 , CREATED_DATE
+, ORG_CODE
+, COMP_CODE
+, REQUESTER
 ) VALUES (
   @DOC_CODE
 , @DOC_VER
@@ -63,21 +66,27 @@ namespace GFCA.APT.DAL.Implements
 , @FLAG_ROW
 , @CREATED_BY
 , @CREATED_DATE
+, @ORG_CODE
+, @COMP_CODE
+, @REQUESTER
 );";
 
             var parms = new
             {
-                DOC_CODE     = entity.DOC_CODE,
-                DOC_VER      = entity.DOC_VER,
-                DOC_REV      = entity.DOC_REV,
-                CLIENT_CODE  = entity.CLIENT_CODE,
-                CUST_CODE    = entity.CUST_CODE,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                CLIENT_CODE = entity.CLIENT_CODE,
+                CUST_CODE = entity.CUST_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
-                DOC_STATUS   = entity.DOC_STATUS,
-                COMMENT      = entity.COMMENT,
-                FLAG_ROW     = entity.FLAG_ROW,
-                CREATED_BY   = entity.CREATED_BY,
+                DOC_STATUS = entity.DOC_STATUS,
+                COMMENT = entity.COMMENT,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
+                ORG_CODE = entity.ORG_CODE,
+                COMP_CODE = entity.COMP_CODE,
+                REQUESTER = entity.REQUESTER
             };
 
             Connection.ExecuteScalar<int>(
@@ -102,21 +111,27 @@ SET
 ,FLAG_ROW     = @FLAG_ROW
 ,UPDATED_BY   = @UPDATED_BY
 ,UPDATED_DATE = @UPDATED_DATE
+,ORG_CODE       = @ORG_CODE
+,COMP_CODE      = @COMP_CODE
+,REQUESTER      = @REQUESTER
 WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 
             var parms = new
             {
-                DOC_CODE     = entity.DOC_CODE,
-                DOC_VER      = entity.DOC_VER,
-                DOC_REV      = entity.DOC_REV,
-                CLIENT_CODE  = entity.CLIENT_CODE,
-                CUST_CODE    = entity.CUST_CODE,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                CLIENT_CODE = entity.CLIENT_CODE,
+                CUST_CODE = entity.CUST_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
-                DOC_STATUS   = entity.DOC_STATUS,
-                COMMENT      = entity.COMMENT,
-                FLAG_ROW     = entity.FLAG_ROW,
-                CREATED_BY   = entity.CREATED_BY,
+                DOC_STATUS = entity.DOC_STATUS,
+                COMMENT = entity.COMMENT,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
+                ORG_CODE = entity.ORG_CODE,
+                COMP_CODE = entity.COMP_CODE,
+                REQUESTER = entity.REQUESTER
             };
 
             Connection.ExecuteScalar<int>(
@@ -291,20 +306,20 @@ AND DOC_FCD_ID = @DOC_FCD_ID
             {
                 DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
-                DOC_CODE       = entity.DOC_CODE,
-                DOC_VER        = entity.DOC_VER,
-                DOC_REV        = entity.DOC_REV,
-                BRAND_CODE     = entity.BRAND_CODE,
-                ACTIVITY_CODE  = entity.ACTIVITY_CODE,
-                CENTER_CODE    = entity.CENTER_CODE,
-                ACC_CODE       = entity.ACC_CODE,
-                SIZE           = entity.SIZE,
-                UOM            = entity.UOM,
-                PACK           = entity.PACK,
-                DATE_REF       = entity.DATE_REF,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                BRAND_CODE = entity.BRAND_CODE,
+                ACTIVITY_CODE = entity.ACTIVITY_CODE,
+                CENTER_CODE = entity.CENTER_CODE,
+                ACC_CODE = entity.ACC_CODE,
+                SIZE = entity.SIZE,
+                UOM = entity.UOM,
+                PACK = entity.PACK,
+                DATE_REF = entity.DATE_REF,
                 CONDITION_TYPE = entity.CONDITION_TYPE,
-                CONTRACT_CATE  = entity.CONTRACT_CATE,
-                CONTRACT_DESC  = entity.CONTRACT_DESC,
+                CONTRACT_CATE = entity.CONTRACT_CATE,
+                CONTRACT_DESC = entity.CONTRACT_DESC,
                 M01 = entity.M01,
                 M02 = entity.M02,
                 M03 = entity.M03,
@@ -379,6 +394,9 @@ AND DOC_FCD_ID = @DOC_FCD_ID
 , CREATED_DATE
 , UPDATED_BY
 , UPDATED_DATE
+, ORG_CODE
+, COMP_CODE
+, REQUESTER
   FROM TB_T_FIXED_CONTRACT_H a;";
             var query = Connection.Query<FixedContractHeaderDto>(
                 sql: sqlQuery

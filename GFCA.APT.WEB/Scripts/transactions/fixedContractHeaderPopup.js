@@ -23,7 +23,8 @@ let fixedContractHeaderPopup = new (function () {
     this.isCreateState = true;
 
     //Model Dto
-    this.field_company = "#pop-txt-company";
+    this.field_company_code = "#pop-cmb-company_hidden";
+    this.field_company_name = "#pop-cmb-company";
     this.field_document_no = "#pop-txt-document-no";
     this.field_client_code = "#pop-cmb-client_hidden";
     this.field_client_name = "#pop-cmb-client";
@@ -31,8 +32,7 @@ let fixedContractHeaderPopup = new (function () {
     this.field_customer_name = "#pop-cmb-customer";
     this.field_channel_code = "#pop-cmb-channel_hidden";
     this.field_channel_name = "#pop-cmb-channel";
-    this.field_requester_code = "#pop-cmb-requester_hidden";
-    this.field_requester_name = "#pop-cmb-requester";
+    this.field_requester = "#pop-txt-requester";
     this.field_position_code = "#pop-cmb-position_hidden";
     this.field_position_name = "#pop-cmb-position";
 
@@ -56,7 +56,9 @@ let fixedContractHeaderPopup = new (function () {
         CHANNEL_NAME: null,
         COMMENT: null,
         FLAG_ROW: null,
-        COMMAND_TYPE: null
+        COMMAND_TYPE: null,
+        OGR_CODE: null,
+        COMP_CODE: null
     };
 
     this.callBack = function (data) {
@@ -83,7 +85,9 @@ let fixedContractHeaderPopup = new (function () {
             CHANNEL_NAME: null,
             COMMENT: null,
             FLAG_ROW: null,
-            COMMAND_TYPE: null
+            COMMAND_TYPE: null,
+            ORG_CODE: null,
+            COMP_CODE: null
         };
     }
 
@@ -145,7 +149,7 @@ let fixedContractHeaderPopup = new (function () {
         $(this.popup_id).modal("hide");
     }
 
-    
+
     this.bindDom = function (data) {
         $(this.field_emis_code_text).empty();
         var o = new Option(data.EMIS_NAME, data.EMIS_CODE, true);
@@ -188,15 +192,21 @@ let fixedContractHeaderPopup = new (function () {
         let CUST_NAME = $(this.field_customer_name).val()
         let CHANNEL_CODE = $(this.field_channel_code).val();
         let CHANNEL_NAME = $(this.field_channel_name).val();
-        let REQUESTER_CODE = $(this.field_requester_code).val();
-        let REQUESTER_NAME = $(this.field_requester_name).val();
+        let REQUESTER = $(this.field_requester).val();
         let POSITION_CODE = $(this.field_position_code).val();
         let POSITION_NAME = $(this.field_position_name).val();
         let COMMAND_TYPE = $(this.button_save).val();
+        let ORG_CODE = $(this.field_position_code).val();
+        let ORG_NAME = $(this.field_position_name).val();
+        let COMP_CODE = $(this.field_company_code).val();
+        let COMP_NAME = $(this.field_company_name).val();
+
+
 
         this.jsonData = {
             COMPANY, DOC_TYPE_CODE, DOC_CODE, DOC_MONTH, DOC_YEAR, DOC_STATUS, DOC_FCH_ID, CLIENT_CODE, CLIENT_NAME, CUST_CODE,
-            CUST_NAME, CHANNEL_CODE, CHANNEL_NAME, REQUESTER_CODE, REQUESTER_NAME, POSITION_CODE, POSITION_NAME, COMMAND_TYPE
+            CUST_NAME, CHANNEL_CODE, CHANNEL_NAME, REQUESTER, POSITION_CODE, POSITION_NAME, COMMAND_TYPE,
+            ORG_CODE, ORG_NAME, COMP_CODE, COMP_NAME
         };
     }
     /*
@@ -338,19 +348,19 @@ let fixedContractHeaderPopup = new (function () {
         }
     }
 
-    this.OnRequesterChangeValue = function (e) {
-        let REQUESTER_CODE = e.value;
+    this.OnPositionChangeValue = function (e) {
+        let ORG_CODE = e.value;
         this.jsonData = {
             ...this.jsonData,
-            REQUESTER_CODE
+            ORG_CODE
         }
     }
 
-    this.OnPositionChangeValue = function (e) {
-        let POSITION_CODE = e.value;
+    this.OnCompanyChangeValue = function (e) {
+        let COMP_CODE = e.value;
         this.jsonData = {
             ...this.jsonData,
-            POSITION_CODE
+            COMP_CODE
         }
     }
 

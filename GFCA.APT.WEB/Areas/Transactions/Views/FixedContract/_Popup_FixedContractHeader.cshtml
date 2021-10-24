@@ -29,7 +29,20 @@
                                         Company
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-company").Placeholder("Company name").CssClass("mandatory").Render()
+                                        @(Html.EJS().ComboBox("pop-cmb-company")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCompany")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("fixedContractHeaderPopup.OnCompanyChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                     </div>
                                 </div>
                             </div>
@@ -124,20 +137,7 @@
                                         Requester
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @(Html.EJS().ComboBox("pop-cmb-requester")
-                                                        .Placeholder("-- Select --")
-                                                        .Autofill(true)
-                                                        .DataSource(o =>
-                                                        {
-                                                            o.Url("/api/Selection/GetEmployee/false")
-                                                            .CrossDomain(false)
-                                                            .Adaptor("UrlAdaptor");
-                                                        })
-                                                        .Enabled(true)
-                                                        .Change("fixedContractHeaderPopup.OnRequesterChangeValue")
-                                                        .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                        .Render())
+                                        @Html.EJS().TextBox("pop-txt-requester").Render()
                                     </div>
                                 </div>
                             </div>
