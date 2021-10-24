@@ -29,14 +29,12 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
-        [HttpGet]
-        public PartialViewResult ItemHeaderPartial(string DocCode)
+        public PartialViewResult ItemHeaderPartial()
         {
             return PartialView();
         }
 
-        [HttpGet]
-        public PartialViewResult ItemFooterPartial(string DocCode)
+        public PartialViewResult ItemFooterPartial()
         {
             return PartialView();
         }
