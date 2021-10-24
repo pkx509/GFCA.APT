@@ -1,0 +1,83 @@
+﻿@using GFCA.APT.Domain.Dto
+@using Syncfusion.EJ2
+@{
+    ViewBag.Title = "FixedContractItem";
+    //var headerDto = new GFCA.APT.Domain.Dto.FixedContractHeaderDto();
+    //headerDto.DOC_CODE = ViewContext.RouteData.Values["DocCode"];
+    //headerDto.DOC_CODE = Request.QueryString["DocCode"];
+    FixedContractHeaderDto headerDto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
+}
+
+@section styles
+{
+    <style>
+        .form-group.col-md-6 {
+            width: 250px;
+        }
+
+        :-ms-fullscreen, .e-dialog {
+            max-width: 552px;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .e-dialog.e-control.e-popup {
+                min-width: 300px !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .e-dialog.e-control.e-popup {
+                /* min-width: 550px !important;*/
+                min-width: 300px !important;
+                min-height: 180px;
+            }
+
+            .e-bigger.e-dialog.e-control.e-popup,
+            .e-bigger .e-dialog.e-control.e-popup {
+                min-height: 496px;
+            }
+        }
+    </style>
+}
+
+<form autocomplete="off" class="form-horizontal">
+    <div class="content-header">
+        <div class="container-fluid">
+            @*----------------- document header -----------------*@
+            @Html.Partial("../Default/ItemHeaderPartial")
+
+            @*----------------- Fixed Contract header -----------------*@
+            @*Html.Partial("ItemHeaderPartial", headerDto) *@
+            @{ Html.RenderPartial("ItemHeaderPartial", headerDto); }
+
+            @*----------------- Fixed Contract detail -----------------*@
+            @Html.Partial("ItemDetailPartial")
+
+            @*----------------- document footer -----------------*@
+            @Html.Partial("../Default/ItemFooterPartial")
+        </div>
+    </div>
+</form>
+
+@section preScripts
+{
+    <script>
+        var urlServices = {
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
+        }
+        var argruments = {
+            data: null,
+        }
+    </script>
+    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
+
+}
+
+@section scripts
+{
+
+    <script>
+
+    </script>
+
+}

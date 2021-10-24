@@ -1,6 +1,10 @@
-﻿@using Syncfusion.EJ2
+﻿@using GFCA.APT.Domain.Dto
+@using Syncfusion.EJ2.DropDowns
+@using Syncfusion.EJ2
 
-@model GFCA.APT.Domain.Dto.FixedContractHeaderDto
+@{ 
+    FixedContractHeaderDto dto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
+}
 
 <div class="row mb-2">
     <div class="col col-lg p-1">
@@ -29,10 +33,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(false)
                                                         .CssClass("mandatory")
-                                                        .Value(Model.CLIENT_CODE)
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(dto.CLIENT_CODE)
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>
@@ -52,10 +55,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(false)
                                                         .CssClass("mandatory")
-                                                        .Value(Model.CUST_CODE)
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(dto.CUST_CODE)
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>
@@ -75,9 +77,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(false)
                                                         .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(dto.CHANNEL_CODE)
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>
@@ -99,9 +101,8 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
                                                         .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>
@@ -121,10 +122,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(false)
                                                         .Change("fixedContractDetail.cmbPositionChange")
                                                         .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>

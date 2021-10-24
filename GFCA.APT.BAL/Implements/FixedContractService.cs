@@ -59,6 +59,22 @@ namespace GFCA.APT.BAL.Implements
                 throw ex;
             }
         }
+        
+        public FixedContractHeaderDto GetHeaderByCode(string docCode)
+        {
+            try
+            {
+                var doch = _uow.FixedContractRepository.GetHeaderAll()
+                .Where(w => w.DOC_CODE == docCode)
+                .FirstOrDefault();
+
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public IEnumerable<FixedContractDetailDto> GetDetailByCode(string code, int ver = -1, int rev = -1)
         {
@@ -297,6 +313,5 @@ namespace GFCA.APT.BAL.Implements
             throw new NotImplementedException();
         }
 
-        
     }
 }

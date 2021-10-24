@@ -67,7 +67,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/FixedContracts/{DocCode}]
         [HttpGet]
-        public ActionResult FixedContractDetail(string DocCode)
+        public ActionResult FixedContractItem(string DocCode)
         {
             /*
             _biz.LogService.Debug("FixedContractDetail");
@@ -85,7 +85,27 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             }
             */
             //return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            try
+            {
+                FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderByCode(DocCode);
+                ViewData["FixedContractHeaderDto"] = headerDto;
+            }
+            catch
+            {
+
+            }
+
             return View();
+        }
+        [HttpGet]
+        public PartialViewResult ItemHeaderPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailPartial()
+        {
+            return PartialView();
         }
 
         [HttpGet]

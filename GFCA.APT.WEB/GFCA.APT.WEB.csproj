@@ -4132,6 +4132,9 @@
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridInvestmentPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\_Popup_FixedContractHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\FixedContractItem.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\ItemHeaderPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailPartial.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />

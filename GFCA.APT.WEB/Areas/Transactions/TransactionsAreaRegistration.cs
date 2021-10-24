@@ -36,7 +36,7 @@ namespace GFCA.APT.WEB.Areas.Transactions
             context.MapRoute(
                 name: "Transaction_FixedContract_Item",
                 url: "T/FixedContracts/{DocCode}",
-                defaults: new { controller = "FixedContract", action = "FixedContractDetail", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "FixedContract", action = "FixedContractItem", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
