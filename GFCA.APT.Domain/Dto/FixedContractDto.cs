@@ -44,6 +44,10 @@ namespace GFCA.APT.Domain.Dto
         public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
         public COMMAND_TYPE COMMAND_TYPE { get; set; } = COMMAND_TYPE.NONE; //SUBMIT, CANCEL, APPROVE, REVIEW, CONFIRM, COMMIT
+        public string ORG_CODE { get; set; }
+        public string ORG_NAME { get; set; }
+        public string COMP_CODE { get; set; }
+        public string COMP_NAME { get; set; }
     }
 
     public class FixedContractDetailDto : Auditable

@@ -16,5 +16,7 @@ namespace GFCA.APT.Domain.Dto
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }
         [Required] public string REQUESTER { get; set; }
+        public string ORG_CODE { get; set; }
+        public string COMP_CODE { get; set; }
     }
 }

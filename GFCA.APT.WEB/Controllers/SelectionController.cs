@@ -329,5 +329,17 @@ namespace GFCA.APT.WEB.Controllers
                 .Select(o => new SelectionItem { Value = o.PACK_CODE, Text = $"{o.PACK_NAME}" });
             return ret;
         }
+
+        // POST: api/Selection/GetCompany
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetCompany()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            ICompanyService svc = biz.CompanyService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.COMP_CODE, Text = $"{o.COMP_NAME}" });
+            return ret;
+        }
     }
 }

@@ -71,6 +71,7 @@ let fixedContractDetail = new (function () {
     this.field_plan_oct = "#txt-plan-oct";
     this.field_plan_nov = "#txt-plan-nov";
     this.field_plan_dec = "#txt-plan-dec";
+    this.field_remark = "#txt-remark";
 
     this.field_apply_to_all = "#txt-apply-to-all";
 
@@ -95,39 +96,40 @@ let fixedContractDetail = new (function () {
     this.bindField = function () {
         let docId = $(this.field_document_no).val() !== undefined ? $(this.field_document_no).val() : '0';
 
-        let DOC_FCH_ID = '';
+        let DOC_FCH_ID = '1';
         let DOC_FCD_ID = '';
-        let DOC_CODE = '';
-        let DOC_VER = '';
-        let DOC_REV = '';
-        let BRAND_CODE = '';
-        let ACTIVITY_CODE = '';
-        let CENTER_CODE = '';
+        let DOC_CODE = 'FC';
+        let DOC_VER = '1';
+        let DOC_REV = '1';
+        let BRAND_CODE = $(this.field_brand_code).val();
+        let ACTIVITY_CODE = $(this.field_trade_activity_code).val();
+        let CENTER_CODE = $(this.field_cost_center_code).val();
         let ACC_CODE = '';
-        let SIZE = '';
-        let UOM = '';
-        let PACK = '';
-        let DATE_REF = '';
+        let SIZE = $(this.field_size_code).val();
+        let UOM = $(this.field_UOM_code).val();
+        let PACK = $(this.field_pack_code).val();
+        let DATE_REF = $(this.field_date_reference).val();
         let CONDITION_TYPE = '';
         let CONTRACT_CATE = '';
         let CONTRACT_DESC = '';
-        let M01 = '';
-        let M02 = '';
-        let M03 = '';
-        let M04 = '';
-        let M05 = '';
-        let M06 = '';
-        let M07 = '';
-        let M08 = '';
-        let M09 = '';
-        let M10 = '';
-        let M11 = '';
-        let M12 = '';
-        let REMARK = '';
+        let M01 = $(this.field_plan_jan).val();
+        let M02 = $(this.field_plan_feb).val();
+        let M03 = $(this.field_plan_mar).val();
+        let M04 = $(this.field_plan_apr).val();
+        let M05 = $(this.field_plan_may).val();
+        let M06 = $(this.field_plan_jun).val();
+        let M07 = $(this.field_plan_jul).val();
+        let M08 = $(this.field_plan_aug).val();
+        let M09 = $(this.field_plan_sep).val();
+        let M10 = $(this.field_plan_oct).val();
+        let M11 = $(this.field_plan_nov).val();
+        let M12 = $(this.field_plan_dec).val();
+        let REMARK = $(this.field_remark).val();
         let DOC_STATUS = '';
         let START_DATE = '';
-        let END_DATE = '';
+        let END_DATE = ''
         let FLAG_ROW = '';
+
 
         this.jsonData = {
             DOC_FCH_ID,
