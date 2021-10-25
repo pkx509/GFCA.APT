@@ -227,17 +227,17 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
             try
             {
-                var doch = model.Header;
-                var docd = model.Detail;
+                
+                var docd = model;
 
                 //validate new document
                 //docd.DOC_FCD_ID = 1;
-                docd.DOC_FCH_ID = doch.DOC_FCH_ID;
-                docd.DOC_CODE = doch.DOC_CODE;
+                docd.DOC_FCH_ID = docd.DOC_FCH_ID;
+                docd.DOC_CODE = docd.DOC_CODE;
                 //docd.DOC_VER = doch.DOC_VER;
                 //docd.DOC_REV = doch.DOC_REV;
 
-                docd.CREATED_BY = doch.REQUESTER;
+                docd.CREATED_BY = "System";
                 docd.CREATED_DATE = DateTime.UtcNow;
                 _uow.FixedContractRepository.InsertDetail(docd);
 
