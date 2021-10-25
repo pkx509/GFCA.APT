@@ -31,11 +31,34 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
-        public void GetDetailItem(string docCode, int docVersion)
+        public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
         {
-            throw new NotImplementedException();
-        }
+            string sqlQuery = @"SELECT  DOC_FCH_ID
+, DOC_CODE
+, DOC_VER
+, DOC_REV
+, CLIENT_CODE
+, (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
+, CUST_CODE
+, (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
+, CHANNEL_CODE
+, (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
+, DOC_STATUS
+, COMMENT
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+, UPDATED_BY
+, UPDATED_DATE
+  FROM TB_T_FIXED_CONTRACT_H a;";
+            var query = Connection.Query<FixedContractHeaderDto>(
+                sql: sqlQuery
+                , transaction: Transaction
+                ).ToList();
 
+            return query;
+
+        }
         public void InsertHeader(FixedContractHeaderDto entity)
         {
             string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_H
@@ -125,7 +148,68 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 transaction: Transaction
             );
         }
+        
+        public IEnumerable<FixedContractDetailDto> GetDetailItems(string docCode, int docVer = -1, int docRev = -1)
+        {
+            string sqlQuery = @"SELECT
+  a.DOC_FCH_ID
+, a.DOC_FCD_ID
+, a.DOC_CODE
+, a.DOC_VER
+, a.DOC_REV
+, a.BRAND_CODE
+, (SELECT TOP 1 b.BRAND_NAME FROM TB_M_BRAND b WHERE b.BRAND_CODE = a.BRAND_CODE) BRAND_NAME
+, a.ACTIVITY_CODE
+, (SELECT TOP 1 b.ACTIVTITY_NAME FROM TB_M_ACTIVITY b WHERE b.ACTIVITY_CODE = a.ACTIVITY_CODE) ACTIVTITY_NAME
+, a.CENTER_CODE
+, (SELECT TOP 1 b.CENTER_NAME FROM TB_M_COST_CENTER b WHERE b.CENTER_CODE = a.CENTER_CODE) CENTER_NAME
+, a.ACC_CODE
+, (SELECT TOP 1 b.ACC_NAME FROM TB_M_GL_ACCOUNT b WHERE b.ACC_CODE = a.ACC_CODE) ACC_NAME
+, a.SIZE
+, (SELECT TOP 1 b.SIZE_NAME FROM TB_M_SIZE b WHERE b.SIZE_CODE = a.SIZE) SIZE_NAME
+, a.UOM
+, a.PACK
+, (SELECT TOP 1 b.PACK_NAME FROM TB_M_PACK b WHERE b.PACK_CODE = a.PACK) SIZE_NAME
+, a.DATE_REF
+, a.CONDITION_TYPE
+, a.CONTRACT_CATE
+, a.CONTRACT_DESC
+, a.M01
+, a.M02
+, a.M03
+, a.M04
+, a.M05
+, a.M06
+, a.M07
+, a.M08
+, a.M09
+, a.M10
+, a.M11
+, a.M12
+, a.REMARK
+, a.DOC_STATUS
+, a.FLAG_ROW
+, a.[START_DATE]
+, a.END_DATE
+, a.CREATED_BY
+, a.CREATED_DATE
+, a.UPDATED_BY
+, a.UPDATED_DATE
+FROM TB_T_FIXED_CONTRACT_D a
+WHERE DOC_CODE = @DOC_CODE
+;";
 
+            var parms = new {
+                DOC_CODE = docCode
+            };
+            var query = Connection.Query<FixedContractDetailDto>(
+                sql: sqlQuery
+                , param : parms
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
         public void InsertDetail(FixedContractDetailDto entity)
         {
             string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_D
@@ -246,7 +330,6 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 transaction: Transaction
             );
         }
-
         public void UpdateDetail(FixedContractDetailDto entity)
         {
             string sqlExecute = @"UPDATE TB_T_FIXED_CONTRACT_D
@@ -334,64 +417,5 @@ AND DOC_FCD_ID = @DOC_FCD_ID
 
         }
 
-        public IEnumerable<FixedContractDetailDto> GetDetailAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
-        {
-            /*
-            SELECT  DOC_FCH_ID
-      , DOC_CODE
-      , DOC_VER
-      , DOC_REV
-      , CLIENT_CODE
-	  , (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
-      , CUST_CODE
-	  , (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
-      , CHANNEL_CODE
-	  , (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
-      , DOC_STATUS
-      , COMMENT
-      , FLAG_ROW
-      , CREATED_BY
-      , CREATED_DATE
-      , UPDATED_BY
-      , UPDATED_DATE
-  FROM TB_T_FIXED_CONTRACT_H a
-             
-             */
-            string sqlQuery = @"SELECT  DOC_FCH_ID
-, DOC_CODE
-, DOC_VER
-, DOC_REV
-, CLIENT_CODE
-, (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
-, CUST_CODE
-, (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
-, CHANNEL_CODE
-, (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
-, DOC_STATUS
-, COMMENT
-, FLAG_ROW
-, CREATED_BY
-, CREATED_DATE
-, UPDATED_BY
-, UPDATED_DATE
-  FROM TB_T_FIXED_CONTRACT_H a;";
-            var query = Connection.Query<FixedContractHeaderDto>(
-                sql: sqlQuery
-                , transaction: Transaction
-                ).ToList();
-
-            return query;
-
-        }
-
-        public FixedContractDto GetDetailItem(string docCode, int docVer = -1, int docRev = -1)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

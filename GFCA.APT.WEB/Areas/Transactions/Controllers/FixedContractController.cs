@@ -111,8 +111,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         [HttpGet]
         public JsonResult UrlFixedContractDetailList(DataManagerRequest dm)
         {
+            // implement ต่อหน่อยคำสั่งนี้จะได้ http://localhost:8881/T/FixedContracts/FC-202109-00001-0101
+            string docCode = Request.Url.PathAndQuery; //ให้ใช้ reg express ตัด เอาแค่ code มาใช้
+            
             _biz.LogService.Debug("UrlFixedContractDetailList");
-            IEnumerable dataSource = _biz.FixedContractService.GetDetailAll();
+            IEnumerable dataSource = _biz.FixedContractService.GetDetailItems(docCode);
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
