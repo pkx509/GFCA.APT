@@ -13,12 +13,15 @@ namespace GFCA.APT.Domain.Dto
         [Required] public string DOC_MONTH { get; set; }
         [Required] public string DOC_YEAR { get; set; }
         public string CUST_CODE { get; set; }
+        public string CUST_NAME { get; set; }
         public DOCUMENT_STATUS DOC_STATUS { get; set; } = DOCUMENT_STATUS.DRAFT;
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }
         [Required] public string REQUESTER { get; set; }
         public string ORG_CODE { get; set; }
+        public string ORG_NAME { get; set; }
         public string COMP_CODE { get; set; }
+        public string COMP_NAME { get; set; }
     }
 
     public class DocumentStateFlowDto : DocumentDto

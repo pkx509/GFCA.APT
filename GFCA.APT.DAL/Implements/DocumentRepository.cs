@@ -18,23 +18,70 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
-        public DocumentStateFlowDto GetDocumentStateFlow(int headerId)
+        public DocumentStateFlowDto GetDocumentStateFlow(int headerId, string documentType)
         {
-            string sqlQuery = @"SELECT 
-  ISNULL(b.UPDATED_BY, b.CREATED_BY) ACTION_BY
-, ISNULL(b.UPDATED_DATE, b.CREATED_DATE) ACTION_DATETIME
-, b.COMMENT
-, a.*
-FROM TB_T_FIXED_CONTRACT_D a
-LEFT JOIN TB_T_FIXED_CONTRACT_H b on b.DOC_FCH_ID = a.DOC_FCH_ID
-WHERE a.CONDITION_TYPE = 'PLANNING'
-and a.FLAG_ROW = 'S'
--- and DOC_FCH_ID = 7
-ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
+            string sqlQuery = @"";
+
+            switch (documentType)
+            {
+                case "FC": //fixed contract
+                    sqlQuery = @"
+                    SELECT 
+                    TTD.DOC_TYPE_CODE,
+                    TTD.DOC_CODE,
+                    TTD.DOC_VER,
+                    TTD.DOC_MONTH,
+                    TTD.DOC_YEAR,
+                    TTD.CUST_CODE,
+                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
+                    TTD.DOC_STATUS,
+                    TTD.FLOW_CURRENT,
+                    TTD.FLOW_NEXT,
+                    TTD.REQUESTER,
+                    TTD.ORG_CODE,
+                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
+                    TTD.COMP_CODE,
+                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
+                    FROM 
+                    TB_T_DOCUMENT TTD 
+                    INNER JOIN TB_T_FIXED_CONTRACT_H TTFCH 
+                    ON TTD.DOC_CODE = TTFCH.DOC_CODE
+                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE
+                    AND TTFCH.DOC_FCH_ID = @DOC_ID";
+                    break;
+                case "BP": //budget planning
+                    sqlQuery = @"
+                    SELECT 
+                    TTD.DOC_TYPE_CODE,
+                    TTD.DOC_CODE,
+                    TTD.DOC_VER,
+                    TTD.DOC_MONTH,
+                    TTD.DOC_YEAR,
+                    TTD.CUST_CODE,
+                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
+                    TTD.DOC_STATUS,
+                    TTD.FLOW_CURRENT,
+                    TTD.FLOW_NEXT,
+                    TTD.REQUESTER,
+                    TTD.ORG_CODE,
+                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
+                    TTD.COMP_CODE,
+                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
+                    FROM 
+                    TB_T_DOCUMENT TTD 
+                    INNER JOIN TB_T_BUDGET_H TTBH 
+                    ON TTD.DOC_CODE = TTBH.DOC_CODE
+                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE 
+                    AND TTBH.DOC_BGH_ID = @DOC_ID";
+                    break;
+                default:
+                    break;
+            }
 
             var parms = new
             {
-                DOC_FCH_ID = headerId
+                DOC_ID = headerId,
+                DOC_TYPE_CODE = documentType
             };
 
             var query = Connection.Query<DocumentStateFlowDto>(
