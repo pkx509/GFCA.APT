@@ -335,7 +335,6 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
-
         #endregion [ detail ]
     }
 }

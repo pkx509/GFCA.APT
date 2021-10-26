@@ -113,7 +113,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             }
 
-            return View(detailDto);
+            return RedirectToAction("FixedContractItem", new { DOC_FCH_ID = DOC_FCH_ID });
         }
 
         [HttpGet]
@@ -126,6 +126,12 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         {
             return PartialView();
         }
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial()
+        {
+            return PartialView();
+        }
+
 
         [HttpGet]
         public PartialViewResult ItemDetailGridFixedContractPartial()

@@ -49,5 +49,12 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         {
             return PartialView();
         }
+        
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial()
+        {
+            return PartialView();
+        }
+
     }
 }

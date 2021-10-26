@@ -4136,6 +4136,10 @@
     <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailGridFixedContractPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Default\ItemStateFlowPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Default\ItemHistoriesPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\ItemFooterPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\ItemFooterPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\BudgetPlan\ItemFooterPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Saleforecast\ItemFooterPartial.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
