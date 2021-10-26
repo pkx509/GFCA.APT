@@ -191,6 +191,7 @@ namespace GFCA.APT.BAL.Implements
         #region [ detail ]
         public FixedContractDto GetDetailItem(int DOC_FCD_ID)
         {
+            var documentType = "FC";
             FixedContractDto dto = new FixedContractDto();
             dto.Detail = new FixedContractDetailDto();
             dto.Header = new FixedContractHeaderDto();
@@ -209,7 +210,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.Detail = docd;
                 var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
                 dto.Header = doch;
-                //dto.Stateflow = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID);
+                dto.Stateflow = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID, documentType);
                 dto.Histories = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
 
                 return dto;
