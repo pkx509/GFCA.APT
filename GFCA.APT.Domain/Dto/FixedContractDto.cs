@@ -7,10 +7,13 @@ namespace GFCA.APT.Domain.Dto
 {
     public class FixedContractDto : Auditable
     {
-
+        public PAGE_MODE DataMode { get; set; }
+        public DocumentStateFlowDto Stateflow { get; set; }
         public FixedContractHeaderDto Header { get; set; }
+        //public IEnumerable<FixedContractDetailDto> Details { get; set; }
         public FixedContractDetailDto Detail { get; set; }
-        public IEnumerable<FixedContractFooter> Footer { get; set; }
+        public FixedContractFooterDto Footer { get; set; }
+        public IEnumerable<DocumentHistoryDto> Histories { get; set; }
     }
 
     public class FixedContractHeaderDto : Auditable
@@ -49,7 +52,6 @@ namespace GFCA.APT.Domain.Dto
         public string COMP_CODE { get; set; }
         public string COMP_NAME { get; set; }
     }
-
     public class FixedContractDetailDto : Auditable
     {
         [Required]
@@ -61,9 +63,13 @@ namespace GFCA.APT.Domain.Dto
         public int DOC_VER { get; set; }
         public int DOC_REV { get; set; }
         public string BRAND_CODE { get; set; }
+        public string BRAND_NAME { get; set; }
         public string ACTIVITY_CODE { get; set; }
+        public string ACTIVITY_NAME { get; set; }
         public string CENTER_CODE { get; set; }
+        public string CENTER_NAME { get; set; }
         public string ACC_CODE { get; set; }
+        public string ACC_NAME { get; set; }
         public string SIZE { get; set; }
         public string UOM { get; set; }
         public string PACK { get; set; }
@@ -90,8 +96,9 @@ namespace GFCA.APT.Domain.Dto
         public string FLAG_ROW { get; set; }
 
     }
-    public class FixedContractFooter
+    public class FixedContractFooterDto
     {
         public string COMMENT { get; set; }
     }
+
 }

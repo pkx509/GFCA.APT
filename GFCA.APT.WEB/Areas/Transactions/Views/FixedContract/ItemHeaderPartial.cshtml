@@ -102,6 +102,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
+                                                        .Value(dto.REQUESTER)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
@@ -122,8 +123,9 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Change("fixedContractDetail.cmbPositionChange")
+                                                        //.Change("fixedContractDetail.cmbPositionChange")
                                                         .CssClass("mandatory")
+                                                        .Value(dto.ORG_NAME)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>

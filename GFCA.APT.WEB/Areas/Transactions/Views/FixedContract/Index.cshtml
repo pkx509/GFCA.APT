@@ -92,8 +92,8 @@ ViewBag.Title = "Fixed contract";
                                       .Mode(EditMode.Dialog);
                                       // .Template("#dialogtemplate");
                                   })
-                                  .RowDeselected("fixedContractDetail.OnRowDeselected")
-                                  .RowSelected("fixedContractDetail.OnRowSelected")
+                                  .RowDeselected("OnRowDeselected")
+                                  .RowSelected("OnRowSelected")
 
                                   .Columns(col =>
                                   {
@@ -129,6 +129,16 @@ ViewBag.Title = "Fixed contract";
         }
         var argruments = {
             data: null,
+        }
+
+        var OnRowSelected = function (args) {
+            console.log(args);
+            argruments.data = args.data;
+        }
+        var OnRowDeselected = function (args) {
+            if (argruments.data == args.data) {
+                argruments.data = null;
+            }
         }
     </script>
 

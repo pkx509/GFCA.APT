@@ -4118,12 +4118,10 @@
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemDetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemDetailGridInvestmentPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Default\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\Index.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\PromotionItem.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Default\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridTradeActivityPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridSummaryPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Saleforecast\SaleForecastItem.cshtml" />
@@ -4135,6 +4133,9 @@
     <Content Include="Areas\Transactions\Views\FixedContract\FixedContractItem.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailGridFixedContractPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Default\ItemStateFlowPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Default\ItemHistoriesPartial.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4243,6 +4244,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\transactions\fixed-contract.js" />
+    <Content Include="Scripts\transactions\fixedContractItem.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />

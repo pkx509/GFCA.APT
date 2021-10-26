@@ -6,6 +6,7 @@
     //headerDto.DOC_CODE = ViewContext.RouteData.Values["DocCode"];
     //headerDto.DOC_CODE = Request.QueryString["DocCode"];
     FixedContractHeaderDto headerDto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
+    FixedContractDetailDto detailDto = ViewData["FixedContractDetailDto"] as FixedContractDetailDto;
 }
 
 @section styles
@@ -44,17 +45,16 @@
     <div class="content-header">
         <div class="container-fluid">
             @*----------------- document header -----------------*@
-            @Html.Partial("../Default/ItemHeaderPartial")
+            @Html.Partial("../Default/ItemStateFlowPartial")
 
             @*----------------- Fixed Contract header -----------------*@
-            @*Html.Partial("ItemHeaderPartial", headerDto) *@
-            @{ Html.RenderPartial("ItemHeaderPartial", headerDto); }
+            @Html.Partial("ItemHeaderPartial")
 
             @*----------------- Fixed Contract detail -----------------*@
             @Html.Partial("ItemDetailPartial")
 
             @*----------------- document footer -----------------*@
-            @Html.Partial("../Default/ItemFooterPartial")
+            @Html.Partial("../Default/ItemHistoriesPartial")
         </div>
     </div>
 </form>
@@ -66,10 +66,19 @@
             AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
         }
         var argruments = {
+            DOC_FCH_ID: @headerDto.DOC_FCH_ID,
             data: null,
         }
+        var OnRowSelected = function (args) {
+            argruments.data = args.data;
+        }
+        var OnRowDeselected = function (args) {
+            if (argruments.data == args.data) {
+                argruments.data = null;
+            }
+        }
     </script>
-    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
+    @Scripts.Render("~/Scripts/transactions/fixedContractItem.js")
 
 }
 

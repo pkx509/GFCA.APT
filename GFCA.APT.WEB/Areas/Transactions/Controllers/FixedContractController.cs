@@ -35,6 +35,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
         public JsonResult UrlFixedContractHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlFixedContractHeaderList");
@@ -65,29 +66,13 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
-        // GET: T/FixedContracts/{DocCode}]
+        // GET: T/FixedContracts/{DOC_FCH_ID}]
         [HttpGet]
-        public ActionResult FixedContractItem(string DocCode)
+        public ActionResult FixedContractItem(int DOC_FCH_ID)
         {
-            /*
-            _biz.LogService.Debug("FixedContractDetail");
-            dynamic d = new BusinessResponse();
-
             try
             {
-                var biz = _biz.FixedContractService.GetDetailByCode(DocCode);
-                d = JsonConvert.SerializeObject(biz);
-                //FixedContractDto
-            }
-            catch
-            {
-
-            }
-            */
-            //return Json(new { data = d, JsonRequestBehavior.AllowGet });
-            try
-            {
-                FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderByCode(DocCode);
+                FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderById(DOC_FCH_ID);
                 ViewData["FixedContractHeaderDto"] = headerDto;
             }
             catch
@@ -97,6 +82,40 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             return View();
         }
+        // GET: T/FixedContracts/{DOC_FCH_ID}/{DOC_FCD_ID}]
+        [HttpGet]
+        public ActionResult FixedContractDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        {
+            FixedContractDto detailDto = new FixedContractDto();
+            try
+            {
+                detailDto = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
+                
+            }
+            catch
+            {
+
+            }
+
+            return View(detailDto);
+        }
+
+        [HttpPost]
+        public ActionResult FixedContractDetail(int DOC_FCH_ID, FixedContractDto data)
+        {
+            FixedContractDto detailDto = new FixedContractDto();
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+            return View(detailDto);
+        }
+
         [HttpGet]
         public PartialViewResult ItemHeaderPartial()
         {
@@ -109,13 +128,19 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
-        public JsonResult UrlFixedContractDetailList(DataManagerRequest dm)
+        public PartialViewResult ItemDetailGridFixedContractPartial()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult UrlFixedContractDetailList(int DOC_FCH_ID, DataManagerRequest dm)
         {
             // implement ต่อหน่อยคำสั่งนี้จะได้ http://localhost:8881/T/FixedContracts/FC-202109-00001-0101
             string docCode = Request.Url.PathAndQuery; //ให้ใช้ reg express ตัด เอาแค่ code มาใช้
             
             _biz.LogService.Debug("UrlFixedContractDetailList");
-            IEnumerable dataSource = _biz.FixedContractService.GetDetailItems(docCode);
+            IEnumerable dataSource = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search

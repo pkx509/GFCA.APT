@@ -5,6 +5,7 @@ using System.Linq;
 using Dapper;
 using System.Data;
 using System;
+using GFCA.APT.Domain.Enums;
 
 namespace GFCA.APT.DAL.Implements
 {
@@ -12,24 +13,6 @@ namespace GFCA.APT.DAL.Implements
     {
 
         public FixedContractRepository(IDbTransaction transaction) : base(transaction) { }
-
-        public IEnumerable<FixedContractDto> All()
-        {
-            string sqlQuery = @"SELECT FCH.DOC_CODE,
-                                (SELECT TOP 1 CHANNEL_NAME  from TB_M_CHANNEL where CHANNEL_CODE = FCH.CHANNEL_CODE) as CHANNEL_NAME,
-                                FCH.CREATED_BY, FCH.REQUESTER,
-                                (SELECT TOP 1 CLIENT_NAME  from TB_M_CLIENT where CLIENT_CODE = FCH.CLIENT_CODE) as CLIENT_NAME,
-                                FCH.CREATED_DATE, FCH.ORG_CODE, FCH.COMP_CODE
-                                FROM TB_T_FIXED_CONTRACT_H FCH";
-
-            var query = Connection.Query<FixedContractDto>(
-                sql: sqlQuery
-                , transaction: Transaction
-                ).ToList();
-
-            return query;
-
-        }
 
         public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
         {
@@ -58,6 +41,41 @@ namespace GFCA.APT.DAL.Implements
 
             return query;
 
+        }
+        public FixedContractHeaderDto GetHeaderById(int DOC_FCH_ID)
+        {
+            string sqlQuery = @"SELECT  DOC_FCH_ID
+, DOC_CODE
+, DOC_VER
+, DOC_REV
+, CLIENT_CODE
+, (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
+, CUST_CODE
+, (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
+, CHANNEL_CODE
+, (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
+, DOC_STATUS
+, COMMENT
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+, UPDATED_BY
+, UPDATED_DATE
+FROM TB_T_FIXED_CONTRACT_H a
+WHERE DOC_FCH_ID = @DOC_FCH_ID
+;";
+            var parms = new
+            {
+                DOC_FCH_ID = DOC_FCH_ID
+            };
+
+            var query = Connection.Query<FixedContractHeaderDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
         }
         public void InsertHeader(FixedContractHeaderDto entity)
         {
@@ -163,7 +181,137 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 transaction: Transaction
             );
         }
-        
+
+        public FixedContractDetailDto GetDetailItem(int DOC_FCD_ID, CONDITION_TYPE conditionType = CONDITION_TYPE.PLANNING)
+        {
+            string sqlQuery = @"SELECT
+  a.DOC_FCH_ID
+, a.DOC_FCD_ID
+, a.DOC_CODE
+, a.DOC_VER
+, a.DOC_REV
+, a.BRAND_CODE
+, (SELECT TOP 1 b.BRAND_NAME FROM TB_M_BRAND b WHERE b.BRAND_CODE = a.BRAND_CODE) BRAND_NAME
+, a.ACTIVITY_CODE
+, (SELECT TOP 1 b.ACTIVTITY_NAME FROM TB_M_ACTIVITY b WHERE b.ACTIVITY_CODE = a.ACTIVITY_CODE) ACTIVTITY_NAME
+, a.CENTER_CODE
+, (SELECT TOP 1 b.CENTER_NAME FROM TB_M_COST_CENTER b WHERE b.CENTER_CODE = a.CENTER_CODE) CENTER_NAME
+, a.ACC_CODE
+, (SELECT TOP 1 b.ACC_NAME FROM TB_M_GL_ACCOUNT b WHERE b.ACC_CODE = a.ACC_CODE) ACC_NAME
+, a.SIZE
+, (SELECT TOP 1 b.SIZE_NAME FROM TB_M_SIZE b WHERE b.SIZE_CODE = a.SIZE) SIZE_NAME
+, a.UOM
+, a.PACK
+, (SELECT TOP 1 b.PACK_NAME FROM TB_M_PACK b WHERE b.PACK_CODE = a.PACK) SIZE_NAME
+, a.DATE_REF
+, a.CONDITION_TYPE
+, a.CONTRACT_CATE
+, a.CONTRACT_DESC
+, a.M01
+, a.M02
+, a.M03
+, a.M04
+, a.M05
+, a.M06
+, a.M07
+, a.M08
+, a.M09
+, a.M10
+, a.M11
+, a.M12
+, a.REMARK
+, a.DOC_STATUS
+, a.FLAG_ROW
+, a.[START_DATE]
+, a.END_DATE
+, a.CREATED_BY
+, a.CREATED_DATE
+, a.UPDATED_BY
+, a.UPDATED_DATE
+FROM TB_T_FIXED_CONTRACT_D a
+WHERE
+CONDITION_TYPE = @CONDITION_TYPE
+AND DOC_FCD_ID = @DOC_FCD_ID
+;";
+
+            var parms = new
+            {
+                DOC_FCD_ID = DOC_FCD_ID,
+                CONDITION_TYPE = conditionType.ToString()
+            };
+            var query = Connection.Query<FixedContractDetailDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                ).FirstOrDefault();
+
+            return query;
+        }
+        public IEnumerable<FixedContractDetailDto> GetDetailItems(int DOC_FCH_ID, CONDITION_TYPE conditionType = CONDITION_TYPE.PLANNING)
+        {
+            string sqlQuery = @"SELECT
+  a.DOC_FCH_ID
+, a.DOC_FCD_ID
+, a.DOC_CODE
+, a.DOC_VER
+, a.DOC_REV
+, a.BRAND_CODE
+, (SELECT TOP 1 b.BRAND_NAME FROM TB_M_BRAND b WHERE b.BRAND_CODE = a.BRAND_CODE) BRAND_NAME
+, a.ACTIVITY_CODE
+, (SELECT TOP 1 b.ACTIVTITY_NAME FROM TB_M_ACTIVITY b WHERE b.ACTIVITY_CODE = a.ACTIVITY_CODE) ACTIVTITY_NAME
+, a.CENTER_CODE
+, (SELECT TOP 1 b.CENTER_NAME FROM TB_M_COST_CENTER b WHERE b.CENTER_CODE = a.CENTER_CODE) CENTER_NAME
+, a.ACC_CODE
+, (SELECT TOP 1 b.ACC_NAME FROM TB_M_GL_ACCOUNT b WHERE b.ACC_CODE = a.ACC_CODE) ACC_NAME
+, a.SIZE
+, (SELECT TOP 1 b.SIZE_NAME FROM TB_M_SIZE b WHERE b.SIZE_CODE = a.SIZE) SIZE_NAME
+, a.UOM
+, a.PACK
+, (SELECT TOP 1 b.PACK_NAME FROM TB_M_PACK b WHERE b.PACK_CODE = a.PACK) SIZE_NAME
+, a.DATE_REF
+, a.CONDITION_TYPE
+, a.CONTRACT_CATE
+, a.CONTRACT_DESC
+, a.M01
+, a.M02
+, a.M03
+, a.M04
+, a.M05
+, a.M06
+, a.M07
+, a.M08
+, a.M09
+, a.M10
+, a.M11
+, a.M12
+, a.REMARK
+, a.DOC_STATUS
+, a.FLAG_ROW
+, a.[START_DATE]
+, a.END_DATE
+, a.CREATED_BY
+, a.CREATED_DATE
+, a.UPDATED_BY
+, a.UPDATED_DATE
+FROM TB_T_FIXED_CONTRACT_D a
+WHERE 
+CONDITION_TYPE = @CONDITION_TYPE
+AND DOC_FCH_ID = @DOC_FCH_ID
+;";
+
+            var parms = new
+            {
+                DOC_FCH_ID = DOC_FCH_ID,
+                CONDITION_TYPE = conditionType.ToString()
+            };
+            var query = Connection.Query<FixedContractDetailDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
         public IEnumerable<FixedContractDetailDto> GetDetailItems(string docCode, int docVer = -1, int docRev = -1)
         {
             string sqlQuery = @"SELECT
@@ -211,7 +359,9 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 , a.UPDATED_BY
 , a.UPDATED_DATE
 FROM TB_T_FIXED_CONTRACT_D a
-WHERE DOC_CODE = @DOC_CODE
+WHERE
+CONDITION_TYPE = 'PLANNING'
+AND DOC_CODE = @DOC_CODE
 ;";
 
             var parms = new {

@@ -249,6 +249,7 @@ let fixedContractDetail = new (function () {
     }
 
     this.OnRowSelected = function (args) {
+        console.log(args);
         argruments.data = args.data;
     }
     this.OnRowDeselected = function (args) {

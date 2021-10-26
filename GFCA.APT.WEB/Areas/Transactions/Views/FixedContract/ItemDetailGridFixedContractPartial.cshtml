@@ -1,0 +1,73 @@
+﻿@using GFCA.APT.Domain.Dto
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2
+@{
+    FixedContractHeaderDto dto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
+}
+
+@(Html.EJS()
+.Grid("grdFixedContractDetailList")
+.Height("450")
+.Width("100%")
+.DataSource(ds =>
+{
+    ds
+    .Url(@Url.Action("UrlFixedContractDetailList", "FixedContract", new { Area = "Transactions", DOC_FCH_ID = dto.DOC_FCH_ID }))
+    .Adaptor("UrlAdaptor")
+    ;
+})
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport()
+.Toolbar(new List<object>() {
+    new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
+    new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+    new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+    new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+    new { text = "Print", prefixIcon = "e-icons e-print" },
+})
+.EditSettings(edit =>
+{
+    edit
+    .AllowEditOnDblClick(false)
+    .AllowAdding(true)
+    .AllowEditing(true)
+    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .Mode(EditMode.Dialog)
+    .Template("#dialogtemplate");
+})
+.RowSelected("OnRowSelected")
+.RowDeselected("OnRowDeselected")
+.Columns(col =>
+{
+
+    col.Field("CONDITION_TYPE").HeaderText("Proceed").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("BRAND_NAME").HeaderText("Brand").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("ACTIVITY_CODE").HeaderText("Trade Activity").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("CONTRACT_CATE").HeaderText("Category").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("DATE_REF").HeaderText("Date Reference").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("SIZE").HeaderText("Size").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("PACK").HeaderText("Pack").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CENTER_CODE").HeaderText("Cost center").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+    col.Field("M01").HeaderText("Jan").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M02").HeaderText("Feb").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M03").HeaderText("Mar").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M04").HeaderText("Apr").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M05").HeaderText("May").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M06").HeaderText("Jun").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M07").HeaderText("Jul").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M08").HeaderText("Aug").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M09").HeaderText("Sep").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M10").HeaderText("Oct").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M11").HeaderText("Nov").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M12").HeaderText("Dec").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CONTRACT_DESC").HeaderText("Remark").Width("350").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+})
+.Render())

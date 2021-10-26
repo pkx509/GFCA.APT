@@ -1,4 +1,5 @@
 ﻿using GFCA.APT.Domain.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GFCA.APT.Domain.Dto
@@ -18,5 +19,20 @@ namespace GFCA.APT.Domain.Dto
         [Required] public string REQUESTER { get; set; }
         public string ORG_CODE { get; set; }
         public string COMP_CODE { get; set; }
+    }
+
+    public class DocumentStateFlowDto : DocumentDto
+    {
+
+    }
+
+    public class DocumentHistoryDto
+    {
+        public string ACTOR_NAME { get; set; }
+        public string ACTOR_POSITION { get; set; }
+        public DateTime ACTION_DATETIME { get; set; }
+        public DOCUMENT_STATUS DOC_STATUS { get; set; }
+        public COMMAND_TYPE DOC_ACTION { get; set; }
+        public string COMMENT { get; set; }
     }
 }

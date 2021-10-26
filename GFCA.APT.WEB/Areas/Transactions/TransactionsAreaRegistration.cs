@@ -35,11 +35,17 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             context.MapRoute(
                 name: "Transaction_FixedContract_Item",
-                url: "T/FixedContracts/{DocCode}",
-                defaults: new { controller = "FixedContract", action = "FixedContractItem", DocCode = UrlParameter.Optional },
+                url: "T/FixedContracts/{DOC_FCH_ID}",
+                defaults: new { controller = "FixedContract", action = "FixedContractItem", DOC_FCH_ID = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
+            context.MapRoute(
+                name: "Transaction_FixedContract_Detail",
+                url: "T/FixedContracts/{DOC_FCH_ID}/{DOC_FCD_ID}",
+                defaults: new { controller = "FixedContract", action = "FixedContractDetail", DOC_FCH_ID = UrlParameter.Optional, DOC_FCD_ID = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
 
             /* Budget Planing Route */
             context.MapRoute(

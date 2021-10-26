@@ -189,6 +189,48 @@ namespace GFCA.APT.BAL.Implements
         #endregion [ header ]
 
         #region [ detail ]
+        public FixedContractDto GetDetailItem(int DOC_FCD_ID)
+        {
+            FixedContractDto dto = new FixedContractDto();
+            dto.Detail = new FixedContractDetailDto();
+            dto.Header = new FixedContractHeaderDto();
+            dto.Stateflow = new DocumentStateFlowDto();
+            dto.Histories = new List<DocumentHistoryDto>();
+            try
+            {
+                dto.DataMode = Domain.Enums.PAGE_MODE.EDITING;
+                if (DOC_FCD_ID == 0) 
+                {
+                    dto.DataMode = Domain.Enums.PAGE_MODE.CREATING;
+                    return dto;
+                }
+
+                var docd = _uow.FixedContractRepository.GetDetailItem(DOC_FCD_ID);
+                dto.Detail = docd;
+                var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
+                dto.Header = doch;
+                //dto.Stateflow = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID);
+                dto.Histories = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
+
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<FixedContractDetailDto> GetDetailItems(int DOC_FCH_ID)
+        {
+            try
+            {
+                var docd = _uow.FixedContractRepository.GetDetailItems(DOC_FCH_ID);
+                return docd;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public IEnumerable<FixedContractDetailDto> GetDetailItems(string code, int ver = -1, int rev = -1)
         {
             try
@@ -293,7 +335,6 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
-
 
         #endregion [ detail ]
     }

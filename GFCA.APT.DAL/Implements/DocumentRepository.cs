@@ -18,6 +18,64 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
+        public DocumentStateFlowDto GetDocumentStateFlow(int headerId)
+        {
+            string sqlQuery = @"SELECT 
+  ISNULL(b.UPDATED_BY, b.CREATED_BY) ACTION_BY
+, ISNULL(b.UPDATED_DATE, b.CREATED_DATE) ACTION_DATETIME
+, b.COMMENT
+, a.*
+FROM TB_T_FIXED_CONTRACT_D a
+LEFT JOIN TB_T_FIXED_CONTRACT_H b on b.DOC_FCH_ID = a.DOC_FCH_ID
+WHERE a.CONDITION_TYPE = 'PLANNING'
+and a.FLAG_ROW = 'S'
+-- and DOC_FCH_ID = 7
+ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
+
+            var parms = new
+            {
+                DOC_FCH_ID = headerId
+            };
+
+            var query = Connection.Query<DocumentStateFlowDto>(
+                sql: sqlQuery,
+                param: parms,
+                transaction: Transaction
+                ).FirstOrDefault()
+                ;
+
+            return query;
+
+        }
+
+        public IEnumerable<DocumentHistoryDto> GetDocumentHistories(int headerId)
+        {
+            string sqlQuery = @"SELECT 
+  ISNULL(b.UPDATED_BY, b.CREATED_BY) ACTION_BY
+, ISNULL(b.UPDATED_DATE, b.CREATED_DATE) ACTION_DATETIME
+, b.COMMENT
+FROM TB_T_FIXED_CONTRACT_D a
+LEFT JOIN TB_T_FIXED_CONTRACT_H b on b.DOC_FCH_ID = a.DOC_FCH_ID
+WHERE a.CONDITION_TYPE = 'PLANNING'
+and a.FLAG_ROW = 'S'
+and b.DOC_FCH_ID = @DOC_FCH_ID
+ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
+
+            var parms = new
+            {
+                DOC_FCH_ID = headerId
+            };
+
+            var query = Connection.Query<DocumentHistoryDto>(
+                sql: sqlQuery,
+                param: parms,
+                transaction: Transaction
+                ).ToList()
+                ;
+
+            return query;
+
+        }
 
         public DocumentDto GenerateDocNo(string docTypeCode, string docCode)
         {
