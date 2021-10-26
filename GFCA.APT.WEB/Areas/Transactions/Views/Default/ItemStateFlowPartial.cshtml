@@ -29,11 +29,14 @@
                                             Company
                                         </label>
                                         <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-company")
-                                            .Value(dto.COMP_NAME)
-                                            .Placeholder("Company name")
-                                            .CssClass("mandatory")
-                                            .Render())
+                                            @if (dto != null) 
+                                            {
+                                                @(Html.EJS().TextBox("txt-company")
+                                                .Value(dto.COMP_NAME)
+                                                .Placeholder("Company name")
+                                                .CssClass("mandatory")
+                                                .Render())
+                                            }
                                         </div>
 
                                     </div>
@@ -46,10 +49,13 @@
                                             Document No
                                         </label>
                                         <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-document-no")
-                                            .Value(dto.DOC_CODE)
-                                            .Placeholder("[Auto generate]")
-                                            .Render())
+                                            @if (dto != null)
+                                            {
+                                                @(Html.EJS().TextBox("txt-document-no")
+                                                .Value(dto.DOC_CODE)
+                                                .Placeholder("[Auto generate]")
+                                                .Render())
+                                            }
                                         </div>
 
                                     </div>
@@ -62,11 +68,13 @@
                                             Version
                                         </label>
                                         <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-version")
+                                            @if (dto != null)
+                                            {
+                                                @(Html.EJS().TextBox("txt-version")
                                                 .Value(dto.DOC_VER.ToString())
                                                 .Render())
+                                            }
                                         </div>
-
                                     </div>
                                 </div>
 
@@ -77,7 +85,12 @@
                                             Status
                                         </label>
                                         <div class="col col-lg-8">
-                                            @Html.EJS().TextBox("txt-status").Value(dto.DOC_STATUS.ToString()).Render()
+                                            @if (dto != null)
+                                            {
+                                                @(Html.EJS().TextBox("txt-status")
+                                                    .Value(dto.DOC_STATUS.ToString())
+                                                    .Render())
+                                            }
                                         </div>
 
                                     </div>
