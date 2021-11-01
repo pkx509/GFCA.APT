@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     let sendPost = function (url, data) {
-        // console.log('url>>>', url);
         let value = {
             ...data
         };

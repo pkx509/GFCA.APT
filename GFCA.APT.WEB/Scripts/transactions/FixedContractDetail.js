@@ -246,16 +246,11 @@ let fixedContractDetail = new (function () {
             ...this.jsonData,
             COST_CENTER_CODE
         }
-    }
+    };
 
-    this.OnRowSelected = function (args) {
-        console.log(args);
-        argruments.data = args.data;
-    }
-    this.OnRowDeselected = function (args) {
-        if (argruments.data == args.data) {
-            argruments.data = null;
-        }
-    }
+    $("#btn-fixed-contact-detail-back").click(function (e) {
+        e.preventDefault();
+        window.location.href = document.referrer;
+    });
 
 })();

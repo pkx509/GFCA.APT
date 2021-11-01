@@ -733,9 +733,8 @@
                         <div class="row">
                             <div class="col col-sm-12 col-lg-3 offset-lg-9">
                                 <!-- Confirm State -->
-                                <button id="pop-btn-save" type="submit" value="SUBMIT" class="btn btn-primary" data-loading-text="Processing...">Save</button>
-                                @Html.ActionLink("Back", "FixedContractItem", new { DOC_FCH_ID = Model.Detail.DOC_FCH_ID }, new { @class = "btn btn-default" })
-
+                                <button id="btn-fixed-contact-detail-save" type="submit" value="SUBMIT" class="btn btn-primary" data-loading-text="Processing...">Save</button>
+                                <button id="btn-fixed-contact-detail-back" class="btn btn-default">Back</button>
                             </div>
                         </div>
 
@@ -746,3 +745,8 @@
     </div>
 
 </form>
+@section preScripts
+{
+    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
+}
+
