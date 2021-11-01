@@ -59,7 +59,7 @@
                                                         })
                                                         .CssClass("mandatory")
                                                         .Value(Model.Detail.BRAND_CODE)
-                                                        //.Change("fixedContractDetail.OnBrandChangeValue")
+                                                        .Change("fixedContractDetail.OnBrandChangeValue")
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -72,7 +72,6 @@
                                         </label>
                                         <div class="col col-lg-8">
                                             @(Html.EJS().TextBox("txt-apply-to-all")
-                                                        //.Change("fixedContractDetail.txtApplyAllChange")
                                                         .Placeholder("Input number only")
                                                         .Render())
                                         </div>
@@ -99,7 +98,7 @@
                                                         })
                                                         .CssClass("mandatory")
                                                         .Value(Model.Detail.ACTIVITY_CODE)
-                                                        //.Change("fixedContractDetail.OnTradeActivityChangeValue")
+                                                        .Change("fixedContractDetail.OnTradeActivityChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -121,7 +120,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Value(Model.Detail.CONTRACT_CATE)
-                                                        //.Change("fixedContractDetail.OnCategoryChangeValue")
+                                                        .Change("fixedContractDetail.OnCategoryChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -168,7 +167,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Value(Model.Detail.UOM)
-                                                        //.Change("fixedContractDetail.OnUOMChangeValue")
+                                                        .Change("fixedContractDetail.OnUOMChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -195,7 +194,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Value(Model.Detail.SIZE)
-                                                        //.Change("fixedContractDetail.OnSizeChangeValue")
+                                                        .Change("fixedContractDetail.OnSizeChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -218,7 +217,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Value(Model.Detail.PACK)
-                                                        //.Change("fixedContractDetail.OnPackChangeValue")
+                                                        .Change("fixedContractDetail.OnPackChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -245,7 +244,7 @@
                                                         })
                                                         .CssClass("mandatory")
                                                         .Value(Model.Detail.CENTER_CODE)
-                                                        //.Change("fixedContractDetail.OnCostCenterChangeValue")
+                                                        .Change("fixedContractDetail.OnCostCenterChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         </div>
@@ -733,7 +732,7 @@
                         <div class="row">
                             <div class="col col-sm-12 col-lg-3 offset-lg-9">
                                 <!-- Confirm State -->
-                                <button id="btn-fixed-contact-detail-save" type="submit" value="SUBMIT" class="btn btn-primary" data-loading-text="Processing...">Save</button>
+                                <button id="btn-fixed-contact-detail-save" type="submit" value="SUBMIT" class="btn btn-primary" data-loading-text="Processing..." onclick="javascript:fixedContractDetail.onSave(this)">Save</button>
                                 <button id="btn-fixed-contact-detail-back" class="btn btn-default">Back</button>
                             </div>
                         </div>
@@ -747,6 +746,11 @@
 </form>
 @section preScripts
 {
+    <script>
+        var urlServices = {
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
+        }
+    </script>
     @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
 }
 

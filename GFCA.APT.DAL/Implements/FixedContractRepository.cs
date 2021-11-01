@@ -114,16 +114,16 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID
 
             var parms = new
             {
-                DOC_CODE     = entity.DOC_CODE,
-                DOC_VER      = entity.DOC_VER,
-                DOC_REV      = entity.DOC_REV,
-                CLIENT_CODE  = entity.CLIENT_CODE,
-                CUST_CODE    = entity.CUST_CODE,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                CLIENT_CODE = entity.CLIENT_CODE,
+                CUST_CODE = entity.CUST_CODE,
                 CHANNEL_CODE = entity.CHANNEL_CODE,
-                DOC_STATUS   = entity.DOC_STATUS,
-                COMMENT      = entity.COMMENT,
-                FLAG_ROW     = entity.FLAG_ROW,
-                CREATED_BY   = entity.CREATED_BY,
+                DOC_STATUS = entity.DOC_STATUS,
+                COMMENT = entity.COMMENT,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
                 ORG_CODE = entity.ORG_CODE,
                 COMP_CODE = entity.COMP_CODE,
@@ -364,12 +364,13 @@ CONDITION_TYPE = 'PLANNING'
 AND DOC_CODE = @DOC_CODE
 ;";
 
-            var parms = new {
+            var parms = new
+            {
                 DOC_CODE = docCode
             };
             var query = Connection.Query<FixedContractDetailDto>(
                 sql: sqlQuery
-                , param : parms
+                , param: parms
                 , transaction: Transaction
                 ).ToList();
 
@@ -452,7 +453,7 @@ AND DOC_CODE = @DOC_CODE
 
             var parms = new
             {
-                //DOC_FCH_ID = entity.DOC_FCH_ID,
+                DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
                 DOC_CODE = entity.DOC_CODE,
                 DOC_VER = entity.DOC_VER,
@@ -539,20 +540,20 @@ AND DOC_FCD_ID = @DOC_FCD_ID
             {
                 DOC_FCH_ID = entity.DOC_FCH_ID,
                 DOC_FCD_ID = entity.DOC_FCD_ID,
-                DOC_CODE       = entity.DOC_CODE,
-                DOC_VER        = entity.DOC_VER,
-                DOC_REV        = entity.DOC_REV,
-                BRAND_CODE     = entity.BRAND_CODE,
-                ACTIVITY_CODE  = entity.ACTIVITY_CODE,
-                CENTER_CODE    = entity.CENTER_CODE,
-                ACC_CODE       = entity.ACC_CODE,
-                SIZE           = entity.SIZE,
-                UOM            = entity.UOM,
-                PACK           = entity.PACK,
-                DATE_REF       = entity.DATE_REF,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                BRAND_CODE = entity.BRAND_CODE,
+                ACTIVITY_CODE = entity.ACTIVITY_CODE,
+                CENTER_CODE = entity.CENTER_CODE,
+                ACC_CODE = entity.ACC_CODE,
+                SIZE = entity.SIZE,
+                UOM = entity.UOM,
+                PACK = entity.PACK,
+                DATE_REF = entity.DATE_REF,
                 CONDITION_TYPE = entity.CONDITION_TYPE,
-                CONTRACT_CATE  = entity.CONTRACT_CATE,
-                CONTRACT_DESC  = entity.CONTRACT_DESC,
+                CONTRACT_CATE = entity.CONTRACT_CATE,
+                CONTRACT_DESC = entity.CONTRACT_DESC,
                 M01 = entity.M01,
                 M02 = entity.M02,
                 M03 = entity.M03,

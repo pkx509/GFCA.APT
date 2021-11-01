@@ -44,43 +44,42 @@
 }
 
 let fixedContractDetail = new (function () {
-    this.field_brand_name = "#cmb-brand";
-    this.field_brand_code = "#cmb-brand_hidden";
-    this.field_trade_activity_name = "#cmb-trade-activity";
-    this.field_trade_activity_code = "#cmb-trade-activity_hidden";
-    this.field_category_name = "#cmb-category";
-    this.field_category_code = "#cmb-category_hidden";
-    this.field_date_reference = "#cmb-date-reference";
-    this.field_UOM_name = "#cmb-uom";
-    this.field_UOM_code = "#cmb-uom_hidden";
-    this.field_size_name = "#cmb-size";
-    this.field_size_code = "#cmb-size_hidden";
-    this.field_pack_name = "#cmb-pack";
-    this.field_pack_code = "#cmb-pack_hidden";
-    this.field_cost_center_name = "#cmb-cost-center";
-    this.field_cost_center_code = "#cmb-cost-center_hidden";
-    this.field_plan_jan = "#txt-plan-jan";
-    this.field_plan_feb = "#txt-plan-feb";
-    this.field_plan_mar = "#txt-plan-mar";
-    this.field_plan_apr = "#txt-plan-apr";
-    this.field_plan_may = "#txt-plan-may";
-    this.field_plan_jun = "#txt-plan-jun";
-    this.field_plan_jul = "#txt-plan-jul";
-    this.field_plan_aug = "#txt-plan-aug";
-    this.field_plan_sep = "#txt-plan-sep";
-    this.field_plan_oct = "#txt-plan-oct";
-    this.field_plan_nov = "#txt-plan-nov";
-    this.field_plan_dec = "#txt-plan-dec";
-    this.field_remark = "#txt-remark";
+    this.field_brand_name = "#BRAND_CODE";
+    this.field_brand_code = "#BRAND_CODE_hidden";
+    this.field_trade_activity_name = "#ACTIVITY_CODE";
+    this.field_trade_activity_code = "#ACTIVITY_CODE_hidden";
+    this.field_category_name = "#CONTRACT_CATE";
+    this.field_category_code = "#CONTRACT_CATE_hidden";
+    this.field_date_reference = "#DATE_REF";
+    this.field_UOM_name = "#UOM";
+    this.field_UOM_code = "#UOM_hidden";
+    this.field_size_name = "#SIZE";
+    this.field_size_code = "#SIZE_hidden";
+    this.field_pack_name = "#PACK";
+    this.field_pack_code = "#PACK_hidden";
+    this.field_cost_center_name = "#CENTER_CODE";
+    this.field_cost_center_code = "#CENTER_CODE_hidden";
+    this.field_plan_jan = "#M01";
+    this.field_plan_feb = "#M02";
+    this.field_plan_mar = "#M03";
+    this.field_plan_apr = "#M04";
+    this.field_plan_may = "#M05";
+    this.field_plan_jun = "#M06";
+    this.field_plan_jul = "#M07";
+    this.field_plan_aug = "#M08";
+    this.field_plan_sep = "#M09";
+    this.field_plan_oct = "#M10";
+    this.field_plan_nov = "#M11";
+    this.field_plan_dec = "#M12";
+    this.field_remark = "#CONTRACT_DESC";
 
     this.field_apply_to_all = "#txt-apply-to-all";
 
-    let monthPlans = $("#txt-plan-jan,#txt-plan-feb,#txt-plan-mar,#txt-plan-apr,#txt-plan-may,#txt-plan-jun,#txt-plan-jul,#txt-plan-aug,#txt-plan-sep,#txt-plan-oct,#txt-plan-nov,#txt-plan-dec");
+    let monthPlans = $("#M01,#M02,#M03,#M04,#M05,#M06,#M07,#M08,#M09,#M10,#M11,#M12");
 
     this.cmbPositionChange = function (e) {
         let t = e.itemData.Text;
         let v = e.value;
-        // console.log(`value = (${v}) and text = (${t})`);
     }
 
     $("#txt-apply-to-all").keyup(function (e) {
@@ -94,9 +93,12 @@ let fixedContractDetail = new (function () {
     });
 
     this.bindField = function () {
-        let docId = $(this.field_document_no).val() !== undefined ? $(this.field_document_no).val() : '0';
 
-        let DOC_FCH_ID = '1';
+        let currentURL = window.location.pathname;
+        let subStringURL = currentURL.split('/');
+
+        let docId = subStringURL[3];
+        let DOC_FCH_ID = docId;
         let DOC_FCD_ID = '';
         let DOC_CODE = 'FC';
         let DOC_VER = '1';
@@ -111,7 +113,7 @@ let fixedContractDetail = new (function () {
         let DATE_REF = $(this.field_date_reference).val();
         let CONDITION_TYPE = '';
         let CONTRACT_CATE = '';
-        let CONTRACT_DESC = '';
+        let CONTRACT_DESC = $(this.field_remark).val();
         let M01 = $(this.field_plan_jan).val();
         let M02 = $(this.field_plan_feb).val();
         let M03 = $(this.field_plan_mar).val();
@@ -124,7 +126,6 @@ let fixedContractDetail = new (function () {
         let M10 = $(this.field_plan_oct).val();
         let M11 = $(this.field_plan_nov).val();
         let M12 = $(this.field_plan_dec).val();
-        let REMARK = $(this.field_remark).val();
         let DOC_STATUS = '';
         let START_DATE = '';
         let END_DATE = ''
@@ -160,7 +161,6 @@ let fixedContractDetail = new (function () {
             M10,
             M11,
             M12,
-            REMARK,
             DOC_STATUS,
             START_DATE,
             END_DATE,
