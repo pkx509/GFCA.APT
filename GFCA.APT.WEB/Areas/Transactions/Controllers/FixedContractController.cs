@@ -116,35 +116,9 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return RedirectToAction("FixedContractItem", new { DOC_FCH_ID = DOC_FCH_ID });
         }
 
-        [HttpGet]
-        public PartialViewResult ItemHeaderPartial()
-        {
-            return PartialView();
-        }
-        [HttpGet]
-        public PartialViewResult ItemDetailPartial()
-        {
-            return PartialView();
-        }
-        [HttpGet]
-        public PartialViewResult ItemFooterPartial()
-        {
-            return PartialView();
-        }
-
-
-        [HttpGet]
-        public PartialViewResult ItemDetailGridFixedContractPartial()
-        {
-            return PartialView();
-        }
-
         [HttpPost]
         public JsonResult UrlFixedContractDetailList(int DOC_FCH_ID, DataManagerRequest dm)
         {
-            // implement ต่อหน่อยคำสั่งนี้จะได้ http://localhost:8881/T/FixedContracts/FC-202109-00001-0101
-            string docCode = Request.Url.PathAndQuery; //ให้ใช้ reg express ตัด เอาแค่ code มาใช้
-            
             _biz.LogService.Debug("UrlFixedContractDetailList");
             IEnumerable dataSource = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
             DataOperations operation = new DataOperations();
@@ -171,6 +145,29 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 dataSource = operation.PerformTake(dataSource, dm.Take);
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+
+        [HttpGet]
+        public PartialViewResult ItemHeaderPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial()
+        {
+            return PartialView();
+        }
+
+
+        [HttpGet]
+        public PartialViewResult ItemDetailGridFixedContractPartial()
+        {
+            return PartialView();
         }
 
         [HttpPost]

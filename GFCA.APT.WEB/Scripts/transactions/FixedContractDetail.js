@@ -27,6 +27,7 @@
                 if (objGrid) {
                     objGrid.refresh();
                 } else {
+
                     window.location = urlServices.CurrentUrl;
                 }
             }
@@ -93,14 +94,14 @@ let fixedContractDetail = new (function () {
     });
 
     this.bindField = function () {
-
         let currentURL = window.location.pathname;
         let subStringURL = currentURL.split('/');
 
         let docId = subStringURL[3];
         let DOC_FCH_ID = docId;
         let DOC_FCD_ID = '';
-        let DOC_CODE = 'FC';
+        //let DOC_CODE = 'FC';
+        let DOC_CODE = Params.DOC_CODE;
         let DOC_VER = '1';
         let DOC_REV = '1';
         let BRAND_CODE = $(this.field_brand_code).val();

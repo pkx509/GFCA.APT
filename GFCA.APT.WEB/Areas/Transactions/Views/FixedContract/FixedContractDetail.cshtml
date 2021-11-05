@@ -13,7 +13,7 @@
 
 @model GFCA.APT.Domain.Dto.FixedContractDto
 
-<form autocomplete="off" class="form-horizontal" action="/T/FixedContracts/7" method="post" enctype="multipart/form-data">
+<form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data">
 
     <div class="row mb-2">
         <div class="col col-lg-12 p-1">
@@ -34,7 +34,7 @@
                                             Detail No
                                         </label>
                                         <div class="col col-lg-8">
-                                            @Html.EJS().TextBox("txt-detail-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
+                                            @(Html.EJS().TextBox("txt-detail-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render())
                                         </div>
                                     </div>
                                 </div>

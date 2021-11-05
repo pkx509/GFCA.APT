@@ -97,13 +97,19 @@ namespace GFCA.APT.BAL.Implements
             {
                 var doch = model;
 
-                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, int.Parse(doch.DOC_YEAR), int.Parse(doch.DOC_MONTH), doch.CLIENT_CODE, doch.CHANNEL_CODE, doch.CUST_CODE);
+                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.DOC_YEAR, doch.DOC_MONTH, doch.CLIENT_CODE, doch.CHANNEL_CODE, doch.CUST_CODE);
                 //generate document no
 
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
                 doc.FLOW_CURRENT = "";
                 doc.FLOW_NEXT = "";
-
+                doc.COMP_CODE = doch.COMP_CODE;
+                doc.COMP_NAME = doch.COMP_NAME;
+                doc.CUST_CODE = doch.CUST_CODE;
+                doc.CUST_NAME = doch.CUST_NAME;
+                doc.ORG_CODE = doch.ORG_CODE;
+                doc.ORG_NAME = doch.ORG_NAME;
+                doc.REQUESTER = "System";
                 _uow.DocumentRepository.Insert(doc);
                 doch.DOC_VER = doc.DOC_VER;
                 doch.DOC_CODE = doc.DOC_CODE;
@@ -272,13 +278,16 @@ namespace GFCA.APT.BAL.Implements
             {
                 
                 var docd = model;
-
+                var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
                 //validate new document
                 //docd.DOC_FCD_ID = 1;
-                docd.DOC_FCH_ID = docd.DOC_FCH_ID;
-                docd.DOC_CODE = docd.DOC_CODE;
-                //docd.DOC_VER = doch.DOC_VER;
-                //docd.DOC_REV = doch.DOC_REV;
+                docd.DOC_FCH_ID = doch.DOC_FCH_ID;
+                docd.DOC_CODE = doch.DOC_CODE;
+                docd.DOC_VER = doch.DOC_VER;
+                docd.DOC_REV = doch.DOC_REV;
+                docd.ACC_CODE = docd.ACC_CODE;
+                docd.CONDITION_TYPE = CONDITION_TYPE.PLANNING;
+                docd.CONTRACT_CATE = docd.CONTRACT_CATE;
 
                 docd.CREATED_BY = "System";
                 docd.CREATED_DATE = DateTime.UtcNow;
