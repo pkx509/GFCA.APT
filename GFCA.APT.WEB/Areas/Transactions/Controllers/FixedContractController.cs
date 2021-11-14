@@ -29,6 +29,13 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
+        // GET: T/FixedContracts/{id}
+        public ActionResult CreateFixedContractDetail()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
         public JsonResult UrlFixedContractHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlFixedContractHeaderList");
@@ -59,32 +66,63 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
-        // GET: T/FixedContracts/{DocCode}
+        // GET: T/FixedContracts/{DOC_FCH_ID}]
         [HttpGet]
-        public ActionResult FixedContractDetail(string DocCode)
+        public ActionResult FixedContractItem(int DOC_FCH_ID)
         {
-            _biz.LogService.Debug("FixedContractDetail");
-            dynamic d = new BusinessResponse();
-
             try
             {
-                var biz = _biz.FixedContractService.GetDetailByCode(DocCode);
-                d = JsonConvert.SerializeObject(biz);
-                //FixedContractDto
+                FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderById(DOC_FCH_ID);
+                // ! get document stateFlow
+                ViewData["FixedContractHeaderDto"] = headerDto;
+                ViewData["DocumentStateFlowDto"] = headerDto;
             }
             catch
             {
 
             }
-            //return Json(new { data = d, JsonRequestBehavior.AllowGet });
+
             return View();
         }
-
+        // GET: T/FixedContracts/{DOC_FCH_ID}/{DOC_FCD_ID}]
         [HttpGet]
-        public JsonResult UrlFixedContractDetailList(DataManagerRequest dm)
+        public ActionResult FixedContractDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        {
+            FixedContractDto detailDto = new FixedContractDto();
+            try
+            {
+                detailDto = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
+                
+            }
+            catch
+            {
+
+            }
+
+            return View(detailDto);
+        }
+
+        [HttpPost]
+        public ActionResult FixedContractDetail(int DOC_FCH_ID, FixedContractDto data)
+        {
+            FixedContractDto detailDto = new FixedContractDto();
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+            return RedirectToAction("FixedContractItem", new { DOC_FCH_ID = DOC_FCH_ID });
+        }
+
+        [HttpPost]
+        public JsonResult UrlFixedContractDetailList(int DOC_FCH_ID, DataManagerRequest dm)
         {
             _biz.LogService.Debug("UrlFixedContractDetailList");
-            IEnumerable dataSource = _biz.FixedContractService.GetDetailAll();
+            IEnumerable dataSource = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
@@ -111,6 +149,29 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
 
+        [HttpGet]
+        public PartialViewResult ItemHeaderPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemDetailPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial()
+        {
+            return PartialView();
+        }
+
+
+        [HttpGet]
+        public PartialViewResult ItemDetailGridFixedContractPartial()
+        {
+            return PartialView();
+        }
+
         [HttpPost]
         public JsonResult CreateFixedContractHeader(FixedContractHeaderDto data)
         {
@@ -130,7 +191,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateFixedContractDetail(FixedContractDto data)
+        public JsonResult CreateFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("CreateFixedContractDetail");
             dynamic d = new BusinessResponse();
@@ -148,7 +209,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditFixedContractDetail(FixedContractDto data)
+        public JsonResult EditFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("EditFixedContractDetail");
             dynamic d = new BusinessResponse();
@@ -181,6 +242,17 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             }
             return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+
+        // GET: T/FixedContracts/{DocCode}]
+        [HttpGet]
+        public ActionResult getFixedContractHeader(string DocCode)
+        {
+            var header = new GFCA.APT.Domain.Dto.FixedContractHeaderDto();
+            header = _biz.FixedContractService.GetHeaderById(2);
+
+            return View(header);
         }
     }
 }

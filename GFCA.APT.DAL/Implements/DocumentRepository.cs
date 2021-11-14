@@ -18,7 +18,112 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
-        
+        public DocumentStateFlowDto GetDocumentStateFlow(int headerId, string documentType)
+        {
+            string sqlQuery = @"";
+
+            switch (documentType)
+            {
+                case "FC": //fixed contract
+                    sqlQuery = @"
+                    SELECT 
+                    TTD.DOC_TYPE_CODE,
+                    TTD.DOC_CODE,
+                    TTD.DOC_VER,
+                    TTD.DOC_MONTH,
+                    TTD.DOC_YEAR,
+                    TTD.CUST_CODE,
+                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
+                    TTD.DOC_STATUS,
+                    TTD.FLOW_CURRENT,
+                    TTD.FLOW_NEXT,
+                    TTD.REQUESTER,
+                    TTD.ORG_CODE,
+                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
+                    TTD.COMP_CODE,
+                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
+                    FROM 
+                    TB_T_DOCUMENT TTD 
+                    INNER JOIN TB_T_FIXED_CONTRACT_H TTFCH 
+                    ON TTD.DOC_CODE = TTFCH.DOC_CODE
+                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE
+                    AND TTFCH.DOC_FCH_ID = @DOC_ID";
+                    break;
+                case "BP": //budget planning
+                    sqlQuery = @"
+                    SELECT 
+                    TTD.DOC_TYPE_CODE,
+                    TTD.DOC_CODE,
+                    TTD.DOC_VER,
+                    TTD.DOC_MONTH,
+                    TTD.DOC_YEAR,
+                    TTD.CUST_CODE,
+                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
+                    TTD.DOC_STATUS,
+                    TTD.FLOW_CURRENT,
+                    TTD.FLOW_NEXT,
+                    TTD.REQUESTER,
+                    TTD.ORG_CODE,
+                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
+                    TTD.COMP_CODE,
+                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
+                    FROM 
+                    TB_T_DOCUMENT TTD 
+                    INNER JOIN TB_T_BUDGET_H TTBH 
+                    ON TTD.DOC_CODE = TTBH.DOC_CODE
+                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE 
+                    AND TTBH.DOC_BGH_ID = @DOC_ID";
+                    break;
+                default:
+                    break;
+            }
+
+            var parms = new
+            {
+                DOC_ID = headerId,
+                DOC_TYPE_CODE = documentType
+            };
+
+            var query = Connection.Query<DocumentStateFlowDto>(
+                sql: sqlQuery,
+                param: parms,
+                transaction: Transaction
+                ).FirstOrDefault()
+                ;
+
+            return query;
+
+        }
+
+        public IEnumerable<DocumentHistoryDto> GetDocumentHistories(int headerId)
+        {
+            string sqlQuery = @"SELECT 
+  ISNULL(b.UPDATED_BY, b.CREATED_BY) ACTION_BY
+, ISNULL(b.UPDATED_DATE, b.CREATED_DATE) ACTION_DATETIME
+, b.COMMENT
+FROM TB_T_FIXED_CONTRACT_D a
+LEFT JOIN TB_T_FIXED_CONTRACT_H b on b.DOC_FCH_ID = a.DOC_FCH_ID
+WHERE a.CONDITION_TYPE = 'PLANNING'
+and a.FLAG_ROW = 'S'
+and b.DOC_FCH_ID = @DOC_FCH_ID
+ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
+
+            var parms = new
+            {
+                DOC_FCH_ID = headerId
+            };
+
+            var query = Connection.Query<DocumentHistoryDto>(
+                sql: sqlQuery,
+                param: parms,
+                transaction: Transaction
+                ).ToList()
+                ;
+
+            return query;
+
+        }
+
         public DocumentDto GenerateDocNo(string docTypeCode, string docCode)
         {
             throw new NotImplementedException();
@@ -50,17 +155,19 @@ namespace GFCA.APT.DAL.Implements
         public IEnumerable<DocumentDto> All()
         {
             string sqlQuery = @"SELECT a.DOC_TYPE_CODE
-	  ,(SELECT TOP 1 DOC_TYPE_NAME  from TB_M_DOCUMENT_TYPE b where b.DOC_TYPE_CODE = a.DOC_TYPE_CODE) as DOC_TYPE_NAME
-      ,a.DOC_CODE
-      ,a.DOC_VER
-      ,a.DOC_REV
-      ,a.DOC_MONTH
-      ,a.DOC_YEAR
-      ,a.CUST_CODE
-      ,a.DOC_STATUS
-      ,a.FLOW_CURRENT
-      ,a.FLOW_NEXT
-      ,a.REQUESTER
+	        ,(SELECT TOP 1 DOC_TYPE_NAME  from TB_M_DOCUMENT_TYPE b where b.DOC_TYPE_CODE = a.DOC_TYPE_CODE) as DOC_TYPE_NAME
+            ,a.DOC_CODE
+            ,a.DOC_VER
+            ,a.DOC_REV
+            ,a.DOC_MONTH
+            ,a.DOC_YEAR
+            ,a.CUST_CODE
+            ,a.DOC_STATUS
+            ,a.FLOW_CURRENT
+            ,a.FLOW_NEXT
+            ,a.REQUESTER
+            ,a.ORG_CODE
+            ,a.COMP_CODE
 FROM TB_T_DOCUMENT a;";
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery
@@ -73,19 +180,21 @@ FROM TB_T_DOCUMENT a;";
         public DocumentDto GetByCode(string code)
         {
             string sqlQuery = @"SELECT a.DOC_TYPE_CODE
-	  ,(SELECT TOP 1 DOC_TYPE_NAME  from TB_M_DOCUMENT_TYPE b where b.DOC_TYPE_CODE = a.DOC_TYPE_CODE) as DOC_TYPE_NAME
-      ,a.DOC_CODE
-      ,a.DOC_VER
-      ,a.DOC_REV
-      ,a.DOC_MONTH
-      ,a.DOC_YEAR
-      ,a.CUST_CODE
-      ,a.DOC_STATUS
-      ,a.FLOW_CURRENT
-      ,a.FLOW_NEXT
-      ,a.REQUESTER
-FROM TB_T_DOCUMENT a
-WHERE a.DOC_CODE = @DOC_CODE;";
+	        ,(SELECT TOP 1 DOC_TYPE_NAME  from TB_M_DOCUMENT_TYPE b where b.DOC_TYPE_CODE = a.DOC_TYPE_CODE) as DOC_TYPE_NAME
+            ,a.DOC_CODE
+            ,a.DOC_VER
+            ,a.DOC_REV
+            ,a.DOC_MONTH
+            ,a.DOC_YEAR
+            ,a.CUST_CODE
+            ,a.DOC_STATUS
+            ,a.FLOW_CURRENT
+            ,a.FLOW_NEXT
+            ,a.REQUESTER
+            ,a.ORG_CODE
+            ,a.COMP_CODE
+            FROM TB_T_DOCUMENT a
+            WHERE a.DOC_CODE = @DOC_CODE;";
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery
                 , param: new { DOC_CODE = code }
@@ -110,6 +219,8 @@ WHERE a.DOC_CODE = @DOC_CODE;";
 , FLOW_CURRENT
 , FLOW_NEXT
 , REQUESTER
+, ORG_CODE
+, COMP_CODE
 ) VALUES (
   @DOC_TYPE_CODE
 , @DOC_CODE
@@ -122,6 +233,8 @@ WHERE a.DOC_CODE = @DOC_CODE;";
 , @FLOW_CURRENT
 , @FLOW_NEXT
 , @REQUESTER
+, @ORG_CODE
+, @COMP_CODE
 );";
 
             var parms = new
@@ -136,7 +249,9 @@ WHERE a.DOC_CODE = @DOC_CODE;";
                 DOC_STATUS = entity.DOC_STATUS,
                 FLOW_CURRENT = entity.FLOW_CURRENT,
                 FLOW_NEXT = entity.FLOW_NEXT,
-                REQUESTER = entity.REQUESTER
+                REQUESTER = entity.REQUESTER,
+                ORG_CODE = entity.ORG_CODE,
+                COMP_CODE = entity.COMP_CODE
             };
 
             Connection.ExecuteScalar<int>(
@@ -162,6 +277,8 @@ SET
 , FLOW_CURRENT  = @FLOW_CURRENT
 , FLOW_NEXT     = @FLOW_NEXT
 , REQUESTER     = @REQUESTER
+, ORG_CODE     = @ORG_CODE
+, COMP_CODE     = @COMP_CODE
 WHERE DOC_CODE = @DOC_CODE
 and DOC_VER    = @DOC_VER
 and DOC_REV    = @DOC_REV
@@ -170,16 +287,18 @@ and DOC_REV    = @DOC_REV
             var parms = new
             {
                 DOC_TYPE_CODE = entity.DOC_TYPE_CODE,
-                DOC_CODE      = entity.DOC_CODE,
-                DOC_VER       = entity.DOC_VER,
-                DOC_REV       = entity.DOC_REV,
-                DOC_MONTH     = entity.DOC_MONTH,
-                DOC_YEAR      = entity.DOC_YEAR,
-                CUST_CODE     = entity.CUST_CODE,
-                DOC_STATUS    = entity.DOC_STATUS,
-                FLOW_CURRENT  = entity.FLOW_CURRENT,
-                FLOW_NEXT     = entity.FLOW_NEXT,
-                REQUESTER     = entity.REQUESTER
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                DOC_MONTH = entity.DOC_MONTH,
+                DOC_YEAR = entity.DOC_YEAR,
+                CUST_CODE = entity.CUST_CODE,
+                DOC_STATUS = entity.DOC_STATUS,
+                FLOW_CURRENT = entity.FLOW_CURRENT,
+                FLOW_NEXT = entity.FLOW_NEXT,
+                REQUESTER = entity.REQUESTER,
+                ORG_CODE = entity.ORG_CODE,
+                COMP_CODE = entity.COMP_CODE
             };
 
             Connection.ExecuteScalar<string>(
@@ -188,7 +307,7 @@ and DOC_REV    = @DOC_REV
                 transaction: Transaction
             );
         }
-        
+
         public void Delete(string code)
         {
             string sqlExecute = @"DELETE TB_T_DOCUMENT

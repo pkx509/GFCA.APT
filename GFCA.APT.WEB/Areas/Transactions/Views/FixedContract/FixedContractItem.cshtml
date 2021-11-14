@@ -1,8 +1,14 @@
-﻿@{
-    ViewBag.Title = "BudgetPlanDetail";
-}
-
+﻿@using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2
+@{
+    ViewBag.Title = "FixedContractItem";
+    //var headerDto = new GFCA.APT.Domain.Dto.FixedContractHeaderDto();
+    //headerDto.DOC_CODE = ViewContext.RouteData.Values["DocCode"];
+    //headerDto.DOC_CODE = Request.QueryString["DocCode"];
+    FixedContractHeaderDto headerDto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
+    DocumentStateFlowDto documentDto = ViewData["DocumentStateFlowDto"] as DocumentStateFlowDto;
+    FixedContractDetailDto detailDto = ViewData["FixedContractDetailDto"] as FixedContractDetailDto;
+}
 
 @section styles
 {
@@ -42,13 +48,13 @@
             @*----------------- document header -----------------*@
             @Html.Partial("../Default/ItemStateFlowPartial")
 
-            @*----------------- bugdet planning header -----------------*@
+            @*----------------- Fixed Contract header -----------------*@
             @Html.Partial("ItemHeaderPartial")
 
-            @*----------------- bugdet planning detail -----------------*@
+            @*----------------- Fixed Contract detail -----------------*@
             @Html.Partial("ItemDetailPartial")
 
-            @*----------------- bugdet planning footer -----------------*@
+            @*----------------- Fixed Contract Footer -----------------*@
             @Html.Partial("ItemFooterPartial")
 
             @*----------------- document footer -----------------*@
@@ -56,35 +62,35 @@
         </div>
     </div>
 </form>
-@Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_DetailGridInvestmentPartial.cshtml")
-@Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_DetailGridSalePartial.cshtml")
 
 @section preScripts
 {
-    <!-- BEGIN preScripts -->
     <script>
-
         var urlServices = {
-            CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
-            Add: "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
-            Edit: "@Url.Action("Edit", "BudgetPlan", new { Area = "Transactions" })",
-            Delete: "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
         }
-
         var argruments = {
+            DOC_FCH_ID: @headerDto.DOC_FCH_ID,
             data: null,
         }
+        var OnRowSelected = function (args) {
+            argruments.data = args.data;
+        }
+        var OnRowDeselected = function (args) {
+            if (argruments.data == args.data) {
+                argruments.data = null;
+            }
+        }
     </script>
-
-    @Scripts.Render("~/Scripts/transactions/budgetPlanPopup.js")
-    <!-- END preScripts -->
+    @Scripts.Render("~/Scripts/transactions/fixedContractItem.js")
 
 }
 
 @section scripts
 {
 
-    @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
+    <script>
+
+    </script>
 
 }
-

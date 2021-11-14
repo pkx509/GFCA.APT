@@ -38,7 +38,7 @@
     <div class="content-header">
         <div class="container-fluid">
             @*----------------- document header -----------------*@
-            @Html.Partial("../Default/ItemHeaderPartial")
+            @Html.Partial("../Default/ItemStateFlowPartial")
 
             @*----------------- Promotion planning header -----------------*@
             @Html.Partial("ItemHeaderPartial")
@@ -47,7 +47,10 @@
             @Html.Partial("ItemDetailPartial")
 
             @*----------------- Promotion planning footer -----------------*@
-            @Html.Partial("../Default/ItemFooterPartial")
+            @Html.Partial("ItemFooterPartial")
+
+            @*----------------- document footer -----------------*@
+            @Html.Partial("../Default/ItemHistoriesPartial")
         </div>
     </div>
 </form>

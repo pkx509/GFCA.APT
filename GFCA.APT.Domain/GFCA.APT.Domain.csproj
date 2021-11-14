@@ -105,10 +105,12 @@
     <Compile Include="Dto\UserLoginDto.cs" />
     <Compile Include="Dto\VenderDto.cs" />
     <Compile Include="Enums\COMMAND_TYPE.cs" />
+    <Compile Include="Enums\CONDITION_TYPE.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
     <Compile Include="Enums\FLAG_ACTIVE.cs" />
     <Compile Include="Enums\FLAG_DEL.cs" />
     <Compile Include="Enums\FLAG_ROW.cs" />
+    <Compile Include="Enums\PAGE_MODE.cs" />
     <Compile Include="HTTP\Controls\SelectionItem.cs" />
     <Compile Include="HTTP\Controls\ToolbarItem.cs" />
     <Compile Include="HTTP\IRequest.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Models\BusinessResponse.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EnumExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HTTP\Controls\TOAST_TYPE.cs" />

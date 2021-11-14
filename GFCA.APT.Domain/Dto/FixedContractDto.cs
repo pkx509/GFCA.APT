@@ -7,10 +7,13 @@ namespace GFCA.APT.Domain.Dto
 {
     public class FixedContractDto : Auditable
     {
-
+        public PAGE_MODE DataMode { get; set; }
+        public DocumentStateFlowDto Stateflow { get; set; }
         public FixedContractHeaderDto Header { get; set; }
+        //public IEnumerable<FixedContractDetailDto> Details { get; set; }
         public FixedContractDetailDto Detail { get; set; }
-        public IEnumerable<FixedContractFooter> Footer { get; set; }
+        public FixedContractFooterDto Footer { get; set; }
+        public IEnumerable<DocumentHistoryDto> Histories { get; set; }
     }
 
     public class FixedContractHeaderDto : Auditable
@@ -23,9 +26,9 @@ namespace GFCA.APT.Domain.Dto
         public int? DOC_VER { get; set; } = 0;
         public int? DOC_REV { get; set; } = 0;
         [Required]
-        public string DOC_MONTH { get; set; }
+        public int DOC_MONTH { get; set; }
         [Required]
-        public string DOC_YEAR { get; set; }
+        public int DOC_YEAR { get; set; }
         public DOCUMENT_STATUS DOC_STATUS { get; set; }
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }
@@ -44,8 +47,11 @@ namespace GFCA.APT.Domain.Dto
         public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
         public COMMAND_TYPE COMMAND_TYPE { get; set; } = COMMAND_TYPE.NONE; //SUBMIT, CANCEL, APPROVE, REVIEW, CONFIRM, COMMIT
+        public string ORG_CODE { get; set; }
+        public string ORG_NAME { get; set; }
+        public string COMP_CODE { get; set; }
+        public string COMP_NAME { get; set; }
     }
-
     public class FixedContractDetailDto : Auditable
     {
         [Required]
@@ -54,17 +60,21 @@ namespace GFCA.APT.Domain.Dto
         public int DOC_FCD_ID { get; set; }
         [Required]
         public string DOC_CODE { get; set; }
-        public int DOC_VER { get; set; }
-        public int DOC_REV { get; set; }
+        public int? DOC_VER { get; set; }
+        public int? DOC_REV { get; set; }
         public string BRAND_CODE { get; set; }
+        public string BRAND_NAME { get; set; }
         public string ACTIVITY_CODE { get; set; }
+        public string ACTIVITY_NAME { get; set; }
         public string CENTER_CODE { get; set; }
+        public string CENTER_NAME { get; set; }
         public string ACC_CODE { get; set; }
+        public string ACC_NAME { get; set; }
         public string SIZE { get; set; }
         public string UOM { get; set; }
         public string PACK { get; set; }
         public string DATE_REF { get; set; }
-        public string CONDITION_TYPE { get; set; }
+        public CONDITION_TYPE CONDITION_TYPE { get; set; }
         public string CONTRACT_CATE { get; set; }
         public string CONTRACT_DESC { get; set; }
         public Nullable<decimal> M01 { get; set; }
@@ -80,14 +90,15 @@ namespace GFCA.APT.Domain.Dto
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
         public string REMARK { get; set; }
-        public string DOC_STATUS { get; set; }
+        public DOCUMENT_STATUS DOC_STATUS { get; set; }
         public Nullable<DateTime> START_DATE { get; set; }
         public Nullable<DateTime> END_DATE { get; set; }
         public string FLAG_ROW { get; set; }
 
     }
-    public class FixedContractFooter
+    public class FixedContractFooterDto
     {
         public string COMMENT { get; set; }
     }
+
 }

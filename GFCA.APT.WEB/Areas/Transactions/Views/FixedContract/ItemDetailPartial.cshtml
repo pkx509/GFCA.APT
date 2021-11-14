@@ -1,0 +1,25 @@
+﻿@using Syncfusion.EJ2.Popups
+@using System.Collections.Generic
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+
+<div class="row mb-2">
+    <div class="col col-lg-12 p-1">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h5>Fixed contract detail</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @Html.Partial("ItemDetailGridFixedContractPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

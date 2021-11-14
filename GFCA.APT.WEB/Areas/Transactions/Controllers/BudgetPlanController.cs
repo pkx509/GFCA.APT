@@ -29,22 +29,27 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult ItemHeaderPartial(string DocCode)
+        public PartialViewResult ItemHeaderPartial()
         {
             return PartialView();
         }
         [HttpGet]
-        public PartialViewResult ItemDetailPartial(string DocCode)
+        public PartialViewResult ItemDetailPartial()
         {
             return PartialView();
         }
         [HttpGet]
-        public PartialViewResult ItemDetailGridSalePartial(string DocCode)
+        public PartialViewResult ItemDetailGridSalePartial()
         {
             return PartialView();
         }
         [HttpGet]
-        public PartialViewResult ItemDetailGridInvestmentPartial(string DocCode)
+        public PartialViewResult ItemDetailGridInvestmentPartial()
+        {
+            return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult ItemFooterPartial()
         {
             return PartialView();
         }

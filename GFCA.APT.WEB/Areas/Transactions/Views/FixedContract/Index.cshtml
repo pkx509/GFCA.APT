@@ -92,6 +92,8 @@ ViewBag.Title = "Fixed contract";
                                       .Mode(EditMode.Dialog);
                                       // .Template("#dialogtemplate");
                                   })
+                                  .RowDeselected("OnRowDeselected")
+                                  .RowSelected("OnRowSelected")
 
                                   .Columns(col =>
                                   {
@@ -120,22 +122,28 @@ ViewBag.Title = "Fixed contract";
     <script>
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "FixedContract", new { Area = "Transactions" })",
-            Add: "@Url.Action("Add", "FixedContract", new { Area = "Transactions" })",
-            AddHeader: "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
-            Edit: "@Url.Action("Edit", "FixedContract", new { Area = "Transactions" })",
-            Delete: "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
+            Add       : "@Url.Action("Add", "FixedContract", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
+            AddDetail : "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })",
+            Delete    : "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
         }
         var argruments = {
             data: null,
         }
+
+        var OnRowSelected = function (args) {
+            console.log(args);
+            argruments.data = args.data;
+        }
+        var OnRowDeselected = function (args) {
+            if (argruments.data == args.data) {
+                argruments.data = null;
+            }
+        }
     </script>
 
-    <script id="template" type="text/x-template">
-        <div>
-            <a href="@Url.Content("~/T/FixedContracts/${DOC_CODE}")" title="${DOC_CODE}">EDIT</a>
-        </div>
-    </script>
     @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
+    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
 }
 
 @section scripts

@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     let sendPost = function (url, data) {
-        // console.log('url>>>', url);
         let value = {
             ...data
         };
@@ -24,7 +23,7 @@
 
                 if (res.Success === true) {
                     fixedContractHeaderPopup.close();
-                    let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
+                    let objGrid = document.getElementById("grdFixedContractDetailList").ej2_instances[0];
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
@@ -47,42 +46,26 @@
     $("#toolbar_add").click(function (e) {
         e.preventDefault();
 
-        let callBack = function (data) {
-            // console.log('data>>>', data);
-            sendPost(urlServices.AddHeader, data);
-        };
-
-        fixedContractHeaderPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+        if (argruments.DOC_FCH_ID) {
+            window.location.href = `/T/FixedContracts/${argruments.DOC_FCH_ID}/0`;
+        }
 
     });
     $("#toolbar_edit").click(function (e) {
-        // console.log('click edit>>');
         e.preventDefault();
 
-        console.log('toolbar_edit', argruments.data);
         if (argruments.data) {
-            console.log(argruments);
-            window.location.href = `/T/FixedContracts/${argruments.data.DOC_FCH_ID}`;
+            window.location.href = `/T/FixedContracts/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
         }
-        
-        /*
-        let callBack = function (data) {
-            // console.log('data>>>', data);
-            // sendPost(urlServices.AddHeader, data);
-            window.location.replace(`/T/FixedContracts/${data.DocCode}`);
-        }; 
-        fixedContractDetail.open(POPUP_MODE.CREATE, argruments.data, callBack);
-        */
-        // var abc = '123';
-        // window.location.href = `/T/FixedContracts/${abc}`;
 
     });
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
+        /*
         let callBack = function (data) {
             sendPost(urlServices.Edit, data);
         };
-
+        */
         // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
