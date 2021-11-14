@@ -56,6 +56,55 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Channel
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().ComboBox("cmb-channel")
+                                                    .Placeholder("-- Select --")
+                                                    .Autofill(true)
+                                                    .DataSource(o =>
+                                                    {
+                                                        o.Url("/api/Selection/GetEmployee/false")
+                                                        .CrossDomain(false)
+                                                        .Adaptor("UrlAdaptor");
+                                                    })
+                                                    .Enabled(true)
+                                                    .CssClass("mandatory")
+                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Customer Segment
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().ComboBox("cmb-cust-segment")
+                                                    .Placeholder("-- Select --")
+                                                    .Autofill(true)
+                                                    .DataSource(o =>
+                                                    {
+                                                        o.Url("/api/Selection/GetOrganization")
+                                                        .CrossDomain(false)
+                                                        .Adaptor("UrlAdaptor");
+                                                    })
+                                                    .Enabled(true)
+                                                    //.Change("page.cmbPositionChange")
+                                                    .CssClass("mandatory")
+                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col col-sm-12 col-lg-4">
                                 <div class="form-group row">
@@ -102,7 +151,71 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Promo Start
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().DatePicker("drpPromoStart")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .Value(DateTime.Today)
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Promo End
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().DatePicker("drpPromoEnd")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .Value(new DateTime(2099, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Buying Start
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().DatePicker("drpBuyStart")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .Value(DateTime.Today)
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Buying End
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().DatePicker("drpBuyEnd")
+                                                                    .Placeholder("Choose a Range")
+                                                                    .Value(new DateTime(2099, 12, 31))
+                                                                    .Format("dd/MM/yyyy")
+                                                                    .Enabled(true)
+                                                                    .Render())
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

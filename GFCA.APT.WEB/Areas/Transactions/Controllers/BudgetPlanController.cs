@@ -21,12 +21,13 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         {
             return View();
         }
-        
+        // GET: T/BudgetPlans/{DocCode}
         [HttpGet]
         public ViewResult BudgetPlanItem(string DocCode)
         {
             return View();
         }
+
         [HttpGet]
         public PartialViewResult ItemHeaderPartial()
         {
