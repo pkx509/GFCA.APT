@@ -2,7 +2,7 @@
 @using Syncfusion.EJ2
 <div class="col-lg-12 p-1">
 
-        @(Html.EJS()
+    @(Html.EJS()
     .Grid("grdOverview")
     .Height("450")
     //.DataSource(ds =>
@@ -17,10 +17,11 @@
     .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
     .AllowExcelExport()
     .Toolbar(new List<object>() {
-    new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-    new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
-    new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
-    //new { text = "Print", prefixIcon = "e-icons e-print" },
+    new { id ="toolbar_tradeActivity_add", text = "Add", prefixIcon = "e-icons e-add" },
+    new { id ="toolbar_tradeActivity_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+    new { id ="toolbar_tradeActivity_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+    new { id ="toolbar_tradeActivity_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+    new { text = "Print", prefixIcon = "e-icons e-print" },
     })
     .AllowResizing()
     .EditSettings(edit =>
@@ -30,13 +31,12 @@
         .AllowAdding(true)
         .AllowEditing(true)
         .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
-        //.Mode(EditMode.Dialog)
-        //.Template("#dialogtemplate")
+        .Mode(EditMode.Dialog)
+        .Template("#dialogtemplate")
         ;
     })
     .Columns(col =>
     {
-
         col.HeaderText("Product").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
         (
             new List<Syncfusion.EJ2.Grids.GridColumn>()

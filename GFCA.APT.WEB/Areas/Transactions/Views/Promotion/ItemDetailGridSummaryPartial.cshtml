@@ -1,115 +1,119 @@
 ﻿@using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2
-@(Html.EJS()
-.Grid("grdSummary")
-.Height("450")
-//.DataSource(ds =>
-//{
-//    ds
-//    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
-//    .Adaptor("UrlAdaptor")
-//    ;
-//})
-.ShowColumnMenu(false).AllowSorting()
-.AllowPaging(true).PageSettings(page => page.PageCount(5))
-.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
-.AllowExcelExport()
-/*
-.Toolbar(new List<object>() {
-new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
-new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
-})
-*/
-.EditSettings(edit =>
-{
-    edit
-    .AllowEditOnDblClick(false)
-    .AllowAdding(true)
-    .AllowEditing(false)
-    .AllowDeleting(false).ShowConfirmDialog(false).ShowDeleteConfirmDialog(false)
-    .Mode(EditMode.Dialog)
-    //.Template("#dialogtemplate")
-    ;
-})
-.Columns(col =>
-{
+<div class="col-lg-12 p-1">
+    @(Html.EJS()
+    .Grid("grdSummary")
+    .Height("450")
+    //.DataSource(ds =>
+    //{
+    //    ds
+    //    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
+    //    .Adaptor("UrlAdaptor")
+    //    ;
+    //})
+    .ShowColumnMenu(false).AllowSorting()
+    .AllowPaging(true).PageSettings(page => page.PageCount(5))
+    .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+    .AllowExcelExport()
 
-    col.Field("Brand").HeaderText("Trade Activity").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Width("150").Add();
-    col.HeaderText("Product").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
-    (
-        new List<Syncfusion.EJ2.Grids.GridColumn>()
-        {
-            new Syncfusion.EJ2.Grids.GridColumn
+    .Toolbar(new List<object>() {
+        new { id ="toolbar_summary_add", text = "Add", prefixIcon = "e-icons e-add" },
+        new { id ="toolbar_summary_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+        new { id ="toolbar_summary_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+        new { id ="toolbar_summary_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+        new { text = "Print", prefixIcon = "e-icons e-print" },
+    })
+
+    .EditSettings(edit =>
+    {
+        edit
+        .AllowEditOnDblClick(false)
+        .AllowAdding(true)
+        .AllowEditing(false)
+        .AllowDeleting(false).ShowConfirmDialog(false).ShowDeleteConfirmDialog(false)
+        .Mode(EditMode.Dialog)
+        .Template("#dialogtemplate")
+        ;
+    })
+    .Columns(col =>
+    {
+
+        col.Field("Brand").HeaderText("Trade Activity").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Width("150").Add();
+        col.HeaderText("Product").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
+        (
+            new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
-                Field = "BRAND_NAME",
-                HeaderText  = "Brand",
-                TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
-                Format = "N2",
-                Width = "150",
-                MinWidth = "130"
-            },
-            new Syncfusion.EJ2.Grids.GridColumn
-            {
-                Field = "NGPP",
-                HeaderText  = "SKU",
-                TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
-                Format = "N2",
-                Width = "150",
-                MinWidth = "130"
+                new Syncfusion.EJ2.Grids.GridColumn
+                {
+                    Field = "BRAND_NAME",
+                    HeaderText  = "Brand",
+                    TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
+                    Format = "N2",
+                    Width = "150",
+                    MinWidth = "130"
+                },
+                new Syncfusion.EJ2.Grids.GridColumn
+                {
+                    Field = "NGPP",
+                    HeaderText  = "SKU",
+                    TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
+                    Format = "N2",
+                    Width = "150",
+                    MinWidth = "130"
+                }
             }
-        }
-    ).Add();
+        ).Add();
 
 
-    col.Field("Trade_Activity").HeaderText("Input Type").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("150").Add();
-    col.Field("Category").HeaderText("Value").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("150").Add();
-    col.Field("Date_Reference").HeaderText("Invest Amt. (BTH)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Trade_Activity").HeaderText("Input Type").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("150").Add();
+        col.Field("Category").HeaderText("Value").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("150").Add();
+        col.Field("Date_Reference").HeaderText("Invest Amt. (BTH)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
 
-    col.HeaderText("Other").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
-    (
-        new List<Syncfusion.EJ2.Grids.GridColumn>()
-        {
-            new Syncfusion.EJ2.Grids.GridColumn
+        col.HeaderText("Other").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
+        (
+            new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
-                Field = "BRAND_NAME",
-                HeaderText  = "Activity",
-                TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
-                Format = "N2",
-                Width = "180",
-                MinWidth = "130"
-            },
-            new Syncfusion.EJ2.Grids.GridColumn
-            {
-                Field = "NGPP",
-                HeaderText  = "Amount (BTH)",
-                TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
-                Format = "N2",
-                Width = "150",
-                MinWidth = "130"
-            },
-            new Syncfusion.EJ2.Grids.GridColumn
-            {
-                Field = "NGPP",
-                HeaderText  = "Combined Activity",
-                TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
-                Format = "N2",
-                Width = "180",
-                MinWidth = "130"
+                new Syncfusion.EJ2.Grids.GridColumn
+                {
+                    Field = "BRAND_NAME",
+                    HeaderText  = "Activity",
+                    TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
+                    Format = "N2",
+                    Width = "180",
+                    MinWidth = "130"
+                },
+                new Syncfusion.EJ2.Grids.GridColumn
+                {
+                    Field = "NGPP",
+                    HeaderText  = "Amount (BTH)",
+                    TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
+                    Format = "N2",
+                    Width = "150",
+                    MinWidth = "130"
+                },
+                new Syncfusion.EJ2.Grids.GridColumn
+                {
+                    Field = "NGPP",
+                    HeaderText  = "Combined Activity",
+                    TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
+                    Format = "N2",
+                    Width = "180",
+                    MinWidth = "130"
+                }
             }
-        }
 
-    ).Add();
-    
-    col.Field("Remark").HeaderText("Incremental Sale/Investment").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("GL - Account").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Cost Center").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Source of Fund2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Amount 2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Remarks").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Request By").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Request Date").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Updated By").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-    col.Field("Remark").HeaderText("Updated Date").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
-})
-.Render())
+        ).Add();
+
+        col.Field("Remark").HeaderText("Incremental Sale/Investment").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("GL - Account").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Cost Center").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Source of Fund2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Amount 2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Remarks").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Request By").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Request Date").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Updated By").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+        col.Field("Remark").HeaderText("Updated Date").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Width("180").Add();
+    })
+    .Render())
+</div>

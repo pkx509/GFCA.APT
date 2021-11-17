@@ -2,25 +2,25 @@
 
 namespace GFCA.APT.WEB.Areas.Transactions
 {
-    public class TransactionsAreaRegistration : AreaRegistration 
+    public class TransactionsAreaRegistration : AreaRegistration
     {
         private const string __nameSpace = "GFCA.APT.WEB.Areas.Transactions.Controllers";
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Transactions";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             /* Document List Route */
 
             context.MapRoute(
-                name      : "Transaction_mutate", 
-                url       : "T/Document/{action}/{yyyy}",
-                defaults  : new { controller = "Default", action = "Index", yyyy = UrlParameter.Optional }, 
+                name: "Transaction_mutate",
+                url: "T/Document/{action}/{yyyy}",
+                defaults: new { controller = "Default", action = "Index", yyyy = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
@@ -77,6 +77,20 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 namespaces: new[] { __nameSpace }
                 );
 
+            context.MapRoute(
+                name: "Transaction_PromotionPlan_Summary_Detail",
+                url: "T/Promotions/Summary/{DOC_FCH_ID}/{DOC_FCD_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionSummaryDetail", DocCode = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_PromotionPlan_Trade_Activity_Detail",
+                url: "T/Promotions/TradeActivity/{DOC_FCH_ID}/{DOC_FCD_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionTradeActivityDetail", DocCode = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
             /* Sale forecaset Route */
             context.MapRoute(
                 name: "Transaction_Saleforecast_List",
@@ -94,7 +108,7 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             /* Default Route */
             context.MapRoute(
-                name : "Transactions_default",
+                name: "Transactions_default",
                 url: "T/{controller}/{action}/{DocCode}",
                 defaults: new { action = "Index", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }

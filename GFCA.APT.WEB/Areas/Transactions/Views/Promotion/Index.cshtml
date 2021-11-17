@@ -66,7 +66,7 @@
                                   {
                                       ds
                                       // TODO: call backend for promotion
-                                      // .Url(@Url.Action("UrlPromotionHeaderList", "Promotion", new { Area = "Transactions" }))
+                                      .Url(@Url.Action("UrlPromotionHeaderList", "Promotion", new { Area = "Transactions" }))
                                       .Adaptor("UrlAdaptor");
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
