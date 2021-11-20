@@ -62,7 +62,7 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 namespaces: new[] { __nameSpace }
                 );
 
-            /* Promotion Planing Route */
+            /* Promotion Planning Route */
             context.MapRoute(
                 name: "Transaction_PromotionPlan_List",
                 url: "T/Promotions",
