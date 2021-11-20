@@ -44,7 +44,7 @@ let sendPost = function (url, data) {
     });
 }
 
-let fixedContractDetail = new (function () {
+let promotionInvestmentDetail = new (function () {
     this.field_brand_name = "#BRAND_CODE";
     this.field_brand_code = "#BRAND_CODE_hidden";
     this.field_trade_activity_name = "#ACTIVITY_CODE";
@@ -85,7 +85,7 @@ let fixedContractDetail = new (function () {
 
     $("#txt-apply-to-all").keyup(function (e) {
         this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-        let value = $(fixedContractDetail.field_apply_to_all).val();
+        let value = $(promotionInvestmentDetail.field_apply_to_all).val();
         monthPlans.val(value);
     });
 

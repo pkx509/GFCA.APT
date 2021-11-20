@@ -43,13 +43,13 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult ItemDetailGridTradeActivityPartial()
+        public PartialViewResult ItemDetailGridSalePartial()
         {
             return PartialView();
         }
 
         [HttpGet]
-        public PartialViewResult ItemDetailGridSummaryPartial()
+        public PartialViewResult ItemDetailGridInvestmentPartial()
         {
             return PartialView();
         }
@@ -85,9 +85,9 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
-        // GET: T/Promotions/Summary/{DOC_FCH_ID}/{DOC_FCD_ID}]
+        // GET: T/Promotions/Investment/{DOC_FCH_ID}/{DOC_FCD_ID}]
         [HttpGet]
-        public ActionResult PromotionSummaryDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        public ActionResult PromotionInvestmentDetail(int DOC_FCH_ID, int DOC_FCD_ID)
         {
 
             return View();

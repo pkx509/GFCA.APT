@@ -79,8 +79,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Summary_Detail",
-                url: "T/Promotions/Summary/{DOC_FCH_ID}/{DOC_FCD_ID}",
-                defaults: new { controller = "Promotion", action = "PromotionSummaryDetail", DocCode = UrlParameter.Optional },
+                url: "T/Promotions/Investment/{DOC_FCH_ID}/{DOC_FCD_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionInvestmentDetail", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 

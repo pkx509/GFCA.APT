@@ -48,7 +48,7 @@
         e.preventDefault();
 
         // if (argruments.DOC_FCH_ID) {
-        window.location.href = `/T/Promotions/Summary/1/0`;
+        window.location.href = `/T/Promotions/Investment/1/0`;
         // }
 
     });
@@ -56,7 +56,7 @@
         e.preventDefault();
 
         if (argruments.data) {
-            window.location.href = `/T/Promotions/Summary/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+            window.location.href = `/T/Promotions/Investment/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
         }
 
     });
