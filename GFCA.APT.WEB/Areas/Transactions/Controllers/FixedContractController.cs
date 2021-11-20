@@ -73,7 +73,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             try
             {
                 FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderById(DOC_FCH_ID);
-                // ! get document stateFlow
+                // TODO: get document stateFlow
                 ViewData["FixedContractHeaderDto"] = headerDto;
                 ViewData["DocumentStateFlowDto"] = headerDto;
             }
