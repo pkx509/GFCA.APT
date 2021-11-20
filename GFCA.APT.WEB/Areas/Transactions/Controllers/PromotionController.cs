@@ -66,22 +66,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return Json(new EmptyResult());
         }
 
-        // GET: T/Promotions/TradeActivity/{DOC_FCH_ID}/{DOC_FCD_ID}]
+        // GET: T/Promotions/Sale/{DOC_FCH_ID}/{DOC_FCD_ID}]
         [HttpGet]
-        public ActionResult PromotionTradeActivityDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        public ActionResult PromotionSaleDetail(int DOC_FCH_ID, int DOC_FCD_ID)
         {
-
-            FixedContractDto detailDto = new FixedContractDto();
-            try
-            {
-                detailDto = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
-
-            }
-            catch
-            {
-
-            }
-
             return View();
         }
 
@@ -89,7 +77,6 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         [HttpGet]
         public ActionResult PromotionInvestmentDetail(int DOC_FCH_ID, int DOC_FCD_ID)
         {
-
             return View();
         }
 

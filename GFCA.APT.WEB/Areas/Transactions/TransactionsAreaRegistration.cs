@@ -78,16 +78,16 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 );
 
             context.MapRoute(
-                name: "Transaction_PromotionPlan_Summary_Detail",
+                name: "Transaction_PromotionPlan_Investment_Detail",
                 url: "T/Promotions/Investment/{DOC_FCH_ID}/{DOC_FCD_ID}",
                 defaults: new { controller = "Promotion", action = "PromotionInvestmentDetail", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
             context.MapRoute(
-                name: "Transaction_PromotionPlan_Trade_Activity_Detail",
-                url: "T/Promotions/TradeActivity/{DOC_FCH_ID}/{DOC_FCD_ID}",
-                defaults: new { controller = "Promotion", action = "PromotionTradeActivityDetail", DocCode = UrlParameter.Optional },
+                name: "Transaction_PromotionPlan_Sale_Detail",
+                url: "T/Promotions/Sale/{DOC_FCH_ID}/{DOC_FCD_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionSaleDetail", DocCode = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 

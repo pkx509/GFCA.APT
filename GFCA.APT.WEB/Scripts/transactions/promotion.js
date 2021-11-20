@@ -60,7 +60,7 @@ $(document).ready(function () {
         if (argruments.data) {
             console.log(argruments);
             // TODO: redirect page
-            // window.location.href = `/T/promotions/${argruments.data.DOC_PROPLH_ID}`;
+            // window.location.href = `/T/Promotions/${argruments.data.DOC_PROPLH_ID}`;
         }
     });
     $("#toolbar_del").click(function (e) {

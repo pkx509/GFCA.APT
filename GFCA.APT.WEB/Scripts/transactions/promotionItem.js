@@ -44,7 +44,7 @@
     }
 
     /* summary tab */
-    $("#toolbar_summary_add").click(function (e) {
+    $("#toolbar_investment_add").click(function (e) {
         e.preventDefault();
 
         // if (argruments.DOC_FCH_ID) {
@@ -52,7 +52,7 @@
         // }
 
     });
-    $("#toolbar_summary_edit").click(function (e) {
+    $("#toolbar_investment_edit").click(function (e) {
         e.preventDefault();
 
         if (argruments.data) {
@@ -60,7 +60,7 @@
         }
 
     });
-    $("#toolbar_summary_del").click(function (e) {
+    $("#toolbar_investment_del").click(function (e) {
         e.preventDefault();
         /*
         let callBack = function (data) {
@@ -71,19 +71,19 @@
     });
 
     /* tradeActivity tab */
-    $("#toolbar_tradeActivity_add").click(function (e) {
+    $("#toolbar_sale_add").click(function (e) {
         e.preventDefault();
 
         // if (argruments.DOC_FCH_ID) {
-        window.location.href = `/T/Promotions/TradeActivity/1/0`;
+        window.location.href = `/T/Promotions/Sale/1/0`;
         // }
 
     });
-    $("#toolbar_tradeActivity_edit").click(function (e) {
+    $("#toolbar_sale_edit").click(function (e) {
         e.preventDefault();
 
         if (argruments.data) {
-            window.location.href = `/T/Promotions/TradeActivity/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+            window.location.href = `/T/Promotions/Sale/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
         }
 
     });
