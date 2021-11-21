@@ -29,15 +29,5 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
-        public PartialViewResult ItemStateFlowPartial()
-        {
-            return PartialView();
-        }
-
-        public PartialViewResult ItemHistoriesPartial()
-        {
-            return PartialView();
-        }
-
     }
 }

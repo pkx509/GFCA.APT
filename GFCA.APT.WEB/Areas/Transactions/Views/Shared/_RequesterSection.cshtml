@@ -1,13 +1,14 @@
 ﻿@using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2.DropDowns
 @using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.FixedContractDetailDto
+
+@model GFCA.APT.Domain.Dto.DocumentRequesterDto
 
 <div class="row mb-2">
     <div class="col col-lg p-1">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h6>Contract header</h6>
+                <h6>Requester</h6>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -24,7 +25,7 @@
 
                                         @if (Model != null)
                                         {
-                                        
+
                                             @(Html.EJS().ComboBox("cmb-client")
                                                             .Placeholder("-- Select --")
                                                             .Autofill(true)
@@ -117,7 +118,7 @@
                                                         //.Value(dto.REQUESTER)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
-                                        
+
                                         }
                                     </div>
                                 </div>
@@ -149,6 +150,30 @@
                                 </div>
                             </div>
                             <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label class="col col-lg-4 control-label text-right">
+                                        Department
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().ComboBox("cmb-emp-org-dev")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetOrganization")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        //.Change("fixedContractDetail.cmbPositionChange")
+                                                        .CssClass("mandatory")
+                                                        //.Value(dto.ORG_NAME)
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GFCA.APT.BAL.Interfaces
 {
-    public interface IFixedContractService
+    public interface IFixedContractService : IDocumentService
     {
         IEnumerable<FixedContractHeaderDto> GetHeaderAll();
         FixedContractHeaderDto GetHeaderById(int id);

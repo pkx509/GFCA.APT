@@ -57,8 +57,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             context.MapRoute(
                 name: "Transaction_BudgetPlans_Item",
-                url: "T/BudgetPlans/{DocCode}",
-                defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DocCode = UrlParameter.Optional },
+                url: "T/BudgetPlans/{DOC_BUDGET_PH_ID}",
+                defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DOC_BUDGET_PH_ID = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
@@ -72,8 +72,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Item",
-                url: "T/Promotions/{DocCode}",
-                defaults: new { controller = "Promotion", action = "PromotionItem", DocCode = UrlParameter.Optional },
+                url: "T/Promotions/{DOC_PROM_PS_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionItem", DOC_PROM_PS_ID = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 

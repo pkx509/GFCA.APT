@@ -1,4 +1,6 @@
 ﻿using GFCA.APT.BAL.Interfaces;
+using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
     public class PromotionController : ControllerWebBase
     {
+        public const string DOC_TYPE_CODE = "PP";
         private readonly IBusinessProvider _biz;
         public PromotionController(IBusinessProvider biz)
         {
@@ -22,9 +25,19 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
-        public ViewResult PromotionItem(string DocCode)
+        public ViewResult PromotionItem(int DOC_PROM_PS_ID)
         {
-            return View();
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PS_ID);
+
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+             
+            }
+            return View(dto);
         }
 
         [HttpGet]

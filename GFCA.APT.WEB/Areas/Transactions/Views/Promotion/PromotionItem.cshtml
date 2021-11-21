@@ -1,4 +1,5 @@
 ﻿@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.PromotionPlanningDto
 @{
     ViewBag.Title = "PromotionItem";
 }
@@ -39,19 +40,20 @@
     <div class="content-header">
         <div class="container-fluid">
             @*----------------- document header -----------------*@
-            @Html.Partial("../Default/ItemStateFlowPartial")
+            @Html.Partial("_DocumentStateSection", Model.DocumentData)
+            @Html.Partial("_RequesterSection", Model.RequesterData)
 
             @*----------------- Promotion planning header -----------------*@
-            @Html.Partial("ItemHeaderPartial")
+            @Html.Partial("ItemHeaderPartial", Model.OverviewData)
 
             @*----------------- Promotion planning detail -----------------*@
-            @Html.Partial("ItemDetailPartial")
+            @Html.Partial("ItemDetailPartial", Model)
 
             @*----------------- Promotion planning footer -----------------*@
-            @Html.Partial("ItemFooterPartial")
+            @Html.Partial("ItemFooterPartial", Model.FooterData)
 
             @*----------------- document footer -----------------*@
-            @Html.Partial("../Default/ItemHistoriesPartial")
+            @Html.Partial("_HistorySection", Model.HistoryData)
         </div>
     </div>
 </form>

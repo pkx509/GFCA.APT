@@ -264,7 +264,6 @@
     <Folder Include="Areas\Masters\Data\" />
     <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Areas\Transactions\Data\" />
-    <Folder Include="Areas\Transactions\Views\Shared\" />
     <Folder Include="log\" />
     <Folder Include="Views\Layout\" />
     <Folder Include="Views\Views\" />
@@ -4132,13 +4131,15 @@
     <Content Include="Areas\Transactions\Views\FixedContract\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\ItemDetailGridFixedContractPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Default\ItemStateFlowPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Default\ItemHistoriesPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Saleforecast\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\FixedContractDetail.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_LayoutTransaction.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_RequesterSection.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_HistorySection.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_DocumentStateSection.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />

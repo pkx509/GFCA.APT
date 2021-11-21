@@ -3,7 +3,7 @@
     <div class="col col-lg p-1">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h6>Promotion planing by</h6>
+                <h6>Overview</h6>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -109,54 +109,6 @@
                             <div class="col col-sm-12 col-lg-4">
                                 <div class="form-group row">
                                     <label class="col col-lg-4 control-label text-right">
-                                        Requester
-                                    </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-requester")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetEmployee/false")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-sm-12 col-lg-4">
-                                <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
-                                        Position
-                                    </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-emp-org")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetOrganization")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    //.Change("page.cmbPositionChange")
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-sm-12 col-lg-4">
-                                <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
                                         Promo Start
                                     </label>
                                     <div class="col col-lg-8">
@@ -219,6 +171,52 @@
                             </div>
                         </div>
 
+                        <div class="row">
+
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label for="txt-sale" class="col col-lg-4 control-label text-right">
+                                        Total Sale Target (THB)
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().TextBox("txt-sale")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    .CssClass("mandatory")
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label for="txt-invest" class="col col-lg-4 control-label text-right">
+                                        Total Invesment (THB)
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().TextBox("txt-invest")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    .CssClass("mandatory")
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 col-lg-4">
+                                <div class="form-group row">
+                                    <label for="txt-ratio" class="col col-lg-4 control-label text-right">
+                                        Sale vs Invesments (%)
+                                    </label>
+                                    <div class="col col-lg-8">
+                                        @(Html.EJS().TextBox("txt-ratio")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    .CssClass("mandatory")
+                                                    .Render())
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>

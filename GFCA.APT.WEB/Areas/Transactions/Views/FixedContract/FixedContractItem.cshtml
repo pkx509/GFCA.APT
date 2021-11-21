@@ -1,13 +1,9 @@
 ﻿@using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.FixedContractDto
+
 @{
     ViewBag.Title = "FixedContractItem";
-    //var headerDto = new GFCA.APT.Domain.Dto.FixedContractHeaderDto();
-    //headerDto.DOC_CODE = ViewContext.RouteData.Values["DocCode"];
-    //headerDto.DOC_CODE = Request.QueryString["DocCode"];
-    FixedContractHeaderDto headerDto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
-    DocumentStateFlowDto documentDto = ViewData["DocumentStateFlowDto"] as DocumentStateFlowDto;
-    FixedContractDetailDto detailDto = ViewData["FixedContractDetailDto"] as FixedContractDetailDto;
 }
 
 @section styles
@@ -46,19 +42,26 @@
     <div class="content-header">
         <div class="container-fluid">
             @*----------------- document header -----------------*@
-            @Html.Partial("../Default/ItemStateFlowPartial")
+            @*
+        Html.Partial("../Default/ItemStateFlowPartial", docState)
+            *@
+            @Html.Partial("_ItemStateFlowPartial", Model.DocumentData)
+            @Html.Partial("_RequesterSection", Model.RequesterData)
 
             @*----------------- Fixed Contract header -----------------*@
-            @Html.Partial("ItemHeaderPartial")
+            @Html.Partial("ItemHeaderPartial", Model.HeaderData)
 
             @*----------------- Fixed Contract detail -----------------*@
             @Html.Partial("ItemDetailPartial")
 
             @*----------------- Fixed Contract Footer -----------------*@
-            @Html.Partial("ItemFooterPartial")
+            @Html.Partial("ItemFooterPartial", Model.FooterData)
 
             @*----------------- document footer -----------------*@
-            @Html.Partial("../Default/ItemHistoriesPartial")
+            @*
+        Html.Partial("../Default/ItemHistoriesPartial")
+            *@
+            @Html.Partial("_ItemHistoriesPartial", Model.HistoryData)
         </div>
     </div>
 </form>

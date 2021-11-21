@@ -18,7 +18,7 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
-        public DocumentStateFlowDto GetDocumentStateFlow(int headerId, string documentType)
+        public DocumentStateDto GetDocumentStateFlow(int headerId, string documentType)
         {
             string sqlQuery = @"";
 
@@ -84,7 +84,7 @@ namespace GFCA.APT.DAL.Implements
                 DOC_TYPE_CODE = documentType
             };
 
-            var query = Connection.Query<DocumentStateFlowDto>(
+            var query = Connection.Query<DocumentStateDto>(
                 sql: sqlQuery,
                 param: parms,
                 transaction: Transaction

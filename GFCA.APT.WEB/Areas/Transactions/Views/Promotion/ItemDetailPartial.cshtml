@@ -3,6 +3,7 @@
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.PromotionPlanningDto
 
 @*----------------- Promotion planing detail -----------------*@
 <div class="row mb-2">
@@ -12,53 +13,6 @@
                 <h5>Promotion planing</h5>
             </div>
             <div class="card-body">
-
-                <div class="row">
-
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-sale" class="col col-lg-4 control-label text-right">
-                                Total Sale Target (THB)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-sale")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-invest" class="col col-lg-4 control-label text-right">
-                                Total Invesment (THB)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-invest")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-ratio" class="col col-lg-4 control-label text-right">
-                                Sale vs Invesments (%)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-ratio")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="row">
                     <div class="col-12 col-sm-12">
@@ -81,12 +35,12 @@
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
 
-                                            @Html.Partial("ItemDetailGridTradeActivityPartial", "PP-202109-000001-0101")
+                                            @Html.Partial("ItemDetailGridTradeActivityPartial", null)
 
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
 
-                                            @Html.Partial("ItemDetailGridSummaryPartial", "PP-202109-000001-0101")
+                                            @Html.Partial("ItemDetailGridSummaryPartial", null)
 
                                         </div>
                                     </div>

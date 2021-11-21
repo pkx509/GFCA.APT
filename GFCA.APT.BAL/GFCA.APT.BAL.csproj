@@ -162,6 +162,7 @@
     <Compile Include="Implements\ServiceBase.cs" />
     <Compile Include="Implements\TradeActivityService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Interfaces\IDocumentService.cs" />
     <Compile Include="Interfaces\IServices.cs" />
     <Compile Include="Interfaces\ISizeService.cs" />
     <Compile Include="Interfaces\IUnitService.cs" />

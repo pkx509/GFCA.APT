@@ -14,6 +14,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
     public class FixedContractController : ControllerWebBase
     {
+        private const string DOC_TYPE_CODE = "FC";
         // private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Transactions/FixedContract
         private readonly IBusinessProvider _biz;
@@ -67,22 +68,41 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         // GET: T/FixedContracts/{DOC_FCH_ID}]
-        [HttpGet]
+        //[HttpGet]
         public ActionResult FixedContractItem(int DOC_FCH_ID)
         {
+            var dto = new FixedContractItemDto();
             try
             {
                 FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderById(DOC_FCH_ID);
-                // ! get document stateFlow
-                ViewData["FixedContractHeaderDto"] = headerDto;
-                ViewData["DocumentStateFlowDto"] = headerDto;
+                var docFlow = _biz.FixedContractService.GetDocumentFlowSection(DOC_TYPE_CODE, DOC_FCH_ID);
+                var docRequester =_biz.FixedContractService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_FCH_ID);
+                var docHistory = _biz.FixedContractService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_FCH_ID);
+                
+                //Document Infomation
+                dto.WorkflowData = docFlow as DocumentWorkFlowDto;
+                dto.DocumentData = new DocumentStateDto();
+                dto.RequesterData = docRequester as DocumentRequesterDto;
+                dto.HistoryData = docHistory as IEnumerable<DocumentHistoryDto>;
+                
+                //Fixed contrac Infomation
+                dto.HeaderData = headerDto as FixedContractHeaderDto;
+                //no use this line bcause already use for bind grid at function UrlFixedContractDetailList
+                //dto.DetailData = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
+                dto.FooterData = new FixedContractFooterDto();
+                /*
+                ViewBag.DocumentFlowDto = docFlow;
+                ViewBag.DocumentRequesterDto = docRequester;
+                ViewBag.DocumentHistoryDto = docHistory;
+                ViewBag.FixedContractHeaderDto = headerDto as FixedContractHeaderDto;
+                */
             }
             catch
             {
 
             }
 
-            return View();
+            return View(dto);
         }
         // GET: T/FixedContracts/{DOC_FCH_ID}/{DOC_FCD_ID}]
         [HttpGet]

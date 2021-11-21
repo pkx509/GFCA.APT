@@ -198,26 +198,18 @@ namespace GFCA.APT.BAL.Implements
         public FixedContractDto GetDetailItem(int DOC_FCD_ID)
         {
             var documentType = "FC";
-            FixedContractDto dto = new FixedContractDto();
-            dto.Detail = new FixedContractDetailDto();
-            dto.Header = new FixedContractHeaderDto();
-            dto.Stateflow = new DocumentStateFlowDto();
-            dto.Histories = new List<DocumentHistoryDto>();
+            FixedContractDto dto = new FixedContractDto(DOC_FCD_ID);
             try
             {
-                dto.DataMode = Domain.Enums.PAGE_MODE.EDITING;
-                if (DOC_FCD_ID == 0) 
-                {
-                    dto.DataMode = Domain.Enums.PAGE_MODE.CREATING;
+                if (dto.DataMode == PAGE_MODE.CREATING)
                     return dto;
-                }
 
                 var docd = _uow.FixedContractRepository.GetDetailItem(DOC_FCD_ID);
-                dto.Detail = docd;
+                //dto. = docd;
                 var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
-                dto.Header = doch;
-                dto.Stateflow = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID, documentType);
-                dto.Histories = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
+                dto.HeaderData = doch;
+                dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID, documentType);
+                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
 
                 return dto;
             }
@@ -346,5 +338,7 @@ namespace GFCA.APT.BAL.Implements
             throw new NotImplementedException();
         }
         #endregion [ detail ]
+
+
     }
 }

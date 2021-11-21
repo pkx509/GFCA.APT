@@ -1,9 +1,8 @@
 ﻿@using GFCA.APT.Domain.Enums
 @using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2
-@{
-    DocumentStateFlowDto dto = ViewData["DocumentStateFlowDto"] as DocumentStateFlowDto;
-}
+@model GFCA.APT.Domain.Dto.DocumentStateDto
+
 <div class="row mb-2">
     <div class="col col-lg-12 p-1">
         <div class="card card-info card-outline">
@@ -29,10 +28,10 @@
                                             Company
                                         </label>
                                         <div class="col col-lg-8">
-                                            @if (dto != null) 
+                                            @if (Model != null)
                                             {
                                                 @(Html.EJS().TextBox("txt-company")
-                                                .Value(dto.COMP_NAME)
+                                                .Value(Model.DOC_CODE)
                                                 .Placeholder("Company name")
                                                 .CssClass("mandatory")
                                                 .Render())
@@ -49,10 +48,10 @@
                                             Document No
                                         </label>
                                         <div class="col col-lg-8">
-                                            @if (dto != null)
+                                            @if (Model != null)
                                             {
                                                 @(Html.EJS().TextBox("txt-document-no")
-                                                .Value(dto.DOC_CODE)
+                                                .Value(Model.DOC_CODE)
                                                 .Placeholder("[Auto generate]")
                                                 .Render())
                                             }
@@ -68,10 +67,10 @@
                                             Version
                                         </label>
                                         <div class="col col-lg-8">
-                                            @if (dto != null)
+                                            @if (Model != null)
                                             {
                                                 @(Html.EJS().TextBox("txt-version")
-                                                .Value(dto.DOC_VER.ToString())
+                                                .Value(Model.DOC_VER.ToString())
                                                 .Render())
                                             }
                                         </div>
@@ -85,10 +84,10 @@
                                             Status
                                         </label>
                                         <div class="col col-lg-8">
-                                            @if (dto != null)
+                                            @if (Model != null)
                                             {
                                                 @(Html.EJS().TextBox("txt-status")
-                                                    .Value(dto.DOC_STATUS.ToString())
+                                                    .Value(Model.DOC_STATUS.ToString())
                                                     .Render())
                                             }
                                         </div>
@@ -110,3 +109,5 @@
         </div>
     </div>
 </div>
+
+

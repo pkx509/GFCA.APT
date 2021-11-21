@@ -1,7 +1,10 @@
-﻿@using GFCA.APT.Domain.Enums
+﻿
+@using GFCA.APT.Domain.Enums
 @using GFCA.APT.Domain.Dto
+@model IEnumerable<GFCA.APT.Domain.Dto.DocumentHistoryDto>
 @{
-    IEnumerable<DocumentHistoryDto> historiesDto = ViewData["DocumentHistoryDto"] as IEnumerable<DocumentHistoryDto>;
+    //IEnumerable<DocumentHistoryDto> historiesDto = ViewData["DocumentHistoryDto"] as IEnumerable<DocumentHistoryDto>;
+    var historiesDto = Model;
 }
 @*----------------- document histories footer -----------------*@
 <div class="row mb-2">
