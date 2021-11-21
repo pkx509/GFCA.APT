@@ -3,6 +3,10 @@
     public class PromotionPlanngSaleDto : Auditable
     {
         public int DOC_PROM_PS_ID { get; set; }
+        
+        public string DOC_CODE { get; set; }
+        public string DOC_VER { get; set; }
+        public string DOC_REV { get; set; }
 
         public string COMP_CODE { get; set; }
         public string COMP_NAME { get; set; }

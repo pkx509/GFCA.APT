@@ -7,6 +7,10 @@ namespace GFCA.APT.Domain.Dto
         public int DOC_PROM_PI_ID { get; set; } //PK
         public int DOC_PROM_PS_ID { get; set; } //FK
 
+        public string DOC_CODE { get; set; }
+        public string DOC_VER { get; set; }
+        public string DOC_REV { get; set; }
+
         public string COMP_CODE { get; set; }
         public string COMP_NAME { get; set; }
 
