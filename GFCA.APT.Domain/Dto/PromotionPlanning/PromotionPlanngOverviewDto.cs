@@ -22,9 +22,9 @@ namespace GFCA.APT.Domain.Dto
         public string CUST_NAME { get; set; }
         public string CUST_SEGMENT { get; set; }
 
-        public double TOTAL_EST_SALE { get; set; }
-        public double TOTAL_EST_INVEST { get; set; }
-        public double SALE_VS_INVEST { get; set; }
+        public decimal TOTAL_EST_SALE { get; set; }
+        public decimal TOTAL_EST_INVEST { get; set; }
+        public decimal SALE_VS_INVEST { get; set; }
 
     }
 }
