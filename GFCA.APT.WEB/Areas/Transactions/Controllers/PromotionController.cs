@@ -52,22 +52,44 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult ItemDetailGridTradeActivityPartial()
+        public PartialViewResult ItemDetailGridSalePartial()
         {
             return PartialView();
         }
 
         [HttpGet]
-        public PartialViewResult ItemDetailGridSummaryPartial()
+        public PartialViewResult ItemDetailGridInvestmentPartial()
         {
             return PartialView();
         }
-        
+
         [HttpGet]
         public PartialViewResult ItemFooterPartial()
         {
             return PartialView();
         }
+
+        [HttpPost]
+        public JsonResult UrlPromotionHeaderList(DataManagerRequest dm)
+        {
+            return Json(new EmptyResult());
+        }
+
+        // GET: T/Promotions/Sale/{DOC_FCH_ID}/{DOC_FCD_ID}]
+        [HttpGet]
+        public ActionResult PromotionSaleDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        {
+            return View();
+        }
+
+        // GET: T/Promotions/Investment/{DOC_FCH_ID}/{DOC_FCD_ID}]
+        [HttpGet]
+        public ActionResult PromotionInvestmentDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        {
+            return View();
+        }
+
+
 
     }
 }

@@ -4119,8 +4119,8 @@
     <Content Include="Areas\Transactions\Views\Promotion\PromotionItem.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridTradeActivityPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridSummaryPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridSalePartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridInvestmentPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Saleforecast\SaleForecastItem.cshtml" />
     <Content Include="Areas\Transactions\Views\Saleforecast\ItemHeaderPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Saleforecast\ItemDetailPartial.cshtml" />
@@ -4248,7 +4248,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\transactions\fixed-contract.js" />
+    <Content Include="Scripts\transactions\promotionItem.js" />
     <Content Include="Scripts\transactions\fixedContractItem.js" />
+    <Content Include="Scripts\transactions\promotion.js" />
+    <Content Include="Scripts\transactions\promotionSaleDetail.js" />
+    <Content Include="Scripts\transactions\promotionInvestmentDetail.js" />
+    <Content Include="Scripts\transactions\promotionHeaderPopup.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />

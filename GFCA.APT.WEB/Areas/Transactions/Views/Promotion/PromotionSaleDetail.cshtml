@@ -1,0 +1,399 @@
+﻿@using GFCA.APT.Domain.HTTP.Controls
+@using System.Collections.Generic
+@using Syncfusion.EJ2.DropDowns
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+
+}
+
+@model GFCA.APT.Domain.Dto.FixedContractDto
+
+<form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+    <div class="row mb-2">
+        <div class="col col-lg-12 p-1">
+            <div class="card card-info card-outline">
+                <div class="card-header">
+                    <h6>New Promotion Planning - Sale</h6>
+                </div>
+                <div class="card-header">
+
+                    <div class="justify-content-start">
+
+                        <div class="col col-sm-12 col-lg-10">
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Detail No
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("txt-detail-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Product
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().ComboBox("PROD_CODE")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetProduct")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        // .Value(Model.Detail.BRAND_CODE)
+                                                        // .Change("fixedContractDetail.OnBrandChangeValue")
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Brand
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().ComboBox("BRAND_CODE")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetBrand/true")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .CssClass("mandatory")
+                                                        // .Value(Model.Detail.BRAND_CODE)
+                                                        // .Change("fixedContractDetail.OnBrandChangeValue")
+                                                        .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Pack
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().ComboBox("cmb-investment-grid-pack")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetPack")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Size
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().ComboBox("cmb-investment-grid-size")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetSize")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            <b><u>Pricing Information</u></b>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Normal Shelf Price (THB)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("NORMAL_SHELF_PRICE_THB")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Discount Type
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("DISCOUNT_TYPE")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Normal Discount (%)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("NORMAL_DISCOUNT_PERCENTAGE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Promotion Discount (%)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("PROMOTION_DISCOUNT_PERCENTAGE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Normal GP (%)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("NORMAL_GP_PERCENTAGE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Promotion Price (THB)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("PROMOTION_PRICE_THB")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Promotion GP (%)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("PROMOTION_GP_PERCENTAGE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            <b><u>Estimated Sales</u></b>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Sales Quantity
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("SALE_QUANTITY")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Average Volume
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("AVERAGE_VOLUME")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Sales Value
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("SALE_VALUES")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Average Sales (THB)
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("AVERAGE_SALE_THB")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            LTP Price
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("LTP_PRICE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Deal Guideline
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("DEAL_GUIDELINE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                            Net-Into-Store
+                                        </label>
+                                        <div class="col col-lg-8">
+                                            @(Html.EJS().TextBox("NET_INTO_STORE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-12 col-lg-6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div>
+                            <div class="row">
+                                <div class="col col-sm-12 col-lg-3 offset-lg-9">
+                                    <!-- Confirm State -->
+                                    <button id="btn-save" class="btn btn-primary">Save</button>
+                                    <button id="btn-back" class="btn btn-default">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</form>
+@section preScripts
+{
+    <script>
+        var urlServices = {
+            AddDetail: ""
+        }
+    </script>
+    @Scripts.Render("~/Scripts/transactions/promotionSaleDetail.js")
+}
+
