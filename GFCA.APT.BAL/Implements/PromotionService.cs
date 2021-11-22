@@ -2,7 +2,6 @@
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.HTTP.Controls;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;
