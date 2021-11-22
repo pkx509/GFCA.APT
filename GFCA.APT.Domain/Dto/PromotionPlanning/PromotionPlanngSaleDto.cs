@@ -1,9 +1,12 @@
-﻿namespace GFCA.APT.Domain.Dto
+﻿using GFCA.APT.Domain.Enums;
+
+namespace GFCA.APT.Domain.Dto
 {
     public class PromotionPlanngSaleDto : Auditable
     {
-        public int DOC_PROM_PS_ID { get; set; }
-        
+        public int DOC_PROM_PS_ID { get; set; } = 0; //PK
+        public int? DOC_PROM_PH_ID { get; set; } //FK
+
         public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }
         public string DOC_REV { get; set; }
@@ -32,11 +35,13 @@
         public decimal AVG_SALE { get; set; }
         public decimal AVG_VOLUME { get; set; }
 
-        public decimal SALE_QTY { get; set; }
+        public int SALE_QTY { get; set; }
         public decimal SALE_VALUE_EXCL_VAT { get; set; }
         public string SALE_UOM { get; set; }
 
         public string DISC_TYPE { get; set; }
+
+        public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
 
     }
 }

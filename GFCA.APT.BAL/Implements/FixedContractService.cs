@@ -92,7 +92,7 @@ namespace GFCA.APT.BAL.Implements
 
         public BusinessResponse CreateHeader(FixedContractHeaderDto model)
         {
-            BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 var doch = model;
@@ -138,14 +138,14 @@ namespace GFCA.APT.BAL.Implements
 
                 _uow.Commit();
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
 
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
             }
 

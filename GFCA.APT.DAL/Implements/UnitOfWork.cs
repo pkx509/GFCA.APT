@@ -33,7 +33,7 @@ namespace GFCA.APT.DAL.Implements
         private IPromotionGroupRepository _promotiongrouprepository;
         private IDocumentRepository _documentRepository;
         private IFixedContractRepository _fixedContractRepository;
-        
+        private IPromotionRepository _promotionRepository;
 
 
         private bool _disposed = false;
@@ -217,7 +217,13 @@ namespace GFCA.APT.DAL.Implements
                 return _fixedContractRepository ?? (_fixedContractRepository = new FixedContractRepository(_transaction));
             }
         }
-
+        public IPromotionRepository PromotionRepository
+        {
+            get
+            {
+                return _promotionRepository ?? (_promotionRepository = new PromotionRepository(_transaction));
+            }
+        }
 
         private void resetRepositories()
         {
@@ -244,6 +250,7 @@ namespace GFCA.APT.DAL.Implements
             _promotiongrouprepository = null;
             _documentRepository = null;
             _fixedContractRepository = null;
+            _promotionRepository = null;
         }
 
         public void Commit()

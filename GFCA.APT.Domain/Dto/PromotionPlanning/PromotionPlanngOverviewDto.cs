@@ -1,10 +1,16 @@
-﻿using System;
+﻿using GFCA.APT.Domain.Enums;
+using System;
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class PromotionPlanngOverviewDto
+    public class PromotionPlanngOverviewDto : Auditable
     {
+        public int? DOC_PROM_PH_ID { get; set; } = 0;
+
         public string DOC_CODE { get; set; }
+        public int? DOC_VER { get; set; } = 0;
+        public int? DOC_REV { get; set; } = 0;
+        public DOCUMENT_STATUS DOC_STATUS { get; set; } = DOCUMENT_STATUS.NONE;
 
         public string PROMO_NAME { get; set; }
         public DateTime PROMO_START { get; set; } = DateTime.Today;
@@ -22,9 +28,12 @@ namespace GFCA.APT.Domain.Dto
         public string CUST_NAME { get; set; }
         public string CUST_SEGMENT { get; set; }
 
-        public decimal TOTAL_EST_SALE { get; set; }
-        public decimal TOTAL_EST_INVEST { get; set; }
-        public decimal SALE_VS_INVEST { get; set; }
+        public decimal TOTAL_EST_SALE { get; set; } = 0.00M;
+        public decimal TOTAL_EST_INVEST { get; set; } = 0.00M;
+        public decimal SALE_VS_INVEST { get; set; } = 0.00M;
 
+        public string COMMENT { get; set; }
+
+        public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
     }
 }

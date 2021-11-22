@@ -2,10 +2,11 @@
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class PromotionPlanngInvesterDto : Auditable
+    public class PromotionPlanngInvestmentDto : Auditable
     {
-        public int DOC_PROM_PI_ID { get; set; } //PK
-        public int DOC_PROM_PS_ID { get; set; } //FK
+        public int DOC_PROM_PI_ID { get; set; } = 0; //PK
+        public int? DOC_PROM_PS_ID { get; set; } //FK
+        public int? DOC_PROM_PH_ID { get; set; } //FK
 
         public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }
@@ -37,17 +38,18 @@ namespace GFCA.APT.Domain.Dto
 
         public string FUND1_CODE { get; set; }
         public string FUND1_NAME { get; set; }
-        public string FUND1_COST_CODE { get; set; }
-        public string FUND1_COST_NAME { get; set; }
+        public string FUND1_CENTER_CODE { get; set; }
+        public string FUND1_CENTER_NAME { get; set; }
         public decimal FUND1_AMOUNT { get; set; } = 0.00M;
 
         public string FUND2_CODE { get; set; }
         public string FUND2_NAME { get; set; }
-        public string FUND2_COST_CODE { get; set; }
-        public string FUND2_COST_NAME { get; set; }
+        public string FUND2_CENTER_CODE { get; set; }
+        public string FUND2_CENTER_NAME { get; set; }
         public decimal FUND2_AMOUNT { get; set; } = 0.00M;
 
         public string REMARKS { get; set; }
+        public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
 
     }
 }

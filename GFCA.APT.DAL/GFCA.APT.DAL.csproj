@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\DocumentRepository.cs" />
+    <Compile Include="Implements\PromotionRepository.cs" />
     <Compile Include="Implements\SizeRepository.cs" />
     <Compile Include="Implements\UnitRepository.cs" />
     <Compile Include="Implements\PackRepository.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
     <Compile Include="Interfaces\IDocumentRepository.cs" />
+    <Compile Include="Interfaces\IPromotionRepository.cs" />
     <Compile Include="Interfaces\IRepositories.cs" />
     <Compile Include="Interfaces\ISizeRepository.cs" />
     <Compile Include="Interfaces\IUnitRepository.cs" />
@@ -424,6 +426,7 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DbUtilities.cs" />
+    <Compile Include="Utilities\FLAG_TYPE_Handler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

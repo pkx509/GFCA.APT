@@ -5,15 +5,17 @@ namespace GFCA.APT.Domain.Models
     public class BusinessResponse
     {
         public bool Success { get; set; } = false;
-        public string MessageType { get; set; }
+        public MESSAGE_TYPE MessageType { get; set; } = MESSAGE_TYPE.WARNING;
         public string Message { get; set; }
         public dynamic Data { get; set; }
 
         public BusinessResponse()
         {
-
+            Success = false;
+            MessageType = MESSAGE_TYPE.WARNING;
+            Message = string.Empty;
         }
-        public BusinessResponse(bool isSuccess, string messageType, string message)
+        public BusinessResponse(bool isSuccess, MESSAGE_TYPE messageType, string message)
         {
             Success = isSuccess;
             MessageType = messageType;

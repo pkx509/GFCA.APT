@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\DataDuplicateException.cs" />
     <Compile Include="Exceptions\DataNoSelectionException.cs" />
+    <Compile Include="Implements\PromotionService.cs" />
     <Compile Include="Implements\SizeService.cs" />
     <Compile Include="Implements\UnitService.cs" />
     <Compile Include="Implements\PackService.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Implements\TradeActivityService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\IDocumentService.cs" />
+    <Compile Include="Interfaces\IPromotionService.cs" />
     <Compile Include="Interfaces\IServices.cs" />
     <Compile Include="Interfaces\ISizeService.cs" />
     <Compile Include="Interfaces\IUnitService.cs" />

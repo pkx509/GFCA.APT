@@ -27,6 +27,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IPromotionGroupRepository PromotionGroupRepository { get; }
 		IDocumentRepository DocumentRepository { get; }
 		IFixedContractRepository FixedContractRepository { get; }
+		IPromotionRepository PromotionRepository { get; }
 
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }

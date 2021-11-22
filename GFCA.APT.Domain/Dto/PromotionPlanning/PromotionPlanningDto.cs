@@ -14,7 +14,7 @@ namespace GFCA.APT.Domain.Dto
 
         public PromotionPlanngOverviewDto OverviewData { get; set; }
         public IEnumerable<PromotionPlanngSaleDto> DetailSaleData { get; set; }
-        public IEnumerable<PromotionPlanngInvesterDto> DetailInvesmentData { get; set; }
+        public IEnumerable<PromotionPlanngInvestmentDto> DetailInvesmentData { get; set; }
 
         public PromotionPlanningFooterDto FooterData { get; set; }
 
@@ -28,7 +28,7 @@ namespace GFCA.APT.Domain.Dto
 
             OverviewData = new PromotionPlanngOverviewDto();
             DetailSaleData = new List<PromotionPlanngSaleDto>();
-            DetailInvesmentData = new List<PromotionPlanngInvesterDto>();
+            DetailInvesmentData = new List<PromotionPlanngInvestmentDto>();
             FooterData = new PromotionPlanningFooterDto();
 
         }
