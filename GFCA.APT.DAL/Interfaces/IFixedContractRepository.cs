@@ -7,16 +7,16 @@ namespace GFCA.APT.DAL.Interfaces
     public interface IFixedContractRepository
     {
 
-        IEnumerable<FixedContractHeaderDto> GetHeaderAll();
-        FixedContractHeaderDto GetHeaderById(int DOC_FCD_ID);
-        void InsertHeader(FixedContractHeaderDto entity);
-        void UpdateHeader(FixedContractHeaderDto entity);
+        IEnumerable<FixedContractHeaderDto> GetFixedContractAll();
+        FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCD_ID);
+        void InsertFixedContractHeader(FixedContractHeaderDto entity);
+        void UpdateFixedContractHeader(FixedContractHeaderDto entity);
+        void DeleteFixedContractHeader(int DOC_FCH_ID);
 
         FixedContractDetailDto GetDetailItem(int DOC_FCD_ID, CONDITION_TYPE conditionType = CONDITION_TYPE.PLANNING);
-        IEnumerable<FixedContractDetailDto> GetDetailItems(string docCode, int docVer = -1, int docRev = -1);
         IEnumerable<FixedContractDetailDto> GetDetailItems(int DOC_FCH_ID, CONDITION_TYPE conditionType = CONDITION_TYPE.PLANNING);
-        void InsertDetail(FixedContractDetailDto entity);
-        void UpdateDetail(FixedContractDetailDto entity);
-
+        void InsertFixedContractDetail(FixedContractDetailDto entity);
+        void UpdateFixedContractDetail(FixedContractDetailDto entity);
+        void DeleteFixedContractDetail(int DOC_FCD_ID);
     }
 }

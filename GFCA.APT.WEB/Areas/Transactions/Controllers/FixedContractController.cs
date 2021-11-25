@@ -71,11 +71,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         //[HttpGet]
         public ActionResult FixedContractItem(int DOC_FCH_ID)
         {
-            var dto = new FixedContractItemDto();
+            var dto = new FixedContractDto();
             try
             {
                 FixedContractHeaderDto headerDto = _biz.FixedContractService.GetHeaderById(DOC_FCH_ID);
-                var docFlow = _biz.FixedContractService.GetDocumentFlowSection(DOC_TYPE_CODE, DOC_FCH_ID);
+                var docFlow = _biz.FixedContractService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_FCH_ID);
                 var docRequester =_biz.FixedContractService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_FCH_ID);
                 var docHistory = _biz.FixedContractService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_FCH_ID);
                 
@@ -90,12 +90,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //no use this line bcause already use for bind grid at function UrlFixedContractDetailList
                 //dto.DetailData = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
                 dto.FooterData = new FixedContractFooterDto();
-                /*
-                ViewBag.DocumentFlowDto = docFlow;
-                ViewBag.DocumentRequesterDto = docRequester;
-                ViewBag.DocumentHistoryDto = docHistory;
-                ViewBag.FixedContractHeaderDto = headerDto as FixedContractHeaderDto;
-                */
+                
             }
             catch
             {
@@ -108,18 +103,18 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         [HttpGet]
         public ActionResult FixedContractDetail(int DOC_FCH_ID, int DOC_FCD_ID)
         {
-            FixedContractDto detailDto = new FixedContractDto();
+            FixedContractDto dto = new FixedContractDto();
             try
             {
-                detailDto = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
-                
+                var item = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
+                dto.DetailItem = item;
             }
             catch
             {
 
             }
 
-            return View(detailDto);
+            return View(dto.DetailItem);
         }
 
         [HttpPost]

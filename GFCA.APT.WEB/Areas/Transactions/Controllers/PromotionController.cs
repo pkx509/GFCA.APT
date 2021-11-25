@@ -38,9 +38,9 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.WorkflowData = _biz.PromotionService.GetDocumentFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
 
                 dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
-                dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
-                dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
-                //dto.FooterData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
             }
             catch (Exception ex)
             {

@@ -154,7 +154,7 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = $"Product ({model.PROD_CODE}) has been changed";
 
  

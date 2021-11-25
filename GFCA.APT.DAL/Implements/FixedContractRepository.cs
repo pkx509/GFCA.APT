@@ -14,7 +14,7 @@ namespace GFCA.APT.DAL.Implements
 
         public FixedContractRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
+        public IEnumerable<FixedContractHeaderDto> GetFixedContractAll()
         {
             string sqlQuery = @"SELECT  DOC_FCH_ID
 , DOC_CODE
@@ -42,9 +42,11 @@ namespace GFCA.APT.DAL.Implements
             return query;
 
         }
-        public FixedContractHeaderDto GetHeaderById(int DOC_FCH_ID)
+        public FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCH_ID)
         {
-            string sqlQuery = @"SELECT  DOC_FCH_ID
+            string sqlQuery = 
+@"SELECT 
+  DOC_FCH_ID
 , DOC_CODE
 , DOC_VER
 , DOC_REV
@@ -62,22 +64,21 @@ namespace GFCA.APT.DAL.Implements
 , UPDATED_BY
 , UPDATED_DATE
 FROM TB_T_FIXED_CONTRACT_H a
-WHERE DOC_FCH_ID = @DOC_FCH_ID
-;";
+WHERE DOC_FCH_ID = @DOC_FCH_ID;";
             var parms = new
             {
                 DOC_FCH_ID = DOC_FCH_ID
             };
 
-            var query = Connection.Query<FixedContractHeaderDto>(
+            var query = Connection.QueryFirstOrDefault<FixedContractHeaderDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
-                ).FirstOrDefault();
+                );
 
             return query;
         }
-        public void InsertHeader(FixedContractHeaderDto entity)
+        public void InsertFixedContractHeader(FixedContractHeaderDto entity)
         {
             string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_H
 (
@@ -137,7 +138,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID
             );
 
         }
-        public void UpdateHeader(FixedContractHeaderDto entity)
+        public void UpdateFixedContractHeader(FixedContractHeaderDto entity)
         {
             string sqlExecute = @"UPDATE TB_T_FIXED_CONTRACT_H
 SET
@@ -177,6 +178,21 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 
             Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+        public void DeleteFixedContractHeader(int DOC_FCH_ID)
+        {
+            string sqlCommand = @"DELETE TB_T_FIXED_CONTRACT_H WHERE DOC_FCH_ID = @DOC_FCH_ID;";
+
+            var parms = new
+            {
+                DOC_FCH_ID = DOC_FCH_ID
+            };
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
@@ -239,11 +255,11 @@ AND DOC_FCD_ID = @DOC_FCD_ID
                 DOC_FCD_ID = DOC_FCD_ID,
                 CONDITION_TYPE = conditionType.ToString()
             };
-            var query = Connection.Query<FixedContractDetailDto>(
+            var query = Connection.QueryFirstOrDefault<FixedContractDetailDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
-                ).FirstOrDefault();
+                );
 
             return query;
         }
@@ -296,8 +312,7 @@ AND DOC_FCD_ID = @DOC_FCD_ID
 FROM TB_T_FIXED_CONTRACT_D a
 WHERE 
 CONDITION_TYPE = @CONDITION_TYPE
-AND DOC_FCH_ID = @DOC_FCH_ID
-;";
+AND DOC_FCH_ID = @DOC_FCH_ID;";
 
             var parms = new
             {
@@ -376,9 +391,9 @@ AND DOC_CODE = @DOC_CODE
 
             return query;
         }
-        public void InsertDetail(FixedContractDetailDto entity)
+        public void InsertFixedContractDetail(FixedContractDetailDto entity)
         {
-            string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_D
+            string sqlCommand = @"INSERT INTO TB_T_FIXED_CONTRACT_D
 (
   DOC_FCH_ID
 , DOC_CODE
@@ -490,15 +505,15 @@ AND DOC_CODE = @DOC_CODE
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
         }
-        public void UpdateDetail(FixedContractDetailDto entity)
+        public void UpdateFixedContractDetail(FixedContractDetailDto entity)
         {
-            string sqlExecute = @"UPDATE TB_T_FIXED_CONTRACT_D
+            string sqlCommand = @"UPDATE TB_T_FIXED_CONTRACT_D
 SET
   BRAND_CODE     = @BRAND_CODE
 , ACTIVITY_CODE  = @ACTIVITY_CODE
@@ -575,12 +590,27 @@ AND DOC_FCD_ID = @DOC_FCD_ID
                 UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2(),
             };
 
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
 
+        }
+        public void DeleteFixedContractDetail(int DOC_FCD_ID)
+        {
+            string sqlCommand = @"DELETE TB_T_FIXED_CONTRACT_D WHERE DOC_FCD_ID = @DOC_FCD_ID;";
+
+            var parms = new
+            {
+                DOC_FCD_ID = DOC_FCD_ID
+            };
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
         }
 
     }

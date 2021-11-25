@@ -56,8 +56,12 @@ namespace GFCA.APT.BAL.Implements
             _uow.Dispose();
         }
 
-        
-        public DocumentWorkFlowDto GetDocumentFlowSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
+        public DocumentStateDto GetDocumentStateSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DocumentWorkFlowDto GetDocumentWorkFlowSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
         {
             return new DocumentWorkFlowDto();
         }
@@ -72,5 +76,6 @@ namespace GFCA.APT.BAL.Implements
             return new List<DocumentHistoryDto>();
         }
 
+        
     }
 }

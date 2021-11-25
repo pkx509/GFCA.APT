@@ -62,7 +62,7 @@ namespace GFCA.APT.BAL.Implements
                 response.Data = data;
                 response.Success = true;
                 response.Message = "TradeActivity has been created";
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 _logger.Info(response.Message);
             }
             catch (DataDuplicateException ex)
@@ -70,7 +70,7 @@ namespace GFCA.APT.BAL.Implements
                 _logger.Debug(model);
                 _logger.Debug($"Error while process: {ex}");
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.WARNING;
+                response.MessageType = MESSAGE_TYPE.WARNING;
                 response.Message = ex.Message;
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace GFCA.APT.BAL.Implements
                 _logger.Debug(model);
                 _logger.Error($"Error while process: {ex}");
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
             }
             finally
@@ -106,7 +106,7 @@ namespace GFCA.APT.BAL.Implements
                 //end process
                 response.Data = data;
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = "TradeActivity has been updated";
                 _logger.Info(response.Message);
             }
@@ -115,7 +115,7 @@ namespace GFCA.APT.BAL.Implements
                 _logger.Debug(model);
                 _logger.Error($"Error while process: {ex}");
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.WARNING;
+                response.MessageType = MESSAGE_TYPE.WARNING;
                 response.Message = ex.Message;
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace GFCA.APT.BAL.Implements
                 _logger.Debug(model);
                 _logger.Error($"Error while process: {ex}");
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
             }
             finally
@@ -159,7 +159,7 @@ namespace GFCA.APT.BAL.Implements
                 //end process
                 response.Data = data;
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = "TradeActivity has been deleted";
                 _logger.Info(response.Message);
             }
@@ -168,7 +168,7 @@ namespace GFCA.APT.BAL.Implements
                 _logger.Debug(model);
                 _logger.Error($"Error while process: {ex}");
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
             }
             finally

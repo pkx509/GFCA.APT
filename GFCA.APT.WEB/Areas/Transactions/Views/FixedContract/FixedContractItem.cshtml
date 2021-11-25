@@ -42,26 +42,20 @@
     <div class="content-header">
         <div class="container-fluid">
             @*----------------- document header -----------------*@
-            @*
-        Html.Partial("../Default/ItemStateFlowPartial", docState)
-            *@
-            @Html.Partial("_ItemStateFlowPartial", Model.DocumentData)
+            @Html.Partial("_DocumentStateSection", Model.DocumentData)
             @Html.Partial("_RequesterSection", Model.RequesterData)
 
             @*----------------- Fixed Contract header -----------------*@
             @Html.Partial("ItemHeaderPartial", Model.HeaderData)
 
             @*----------------- Fixed Contract detail -----------------*@
-            @Html.Partial("ItemDetailPartial")
+            @Html.Partial("ItemDetailPartial", Model.HeaderData)
 
             @*----------------- Fixed Contract Footer -----------------*@
             @Html.Partial("ItemFooterPartial", Model.FooterData)
 
             @*----------------- document footer -----------------*@
-            @*
-        Html.Partial("../Default/ItemHistoriesPartial")
-            *@
-            @Html.Partial("_ItemHistoriesPartial", Model.HistoryData)
+            @Html.Partial("_HistorySection", Model.HistoryData)
         </div>
     </div>
 </form>
@@ -73,7 +67,7 @@
             AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
         }
         var argruments = {
-            DOC_FCH_ID: @headerDto.DOC_FCH_ID,
+            DOC_FCH_ID: "@Model.HeaderData.DOC_FCH_ID",
             data: null,
         }
         var OnRowSelected = function (args) {

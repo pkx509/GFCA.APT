@@ -5,7 +5,7 @@ namespace GFCA.APT.DAL.Interfaces
 {
     public interface IDocumentRepository : IRepositories<DocumentDto>
     {
-        DocumentStateDto GetDocumentStateFlow(int headerId, string documentType);
+        DocumentStateDto GetDocumentStateFlow(string documentType, int headerId);
         IEnumerable<DocumentHistoryDto> GetDocumentHistories(int headerId);
         DocumentDto GenerateDocNo(string docTypeCode, string docCode);
         DocumentDto GenerateDocNo(string docTypeCode, int docYear, int docMonth, string clientCode, string channelCode, string custCode);

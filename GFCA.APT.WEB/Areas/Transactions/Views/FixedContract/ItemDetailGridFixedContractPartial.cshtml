@@ -1,9 +1,8 @@
 ﻿@using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2
-@{
-    FixedContractHeaderDto dto = ViewData["FixedContractHeaderDto"] as FixedContractHeaderDto;
-}
+@model GFCA.APT.Domain.Dto.FixedContractHeaderDto
+
 
 @(Html.EJS()
 .Grid("grdFixedContractDetailList")
@@ -12,7 +11,7 @@
 .DataSource(ds =>
 {
     ds
-    .Url(@Url.Action("UrlFixedContractDetailList", "FixedContract", new { Area = "Transactions", DOC_FCH_ID = dto.DOC_FCH_ID }))
+    .Url(@Url.Action("UrlFixedContractDetailList", "FixedContract", new { Area = "Transactions", DOC_FCH_ID = Model.DOC_FCH_ID }))
     .Adaptor("UrlAdaptor")
     ;
 })

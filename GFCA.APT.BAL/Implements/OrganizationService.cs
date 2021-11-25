@@ -66,13 +66,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = $"Organization ({model.ORG_CODE}) has been created";
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
 
@@ -111,13 +111,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = $"Organization ({model.ORG_CODE}) has been changed";
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
             }
@@ -154,13 +154,13 @@ namespace GFCA.APT.BAL.Implements
                 _uow.Commit();
 
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = $"{typeof(OrganizationService)} has been deleted";
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error($"{ex.Message}");
             }

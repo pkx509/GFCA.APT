@@ -1,7 +1,7 @@
 ﻿@using GFCA.APT.Domain.Dto
 @using Syncfusion.EJ2.DropDowns
 @using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.FixedContractDetailDto
+@model GFCA.APT.Domain.Dto.FixedContractHeaderDto
 
 <div class="row mb-2">
     <div class="col col-lg p-1">
@@ -35,7 +35,7 @@
                                                                 .Adaptor("UrlAdaptor");
                                                             })
                                                             .CssClass("mandatory")
-                                                            //.Value(dbo.CLIENT_CODE)
+                                                            .Value(Model.CLIENT_CODE)
                                                             .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                             .Render())
                                         }
@@ -61,7 +61,7 @@
                                                                 .Adaptor("UrlAdaptor");
                                                             })
                                                             .CssClass("mandatory")
-                                                            //.Value(dto.CUST_CODE)
+                                                            .Value(Model.CUST_CODE)
                                                             .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                             .Render())
                                         }
@@ -86,7 +86,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
-                                                        //.Value(dto.CHANNEL_CODE)
+                                                        .Value(Model.CHANNEL_CODE)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         }
@@ -114,7 +114,7 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
-                                                        //.Value(dto.REQUESTER)
+                                                        .Value(Model.REQUESTER)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         
@@ -141,7 +141,7 @@
                                                         })
                                                         //.Change("fixedContractDetail.cmbPositionChange")
                                                         .CssClass("mandatory")
-                                                        //.Value(dto.ORG_NAME)
+                                                        .Value(Model.ORG_NAME)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                         }

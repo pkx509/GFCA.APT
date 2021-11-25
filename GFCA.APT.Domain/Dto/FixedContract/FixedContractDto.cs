@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class FixedContractDto : Auditable
+    public class FixedContractDto
     {
         public PAGE_MODE DataMode { get; set; }
         public DocumentWorkFlowDto WorkflowData { get; set; }
@@ -12,7 +12,8 @@ namespace GFCA.APT.Domain.Dto
         public IEnumerable<DocumentHistoryDto> HistoryData { get; set; }
         
         public FixedContractHeaderDto HeaderData { get; set; }
-        //public IEnumerable<FixedContractDetailDto> DetailData { get; set; }
+        public FixedContractDetailDto DetailItem { get; set; }
+        public IEnumerable<FixedContractDetailDto> DetailData { get; set; }
         public FixedContractFooterDto FooterData { get; set; }
 
         public FixedContractDto(int primaryKey = 0)
@@ -22,7 +23,10 @@ namespace GFCA.APT.Domain.Dto
             DocumentData = new DocumentStateDto();
             RequesterData = new DocumentRequesterDto();
             HistoryData = new List<DocumentHistoryDto>();
-            //DetailData = new List<FixedContractDetailDto>();
+
+            HeaderData = new FixedContractHeaderDto();
+            DetailItem = new FixedContractDetailDto();
+            DetailData = new List<FixedContractDetailDto>();
             FooterData = new FixedContractFooterDto();
 
         }

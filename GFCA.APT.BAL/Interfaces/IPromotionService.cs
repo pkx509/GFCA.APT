@@ -12,6 +12,7 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse AddOverview(PromotionPlanngOverviewDto entity);
         BusinessResponse EditOverview(PromotionPlanngOverviewDto entity);
         BusinessResponse RemoveOverview(int DOC_PROM_PH_ID);
+        PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID);
 
         IEnumerable<PromotionPlanngSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID);
         PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID);

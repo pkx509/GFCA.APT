@@ -33,6 +33,10 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
+        public PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID)
+        {
+            throw new NotImplementedException();
+        }
         public BusinessResponse AddOverview(PromotionPlanngOverviewDto entity)
         {
             BusinessResponse response = new BusinessResponse();

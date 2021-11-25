@@ -73,5 +73,8 @@ namespace GFCA.APT.BAL.Implements
 
         private IPromotionGroupService _promotiongroupService;
         public IPromotionGroupService PromotionGroupService => _promotiongroupService ?? (_promotiongroupService = Serve.PromotionGroupService.CreateInstant());
+
+        private IPromotionService _promotionService;
+        public IPromotionService PromotionService => _promotionService ?? (_promotionService = Serve.PromotionService.CreateInstant());
     }
 }

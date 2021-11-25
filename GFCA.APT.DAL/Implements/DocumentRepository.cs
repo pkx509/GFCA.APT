@@ -18,7 +18,7 @@ namespace GFCA.APT.DAL.Implements
             return true;
         }
 
-        public DocumentStateDto GetDocumentStateFlow(int headerId, string documentType)
+        public DocumentStateDto GetDocumentStateFlow(string documentType, int headerId)
         {
             string sqlQuery = @"";
 
@@ -132,7 +132,7 @@ ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
         public DocumentDto GenerateDocNo(string docTypeCode, int docYear, int docMonth, string clientCode, string channelCode, string custCode)
         {
             string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH, @CLIENT_CODE, @CHANNEL_CODE, @CUST_CODE";
-            //string sqlQuery = @"SP_GENERATE_DOC_CODE";
+            //Connection.ExecuteReader()
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery,
                 param: new

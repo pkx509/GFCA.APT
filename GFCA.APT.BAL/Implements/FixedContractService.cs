@@ -10,8 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Implements
 {
@@ -37,7 +35,7 @@ namespace GFCA.APT.BAL.Implements
         {
             try
             {
-                var doch = _uow.FixedContractRepository.GetHeaderAll();
+                var doch = _uow.FixedContractRepository.GetFixedContractAll();
                 return doch;
             }
             catch (Exception ex)
@@ -49,7 +47,7 @@ namespace GFCA.APT.BAL.Implements
         {
             try
             {
-                var doch = _uow.FixedContractRepository.GetHeaderAll()
+                var doch = _uow.FixedContractRepository.GetFixedContractAll()
                     .Where(w => w.DOC_FCH_ID == id);
                 return doch.FirstOrDefault();
             }
@@ -65,7 +63,7 @@ namespace GFCA.APT.BAL.Implements
                 
                 //FC-YYYYMM-VVRR
                 string docCode = code.Substring(0, 9);
-                var doch = _uow.FixedContractRepository.GetHeaderAll()
+                var doch = _uow.FixedContractRepository.GetFixedContractAll()
                     .Where(w => w.DOC_CODE.Contains(code));
 
 
@@ -134,7 +132,7 @@ namespace GFCA.APT.BAL.Implements
                 */
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.InsertHeader(doch);
+                _uow.FixedContractRepository.InsertFixedContractHeader(doch);
 
                 _uow.Commit();
                 response.Success = true;
@@ -153,7 +151,7 @@ namespace GFCA.APT.BAL.Implements
         }
         public BusinessResponse EditHeader(FixedContractHeaderDto model)
         {
-            BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 var doch = model;
@@ -175,19 +173,40 @@ namespace GFCA.APT.BAL.Implements
                 doch.REQUESTER = doc.REQUESTER;
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.InsertHeader(doch);
+                _uow.FixedContractRepository.InsertFixedContractHeader(doch);
 
                 _uow.Commit();
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
 
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        public BusinessResponse RemoveHeader(FixedContractHeaderDto model)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                _uow.FixedContractRepository.DeleteFixedContractHeader(model.DOC_FCH_ID);
+                
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                _logger.Error("RemoveHeader : ", ex);
             }
 
             return response;
@@ -195,23 +214,23 @@ namespace GFCA.APT.BAL.Implements
         #endregion [ header ]
 
         #region [ detail ]
-        public FixedContractDto GetDetailItem(int DOC_FCD_ID)
+        public FixedContractDetailDto GetDetailItem(int DOC_FCD_ID)
         {
             var documentType = "FC";
             FixedContractDto dto = new FixedContractDto(DOC_FCD_ID);
             try
             {
                 if (dto.DataMode == PAGE_MODE.CREATING)
-                    return dto;
+                    return dto.DetailItem;
 
                 var docd = _uow.FixedContractRepository.GetDetailItem(DOC_FCD_ID);
                 //dto. = docd;
-                var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
+                var doch = _uow.FixedContractRepository.GetFixedContractByItemID(docd.DOC_FCH_ID);
                 dto.HeaderData = doch;
-                dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(doch.DOC_FCH_ID, documentType);
+                dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(documentType, doch.DOC_FCH_ID);
                 dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
 
-                return dto;
+                return docd;
             }
             catch (Exception ex)
             {
@@ -255,7 +274,7 @@ namespace GFCA.APT.BAL.Implements
                     }
                 }
                 */
-                var docd = _uow.FixedContractRepository.GetDetailItems(code);
+                var docd = _uow.FixedContractRepository.GetDetailItems(7);
                 return docd;
             }
             catch (Exception ex)
@@ -263,14 +282,15 @@ namespace GFCA.APT.BAL.Implements
                 throw ex;
             }
         }
+        
         public BusinessResponse CreateDetail(FixedContractDetailDto model)
         {
-            BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 
                 var docd = model;
-                var doch = _uow.FixedContractRepository.GetHeaderById(docd.DOC_FCH_ID);
+                var doch = _uow.FixedContractRepository.GetFixedContractByItemID(docd.DOC_FCH_ID);
                 //validate new document
                 //docd.DOC_FCD_ID = 1;
                 docd.DOC_FCH_ID = doch.DOC_FCH_ID;
@@ -283,18 +303,18 @@ namespace GFCA.APT.BAL.Implements
 
                 docd.CREATED_BY = "System";
                 docd.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.InsertDetail(docd);
+                _uow.FixedContractRepository.InsertFixedContractDetail(docd);
 
                 
                 _uow.Commit();
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
             }
 
@@ -302,7 +322,7 @@ namespace GFCA.APT.BAL.Implements
         }
         public BusinessResponse EditDetail(FixedContractDetailDto model)
         {
-            BusinessResponse response = new BusinessResponse(false, TOAST_TYPE.WARNING, string.Empty);
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 var docd = model;
@@ -316,26 +336,44 @@ namespace GFCA.APT.BAL.Implements
 
                 docd.CREATED_BY = "System";
                 docd.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.UpdateDetail(docd);
-
+                _uow.FixedContractRepository.UpdateFixedContractDetail(docd);
 
                 _uow.Commit();
                 response.Success = true;
-                response.MessageType = TOAST_TYPE.SUCCESS;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.MessageType = TOAST_TYPE.ERROR;
+                response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
+                _logger.Error("EditDetail : ", ex);
             }
 
             return response;
         }
         public BusinessResponse RemoveDetail(FixedContractDetailDto model)
         {
-            throw new NotImplementedException();
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                _uow.FixedContractRepository.DeleteFixedContractDetail(model.DOC_FCD_ID);
+                
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                _logger.Error("RemoveDetail : ", ex);
+            }
+
+            return response;
         }
         #endregion [ detail ]
 

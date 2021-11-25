@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -53,7 +54,7 @@ FROM TB_T_PROMOTION_H A";
         public PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID)
         {
             string sqlQuery =
-@"SELECT TOP 1
+@"SELECT
   A.DOC_PROM_PH_ID
 , A.DOC_CODE
 , A.DOC_VER
@@ -88,11 +89,11 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 DOC_PROM_PH_ID = DOC_PROM_PH_ID
             };
 
-            var query = Connection.Query<PromotionPlanngOverviewDto>(
+            var query = Connection.QueryFirstOrDefault<PromotionPlanngOverviewDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
-                ).FirstOrDefault();
+                );
 
             return query;
         }
@@ -307,7 +308,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
         public PromotionPlanngInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
         {
             string sqlQuery =
-@"SELECT TOP 1
+@"SELECT
   A.DOC_PROM_PI_ID
 , A.DOC_PROM_PS_ID
 , A.DOC_PROM_PH_ID
@@ -353,12 +354,20 @@ WHERE A.DOC_PROM_PI_ID = @DOC_PROM_PI_ID;";
             {
                 DOC_PROM_PI_ID = DOC_PROM_PI_ID
             };
-
-            var query = Connection.Query<PromotionPlanngInvestmentDto>(
+            /*
+            var maps = (delegate (PromotionPlanngInvestmentDto dto)
+            {
+                var data = new PromotionPlanngInvestmentDto();
+                return data;
+            });
+            */
+            var query = Connection.QueryFirstOrDefault<PromotionPlanngInvestmentDto>(
                 sql: sqlQuery
                 , param: parms
+                //, map: maps
+                //, splitOn: "DOC_PROM_PI_ID"
                 , transaction: Transaction
-                ).FirstOrDefault();
+                );
 
             return query;
         }
@@ -605,7 +614,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
         public PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
         {
             string sqlQuery =
-@"SELECT TOP 1
+@"SELECT
   A.DOC_PROM_PS_ID
 , A.DOC_PROM_PH_ID
 , A.DOC_CODE
@@ -646,11 +655,11 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 DOC_PROM_PS_ID = DOC_PROM_PS_ID
             };
 
-            var query = Connection.Query<PromotionPlanngSaleDto>(
+            var query = Connection.QueryFirstOrDefault<PromotionPlanngSaleDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
-                ).FirstOrDefault();
+                );
 
             return query;
         }
@@ -835,6 +844,6 @@ WHERE DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
             );
 
         }
-
     }
+
 }

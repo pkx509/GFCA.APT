@@ -3,6 +3,7 @@
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.FixedContractHeaderDto
 
 @{
     Dictionary<string, object> disabled = new Dictionary<string, object>();
@@ -17,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @Html.Partial("ItemDetailGridFixedContractPartial")
+                    @Html.Partial("ItemDetailGridFixedContractPartial", Model)
                 </div>
             </div>
         </div>
