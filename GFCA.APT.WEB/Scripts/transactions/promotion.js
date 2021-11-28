@@ -10,11 +10,9 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-
                 let res = JSON.parse(response.data);
-
                 $.toast({
-                    type: "success",
+                    type: res.MessageType.ToMessageType(),
                     title: "information",
                     subtitle: (new Date()).toDateString(),
                     content: res.Message,
@@ -22,7 +20,7 @@ $(document).ready(function () {
                 });
 
                 if (res.Success === true) {
-                    fixedContractHeaderPopup.close();
+                    promotionHeaderPopup.close();
                     let objGrid = document.getElementById("grdPromotion").ej2_instances[0];
                     if (objGrid) {
                         objGrid.refresh();
@@ -45,7 +43,6 @@ $(document).ready(function () {
 
     $("#toolbar_add").click(function (e) {
         e.preventDefault();
-
         let callBack = function (data) {
             sendPost(urlServices.AddHeader, data);
         };

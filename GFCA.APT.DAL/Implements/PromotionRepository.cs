@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using GFCA.APT.DAL.Interfaces;
+using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.Enums;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -37,7 +37,7 @@ namespace GFCA.APT.DAL.Implements
 , A.TOTAL_EST_INVEST
 , A.SALE_VS_INVEST
 , A.COMMENT
-, A.FLAG_ROW
+--, A.FLAG_ROW
 , A.CREATED_BY
 , A.CREATED_DATE
 , A.UPDATED_BY
@@ -149,7 +149,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 DOC_CODE         = entity.DOC_CODE,
                 DOC_VER          = entity.DOC_VER,
                 DOC_REV          = entity.DOC_REV,
-                DOC_STATUS       = entity.DOC_STATUS.ToString(),
+                DOC_STATUS       = entity.DOC_STATUS.ToValue(),
                 PROMO_NAME       = entity.PROMO_NAME,
                 PROMO_START      = entity.PROMO_START,
                 PROMO_END        = entity.PROMO_END,
@@ -163,7 +163,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 TOTAL_EST_INVEST = entity.TOTAL_EST_INVEST,
                 SALE_VS_INVEST   = entity.SALE_VS_INVEST,
                 //COMMENT        = entity.COMMENT,
-                FLAG_ROW         = entity.FLAG_ROW.ToString(),
+                FLAG_ROW         = entity.FLAG_ROW.ToValue(),
                 CREATED_BY       = entity.CREATED_BY
             };
 
@@ -207,7 +207,7 @@ WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
                 DOC_CODE         = entity.DOC_CODE,
                 DOC_VER          = entity.DOC_VER,
                 DOC_REV          = entity.DOC_REV,
-                DOC_STATUS       = entity.DOC_STATUS.ToString(),
+                DOC_STATUS       = entity.DOC_STATUS.ToValue(),
                 PROMO_NAME       = entity.PROMO_NAME,
                 PROMO_START      = entity.PROMO_START,
                 PROMO_END        = entity.PROMO_END,
@@ -221,7 +221,7 @@ WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
                 TOTAL_EST_INVEST = entity.TOTAL_EST_INVEST,
                 SALE_VS_INVEST   = entity.SALE_VS_INVEST,
                 COMMENT          = entity.COMMENT,
-                FLAG_ROW         = entity.FLAG_ROW.ToString(),
+                FLAG_ROW         = entity.FLAG_ROW.ToValue(),
                 UPDATED_BY       = entity.UPDATED_BY
             };
 
@@ -459,7 +459,7 @@ WHERE A.DOC_PROM_PI_ID = @DOC_PROM_PI_ID;";
                 FUND2_COST_CODE         = entity.FUND2_CENTER_CODE,
                 FUND2_AMOUNT            = entity.FUND2_AMOUNT,
                 REMARKS                 = entity.REMARKS,
-                FLAG_ROW                = entity.FLAG_ROW.ToString(),
+                FLAG_ROW                = entity.FLAG_ROW.ToValue(),
                 CREATED_BY              = entity.CREATED_BY
             };
 
@@ -532,7 +532,7 @@ WHERE DOC_PROM_PI_ID = @DOC_PROM_PI_ID";
                 FUND2_COST_CODE         = entity.FUND2_CENTER_CODE,
                 FUND2_AMOUNT            = entity.FUND2_AMOUNT,
                 REMARKS                 = entity.REMARKS,
-                FLAG_ROW                = entity.FLAG_ROW.ToString(),
+                FLAG_ROW                = entity.FLAG_ROW.ToValue(),
                 UPDATED_BY              = entity.UPDATED_BY
             };
 
@@ -748,7 +748,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 SALE_VALUE_EXCL_VAT = entity.SALE_VALUE_EXCL_VAT,
                 SALE_UOM            = entity.SALE_UOM,
                 DISC_TYPE           = entity.DISC_TYPE,
-                FLAG_ROW            = entity.FLAG_ROW.ToString(),
+                FLAG_ROW            = entity.FLAG_ROW.ToValue(),
                 CREATED_BY          = entity.CREATED_BY
             };
 
@@ -819,7 +819,7 @@ WHERE DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 SALE_VALUE_EXCL_VAT = entity.SALE_VALUE_EXCL_VAT,
                 SALE_UOM            = entity.SALE_UOM,
                 DISC_TYPE           = entity.DISC_TYPE,
-                FLAG_ROW            = entity.FLAG_ROW.ToString(),
+                FLAG_ROW            = entity.FLAG_ROW.ToValue(),
                 UPDATED_BY          = entity.UPDATED_BY
             };
 

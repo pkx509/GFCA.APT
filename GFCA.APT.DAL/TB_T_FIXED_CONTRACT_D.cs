@@ -52,6 +52,6 @@ namespace GFCA.APT.DAL
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
-        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
+        public virtual TB_T_FIXED_CONTRACT_H TB_T_FIXED_CONTRACT_H { get; set; }
     }
 }

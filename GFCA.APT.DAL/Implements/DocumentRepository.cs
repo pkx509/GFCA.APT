@@ -124,30 +124,22 @@ ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
 
         }
 
-        public DocumentDto GenerateDocNo(string docTypeCode, string docCode)
+        public DocumentDto GenerateDocNo(string docTypeCode, string custCode, int docYear, int docMonth)
         {
-            throw new NotImplementedException();
-        }
-
-        public DocumentDto GenerateDocNo(string docTypeCode, int docYear, int docMonth, string clientCode, string channelCode, string custCode)
-        {
-            string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @DOC_TYPE_CODE, @DOC_YEAR, @DOC_MONTH, @CLIENT_CODE, @CHANNEL_CODE, @CUST_CODE";
+            string sqlQuery = @"EXECUTE SP_GENERATE_DOC_CODE @IN_DOC_TYPE_CODE, @IN_DOC_YEAR, @IN_DOC_MONTH, @IN_CUST_CODE";
             //Connection.ExecuteReader()
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery,
                 param: new
                 {
-                    DOC_TYPE_CODE = docTypeCode,
-                    DOC_YEAR = docYear,
-                    DOC_MONTH = docMonth,
-                    CLIENT_CODE = clientCode,
-                    CHANNEL_CODE = channelCode,
-                    CUST_CODE = custCode
+                    IN_DOC_TYPE_CODE = docTypeCode,
+                    IN_DOC_YEAR = docYear,
+                    IN_DOC_MONTH = docMonth,
+                    IN_CUST_CODE = custCode
                 },
                 commandType: CommandType.Text,
                 transaction: Transaction
-                ).FirstOrDefault()
-                ;
+                ).FirstOrDefault();
 
             return query;
         }

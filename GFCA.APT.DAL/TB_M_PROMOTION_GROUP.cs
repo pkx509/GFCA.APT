@@ -18,7 +18,6 @@ namespace GFCA.APT.DAL
         public TB_M_PROMOTION_GROUP()
         {
             this.TB_P_PRODUCT_GROUP = new HashSet<TB_P_PRODUCT_GROUP>();
-            this.TB_T_PROMOTION_PLAN_H = new HashSet<TB_T_PROMOTION_PLAN_H>();
         }
     
         public string PROGP_CODE { get; set; }
@@ -35,7 +34,5 @@ namespace GFCA.APT.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_P_PRODUCT_GROUP> TB_P_PRODUCT_GROUP { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
     }
 }

@@ -95,7 +95,7 @@ namespace GFCA.APT.BAL.Implements
             {
                 var doch = model;
 
-                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.DOC_YEAR, doch.DOC_MONTH, doch.CLIENT_CODE, doch.CHANNEL_CODE, doch.CUST_CODE);
+                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.CUST_CODE, doch.DOC_YEAR, doch.DOC_MONTH);
                 //generate document no
 
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;

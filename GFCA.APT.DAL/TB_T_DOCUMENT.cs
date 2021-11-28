@@ -21,10 +21,7 @@ namespace GFCA.APT.DAL
             this.TB_T_BUDGET_H = new HashSet<TB_T_BUDGET_H>();
             this.TB_T_CLAIM_D = new HashSet<TB_T_CLAIM_D>();
             this.TB_T_CLAIM_H = new HashSet<TB_T_CLAIM_H>();
-            this.TB_T_FIXED_CONTRACT_D = new HashSet<TB_T_FIXED_CONTRACT_D>();
             this.TB_T_FIXED_CONTRACT_H = new HashSet<TB_T_FIXED_CONTRACT_H>();
-            this.TB_T_PROMOTION_PLAN_D = new HashSet<TB_T_PROMOTION_PLAN_D>();
-            this.TB_T_PROMOTION_PLAN_H = new HashSet<TB_T_PROMOTION_PLAN_H>();
         }
     
         public string DOC_TYPE_CODE { get; set; }
@@ -33,11 +30,13 @@ namespace GFCA.APT.DAL
         public Nullable<int> DOC_REV { get; set; }
         public Nullable<int> DOC_MONTH { get; set; }
         public Nullable<int> DOC_YEAR { get; set; }
+        public string COMP_CODE { get; set; }
         public string CUST_CODE { get; set; }
         public string DOC_STATUS { get; set; }
         public string FLOW_CURRENT { get; set; }
         public string FLOW_NEXT { get; set; }
         public string REQUESTER { get; set; }
+        public string ORG_CODE { get; set; }
     
         public virtual TB_M_DOCUMENT_TYPE TB_M_DOCUMENT_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -49,12 +48,6 @@ namespace GFCA.APT.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_CLAIM_H> TB_T_CLAIM_H { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_FIXED_CONTRACT_D> TB_T_FIXED_CONTRACT_D { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_FIXED_CONTRACT_H> TB_T_FIXED_CONTRACT_H { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_PROMOTION_PLAN_D> TB_T_PROMOTION_PLAN_D { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
     }
 }

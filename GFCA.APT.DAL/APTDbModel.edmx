@@ -97,18 +97,6 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Property Name="ErrorMessage" Type="varchar(max)" />
           <Property Name="ErrorDateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="DeviceCodes">
-          <Key>
-            <PropertyRef Name="UserCode" />
-          </Key>
-          <Property Name="UserCode" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="DeviceCode" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
-          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="PersistedGrants">
           <Key>
             <PropertyRef Name="Key" />
@@ -408,6 +396,25 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'APT2DB3.dbo.TB_M_PACK_20210923' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TB_M_PACK_20210923">
+          <Key>
+            <PropertyRef Name="PACK_ID" />
+            <PropertyRef Name="PACK_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
+          </Key>
+          <Property Name="PACK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PACK_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PACK_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="PACK_DESC" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TB_M_PRODUCT">
           <Key>
             <PropertyRef Name="PROD_CODE" />
@@ -480,19 +487,6 @@ warning 6002: The table/view 'APT2DB3.dbo.DB_Errors' does not have a primary key
           <Property Name="SIZE_CODE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SIZE_NAME" Type="varchar" MaxLength="100" />
           <Property Name="SIZE_DESC" Type="varchar(max)" />
-          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
-          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
-          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
-        </EntityType>
-        <EntityType Name="TB_M_SOURCE_FUND">
-          <Key>
-            <PropertyRef Name="FUND_CODE" />
-          </Key>
-          <Property Name="FUND_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FUND_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="FUND_DESC" Type="varchar(max)" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
@@ -825,11 +819,13 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="DOC_REV" Type="int" />
           <Property Name="DOC_MONTH" Type="int" />
           <Property Name="DOC_YEAR" Type="int" />
+          <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
           <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
           <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
           <Property Name="FLOW_CURRENT" Type="varchar" MaxLength="50" />
           <Property Name="FLOW_NEXT" Type="varchar" MaxLength="50" />
           <Property Name="REQUESTER" Type="varchar" MaxLength="100" />
+          <Property Name="ORG_CODE" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TB_T_FIXED_CONTRACT_D">
           <Key>
@@ -891,35 +887,101 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" />
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+          <Property Name="ORG_CODE1" Type="varchar" MaxLength="50" />
+          <Property Name="COMP_CODE1" Type="varchar" MaxLength="50" />
+          <Property Name="REQUESTER1" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="TB_T_PROMOTION_PLAN_D">
+        <EntityType Name="TB_T_PROMOTION_H">
           <Key>
-            <PropertyRef Name="DOC_PROPLD_ID" />
+            <PropertyRef Name="DOC_PROM_PH_ID" />
           </Key>
-          <Property Name="DOC_PROPLH_ID" Type="int" />
-          <Property Name="DOC_PROPLD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_PROM_PH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DOC_CODE" Type="varchar" MaxLength="50" />
-          <Property Name="PROPLD_TYPE_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_VER" Type="int" />
+          <Property Name="DOC_REV" Type="int" />
+          <Property Name="DOC_STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="PROMO_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="PROMO_START" Type="date" />
+          <Property Name="PROMO_END" Type="date" />
+          <Property Name="BUYING_START" Type="date" />
+          <Property Name="BUYING_END" Type="date" />
+          <Property Name="CLIENT_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CUST_SEGMENT" Type="varchar" MaxLength="50" />
+          <Property Name="TOTAL_EST_SALE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="TOTAL_EST_INVEST" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="SALE_VS_INVEST" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="COMMENT" Type="varchar(max)" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" />
           <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
           <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
         </EntityType>
-        <EntityType Name="TB_T_PROMOTION_PLAN_H">
+        <EntityType Name="TB_T_PROMOTION_INVEST">
           <Key>
-            <PropertyRef Name="DOC_PROPLH_ID" />
+            <PropertyRef Name="DOC_PROM_PI_ID" />
           </Key>
-          <Property Name="DOC_PROPLH_ID" Type="int" Nullable="false" />
+          <Property Name="DOC_PROM_PI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_PROM_PS_ID" Type="int" />
+          <Property Name="DOC_PROM_PH_ID" Type="int" />
           <Property Name="DOC_CODE" Type="varchar" MaxLength="50" />
-          <Property Name="PROGP_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CLIENT_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CUST_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PROPL_CODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PROPL_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="PROPL_BEGIN" Type="date" />
-          <Property Name="PROPL_END" Type="date" />
+          <Property Name="DOC_VER" Type="int" />
+          <Property Name="DOC_REV" Type="int" />
+          <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_SKU" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVITY_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="INVEST_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="INVEST_VALUE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="INVEST_AMOUNT" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="ACTIVITY_CODE_OTHER" Type="varchar" MaxLength="50" />
+          <Property Name="ACTIVITY_COMBINED_OTHER" Type="varchar" MaxLength="1" />
+          <Property Name="INCREMENT_SALE_INVEST" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="INVEST_ACC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FUND1_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FUND1_CENTER_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FUND1_AMOUNT" Type="nchar" MaxLength="10" />
+          <Property Name="FUND2_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FUND2_CENTER_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FUND2_AMOUNT" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="REMARKS" Type="varchar(max)" />
+          <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="100" />
+          <Property Name="UPDATED_DATE" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TB_T_PROMOTION_SALE">
+          <Key>
+            <PropertyRef Name="DOC_PROM_PS_ID" />
+          </Key>
+          <Property Name="DOC_PROM_PS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOC_PROM_PH_ID" Type="int" />
+          <Property Name="DOC_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="DOC_VER" Type="int" />
+          <Property Name="DOC_REV" Type="int" />
+          <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="BRAND_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_SKU" Type="varchar" MaxLength="50" />
+          <Property Name="PROD_LTP_EXCL_VAT" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="NORM_PERC_DISC" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="NORM_PERC_GP" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="NORM_SHELF_PRICE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="PROMO_PERC_DISC" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="PROMO_PERC_GP" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="PROMO_SHELF_PRICE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="DEAL_GUIDE_LINE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="NET_INTO_STORE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="AVG_SALE" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="AVG_VOLUME" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="SALE_QTY" Type="int" />
+          <Property Name="SALE_VALUE_EXCL_VAT" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="SALE_UOM" Type="varchar" MaxLength="100" />
+          <Property Name="DISC_TYPE" Type="varchar" MaxLength="100" />
           <Property Name="FLAG_ROW" Type="varchar" MaxLength="1" />
           <Property Name="CREATED_BY" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CREATED_DATE" Type="datetime2" Precision="7" Nullable="false" />
@@ -1193,18 +1255,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
-          <End Role="TB_M_SOURCE_FUND" Type="Self.TB_M_SOURCE_FUND" Multiplicity="0..1" />
-          <End Role="TB_M_VENDOR" Type="Self.TB_M_VENDOR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_M_SOURCE_FUND">
-              <PropertyRef Name="FUND_CODE" />
-            </Principal>
-            <Dependent Role="TB_M_VENDOR">
-              <PropertyRef Name="FUND_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_P_BRAND_ORG_TB_M_BRAND">
           <End Role="TB_M_BRAND" Type="Self.TB_M_BRAND" Multiplicity="1" />
           <End Role="TB_P_BRAND_ORG" Type="Self.TB_P_BRAND_ORG" Multiplicity="*" />
@@ -1445,15 +1495,15 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="1" />
+        <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H">
+          <End Role="TB_T_FIXED_CONTRACT_H" Type="Self.TB_T_FIXED_CONTRACT_H" Multiplicity="1" />
           <End Role="TB_T_FIXED_CONTRACT_D" Type="Self.TB_T_FIXED_CONTRACT_D" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
+            <Principal Role="TB_T_FIXED_CONTRACT_H">
+              <PropertyRef Name="DOC_FCH_ID" />
             </Principal>
             <Dependent Role="TB_T_FIXED_CONTRACT_D">
-              <PropertyRef Name="DOC_CODE" />
+              <PropertyRef Name="DOC_FCH_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1469,51 +1519,15 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE">
-          <End Role="TB_M_PROMOTION_PLAN_TYPE" Type="Self.TB_M_PROMOTION_PLAN_TYPE" Multiplicity="0..1" />
-          <End Role="TB_T_PROMOTION_PLAN_D" Type="Self.TB_T_PROMOTION_PLAN_D" Multiplicity="*" />
+        <Association Name="FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE">
+          <End Role="TB_T_PROMOTION_SALE" Type="Self.TB_T_PROMOTION_SALE" Multiplicity="0..1" />
+          <End Role="TB_T_PROMOTION_INVEST" Type="Self.TB_T_PROMOTION_INVEST" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_M_PROMOTION_PLAN_TYPE">
-              <PropertyRef Name="PROPLD_TYPE_CODE" />
+            <Principal Role="TB_T_PROMOTION_SALE">
+              <PropertyRef Name="DOC_PROM_PS_ID" />
             </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_D">
-              <PropertyRef Name="PROPLD_TYPE_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT">
-          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="0..1" />
-          <End Role="TB_T_PROMOTION_PLAN_D" Type="Self.TB_T_PROMOTION_PLAN_D" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_D">
-              <PropertyRef Name="DOC_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP">
-          <End Role="TB_M_PROMOTION_GROUP" Type="Self.TB_M_PROMOTION_GROUP" Multiplicity="1" />
-          <End Role="TB_T_PROMOTION_PLAN_H" Type="Self.TB_T_PROMOTION_PLAN_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_M_PROMOTION_GROUP">
-              <PropertyRef Name="PROGP_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_H">
-              <PropertyRef Name="PROGP_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT">
-          <End Role="TB_T_DOCUMENT" Type="Self.TB_T_DOCUMENT" Multiplicity="0..1" />
-          <End Role="TB_T_PROMOTION_PLAN_H" Type="Self.TB_T_PROMOTION_PLAN_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_H">
-              <PropertyRef Name="DOC_CODE" />
+            <Dependent Role="TB_T_PROMOTION_INVEST">
+              <PropertyRef Name="DOC_PROM_PS_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1628,7 +1642,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserTokens" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DeviceCodes" EntityType="Self.DeviceCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersistedGrants" EntityType="Self.PersistedGrants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Self.TB_M_ACTIVITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_BRAND" EntityType="Self.TB_M_BRAND" Schema="dbo" store:Type="Tables" />
@@ -1653,7 +1666,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Self.TB_M_PROMOTION_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_PROMOTION_PLAN_TYPE" EntityType="Self.TB_M_PROMOTION_PLAN_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_SIZE" EntityType="Self.TB_M_SIZE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_M_SOURCE_FUND" EntityType="Self.TB_M_SOURCE_FUND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_UNIT" EntityType="Self.TB_M_UNIT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_M_VENDOR" EntityType="Self.TB_M_VENDOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_P_BRAND_ORG" EntityType="Self.TB_P_BRAND_ORG" Schema="dbo" store:Type="Tables" />
@@ -1672,8 +1684,9 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_T_DOCUMENT" EntityType="Self.TB_T_DOCUMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_FIXED_CONTRACT_D" EntityType="Self.TB_T_FIXED_CONTRACT_D" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_T_FIXED_CONTRACT_H" EntityType="Self.TB_T_FIXED_CONTRACT_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_T_PROMOTION_PLAN_D" EntityType="Self.TB_T_PROMOTION_PLAN_D" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_T_PROMOTION_PLAN_H" EntityType="Self.TB_T_PROMOTION_PLAN_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_T_PROMOTION_H" EntityType="Self.TB_T_PROMOTION_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_T_PROMOTION_INVEST" EntityType="Self.TB_T_PROMOTION_INVEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_T_PROMOTION_SALE" EntityType="Self.TB_T_PROMOTION_SALE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WM_FLOW_ITEM" EntityType="Self.TB_WM_FLOW_ITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WM_OPERATION" EntityType="Self.TB_WM_OPERATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_WM_WORKFLOW" EntityType="Self.TB_WM_WORKFLOW" Schema="dbo" store:Type="Tables" />
@@ -1692,6 +1705,19 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
     [DB_Errors].[ErrorMessage] AS [ErrorMessage], 
     [DB_Errors].[ErrorDateTime] AS [ErrorDateTime]
     FROM [dbo].[DB_Errors] AS [DB_Errors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TB_M_PACK_20210923" EntityType="Self.TB_M_PACK_20210923" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TB_M_PACK_20210923].[PACK_ID] AS [PACK_ID], 
+    [TB_M_PACK_20210923].[PACK_CODE] AS [PACK_CODE], 
+    [TB_M_PACK_20210923].[PACK_NAME] AS [PACK_NAME], 
+    [TB_M_PACK_20210923].[PACK_DESC] AS [PACK_DESC], 
+    [TB_M_PACK_20210923].[FLAG_ROW] AS [FLAG_ROW], 
+    [TB_M_PACK_20210923].[CREATED_BY] AS [CREATED_BY], 
+    [TB_M_PACK_20210923].[CREATED_DATE] AS [CREATED_DATE], 
+    [TB_M_PACK_20210923].[UPDATED_BY] AS [UPDATED_BY], 
+    [TB_M_PACK_20210923].[UPDATED_DATE] AS [UPDATED_DATE]
+    FROM [dbo].[TB_M_PACK_20210923] AS [TB_M_PACK_20210923]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Self.TB_S_EMPLOYEE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1781,10 +1807,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_M_UNIT" EntitySet="TB_M_UNIT" />
             <End Role="TB_M_UNIT1" EntitySet="TB_M_UNIT" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND" Association="Self.FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
-            <End Role="TB_M_SOURCE_FUND" EntitySet="TB_M_SOURCE_FUND" />
-            <End Role="TB_M_VENDOR" EntitySet="TB_M_VENDOR" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_P_BRAND_ORG_TB_M_BRAND" Association="Self.FK_TB_P_BRAND_ORG_TB_M_BRAND">
             <End Role="TB_M_BRAND" EntitySet="TB_M_BRAND" />
             <End Role="TB_P_BRAND_ORG" EntitySet="TB_P_BRAND_ORG" />
@@ -1865,29 +1887,17 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_M_DOCUMENT_TYPE" EntitySet="TB_M_DOCUMENT_TYPE" />
             <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT" Association="Self.FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
+          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H" Association="Self.FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H">
+            <End Role="TB_T_FIXED_CONTRACT_H" EntitySet="TB_T_FIXED_CONTRACT_H" />
             <End Role="TB_T_FIXED_CONTRACT_D" EntitySet="TB_T_FIXED_CONTRACT_D" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT" Association="Self.FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT">
             <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
             <End Role="TB_T_FIXED_CONTRACT_H" EntitySet="TB_T_FIXED_CONTRACT_H" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE" Association="Self.FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE">
-            <End Role="TB_M_PROMOTION_PLAN_TYPE" EntitySet="TB_M_PROMOTION_PLAN_TYPE" />
-            <End Role="TB_T_PROMOTION_PLAN_D" EntitySet="TB_T_PROMOTION_PLAN_D" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT" Association="Self.FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
-            <End Role="TB_T_PROMOTION_PLAN_D" EntitySet="TB_T_PROMOTION_PLAN_D" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP" Association="Self.FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP">
-            <End Role="TB_M_PROMOTION_GROUP" EntitySet="TB_M_PROMOTION_GROUP" />
-            <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT" Association="Self.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
-            <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
+          <AssociationSet Name="FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE" Association="Self.FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE">
+            <End Role="TB_T_PROMOTION_SALE" EntitySet="TB_T_PROMOTION_SALE" />
+            <End Role="TB_T_PROMOTION_INVEST" EntitySet="TB_T_PROMOTION_INVEST" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_WM_WORKFLOW_STATE_TB_WM_WORKFLOW" Association="Self.FK_TB_WM_WORKFLOW_STATE_TB_WM_WORKFLOW">
             <End Role="TB_WM_WORKFLOW" EntitySet="TB_WM_WORKFLOW" />
@@ -1949,7 +1959,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="AspNetUserLogins" EntityType="Models.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Models.AspNetUser" />
           <EntitySet Name="AspNetUserTokens" EntityType="Models.AspNetUserToken" />
-          <EntitySet Name="DeviceCodes" EntityType="Models.DeviceCode" />
           <EntitySet Name="PersistedGrants" EntityType="Models.PersistedGrant" />
           <EntitySet Name="TB_M_ACTIVITY" EntityType="Models.TB_M_ACTIVITY" />
           <EntitySet Name="TB_M_BRAND" EntityType="Models.TB_M_BRAND" />
@@ -1974,7 +1983,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_M_PROMOTION_GROUP" EntityType="Models.TB_M_PROMOTION_GROUP" />
           <EntitySet Name="TB_M_PROMOTION_PLAN_TYPE" EntityType="Models.TB_M_PROMOTION_PLAN_TYPE" />
           <EntitySet Name="TB_M_SIZE" EntityType="Models.TB_M_SIZE" />
-          <EntitySet Name="TB_M_SOURCE_FUND" EntityType="Models.TB_M_SOURCE_FUND" />
           <EntitySet Name="TB_M_UNIT" EntityType="Models.TB_M_UNIT" />
           <EntitySet Name="TB_M_VENDOR" EntityType="Models.TB_M_VENDOR" />
           <EntitySet Name="TB_P_BRAND_ORG" EntityType="Models.TB_P_BRAND_ORG" />
@@ -1993,8 +2001,9 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_T_DOCUMENT" EntityType="Models.TB_T_DOCUMENT" />
           <EntitySet Name="TB_T_FIXED_CONTRACT_D" EntityType="Models.TB_T_FIXED_CONTRACT_D" />
           <EntitySet Name="TB_T_FIXED_CONTRACT_H" EntityType="Models.TB_T_FIXED_CONTRACT_H" />
-          <EntitySet Name="TB_T_PROMOTION_PLAN_D" EntityType="Models.TB_T_PROMOTION_PLAN_D" />
-          <EntitySet Name="TB_T_PROMOTION_PLAN_H" EntityType="Models.TB_T_PROMOTION_PLAN_H" />
+          <EntitySet Name="TB_T_PROMOTION_H" EntityType="Models.TB_T_PROMOTION_H" />
+          <EntitySet Name="TB_T_PROMOTION_INVEST" EntityType="Models.TB_T_PROMOTION_INVEST" />
+          <EntitySet Name="TB_T_PROMOTION_SALE" EntityType="Models.TB_T_PROMOTION_SALE" />
           <EntitySet Name="TB_WM_FLOW_ITEM" EntityType="Models.TB_WM_FLOW_ITEM" />
           <EntitySet Name="TB_WM_OPERATION" EntityType="Models.TB_WM_OPERATION" />
           <EntitySet Name="TB_WM_WORKFLOW" EntityType="Models.TB_WM_WORKFLOW" />
@@ -2002,6 +2011,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySet Name="TB_WP_STATE_ACTOR" EntityType="Models.TB_WP_STATE_ACTOR" />
           <EntitySet Name="TB_WP_STATE_DIRECTION" EntityType="Models.TB_WP_STATE_DIRECTION" />
           <EntitySet Name="DB_Errors" EntityType="Models.DB_Errors" />
+          <EntitySet Name="TB_M_PACK_20210923" EntityType="Models.TB_M_PACK_20210923" />
           <EntitySet Name="TB_S_EMPLOYEE" EntityType="Models.TB_S_EMPLOYEE" />
           <EntitySet Name="TB_S_ORGANIZATION" EntityType="Models.TB_S_ORGANIZATION" />
           <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Models.FK_AspNetRoleClaims_AspNetRoles_RoleId">
@@ -2104,18 +2114,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_M_PROMOTION_GROUP" EntitySet="TB_M_PROMOTION_GROUP" />
             <End Role="TB_P_PRODUCT_GROUP" EntitySet="TB_P_PRODUCT_GROUP" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP" Association="Models.FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP">
-            <End Role="TB_M_PROMOTION_GROUP" EntitySet="TB_M_PROMOTION_GROUP" />
-            <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE" Association="Models.FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE">
-            <End Role="TB_M_PROMOTION_PLAN_TYPE" EntitySet="TB_M_PROMOTION_PLAN_TYPE" />
-            <End Role="TB_T_PROMOTION_PLAN_D" EntitySet="TB_T_PROMOTION_PLAN_D" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND" Association="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
-            <End Role="TB_M_SOURCE_FUND" EntitySet="TB_M_SOURCE_FUND" />
-            <End Role="TB_M_VENDOR" EntitySet="TB_M_VENDOR" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_M_UNIT_TB_M_UNIT" Association="Models.FK_TB_M_UNIT_TB_M_UNIT">
             <End Role="TB_M_UNIT" EntitySet="TB_M_UNIT" />
             <End Role="TB_M_UNIT1" EntitySet="TB_M_UNIT" />
@@ -2148,21 +2146,17 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
             <End Role="TB_T_CLAIM_H" EntitySet="TB_T_CLAIM_H" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT" Association="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
-            <End Role="TB_T_FIXED_CONTRACT_D" EntitySet="TB_T_FIXED_CONTRACT_D" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT" Association="Models.FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT">
             <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
             <End Role="TB_T_FIXED_CONTRACT_H" EntitySet="TB_T_FIXED_CONTRACT_H" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT" Association="Models.FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
-            <End Role="TB_T_PROMOTION_PLAN_D" EntitySet="TB_T_PROMOTION_PLAN_D" />
+          <AssociationSet Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H" Association="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H">
+            <End Role="TB_T_FIXED_CONTRACT_H" EntitySet="TB_T_FIXED_CONTRACT_H" />
+            <End Role="TB_T_FIXED_CONTRACT_D" EntitySet="TB_T_FIXED_CONTRACT_D" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT" Association="Models.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT">
-            <End Role="TB_T_DOCUMENT" EntitySet="TB_T_DOCUMENT" />
-            <End Role="TB_T_PROMOTION_PLAN_H" EntitySet="TB_T_PROMOTION_PLAN_H" />
+          <AssociationSet Name="FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE" Association="Models.FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE">
+            <End Role="TB_T_PROMOTION_SALE" EntitySet="TB_T_PROMOTION_SALE" />
+            <End Role="TB_T_PROMOTION_INVEST" EntitySet="TB_T_PROMOTION_INVEST" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM" Association="Models.FK_TB_WP_STATE_DIRECTION_TB_WM_FLOW_ITEM">
             <End Role="TB_WM_FLOW_ITEM" EntitySet="TB_WM_FLOW_ITEM" />
@@ -2270,18 +2264,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="Name" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Models.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUserToken" ToRole="AspNetUser" />
-        </EntityType>
-        <EntityType Name="DeviceCode">
-          <Key>
-            <PropertyRef Name="UserCode" />
-          </Key>
-          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceCode1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersistedGrant">
           <Key>
@@ -2662,7 +2644,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TB_P_PRODUCT_GROUP" Relationship="Models.FK_TB_P_PRODUCT_GROUP_TB_M_PROMOTION_GROUP" FromRole="TB_M_PROMOTION_GROUP" ToRole="TB_P_PRODUCT_GROUP" />
-          <NavigationProperty Name="TB_T_PROMOTION_PLAN_H" Relationship="Models.FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP" FromRole="TB_M_PROMOTION_GROUP" ToRole="TB_T_PROMOTION_PLAN_H" />
         </EntityType>
         <EntityType Name="TB_M_PROMOTION_PLAN_TYPE">
           <Key>
@@ -2676,7 +2657,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_T_PROMOTION_PLAN_D" Relationship="Models.FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE" FromRole="TB_M_PROMOTION_PLAN_TYPE" ToRole="TB_T_PROMOTION_PLAN_D" />
         </EntityType>
         <EntityType Name="TB_M_SIZE">
           <Key>
@@ -2690,20 +2670,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-        </EntityType>
-        <EntityType Name="TB_M_SOURCE_FUND">
-          <Key>
-            <PropertyRef Name="FUND_CODE" />
-          </Key>
-          <Property Name="FUND_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FUND_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FUND_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_M_VENDOR" Relationship="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND" FromRole="TB_M_SOURCE_FUND" ToRole="TB_M_VENDOR" />
         </EntityType>
         <EntityType Name="TB_M_UNIT">
           <Key>
@@ -2738,7 +2704,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_M_SOURCE_FUND" Relationship="Models.FK_TB_M_VENDOR_TB_M_SOURCE_FUND" FromRole="TB_M_VENDOR" ToRole="TB_M_SOURCE_FUND" />
           <NavigationProperty Name="TB_P_CUSTOMER_PARTY" Relationship="Models.FK_TB_P_CUSTOMER_PARTY_TB_M_VENDOR" FromRole="TB_M_VENDOR" ToRole="TB_P_CUSTOMER_PARTY" />
         </EntityType>
         <EntityType Name="TB_P_BRAND_ORG">
@@ -2966,20 +2931,19 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="DOC_REV" Type="Int32" />
           <Property Name="DOC_MONTH" Type="Int32" />
           <Property Name="DOC_YEAR" Type="Int32" />
+          <Property Name="COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLOW_CURRENT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FLOW_NEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="REQUESTER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORG_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TB_M_DOCUMENT_TYPE" Relationship="Models.FK_TB_T_DOCUMENT_TB_M_DOCUMENT_TYPE" FromRole="TB_T_DOCUMENT" ToRole="TB_M_DOCUMENT_TYPE" />
           <NavigationProperty Name="TB_T_BUDGET_D" Relationship="Models.FK_TB_T_BUDGET_D_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_BUDGET_D" />
           <NavigationProperty Name="TB_T_BUDGET_H" Relationship="Models.FK_TB_T_BUDGET_H_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_BUDGET_H" />
           <NavigationProperty Name="TB_T_CLAIM_D" Relationship="Models.FK_TB_T_CLAIM_D_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_CLAIM_D" />
           <NavigationProperty Name="TB_T_CLAIM_H" Relationship="Models.FK_TB_T_CLAIM_H_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_CLAIM_H" />
-          <NavigationProperty Name="TB_T_FIXED_CONTRACT_D" Relationship="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_FIXED_CONTRACT_D" />
           <NavigationProperty Name="TB_T_FIXED_CONTRACT_H" Relationship="Models.FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_FIXED_CONTRACT_H" />
-          <NavigationProperty Name="TB_T_PROMOTION_PLAN_D" Relationship="Models.FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_PROMOTION_PLAN_D" />
-          <NavigationProperty Name="TB_T_PROMOTION_PLAN_H" Relationship="Models.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT" FromRole="TB_T_DOCUMENT" ToRole="TB_T_PROMOTION_PLAN_H" />
         </EntityType>
         <EntityType Name="TB_T_FIXED_CONTRACT_D">
           <Key>
@@ -3022,7 +2986,7 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT" FromRole="TB_T_FIXED_CONTRACT_D" ToRole="TB_T_DOCUMENT" />
+          <NavigationProperty Name="TB_T_FIXED_CONTRACT_H" Relationship="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H" FromRole="TB_T_FIXED_CONTRACT_D" ToRole="TB_T_FIXED_CONTRACT_H" />
         </EntityType>
         <EntityType Name="TB_T_FIXED_CONTRACT_H">
           <Key>
@@ -3042,45 +3006,110 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <Property Name="ORG_CODE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COMP_CODE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTER1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT" FromRole="TB_T_FIXED_CONTRACT_H" ToRole="TB_T_DOCUMENT" />
+          <NavigationProperty Name="TB_T_FIXED_CONTRACT_D" Relationship="Models.FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H" FromRole="TB_T_FIXED_CONTRACT_H" ToRole="TB_T_FIXED_CONTRACT_D" />
         </EntityType>
-        <EntityType Name="TB_T_PROMOTION_PLAN_D">
+        <EntityType Name="TB_T_PROMOTION_H">
           <Key>
-            <PropertyRef Name="DOC_PROPLD_ID" />
+            <PropertyRef Name="DOC_PROM_PH_ID" />
           </Key>
-          <Property Name="DOC_PROPLH_ID" Type="Int32" />
-          <Property Name="DOC_PROPLD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_PROM_PH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DOC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PROPLD_TYPE_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_VER" Type="Int32" />
+          <Property Name="DOC_REV" Type="Int32" />
+          <Property Name="DOC_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROMO_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROMO_START" Type="DateTime" Precision="0" />
+          <Property Name="PROMO_END" Type="DateTime" Precision="0" />
+          <Property Name="BUYING_START" Type="DateTime" Precision="0" />
+          <Property Name="BUYING_END" Type="DateTime" Precision="0" />
+          <Property Name="CLIENT_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_SEGMENT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOTAL_EST_SALE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="TOTAL_EST_INVEST" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="SALE_VS_INVEST" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_DATE" Type="DateTime" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_M_PROMOTION_PLAN_TYPE" Relationship="Models.FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE" FromRole="TB_T_PROMOTION_PLAN_D" ToRole="TB_M_PROMOTION_PLAN_TYPE" />
-          <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT" FromRole="TB_T_PROMOTION_PLAN_D" ToRole="TB_T_DOCUMENT" />
         </EntityType>
-        <EntityType Name="TB_T_PROMOTION_PLAN_H">
+        <EntityType Name="TB_T_PROMOTION_INVEST">
           <Key>
-            <PropertyRef Name="DOC_PROPLH_ID" />
+            <PropertyRef Name="DOC_PROM_PI_ID" />
           </Key>
-          <Property Name="DOC_PROPLH_ID" Type="Int32" Nullable="false" />
+          <Property Name="DOC_PROM_PI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_PROM_PS_ID" Type="Int32" />
+          <Property Name="DOC_PROM_PH_ID" Type="Int32" />
           <Property Name="DOC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PROGP_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CLIENT_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CUST_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CHANNEL_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PROPL_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PROPL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PROPL_BEGIN" Type="DateTime" Precision="0" />
-          <Property Name="PROPL_END" Type="DateTime" Precision="0" />
+          <Property Name="DOC_VER" Type="Int32" />
+          <Property Name="DOC_REV" Type="Int32" />
+          <Property Name="COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BRAND_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INVEST_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INVEST_VALUE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="INVEST_AMOUNT" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="ACTIVITY_CODE_OTHER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_COMBINED_OTHER" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="INCREMENT_SALE_INVEST" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="INVEST_ACC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND1_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND1_CENTER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND1_AMOUNT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FUND2_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND2_CENTER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FUND2_AMOUNT" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="REMARKS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TB_M_PROMOTION_GROUP" Relationship="Models.FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP" FromRole="TB_T_PROMOTION_PLAN_H" ToRole="TB_M_PROMOTION_GROUP" />
-          <NavigationProperty Name="TB_T_DOCUMENT" Relationship="Models.FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT" FromRole="TB_T_PROMOTION_PLAN_H" ToRole="TB_T_DOCUMENT" />
+          <NavigationProperty Name="TB_T_PROMOTION_SALE" Relationship="Models.FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE" FromRole="TB_T_PROMOTION_INVEST" ToRole="TB_T_PROMOTION_SALE" />
+        </EntityType>
+        <EntityType Name="TB_T_PROMOTION_SALE">
+          <Key>
+            <PropertyRef Name="DOC_PROM_PS_ID" />
+          </Key>
+          <Property Name="DOC_PROM_PS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOC_PROM_PH_ID" Type="Int32" />
+          <Property Name="DOC_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_VER" Type="Int32" />
+          <Property Name="DOC_REV" Type="Int32" />
+          <Property Name="COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BRAND_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LTP_EXCL_VAT" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="NORM_PERC_DISC" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="NORM_PERC_GP" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="NORM_SHELF_PRICE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="PROMO_PERC_DISC" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="PROMO_PERC_GP" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="PROMO_SHELF_PRICE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="DEAL_GUIDE_LINE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="NET_INTO_STORE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="AVG_SALE" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="AVG_VOLUME" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="SALE_QTY" Type="Int32" />
+          <Property Name="SALE_VALUE_EXCL_VAT" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="SALE_UOM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISC_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TB_T_PROMOTION_INVEST" Relationship="Models.FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE" FromRole="TB_T_PROMOTION_SALE" ToRole="TB_T_PROMOTION_INVEST" />
         </EntityType>
         <EntityType Name="TB_WM_FLOW_ITEM">
           <Key>
@@ -3182,6 +3211,23 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TB_M_PACK_20210923">
+          <Key>
+            <PropertyRef Name="PACK_ID" />
+            <PropertyRef Name="PACK_CODE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="CREATED_DATE" />
+          </Key>
+          <Property Name="PACK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PACK_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ROW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="TB_S_EMPLOYEE">
           <Key>
@@ -3521,42 +3567,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_H_TB_M_PROMOTION_GROUP">
-          <End Type="Models.TB_M_PROMOTION_GROUP" Role="TB_M_PROMOTION_GROUP" Multiplicity="1" />
-          <End Type="Models.TB_T_PROMOTION_PLAN_H" Role="TB_T_PROMOTION_PLAN_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_M_PROMOTION_GROUP">
-              <PropertyRef Name="PROGP_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_H">
-              <PropertyRef Name="PROGP_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_D_TB_M_PROMOTION_PLAN_TYPE">
-          <End Type="Models.TB_M_PROMOTION_PLAN_TYPE" Role="TB_M_PROMOTION_PLAN_TYPE" Multiplicity="0..1" />
-          <End Type="Models.TB_T_PROMOTION_PLAN_D" Role="TB_T_PROMOTION_PLAN_D" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_M_PROMOTION_PLAN_TYPE">
-              <PropertyRef Name="PROPLD_TYPE_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_D">
-              <PropertyRef Name="PROPLD_TYPE_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_M_VENDOR_TB_M_SOURCE_FUND">
-          <End Type="Models.TB_M_SOURCE_FUND" Role="TB_M_SOURCE_FUND" Multiplicity="0..1" />
-          <End Type="Models.TB_M_VENDOR" Role="TB_M_VENDOR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_M_SOURCE_FUND">
-              <PropertyRef Name="FUND_CODE" />
-            </Principal>
-            <Dependent Role="TB_M_VENDOR">
-              <PropertyRef Name="FUND_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_M_UNIT_TB_M_UNIT">
           <End Type="Models.TB_M_UNIT" Role="TB_M_UNIT" Multiplicity="0..1" />
           <End Type="Models.TB_M_UNIT" Role="TB_M_UNIT1" Multiplicity="*" />
@@ -3653,18 +3663,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_DOCUMENT">
-          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="1" />
-          <End Type="Models.TB_T_FIXED_CONTRACT_D" Role="TB_T_FIXED_CONTRACT_D" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
-            </Principal>
-            <Dependent Role="TB_T_FIXED_CONTRACT_D">
-              <PropertyRef Name="DOC_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_T_FIXED_CONTRACT_H_TB_T_DOCUMENT">
           <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="1" />
           <End Type="Models.TB_T_FIXED_CONTRACT_H" Role="TB_T_FIXED_CONTRACT_H" Multiplicity="*" />
@@ -3677,27 +3675,27 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_D_TB_T_DOCUMENT">
-          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="0..1" />
-          <End Type="Models.TB_T_PROMOTION_PLAN_D" Role="TB_T_PROMOTION_PLAN_D" Multiplicity="*" />
+        <Association Name="FK_TB_T_FIXED_CONTRACT_D_TB_T_FIXED_CONTRACT_H">
+          <End Type="Models.TB_T_FIXED_CONTRACT_H" Role="TB_T_FIXED_CONTRACT_H" Multiplicity="1" />
+          <End Type="Models.TB_T_FIXED_CONTRACT_D" Role="TB_T_FIXED_CONTRACT_D" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
+            <Principal Role="TB_T_FIXED_CONTRACT_H">
+              <PropertyRef Name="DOC_FCH_ID" />
             </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_D">
-              <PropertyRef Name="DOC_CODE" />
+            <Dependent Role="TB_T_FIXED_CONTRACT_D">
+              <PropertyRef Name="DOC_FCH_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_T_PROMOTION_PLAN_H_TB_T_DOCUMENT">
-          <End Type="Models.TB_T_DOCUMENT" Role="TB_T_DOCUMENT" Multiplicity="0..1" />
-          <End Type="Models.TB_T_PROMOTION_PLAN_H" Role="TB_T_PROMOTION_PLAN_H" Multiplicity="*" />
+        <Association Name="FK_TB_T_PROMOTION_INVEST_TB_T_PROMOTION_SALE">
+          <End Type="Models.TB_T_PROMOTION_SALE" Role="TB_T_PROMOTION_SALE" Multiplicity="0..1" />
+          <End Type="Models.TB_T_PROMOTION_INVEST" Role="TB_T_PROMOTION_INVEST" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_T_DOCUMENT">
-              <PropertyRef Name="DOC_CODE" />
+            <Principal Role="TB_T_PROMOTION_SALE">
+              <PropertyRef Name="DOC_PROM_PS_ID" />
             </Principal>
-            <Dependent Role="TB_T_PROMOTION_PLAN_H">
-              <PropertyRef Name="DOC_CODE" />
+            <Dependent Role="TB_T_PROMOTION_INVEST">
+              <PropertyRef Name="DOC_PROM_PS_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3865,19 +3863,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeviceCodes">
-            <EntityTypeMapping TypeName="Models.DeviceCode">
-              <MappingFragment StoreEntitySet="DeviceCodes">
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
-                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="DeviceCode1" ColumnName="DeviceCode" />
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4280,20 +4265,6 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_M_SOURCE_FUND">
-            <EntityTypeMapping TypeName="Models.TB_M_SOURCE_FUND">
-              <MappingFragment StoreEntitySet="TB_M_SOURCE_FUND">
-                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
-                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
-                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
-                <ScalarProperty Name="FUND_DESC" ColumnName="FUND_DESC" />
-                <ScalarProperty Name="FUND_NAME" ColumnName="FUND_NAME" />
-                <ScalarProperty Name="FUND_CODE" ColumnName="FUND_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_M_UNIT">
             <EntityTypeMapping TypeName="Models.TB_M_UNIT">
               <MappingFragment StoreEntitySet="TB_M_UNIT">
@@ -4528,11 +4499,13 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySetMapping Name="TB_T_DOCUMENT">
             <EntityTypeMapping TypeName="Models.TB_T_DOCUMENT">
               <MappingFragment StoreEntitySet="TB_T_DOCUMENT">
+                <ScalarProperty Name="ORG_CODE" ColumnName="ORG_CODE" />
                 <ScalarProperty Name="REQUESTER" ColumnName="REQUESTER" />
                 <ScalarProperty Name="FLOW_NEXT" ColumnName="FLOW_NEXT" />
                 <ScalarProperty Name="FLOW_CURRENT" ColumnName="FLOW_CURRENT" />
                 <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
                 <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
                 <ScalarProperty Name="DOC_YEAR" ColumnName="DOC_YEAR" />
                 <ScalarProperty Name="DOC_MONTH" ColumnName="DOC_MONTH" />
                 <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
@@ -4588,6 +4561,9 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
           <EntitySetMapping Name="TB_T_FIXED_CONTRACT_H">
             <EntityTypeMapping TypeName="Models.TB_T_FIXED_CONTRACT_H">
               <MappingFragment StoreEntitySet="TB_T_FIXED_CONTRACT_H">
+                <ScalarProperty Name="REQUESTER1" ColumnName="REQUESTER1" />
+                <ScalarProperty Name="COMP_CODE1" ColumnName="COMP_CODE1" />
+                <ScalarProperty Name="ORG_CODE1" ColumnName="ORG_CODE1" />
                 <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
                 <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
@@ -4605,39 +4581,103 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_T_PROMOTION_PLAN_D">
-            <EntityTypeMapping TypeName="Models.TB_T_PROMOTION_PLAN_D">
-              <MappingFragment StoreEntitySet="TB_T_PROMOTION_PLAN_D">
+          <EntitySetMapping Name="TB_T_PROMOTION_H">
+            <EntityTypeMapping TypeName="Models.TB_T_PROMOTION_H">
+              <MappingFragment StoreEntitySet="TB_T_PROMOTION_H">
                 <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
                 <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
-                <ScalarProperty Name="PROPLD_TYPE_CODE" ColumnName="PROPLD_TYPE_CODE" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="SALE_VS_INVEST" ColumnName="SALE_VS_INVEST" />
+                <ScalarProperty Name="TOTAL_EST_INVEST" ColumnName="TOTAL_EST_INVEST" />
+                <ScalarProperty Name="TOTAL_EST_SALE" ColumnName="TOTAL_EST_SALE" />
+                <ScalarProperty Name="CUST_SEGMENT" ColumnName="CUST_SEGMENT" />
+                <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
+                <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
+                <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
+                <ScalarProperty Name="BUYING_END" ColumnName="BUYING_END" />
+                <ScalarProperty Name="BUYING_START" ColumnName="BUYING_START" />
+                <ScalarProperty Name="PROMO_END" ColumnName="PROMO_END" />
+                <ScalarProperty Name="PROMO_START" ColumnName="PROMO_START" />
+                <ScalarProperty Name="PROMO_NAME" ColumnName="PROMO_NAME" />
+                <ScalarProperty Name="DOC_STATUS" ColumnName="DOC_STATUS" />
+                <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
+                <ScalarProperty Name="DOC_VER" ColumnName="DOC_VER" />
                 <ScalarProperty Name="DOC_CODE" ColumnName="DOC_CODE" />
-                <ScalarProperty Name="DOC_PROPLD_ID" ColumnName="DOC_PROPLD_ID" />
-                <ScalarProperty Name="DOC_PROPLH_ID" ColumnName="DOC_PROPLH_ID" />
+                <ScalarProperty Name="DOC_PROM_PH_ID" ColumnName="DOC_PROM_PH_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_T_PROMOTION_PLAN_H">
-            <EntityTypeMapping TypeName="Models.TB_T_PROMOTION_PLAN_H">
-              <MappingFragment StoreEntitySet="TB_T_PROMOTION_PLAN_H">
+          <EntitySetMapping Name="TB_T_PROMOTION_INVEST">
+            <EntityTypeMapping TypeName="Models.TB_T_PROMOTION_INVEST">
+              <MappingFragment StoreEntitySet="TB_T_PROMOTION_INVEST">
                 <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
                 <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
-                <ScalarProperty Name="PROPL_END" ColumnName="PROPL_END" />
-                <ScalarProperty Name="PROPL_BEGIN" ColumnName="PROPL_BEGIN" />
-                <ScalarProperty Name="PROPL_NAME" ColumnName="PROPL_NAME" />
-                <ScalarProperty Name="PROPL_CODE" ColumnName="PROPL_CODE" />
-                <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
-                <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
-                <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
-                <ScalarProperty Name="PROGP_CODE" ColumnName="PROGP_CODE" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="FUND2_AMOUNT" ColumnName="FUND2_AMOUNT" />
+                <ScalarProperty Name="FUND2_CENTER_CODE" ColumnName="FUND2_CENTER_CODE" />
+                <ScalarProperty Name="FUND2_CODE" ColumnName="FUND2_CODE" />
+                <ScalarProperty Name="FUND1_AMOUNT" ColumnName="FUND1_AMOUNT" />
+                <ScalarProperty Name="FUND1_CENTER_CODE" ColumnName="FUND1_CENTER_CODE" />
+                <ScalarProperty Name="FUND1_CODE" ColumnName="FUND1_CODE" />
+                <ScalarProperty Name="INVEST_ACC_CODE" ColumnName="INVEST_ACC_CODE" />
+                <ScalarProperty Name="INCREMENT_SALE_INVEST" ColumnName="INCREMENT_SALE_INVEST" />
+                <ScalarProperty Name="ACTIVITY_COMBINED_OTHER" ColumnName="ACTIVITY_COMBINED_OTHER" />
+                <ScalarProperty Name="ACTIVITY_CODE_OTHER" ColumnName="ACTIVITY_CODE_OTHER" />
+                <ScalarProperty Name="INVEST_AMOUNT" ColumnName="INVEST_AMOUNT" />
+                <ScalarProperty Name="INVEST_VALUE" ColumnName="INVEST_VALUE" />
+                <ScalarProperty Name="INVEST_TYPE" ColumnName="INVEST_TYPE" />
+                <ScalarProperty Name="ACTIVITY_CODE" ColumnName="ACTIVITY_CODE" />
+                <ScalarProperty Name="PROD_SKU" ColumnName="PROD_SKU" />
+                <ScalarProperty Name="PROD_CODE" ColumnName="PROD_CODE" />
+                <ScalarProperty Name="BRAND_CODE" ColumnName="BRAND_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
+                <ScalarProperty Name="DOC_VER" ColumnName="DOC_VER" />
                 <ScalarProperty Name="DOC_CODE" ColumnName="DOC_CODE" />
-                <ScalarProperty Name="DOC_PROPLH_ID" ColumnName="DOC_PROPLH_ID" />
+                <ScalarProperty Name="DOC_PROM_PH_ID" ColumnName="DOC_PROM_PH_ID" />
+                <ScalarProperty Name="DOC_PROM_PS_ID" ColumnName="DOC_PROM_PS_ID" />
+                <ScalarProperty Name="DOC_PROM_PI_ID" ColumnName="DOC_PROM_PI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_T_PROMOTION_SALE">
+            <EntityTypeMapping TypeName="Models.TB_T_PROMOTION_SALE">
+              <MappingFragment StoreEntitySet="TB_T_PROMOTION_SALE">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="DISC_TYPE" ColumnName="DISC_TYPE" />
+                <ScalarProperty Name="SALE_UOM" ColumnName="SALE_UOM" />
+                <ScalarProperty Name="SALE_VALUE_EXCL_VAT" ColumnName="SALE_VALUE_EXCL_VAT" />
+                <ScalarProperty Name="SALE_QTY" ColumnName="SALE_QTY" />
+                <ScalarProperty Name="AVG_VOLUME" ColumnName="AVG_VOLUME" />
+                <ScalarProperty Name="AVG_SALE" ColumnName="AVG_SALE" />
+                <ScalarProperty Name="NET_INTO_STORE" ColumnName="NET_INTO_STORE" />
+                <ScalarProperty Name="DEAL_GUIDE_LINE" ColumnName="DEAL_GUIDE_LINE" />
+                <ScalarProperty Name="PROMO_SHELF_PRICE" ColumnName="PROMO_SHELF_PRICE" />
+                <ScalarProperty Name="PROMO_PERC_GP" ColumnName="PROMO_PERC_GP" />
+                <ScalarProperty Name="PROMO_PERC_DISC" ColumnName="PROMO_PERC_DISC" />
+                <ScalarProperty Name="NORM_SHELF_PRICE" ColumnName="NORM_SHELF_PRICE" />
+                <ScalarProperty Name="NORM_PERC_GP" ColumnName="NORM_PERC_GP" />
+                <ScalarProperty Name="NORM_PERC_DISC" ColumnName="NORM_PERC_DISC" />
+                <ScalarProperty Name="PROD_LTP_EXCL_VAT" ColumnName="PROD_LTP_EXCL_VAT" />
+                <ScalarProperty Name="PROD_SKU" ColumnName="PROD_SKU" />
+                <ScalarProperty Name="PROD_CODE" ColumnName="PROD_CODE" />
+                <ScalarProperty Name="BRAND_CODE" ColumnName="BRAND_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="DOC_REV" ColumnName="DOC_REV" />
+                <ScalarProperty Name="DOC_VER" ColumnName="DOC_VER" />
+                <ScalarProperty Name="DOC_CODE" ColumnName="DOC_CODE" />
+                <ScalarProperty Name="DOC_PROM_PH_ID" ColumnName="DOC_PROM_PH_ID" />
+                <ScalarProperty Name="DOC_PROM_PS_ID" ColumnName="DOC_PROM_PS_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4731,6 +4771,21 @@ warning 6002: The table/view 'APT2DB3.dbo.TB_S_ORGANIZATION' does not have a pri
                 <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_M_PACK_20210923">
+            <EntityTypeMapping TypeName="Models.TB_M_PACK_20210923">
+              <MappingFragment StoreEntitySet="TB_M_PACK_20210923">
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="FLAG_ROW" ColumnName="FLAG_ROW" />
+                <ScalarProperty Name="PACK_DESC" ColumnName="PACK_DESC" />
+                <ScalarProperty Name="PACK_NAME" ColumnName="PACK_NAME" />
+                <ScalarProperty Name="PACK_CODE" ColumnName="PACK_CODE" />
+                <ScalarProperty Name="PACK_ID" ColumnName="PACK_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

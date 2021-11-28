@@ -12,34 +12,30 @@ namespace GFCA.APT.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_T_FIXED_CONTRACT_H
+    public partial class TB_T_PROMOTION_H
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_T_FIXED_CONTRACT_H()
-        {
-            this.TB_T_FIXED_CONTRACT_D = new HashSet<TB_T_FIXED_CONTRACT_D>();
-        }
-    
-        public int DOC_FCH_ID { get; set; }
+        public int DOC_PROM_PH_ID { get; set; }
         public string DOC_CODE { get; set; }
-        public int DOC_VER { get; set; }
-        public int DOC_REV { get; set; }
-        public string CLIENT_CODE { get; set; }
-        public string CUST_CODE { get; set; }
-        public string CHANNEL_CODE { get; set; }
+        public Nullable<int> DOC_VER { get; set; }
+        public Nullable<int> DOC_REV { get; set; }
         public string DOC_STATUS { get; set; }
+        public string PROMO_NAME { get; set; }
+        public Nullable<System.DateTime> PROMO_START { get; set; }
+        public Nullable<System.DateTime> PROMO_END { get; set; }
+        public Nullable<System.DateTime> BUYING_START { get; set; }
+        public Nullable<System.DateTime> BUYING_END { get; set; }
+        public string CLIENT_CODE { get; set; }
+        public string CHANNEL_CODE { get; set; }
+        public string CUST_CODE { get; set; }
+        public string CUST_SEGMENT { get; set; }
+        public Nullable<decimal> TOTAL_EST_SALE { get; set; }
+        public Nullable<decimal> TOTAL_EST_INVEST { get; set; }
+        public Nullable<decimal> SALE_VS_INVEST { get; set; }
         public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
-        public string ORG_CODE1 { get; set; }
-        public string COMP_CODE1 { get; set; }
-        public string REQUESTER1 { get; set; }
-    
-        public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_T_FIXED_CONTRACT_D> TB_T_FIXED_CONTRACT_D { get; set; }
     }
 }

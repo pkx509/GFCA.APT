@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.Domain.HTTP.Controls
 {
-    [DataContract(Name = "DocumentStatus")]
+    [DataContract(Name = "MessageType")]
     public enum MESSAGE_TYPE
     {
         [EnumMember(Value = "info")] INFORMATION = 0,

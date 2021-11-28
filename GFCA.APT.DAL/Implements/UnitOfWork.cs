@@ -10,6 +10,7 @@ namespace GFCA.APT.DAL.Implements
     {
         private IDbConnection _connection;
         private IDbTransaction _transaction;
+
         private IBrandRepository _brandRepository;
         private IProductRepository _productRepository;
         private IEmissionRepository _emissionRepository;
@@ -30,25 +31,21 @@ namespace GFCA.APT.DAL.Implements
         private IUnitRepository _unitRepository;
         private ISizeRepository _sizeRepository;
         private ICustomerPartyRepository _customerPartyRepository;
-        private IPromotionGroupRepository _promotiongrouprepository;
+        private IPromotionGroupRepository _promotionGroupRepository;
         private IDocumentRepository _documentRepository;
         private IFixedContractRepository _fixedContractRepository;
         private IPromotionRepository _promotionRepository;
 
-
-        private bool _disposed = false;
         public static IUnitOfWork CreateInstant()
         {
             var uow = new UnitOfWork("APTDbConnectionString");
             return uow;
         }
-
         public UnitOfWork(string connectionName)
         {
             string connString = ConfigurationManager.ConnectionStrings[connectionName].ToString();
             Initial(connString);
         }
-
         private void Initial(string connectionString)
         {
             _connection = new SqlConnection(connectionString);
@@ -200,7 +197,7 @@ namespace GFCA.APT.DAL.Implements
         {
             get
             {
-                return _promotiongrouprepository ?? (_promotiongrouprepository = new PromotionGroupRepository(_transaction));
+                return _promotionGroupRepository ?? (_promotionGroupRepository = new PromotionGroupRepository(_transaction));
             }
         }
         public IDocumentRepository DocumentRepository
@@ -225,34 +222,6 @@ namespace GFCA.APT.DAL.Implements
             }
         }
 
-        private void resetRepositories()
-        {
-            _brandRepository = null;
-            _productRepository = null;
-            _emissionRepository = null;
-            _glaccountRepository = null;
-            _budgetTypeRepository = null;
-            _tradeActivityRepository = null;
-            _channelRepository = null;
-            _companyRepository = null;
-            _costCenterRepository = null;
-            _customerRepository = null;
-            _clientRepository = null;
-            _documentTypeRepository = null;
-            _distributorRepository = null;
-            _employeeRepository = null;
-            _internalOrderRepository = null;
-            _organizationRepository = null;
-            _packRepository = null;
-            _unitRepository = null;
-            _sizeRepository = null;
-            _customerPartyRepository = null;
-            _promotiongrouprepository = null;
-            _documentRepository = null;
-            _fixedContractRepository = null;
-            _promotionRepository = null;
-        }
-
         public void Commit()
         {
             try
@@ -273,7 +242,38 @@ namespace GFCA.APT.DAL.Implements
         }
 
         #region [ Grabrage Collection ]
-        
+
+        private bool _disposed = false;
+        private void resetRepositories()
+        {
+            //masters
+            _brandRepository = null;
+            _productRepository = null;
+            _emissionRepository = null;
+            _glaccountRepository = null;
+            _budgetTypeRepository = null;
+            _tradeActivityRepository = null;
+            _channelRepository = null;
+            _companyRepository = null;
+            _costCenterRepository = null;
+            _customerRepository = null;
+            _clientRepository = null;
+            _documentTypeRepository = null;
+            _distributorRepository = null;
+            _employeeRepository = null;
+            _internalOrderRepository = null;
+            _organizationRepository = null;
+            _packRepository = null;
+            _unitRepository = null;
+            _sizeRepository = null;
+            _customerPartyRepository = null;
+            _promotionGroupRepository = null;
+
+            //transaction
+            _documentRepository = null;
+            _fixedContractRepository = null;
+            _promotionRepository = null;
+        }
         private void Dispose(bool disposing)
         {
 

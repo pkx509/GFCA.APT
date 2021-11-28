@@ -122,6 +122,7 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/dist/js/adminlte.js")
                 .Include("~/Scripts/jquery.bsAlerts.min.js")
                 .Include("~/Scripts/bs4-toast/dist/toast.min.js")
+                .Include("~/Scripts/common.js")
                 ;
             bundles.Add(adminlteScript);
             bundles.Add(new StyleBundle("~/bundles/ejstyles").Include(

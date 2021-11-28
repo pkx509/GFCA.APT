@@ -93,11 +93,14 @@
 
                                   .Columns(col =>
                                   {
-                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
-                                      col.Field("REQUESTER").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
-                                      col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_VER").HeaderText("Version").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_REV").HeaderText("Revision").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_NAME").HeaderText("Customer").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Center).Add();
                                   })
                                   .Render())
 
@@ -118,7 +121,7 @@
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
             Add       : "@Url.Action("Add", "Promotion", new { Area = "Transactions" })",
-            AddHeader : "@Url.Action("CreatePromotionHeader", "Promotion", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
             AddDetail : "@Url.Action("CreatePromotionDetail", "Promotion", new { Area = "Transactions" })",
             Delete    : "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
         }
@@ -138,7 +141,6 @@
     </script>
 
     @Scripts.Render("~/Scripts/transactions/promotionHeaderPopup.js")
-    @Scripts.Render("~/Scripts/transactions/promotionDetail.js")
 }
 
 @section scripts

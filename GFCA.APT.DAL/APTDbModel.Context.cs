@@ -33,7 +33,6 @@ namespace GFCA.APT.DAL
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
-        public virtual DbSet<DeviceCode> DeviceCodes { get; set; }
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; }
         public virtual DbSet<TB_M_ACTIVITY> TB_M_ACTIVITY { get; set; }
         public virtual DbSet<TB_M_BRAND> TB_M_BRAND { get; set; }
@@ -58,7 +57,6 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_M_PROMOTION_GROUP> TB_M_PROMOTION_GROUP { get; set; }
         public virtual DbSet<TB_M_PROMOTION_PLAN_TYPE> TB_M_PROMOTION_PLAN_TYPE { get; set; }
         public virtual DbSet<TB_M_SIZE> TB_M_SIZE { get; set; }
-        public virtual DbSet<TB_M_SOURCE_FUND> TB_M_SOURCE_FUND { get; set; }
         public virtual DbSet<TB_M_UNIT> TB_M_UNIT { get; set; }
         public virtual DbSet<TB_M_VENDOR> TB_M_VENDOR { get; set; }
         public virtual DbSet<TB_P_BRAND_ORG> TB_P_BRAND_ORG { get; set; }
@@ -77,8 +75,9 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_T_DOCUMENT> TB_T_DOCUMENT { get; set; }
         public virtual DbSet<TB_T_FIXED_CONTRACT_D> TB_T_FIXED_CONTRACT_D { get; set; }
         public virtual DbSet<TB_T_FIXED_CONTRACT_H> TB_T_FIXED_CONTRACT_H { get; set; }
-        public virtual DbSet<TB_T_PROMOTION_PLAN_D> TB_T_PROMOTION_PLAN_D { get; set; }
-        public virtual DbSet<TB_T_PROMOTION_PLAN_H> TB_T_PROMOTION_PLAN_H { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_H> TB_T_PROMOTION_H { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
+        public virtual DbSet<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
         public virtual DbSet<TB_WM_FLOW_ITEM> TB_WM_FLOW_ITEM { get; set; }
         public virtual DbSet<TB_WM_OPERATION> TB_WM_OPERATION { get; set; }
         public virtual DbSet<TB_WM_WORKFLOW> TB_WM_WORKFLOW { get; set; }
@@ -86,6 +85,7 @@ namespace GFCA.APT.DAL
         public virtual DbSet<TB_WP_STATE_ACTOR> TB_WP_STATE_ACTOR { get; set; }
         public virtual DbSet<TB_WP_STATE_DIRECTION> TB_WP_STATE_DIRECTION { get; set; }
         public virtual DbSet<DB_Errors> DB_Errors { get; set; }
+        public virtual DbSet<TB_M_PACK_20210923> TB_M_PACK_20210923 { get; set; }
         public virtual DbSet<TB_S_EMPLOYEE> TB_S_EMPLOYEE { get; set; }
         public virtual DbSet<TB_S_ORGANIZATION> TB_S_ORGANIZATION { get; set; }
     

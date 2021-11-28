@@ -2,6 +2,7 @@
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.HTTP.Controls;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;
@@ -27,7 +28,15 @@ namespace GFCA.APT.BAL.Implements
         #region [ header ]
         public IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var doch = _uow.PromotionRepository.GetPromotionPlanAll();
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID)
         {
@@ -37,17 +46,35 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
-        public BusinessResponse AddOverview(PromotionPlanngOverviewDto entity)
+        public BusinessResponse CreateOverview(PromotionPlanngOverviewDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
                 PromotionPlanngOverviewDto model = entity;
-                _uow.DocumentRepository.GenerateDocNo("PP", DateTime.Today.Year, DateTime.Today.Month, model.CLIENT_CODE, model.CHANNEL_CODE, model.CUST_CODE);
+                var dummyDoc = _uow.DocumentRepository.GenerateDocNo(model.DOC_TYPE_CODE, model.CUST_CODE, DateTime.Today.Year, DateTime.Today.Month);
+                DocumentDto doc = dummyDoc;
+                doc.REQUESTER = "System";
+                //_uow.DocumentRepository.Insert(doc);
+
+                model.DOC_CODE = dummyDoc.DOC_CODE;
+                model.DOC_VER = dummyDoc.DOC_VER;
+                model.DOC_REV = dummyDoc.DOC_REV;
+                model.CUST_CODE = dummyDoc.CUST_CODE;
+                //model.CUST_NAME = 
+                model.CREATED_BY = doc.REQUESTER;
                 _uow.PromotionRepository.InsertOverview(model);
+                
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("PromotionService : ", ex);
             }
 
@@ -90,7 +117,7 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
-        public BusinessResponse AddInvestment(PromotionPlanngInvestmentDto entity)
+        public BusinessResponse CreateInvestment(PromotionPlanngInvestmentDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
@@ -140,7 +167,7 @@ namespace GFCA.APT.BAL.Implements
         {
             throw new NotImplementedException();
         }
-        public BusinessResponse AddPlanngSale(PromotionPlanngSaleDto entity)
+        public BusinessResponse CreatePlanngSale(PromotionPlanngSaleDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try

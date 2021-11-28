@@ -229,7 +229,7 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().DatePicker("pop-cmb-promotionEnd")
                                                                     .Placeholder("Choose a Range")
-                                                                    .Value(DateTime.Today)
+                                                                    .Value(new DateTime(2099, 12, 31))
                                                                     .Format("dd/MM/yyyy")
                                                                     .Enabled(true)
                                                                     .Render())
@@ -261,7 +261,7 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().DatePicker("pop-cmb-buyingEnd")
                                                                     .Placeholder("Choose a Range")
-                                                                    .Value(DateTime.Today)
+                                                                    .Value(new DateTime(2099, 12, 31))
                                                                     .Format("dd/MM/yyyy")
                                                                     .Enabled(true)
                                                                     .Render())
@@ -276,6 +276,8 @@
                         </div>
 
                     </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

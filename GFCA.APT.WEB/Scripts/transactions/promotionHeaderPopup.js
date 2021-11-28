@@ -1,6 +1,6 @@
 const POPUP_MODE = Object.freeze({
     CREATE: 1,
-    EDIT: 2,
+    EDIT  : 2,
     DELETE: 3
 });
 
@@ -24,45 +24,56 @@ let promotionHeaderPopup = new (function () {
 
     //Model Dto
     /*
-    this.field_company_code = "#pop-cmb-company_hidden";
-    this.field_company_name = "#pop-cmb-company";
-    this.field_document_no = "#pop-txt-document-no";
-    this.field_client_code = "#pop-cmb-client_hidden";
-    this.field_client_name = "#pop-cmb-client";
+    this.field_company_code  = "#pop-cmb-company_hidden";
+    this.field_company_name  = "#pop-cmb-company";
+    this.field_document_no   = "#pop-txt-document-no";
+    this.field_client_code   = "#pop-cmb-client_hidden";
+    this.field_client_name   = "#pop-cmb-client";
     this.field_customer_code = "#pop-cmb-customer_hidden";
     this.field_customer_name = "#pop-cmb-customer";
-    this.field_channel_code = "#pop-cmb-channel_hidden";
-    this.field_channel_name = "#pop-cmb-channel";
-    this.field_requester = "#pop-txt-requester";
+    this.field_channel_code  = "#pop-cmb-channel_hidden";
+    this.field_channel_name  = "#pop-cmb-channel";
+    this.field_requester     = "#pop-txt-requester";
     this.field_position_code = "#pop-cmb-position_hidden";
     this.field_position_name = "#pop-cmb-position";
     */
 
-    //FixedContractHeaderDto
+    //PromotionPlanngOverviewDto
     this.jsonData = {
-        /*
-        DOC_TYPE_CODE: null,
-        DOC_CODE: null,
-        DOC_VER: null,
-        DOC_REV: null,
-        DOC_MONTH: null,
-        DOC_YEAR: null,
-        DOC_STATUS: null,
-        FLOW_CURRENT: null,
-        FLOW_NEXT: null,
-        REQUESTER: null,
-        DOC_FCH_ID: null,
-        CLIENT_CODE: null,
-        CLIENT_NAME: null,
-        CUST_CODE: null,
-        CHANNEL_CODE: null,
-        CHANNEL_NAME: null,
-        COMMENT: null,
-        FLAG_ROW: null,
-        COMMAND_TYPE: null,
-        OGR_CODE: null,
-        COMP_CODE: null
-        */
+        
+        DOC_TYPE_CODE : 'PP',
+
+        DOC_PROM_PH_ID : 0,
+
+        DOC_CODE   : null,
+        DOC_VER    : 0,
+        DOC_REV    : 0,
+        DOC_STATUS : 'DRAFT',
+
+        PROMO_NAME   : null,
+        PROMO_START  : null,
+        PROMO_END    : null,
+        BUYING_START : null,
+        BUYING_END   : null,
+
+        CLIENT_CODE  : null,
+        CLIENT_NAME  : null,
+
+        CHANNEL_CODE : null,
+        CHANNEL_NAME : null,
+
+        CUST_CODE    : null,
+        CUST_NAME    : null,
+        CUST_SEGMENT : null,
+
+        TOTAL_EST_SALE   : 0.00,
+        TOTAL_EST_INVEST : 0.00,
+        SALE_VS_INVEST   : 0.00,
+
+        COMMENT : null,
+
+        FLAG_ROW : 'SHOW'
+
     };
 
     this.callBack = function (data) {
@@ -71,29 +82,38 @@ let promotionHeaderPopup = new (function () {
 
     this.clearValue = function () {
         this.jsonData = {
-            /*
-            DOC_TYPE_CODE: null,
-            DOC_CODE: null,
-            DOC_VER: null,
-            DOC_REV: null,
-            DOC_MONTH: null,
-            DOC_YEAR: null,
-            DOC_STATUS: null,
-            FLOW_CURRENT: null,
-            FLOW_NEXT: null,
-            REQUESTER: null,
-            DOC_FCH_ID: null,
-            CLIENT_CODE: null,
-            CLIENT_NAME: null,
-            CUST_CODE: null,
-            CHANNEL_CODE: null,
-            CHANNEL_NAME: null,
-            COMMENT: null,
-            FLAG_ROW: null,
-            COMMAND_TYPE: null,
-            ORG_CODE: null,
-            COMP_CODE: null
-            */
+            DOC_TYPE_CODE   : 'PP',
+
+            DOC_PROM_PH_ID  : 0,
+
+            DOC_CODE        : null,
+            DOC_VER         : 0,
+            DOC_REV         : 0,
+            DOC_STATUS      : 'DRAFT',
+
+            PROMO_NAME      : null,
+            PROMO_START     : null,
+            PROMO_END       : null,
+            BUYING_START    : null,
+            BUYING_END      : null,
+
+            CLIENT_CODE     : null,
+            CLIENT_NAME     : null,
+
+            CHANNEL_CODE    : null,
+            CHANNEL_NAME    : null,
+
+            CUST_CODE       : null,
+            CUST_NAME       : null,
+            CUST_SEGMENT    : null,
+
+            TOTAL_EST_SALE  : 0.00,
+            TOTAL_EST_INVEST: 0.00,
+            SALE_VS_INVEST  : 0.00,
+
+            COMMENT         : null,
+
+            FLAG_ROW        : 'SHOW'
         };
     }
 
@@ -164,60 +184,55 @@ let promotionHeaderPopup = new (function () {
         $(this.field_emis_code_text).val(data.EMIS_NAME);
         $(this.field_emis_code_text).attr("aria-label", data.EMIS_NAME);
 
-        $(this.field_channel_code).val(data.CHANNEL_CODE);
+        $("#pop-cmb-company").val();
         $(this.field_channel_name).val(data.CHANNEL_NAME);
         $(this.field_channel_desc).val(data.CHANNEL_DESC);
-        $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
-
-
-        if (data.FLAG_ROW == 'D') {
-            $(this.field_is_active).prop("checked", "");
-            $(this.field_is_active).parent().parent().attr("aria-checked", "false");
-            $(this.field_is_active).parent().children().removeClass("e-check");
-        } else {
-            $(this.field_is_active).prop("checked", "checked");
-            $(this.field_is_active).parent().parent().attr("aria-checked", "true");
-            $(this.field_is_active).parent().children().addClass("e-check");
-            $(this.field_is_active).removeClass("e-check");
-        }
         */
     }
 
     this.bindField = function () {
-        /*
+        
         let currentDate = new Date();
         let docId = $(this.field_document_no).val() !== undefined ? $(this.field_document_no).val() : '0';
 
-        let COMPANY = $(this.field_company).val();
-        let DOC_TYPE_CODE = 'FC';
-        let DOC_CODE = docId;
-        let DOC_MONTH = currentDate.getMonth();
-        let DOC_YEAR = currentDate.getFullYear();
-        let DOC_STATUS = 'Draft';
-        let DOC_FCH_ID = docId;
-        let CLIENT_CODE = $(this.field_client_code).val();
-        let CLIENT_NAME = $(this.field_client_name).val();
-        let CUST_CODE = $(this.field_customer_code).val();
-        let CUST_NAME = $(this.field_customer_name).val()
-        let CHANNEL_CODE = $(this.field_channel_code).val();
-        let CHANNEL_NAME = $(this.field_channel_name).val();
-        let REQUESTER = $(this.field_requester).val();
-        let POSITION_CODE = $(this.field_position_code).val();
-        let POSITION_NAME = $(this.field_position_name).val();
-        let COMMAND_TYPE = $(this.button_save).val();
-        let ORG_CODE = $(this.field_position_code).val();
-        let ORG_NAME = $(this.field_position_name).val();
-        let COMP_CODE = $(this.field_company_code).val();
-        let COMP_NAME = $(this.field_company_name).val();
-
-
+        let COMP_CODE         = $("#pop-cmb-company").val();
+        let DOC_TYPE_CODE     = 'PP';
+        let DOC_PROM_PH_ID    = docId;
+        //let DOC_CODE        = null;
+        //let DOC_VER           = 0;
+        //let DOC_REV           = 0;
+        let DOC_STATUS        = 'DRAFT';
+        let PROMO_NAME        = $("#pop-txt-promotionName").val();
+        let PROMO_START       = $("#pop-cmb-promotionStart").val();
+        let PROMO_END         = $("#pop-cmb-promotionEnd").val();
+        let BUYING_START      = $("#pop-cmb-buyingStart").val();
+        let BUYING_END        = $("#pop-cmb-buyingEnd").val();
+        let CLIENT_CODE       = $("#pop-cmb-client_hidden").val();
+        let CLIENT_NAME       = $("#pop-cmb-client").val();
+        let CHANNEL_CODE      = $("#pop-cmb-channel_hidden").val();
+        let CHANNEL_NAME      = $("#pop-cmb-channel").val();
+        let CUST_CODE         = $("#pop-cmb-customer_hidden").val();
+        let CUST_NAME         = $("#pop-cmb-customer").val();
+        let CUST_SEGMENT      = $("#pop-cmb-cust-segment_hidden").val();
+        //let TOTAL_EST_SALE    = 0.00;
+        //let TOTAL_EST_INVEST  = 0.00;
+        //let SALE_VS_INVEST    = 0.00;
+        //let COMMENT           = null;
+        let FLAG_ROW          = 'S';
 
         this.jsonData = {
-            COMPANY, DOC_TYPE_CODE, DOC_CODE, DOC_MONTH, DOC_YEAR, DOC_STATUS, DOC_FCH_ID, CLIENT_CODE, CLIENT_NAME, CUST_CODE,
-            CUST_NAME, CHANNEL_CODE, CHANNEL_NAME, REQUESTER, POSITION_CODE, POSITION_NAME, COMMAND_TYPE,
-            ORG_CODE, ORG_NAME, COMP_CODE, COMP_NAME
+            COMP_CODE, DOC_TYPE_CODE, DOC_PROM_PH_ID,
+            //DOC_CODE, DOC_VER, DOC_REV,
+            //DOC_STATUS,
+            PROMO_NAME, PROMO_START, PROMO_END, BUYING_START, BUYING_END,
+            CLIENT_CODE, CLIENT_NAME,
+            CHANNEL_CODE, CHANNEL_NAME,
+            CUST_CODE, CUST_NAME, CUST_SEGMENT,
+            //TOTAL_EST_SALE, TOTAL_EST_INVEST, SALE_VS_INVEST,
+            //COMMENT,
+            FLAG_ROW
         };
-        */
+        
     }
     /*
     this.fieldsDisable = function () {
@@ -243,7 +258,7 @@ let promotionHeaderPopup = new (function () {
     */
 
     this.onSave = function (e) {
-        /*
+        
         this.bindField();
         //begin Validation
         let msg = '';
@@ -262,10 +277,10 @@ let promotionHeaderPopup = new (function () {
                 ...this.jsonData,
                 IS_DELETE_PERMANANT
             };
-            fixedContractHeaderPopup.callBack(this.jsonData);
-            fixedContractHeaderPopup.close();
+            promotionHeaderPopup.callBack(this.jsonData);
+            promotionHeaderPopup.close();
         }
-        */
+        
     }
 
     this.onDelete = function (e) {
