@@ -138,7 +138,7 @@ namespace GFCA.APT.BAL.Implements
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
-
+                response.Data = doch;
             }
             catch (Exception ex)
             {
@@ -310,6 +310,7 @@ namespace GFCA.APT.BAL.Implements
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Data = docd;
             }
             catch (Exception ex)
             {

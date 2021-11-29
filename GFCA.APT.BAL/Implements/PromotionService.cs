@@ -40,7 +40,15 @@ namespace GFCA.APT.BAL.Implements
         }
         public PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var docdo = _uow.PromotionRepository.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                return docdo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID)
         {
@@ -51,31 +59,32 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngOverviewDto model = entity;
-                var dummyDoc = _uow.DocumentRepository.GenerateDocNo(model.DOC_TYPE_CODE, model.CUST_CODE, DateTime.Today.Year, DateTime.Today.Month);
+                PromotionPlanngOverviewDto dto = entity;
+                var dummyDoc = _uow.DocumentRepository.GenerateDocNo(dto.DOC_TYPE_CODE, dto.CUST_CODE, DateTime.Today.Year, DateTime.Today.Month);
                 DocumentDto doc = dummyDoc;
                 doc.REQUESTER = "System";
                 //_uow.DocumentRepository.Insert(doc);
 
-                model.DOC_CODE = dummyDoc.DOC_CODE;
-                model.DOC_VER = dummyDoc.DOC_VER;
-                model.DOC_REV = dummyDoc.DOC_REV;
-                model.CUST_CODE = dummyDoc.CUST_CODE;
+                dto.DOC_CODE = dummyDoc.DOC_CODE;
+                dto.DOC_VER = dummyDoc.DOC_VER;
+                dto.DOC_REV = dummyDoc.DOC_REV;
+                dto.CUST_CODE = dummyDoc.CUST_CODE;
                 //model.CUST_NAME = 
-                model.CREATED_BY = doc.REQUESTER;
-                _uow.PromotionRepository.InsertOverview(model);
+                dto.CREATED_BY = doc.REQUESTER;
+                _uow.PromotionRepository.InsertOverview(dto);
                 
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
-                _logger.Error("PromotionService : ", ex);
+                _logger.Error("CreateOverview : ", ex);
             }
 
             return response;
@@ -85,10 +94,20 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngOverviewDto model = entity;
+                PromotionPlanngOverviewDto dto = entity;
+                _uow.PromotionRepository.UpdateOverview(dto);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("EditOverview : ", ex);
             }
             return response;
@@ -138,11 +157,20 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanningInvestmentDto model = entity;
+                PromotionPlanningInvestmentDto dto = entity;
+                _uow.PromotionRepository.InsertInvestment(dto);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {
-                _logger.Error("AddInvestment : ", ex);
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("CreateInvestment : ", ex);
             }
             return response;
         }
@@ -151,13 +179,14 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanningInvestmentDto model = entity;
+                PromotionPlanningInvestmentDto dto = entity;
 
-                _uow.PromotionRepository.UpdateInvestment(model);
+                _uow.PromotionRepository.UpdateInvestment(dto);
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {
@@ -220,20 +249,21 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanningSaleDto model = entity;
+                PromotionPlanningSaleDto dto = entity;
 
-                _uow.PromotionRepository.InsertPlanngSale(model);
+                _uow.PromotionRepository.InsertPlanngSale(dto);
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
-                _logger.Error("AddPlanngSale : ", ex);
+                _logger.Error("CreatePlanngSale : ", ex);
             }
             return response;
         }
@@ -242,13 +272,14 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanningSaleDto model = entity;
+                PromotionPlanningSaleDto dto = entity;
 
-                _uow.PromotionRepository.UpdatePlanngSale(model);
+                _uow.PromotionRepository.UpdatePlanngSale(dto);
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Data = dto;
             }
             catch (Exception ex)
             {

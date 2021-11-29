@@ -81,7 +81,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
         }
         public void InsertFixedContractHeader(FixedContractHeaderDto entity)
         {
-            string sqlExecute = @"INSERT INTO TB_T_FIXED_CONTRACT_H
+            string sqlCommand = @"INSERT INTO TB_T_FIXED_CONTRACT_H
 (
   DOC_CODE
 , DOC_VER
@@ -129,7 +129,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
             };
 
             int DOC_FCH_ID = Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
+                sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
@@ -137,7 +137,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
         }
         public void UpdateFixedContractHeader(FixedContractHeaderDto entity)
         {
-            string sqlExecute = @"UPDATE TB_T_FIXED_CONTRACT_H
+            string sqlCommand = @"UPDATE TB_T_FIXED_CONTRACT_H
 SET
  DOC_CODE     = @DOC_CODE
 ,DOC_VER      = @DOC_VER
@@ -173,8 +173,8 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 REQUESTER = entity.REQUESTER
             };
 
-            Connection.ExecuteScalar<int>(
-                sql: sqlExecute,
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
