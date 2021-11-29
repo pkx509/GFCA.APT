@@ -88,9 +88,8 @@
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog);
                                   })
-                                  .RowDeselected("OnRowDeselected")
-                                  .RowSelected("OnRowSelected")
-
+                                  .RowDeselected("promotionHeaderPopup.OnRowDeselected")
+                                  .RowSelected("promotionHeaderPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
                                       col.Field("DOC_CODE").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();

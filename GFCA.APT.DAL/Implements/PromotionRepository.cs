@@ -246,7 +246,7 @@ WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
             );
         }
 
-        public IEnumerable<PromotionPlanngInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID)
+        public IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID)
         {
             string sqlQuery =
 @"SELECT
@@ -296,7 +296,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 DOC_PROM_PH_ID = DOC_PROM_PH_ID
             };
 
-            var query = Connection.Query<PromotionPlanngInvestmentDto>(
+            var query = Connection.Query<PromotionPlanningInvestmentDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
@@ -305,7 +305,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
             return query;
 
         }
-        public PromotionPlanngInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
+        public PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
         {
             string sqlQuery =
 @"SELECT
@@ -361,7 +361,7 @@ WHERE A.DOC_PROM_PI_ID = @DOC_PROM_PI_ID;";
                 return data;
             });
             */
-            var query = Connection.QueryFirstOrDefault<PromotionPlanngInvestmentDto>(
+            var query = Connection.QueryFirstOrDefault<PromotionPlanningInvestmentDto>(
                 sql: sqlQuery
                 , param: parms
                 //, map: maps
@@ -371,7 +371,7 @@ WHERE A.DOC_PROM_PI_ID = @DOC_PROM_PI_ID;";
 
             return query;
         }
-        public void InsertInvestment(PromotionPlanngInvestmentDto entity)
+        public void InsertInvestment(PromotionPlanningInvestmentDto entity)
         {
             string sqlCommand =
 @"INSERT INTO TB_T_PROMOTION_INVEST
@@ -471,7 +471,7 @@ WHERE A.DOC_PROM_PI_ID = @DOC_PROM_PI_ID;";
 
             entity.DOC_PROM_PI_ID = DOC_PROM_PI_ID;
         }
-        public void UpdateInvestment(PromotionPlanngInvestmentDto entity)
+        public void UpdateInvestment(PromotionPlanningInvestmentDto entity)
         {
             string sqlCommand =
 @"UPDATE TB_T_PROMOTION_INVEST
@@ -558,7 +558,7 @@ WHERE DOC_PROM_PI_ID = @DOC_PROM_PI_ID";
             );
         }
 
-        public IEnumerable<PromotionPlanngSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID)
+        public IEnumerable<PromotionPlanningSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID)
         {
             string sqlQuery =
 @"SELECT 
@@ -602,7 +602,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
                 DOC_PROM_PH_ID = DOC_PROM_PH_ID
             };
 
-            var query = Connection.Query<PromotionPlanngSaleDto>(
+            var query = Connection.Query<PromotionPlanningSaleDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
@@ -611,7 +611,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
             return query;
 
         }
-        public PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
+        public PromotionPlanningSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
         {
             string sqlQuery =
 @"SELECT
@@ -655,7 +655,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 DOC_PROM_PS_ID = DOC_PROM_PS_ID
             };
 
-            var query = Connection.QueryFirstOrDefault<PromotionPlanngSaleDto>(
+            var query = Connection.QueryFirstOrDefault<PromotionPlanningSaleDto>(
                 sql: sqlQuery
                 , param: parms
                 , transaction: Transaction
@@ -663,7 +663,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
 
             return query;
         }
-        public void InsertPlanngSale(PromotionPlanngSaleDto entity)
+        public void InsertPlanngSale(PromotionPlanningSaleDto entity)
         {
             string sqlCommand =
 @"INSERT INTO TB_T_PROMOTION_SALE
@@ -760,7 +760,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
 
             entity.DOC_PROM_PS_ID = DOC_PROM_PS_ID;
         }
-        public void UpdatePlanngSale(PromotionPlanngSaleDto entity)
+        public void UpdatePlanngSale(PromotionPlanningSaleDto entity)
         {
             string sqlCommand =
 @"UPDATE TB_T_PROMOTION_SALE

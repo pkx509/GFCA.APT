@@ -11,16 +11,16 @@ namespace GFCA.APT.DAL.Interfaces
         void UpdateOverview(PromotionPlanngOverviewDto entity);
         void DeleteOverview(int DOC_PROM_PH_ID);
 
-        IEnumerable<PromotionPlanngSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID);
-        PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID);
-        void InsertPlanngSale(PromotionPlanngSaleDto entity);
-        void UpdatePlanngSale(PromotionPlanngSaleDto entity);
+        IEnumerable<PromotionPlanningSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID);
+        PromotionPlanningSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID);
+        void InsertPlanngSale(PromotionPlanningSaleDto entity);
+        void UpdatePlanngSale(PromotionPlanningSaleDto entity);
         void DeletePlanngSale(int DOC_PROM_PS_ID);
 
-        IEnumerable<PromotionPlanngInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID);
-        PromotionPlanngInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID);
-        void InsertInvestment(PromotionPlanngInvestmentDto entity);
-        void UpdateInvestment(PromotionPlanngInvestmentDto entity);
+        IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID);
+        PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID);
+        void InsertInvestment(PromotionPlanningInvestmentDto entity);
+        void UpdateInvestment(PromotionPlanningInvestmentDto entity);
         void DeleteInvestment(int DOC_PROM_PI_ID);
 
 

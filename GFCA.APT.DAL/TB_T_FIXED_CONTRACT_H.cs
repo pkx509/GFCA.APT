@@ -27,16 +27,15 @@ namespace GFCA.APT.DAL
         public string CLIENT_CODE { get; set; }
         public string CUST_CODE { get; set; }
         public string CHANNEL_CODE { get; set; }
+        public string COMP_CODE { get; set; }
         public string DOC_STATUS { get; set; }
         public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
+        public string REQUETER_ORG_CODE { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
-        public string ORG_CODE1 { get; set; }
-        public string COMP_CODE1 { get; set; }
-        public string REQUESTER1 { get; set; }
     
         public virtual TB_T_DOCUMENT TB_T_DOCUMENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

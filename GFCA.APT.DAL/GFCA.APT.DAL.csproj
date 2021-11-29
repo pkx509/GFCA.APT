@@ -241,6 +241,9 @@
     <Compile Include="DB_Errors.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeviceCode.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\DocumentRepository.cs" />
     <Compile Include="Implements\PromotionRepository.cs" />
@@ -325,9 +328,6 @@
     <Compile Include="TB_M_DISTRIBUTOR.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_M_DOCUMENT_TYPE.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_M_EMISSION.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -355,9 +355,6 @@
     <Compile Include="TB_M_PACK.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_M_PACK_20210923.cs">
-      <DependentUpon>APTDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TB_M_PRODUCT.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
@@ -368,6 +365,9 @@
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_SIZE.cs">
+      <DependentUpon>APTDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_M_SOURCE_FUND.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_M_UNIT.cs">

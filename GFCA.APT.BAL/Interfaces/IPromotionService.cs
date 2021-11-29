@@ -14,17 +14,17 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse RemoveOverview(int DOC_PROM_PH_ID);
         PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID);
 
-        IEnumerable<PromotionPlanngSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID);
-        PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID);
-        BusinessResponse CreatePlanngSale(PromotionPlanngSaleDto entity);
-        BusinessResponse EditPlanngSale(PromotionPlanngSaleDto entity);
-        BusinessResponse RemovePlanngSale(int DOC_PROM_PS_ID);
+        IEnumerable<PromotionPlanningSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID);
+        PromotionPlanningSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID);
+        BusinessResponse CreatePlanngSale(PromotionPlanningSaleDto entity);
+        BusinessResponse EditPlanngSale(PromotionPlanningSaleDto entity);
+        BusinessResponse RemovePlanngSale(PromotionPlanningSaleDto entity);
 
-        IEnumerable<PromotionPlanngInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID);
-        PromotionPlanngInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID);
-        BusinessResponse CreateInvestment(PromotionPlanngInvestmentDto entity);
-        BusinessResponse EditInvestment(PromotionPlanngInvestmentDto entity);
-        BusinessResponse RemoveInvestment(int DOC_PROM_PI_ID);
+        IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID);
+        PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID);
+        BusinessResponse CreateInvestment(PromotionPlanningInvestmentDto entity);
+        BusinessResponse EditInvestment(PromotionPlanningInvestmentDto entity);
+        BusinessResponse RemoveInvestment(PromotionPlanningInvestmentDto entity);
 
     }
 }

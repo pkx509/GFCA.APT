@@ -50,6 +50,7 @@ namespace GFCA.APT.DAL
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
     
+        public virtual TB_T_PROMOTION_H TB_T_PROMOTION_H { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_PROMOTION_INVEST> TB_T_PROMOTION_INVEST { get; set; }
     }

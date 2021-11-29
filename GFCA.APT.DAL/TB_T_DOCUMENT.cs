@@ -38,7 +38,6 @@ namespace GFCA.APT.DAL
         public string REQUESTER { get; set; }
         public string ORG_CODE { get; set; }
     
-        public virtual TB_M_DOCUMENT_TYPE TB_M_DOCUMENT_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_T_BUDGET_D> TB_T_BUDGET_D { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

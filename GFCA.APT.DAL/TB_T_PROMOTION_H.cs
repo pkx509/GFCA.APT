@@ -14,6 +14,12 @@ namespace GFCA.APT.DAL
     
     public partial class TB_T_PROMOTION_H
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_T_PROMOTION_H()
+        {
+            this.TB_T_PROMOTION_SALE = new HashSet<TB_T_PROMOTION_SALE>();
+        }
+    
         public int DOC_PROM_PH_ID { get; set; }
         public string DOC_CODE { get; set; }
         public Nullable<int> DOC_VER { get; set; }
@@ -37,5 +43,8 @@ namespace GFCA.APT.DAL
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_T_PROMOTION_SALE> TB_T_PROMOTION_SALE { get; set; }
     }
 }

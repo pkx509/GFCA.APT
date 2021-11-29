@@ -2,7 +2,7 @@
 
 namespace GFCA.APT.Domain.Dto
 {
-    public class PromotionPlanngInvestmentDto : Auditable
+    public class PromotionPlanningInvestmentDto : Auditable
     {
         public int DOC_PROM_PI_ID { get; set; } = 0; //PK
         public int? DOC_PROM_PS_ID { get; set; } //FK

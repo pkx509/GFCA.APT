@@ -1,5 +1,11 @@
-﻿CREATE FUNCTION [dbo].[Split] (@String VARCHAR (MAX), @Delimiter CHAR (1))
-   RETURNS @results TABLE (items VARCHAR (MAX))
+﻿CREATE FUNCTION [dbo].[Split] 
+(
+      @String VARCHAR (MAX)
+    , @Delimiter CHAR (1)
+) RETURNS @results TABLE 
+(
+    items VARCHAR (MAX)
+)
 AS
    BEGIN
      DECLARE @index   INT

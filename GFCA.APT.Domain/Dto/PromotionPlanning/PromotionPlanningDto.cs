@@ -13,10 +13,10 @@ namespace GFCA.APT.Domain.Dto
         public IEnumerable<DocumentHistoryDto> HistoryData { get; set; }
 
         public PromotionPlanngOverviewDto OverviewData { get; set; }
-        public PromotionPlanngSaleDto DetailSaleItem { get; set; }
-        public PromotionPlanngInvestmentDto DetailInvesmentItem { get; set; }
-        public IEnumerable<PromotionPlanngSaleDto> DetailSaleData { get; set; }
-        public IEnumerable<PromotionPlanngInvestmentDto> DetailInvesmentData { get; set; }
+        public PromotionPlanningSaleDto DetailSaleItem { get; set; }
+        public PromotionPlanningInvestmentDto DetailInvesmentItem { get; set; }
+        public IEnumerable<PromotionPlanningSaleDto> DetailSaleData { get; set; }
+        public IEnumerable<PromotionPlanningInvestmentDto> DetailInvesmentData { get; set; }
 
         public PromotionPlanningFooterDto FooterData { get; set; }
 
@@ -29,10 +29,10 @@ namespace GFCA.APT.Domain.Dto
             HistoryData = new List<DocumentHistoryDto>();
 
             OverviewData = new PromotionPlanngOverviewDto();
-            DetailSaleItem = new PromotionPlanngSaleDto();
-            DetailInvesmentItem = new PromotionPlanngInvestmentDto();
-            DetailSaleData = new List<PromotionPlanngSaleDto>();
-            DetailInvesmentData = new List<PromotionPlanngInvestmentDto>();
+            DetailSaleItem = new PromotionPlanningSaleDto();
+            DetailInvesmentItem = new PromotionPlanningInvestmentDto();
+            DetailSaleData = new List<PromotionPlanningSaleDto>();
+            DetailInvesmentData = new List<PromotionPlanningInvestmentDto>();
             FooterData = new PromotionPlanningFooterDto();
 
         }

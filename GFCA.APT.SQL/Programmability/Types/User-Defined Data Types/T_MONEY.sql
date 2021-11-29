@@ -1,0 +1,1 @@
+﻿CREATE TYPE [dbo].[T_MONEY] FROM [numeric](13, 4) NULL

@@ -87,9 +87,9 @@
     <Compile Include="Dto\FixedContract\FixedContractFooterDto.cs" />
     <Compile Include="Dto\FixedContract\FixedContractHeaderDto.cs" />
     <Compile Include="Dto\FixedContract\FixedContractItemDto.cs" />
-    <Compile Include="Dto\PromotionPlanning\PromotionPlanngInvestmentDto.cs" />
-    <Compile Include="Dto\PromotionPlanning\PromotionPlanngOverviewDto.cs" />
-    <Compile Include="Dto\PromotionPlanning\PromotionPlanngSaleDto.cs" />
+    <Compile Include="Dto\PromotionPlanning\PromotionPlanningInvestmentDto.cs" />
+    <Compile Include="Dto\PromotionPlanning\PromotionPlanningOverviewDto.cs" />
+    <Compile Include="Dto\PromotionPlanning\PromotionPlanningSaleDto.cs" />
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningDto.cs" />
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningFooterDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />

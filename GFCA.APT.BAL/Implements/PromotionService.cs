@@ -109,20 +109,36 @@ namespace GFCA.APT.BAL.Implements
         #endregion [ header ]
 
         #region [ Investment ]
-        public IEnumerable<PromotionPlanngInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID)
+        public IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var docdi = _uow.PromotionRepository.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+                return docdi;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public PromotionPlanngInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
+        public PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var docdi = _uow.PromotionRepository.GetInvestmentByItemID(DOC_PROM_PI_ID);
+                return docdi;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public BusinessResponse CreateInvestment(PromotionPlanngInvestmentDto entity)
+        public BusinessResponse CreateInvestment(PromotionPlanningInvestmentDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngInvestmentDto model = entity;
+                PromotionPlanningInvestmentDto model = entity;
             }
             catch (Exception ex)
             {
@@ -130,28 +146,44 @@ namespace GFCA.APT.BAL.Implements
             }
             return response;
         }
-        public BusinessResponse EditInvestment(PromotionPlanngInvestmentDto entity)
+        public BusinessResponse EditInvestment(PromotionPlanningInvestmentDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngInvestmentDto model = entity;
+                PromotionPlanningInvestmentDto model = entity;
+
+                _uow.PromotionRepository.UpdateInvestment(model);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("EditInvestment : ", ex);
             }
             return response;
         }
-        public BusinessResponse RemoveInvestment(int DOC_PROM_PI_ID)
+        public BusinessResponse RemoveInvestment(PromotionPlanningInvestmentDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
-
+                _uow.PromotionRepository.DeleteInvestment(entity.DOC_PROM_PI_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("RemoveInvestment : ", ex);
             }
             return response;
@@ -159,49 +191,91 @@ namespace GFCA.APT.BAL.Implements
         #endregion [ Investment ]
 
         #region [ Sale ]
-        public IEnumerable<PromotionPlanngSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID)
+        public IEnumerable<PromotionPlanningSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var docds = _uow.PromotionRepository.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+                return docds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public PromotionPlanngSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
+        public PromotionPlanningSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var docds = _uow.PromotionRepository.GetSaleDataByItemID(DOC_PROM_PS_ID);
+                return docds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public BusinessResponse CreatePlanngSale(PromotionPlanngSaleDto entity)
+        public BusinessResponse CreatePlanngSale(PromotionPlanningSaleDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngSaleDto model = entity;
+                PromotionPlanningSaleDto model = entity;
+
+                _uow.PromotionRepository.InsertPlanngSale(model);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("AddPlanngSale : ", ex);
             }
             return response;
         }
-        public BusinessResponse EditPlanngSale(PromotionPlanngSaleDto entity)
+        public BusinessResponse EditPlanngSale(PromotionPlanningSaleDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
-                PromotionPlanngSaleDto model = entity;
+                PromotionPlanningSaleDto model = entity;
+
+                _uow.PromotionRepository.UpdatePlanngSale(model);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("EditPlanngSale : ", ex);
             }
             return response;
         }
-        public BusinessResponse RemovePlanngSale(int DOC_PROM_PS_ID)
+        public BusinessResponse RemovePlanngSale(PromotionPlanningSaleDto entity)
         {
             BusinessResponse response = new BusinessResponse();
             try
             {
+                _uow.PromotionRepository.DeletePlanngSale(entity.DOC_PROM_PS_ID);
 
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("RemovePlanngSale : ", ex);
             }
             return response;

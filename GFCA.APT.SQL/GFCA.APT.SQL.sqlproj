@@ -87,6 +87,13 @@
     <Build Include="Tables\TB_M_COMPANY.sql" />
     <Build Include="Programmability\Types\User-Defined Data Types\T_AUDIT_DATE.sql" />
     <Build Include="Programmability\Stored_Procedures\SP_GENERATE_DOC_CODE.sql" />
+    <Build Include="Tables\TB_T_PROMOTION_H.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_MONEY.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_FLAG.sql" />
+    <Build Include="Programmability\Types\User-Defined Data Types\T_DATETIME.sql" />
+    <Build Include="Tables\TB_T_FIXED_CONTRACT_H.sql" />
+    <Build Include="Tables\TB_S_CUST_PRODUCT.sql" />
+    <Build Include="Tables\TB_S_BRAND_PRODUCT.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="GFCA.APT.SQL.refactorlog" />

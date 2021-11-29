@@ -28,6 +28,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
+        // GET: T/Promotions/{DOC_PROM_PH_ID}}]
         [HttpGet]
         public ViewResult PromotionItem(int DOC_PROM_PH_ID)
         {
@@ -48,6 +49,38 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             catch
             {
              
+            }
+            return View(dto);
+        }
+
+        // GET: T/Promotions/{DOC_PROM_PH_ID}/{DOC_PROM_PS_ID}]
+        [HttpGet]
+        public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID)
+        {
+            PromotionPlanningSaleDto dto = new PromotionPlanningSaleDto();
+            try
+            {
+                dto = _biz.PromotionService.GetSaleDataByItemID(DOC_PROM_PS_ID);
+            }
+            catch
+            {
+
+            }
+            return View(dto);
+        }
+
+        // GET: T/Promotions/{DOC_PROM_PH_ID}/{DOC_PROM_PI_ID}]
+        [HttpGet]
+        public ActionResult PromotionInvestmentDetail(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
+        {
+            PromotionPlanningInvestmentDto dto = new PromotionPlanningInvestmentDto();
+            try
+            {
+                dto = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PI_ID);
+            }
+            catch
+            {
+
             }
             return View(dto);
         }
@@ -111,7 +144,67 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
-        
+        [HttpPost]
+        public JsonResult UrlPromotionPlanningSaleList(int DOC_PROM_PH_ID, DataManagerRequest dm)
+        {
+            _biz.LogService.Debug("UrlPromotionPlanningSaleList");
+            IEnumerable dataSource = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+            DataOperations operation = new DataOperations();
+            List<string> str = new List<string>();
+            if (dm.Search != null && dm.Search.Count > 0) // Search
+            {
+                dataSource = operation.PerformSearching(dataSource, dm.Search);
+            }
+            if (dm.Sorted != null && dm.Sorted.Count > 0) // Sorting
+            {
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0) // Filtering
+            {
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+            }
+            int count = dataSource.Cast<PromotionPlanningSaleDto>().Count();
+            if (dm.Skip != 0) // Paging
+            {
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);
+            }
+            if (dm.Take != 0)
+            {
+                dataSource = operation.PerformTake(dataSource, dm.Take);
+            }
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+        [HttpPost]
+        public JsonResult UrlPromotionPlanningInvesmentList(int DOC_PROM_PH_ID, DataManagerRequest dm)
+        {
+            _biz.LogService.Debug("UrlPromotionPlanningInvesmentList");
+            IEnumerable dataSource = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+            DataOperations operation = new DataOperations();
+            List<string> str = new List<string>();
+            if (dm.Search != null && dm.Search.Count > 0) // Search
+            {
+                dataSource = operation.PerformSearching(dataSource, dm.Search);
+            }
+            if (dm.Sorted != null && dm.Sorted.Count > 0) // Sorting
+            {
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0) // Filtering
+            {
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+            }
+            int count = dataSource.Cast<PromotionPlanningInvestmentDto>().Count();
+            if (dm.Skip != 0) // Paging
+            {
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);
+            }
+            if (dm.Take != 0)
+            {
+                dataSource = operation.PerformTake(dataSource, dm.Take);
+            }
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+
         [HttpPost]
         public JsonResult CreatePromotionPlanngOverview(PromotionPlanngOverviewDto data)
         {
@@ -130,21 +223,113 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return Json(new { data = d, JsonRequestBehavior.AllowGet });
         }
 
-        // GET: T/Promotions/Sale/{DOC_FCH_ID}/{DOC_FCD_ID}]
-        [HttpGet]
-        public ActionResult PromotionSaleDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        [HttpPost]
+        public JsonResult CreatePromotionPlanngSale(PromotionPlanningSaleDto data)
         {
-            return View();
+            _biz.LogService.Debug("CreatePromotionPlanngSale");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.PromotionService.CreatePlanngSale(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
         }
 
-        // GET: T/Promotions/Investment/{DOC_FCH_ID}/{DOC_FCD_ID}]
-        [HttpGet]
-        public ActionResult PromotionInvestmentDetail(int DOC_FCH_ID, int DOC_FCD_ID)
+        [HttpPost]
+        public JsonResult CreatePromotionPlanningInvestment(PromotionPlanningInvestmentDto data)
         {
-            return View();
+            _biz.LogService.Debug("CreatePromotionPlanningInvestment");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.PromotionService.CreateInvestment(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
         }
 
+        [HttpPost]
+        public JsonResult EditPromotionPlanngSale(PromotionPlanningSaleDto data)
+        {
+            _biz.LogService.Debug("EditPromotionPlanngSale");
+            dynamic d = new BusinessResponse();
 
+            try
+            {
+                var biz = _biz.PromotionService.EditPlanngSale(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult EditPromotionPlanningInvestment(PromotionPlanningInvestmentDto data)
+        {
+            _biz.LogService.Debug("EditPromotionPlanningInvestment");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.PromotionService.EditInvestment(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult DeletePromotionPlanngSale(PromotionPlanningSaleDto data)
+        {
+            _biz.LogService.Debug("DeletePromotionPlanngSale");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.PromotionService.RemovePlanngSale(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult DeletePromotionPlanningInvestment(PromotionPlanningInvestmentDto data)
+        {
+            _biz.LogService.Debug("DeletePromotionPlanningInvestment");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.PromotionService.RemoveInvestment(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
 
     }
 }

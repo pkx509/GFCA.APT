@@ -6,6 +6,7 @@ using Dapper;
 using System.Data;
 using System;
 using GFCA.APT.Domain.Enums;
+using GFCA.APT.Domain;
 
 namespace GFCA.APT.DAL.Implements
 {
@@ -88,14 +89,13 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 , CLIENT_CODE
 , CUST_CODE
 , CHANNEL_CODE
+, COMP_CODE
 , DOC_STATUS
 , COMMENT
 , FLAG_ROW
+, REQUESTER_ORG_CODE
 , CREATED_BY
 , CREATED_DATE
-, ORG_CODE
-, COMP_CODE
-, REQUESTER
 ) VALUES (
   @DOC_CODE
 , @DOC_VER
@@ -103,40 +103,37 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 , @CLIENT_CODE
 , @CUST_CODE
 , @CHANNEL_CODE
-, @DOC_STATUS
-, @COMMENT
-, @FLAG_ROW
-, @CREATED_BY
-, @CREATED_DATE
-, @ORG_CODE
 , @COMP_CODE
-, @REQUESTER
-);";
+, @DOC_STATUS
+, NULL
+, @FLAG_ROW
+, @REQUESTER_ORG_CODE
+, @CREATED_BY
+, SYSDATETIME()
+); SELECT SCOPE_IDENTITY()";
 
             var parms = new
             {
-                DOC_CODE = entity.DOC_CODE,
-                DOC_VER = entity.DOC_VER,
-                DOC_REV = entity.DOC_REV,
-                CLIENT_CODE = entity.CLIENT_CODE,
-                CUST_CODE = entity.CUST_CODE,
-                CHANNEL_CODE = entity.CHANNEL_CODE,
-                DOC_STATUS = entity.DOC_STATUS.ToString(),
-                COMMENT = entity.COMMENT,
-                FLAG_ROW = entity.FLAG_ROW,
-                CREATED_BY = entity.CREATED_BY,
-                CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
-                ORG_CODE = entity.ORG_CODE,
-                COMP_CODE = entity.COMP_CODE,
-                REQUESTER = entity.REQUESTER
+                DOC_CODE           = entity.DOC_CODE,
+                DOC_VER            = entity.DOC_VER,
+                DOC_REV            = entity.DOC_REV,
+                CLIENT_CODE        = entity.CLIENT_CODE,
+                CUST_CODE          = entity.CUST_CODE,
+                CHANNEL_CODE       = entity.CHANNEL_CODE,
+                COMP_CODE          = entity.COMP_CODE,
+                DOC_STATUS         = entity.DOC_STATUS,
+                //COMMENT          = entity.COMMENT,
+                FLAG_ROW           = entity.FLAG_ROW.ToValue(),
+                REQUESTER_ORG_CODE = entity.ORG_CODE,
+                CREATED_BY         = entity.CREATED_BY
             };
 
-            Connection.ExecuteScalar<int>(
+            int DOC_FCH_ID = Connection.ExecuteScalar<int>(
                 sql: sqlExecute,
                 param: parms,
                 transaction: Transaction
             );
-
+            entity.DOC_FCH_ID = DOC_FCH_ID;
         }
         public void UpdateFixedContractHeader(FixedContractHeaderDto entity)
         {
@@ -464,7 +461,7 @@ AND DOC_CODE = @DOC_CODE
 , @END_DATE
 , @CREATED_BY
 , @CREATED_DATE
-);";
+); SELECT SCOPE_IDENTITY()";
 
             var parms = new
             {
@@ -505,11 +502,13 @@ AND DOC_CODE = @DOC_CODE
                 CREATED_DATE = entity.CREATED_DATE?.ToDateTime2(),
             };
 
-            int effected = Connection.ExecuteScalar<int>(
+            int DOC_FCD_ID = Connection.ExecuteScalar<int>(
                 sql: sqlCommand,
                 param: parms,
                 transaction: Transaction
             );
+
+            entity.DOC_FCD_ID = DOC_FCD_ID;
         }
         public void UpdateFixedContractDetail(FixedContractDetailDto entity)
         {

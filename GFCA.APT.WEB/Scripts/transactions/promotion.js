@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     let sendPost = function (url, data) {
         let value = {
