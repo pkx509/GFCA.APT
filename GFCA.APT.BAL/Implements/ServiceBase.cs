@@ -58,22 +58,52 @@ namespace GFCA.APT.BAL.Implements
 
         public DocumentStateDto GetDocumentStateSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new DocumentStateDto();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DocumentWorkFlowDto GetDocumentWorkFlowSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
         {
-            return new DocumentWorkFlowDto();
+            try
+            {
+                return new DocumentWorkFlowDto();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DocumentRequesterDto GetDocumentRequesterSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
         {
-            return new DocumentRequesterDto();
+            try
+            {
+
+                return new DocumentRequesterDto();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<DocumentHistoryDto> GetDocumentHistorySection(string documentType, int documentHeaderId)
         {
-            return new List<DocumentHistoryDto>();
+            try
+            {
+
+                return new List<DocumentHistoryDto>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         

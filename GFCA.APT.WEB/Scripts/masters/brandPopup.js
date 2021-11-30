@@ -327,8 +327,8 @@ let brandPopup = new (function () {
     }
     this.OnToolbarClick = function (args) {
 
-        let gridObj = document.getElementById("grdBrand").ej2_instances[0];
         if (args.item.id === 'toolbar_excel') {
+            let gridObj = document.getElementById("grdBrand").ej2_instances[0];
             gridObj.excelExport();
         }
 

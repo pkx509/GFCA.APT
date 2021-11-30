@@ -312,7 +312,8 @@ let promotionHeaderPopup = new (function () {
     }
 
     this.OnRowSelected = function (args) {
-        argruments.data = args.data;
+        argruments.data = args.data
+        console.log(argruments.data);
     }
     this.OnRowDeselected = function (args) {
         if (argruments.data == args.data) {
@@ -423,9 +424,22 @@ let promotionHeaderPopup = new (function () {
     }
 
     this.OnExcelExportClick = function (args) {
-        let gridObj = document.getElementById("grdPromotion").ej2_instances[0];
         if (args.item.id === 'grdPromotion_excelexport') {
+            let gridObj = document.getElementById("grdPromotion").ej2_instances[0];
             gridObj.excelExport();
         }
+        /*
+        if (args.item.id === 'toolbar_add') {
+            //args.preventDefault();
+        }
+        if (args.item.id === 'toolbar_edit') {
+            args.preventDefault();
+            window.location = urlServices.CurrentUrl + `/${argruments.data.DOC_PROM_PH_ID}`;
+        }
+        if (args.item.id === 'toolbar_del') {
+            //args.preventDefault();
+        }
+        */
+
     }
 })();

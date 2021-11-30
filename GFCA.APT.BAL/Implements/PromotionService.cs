@@ -52,7 +52,15 @@ namespace GFCA.APT.BAL.Implements
         }
         public PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dto = new PromotionPlanningFooterDto();
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public BusinessResponse CreateOverview(PromotionPlanngOverviewDto entity)
         {
@@ -69,6 +77,7 @@ namespace GFCA.APT.BAL.Implements
                 dto.DOC_VER = dummyDoc.DOC_VER;
                 dto.DOC_REV = dummyDoc.DOC_REV;
                 dto.CUST_CODE = dummyDoc.CUST_CODE;
+                dto.DOC_STATUS = GFCA.APT.Domain.Enums.DOCUMENT_STATUS.DRAFT;
                 //model.CUST_NAME = 
                 dto.CREATED_BY = doc.REQUESTER;
                 _uow.PromotionRepository.InsertOverview(dto);
