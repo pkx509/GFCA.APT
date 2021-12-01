@@ -4,6 +4,7 @@ namespace GFCA.APT.Domain.Dto
 {
     public class PromotionPlanningSaleDto : Auditable
     {
+        public PAGE_MODE DataMode => DOC_PROM_PS_ID == 0 ? PAGE_MODE.CREATING : PAGE_MODE.EDITING;
         public int DOC_PROM_PS_ID { get; set; } = 0; //PK
         public int? DOC_PROM_PH_ID { get; set; } //FK
 
@@ -19,6 +20,8 @@ namespace GFCA.APT.Domain.Dto
 
         public string PROD_CODE { get; set; }
         public string PROD_SKU { get; set; }
+        public string PROD_PACK { get; set; }
+        public string PROD_SIZE { get; set; }
         public decimal PROD_LTP_EXCL_VAT { get; set; }
         
         public decimal NORM_PERC_DISC { get; set; }

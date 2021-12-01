@@ -1,4 +1,7 @@
-﻿@*----------------- Promotion planning header -----------------*@
+﻿@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.PromotionPlanngOverviewDto
+
+@*----------------- Promotion planning header -----------------*@
 <div class="row mb-2">
     <div class="col col-lg p-1">
         <div class="card card-info card-outline">
@@ -17,19 +20,23 @@
                                         Client
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-client")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetClient")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().ComboBox("cmb-client")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetClient")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.CLIENT_CODE)
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -39,19 +46,23 @@
                                         Customer
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-customer")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetCustomer")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().ComboBox("cmb-customer")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCustomer")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.CUST_CODE)
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -64,19 +75,24 @@
                                         Channel
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-channel")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetEmployee/false")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                        
+                                            @(Html.EJS().ComboBox("cmb-channel")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetChannel/false")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.CHANNEL_CODE)
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -86,20 +102,24 @@
                                         Customer Segment
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-cust-segment")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetOrganization")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    //.Change("page.cmbPositionChange")
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().ComboBox("cmb-cust-segment")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetOrganization")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(false)
+                                                        //.Change("page.cmbPositionChange")
+                                                        .CssClass("disabled") //.CssClass("mandatory")
+                                                        .Value(Model.CUST_SEGMENT)
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -112,12 +132,18 @@
                                         Promo Start
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().DatePicker("drpPromoStart")
-                                                                    .Placeholder("Choose a Range")
-                                                                    .Value(DateTime.Today)
-                                                                    .Format("dd/MM/yyyy")
-                                                                    .Enabled(true)
-                                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                        
+                                            @(Html.EJS().DatePicker("drpPromoStart")
+                                                                        .Placeholder("Choose a Range")
+                                                                        .Format("dd/MM/yyyy")
+                                                                        .Enabled(false)
+                                                                        .CssClass("disabled")
+                                                                        .Value(Model.PROMO_START)
+                                                                        .Render())
+
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -127,12 +153,16 @@
                                         Promo End
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().DatePicker("drpPromoEnd")
-                                                                    .Placeholder("Choose a Range")
-                                                                    .Value(new DateTime(2099, 12, 31))
-                                                                    .Format("dd/MM/yyyy")
-                                                                    .Enabled(true)
-                                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().DatePicker("drpPromoEnd")
+                                                                        .Placeholder("Choose a Range")
+                                                                        .Format("dd/MM/yyyy")
+                                                                        .Enabled(false)
+                                                                        .CssClass("disabled")
+                                                                        .Value(Model.PROMO_END)
+                                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -145,12 +175,16 @@
                                         Buying Start
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().DatePicker("drpBuyStart")
-                                                                    .Placeholder("Choose a Range")
-                                                                    .Value(DateTime.Today)
-                                                                    .Format("dd/MM/yyyy")
-                                                                    .Enabled(true)
-                                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().DatePicker("drpBuyStart")
+                                                                        .Placeholder("Choose a Range")
+                                                                        .Format("dd/MM/yyyy")
+                                                                        .Enabled(false)
+                                                                        .CssClass("disabled")
+                                                                        .Value(Model.BUYING_START)
+                                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -160,12 +194,17 @@
                                         Buying End
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().DatePicker("drpBuyEnd")
-                                                                    .Placeholder("Choose a Range")
-                                                                    .Value(new DateTime(2099, 12, 31))
-                                                                    .Format("dd/MM/yyyy")
-                                                                    .Enabled(true)
-                                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                        
+                                            @(Html.EJS().DatePicker("drpBuyEnd")
+                                                                        .Placeholder("Choose a Range")
+                                                                        .Format("dd/MM/yyyy")
+                                                                        .Enabled(false)
+                                                                        .CssClass("disabled")
+                                                                        .Value(Model.BUYING_END)
+                                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -179,11 +218,16 @@
                                         Total Sale Target (THB)
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().TextBox("txt-sale")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().TextBox("txt-sale")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.TOTAL_EST_SALE.ToString("N2"))
+                                                        .Render())
+                                        
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -193,11 +237,17 @@
                                         Total Invesment (THB)
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().TextBox("txt-invest")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                        
+                                            @(Html.EJS().TextBox("txt-invest")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.TOTAL_EST_INVEST.ToString("N2"))
+                                                        .Render())
+
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -207,11 +257,15 @@
                                         Sale vs Invesments (%)
                                     </label>
                                     <div class="col col-lg-8">
-                                        @(Html.EJS().TextBox("txt-ratio")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
+                                        @if (Model != null)
+                                        {
+                                            @(Html.EJS().TextBox("txt-ratio")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
+                                                        .Value(Model.SALE_VS_INVEST.ToString("N2"))
+                                                        .Render())
+                                        }
                                     </div>
                                 </div>
                             </div>

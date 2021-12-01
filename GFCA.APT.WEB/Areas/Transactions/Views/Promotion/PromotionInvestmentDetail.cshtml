@@ -1,17 +1,13 @@
-﻿@using GFCA.APT.Domain.HTTP.Controls
-@using System.Collections.Generic
+﻿@using System.Collections.Generic
 @using Syncfusion.EJ2.DropDowns
-@using Syncfusion.EJ2.Popups
-@using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.PromotionPlanningInvestmentDto
 
 @{
     Dictionary<string, object> disabled = new Dictionary<string, object>();
     disabled.Add("disabled", "true");
 
 }
-
-@model GFCA.APT.Domain.Dto.FixedContractDto
 
 <form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data">
 
@@ -422,6 +418,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 </form>
 @section preScripts

@@ -4141,6 +4141,8 @@
     <Content Include="Areas\Transactions\Views\Shared\_HistorySection.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_DocumentStateSection.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\_Popup_PromotionHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\PromotionInvestmentDetail.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\PromotionSaleDetail.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />

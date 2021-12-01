@@ -47,7 +47,7 @@
             @Html.Partial("ItemHeaderPartial", Model.OverviewData)
 
             @*----------------- Promotion planning detail -----------------*@
-            @Html.Partial("ItemDetailPartial", Model)
+            @Html.Partial("ItemDetailPartial", Model.OverviewData)
 
             @*----------------- Promotion planning footer -----------------*@
             @Html.Partial("ItemFooterPartial", Model.FooterData)
@@ -57,6 +57,46 @@
         </div>
     </div>
 </form>
+@section preScripts
+{
+    <script>
+        var urlServices = {
+            CurrentUrl     : "@Url.Action("PromotionItem", "Promotion", new { Area = "Transactions", DOC_PROM_PH_ID = Model.OverviewData.DOC_PROM_PH_ID })",
+            AddSale        : "@Url.Action("CreatePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            AddInvestment  : "@Url.Action("CreatePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            EditSale       : "@Url.Action("EditPromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            EditInvestment : "@Url.Action("EditPromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            DeleteSale       : "@Url.Action("DeletePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            DeleteInvestment: "@Url.Action("DeletePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+        }
+        var argruments = {
+            DOC_PROM_PH_ID : "@Model.OverviewData.DOC_PROM_PH_ID",
+            dataSale: null,
+            dataInvest: null,
+        }
+
+        function onGridSaleRowSelected(args) {
+            argruments.dataSale = args.data;
+        }
+
+        function onGridSaleRowDeselected(args) {
+            if (argruments.dataSale == args.data) {
+                argruments.dataSale = null;
+            }
+        }
+
+        function onGridInvestRowSelected(args) {
+            argruments.dataInvest = args.data;
+        }
+
+        function onGridInvestRowDeselected(args) {
+            if (argruments.dataInvest == args.data) {
+                argruments.dataInvest = null;
+            }
+        }
+
+    </script>
+}
 
 @section scripts
 {

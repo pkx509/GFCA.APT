@@ -145,6 +145,7 @@ namespace GFCA.APT.BAL.Implements
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
+                _logger.Error("CreateHeader", ex);
             }
 
             return response;

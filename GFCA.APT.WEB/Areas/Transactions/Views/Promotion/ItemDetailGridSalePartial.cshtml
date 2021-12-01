@@ -37,6 +37,8 @@
         //.Template("#dialogtemplate")
         ;
     })
+    .RowDeselected("onGridSaleRowDeselected")
+    .RowSelected("onGridSaleRowSelected")
     .Columns(col =>
     {
         col.HeaderText("Product").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
@@ -54,7 +56,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "NGPP",
+                    Field = "PROD_SKU",
                     HeaderText  = "SKU",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -63,14 +65,13 @@
                 }
             }
         ).Add();
-
         col.HeaderText("Normal").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
         (
             new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "NDP",
+                    Field = "NORM_PERC_DISC",
                     HeaderText  = "Discount %",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -79,7 +80,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "NGPP",
+                    Field = "NORM_PERC_GP",
                     HeaderText  = "GP %",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -88,7 +89,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "NSPBTH",
+                    Field = "NORM_SHELF_PRICE",
                     HeaderText  = "Shelf Price (BTH)",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -97,14 +98,13 @@
                 }
             }
         ).Add();
-
         col.HeaderText("Promotion").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
         (
             new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMODP",
+                    Field = "PROMO_PERC_DISC",
                     HeaderText  = "Discount %",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -113,7 +113,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMOGPP",
+                    Field = "PROMO_PERC_GP",
                     HeaderText  = "GP %",
                     TextAlign = TextAlign.Center,
                     Format = "N2",
@@ -122,7 +122,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMOSPBTH",
+                    Field = "PROMO_SHELF_PRICE",
                     HeaderText  = "Shelf Price (BTH)",
                     TextAlign = TextAlign.Center,
                     Format = "N2",
@@ -131,14 +131,13 @@
                 }
             }
         ).Add();
-
         col.HeaderText("(BTH)").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
         (
             new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMODP",
+                    Field = "DEAL_GUIDE_LINE",
                     HeaderText  = "Deal Guideline",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -147,7 +146,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMOGPP",
+                    Field = "NET_INTO_STORE",
                     HeaderText  = "Net Into Store",
                     TextAlign = TextAlign.Center,
                     Format = "N2",
@@ -156,7 +155,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMOSPBTH",
+                    Field = "AVG_SALE",
                     HeaderText  = "Average Sale",
                     TextAlign = TextAlign.Center,
                     Format = "N2",
@@ -165,14 +164,13 @@
                 }
             }
         ).Add();
-
         col.HeaderText("(CV)").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Columns
         (
             new List<Syncfusion.EJ2.Grids.GridColumn>()
             {
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMODP",
+                    Field = "AVG_VOLUME",
                     HeaderText  = "Avg Volume",
                     TextAlign = Syncfusion.EJ2.Grids.TextAlign.Center,
                     Format = "N2",
@@ -181,7 +179,7 @@
                 },
                 new Syncfusion.EJ2.Grids.GridColumn
                 {
-                    Field = "PROMOGPP",
+                    Field = "SALE_QTY",
                     HeaderText  = "Sale QTY.",
                     TextAlign = TextAlign.Center,
                     Format = "N2",
@@ -191,13 +189,13 @@
             }
         ).Add();
 
-        col.Field("Trade_Activity").HeaderText("Sale Value (Excl.VAT/BTH)").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Sales UOM").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Discount Type").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Request By").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Request Date").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Update By").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
-        col.Field("Trade_Activity").HeaderText("Request Date").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("SALE_VALUE_EXCL_VAT").HeaderText("Sale Value (Excl.VAT/BTH)").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("SALE_UOM").HeaderText("Sales UOM").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("DISC_TYPE").HeaderText("Discount Type").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("CREATED_BY").HeaderText("Created By").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("CREATED_DATE").HeaderText("Created Date").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("UPDATED_BY").HeaderText("Updated By").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+        col.Field("UPDATED_DATE").HeaderText("Updated Date").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
 
     })
     .Render())

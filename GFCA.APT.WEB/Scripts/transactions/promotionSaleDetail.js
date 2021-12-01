@@ -1,5 +1,5 @@
 let sendPost = function (url, data) {
-    console.log('url>>>', url);
+
     let value = {
         ...data
     };
@@ -14,7 +14,7 @@ let sendPost = function (url, data) {
             let res = JSON.parse(response.data);
 
             $.toast({
-                type: "success",
+                type: res.MessageType.ToMessageType(),
                 title: "information",
                 subtitle: (new Date()).toDateString(),
                 content: res.Message,
@@ -22,14 +22,11 @@ let sendPost = function (url, data) {
             });
 
             if (res.Success === true) {
-                fixedContractHeaderPopup.close();
-                let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
-                if (objGrid) {
-                    objGrid.refresh();
-                } else {
 
-                    window.location = urlServices.CurrentUrl;
-                }
+                setTimeout(function () {
+                    window.location = urlServices.PreviousUrl;
+                }, 7000);
+
             }
         },
         error: function (response) {
@@ -73,102 +70,86 @@ let promotionSaleDetail = new (function () {
     this.field_plan_nov = "#M11";
     this.field_plan_dec = "#M12";
     this.field_remark = "#CONTRACT_DESC";
-
-    this.field_apply_to_all = "#txt-apply-to-all";
-
-    let monthPlans = $("#M01,#M02,#M03,#M04,#M05,#M06,#M07,#M08,#M09,#M10,#M11,#M12");
-
-    this.cmbPositionChange = function (e) {
-        let t = e.itemData.Text;
-        let v = e.value;
-    }
-
-    $("#txt-apply-to-all").keyup(function (e) {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-        let value = $(promotionInvestmentDetail.field_apply_to_all).val();
-        monthPlans.val(value);
-    });
-
-    monthPlans.keyup(function (e) {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-    });
-
+    
     this.bindField = function () {
         let currentURL = window.location.pathname;
-        let subStringURL = currentURL.split('/');
-
-        let docId = subStringURL[3];
-        let DOC_FCH_ID = docId;
-        let DOC_FCD_ID = '';
-        let DOC_CODE = 'FC';
-        let DOC_VER = '1';
-        let DOC_REV = '1';
-        let BRAND_CODE = $(this.field_brand_code).val();
-        let ACTIVITY_CODE = $(this.field_trade_activity_code).val();
-        let CENTER_CODE = $(this.field_cost_center_code).val();
-        let ACC_CODE = '';
-        let SIZE = $(this.field_size_code).val();
-        let UOM = $(this.field_UOM_code).val();
-        let PACK = $(this.field_pack_code).val();
-        let DATE_REF = $(this.field_date_reference).val();
-        let CONDITION_TYPE = '';
-        let CONTRACT_CATE = '';
-        let CONTRACT_DESC = $(this.field_remark).val();
-        let M01 = $(this.field_plan_jan).val();
-        let M02 = $(this.field_plan_feb).val();
-        let M03 = $(this.field_plan_mar).val();
-        let M04 = $(this.field_plan_apr).val();
-        let M05 = $(this.field_plan_may).val();
-        let M06 = $(this.field_plan_jun).val();
-        let M07 = $(this.field_plan_jul).val();
-        let M08 = $(this.field_plan_aug).val();
-        let M09 = $(this.field_plan_sep).val();
-        let M10 = $(this.field_plan_oct).val();
-        let M11 = $(this.field_plan_nov).val();
-        let M12 = $(this.field_plan_dec).val();
-        let DOC_STATUS = '';
-        let START_DATE = '';
-        let END_DATE = ''
-        let FLAG_ROW = '';
-
+        let subStringURL = currentURL.split('/S/');
+        
+        let DOC_PROM_PS_ID      = subStringURL[1];//$("#DOC_PROM_PS_ID").val();
+        let DOC_PROM_PH_ID      = subStringURL[0].split('s/')[1]; //$("#DOC_PROM_PH_ID").val();
+        let DOC_CODE            = $("#DOC_CODE").val();
+        let DOC_VER             = $("#DOC_VER").val();
+        let DOC_REV             = $("#DOC_REV").val();
+        let COMP_CODE           = $("#COMP_CODE").val();
+        let COMP_NAME           = $("#COMP_NAME").val();
+        let BRAND_CODE          = $("#BRAND_CODE_hidden").val();
+        let BRAND_NAME          = $("#BRAND_CODE").val();
+        let PROD_CODE           = $("#PROD_CODE_hidden").val();
+        let PROD_SKU            = $("#PROD_SKU").val();
+        let PROD_PACK           = $("#PROD_PACK_hidden").val();
+        let PROD_SIZE           = $("#PROD_SIZE_hidden").val();
+        let PROD_LTP_EXCL_VAT   = $("#PROD_LTP_EXCL_VAT").val();
+        let NORM_PERC_DISC      = $("#NORM_PERC_DISC").val();
+        let NORM_PERC_GP        = $("#NORM_PERC_GP").val();
+        let NORM_SHELF_PRICE    = $("#NORM_SHELF_PRICE").val();
+        let PROMO_PERC_DISC     = $("#PROMO_PERC_DISC").val();
+        let PROMO_PERC_GP       = $("#PROMO_PERC_GP").val();
+        let PROMO_SHELF_PRICE   = $("#PROMO_SHELF_PRICE").val();
+        let DEAL_GUIDE_LINE     = $("#DEAL_GUIDE_LINE").val();
+        let NET_INTO_STORE      = $("#NET_INTO_STORE").val();
+        let AVG_SALE            = $("#AVG_SALE").val();
+        let AVG_VOLUME          = $("#AVG_VOLUME").val();
+        let SALE_QTY            = $("#SALE_QTY").val();
+        let SALE_VALUE_EXCL_VAT = $("#SALE_VALUE_EXCL_VAT").val();
+        let SALE_UOM            = $("#SALE_UOM").val();
+        let DISC_TYPE           = $("#DISC_TYPE").val();
+        let FLAG_ROW            = $("#FLAG_ROW").val();
 
         this.jsonData = {
-            DOC_FCH_ID,
-            DOC_FCD_ID,
+            DOC_PROM_PS_ID, //PK
+            DOC_PROM_PH_ID, //FK
+
             DOC_CODE,
             DOC_VER,
             DOC_REV,
+
+            COMP_CODE,
+            COMP_NAME,
+
             BRAND_CODE,
-            ACTIVITY_CODE,
-            CENTER_CODE,
-            ACC_CODE,
-            SIZE,
-            UOM,
-            PACK,
-            DATE_REF,
-            CONDITION_TYPE,
-            CONTRACT_CATE,
-            CONTRACT_DESC,
-            M01,
-            M02,
-            M03,
-            M04,
-            M05,
-            M06,
-            M07,
-            M08,
-            M09,
-            M10,
-            M11,
-            M12,
-            DOC_STATUS,
-            START_DATE,
-            END_DATE,
+            BRAND_NAME,
+
+            PROD_CODE,
+            PROD_SKU,
+            PROD_PACK,
+            PROD_SIZE,
+            PROD_LTP_EXCL_VAT,
+        
+            NORM_PERC_DISC,
+            NORM_PERC_GP,
+            NORM_SHELF_PRICE,
+
+            PROMO_PERC_DISC,
+            PROMO_PERC_GP,
+            PROMO_SHELF_PRICE,
+
+            DEAL_GUIDE_LINE,
+            NET_INTO_STORE,
+
+            AVG_SALE,
+            AVG_VOLUME,
+
+            SALE_QTY,
+            SALE_VALUE_EXCL_VAT,
+            SALE_UOM,
+
+            DISC_TYPE,
             FLAG_ROW
         };
     }
 
     this.onSave = function (e) {
+        
         this.bindField();
         //begin Validation
         let msg = '';
@@ -182,16 +163,26 @@ let promotionSaleDetail = new (function () {
                 delay: 5000
             });
         } else {
-            let IS_DELETE_PERMANANT = false;
+            let FLAG_ROW = 'S';
             this.jsonData = {
                 ...this.jsonData,
-                IS_DELETE_PERMANANT
+                FLAG_ROW
             };
-            sendPost(urlServices.AddDetail, this.jsonData);
+
+            var url = urlServices.EditDetailSale;
+            if (this.jsonData.DOC_PROM_PS_ID == 0) {
+                url = urlServices.AddDetailSale;
+            }
+
+            sendPost(url, this.jsonData);
         }
     }
 
-    // onchage 
+    this.onBack = function (e) {
+        window.location.href = urlServices.PreviousUrl;
+    }
+
+    // onchage
     this.OnBrandChangeValue = function (e) {
         let BRAND_CODE = e.value;
         this.jsonData = {
@@ -200,57 +191,28 @@ let promotionSaleDetail = new (function () {
         }
     }
 
-    this.OnTradeActivityChangeValue = function (e) {
-        let TRADE_ACTIVITY_CODE = e.value;
+    this.OnProductChangeValue = function (e) {
+        let PROD_CODE = e.value;
         this.jsonData = {
             ...this.jsonData,
-            TRADE_ACTIVITY_CODE
-        }
-    }
-
-    this.OnCategoryChangeValue = function (e) {
-        let CATEGORY_CODE = e.value;
-        this.jsonData = {
-            ...this.jsonData,
-            CATEGORY_CODE
-        }
-    }
-
-    this.OnUOMChangeValue = function (e) {
-        let UOM_CODE = e.value;
-        this.jsonData = {
-            ...this.jsonData,
-            UOM_CODE
-        }
-    }
-
-    this.OnSizeChangeValue = function (e) {
-        let SIZE_CODE = e.value;
-        this.jsonData = {
-            ...this.jsonData,
-            SIZE_CODE
+            PROD_CODE
         }
     }
 
     this.OnPackChangeValue = function (e) {
-        let PACK_CODE = e.value;
+        let PROD_PACK = e.value;
         this.jsonData = {
             ...this.jsonData,
-            PACK_CODE
+            PROD_PACK
         }
     }
 
-    this.OnCostCenterChangeValue = function (e) {
-        let COST_CENTER_CODE = e.value;
+    this.OnSizeChangeValue = function (e) {
+        let PROD_SIZE = e.value;
         this.jsonData = {
             ...this.jsonData,
-            COST_CENTER_CODE
+            PROD_SIZE
         }
-    };
-
-    $("#btn-fixed-contact-detail-back").click(function (e) {
-        e.preventDefault();
-        window.location.href = document.referrer;
-    });
+    }
 
 })();

@@ -126,10 +126,18 @@ namespace GFCA.APT.BAL.Implements
             BusinessResponse response = new BusinessResponse();
             try
             {
+                _uow.PromotionRepository.DeleteOverview(DOC_PROM_PH_ID);
 
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
                 _logger.Error("RemoveOverview : ", ex);
             }
             return response;
@@ -259,7 +267,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 PromotionPlanningSaleDto dto = entity;
-
+                dto.CREATED_BY = "System";
                 _uow.PromotionRepository.InsertPlanngSale(dto);
                 _uow.Commit();
                 response.Success = true;

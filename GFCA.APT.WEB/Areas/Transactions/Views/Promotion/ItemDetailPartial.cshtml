@@ -3,7 +3,7 @@
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.PromotionPlanningDto
+@model GFCA.APT.Domain.Dto.PromotionPlanngOverviewDto
 
 @*----------------- Promotion planning detail -----------------*@
 <div class="row mb-2">
@@ -35,12 +35,12 @@
                                     <div class="tab-content" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
 
-                                            @Html.Partial("ItemDetailGridSalePartial", Model.OverviewData)
+                                            @Html.Partial("ItemDetailGridSalePartial", Model)
 
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
 
-                                            @Html.Partial("ItemDetailGridInvestmentPartial", Model.OverviewData)
+                                            @Html.Partial("ItemDetailGridInvestmentPartial", Model)
 
                                         </div>
                                     </div>

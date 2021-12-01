@@ -26,7 +26,7 @@ namespace GFCA.APT.Domain.Dto
         public string UOM { get; set; }
         public string PACK { get; set; }
         public string DATE_REF { get; set; }
-        public CONDITION_TYPE CONDITION_TYPE { get; set; }
+        public CONDITION_TYPE CONDITION_TYPE { get; set; } = CONDITION_TYPE.NONE;
         public string CONTRACT_CATE { get; set; }
         public string CONTRACT_DESC { get; set; }
         public Nullable<decimal> M01 { get; set; }
@@ -42,10 +42,10 @@ namespace GFCA.APT.Domain.Dto
         public Nullable<decimal> M11 { get; set; }
         public Nullable<decimal> M12 { get; set; }
         public string REMARK { get; set; }
-        public DOCUMENT_STATUS DOC_STATUS { get; set; }
+        public DOCUMENT_STATUS DOC_STATUS { get; set; } = DOCUMENT_STATUS.NONE;
         public Nullable<DateTime> START_DATE { get; set; }
         public Nullable<DateTime> END_DATE { get; set; }
-        public string FLAG_ROW { get; set; }
+        public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
 
     }
 }

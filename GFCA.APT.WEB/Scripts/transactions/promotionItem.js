@@ -14,7 +14,7 @@
                 let res = JSON.parse(response.data);
 
                 $.toast({
-                    type: "success",
+                    type: res.MessageType.ToMessageType(),
                     title: "information",
                     subtitle: (new Date()).toDateString(),
                     content: res.Message,
@@ -43,58 +43,59 @@
         });
     }
 
-    /* summary tab */
     $("#toolbar_investment_add").click(function (e) {
         e.preventDefault();
-
-        // if (argruments.DOC_FCH_ID) {
-        window.location.href = `/T/Promotions/Investment/1/0`;
-        // }
+        if (argruments.DOC_PROM_PH_ID) {
+            let url = urlServices.CurrentUrl + `/I/0`;
+            window.location.href = url;
+        }
 
     });
+
     $("#toolbar_investment_edit").click(function (e) {
         e.preventDefault();
 
-        if (argruments.data) {
-            window.location.href = `/T/Promotions/Investment/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+        if (argruments.dataInvest) {
+            let url = urlServices.CurrentUrl + `/I/${argruments.dataInvest.DOC_PROM_PI_ID}`;
+            window.location.href = url;
         }
 
     });
+    /*
     $("#toolbar_investment_del").click(function (e) {
         e.preventDefault();
-        /*
+        
         let callBack = function (data) {
             sendPost(urlServices.Edit, data);
         };
-        */
+        
         // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
-
-    /* tradeActivity tab */
+    */
     $("#toolbar_sale_add").click(function (e) {
         e.preventDefault();
 
-        // if (argruments.DOC_FCH_ID) {
-        window.location.href = `/T/Promotions/Sale/1/0`;
-        // }
-
-    });
-    $("#toolbar_sale_edit").click(function (e) {
-        e.preventDefault();
-
-        if (argruments.data) {
-            window.location.href = `/T/Promotions/Sale/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+        if (argruments.DOC_PROM_PH_ID) {
+            let url = urlServices.CurrentUrl + `/S/0`;
+            window.location.href = url;
         }
 
     });
-    $("#toolbar_tradeActivity_del").click(function (e) {
+
+    $("#toolbar_sale_edit").click(function (e) {
         e.preventDefault();
-        /*
-        let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
-        };
-        */
-        // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+
+        if (argruments.dataSale) {
+            let url = urlServices.CurrentUrl + `/S/${argruments.dataSale.DOC_PROM_PS_ID}`;
+            window.location.href = url;
+        }
+
     });
+    /*
+    $("#toolbar_sale_del").click(function (e) {
+        e.preventDefault();
+        
+    });
+    */
 
 });
