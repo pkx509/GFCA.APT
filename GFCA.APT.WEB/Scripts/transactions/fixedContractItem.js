@@ -60,7 +60,11 @@
 
     });
     $("#toolbar_del").click(function (e) {
+       
         e.preventDefault();
+
+      
+
         /*
         let callBack = function (data) {
             sendPost(urlServices.Edit, data);
