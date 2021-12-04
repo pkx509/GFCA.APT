@@ -11,28 +11,37 @@
         dataType: "json",
         success: function (response) {
 
+
+
             let res = JSON.parse(response.data);
 
+
+
+
             $.toast({
-                type: "success",
+                type: res.MessageType.ToMessageType(),
                 title: "information",
                 subtitle: (new Date()).toDateString(),
                 content: res.Message,
                 delay: 7000
             });
 
-            if (res.Success === true) {
-                fixedContractHeaderPopup.close();
-                let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
-                if (objGrid) {
-                    objGrid.refresh();
-                } else {
 
-                    window.location = urlServices.CurrentUrl;
-                }
+
+            if (res.Success === true) {
+                //  console.log('url>>>', url);
+
+                setTimeout(function () {
+                    // alert(url);
+                    window.location = document.referrer;
+                }, 500);
+
+
+
             }
         },
         error: function (response) {
+
             $.toast({
                 type: "error",
                 title: "error",
@@ -45,6 +54,7 @@
 }
 
 let fixedContractDetail = new (function () {
+    this.field_doc_fcd_id = "#DOC_FCD_ID";
     this.field_brand_name = "#BRAND_CODE";
     this.field_brand_code = "#BRAND_CODE_hidden";
     this.field_trade_activity_name = "#ACTIVITY_CODE";
@@ -96,10 +106,11 @@ let fixedContractDetail = new (function () {
     this.bindField = function () {
         let currentURL = window.location.pathname;
         let subStringURL = currentURL.split('/');
+       // alert(currentURL);
 
         let docId = subStringURL[3];
         let DOC_FCH_ID = docId;
-        let DOC_FCD_ID = '';
+        let DOC_FCD_ID = subStringURL[4];
         let DOC_CODE = 'FC';
         let DOC_VER = '1';
         let DOC_REV = '1';
@@ -169,6 +180,11 @@ let fixedContractDetail = new (function () {
     }
 
     this.onSave = function (e) {
+
+        
+
+       // console.log('DOC_FCD_ID  >>>', this.jsonData.DOC_FCD_ID);
+
         this.bindField();
         //begin Validation
         let msg = '';
@@ -187,7 +203,17 @@ let fixedContractDetail = new (function () {
                 ...this.jsonData,
                 IS_DELETE_PERMANANT
             };
-            sendPost(urlServices.AddDetail, this.jsonData);
+
+          //  alert($(this.field_doc_fcd_id).val());
+
+            var url = urlServices.EditFixedContractDetail;
+            if ($(this.field_doc_fcd_id).val() == 0) {
+              //  alert($(this.field_doc_fcd_id).val());
+                url = urlServices.AddFixedContractDetail;
+            }
+
+
+            sendPost(url, this.jsonData);
         }
     }
 

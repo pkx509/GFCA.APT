@@ -537,18 +537,21 @@ SET
 , M10            = @M10
 , M11            = @M11
 , M12            = @M12
-, COMMENT        = @COMMENT
+, REMARK        = @REMARK
 , DOC_STATUS     = @DOC_STATUS
 , FLAG_ROW       = @FLAG_ROW
 , START_DATE     = @START_DATE
 , END_DATE       = @END_DATE
 , UPDATED_BY     = @UPDATED_BY
 , UPDATED_DATE   = @UPDATED_DATE
-WHERE 
-DOC_CODE       = @DOC_CODE
-AND DOC_FCH_ID = @DOC_FCH_ID
-AND DOC_FCD_ID = @DOC_FCD_ID
+WHERE DOC_FCD_ID = @DOC_FCD_ID
 ;";
+
+            /*
+             DOC_CODE       = @DOC_CODE
+            AND DOC_FCH_ID = @DOC_FCH_ID
+
+             */
 
             var parms = new
             {

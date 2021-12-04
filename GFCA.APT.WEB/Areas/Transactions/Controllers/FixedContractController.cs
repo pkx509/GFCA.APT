@@ -226,19 +226,28 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         [HttpPost]
         public JsonResult EditFixedContractDetail(FixedContractDetailDto data)
         {
+
             _biz.LogService.Debug("EditFixedContractDetail");
-            dynamic d = new BusinessResponse();
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
 
             try
             {
-                var biz = _biz.FixedContractService.EditDetail(data);
-                d = JsonConvert.SerializeObject(biz);
-            }
-            catch
-            {
+
+                bizObj = _biz.FixedContractService.EditDetail(data);
 
             }
-            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("EditFixedContractDetail : ", ex);
+
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]

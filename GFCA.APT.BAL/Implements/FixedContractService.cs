@@ -333,6 +333,7 @@ namespace GFCA.APT.BAL.Implements
                 docd.DOC_FCD_ID = docd.DOC_FCD_ID;
                 docd.DOC_FCH_ID = docd.DOC_FCH_ID;
                 docd.DOC_CODE = docd.DOC_CODE;
+                docd.CONDITION_TYPE = CONDITION_TYPE.PLANNING;
                 //docd.DOC_VER = doch.DOC_VER;
                 //docd.DOC_REV = doch.DOC_REV;
 
