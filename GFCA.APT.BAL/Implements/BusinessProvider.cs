@@ -76,5 +76,10 @@ namespace GFCA.APT.BAL.Implements
 
         private IPromotionService _promotionService;
         public IPromotionService PromotionService => _promotionService ?? (_promotionService = Serve.PromotionService.CreateInstant());
+
+        private IBudgetPlanService _budgetplanService;
+        public IBudgetPlanService BudgetPlanService => _budgetplanService ?? (_budgetplanService = Serve.BudgetPlanService.CreateInstant());
+
+ 
     }
 }
