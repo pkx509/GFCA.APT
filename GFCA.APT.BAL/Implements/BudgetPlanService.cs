@@ -13,29 +13,31 @@ using System.Reflection;
 
 namespace GFCA.APT.BAL.Implements
 {
-    public class FixedContractService: ServiceBase, IFixedContractService
+    //IBudgetPlanService
+
+    public class BudgetPlanService : ServiceBase, IBudgetPlanService
     {
         private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         #region [ constructor ]
-        internal static FixedContractService CreateInstant()
+        internal static BudgetPlanService CreateInstant()
         {
             var uow = UnitOfWork.CreateInstant();
-            var svc = new FixedContractService(uow);
+            var svc = new BudgetPlanService(uow);
 
             return svc;
         }
-        public FixedContractService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public BudgetPlanService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }
         #endregion [ constructor ]
 
         #region [ header ]
-        public IEnumerable<FixedContractHeaderDto> GetHeaderAll()
+        public IEnumerable<BudgetPlanHeaderDto> GetHeaderAll()
         {
             try
             {
-                var doch = _uow.FixedContractRepository.GetFixedContractAll();
+                var doch = _uow.BudgetPlanRepository.GetBudgetPlanAll();
                 return doch;
             }
             catch (Exception ex)
@@ -378,6 +380,11 @@ namespace GFCA.APT.BAL.Implements
 
             return response;
         }
+
+        
+ 
+
+
         #endregion [ detail ]
 
 

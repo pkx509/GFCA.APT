@@ -246,6 +246,7 @@
     </Compile>
     <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\DocumentRepository.cs" />
+    <Compile Include="Implements\BudgetPlanRepository.cs" />
     <Compile Include="Implements\PromotionRepository.cs" />
     <Compile Include="Implements\SizeRepository.cs" />
     <Compile Include="Implements\UnitRepository.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
     <Compile Include="Interfaces\IDocumentRepository.cs" />
+    <Compile Include="Interfaces\IBudgetPlanRepository.cs" />
     <Compile Include="Interfaces\IPromotionRepository.cs" />
     <Compile Include="Interfaces\IRepositories.cs" />
     <Compile Include="Interfaces\ISizeRepository.cs" />

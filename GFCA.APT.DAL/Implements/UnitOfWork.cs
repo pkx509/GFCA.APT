@@ -35,6 +35,8 @@ namespace GFCA.APT.DAL.Implements
         private IDocumentRepository _documentRepository;
         private IFixedContractRepository _fixedContractRepository;
         private IPromotionRepository _promotionRepository;
+        private IBudgetPlanRepository _budgetplanRepository;
+
 
         public static IUnitOfWork CreateInstant()
         {
@@ -221,6 +223,18 @@ namespace GFCA.APT.DAL.Implements
                 return _promotionRepository ?? (_promotionRepository = new PromotionRepository(_transaction));
             }
         }
+
+      
+
+        public IBudgetPlanRepository BudgetPlanRepository
+        {
+            get
+            {
+                return _budgetplanRepository ?? (_budgetplanRepository = new BudgetPlanRepository(_transaction));
+            }
+        }
+
+
 
         public void Commit()
         {

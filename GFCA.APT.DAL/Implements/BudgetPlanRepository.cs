@@ -10,39 +10,12 @@ using GFCA.APT.Domain;
 
 namespace GFCA.APT.DAL.Implements
 {
-    public class FixedContractRepository : RepositoryBase, IFixedContractRepository
+    public class BudgetPlanRepository : RepositoryBase, IBudgetPlanRepository
     {
 
-        public FixedContractRepository(IDbTransaction transaction) : base(transaction) { }
+        public BudgetPlanRepository(IDbTransaction transaction) : base(transaction) { }
 
-        public IEnumerable<FixedContractHeaderDto> GetFixedContractAll()
-        {
-            string sqlQuery = @"SELECT  DOC_FCH_ID
-, DOC_CODE
-, DOC_VER
-, DOC_REV
-, CLIENT_CODE
-, (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
-, CUST_CODE
-, (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
-, CHANNEL_CODE
-, (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
-, DOC_STATUS
-, COMMENT
-, FLAG_ROW
-, CREATED_BY
-, CREATED_DATE
-, UPDATED_BY
-, UPDATED_DATE
-  FROM TB_T_FIXED_CONTRACT_H a;";
-            var query = Connection.Query<FixedContractHeaderDto>(
-                sql: sqlQuery
-                , transaction: Transaction
-                ).ToList();
-
-            return query;
-
-        }
+ 
         public FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCH_ID)
         {
             string sqlQuery = 
@@ -615,5 +588,40 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
             );
         }
 
+       
+
+        public IEnumerable<BudgetPlanHeaderDto> GetBudgetPlanAll()
+        {
+            string sqlQuery = @"SELECT  DOC_FCH_ID
+, DOC_CODE
+, DOC_VER
+, DOC_REV
+, CLIENT_CODE
+, (SELECT TOP 1 b.CLIENT_NAME FROM TB_M_CLIENT b WHERE b.CLIENT_CODE = a.CLIENT_CODE) CLIENT_NAME
+, CUST_CODE
+, (SELECT TOP 1 b.CUST_NAME FROM TB_M_CUSTOMER b WHERE b.CUST_CODE = a.CUST_CODE) CUST_NAME
+, CHANNEL_CODE
+, (SELECT TOP 1 b.CHANNEL_NAME FROM TB_M_CHANNEL b WHERE b.CHANNEL_CODE = a.CHANNEL_CODE) CHANNEL_NAME
+, DOC_STATUS
+, COMMENT
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+, UPDATED_BY
+, UPDATED_DATE
+  FROM TB_T_FIXED_CONTRACT_H a;";
+            var query = Connection.Query<BudgetPlanHeaderDto>(
+                sql: sqlQuery
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+
+        }
+
+        public IEnumerable<FixedContractHeaderDto> GetFixedContractAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
