@@ -2,16 +2,13 @@
 @using GFCA.APT.Domain.Enums
 @using GFCA.APT.Domain.Dto
 @model IEnumerable<GFCA.APT.Domain.Dto.DocumentHistoryDto>
-@{
-    //IEnumerable<DocumentHistoryDto> historiesDto = ViewData["DocumentHistoryDto"] as IEnumerable<DocumentHistoryDto>;
-    var historiesDto = Model;
-}
+
 @*----------------- document histories footer -----------------*@
 <div class="row mb-2">
     <div class="col col-lg-12 p-1">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h5>Audit &amp; History</h5>
+                <h5>History</h5>
             </div>
             <div class="card-body">
 
@@ -24,10 +21,10 @@
                             <span class="bg-gradient-gray">History</span>
                         </div>
 
-                        @if (historiesDto != null)
+                        @if (Model != null)
                         {
 
-                            foreach (var history in historiesDto)
+                            foreach (var history in Model)
                             {
                                 <div>
                                     @if (history.DOC_STATUS == DOCUMENT_STATUS.DRAFT)
@@ -163,6 +160,30 @@
 
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col col-lg-12 p-1">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h5>Flow State</h5>
+            </div>
+            <div class="card-body">
+
+                <div id="flowstates-wrapper">
+                    <div class="flowstates">
+                        <ul>
+                            <li><a href="#" class="current">Request</a><div class="state-shadow">Request</div></li>
+                            <li><a href="#">Approval</a><div class="state-shadow">Approval</div></li>
+                            <li><a href="#">Review</a><div class="state-shadow">Review</div></li>
+                            <li><a href="#">Completed</a><div class="state-shadow">Completed</div></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

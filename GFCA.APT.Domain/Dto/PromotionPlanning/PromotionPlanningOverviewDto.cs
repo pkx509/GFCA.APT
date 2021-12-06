@@ -12,6 +12,8 @@ namespace GFCA.APT.Domain.Dto
         public string DOC_CODE { get; set; }
         public int? DOC_VER { get; set; } = 0;
         public int? DOC_REV { get; set; } = 0;
+
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public DOCUMENT_STATUS DOC_STATUS { get; set; } = DOCUMENT_STATUS.NONE;
 
         public string PROMO_NAME { get; set; }
@@ -36,6 +38,7 @@ namespace GFCA.APT.Domain.Dto
 
         public string COMMENT { get; set; }
 
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
     }
 }

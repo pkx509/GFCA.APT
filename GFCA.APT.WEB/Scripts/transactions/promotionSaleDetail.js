@@ -42,34 +42,6 @@ let sendPost = function (url, data) {
 }
 
 let promotionSaleDetail = new (function () {
-    this.field_brand_name = "#BRAND_CODE";
-    this.field_brand_code = "#BRAND_CODE_hidden";
-    this.field_trade_activity_name = "#ACTIVITY_CODE";
-    this.field_trade_activity_code = "#ACTIVITY_CODE_hidden";
-    this.field_category_name = "#CONTRACT_CATE";
-    this.field_category_code = "#CONTRACT_CATE_hidden";
-    this.field_date_reference = "#DATE_REF";
-    this.field_UOM_name = "#UOM";
-    this.field_UOM_code = "#UOM_hidden";
-    this.field_size_name = "#SIZE";
-    this.field_size_code = "#SIZE_hidden";
-    this.field_pack_name = "#PACK";
-    this.field_pack_code = "#PACK_hidden";
-    this.field_cost_center_name = "#CENTER_CODE";
-    this.field_cost_center_code = "#CENTER_CODE_hidden";
-    this.field_plan_jan = "#M01";
-    this.field_plan_feb = "#M02";
-    this.field_plan_mar = "#M03";
-    this.field_plan_apr = "#M04";
-    this.field_plan_may = "#M05";
-    this.field_plan_jun = "#M06";
-    this.field_plan_jul = "#M07";
-    this.field_plan_aug = "#M08";
-    this.field_plan_sep = "#M09";
-    this.field_plan_oct = "#M10";
-    this.field_plan_nov = "#M11";
-    this.field_plan_dec = "#M12";
-    this.field_remark = "#CONTRACT_DESC";
     
     this.bindField = function () {
         let currentURL = window.location.pathname;
@@ -169,9 +141,9 @@ let promotionSaleDetail = new (function () {
                 FLAG_ROW
             };
 
-            var url = urlServices.EditDetailSale;
+            var url = urlServices.EditDetail;
             if (this.jsonData.DOC_PROM_PS_ID == 0) {
-                url = urlServices.AddDetailSale;
+                url = urlServices.AddDetail;
             }
 
             sendPost(url, this.jsonData);
@@ -179,7 +151,9 @@ let promotionSaleDetail = new (function () {
     }
 
     this.onBack = function (e) {
-        window.location.href = urlServices.PreviousUrl;
+        //e.preventDefault();
+        //window.location.href = urlServices.PreviousUrl;
+        window.history.back();
     }
 
     // onchage

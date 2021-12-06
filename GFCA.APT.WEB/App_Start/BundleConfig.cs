@@ -81,6 +81,9 @@ namespace GFCA.APT.WEB
             jqueyLteScript
                 .Include("~/Content/plugins/jquery/jquery.min.js ")
                 .Include("~/Content/plugins/jquery-ui/jquery-ui.min.js")
+                //.Include("~/Scripts/numeral-js/min/numeral.min.js")
+                //.Include("~/Scripts/numeral-js/src/locales/th.js")
+                .Include("~/Scripts/jquery-numeric/jquery.numeric.js")
                 ;
             bundles.Add(jqueyLteScript);
             /*

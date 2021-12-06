@@ -5,8 +5,8 @@ namespace GFCA.APT.Domain.Dto
     public class PromotionPlanningInvestmentDto : Auditable
     {
         public int DOC_PROM_PI_ID { get; set; } = 0; //PK
-        public int? DOC_PROM_PS_ID { get; set; } //FK
-        public int? DOC_PROM_PH_ID { get; set; } //FK
+        public int DOC_PROM_PS_ID { get; set; } //FK
+        public int DOC_PROM_PH_ID { get; set; } //FK
 
         public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }
@@ -20,17 +20,25 @@ namespace GFCA.APT.Domain.Dto
 
         public string PROD_CODE { get; set; }
         public string PROD_SKU { get; set; }
+        public string PROD_PACK_CODE { get; set; }
+        public string PROD_PACK_NAME { get; set; }
+        public string PROD_SIZE_CODE { get; set; }
+        public string PROD_SIZE_NAME { get; set; }
 
         public string ACTIVITY_CODE { get; set; }
         public string ACTIVITY_NAME { get; set; }
 
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public INVESTMENT_TYPE INVEST_TYPE { get; set; } = INVESTMENT_TYPE.VALUE; // PERCENT, VALUE
         public decimal INVEST_VALUE { get; set; } = 0.00M;
-        public decimal INVEST_AMOUNT { get; set; } = 0.00M; 
+        public decimal INVEST_AMOUNT { get; set; } = 0.00M;
 
-        public string ACTIVITY_CODE_OTHER { get; set; }
-        public string ACTIVITY_NAME_OTHER { get; set; }
-        public string ACTIVITY_COMBINED_OTHER { get; set; } = "N"; //Y, N
+        public string OTHER_ACTIVITY_CODE { get; set; }
+        public string OTHER_ACTIVITY_NAME { get; set; }
+        public string OTHER_ACTIVITY_COMBINED { get; set; } = "N"; //Y, N
+        public decimal OTHER_AMOUNT { get; set; } = 0.00M;
+
+        public decimal TOTAL_AMOUNT { get; set; } = 0.00M;
         public decimal INCREMENT_SALE_INVEST { get; set; } = 0.00M;
 
         public string INVEST_ACC_CODE { get; set; }
@@ -49,6 +57,8 @@ namespace GFCA.APT.Domain.Dto
         public decimal FUND2_AMOUNT { get; set; } = 0.00M;
 
         public string REMARKS { get; set; }
+
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
 
     }

@@ -57,6 +57,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -92,6 +95,7 @@
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningSaleDto.cs" />
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningDto.cs" />
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningFooterDto.cs" />
+    <Compile Include="Dto\RoutePathDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
     <Compile Include="Dto\UnitDto.cs" />
     <Compile Include="Dto\PackDto.cs" />

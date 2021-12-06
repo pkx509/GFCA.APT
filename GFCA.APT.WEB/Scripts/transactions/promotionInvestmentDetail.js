@@ -1,5 +1,10 @@
+$("#SALE_QUANTITY").numeric({ decimalPlaces: 2 });
+$("#INVEST_AMOUNT").numeric({ decimalPlaces: 2 });
+$("#OTHER_AMOUNT").numeric({ decimalPlaces: 2 });
+$("#TOTAL_AMOUNT").numeric({ decimalPlaces: 2 });
+
 let sendPost = function (url, data) {
-    console.log('url>>>', url);
+
     let value = {
         ...data
     };
@@ -14,7 +19,7 @@ let sendPost = function (url, data) {
             let res = JSON.parse(response.data);
 
             $.toast({
-                type: "success",
+                type: res.MessageType.ToMessageType(),
                 title: "information",
                 subtitle: (new Date()).toDateString(),
                 content: res.Message,
@@ -22,14 +27,11 @@ let sendPost = function (url, data) {
             });
 
             if (res.Success === true) {
-                fixedContractHeaderPopup.close();
-                let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
-                if (objGrid) {
-                    objGrid.refresh();
-                } else {
 
-                    window.location = urlServices.CurrentUrl;
-                }
+                setTimeout(function () {
+                    window.location = urlServices.PreviousUrl;
+                }, 7000);
+
             }
         },
         error: function (response) {
@@ -44,131 +46,17 @@ let sendPost = function (url, data) {
     });
 }
 
-let promotionInvestmentDetail = new (function () {
-    this.field_brand_name = "#BRAND_CODE";
-    this.field_brand_code = "#BRAND_CODE_hidden";
-    this.field_trade_activity_name = "#ACTIVITY_CODE";
-    this.field_trade_activity_code = "#ACTIVITY_CODE_hidden";
-    this.field_category_name = "#CONTRACT_CATE";
-    this.field_category_code = "#CONTRACT_CATE_hidden";
-    this.field_date_reference = "#DATE_REF";
-    this.field_UOM_name = "#UOM";
-    this.field_UOM_code = "#UOM_hidden";
-    this.field_size_name = "#SIZE";
-    this.field_size_code = "#SIZE_hidden";
-    this.field_pack_name = "#PACK";
-    this.field_pack_code = "#PACK_hidden";
-    this.field_cost_center_name = "#CENTER_CODE";
-    this.field_cost_center_code = "#CENTER_CODE_hidden";
-    this.field_plan_jan = "#M01";
-    this.field_plan_feb = "#M02";
-    this.field_plan_mar = "#M03";
-    this.field_plan_apr = "#M04";
-    this.field_plan_may = "#M05";
-    this.field_plan_jun = "#M06";
-    this.field_plan_jul = "#M07";
-    this.field_plan_aug = "#M08";
-    this.field_plan_sep = "#M09";
-    this.field_plan_oct = "#M10";
-    this.field_plan_nov = "#M11";
-    this.field_plan_dec = "#M12";
-    this.field_remark = "#CONTRACT_DESC";
+let action = {
 
-    this.field_apply_to_all = "#txt-apply-to-all";
+    Initialize: function (callback) {
+        callback();
+    },
 
-    let monthPlans = $("#M01,#M02,#M03,#M04,#M05,#M06,#M07,#M08,#M09,#M10,#M11,#M12");
+    LoadData: function () {
 
-    this.cmbPositionChange = function (e) {
-        let t = e.itemData.Text;
-        let v = e.value;
-    }
+    },
 
-    $("#txt-apply-to-all").keyup(function (e) {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-        let value = $(promotionInvestmentDetail.field_apply_to_all).val();
-        monthPlans.val(value);
-    });
-
-    monthPlans.keyup(function (e) {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-    });
-
-    this.bindField = function () {
-        let currentURL = window.location.pathname;
-        let subStringURL = currentURL.split('/');
-
-        let docId = subStringURL[3];
-        let DOC_FCH_ID = docId;
-        let DOC_FCD_ID = '';
-        let DOC_CODE = 'FC';
-        let DOC_VER = '1';
-        let DOC_REV = '1';
-        let BRAND_CODE = $(this.field_brand_code).val();
-        let ACTIVITY_CODE = $(this.field_trade_activity_code).val();
-        let CENTER_CODE = $(this.field_cost_center_code).val();
-        let ACC_CODE = '';
-        let SIZE = $(this.field_size_code).val();
-        let UOM = $(this.field_UOM_code).val();
-        let PACK = $(this.field_pack_code).val();
-        let DATE_REF = $(this.field_date_reference).val();
-        let CONDITION_TYPE = '';
-        let CONTRACT_CATE = '';
-        let CONTRACT_DESC = $(this.field_remark).val();
-        let M01 = $(this.field_plan_jan).val();
-        let M02 = $(this.field_plan_feb).val();
-        let M03 = $(this.field_plan_mar).val();
-        let M04 = $(this.field_plan_apr).val();
-        let M05 = $(this.field_plan_may).val();
-        let M06 = $(this.field_plan_jun).val();
-        let M07 = $(this.field_plan_jul).val();
-        let M08 = $(this.field_plan_aug).val();
-        let M09 = $(this.field_plan_sep).val();
-        let M10 = $(this.field_plan_oct).val();
-        let M11 = $(this.field_plan_nov).val();
-        let M12 = $(this.field_plan_dec).val();
-        let DOC_STATUS = '';
-        let START_DATE = '';
-        let END_DATE = ''
-        let FLAG_ROW = '';
-
-
-        this.jsonData = {
-            DOC_FCH_ID,
-            DOC_FCD_ID,
-            DOC_CODE,
-            DOC_VER,
-            DOC_REV,
-            BRAND_CODE,
-            ACTIVITY_CODE,
-            CENTER_CODE,
-            ACC_CODE,
-            SIZE,
-            UOM,
-            PACK,
-            DATE_REF,
-            CONDITION_TYPE,
-            CONTRACT_CATE,
-            CONTRACT_DESC,
-            M01,
-            M02,
-            M03,
-            M04,
-            M05,
-            M06,
-            M07,
-            M08,
-            M09,
-            M10,
-            M11,
-            M12,
-            DOC_STATUS,
-            START_DATE,
-            END_DATE,
-            FLAG_ROW
-        };
-    }
-
-    this.onSave = function (e) {
+    Save: function (e) {
         this.bindField();
         //begin Validation
         let msg = '';
@@ -189,6 +77,215 @@ let promotionInvestmentDetail = new (function () {
             };
             sendPost(urlServices.AddDetail, this.jsonData);
         }
+    },
+
+    Back: function (e) {
+        e.preventDefault();
+        window.history.back();
+    },
+
+    clear: function (callback) {
+        callback();
+    }
+
+};
+
+let promotionInvestmentDetail = new (function () {
+    this.jsondata = {
+    };
+
+    this.cmbPositionChange = function (e) {
+        let t = e.itemData.Text;
+        let v = e.value;
+    }
+
+    this.onMutualFieldChanged = function (e) {
+        console.log(e);
+    }
+    
+    this.bindField = function () {
+        
+        let DOC_PROM_PI_ID = $("#DOC_PROM_PI_ID").val(); //PK
+        let DOC_PROM_PS_ID = $("#DOC_PROM_PS_ID").val(); //FK
+        let DOC_PROM_PH_ID = $("#DOC_PROM_PH_ID").val(); //FK
+
+        let DOC_CODE = $("#DOC_CODE").val();
+        let DOC_VER = $("#DOC_VER").val();
+        let DOC_REV = $("#DOC_REV").val();
+        
+        let COMP_CODE = $("#COMP_CODE_hidden").val();
+        let COMP_NAME = $("#COMP_CODE").val();
+        
+        let BRAND_CODE = $("#BRAND_CODE_hidden").val();
+        let BRAND_NAME = $("#BRAND_CODE").val();
+        
+        let PROD_CODE = $("#PROD_CODE_hidden").val();
+        let PROD_SKU  = $("#PROD_CODE").val();
+        let PROD_PACK = $("#PROD_PACK").val();
+        let PROD_SIZE = $("#PROD_SIZE").val();
+        
+        let ACTIVITY_CODE = $("#ACTIVITY_CODE_hidden").val();
+        let ACTIVITY_NAME = $("#ACTIVITY_CODE").val();
+        
+        //let INVEST_TYPE   = $("#INVEST_TYPE").val();
+        let INVEST_TYPE   = $("input[name='INVEST_TYPE']:checked").val();
+        let INVEST_VALUE  = $("#INVEST_VALUE").val();
+        let INVEST_AMOUNT = $("#INVEST_AMOUNT").val();
+        
+        let OTHER_ACTIVITY_CODE     = $("#OTHER_ACTIVITY_CODE_hidden").val();
+        let OTHER_ACTIVITY_NAME     = $("#OTHER_ACTIVITY_CODE").val();
+        let OTHER_ACTIVITY_COMBINED = $("#OTHER_ACTIVITY_COMBINED").prop("checked") === true ? 'Y': 'N';
+        let OTHER_AMOUNT            = $("#OTHER_AMOUNT").val();
+
+        let TOTAL_AMOUNT          = $("#TOTAL_AMOUNT").val();
+        let INCREMENT_SALE_INVEST = $("#INCREMENT_SALE_INVEST").val();
+        
+        //var INVEST_ACC_CODE = $("#INVEST_ACC_CODE_hidden").val();
+        //var INVEST_ACC_NAME = $("#INVEST_ACC_CODE").val();
+        
+        let FUND1_CODE        = $("#FUND1_CODE").val();
+        let FUND1_NAME        = $("#FUND1_CODE").val();
+        let FUND1_CENTER_CODE = $("#FUND1_CENTER_CODE_hidden").val();
+        let FUND1_CENTER_NAME = $("#FUND1_CENTER_CODE").val();
+        let FUND1_AMOUNT      = $("#FUND1_AMOUNT").val();
+
+        let FUND2_CODE        = $("#FUND2_CODE").val();
+        let FUND2_NAME        = $("#FUND2_CODE").val();
+        let FUND2_CENTER_CODE = $("#FUND2_CENTER_CODE_hidden").val();
+        let FUND2_CENTER_NAME = $("#FUND2_CENTER_CODE").val();
+        let FUND2_AMOUNT      = $("#FUND2_AMOUNT").val();
+
+        let REMARKS = document.getElementById("REMARKS").ej2_instances[0].value;
+        let FLAG_ROW = 'S'
+
+
+        this.jsonData = {
+            DOC_PROM_PI_ID,
+            DOC_PROM_PS_ID,
+            DOC_PROM_PH_ID,
+            
+            DOC_CODE,
+            DOC_VER,
+            DOC_REV,
+            
+            COMP_CODE,
+            COMP_NAME,
+            
+            BRAND_CODE,
+            BRAND_NAME,
+            
+            PROD_CODE,
+            PROD_SKU,
+            PROD_PACK,
+            PROD_SIZE,
+            
+            ACTIVITY_CODE,
+            ACTIVITY_NAME,
+            
+            INVEST_TYPE,
+            INVEST_VALUE,
+            INVEST_AMOUNT,
+            
+            OTHER_ACTIVITY_CODE,
+            OTHER_ACTIVITY_NAME,
+            OTHER_ACTIVITY_COMBINED,
+            OTHER_AMOUNT,
+
+            TOTAL_AMOUNT,
+            INCREMENT_SALE_INVEST,
+            
+            //INVEST_ACC_CODE,
+            //INVEST_ACC_NAME,
+            
+            FUND1_CODE,
+            FUND1_NAME,
+            FUND1_CENTER_CODE,
+            FUND1_CENTER_NAME,
+            FUND1_AMOUNT,
+            
+            FUND2_CODE,
+            FUND2_NAME,
+            FUND2_CENTER_CODE,
+            FUND2_CENTER_NAME,
+            FUND2_AMOUNT,
+            
+            REMARKS,
+            FLAG_ROW
+        };
+    }
+
+    this.onSave = function (e) {
+        this.bindField();
+
+        //begin Validation
+        let msg = '';
+        //end Validation
+        if (msg) {
+            $.toast({
+                type: "warning",
+                title: "Invalid information",
+                subtitle: (new Date()).toDateString(),
+                content: msg,
+                delay: 5000
+            });
+        } else {
+            let IS_DELETE_PERMANANT = false;
+            this.jsonData = {
+                ...this.jsonData,
+                IS_DELETE_PERMANANT
+            };
+
+            let url = urlServices.EditDetail;
+            if (this.jsonData.DOC_PROM_PI_ID === 0) {
+                url = urlServices.AddDetail;
+            }
+
+            sendPost(url, this.jsonData);
+        }
+    }
+
+    this.onBack = function (e) {
+        //e.preventDefault();
+        //window.location.href = urlServices.PreviousUrl;
+        window.history.back();
+    }
+
+    this.onAmountKeyup = function (e) {
+        let json = this.jsonData;
+        let INVEST_AMOUNT = e.value;
+        let OTHER_AMOUNT = $("#OTHER_AMOUNT").val();
+        
+        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT);
+        $("#TOTAL_AMOUNT").val(TOTAL_AMOUNT.toFixed(2));
+
+        let INCREMENT_SALE_INVEST = parseFloat(INVEST_AMOUNT) / TOTAL_AMOUNT;
+        $("#INCREMENT_SALE_INVEST").val(INCREMENT_SALE_INVEST.toFixed(2));
+
+        this.jsonData = {
+            ...json,
+            INVEST_AMOUNT,
+            TOTAL_AMOUNT,
+            INCREMENT_SALE_INVEST
+        };
+    }
+
+    this.onAmountOtherKeyup = function (e) {
+        let json = this.jsonData;
+        let INVEST_AMOUNT = $("#INVEST_AMOUNT").val();
+        let OTHER_AMOUNT = e.value;
+
+        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT);
+        $("#TOTAL_AMOUNT").val(TOTAL_AMOUNT.toFixed(2));
+
+        let INCREMENT_SALE_INVEST = parseFloat(INVEST_AMOUNT) / TOTAL_AMOUNT;
+        $("#INCREMENT_SALE_INVEST").val(INCREMENT_SALE_INVEST.toFixed(2));
+        this.jsonData = {
+            ...json,
+            INVEST_AMOUNT,
+            TOTAL_AMOUNT,
+            INCREMENT_SALE_INVEST
+        };
+
     }
 
     // onchage 
@@ -246,11 +343,44 @@ let promotionInvestmentDetail = new (function () {
             ...this.jsonData,
             COST_CENTER_CODE
         }
-    };
+    }
 
-    $("#btn-fixed-contact-detail-back").click(function (e) {
-        e.preventDefault();
-        window.location.href = document.referrer;
+    this.disableFields = function (isEnabled) {
+
+        $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").removeAttr("disabled");
+        $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").removeClass("e-disabled");
+        $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").parent().removeClass("e-disabled");
+
+        if (isEnabled == false) {
+            $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").attr("disabled", "disabled");
+            $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").addClass("e-disabled");
+            $("#OTHER_ACTIVITY_CODE, #OTHER_AMOUNT").parent().addClass("e-disabled");
+        }
+    }
+
+    this.OnOtherActivityCombined = function (e) {
+        let OTHER_ACTIVITY_COMBINED = e.value;
+        let json = this.jsonData;
+        this.jsonData = {
+            ...json,
+            OTHER_ACTIVITY_COMBINED
+        };
+
+        promotionInvestmentDetail.disableFields(e.checked);
+    }
+})();
+
+$(document).ready(function () {
+
+    $("input[name='INVEST_TYPE']").change(function (e) {
+
+        let INVEST_TYPE = e.target.value;
+        let json = promotionInvestmentDetail.jsonData;
+        promotionInvestmentDetail.jsonData = {
+            ...json,
+            INVEST_TYPE
+        }
+        console.log(promotionInvestmentDetail.jsonData);
     });
 
-})();
+})

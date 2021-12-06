@@ -1,7 +1,8 @@
 ﻿@using System.Collections.Generic
 @using Syncfusion.EJ2.DropDowns
 @using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.PromotionPlanningInvestmentDto
+@using GFCA.APT.Domain
+@model GFCA.APT.Domain.Dto.PromotionPlanningDto
 
 @{
     Dictionary<string, object> disabled = new Dictionary<string, object>();
@@ -9,43 +10,42 @@
 
 }
 
-<form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data">
+<!--<form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data"> -->
+<div class="form-horizontal">
+    <div class="content-header">
+        <div class="container-fluid">
 
-    <div class="row mb-2">
-        <div class="col col-lg-12 p-1">
-            <div class="card card-info card-outline">
-                <div class="card-header">
-                    <h6>New Promotion Planning - Investment</h6>
-                </div>
-                <div class="card-header">
+            @Html.Partial("_DocumentStateSection", Model.DocumentData)
+            @Html.Partial("_RequesterSection", Model.RequesterData)
 
-                    <div class="justify-content-start">
 
-                        <div class="col col-sm-12 col-lg-10">
+            <div class="row mb-2">
+                <div class="col col-lg-12 p-1">
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            @if (@Model.DetailInvesmentItem.DOC_PROM_PI_ID == 0)
+                            {
+                                <h6>Promotion - Investment Create</h6>
+                            }
+                            else
+                            {
+                                <h6>Promotion - Investment ( @Model.DetailInvesmentItem.DOC_PROM_PI_ID.ToString() )</h6>
+                            }
+                        </div>
+                        <div class="card-header">
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Detail No
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-detail-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render())
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
+                            <div class="justify-content-start">
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Brand
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("BRAND_CODE")
+                                <div class="col col-sm-12 col-lg-10">
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Brand
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("BRAND_CODE")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -55,20 +55,20 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
-                                                        // .Value(Model.Detail.BRAND_CODE)
                                                         // .Change("fixedContractDetail.OnBrandChangeValue")
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.BRAND_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Product
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("PROD_CODE")
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Product
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("PROD_CODE")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -78,23 +78,23 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
-                                                        // .Value(Model.Detail.BRAND_CODE)
                                                         // .Change("fixedContractDetail.OnBrandChangeValue")
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.PROD_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Pack
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("cmb-investment-grid-pack")
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Pack
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("PROD_PACK")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -104,17 +104,18 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.PROD_PACK_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Size
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("cmb-investment-grid-size")
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Size
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("PROD_SIZE")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -124,22 +125,51 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.PROD_SIZE_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Trade Investment Activity
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("ACTIVITY_CODE")
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Sales Quantity
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("SALE_QUANTITY")
+                                                    .Placeholder("0.00")
+                                                    .Enabled(true)
+                                                    //.Value(Model.DetailInvesmentItem.qty)
+                                                    .Render())
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    <b><u>Investment Allocation</u></b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-sm-12 col-lg-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label for="ACTIVITY_CODE" class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Activity
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("ACTIVITY_CODE")
                                                         .Placeholder("-- Select --")
-                                                        .Value("38")
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
@@ -148,49 +178,76 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .CssClass("mandatory")
-                                                        // .Value(Model.Detail.ACTIVITY_CODE)
                                                         // .Change("fixedContractDetail.OnTradeActivityChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.ACTIVITY_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Sales Quantity
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("SALE_QUANTITY")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .Render())
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="row">
-
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Input type
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-investment-grid-input-type")
-                                                    .Enabled(true)
-                                                    .Render())
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Input type
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().RadioButton("INPUT_VALUE")
+                                                           .Label("Value")
+                                                           .Name("INVEST_TYPE")
+                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.VALUE.ToString())
+                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("VALUE"))
+                                                           //.Change("onMutualFieldChanged")
+                                                           .Render())&nbsp;&nbsp;&nbsp;
+                                                    @(Html.EJS().RadioButton("INPUT_VALUE_PER_UNIT")
+                                                           .Label("Bath/Unit")
+                                                           .Name("INVEST_TYPE")
+                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.VALUE_PER_UNIT.ToString())
+                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("VALUE_PER_UNIT"))
+                                                           //.Change("onMutualFieldChanged")
+                                                           .Render())&nbsp;&nbsp;&nbsp;
+                                                    @(Html.EJS().RadioButton("INPUT_PERCENT")
+                                                           .Label("Percent")
+                                                           .Name("INVEST_TYPE")
+                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.PERCENT.ToString())
+                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("PERCENT"))
+                                                           //.Change("onMutualFieldChanged")
+                                                           .Render())
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Cost Center
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("COST_CENTER")
+
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Value
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("INVEST_VALUE")
+                                                        .Placeholder("0.00")
+                                                        .EnableRtl(true)
+                                                        .Enabled(true)
+                                                        .Value(Model.DetailInvesmentItem.INVEST_VALUE.ToString("N2"))
+                                                        .Render())
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Cost Center
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("FUND1_CENTER_CODE")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -199,163 +256,236 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        // .Value(Model.Detail.UOM)
                                                         // .Change("fixedContractDetail.OnUOMChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.FUND1_CENTER_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Value
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("VALUE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Source of Fund
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-investment-grid-source-of-fund")
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Source of Fund
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("FUND1_CODE")
                                                     .Enabled(true)
+                                                    .Value(Model.DetailInvesmentItem.FUND1_CODE)
                                                     .Render())
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Investment Amount
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("INVESTMENT_AMOUNT")
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label for="INVEST_AMOUNT" class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Amount
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @*(Html.EJS().TextBox("INVEST_AMOUNT")
                                                         .Placeholder("0.00")
                                                         .Enabled(true)
+                                                        .Value(Model.DetailInvesmentItem.INVEST_AMOUNT.ToString("N2"))
+                                                        .Change("promotionInvestmentDetail.onAmountKeyup")
                                                         .Render())
+                                                    *@
+                                                    <span class="e-input-group e-control-wrapper e-rtl e-valid-input">
+                                                        <input id="INVEST_AMOUNT"
+                                                               class="e-control e-textbox e-lib e-input"
+                                                               type="text"
+                                                               role="textbox"
+                                                               name="INVEST_AMOUNT"
+                                                               placeholder="0.00"
+                                                               aria-placeholder="0.00"
+                                                               onkeyup="javascript: promotionInvestmentDetail.onAmountKeyup(this);"
+                                                               value="@Model.DetailInvesmentItem.INVEST_AMOUNT.ToString("N2")" />
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Other Activity
+                                                </label>
+                                                <div class="col col-lg-8">
+
+                                                    @(Html.EJS().ComboBox("OTHER_ACTIVITY_CODE")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetTradeActivity")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        //.CssClass("mandatory")
+                                                        // .Change("fixedContractDetail.OnTradeActivityChangeValue")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.OTHER_ACTIVITY_CODE)
+                                                        //.Enabled(Model.DetailInvesmentItem.OTHER_ACTIVITY_COMBINED.Equals("Y"))
+                                                        .Render())
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label for="OTHER_ACTIVITY_COMBINED" class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Combined Other Activity
+                                                </label>
+                                                <div class="col col-lg-8">
+
+                                                    @(Html.EJS().CheckBox("OTHER_ACTIVITY_COMBINED")
+                                                        //.Label("Combined Other Activity")
+                                                        //.LabelPosition(Syncfusion.EJ2.Buttons.LabelPosition.After)
+                                                        //.Value(Model.DetailInvesmentItem.ACTIVITY_COMBINED_OTHER)
+                                                        .Checked(Model.DetailInvesmentItem.OTHER_ACTIVITY_COMBINED.Equals("Y"))
+                                                        .Change("promotionInvestmentDetail.OnOtherActivityCombined")
+                                                        .Render())
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Other Amount
+                                                </label>
+                                                <div class="col col-lg-8">
+
+                                                    <span class="e-input-group e-control-wrapper e-rtl e-valid-input">
+                                                        <input id="OTHER_AMOUNT"
+                                                               class="e-control e-textbox e-lib e-input"
+                                                               type="text"
+                                                               role="textbox"
+                                                               name="OTHER_AMOUNT"
+                                                               placeholder="0.00"
+                                                               aria-placeholder="0.00"
+                                                               onkeyup="javascript: promotionInvestmentDetail.onAmountOtherKeyup(this);"
+                                                               value="@Model.DetailInvesmentItem.OTHER_AMOUNT.ToString("N2")" />
+                                                    </span>
+
+                                                    @*
+        <span class="e-control-wrapper e-numeric e-input-group e-rtl e-valid-input">
+            <input id="test2" class="e-control e-numerictextbox e-lib e-input" role="spinbutton" tabindex="0"
+                   autocomplete="off" aria-live="assertive"
+                   aria-valuemin="-99999999.7976" aria-valuemax="99999999.7976" aria-valuenow="0" />
+            <input type="text" validatehidden="true" class="e-numeric-hidden" name="test2" />
+            <span class="e-input-group-icon e-spin-down" title="Decrement value" aria-label="Decrement value"></span>
+            <span class="e-input-group-icon e-spin-up" title="Increment value" aria-label="Increment value"></span>
+        </span>
+
+        @(Html.EJS().NumericTextBox("test")
+                    .EnableRtl(true)
+                    .Format("n2")
+                    .Value(Model.DetailInvesmentItem.OTHER_AMOUNT)
+                    .Decimals(2)
+                    .Enabled(Model.DetailInvesmentItem.OTHER_ACTIVITY_COMBINED.Equals("Y"))
+                    .Render())
+
+                                                    *@
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-lg-12 col-md-12 col-sm-12">
+                                            <hr />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Amount
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("AMOUNT")
+                                    <div class="row">
+
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label for="TOTAL_AMOUNT" class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Total Amount
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("TOTAL_AMOUNT")
                                                         .Placeholder("0.00")
                                                         .Enabled(true)
+                                                        .Value(Model.DetailInvesmentItem.TOTAL_AMOUNT.ToString("N2"))
+                                                        .EnableRtl(true)
+                                                        .Enabled(false)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Other Activity
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-investment-grid-other-activity")
-                                                    .Enabled(true)
-                                                    .Render())
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Other Amount
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("OTHER_AMOUNT")
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Incremental Sales vs Investment
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("INCREMENT_SALE_INVEST")
                                                         .Placeholder("0.00")
-                                                        .Enabled(true)
+                                                        .Value(Model.DetailInvesmentItem.INCREMENT_SALE_INVEST.ToString("N2"))
+                                                        .EnableRtl(true)
+                                                        .Enabled(false)
                                                         .Render())
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Remarks
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().TextBox("REMARKS")
+                                                        .Multiline(true)
+                                                        .Value(Model.DetailInvesmentItem.REMARKS)
+                                                        .Render())
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col col-sm-12 col-lg-6">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Incremental Sales vs Investment
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("INCREMENTAL_SALES_VS_INVESTMENT")
-                                            .Placeholder("0.00")
-                                            .Enabled(true)
-                                            .Render())
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    <b><u>Additional Allocation</u></b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-sm-12 col-lg-6">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Combined Other Activity
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @Html.EJS().CheckBox("chk-combined").Render()
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Remarks
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @Html.EJS().TextBox("txt-remark").Multiline(true).Render()
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            <b><u>Additional Allocation</u></b>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Cost Center 2
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().ComboBox("COST_CENTER_2")
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Cost Center 2
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @(Html.EJS().ComboBox("FUND2_CENTER_CODE")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
@@ -364,69 +494,100 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        // .Value(Model.Detail.UOM)
                                                         // .Change("fixedContractDetail.OnUOMChangeValue")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Value(Model.DetailInvesmentItem.FUND2_CENTER_CODE)
                                                         .Render())
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Source of Fund 2
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("txt-investment-grid-source-of-fund-2")
-                                                    .Enabled(true)
-                                                    .Render())
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Source of Fund 2
+                                                </label>
+                                                <div class="col col-lg-8">
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Amount 2
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @(Html.EJS().TextBox("AMOUNT_2")
-                                            .Placeholder("0.00")
-                                            .Enabled(true)
-                                            .Render())
+                                                    @(Html.EJS().TextBox("FUND2_CODE")
+                                                        .Enabled(true)
+                                                        .Value(Model.DetailInvesmentItem.FUND2_CODE)
+                                                        .Render())
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                    Amount 2
+                                                </label>
+                                                <div class="col col-lg-8">
+                                                    @*(Html.EJS().TextBox("FUND2_AMOUNT")
+                                                        .Placeholder("0.00")
+                                                        .Value(Model.DetailInvesmentItem.FUND2_AMOUNT.ToString("N2"))
+                                                        .Render())
+                                                    *@
+                                                    <span class="e-input-group e-control-wrapper e-rtl e-valid-input">
+                                                        <input id="FUND2_AMOUNT"
+                                                               class="e-control e-textbox e-lib e-input"
+                                                               type="text"
+                                                               role="textbox"
+                                                               name="FUND2_AMOUNT"
+                                                               placeholder="0.00"
+                                                               aria-placeholder="0.00"
+                                                               value="@Model.DetailInvesmentItem.FUND2_AMOUNT.ToString("N2")" />
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col col-sm-12 col-lg-6">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div>
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-3 offset-lg-9">
-                                    <!-- Confirm State -->
-                                    <button id="btn-save" class="btn btn-primary">Save</button>
-                                    <button id="btn-back" class="btn btn-default">Back</button>
+                            <div class="card-footer">
+                                <div>
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-lg-3 offset-lg-9">
+                                            <!-- Confirm State -->
+                                            <button id="btn-save" class="btn btn-primary" onclick="javascript: promotionInvestmentDetail.onSave(this);">Save</button>
+                                            <button id="btn-back" class="btn btn-default" onclick="javascript: promotionInvestmentDetail.onBack(this);">Back</button>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <input id="DOC_PROM_PH_ID" type="hidden" value="@Model.DetailInvesmentItem.DOC_PROM_PH_ID" />
+            <input id="DOC_PROM_PS_ID" type="hidden" value="17" />
+            <input id="DOC_PROM_PI_ID" type="hidden" value="@Model.DetailInvesmentItem.DOC_PROM_PI_ID" />
+            
         </div>
     </div>
+</div>
+<!-- </form> -->
 
-</form>
 @section preScripts
 {
     <script>
         var urlServices = {
-            AddDetail: ""
+            PreviousUrl  : "@Url.Action("PromotionItem", "Promotion", new { Area = "Transactions" })",
+            CurrentUrl   : "@Url.Action("PromotionInvestmentDetail", "Promotion", new { Area = "Transactions" })",
+            AddDetail    : "@Url.Action("CreatePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            EditDetail   : "@Url.Action("EditPromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            DeleteDetail : "@Url.Action("DeletePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
         }
+
+        var Params = {
+
+        }
+
     </script>
     @Scripts.Render("~/Scripts/transactions/promotionInvestmentDetail.js")
 }

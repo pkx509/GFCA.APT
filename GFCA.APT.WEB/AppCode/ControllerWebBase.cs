@@ -31,9 +31,14 @@ namespace GFCA.APT.WEB
 
             var assambly = System.Reflection.Assembly.GetExecutingAssembly();
             var versionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(assambly.Location);
+
+            string env = Environment.GetEnvironmentVariable("ENV_APT");
+            if (env == null)
+                env = "DEV";
+
             ViewBag.InfomationSystem = new InfomationSystem 
             {
-                Environment = Environment.GetEnvironmentVariable("DEV_ENVIRONMENT") == "1"? "Development": "Production",
+                Environment = env,
                 SystemVersion = versionInfo.FileVersion,
                 DatabaseVersion = "0.0.2"
             };
