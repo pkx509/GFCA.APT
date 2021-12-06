@@ -204,7 +204,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 PromotionPlanningInvestmentDto dto = entity;
-
+                dto.UPDATED_BY = "System";
                 _uow.PromotionRepository.UpdateInvestment(dto);
                 _uow.Commit();
                 response.Success = true;
