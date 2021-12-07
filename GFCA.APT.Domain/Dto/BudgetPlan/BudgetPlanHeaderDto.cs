@@ -23,12 +23,16 @@ namespace GFCA.APT.Domain.Dto
 
         [Required]
         /* Fixed contract header */
-        public int DOC_FCH_ID { get; set; }
+        public int DOC_BGH_ID { get; set; }
+       
         //public string DOC_CODE { get; set; }
-        public string CLIENT_CODE { get; set; }
-        public string CLIENT_NAME { get; set; }
-        public string CUST_CODE { get; set; }
+        public string BG_TYPE_CODE { get; set; }
+        public string COMP_CODE { get; set; }
+        public string BRAND_CODE { get; set; }
+        public string BRAND_NAME { get; set; }
         public string CUST_NAME { get; set; }
+        public string Year { get; set; }
+        public decimal AMOUNT { get; set; }
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }
         public string COMMENT { get; set; }
@@ -36,7 +40,7 @@ namespace GFCA.APT.Domain.Dto
         public COMMAND_TYPE COMMAND_TYPE { get; set; } = COMMAND_TYPE.NONE; //SUBMIT, CANCEL, APPROVE, REVIEW, CONFIRM, COMMIT
         public string ORG_CODE { get; set; }
         public string ORG_NAME { get; set; }
-        public string COMP_CODE { get; set; }
+      
         public string COMP_NAME { get; set; }
     }
 }

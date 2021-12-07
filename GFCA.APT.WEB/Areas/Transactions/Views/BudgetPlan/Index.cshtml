@@ -98,10 +98,18 @@ ViewBag.Title = "Fixed contract";
 
                                   .Columns(col =>
                                   {
+
                                       col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
-                                      col.Field("REQUESTER").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
-                                      col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BG_TYPE_CODE").HeaderText("Code Type").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("COMP_CODE").HeaderText("Comp Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BRAND_CODE").HeaderText("Brand Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BRAND_NAME").HeaderText("Brand Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("Year").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+                                      col.Field("AMOUNT").HeaderText("Amount").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+
+
+                                      col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
                                       col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                   })
                                   .Render())
@@ -122,8 +130,8 @@ ViewBag.Title = "Fixed contract";
     <!-- BEGIN preScripts -->
     <script>
         var urlServices = {
-            CurrentUrl: "@Url.Action("index", "FixedContract", new { Area = "Transactions" })",
-            Add       : "@Url.Action("Add", "FixedContract", new { Area = "Transactions" })",
+            CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
+            Add       : "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
             AddHeader : "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
             AddDetail : "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })",
             Delete    : "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
@@ -149,5 +157,5 @@ ViewBag.Title = "Fixed contract";
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/transactions/fixedContract.js")
+    @Scripts.Render("~/Scripts/transactions/BudgetPlan.js")
 }
