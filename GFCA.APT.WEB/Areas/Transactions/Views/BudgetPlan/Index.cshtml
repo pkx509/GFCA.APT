@@ -122,8 +122,10 @@ ViewBag.Title = "Fixed contract";
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    @Html.Partial("~/Areas/Transactions/Views/FixedContract/_Popup_FixedContractHeader.cshtml")
-}
+    @Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_BudgetPlanHeader.cshtml")
+
+    }
+
 
 @section preScripts
 {
@@ -132,9 +134,9 @@ ViewBag.Title = "Fixed contract";
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
             Add       : "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
-            AddHeader : "@Url.Action("CreateFixedContractHeader", "FixedContract", new { Area = "Transactions" })",
-            AddDetail : "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })",
-            Delete    : "@Url.Action("Delete", "FixedContract", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "FixedContract", new { Area = "Transactions" })",
+            AddDetail : "@Url.Action("CreateBudgetPlanDetail", "FixedContract", new { Area = "Transactions" })",
+            Delete    : "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
         }
         var argruments = {
             data: null,
@@ -150,12 +152,13 @@ ViewBag.Title = "Fixed contract";
             }
         }
     </script>
+    @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
 
-    @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
-    @Scripts.Render("~/Scripts/transactions/fixedContractDetail.js")
+
+
 }
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/transactions/BudgetPlan.js")
+    @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
 }

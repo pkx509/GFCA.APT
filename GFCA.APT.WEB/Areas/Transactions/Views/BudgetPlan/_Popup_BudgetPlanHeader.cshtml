@@ -1,0 +1,188 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<form class="form-horizontal" id="pop-form-channel">
+    <div id="popup-budgetplanHeader" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BUDGET PLANNING</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Company
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-company")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCompany")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnCompanyChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Document No
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-document-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Client
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-client")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetClient")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnClientChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Customer
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-customer")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCustomer")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnCustomerChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Channel
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-channel")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetChannel")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnChannelChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Requester
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-requester").Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Position
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-position")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetOrganization")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnPositionChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="pop-btn-save" type="button" class="e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:budgetPlanHeaderPopup.onSave(this)">Save</button>
+                    <button type="button" class="e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:budgetPlanHeaderPopup.close(this)">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

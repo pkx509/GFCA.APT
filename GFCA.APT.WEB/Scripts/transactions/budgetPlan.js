@@ -48,17 +48,15 @@
 
     $("#toolbar_add").click(function (e) {
         e.preventDefault();
-        //alert("Add");
-        window.location = urlServices.Add;
+      //  console.log('data>>>', data);
+       
         let callBack = function (data) {
-           // console.log('data>>>', data);
-            window.location = urlServices.AddHeader;
-          //  sendPost(urlServices.AddHeader, data);
-
-            //sendPost(urlServices.AddHeader, data);
+           // alert("Add111");
+          //  console.log('data>>>', data);
+            sendPost(urlServices.AddHeader, data);
         };
 
-      //  fixedContractHeaderPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+        budgetPlanHeaderPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
 
     });
 

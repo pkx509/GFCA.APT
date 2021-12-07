@@ -1,5 +1,7 @@
 ﻿using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Models;
+using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System;
 using System.Collections;
@@ -62,6 +64,24 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 dataSource = operation.PerformTake(dataSource, dm.Take);
             }
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+
+        [HttpPost]
+        public JsonResult CreateBudgetPlanHeader(FixedContractHeaderDto data)
+        {
+            _biz.LogService.Debug("CreateFixedContractHeader");
+            dynamic d = new BusinessResponse();
+
+            try
+            {
+                var biz = _biz.FixedContractService.CreateHeader(data);
+                d = JsonConvert.SerializeObject(biz);
+            }
+            catch
+            {
+
+            }
+            return Json(new { data = d, JsonRequestBehavior.AllowGet });
         }
 
 
