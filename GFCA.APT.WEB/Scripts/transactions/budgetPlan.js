@@ -46,6 +46,22 @@
         });
     }
 
+    $("#toolbar_add").click(function (e) {
+        e.preventDefault();
+        //alert("Add");
+        window.location = urlServices.Add;
+        let callBack = function (data) {
+           // console.log('data>>>', data);
+            window.location = urlServices.AddHeader;
+          //  sendPost(urlServices.AddHeader, data);
+
+            //sendPost(urlServices.AddHeader, data);
+        };
+
+      //  fixedContractHeaderPopup.open(POPUP_MODE.CREATE, argruments.data, callBack);
+
+    });
+
     // budget plan sale tab
     $("#toolbar_add_sale_grid").click(function (e) {
         e.preventDefault();
