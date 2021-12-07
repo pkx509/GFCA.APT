@@ -4146,7 +4146,7 @@
     <Content Include="Areas\Transactions\Views\Promotion\PromotionSaleDetail.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_NavBar.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_CommandSection.cshtml" />
-    <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetPlanHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_BreadCrumbPath.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4425,7 +4425,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\transactions\fixed-contract.js" />
-    <Content Include="Scripts\transactions\budgetPlanHeaderPopup.js" />
     <Content Include="Scripts\transactions\promotionItem.js" />
     <Content Include="Scripts\transactions\fixedContractItem.js" />
     <Content Include="Scripts\transactions\promotion.js" />
