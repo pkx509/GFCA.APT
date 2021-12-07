@@ -4146,6 +4146,7 @@
     <Content Include="Areas\Transactions\Views\Promotion\PromotionSaleDetail.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_NavBar.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_CommandSection.cshtml" />
+    <Content Include="Areas\Transactions\Views\Shared\_BreadCrumbPath.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
