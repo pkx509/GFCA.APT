@@ -4,9 +4,10 @@ namespace GFCA.APT.Domain.Dto
 {
     public class PromotionPlanningSaleDto : Auditable
     {
-        public PAGE_MODE DataMode => DOC_PROM_PS_ID == 0 ? PAGE_MODE.CREATING : PAGE_MODE.EDITING;
+        //public PAGE_MODE DataMode => DOC_PROM_PS_ID == 0 ? PAGE_MODE.CREATING : PAGE_MODE.EDITING;
+        public PAGE_MODE DataMode { get; set; } = PAGE_MODE.CREATING;
         public int DOC_PROM_PS_ID { get; set; } = 0; //PK
-        public int? DOC_PROM_PH_ID { get; set; } //FK
+        public int DOC_PROM_PH_ID { get; set; } //FK
 
         public string DOC_CODE { get; set; }
         public string DOC_VER { get; set; }

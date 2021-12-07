@@ -5,6 +5,7 @@ namespace GFCA.APT.Domain.Dto
 {
     public class FixedContractDto
     {
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PAGE_MODE DataMode { get; set; }
         public DocumentWorkFlowDto WorkflowData { get; set; }
         public DocumentStateDto DocumentData { get; set; }

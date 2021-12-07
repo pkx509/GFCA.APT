@@ -21,7 +21,7 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse RemovePlanngSale(PromotionPlanningSaleDto entity);
 
         IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID);
-        PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID);
+        PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID);
         BusinessResponse CreateInvestment(PromotionPlanningInvestmentDto entity);
         BusinessResponse EditInvestment(PromotionPlanningInvestmentDto entity);
         BusinessResponse RemoveInvestment(PromotionPlanningInvestmentDto entity);

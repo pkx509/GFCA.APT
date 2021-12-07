@@ -32,8 +32,7 @@
                                             {
                                                 @(Html.EJS().TextBox("txt-company")
                                                 .Value(Model.DOC_CODE)
-                                                .Placeholder("Company name")
-                                                .CssClass("mandatory")
+                                                .Enabled(false)
                                                 .Render())
                                             }
                                         </div>
@@ -52,7 +51,7 @@
                                             {
                                                 @(Html.EJS().TextBox("txt-document-no")
                                                 .Value(Model.DOC_CODE)
-                                                .Placeholder("[Auto generate]")
+                                                .Enabled(false)
                                                 .Render())
                                             }
                                         </div>
@@ -71,8 +70,11 @@
                                             {
                                                 @(Html.EJS().TextBox("txt-version")
                                                 .Value(Model.DOC_VER.ToString())
+                                                .Enabled(false)
                                                 .Render())
                                             }
+                                            <input id="DOC_VER" type="hidden" value="@Model.DOC_VER" />
+                                            <input id="DOC_REV" type="hidden" value="@Model.DOC_REV" />
                                         </div>
                                     </div>
                                 </div>
@@ -88,6 +90,7 @@
                                             {
                                                 @(Html.EJS().TextBox("txt-status")
                                                     .Value(Model.DOC_STATUS.ToString())
+                                                    .Enabled(false)
                                                     .Render())
                                             }
                                         </div>

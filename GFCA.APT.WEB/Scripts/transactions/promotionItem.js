@@ -91,11 +91,14 @@
         }
 
     });
-    /*
+    
     $("#toolbar_sale_del").click(function (e) {
         e.preventDefault();
-        
-    });
-    */
 
+        if (argruments.dataSale) {
+            let url = urlServices.CurrentUrl + `/S/${argruments.dataSale.DOC_PROM_PS_ID}/2`;
+            window.location.href = url;
+        }
+    });
+    
 });

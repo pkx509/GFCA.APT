@@ -86,8 +86,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Sale_Detail",
-                url: "T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}",
-                defaults: new { controller = "Promotion", action = "PromotionSaleDetail", DOC_PROM_PH_ID = UrlParameter.Optional, DOC_PROM_PS_ID = UrlParameter.Optional },
+                url: "T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}/{PS_MODE}",
+                defaults: new { controller = "Promotion", action = "PromotionSaleDetail", DOC_PROM_PH_ID = UrlParameter.Optional, DOC_PROM_PS_ID = UrlParameter.Optional, PS_MODE = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 

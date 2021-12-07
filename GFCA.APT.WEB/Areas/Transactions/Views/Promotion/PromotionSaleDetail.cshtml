@@ -1,7 +1,7 @@
 ﻿@using System.Collections.Generic
 @using Syncfusion.EJ2.DropDowns
 @using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.PromotionPlanningSaleDto
+@model GFCA.APT.Domain.Dto.PromotionPlanningDto
 
 @{
     Dictionary<string, object> disabled = new Dictionary<string, object>();
@@ -10,83 +10,67 @@
 }
 
 @*using (Html.BeginForm("CreatePromotionPlanngSale"
-    , "Promotion"
-    , new { @area = "Trasactions" }
-    , FormMethod.Post
-    , new { autocomplete = "off", @class = "form-horizontal" }))
-{
-}
+        , "Promotion"
+        , new { @area = "Trasactions" }
+        , FormMethod.Post
+        , new { autocomplete = "off", @class = "form-horizontal" }))
+    {
+    }
 *@
 <!--form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data" -->
+<div class="content-header">
+    <div class="container-fluid">
 
-    <div class="row mb-2">
-        <div class="col col-lg-12 p-1">
-            <div class="card card-info card-outline">
-                <div class="card-header">
-                    <h6>New Promotion Planning - Sale</h6>
-                </div>
-                <div class="card-header">
+        @Html.Partial("_DocumentStateSection", Model.DocumentData)
+        @Html.Partial("_RequesterSection", Model.RequesterData)
 
-                    <div class="justify-content-start">
+        <div class="row mb-2">
+            <div class="col col-lg-12 p-1">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
 
-                        <div class="col col-sm-12 col-lg-10">
+                        @if (@Model.DetailSaleItem.DOC_PROM_PS_ID == 0)
+                        {
+                            <h6> Promotion - Sale Create</h6>
+                        }
+                        else
+                        {
+                            <h6> Promotion - Sale ( @Model.DetailSaleItem.DOC_PROM_PS_ID.ToString() ) </h6>
+                        }
+                    </div>
+                    <div class="card-header">
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Detail No
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("DOC_PROM_PS_ID")
-                                                            .Placeholder("[Auto generate]")
-                                                            .HtmlAttributes(disabled)
-                                                            .Value(Model.DOC_PROM_PS_ID.ToString())
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("DOC_PROM_PS_ID")
-                                                            .Placeholder("[Auto generate]")
-                                                            .HtmlAttributes(disabled)
-                                                            .Render())
+                        <div class="justify-content-start">
+
+                            <div class="col col-sm-12 col-lg-10">
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Product
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_CODE")
+                                                                 .Placeholder("-- Select --")
+                                                                 .Autofill(true)
+                                                                 .DataSource(o =>
+                                                                 {
+                                                                     o.Url("/api/Selection/GetProduct")
+                                                                     .CrossDomain(false)
+                                                                     .Adaptor("UrlAdaptor");
+                                                                 })
+                                                                 .CssClass("mandatory")
+                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                 .Change("promotionSaleDetail.OnProductChangeValue")
+                                                                 .Value(Model.DetailSaleItem.PROD_CODE)
+                                                                 .Render())
                                                 }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Product
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().ComboBox("PROD_CODE")
-                                                                 .Placeholder("-- Select --")
-                                                                 .Autofill(true)
-                                                                 .DataSource(o =>
-                                                                 {
-                                                                     o.Url("/api/Selection/GetProduct")
-                                                                     .CrossDomain(false)
-                                                                     .Adaptor("UrlAdaptor");
-                                                                 })
-                                                                 .CssClass("mandatory")
-                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                                 .Change("promotionSaleDetail.OnProductChangeValue")
-                                                                 .Value(Model.PROD_CODE)
-                                                                 .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().ComboBox("PROD_CODE")
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_CODE")
                                                                  .Placeholder("-- Select --")
                                                                  .Autofill(true)
                                                                  .DataSource(o =>
@@ -99,20 +83,20 @@
                                                                  .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                  .Change("promotionSaleDetail.OnProductChangeValue")
                                                                  .Render())
-                                            }
+                                                }
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Brand
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().ComboBox("BRAND_CODE")
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Brand
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().ComboBox("BRAND_CODE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -124,12 +108,12 @@
                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .CssClass("mandatory")
                                                                 .Change("promotionSaleDetail.OnBrandChangeValue")
-                                                                .Value(Model.BRAND_CODE)
+                                                                .Value(Model.DetailSaleItem.BRAND_CODE)
                                                                 .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().ComboBox("BRAND_CODE")
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("BRAND_CODE")
                                                             .Placeholder("-- Select --")
                                                             .Autofill(true)
                                                             .DataSource(o =>
@@ -143,23 +127,23 @@
                                                             .Change("promotionSaleDetail.OnBrandChangeValue")
                                                             // .Value(Model.BRAND_CODE)
                                                             .Render())
-                                            }
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Pack
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Pack
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
 
-                                                @(Html.EJS().ComboBox("PROD_PACK")
+                                                    @(Html.EJS().ComboBox("PROD_PACK")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -170,12 +154,12 @@
                                                                 })
                                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .Change("promotionSaleDetail.OnPackChangeValue")
-                                                                .Value(Model.PROD_PACK)
+                                                                .Value(Model.DetailSaleItem.PROD_PACK)
                                                                 .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().ComboBox("PROD_PACK")
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_PACK")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -188,20 +172,20 @@
                                                                 .Change("promotionSaleDetail.OnPackChangeValue")
                                                                 //.Value(Model.PACK)
                                                                 .Render())
-                                            }
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Size
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Size
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
 
-                                                @(Html.EJS().ComboBox("PROD_SIZE")
+                                                    @(Html.EJS().ComboBox("PROD_SIZE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -212,12 +196,12 @@
                                                                 })
                                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .Change("promotionSaleDetail.OnSizeChangeValue")
-                                                                .Value(Model.PROD_SIZE)
+                                                                .Value(Model.DetailSaleItem.PROD_SIZE)
                                                                 .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().ComboBox("PROD_SIZE")
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_SIZE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -230,422 +214,429 @@
                                                                 .Change("promotionSaleDetail.OnSizeChangeValue")
                                                                 //.Value(Model.SIZE)
                                                                 .Render())
-                                            }
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            <b><u>Pricing Information</u></b>
-                                        </label>
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                <b><u>Pricing Information</u></b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
                                     </div>
                                 </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
 
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Discount Type
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("DISCOUNT_TYPE")
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Discount Type
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("DISCOUNT_TYPE")
                                                                 .Enabled(true)
-                                                                .Value(Model.DISC_TYPE)
+                                                                .Value(Model.DetailSaleItem.DISC_TYPE)
                                                                 .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("DISCOUNT_TYPE")
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("DISCOUNT_TYPE")
                                                                 .Enabled(true)
                                                                 .Render())
-                                            }
+                                                }
+                                            </div>
                                         </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Normal Discount (%)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_PERC_DISC")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.NORM_PERC_DISC.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_PERC_DISC")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Promotion Discount (%)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_PERC_DISC")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.PROMO_PERC_DISC.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_PERC_DISC")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                NormalShelf Price (THB)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_SHELF_PRICE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.NORM_SHELF_PRICE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_SHELF_PRICE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Promotion Price (THB)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_SHELF_PRICE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.PROMO_SHELF_PRICE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_SHELF_PRICE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Normal GP (%)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_PERC_GP")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.NORM_PERC_GP.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("NORM_PERC_GP")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Promotion GP (%)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_PERC_GP")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.PROMO_PERC_GP.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("PROMO_PERC_GP")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                <b><u>Estimated Sales</u></b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Sales Quantity
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("SALE_QTY")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.SALE_QTY.ToString("N0"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("SALE_QTY")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Average Volume
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("AVG_VOLUME")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.AVG_VOLUME.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("AVG_VOLUME")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Sales Value
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("SALE_VALUE_EXCL_VAT")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.SALE_VALUE_EXCL_VAT.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("SALE_VALUE_EXCL_VAT")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Average Sales (THB)
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("AVG_SALE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.AVG_SALE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("AVG_SALE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                LTP Price
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("PROD_LTP_EXCL_VAT")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.PROD_LTP_EXCL_VAT.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("PROD_LTP_EXCL_VAT")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Deal Guideline
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.DEAL_GUIDE_LINE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Net-Into-Store
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("NET_INTO_STORE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.NET_INTO_STORE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("NET_INTO_STORE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
                                     </div>
                                 </div>
 
                             </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Normal Discount (%)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("NORM_PERC_DISC")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.NORM_PERC_DISC.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("NORM_PERC_DISC")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Promotion Discount (%)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_PERC_DISC")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.PROMO_PERC_DISC.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_PERC_DISC")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            NormalShelf Price (THB)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("NORM_SHELF_PRICE")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.NORM_SHELF_PRICE.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("NORM_SHELF_PRICE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Promotion Price (THB)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_SHELF_PRICE")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.PROMO_SHELF_PRICE.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_SHELF_PRICE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Normal GP (%)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("NORM_PERC_GP")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.NORM_PERC_GP.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("NORM_PERC_GP")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Promotion GP (%)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_PERC_GP")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.PROMO_PERC_GP.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("PROMO_PERC_GP")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            <b><u>Estimated Sales</u></b>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Sales Quantity
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("SALE_QTY")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.SALE_QTY.ToString("N0"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("SALE_QTY")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Average Volume
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("AVG_VOLUME")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.AVG_VOLUME.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("AVG_VOLUME")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Sales Value
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("SALE_VALUE_EXCL_VAT")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.SALE_VALUE_EXCL_VAT.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("SALE_VALUE_EXCL_VAT")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Average Sales (THB)
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("AVG_SALE")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.AVG_SALE.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("AVG_SALE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            LTP Price
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("PROD_LTP_EXCL_VAT")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.PROD_LTP_EXCL_VAT.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("PROD_LTP_EXCL_VAT")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Deal Guideline
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.DEAL_GUIDE_LINE.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-6">
-                                    <div class="form-group row">
-                                        <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                            Net-Into-Store
-                                        </label>
-                                        <div class="col col-lg-8">
-                                            @if (Model != null)
-                                            {
-                                                @(Html.EJS().TextBox("NET_INTO_STORE")
-                                                            .Placeholder("0.00")
-                                                            .Enabled(true)
-                                                            .Value(Model.NET_INTO_STORE.ToString("N2"))
-                                                            .Render())
-                                            }
-                                            else
-                                            {
-                                                @(Html.EJS().TextBox("NET_INTO_STORE")
-                                                        .Placeholder("0.00")
-                                                        .Enabled(true)
-                                                        .Render())
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-12 col-lg-6">
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div>
-                            <div class="row">
-                                <div class="col col-sm-12 col-lg-3 offset-lg-9">
-                                    @if (Model != null)
-                                    {
-                                        <input type="hidden" id="DOC_PROM_PH_ID" value="@Model.DOC_PROM_PH_ID" />
-                                        <input type="hidden" id="DOC_PROM_PS_ID" value="@Model.DOC_PROM_PS_ID" />
-                                        <input type="hidden" id="DOC_CODE" value="@Model.DOC_CODE" />
-                                        <input type="hidden" id="DOC_VER" value="@Model.DOC_VER" />
-                                        <input type="hidden" id="DOC_REV" value="@Model.DOC_REV" />
-                                        <input type="hidden" id="FLAG_ROW" value="@Model.FLAG_ROW" />
-                                    }
+                        <div class="card-footer">
+                            <div>
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-2">
+                                        @if (Model.DataMode != GFCA.APT.Domain.Enums.PAGE_MODE.CREATING)
+                                        {
+                                            <button id="btn-del" class="btn btn-danger" onclick="javascript: promotionSaleDetail.onDelete(this);">Delete</button>
+                                        }
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-3 offset-lg-7">
+                                        @if (Model != null)
+                                        {
+                                            <input type="hidden" id="DOC_PROM_PH_ID" value="@Model.DetailSaleItem.DOC_PROM_PH_ID" />
+                                            <input type="hidden" id="DOC_PROM_PS_ID" value="@Model.DetailSaleItem.DOC_PROM_PS_ID" />
+                                            <input type="hidden" id="DOC_CODE" value="@Model.DetailSaleItem.DOC_CODE" />
+                                            <input type="hidden" id="DOC_VER" value="@Model.DetailSaleItem.DOC_VER" />
+                                            <input type="hidden" id="DOC_REV" value="@Model.DetailSaleItem.DOC_REV" />
+                                            <input type="hidden" id="FLAG_ROW" value="@Model.DetailSaleItem.FLAG_ROW" />
+                                        }
 
-                                    <!-- Confirm State -->
-                                    <button id="btn-save" class="btn btn-primary" onclick="javascript: promotionSaleDetail.onSave(this);">Save</button>
-                                    <button id="btn-back" class="btn btn-default" onclick="javascript: promotionSaleDetail.onBack(this);">Back</button>
+                                        <!-- Confirm State -->
+                                        <button id="btn-save" class="btn btn-primary" onclick="javascript: promotionSaleDetail.onSave(this);">Save</button>
+                                        <button id="btn-back" class="btn btn-default" onclick="javascript: promotionSaleDetail.onBack(this);">Back</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -653,19 +644,20 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+</div>
 <!--/form -->
 
 @section preScripts
 {
     <script>
         var urlServices = {
-            PreviousUrl      : "@Url.Action("PromotionItem", "Promotion", new { Area = "Transactions" })",
-            CurrentUrl       : "@Url.Action("PromotionSaleDetail", "Promotion", new { Area = "Transactions" })",
-            AddDetailSale    : "@Url.Action("CreatePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
-            EditDetailSale   : "@Url.Action("EditPromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
-            DeleteDetailSale : "@Url.Action("DeletePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            PreviousUrl  : "@Url.Action("PromotionItem", "Promotion", new { Area = "Transactions" })",
+            CurrentUrl   : "@Url.Action("PromotionSaleDetail", "Promotion", new { Area = "Transactions" })",
+            AddDetail    : "@Url.Action("CreatePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            EditDetail   : "@Url.Action("EditPromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
+            DeleteDetail : "@Url.Action("DeletePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
         }
 
     </script>

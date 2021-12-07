@@ -81,12 +81,12 @@
                                                 .Autofill(true)
                                                 .DataSource(o =>
                                                 {
-                                                    o.Url("http://localhost:57628/api/Selection/GetEmission")
+                                                    o.Url("/api/Selection/GetEmission")
                                                     .CrossDomain(false)
                                                     .Adaptor("UrlAdaptor");
                                                 })
                                                 .Change("cmb3ChangeValue")
-                                                .Value(2)
+                                                .Value("20")
                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                 .Render())
 
@@ -214,26 +214,6 @@
 
                 </div>
                 <!-- /.card -->
-                
-                <div class="form-group">
-                    <div class="col-sm-3">
-                        <div class="box-tools pull-right" style="padding-top:8px;">
-                            @Html.EJS().Button("promptBtn").CssClass("btn btn-success").Content("Prompt").Render()
-                            <button class="btn btn-warning">Re-send</button>
-                            <button class="btn btn-danger">Cancel</button>
-
-                            <button class="btn btn-primary">Save</button>
-                            <button class="btn btn-success">Submit</button>
-                            <button class="btn btn-info">Approve</button>
-
-                            <button class="btn btn-success">Re-Submit</button>
-                            <button class="btn btn-info">Acknowledge</button>
-                            <button class="btn btn-warning">Clone</button>
-                            <button class="btn btn-info">Close</button>
-                            <button class="btn btn-danger">Reject</button>
-                        </div>
-                    </div>
-                </div>
 
             </section>
             <!-- /.Left col -->

@@ -7,5 +7,6 @@ namespace GFCA.APT.Domain.Enums
     {
         [EnumMember(Value = "CREATING")] CREATING = 0,
         [EnumMember(Value = "EDITING")] EDITING = 1,
+        [EnumMember(Value = "DELETING")] DELETING = 2,
     }
 }

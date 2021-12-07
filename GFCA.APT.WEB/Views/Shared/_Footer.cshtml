@@ -7,7 +7,7 @@
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block mr-lg-5">
 
-        @if (sys.Environment.ToLower() == "development")
+        @if (sys.Environment.ToLower() == "dev")
         {
             <div class="ribbon-wrapper">
                 <div class="ribbon bg-warning font-weight-light text-sm">
@@ -20,6 +20,14 @@
             <div class="ribbon-wrapper">
                 <div class="ribbon bg-warning font-weight-light text-sm">
                     UAT
+                </div>
+            </div>
+        }
+        else if (sys.Environment.ToLower() == "staging")
+        {
+            <div class="ribbon-wrapper">
+                <div class="ribbon bg-warning font-weight-light text-sm">
+                    STAGE
                 </div>
             </div>
         }

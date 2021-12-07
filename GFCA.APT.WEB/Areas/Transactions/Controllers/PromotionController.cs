@@ -55,16 +55,30 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}]
         [HttpGet]
-        public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID)
+        public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
         {
-            PromotionPlanningSaleDto dto = new PromotionPlanningSaleDto();
+            _biz.LogService.Info("PromotionSaleDetail");
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PS_ID);
+            //PromotionPlanningSaleDto dto = new PromotionPlanningSaleDto();
             try
             {
-                dto = _biz.PromotionService.GetSaleDataByItemID(DOC_PROM_PS_ID);
-            }
-            catch
-            {
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
 
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                dto.DetailSaleItem = _biz.PromotionService.GetSaleDataByItemID(DOC_PROM_PS_ID);
+                if (DOC_PROM_PS_ID != 0)
+                    dto.DataMode = PS_MODE;
+
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+            }
+            catch(Exception ex)
+            {
+                _biz.LogService.Error("PromotionSaleDetail : ", ex);
             }
             return View(dto);
         }
@@ -73,18 +87,33 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         [HttpGet]
         public ActionResult PromotionInvestmentDetail(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
         {
-            PromotionPlanningInvestmentDto dto = new PromotionPlanningInvestmentDto();
+            _biz.LogService.Info("PromotionInvestmentDetail");
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PI_ID);
+            //PromotionPlanningInvestmentDto dto = new PromotionPlanningInvestmentDto();
             try
             {
-                dto = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PI_ID);
-            }
-            catch
-            {
+
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                dto.DetailInvesmentItem = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PH_ID, DOC_PROM_PI_ID);
+                
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
 
             }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("PromotionInvestmentDetail : ", ex);
+            }
+
             return View(dto);
         }
-
+        /*
         [HttpGet]
         public PartialViewResult ItemHeaderPartial()
         {
@@ -113,7 +142,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         {
             return PartialView();
         }
-
+        */
         [HttpPost]
         public JsonResult UrlPromotionHeaderList(DataManagerRequest dm)
         {

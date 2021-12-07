@@ -33,6 +33,7 @@ namespace GFCA.APT.Domain.Dto
         public string CHANNEL_NAME { get; set; }
         public string COMMENT { get; set; }
         public string FLAG_ROW { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public COMMAND_TYPE COMMAND_TYPE { get; set; } = COMMAND_TYPE.NONE; //SUBMIT, CANCEL, APPROVE, REVIEW, CONFIRM, COMMIT
         public string ORG_CODE { get; set; }
         public string ORG_NAME { get; set; }

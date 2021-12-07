@@ -157,11 +157,17 @@ namespace GFCA.APT.BAL.Implements
                 throw ex;
             }
         }
-        public PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PI_ID)
+        public PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
         {
             try
             {
                 var docdi = _uow.PromotionRepository.GetInvestmentByItemID(DOC_PROM_PI_ID);
+                if (docdi == null)
+                {
+                    docdi = new PromotionPlanningInvestmentDto();
+                    docdi.DOC_PROM_PH_ID = DOC_PROM_PH_ID;
+                    //docdi.DOC_PROM_PS_ID = 
+                }
                 return docdi;
             }
             catch (Exception ex)
@@ -175,6 +181,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 PromotionPlanningInvestmentDto dto = entity;
+                dto.CREATED_BY = "System";
                 _uow.PromotionRepository.InsertInvestment(dto);
                 _uow.Commit();
                 response.Success = true;
@@ -197,7 +204,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 PromotionPlanningInvestmentDto dto = entity;
-
+                dto.UPDATED_BY = "System";
                 _uow.PromotionRepository.UpdateInvestment(dto);
                 _uow.Commit();
                 response.Success = true;
@@ -254,6 +261,8 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 var docds = _uow.PromotionRepository.GetSaleDataByItemID(DOC_PROM_PS_ID);
+                if (docds == null)
+                    docds = new PromotionPlanningSaleDto();
                 return docds;
             }
             catch (Exception ex)

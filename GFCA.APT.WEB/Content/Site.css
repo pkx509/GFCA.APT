@@ -230,3 +230,285 @@ label {
     padding-bottom: 5px;
     padding-top: 5px;
 }
+
+ul {
+    list-style: none;
+}
+
+/****************************
+	Workflow State
+****************************/
+    .flowstates {
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .flowstates li {
+        position: relative;
+        float: left;
+        margin: 0.5em 0 1em;
+    }
+
+    .flowstates a {
+        position: relative;
+        z-index: 3;
+        padding: 0.65em 1em;
+        margin-right: 25px;
+        float: left;
+        text-decoration: none;
+        color: #7a7a7a;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+        position: relative;
+        background-image: -moz-linear-gradient(left, #f9f9f9 0%, #dedede 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,#f9f9f9), color-stop(100%,#dedede));
+        background-image: -webkit-linear-gradient(left, #f9f9f9 0%,#dedede 100%);
+        background-image: -o-linear-gradient(left, #f9f9f9 0%,#dedede 100%);
+        background-image: -ms-linear-gradient(left, #f9f9f9 0%,#dedede 100%);
+        background-image: linear-gradient(to right, #f9f9f9 0%,#dedede 100%);
+    }
+
+    .flowstates a:hover {
+        background-image: -moz-linear-gradient(left, #efefef 0%, #d6d6d6 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,#efefef), color-stop(100%,#d6d6d6));
+        background-image: -webkit-linear-gradient(left, #efefef 0%, #d6d6d6 100%);
+        background-image: -o-linear-gradient(left, #efefef 0%, #d6d6d6 100%);
+        background-image: -ms-linear-gradient(left, #efefef 0%, #d6d6d6 100%);
+        background-image: linear-gradient(to right, #efefef 0%, #d6d6d6 100%);
+    }
+
+    .flowstates a::before {
+        content: "";
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        margin-top: -1.25em;
+        border-width: 1.3em 0 1.3em 1.3em;
+        border-style: solid;
+        border-color: #f9f9f9 #f9f9f9 #f9f9f9 transparent;
+        left: -1.25em;
+    }
+
+    .flowstates a:hover::before {
+        border-color: #efefef #efefef #efefef transparent;
+    }
+
+    .flowstates a::after {
+        content: "";
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        margin-top: -1.25em;
+        border-top: 1.3em solid transparent;
+        border-bottom: 1.3em solid transparent;
+        border-left: 1.3em solid #dedede;
+        right: -1.29em;
+    }
+
+    .flowstates a:hover::after {
+        border-left-color: #d6d6d6;
+    }
+
+    .flowstates .current,
+    .flowstates .current:hover {
+        color: #fff;
+        text-shadow: 0 -1px 0 #b65228;
+        background-image: -moz-linear-gradient(left, #f1a154 0%, #e47327 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,#f1a154), color-stop(100%,#e47327));
+        background-image: -webkit-linear-gradient(left, #f1a154 0%,#e47327 100%);
+        background-image: -o-linear-gradient(left, #f1a154 0%,#e47327 100%);
+        background-image: -ms-linear-gradient(left, #f1a154 0%,#e47327 100%);
+        background-image: linear-gradient(to right, #f1a154 0%,#e47327 100%);
+    }
+
+    .flowstates a.current::before,
+    .flowstates a.current:hover::before {
+        border-color: #f1a154 #f1a154 #f1a154 transparent;
+    }
+
+    .flowstates a.current::after,
+    .flowstates a.current:hover::after {
+        border-left: 1.3em solid #e47327;
+    }
+
+    .state-shadow {
+        position: absolute;
+        top: 1px;
+        z-index: 2;
+        padding: 0.675em 1em;
+        margin-right: 25px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .state-shadow::before {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        margin-top: -1.25em;
+        border-width: 1.3em 0 1.3em 1.3em;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2) transparent;
+        left: -1.25em;
+    }
+
+    .state-shadow::after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        margin-top: -1.25em;
+        border-top: 1.3em solid transparent;
+        border-bottom: 1.3em solid transparent;
+        border-left: 1.3em solid rgba(0, 0, 0, 0.2);
+        right: -1.29em;
+    }
+
+
+
+/****************************
+	breadcrumb
+****************************/
+
+.breadcrumb,
+.breadcrumb a {
+    height: 31px;
+    /* display: inline-block; */
+}
+
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    border-radius: 3px;
+    /* border-width: 1px;
+    border-style: solid; */
+    overflow: hidden;
+}
+
+.breadcrumb a {
+    text-rendering: optimizeLegibility;
+    line-height: 31px;
+    /*font-size: 12px;
+    font-weight: 300; */
+    text-decoration: none;
+    padding: 0 10px 0 20px;
+    position: relative;
+}
+
+.breadcrumb a:first-child {
+    padding-left: 16px;
+}
+
+.breadcrumb a:last-child,
+.breadcrumb input[type=text] {
+    padding-right: 16px;
+}
+
+.breadcrumb a:after,
+.breadcrumb a:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    /* make left half the height */
+    border-left: 10px solid transparent;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    z-index: 2;
+}
+
+.breadcrumb a:before {
+    margin-left: 1px;
+    z-index: 1;
+}
+
+.breadcrumb a:last-child {
+    color: #fff;
+}
+
+.breadcrumb a:last-child {
+    pointer-events: none;
+    cursor: default;
+}
+
+.breadcrumb a:last-child:after,
+.breadcrumb a:last-child:before,
+.breadcrumb input[type=text] {
+    border: none;
+}
+
+.breadcrumb input[type=text] {
+    -webkit-appearance: none;
+    display: inline-block;
+    text-indent: 24px;
+    padding: 0 16px;
+    height: 33px;
+    width: 10px;
+    outline: 1px solid transparent;
+    background-origin: content-box;
+    background-position: left 50%;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    transition-property: all;
+    transition-duration: .13s;
+    transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+.breadcrumb input[type=text]:hover,
+.breadcrumb input[type=text]:focus {
+    width: 100px;
+}
+
+
+/* LIGHT COLORS */
+.light .breadcrumb {
+    /* border-color: #9C9E9E; */
+}
+
+    .light .breadcrumb a {
+        color: #454545;
+        background-color: #e5e9e9;
+        text-shadow: 0 -1px rgba(255,255,255,.7);
+        box-shadow: inset 0 1px 0 #fff;
+    }
+
+        .light .breadcrumb a:after {
+            border-left-color: #e5e9e9;
+        }
+
+        .light .breadcrumb a:before {
+            /*border-left-color: #9C9E9E;*/
+            border-left-color: #fff; 
+        }
+
+        .light .breadcrumb a:hover {
+            background: #EDF1F1;
+        }
+
+        .light .breadcrumb a:hover:after {
+            border-left-color: #EDF1F1;
+        }
+        
+        .light .breadcrumb a:last-child,
+        .light .breadcrumb input[type=text] {
+            background-color: #fff;
+            /* box-shadow: inset 0 1px 2px rgba(0,0,0,.2); */
+        }
+        
+    .light .breadcrumb input[type=text] {
+        color: #454545;
+        background-color: #D3D7D7;
+        border: 0;
+        /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49364/search-dark.svg); */
+    }
+
+    .breadcrumb input[type=text]:focus {
+        outline-color: #0026FF;
+        background-color: #fff;
+        box-shadow: inset 0 0 0 2px #6CB4F3, inset 0 1px 2px rgba(0,0,0,.4);
+    }
