@@ -11,7 +11,7 @@ let detailGridSalePartialPopup = new (function () {
     let _args = null;
 
     //UI
-    this.popup_id = "#popup-detailGridSalePartial";
+    this.popup_id = "#popup-budgetHeader";
     this.header_title = "#pop-lbl-sale-header-title";
     this.button_remove = "#pop-btn-del-permanat";
     this.button_del = "#pop-btn-del";

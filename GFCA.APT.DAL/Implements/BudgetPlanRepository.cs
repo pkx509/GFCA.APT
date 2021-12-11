@@ -597,15 +597,11 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
       ,A.[BG_TYPE_CODE]
       ,A.[COMP_CODE]
 	  ,(SELECT TOP 1 isnull(b.COMP_NAME,'') FROM [TB_M_COMPANY] b WHERE b.COMP_CODE = A.[COMP_CODE]) COMP_NAME
-      ,A.[BRAND_CODE]
-	    ,(SELECT TOP 1 isnull(b.BRAND_NAME,'') FROM [TB_M_BRAND] b WHERE b.BRAND_CODE = A.BRAND_CODE) BRAND_NAME
-      ,A.[Year]
-      ,A.[AMOUNT]
       ,A.[CREATED_BY]
       ,A.[CREATED_DATE]
       ,A.[UPDATED_BY]
       ,A.[UPDATED_DATE]
-  FROM [dbo].[TB_T_BUDGET_H_V2] AS A;";
+  FROM [dbo].[TB_T_BUDGET_H] AS A;";
             var query = Connection.Query<BudgetPlanHeaderDto>(
                 sql: sqlQuery
                 , transaction: Transaction
