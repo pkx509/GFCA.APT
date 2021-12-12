@@ -236,7 +236,7 @@ let promotionInvestmentDetail = new (function () {
             };
 
             let url = urlServices.EditDetail;
-            if (this.jsonData.DOC_PROM_PI_ID === 0) {
+            if (this.jsonData.DOC_PROM_PI_ID == 0) {
                 url = urlServices.AddDetail;
             }
 
