@@ -277,8 +277,8 @@ let budgetPlanHeaderPopup = new (function () {
                 ...this.jsonData,
                 IS_DELETE_PERMANANT
             };
-            promotionHeaderPopup.callBack(this.jsonData);
-            promotionHeaderPopup.close();
+            budgetPlanHeaderPopup.callBack(this.jsonData);
+            budgetPlanHeaderPopup.close();
         }
         
     }

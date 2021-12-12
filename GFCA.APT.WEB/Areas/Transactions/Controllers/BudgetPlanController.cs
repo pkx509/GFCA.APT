@@ -28,9 +28,31 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
         // GET: T/BudgetPlans/{DocCode}
         [HttpGet]
-        public ViewResult BudgetPlanItem(string DocCode)
+        public ViewResult BudgetPlanItem(int DOC_BGH_ID)
         {
-            return View();
+            BudgetPlanDto dto = new BudgetPlanDto(DOC_BGH_ID);
+
+
+            try
+            {
+                dto.BudgetPlanHeader = _biz.BudgetPlanService.BudgetPlanByID(DOC_BGH_ID);
+              //  dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+              //  dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+              //  dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+              //   dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+
+                //  dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+                //   dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+            }
+            catch
+            {
+
+            }
+            return View(dto);
+
+
         }
 
         [HttpPost]
@@ -67,14 +89,14 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateBudgetPlanHeader(FixedContractHeaderDto data)
+        public JsonResult CreateBudgetPlanHeader(BudgetPlanHeaderDto data)
         {
             _biz.LogService.Debug("CreateFixedContractHeader");
             dynamic d = new BusinessResponse();
 
             try
             {
-                var biz = _biz.FixedContractService.CreateHeader(data);
+                var biz = _biz.BudgetPlanService.CreateHeader(data);
                 d = JsonConvert.SerializeObject(biz);
             }
             catch
@@ -82,6 +104,50 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             }
             return Json(new { data = d, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult CreateBudgetPlanSale(BudgetPlanDto data)
+        {
+            _biz.LogService.Info("CreateBudgetPlaningSale");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+               // bizObj = _biz.PromotionService.CreatePlanngSale(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("CreateBudgetPlaningSale : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult CreateBudgetPlanningInvestment(BudgetPlanDto data)
+        {
+            _biz.LogService.Info("CreateBudgetPlanningInvestment");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+               // bizObj = _biz.PromotionService.CreateInvestment(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("CreateBudgetPlanningInvestment : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
 

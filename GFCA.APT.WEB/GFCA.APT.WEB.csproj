@@ -4148,6 +4148,7 @@
     <Content Include="Areas\Transactions\Views\Shared\_CommandSection.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_BreadCrumbPath.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetPlanHeader.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4391,6 +4392,8 @@
     <Content Include="Scripts\numeral-js\tests\locales\uk-ua.js" />
     <Content Include="Scripts\numeral-js\tests\locales\vi.js" />
     <Content Include="Scripts\numeral-js\tests\numeral.js" />
+    <Content Include="Scripts\transactions\budgetPlanHeaderPopup.js" />
+    <Content Include="Scripts\transactions\budgetPlanItem.js" />
     <Content Include="Scripts\transactions\budgetPlanPopup.js" />
     <Content Include="Scripts\transactions\budgetPlan.js" />
     <Content Include="Scripts\transactions\FixedContractDetail.js" />

@@ -10,8 +10,12 @@ namespace GFCA.APT.BAL.Interfaces
     {
         IEnumerable<BudgetPlanHeaderDto> GetHeaderAll();
         FixedContractHeaderDto GetHeaderById(int DOC_FCH_ID);
+        BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID);
+        
+
+
         FixedContractHeaderDto GetHeaderByCode(string code, int ver = -1, int rev = -1);
-        BusinessResponse CreateHeader(FixedContractHeaderDto model);
+        BusinessResponse CreateHeader(BudgetPlanHeaderDto model);
         BusinessResponse EditHeader(FixedContractHeaderDto model);
         BusinessResponse RemoveHeader(FixedContractHeaderDto model);
 

@@ -61,6 +61,8 @@ ViewBag.Title = "Fixed contract";
             <div class="row mb-2">
                 <div class="col-lg-12 p-1">
                     <div class="card card-success card-outline">
+                      
+
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
                                   .Grid("grdBudgetPlan")
@@ -131,13 +133,14 @@ ViewBag.Title = "Fixed contract";
 {
     <!-- BEGIN preScripts -->
     <script>
-        var urlServices = {
+     
+            var urlServices = {
             CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
-            Add       : "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
-            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "FixedContract", new { Area = "Transactions" })",
-            AddDetail : "@Url.Action("CreateBudgetPlanDetail", "FixedContract", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "BudgetPlan", new { Area = "Transactions" })",
             Delete    : "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
-        }
+            }
+
+
         var argruments = {
             data: null,
         }
@@ -152,7 +155,7 @@ ViewBag.Title = "Fixed contract";
             }
         }
     </script>
-    @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
+   @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
 
 
 
@@ -160,5 +163,6 @@ ViewBag.Title = "Fixed contract";
 
 @section scripts
 {
+
     @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
 }

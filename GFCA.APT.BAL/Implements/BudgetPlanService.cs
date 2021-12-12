@@ -90,14 +90,14 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        public BusinessResponse CreateHeader(FixedContractHeaderDto model)
+        public BusinessResponse CreateHeader(BudgetPlanHeaderDto model)
         {
             BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 var doch = model;
 
-                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.CUST_CODE, doch.DOC_YEAR, doch.DOC_MONTH);
+                var doc = _uow.DocumentRepository.GenerateDocNo("BP", doch.CUST_CODE, System.DateTime.Now.Year, System.DateTime.Now.Month);
                 //generate document no
 
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
@@ -110,7 +110,7 @@ namespace GFCA.APT.BAL.Implements
                 doc.ORG_CODE = doch.ORG_CODE;
                 doc.ORG_NAME = doch.ORG_NAME;
                 doc.REQUESTER = "System";
-                _uow.DocumentRepository.Insert(doc);
+            //    _uow.DocumentRepository.Insert(doc);
                 doch.DOC_VER = doc.DOC_VER;
                 doch.DOC_CODE = doc.DOC_CODE;
                 /*
@@ -134,7 +134,7 @@ namespace GFCA.APT.BAL.Implements
                 */
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.InsertFixedContractHeader(doch);
+                _uow.BudgetPlanRepository.InsertBudgetPlanHeaderHeader(doch);
 
                 _uow.Commit();
                 response.Success = true;
@@ -381,8 +381,39 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
-        
- 
+     
+
+
+
+
+
+        public BudgetPlanHeaderDto BudgetPlanHeaderDto(int id)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetBudgetPlanID(id);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetBudgetPlanID(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
 
         #endregion [ detail ]

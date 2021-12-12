@@ -9,9 +9,9 @@ namespace GFCA.APT.DAL.Interfaces
 
         IEnumerable<FixedContractHeaderDto> GetFixedContractAll();
         IEnumerable<BudgetPlanHeaderDto> GetBudgetPlanAll();
-
-        FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCD_ID);
-        void InsertFixedContractHeader(FixedContractHeaderDto entity);
+        //
+        BudgetPlanHeaderDto GetBudgetPlanID(int DOC_BGH_ID);
+        void InsertBudgetPlanHeaderHeader(BudgetPlanHeaderDto entity);
         void UpdateFixedContractHeader(FixedContractHeaderDto entity);
         void DeleteFixedContractHeader(int DOC_FCH_ID);
 

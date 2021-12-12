@@ -353,5 +353,17 @@ namespace GFCA.APT.WEB.Controllers
                 .Select(o => new SelectionItem { Value = o.PROD_CODE, Text = $"{o.PROD_CODE} - {o.PROD_NAME}" });
             return ret;
         }
+
+        [HttpPost]
+        public IEnumerable<SelectionItem> GetBudgetType()
+        {
+            IBusinessProvider biz = new BusinessProvider();
+            IBudgetTypeService svc = biz.BudgetTypeService;
+            var ret = svc.GetAll()
+                .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
+                .Select(o => new SelectionItem { Value = o.BG_TYPE_CODE, Text = $"{o.BG_TYPE_CODE} - {o.BG_TYPE_NAME}" });
+            return ret;
+        }
+
     }
 }

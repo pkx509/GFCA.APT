@@ -615,5 +615,125 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
         {
             throw new NotImplementedException();
         }
+
+
+        public BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID)
+        {
+           
+
+            string sqlQuery =
+@"SELECT 
+ *
+FROM TB_T_BUDGET_H a
+WHERE DOC_BGH_ID = @DOC_BGH_ID;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanHeaderDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+        public void InsertBudgetPlanHeaderHeader(BudgetPlanHeaderDto entity)
+        {
+            string sqlCommand = @"INSERT INTO TB_T_BUDGET_H
+(DOC_CODE,
+DOC_VER,
+DOC_REV,
+BG_TYPE_CODE,
+COMP_CODE,
+CUST_CODE,
+FISCAL_YEAR,
+BUDGET_AMOUNT,
+ACTUAL,
+COMMITMENT,
+AVAILABLE,
+FLAG_ROW,
+CREATED_BY,
+UPDATED_BY,
+UPDATED_DATE,
+CREATED_DATE
+)
+VALUES
+(
+ @DOC_CODE,
+@DOC_VER,
+@DOC_REV,
+@BG_TYPE_CODE,
+@COMP_CODE,
+@CUST_CODE,
+@FISCAL_YEAR,
+@BUDGET_AMOUNT,
+@ACTUAL,
+@COMMITMENT,
+@AVAILABLE,
+@FLAG_ROW,
+@CREATED_BY,
+@UPDATED_BY,
+@UPDATED_DATE,
+@CREATED_DATE
+); SELECT SCOPE_IDENTITY()";
+
+            var parms = new
+            {
+                
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                BG_TYPE_CODE = entity.BG_TYPE_CODE,
+                COMP_CODE = entity.COMP_CODE,
+                CUST_CODE = entity.CUST_CODE,
+                FISCAL_YEAR = entity.FISCAL_YEAR,
+                BUDGET_AMOUNT = entity.BUDGET_AMOUNT,
+                ACTUAL = entity.ACTUAL,
+                COMMITMENT = entity.COMMITMENT,
+                AVAILABLE = entity.AVAILABLE,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE,
+
+
+
+
+             
+            };
+
+            int DOC_BGH_ID = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+            entity.DOC_BGH_ID = DOC_BGH_ID;
+        }
+
+        public BudgetPlanHeaderDto GetBudgetPlanID(int DOC_BGH_ID)
+        {
+
+            string sqlQuery =
+@"SELECT 
+ *
+FROM TB_T_BUDGET_H a
+WHERE DOC_BGH_ID = @DOC_BGH_ID;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanHeaderDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
     }
 }

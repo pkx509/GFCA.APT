@@ -1,4 +1,9 @@
-﻿@*----------------- bugdet planing header -----------------*@
+﻿@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.BudgetPlanDto
+@{ Dictionary<string, object> disabled = new Dictionary<string, object>();
+                disabled.Add("disabled", "true"); }
+
+@*----------------- bugdet planing header -----------------*@
 <div class="row mb-2">
     <div class="col col-lg p-1">
         <div class="card card-info card-outline">
@@ -10,102 +15,163 @@
                     <div class="col col-sm-12 col-lg-10">
 
                         <div class="row">
-
-                            <div class="col col-sm-12 col-lg-4">
+                            <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
-                                        Client
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Company
                                     </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-client")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetClient")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-company")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCompany")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Value(Model.BudgetPlanHeader.COMP_CODE)
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnCompanyChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                     </div>
                                 </div>
                             </div>
-                            <div class="col col-sm-12 col-lg-4">
+                            <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Document No
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-document-no").Placeholder("[Auto generate]").HtmlAttributes(disabled).Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        BudGetType
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-budgettype")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetClient")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnClientChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
                                         Customer
                                     </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-customer")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetCustomer")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @(Html.EJS().ComboBox("pop-cmb-customer")
+                                                        .Placeholder("-- Select --")
+                                                        .Autofill(true)
+                                                        .DataSource(o =>
+                                                        {
+                                                            o.Url("/api/Selection/GetCustomer")
+                                                            .CrossDomain(false)
+                                                            .Adaptor("UrlAdaptor");
+                                                        })
+                                                        .Enabled(true)
+                                                        .Change("budgetPlanHeaderPopup.OnCustomerChangeValue")
+                                                        .CssClass("mandatory")
+                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                        .Render())
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-sm-12 col-lg-4">
-                                <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
-                                        Requester
-                                    </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-requester")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetEmployee/false")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-sm-12 col-lg-4">
-                                <div class="form-group row">
-                                    <label class="col col-lg-4 control-label text-right">
-                                        Position
-                                    </label>
-                                    <div class="col col-lg-8">
-                                        @(Html.EJS().ComboBox("cmb-emp-org")
-                                                    .Placeholder("-- Select --")
-                                                    .Autofill(true)
-                                                    .DataSource(o =>
-                                                    {
-                                                        o.Url("/api/Selection/GetOrganization")
-                                                        .CrossDomain(false)
-                                                        .Adaptor("UrlAdaptor");
-                                                    })
-                                                    .Enabled(true)
-                                                    //.Change("page.cmbPositionChange")
-                                                    .CssClass("mandatory")
-                                                    .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                    .Render())
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-sm-12 col-lg-4">
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Year
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Render()
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Amount
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-budget_amount").Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Actual
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-actual").Render()
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Commitment
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-commitment").Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Available
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().TextBox("pop-txt-available").Render()
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                        Active
+                                    </label>
+                                    <div class="col-sm-9 col-md-10 col-lg-9">
+                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
