@@ -80,7 +80,7 @@
 
 
     $("#toolbar_add_investment_grid").click(function (e) {
-        alert("toolbar_add_investment_grid")
+        //alert("toolbar_add_investment_grid")
         e.preventDefault();
 
         if (argruments.DOC_FCH_ID) {

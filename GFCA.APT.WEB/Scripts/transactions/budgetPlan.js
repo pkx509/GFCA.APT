@@ -14,7 +14,7 @@
             dataType: "json",
             success: function (response) {
                 let res = JSON.parse(response.data);
-                alert(res.Data.DOC_BGH_ID);
+                //alert(res.Data.DOC_BGH_ID);
 
                 $.toast({
                     type: res.MessageType.ToMessageType(),
