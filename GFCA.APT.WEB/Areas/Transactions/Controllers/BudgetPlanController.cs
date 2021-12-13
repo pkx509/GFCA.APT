@@ -202,7 +202,36 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View(dto);
         }
 
-
+        [HttpPost]
+        public JsonResult UrlBudgetPlanSaleList(int DOC_BGH_ID, DataManagerRequest dm)
+        {
+            _biz.LogService.Info("UrlBudgetPlanSaleList");
+            IEnumerable dataSource = _biz.PromotionService.GetSaleDataByHeaderID(DOC_BGH_ID);
+            DataOperations operation = new DataOperations();
+            List<string> str = new List<string>();
+            if (dm.Search != null && dm.Search.Count > 0) // Search
+            {
+                dataSource = operation.PerformSearching(dataSource, dm.Search);
+            }
+            if (dm.Sorted != null && dm.Sorted.Count > 0) // Sorting
+            {
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0) // Filtering
+            {
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+            }
+            int count = dataSource.Cast<PromotionPlanningSaleDto>().Count();
+            if (dm.Skip != 0) // Paging
+            {
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);
+            }
+            if (dm.Take != 0)
+            {
+                dataSource = operation.PerformTake(dataSource, dm.Take);
+            }
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
 
         [HttpPost]
         public JsonResult CreateBudgetPlanHeader(BudgetPlanHeaderDto data)

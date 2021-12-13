@@ -1,15 +1,18 @@
 ﻿@using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2
+
+
+
 @(Html.EJS()
 .Grid("grdBudgetPlanSale")
 .Height("450")
 //.DataSource(ds =>
-//{
-//    ds
-//    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
-//    .Adaptor("UrlAdaptor")
-//    ;
-//})
+  //  {
+    //    ds
+      //  .Url(@Url.Action("UrlBudgetPlanSaleList", "BudgetPlan", new { Area = "Transactions", DOC_BGH_ID = Model.DOC_BGH_ID }))
+        //.Adaptor("UrlAdaptor")
+       // ;
+  //  })
 .ShowColumnMenu(false).AllowSorting()
 .AllowPaging(true).PageSettings(page => page.PageCount(5))
 .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
