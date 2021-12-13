@@ -61,7 +61,19 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DOC_BGH_ID = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
-            
+            context.MapRoute(
+              name: "Transaction_BudgetPlan_Sale_Detail",
+              url: "T/BudgetPlans/{DOC_BGH_ID}/S/{DOC_BGH_SALES_ID}",
+              defaults: new { controller = "BudgetPlan", action = "BudgetPlanSaleDetail", DOC_BGH_ID = UrlParameter.Optional, DOC_BGH_SALES_ID = UrlParameter.Optional },
+              namespaces: new[] { __nameSpace }
+              );
+
+            context.MapRoute(
+              name: "Transaction_BudgetPlan_Investment_Detail",
+              url: "T/BudgetPlans/{DOC_BGH_ID}/I/{DOC_BGH_INV_ID}",
+              defaults: new { controller = "BudgetPlan", action = "BudgetPlanInvestmentDetail", DOC_BGH_ID = UrlParameter.Optional, DOC_BGH_INV_ID = UrlParameter.Optional },
+              namespaces: new[] { __nameSpace }
+              );
 
 
             /* Promotion Planning Route */

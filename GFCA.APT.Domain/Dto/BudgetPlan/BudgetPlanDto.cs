@@ -22,7 +22,7 @@ namespace GFCA.APT.Domain.Dto
         public PromotionPlanningFooterDto FooterData { get; set; }
 
         public BudgetPlanHeaderDto BudgetPlanHeader { get; set; }
-
+        public BudgetPlanSaleDto BudgetPlanSaleDto { get; set; }
         public BudgetPlanDto(int primaryKey = 0)
         {
             DataMode = primaryKey == 0 ? PAGE_MODE.CREATING : PAGE_MODE.EDITING;
@@ -38,6 +38,8 @@ namespace GFCA.APT.Domain.Dto
             DetailInvesmentData = new List<PromotionPlanningInvestmentDto>();
             FooterData = new PromotionPlanningFooterDto();
             BudgetPlanHeader = new BudgetPlanHeaderDto();
+            BudgetPlanSaleDto = new BudgetPlanSaleDto();
+
 
         }
     }

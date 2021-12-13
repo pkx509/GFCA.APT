@@ -20,5 +20,13 @@ namespace GFCA.APT.DAL.Interfaces
         void InsertFixedContractDetail(FixedContractDetailDto entity);
         void UpdateFixedContractDetail(FixedContractDetailDto entity);
         void DeleteFixedContractDetail(int DOC_FCD_ID);
+
+
+
+
+        void InsertBudgetPlanSale(BudgetPlanSaleDto entity);
+        void InsertBudgetPlanInvestment(BudgetPlanInvestmentDto entity);
+         
+
     }
 }

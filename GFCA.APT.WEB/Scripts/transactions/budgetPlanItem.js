@@ -46,12 +46,20 @@
     
     $("#toolbar_add_sale_grid").click(function (e) {
         //alert(urlServices.AddSale + '/' + argruments.DOC_BGH_ID + "/0");
+        //BudgetPlanSaleDetail
+      //  alert(urlServices.CurrentUrl);
+
 
         e.preventDefault();
 
+        
 
         if (argruments.DOC_BGH_ID) {
-            window.location.href = urlServices.AddSale + '/' + argruments.DOC_BGH_ID + "/0";
+          
+          //  window.location.href = urlServices.AddSale + '/' + argruments.DOC_BGH_ID + "/0";
+           let url = urlServices.CurrentUrl + `/S/0`;
+            window.location.href = url;
+
         }
 
        
@@ -83,8 +91,11 @@
         //alert("toolbar_add_investment_grid")
         e.preventDefault();
 
-        if (argruments.DOC_FCH_ID) {
-            window.location.href = `/T/FixedContracts/${argruments.DOC_FCH_ID}/0`;
+        if (argruments.DOC_BGH_ID) {
+        
+            let url = urlServices.CurrentUrl + `/I/0`;
+            window.location.href = url;
+
         }
 
     });

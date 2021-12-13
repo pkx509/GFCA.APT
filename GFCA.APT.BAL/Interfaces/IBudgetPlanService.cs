@@ -20,9 +20,13 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse RemoveHeader(FixedContractHeaderDto model);
 
         //IEnumerable<FixedContractDetailDto> GetDetailItems(string code, int ver = -1, int rev = -1);
+        BusinessResponse CreateSalesDetail(BudgetPlanSaleDto model);
+        BusinessResponse CreateInvestmentDetail(BudgetPlanInvestmentDto model);
+        //BudgetPlanInvestmentDto
+
         IEnumerable<FixedContractDetailDto> GetDetailItems(int DOC_FCH_ID);
         FixedContractDetailDto GetDetailItem(int DOC_FCD_ID);
-        BusinessResponse CreateDetail(FixedContractDetailDto model);
+
         BusinessResponse EditDetail(FixedContractDetailDto model);
         BusinessResponse RemoveDetail(FixedContractDetailDto model);
     }

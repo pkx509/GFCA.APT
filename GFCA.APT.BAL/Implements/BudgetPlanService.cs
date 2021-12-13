@@ -413,6 +413,128 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
+        public BusinessResponse CreateHeader(PromotionPlanningSaleDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusinessResponse CreateSalesDetail(BudgetPlanSaleDto model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                var dto = model;
+
+
+
+                dto.DOC_BGH_ID = model.DOC_BGH_ID;
+             //  dto.DOC_BGH_SALES_ID = model.DOC_BGH_SALES_ID;
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.PACK_CODE = model.PACK_CODE;
+                dto.SIZE_CODE = model.SIZE_CODE;
+                dto.PRD_CODE = model.PRD_CODE;
+                dto.COST_ELEMENT_CODE = model.COST_ELEMENT_CODE;
+                dto.COST_CENTER = model.COST_CENTER;
+                dto.YEAR = model.YEAR;
+                dto.MONTH = model.MONTH;
+                dto.TOTAL = model.TOTAL;
+                dto.M1 = model.M1;
+                dto.M2 = model.M2;
+                dto.M3 = model.M3;
+                dto.M4 = model.M4;
+                dto.M5 = model.M5;
+                dto.M6 = model.M6;
+                dto.M7 = model.M7;
+                dto.M8 = model.M8;
+                dto.M9 = model.M9;
+                dto.M10 = model.M10;
+                dto.M11 = model.M11;
+                dto.M12 = model.M12;
+                dto.FLAG_ROW = model.FLAG_ROW;
+                dto.CREATED_BY = model.CREATED_BY;
+                dto.CREATED_DATE = model.CREATED_DATE;
+                dto.UPDATED_BY = model.UPDATED_BY;
+                dto.UPDATED_DATE = model.UPDATED_DATE;
+                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_DATE = DateTime.UtcNow;
+                _uow.BudgetPlanRepository.InsertBudgetPlanSale(dto);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("CreateHeader", ex);
+            }
+
+            return response;
+        }
+
+        public BusinessResponse CreateInvestmentDetail(BudgetPlanInvestmentDto model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                var dto = model;
+
+
+
+                dto.DOC_BGH_ID = model.DOC_BGH_ID;
+                //  dto.DOC_BGH_SALES_ID = model.DOC_BGH_SALES_ID;
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.PACK_CODE = model.PACK_CODE;
+                dto.SIZE_CODE = model.SIZE_CODE;
+                dto.PRD_CODE = model.PRD_CODE;
+                dto.ACTIVITY_CODE = model.ACTIVITY_CODE;
+                dto.COST_ELEMENT_CODE = model.COST_ELEMENT_CODE;
+                dto.COST_CENTER = model.COST_CENTER;
+                dto.YEAR = model.YEAR;
+                dto.MONTH = model.MONTH;
+                dto.TOTAL = model.TOTAL;
+                dto.M1 = model.M1;
+                dto.M2 = model.M2;
+                dto.M3 = model.M3;
+                dto.M4 = model.M4;
+                dto.M5 = model.M5;
+                dto.M6 = model.M6;
+                dto.M7 = model.M7;
+                dto.M8 = model.M8;
+                dto.M9 = model.M9;
+                dto.M10 = model.M10;
+                dto.M11 = model.M11;
+                dto.M12 = model.M12;
+                dto.FLAG_ROW = model.FLAG_ROW;
+                dto.CREATED_BY = model.CREATED_BY;
+                dto.CREATED_DATE = model.CREATED_DATE;
+                dto.UPDATED_BY = model.UPDATED_BY;
+                dto.UPDATED_DATE = model.UPDATED_DATE;
+                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_DATE = DateTime.UtcNow;
+                _uow.BudgetPlanRepository.InsertBudgetPlanInvestment(dto);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("CreateInvestmentDetail", ex);
+            }
+
+            return response;
+        }
+
 
 
 

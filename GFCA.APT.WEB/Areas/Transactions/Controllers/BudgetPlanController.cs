@@ -1,5 +1,6 @@
 ﻿using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
@@ -89,6 +90,121 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
+        public ActionResult BudgetPlanSaleDetail(int DOC_BGH_ID, BudgetPlanDto data)
+        {
+            BudgetPlanDto detailDto = new BudgetPlanDto();
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+            return RedirectToAction("BudgetPlanItem", new { DOC_BGH_ID = DOC_BGH_ID });
+        }
+
+       
+      
+        [HttpGet]
+        public ActionResult BudgetPlanSaleDetail_backup(int DOC_BGH_ID, int DOC_BGH_SALES_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
+        {
+            _biz.LogService.Info("PromotionSaleDetail");
+            BudgetPlanDto dto = new BudgetPlanDto(DOC_BGH_ID);
+         
+            try
+            {
+                /*
+
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                dto.DetailSaleItem = _biz.PromotionService.GetSaleDataByItemID(DOC_PROM_PS_ID);
+                if (DOC_PROM_PS_ID != 0)
+                    dto.DataMode = PS_MODE;
+
+    
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                */
+
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("BudgetPlanSaleDetail : ", ex);
+            }
+            return View(dto);
+        }
+
+    
+ 
+        // GET: T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}]
+        [HttpGet]
+        public ActionResult BudgetPlanSaleDetail(int DOC_BGH_ID, int DOC_BGH_SALES_ID)
+        {
+            _biz.LogService.Info("PromotionInvestmentDetail");
+            BudgetPlanDto dto = new BudgetPlanDto(DOC_BGH_ID);
+            try
+            {
+                /*
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                dto.DetailInvesmentItem = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PH_ID, DOC_PROM_PI_ID);
+
+      
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                */
+
+
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("BudgetPlanSaleDetail : ", ex);
+            }
+
+            return View(dto);
+        }
+
+        [HttpGet]
+        public ActionResult BudgetPlanInvestmentDetail(int DOC_BGH_ID, int DOC_BGH_INV_ID)
+        {
+            _biz.LogService.Info("BudgetPlanInvestmentDetail");
+            BudgetPlanDto dto = new BudgetPlanDto(DOC_BGH_ID);
+            try
+            {
+                /*
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
+                dto.DetailInvesmentItem = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PH_ID, DOC_PROM_PI_ID);
+
+      
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                */
+
+
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("BudgetPlanInvestmentDetail : ", ex);
+            }
+
+            return View(dto);
+        }
+
+
+
+        [HttpPost]
         public JsonResult CreateBudgetPlanHeader(BudgetPlanHeaderDto data)
         {
             _biz.LogService.Debug("CreateFixedContractHeader");
@@ -107,7 +223,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateBudgetPlanSale(BudgetPlanDto data)
+        public JsonResult CreateBudgetPlanSale(BudgetPlanSaleDto data)
         {
             _biz.LogService.Info("CreateBudgetPlaningSale");
             string jsonData = string.Empty;
@@ -115,7 +231,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             try
             {
-               // bizObj = _biz.PromotionService.CreatePlanngSale(data);
+               bizObj = _biz.BudgetPlanService.CreateSalesDetail(data);
             }
             catch (Exception ex)
             {
@@ -129,19 +245,19 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateBudgetPlanningInvestment(BudgetPlanDto data)
+        public JsonResult CreateBudgetPlanInvestment(BudgetPlanInvestmentDto data)
         {
-            _biz.LogService.Info("CreateBudgetPlanningInvestment");
+            _biz.LogService.Info("CreateBudgetPlanInvestment");
             string jsonData = string.Empty;
             var bizObj = new BusinessResponse();
 
             try
             {
-               // bizObj = _biz.PromotionService.CreateInvestment(data);
+                bizObj = _biz.BudgetPlanService.CreateInvestmentDetail(data);
             }
             catch (Exception ex)
             {
-                _biz.LogService.Error("CreateBudgetPlanningInvestment : ", ex);
+                _biz.LogService.Error("CreateBudgetPlanInvestment : ", ex);
             }
             finally
             {

@@ -1,0 +1,708 @@
+﻿@using System.Collections.Generic
+@using Syncfusion.EJ2.DropDowns
+@using Syncfusion.EJ2
+@using GFCA.APT.Domain
+@model GFCA.APT.Domain.Dto.BudgetPlanDto
+
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+
+}
+
+<!--<form autocomplete="off" class="form-horizontal" method="post" enctype="multipart/form-data"> -->
+<div class="content-header">
+    <div class="container-fluid">
+
+        @Html.Partial("_DocumentStateSection", Model.DocumentData)
+
+        <div class="row mb-2">
+            <div class="col col-lg-12 p-1">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+
+                        @if (@Model.DetailSaleItem.DOC_PROM_PS_ID == 0)
+                        {
+                            <h6> BudgetPlaning - Investment Create</h6>
+                        }
+                        else
+                        {
+                            <h6> BudgetPlaning - Investment ( @Model.DetailSaleItem.DOC_PROM_PS_ID.ToString() ) </h6>
+                        }
+                    </div>
+                    <div class="card-header">
+
+                        <div class="justify-content-start">
+
+                            <div class="col col-sm-12 col-lg-10">
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Product
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_CODE")
+                                                                 .Placeholder("-- Select --")
+                                                                 .Autofill(true)
+                                                                 .DataSource(o =>
+                                                                 {
+                                                                     o.Url("/api/Selection/GetProduct")
+                                                                     .CrossDomain(false)
+                                                                     .Adaptor("UrlAdaptor");
+                                                                 })
+                                                                 .CssClass("mandatory")
+                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                 .Change("budgetPlanInvestmentDetail.OnProductChangeValue")
+                                                                 .Value(Model.DetailSaleItem.PROD_CODE)
+                                                                 .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_CODE")
+                                                                 .Placeholder("-- Select --")
+                                                                 .Autofill(true)
+                                                                 .DataSource(o =>
+                                                                 {
+                                                                     o.Url("/api/Selection/GetProduct")
+                                                                     .CrossDomain(false)
+                                                                     .Adaptor("UrlAdaptor");
+                                                                 })
+                                                                 .CssClass("mandatory")
+                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                 .Change("budgetPlanInvestmentDetail.OnProductChangeValue")
+                                                                 .Render())
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Brand
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().ComboBox("BRAND_CODE")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetBrand/true")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .CssClass("mandatory")
+                                                                .Change("budgetPlanInvestmentDetail.OnBrandChangeValue")
+                                                                .Value(Model.DetailSaleItem.BRAND_CODE)
+                                                                .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("BRAND_CODE")
+                                                            .Placeholder("-- Select --")
+                                                            .Autofill(true)
+                                                            .DataSource(o =>
+                                                            {
+                                                                o.Url("/api/Selection/GetBrand/true")
+                                                                .CrossDomain(false)
+                                                                .Adaptor("UrlAdaptor");
+                                                            })
+                                                            .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                            .CssClass("mandatory")
+                                                            .Change("budgetPlanInvestmentDetail.OnBrandChangeValue")
+                                                            // .Value(Model.BRAND_CODE)
+                                                            .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Pack
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+
+                                                    @(Html.EJS().ComboBox("PROD_PACK")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetPack")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .Change("budgetPlanInvestmentDetail.OnPackChangeValue")
+                                                                .Value(Model.DetailSaleItem.PROD_PACK)
+                                                                .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_PACK")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetPack")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .Change("budgetPlanInvestmentDetail.OnPackChangeValue")
+                                                                //.Value(Model.PACK)
+                                                                .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Size
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+
+                                                    @(Html.EJS().ComboBox("PROD_SIZE")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetSize")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .Change("budgetPlanInvestmentDetail.OnSizeChangeValue")
+                                                                .Value(Model.DetailSaleItem.PROD_SIZE)
+                                                                .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().ComboBox("PROD_SIZE")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetSize")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .Change("budgetPlanInvestmentDetail.OnSizeChangeValue")
+                                                                //.Value(Model.SIZE)
+                                                                .Render())
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Activity Code
+                                            </label>
+                                            <div class="col col-lg-8">
+
+
+                                                @(Html.EJS().ComboBox("ACTIVITY_CODE")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetTradeActivity/true")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .CssClass("mandatory")
+                                                                .Change("budgetPlanInvestmentDetail.OnBrandChangeValue")
+                                                                .Value(Model.DetailSaleItem.COMP_CODE)
+                                                                .Render())
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                CostCenter
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                                @(Html.EJS().ComboBox("COST_CENTER")
+                                                                .Placeholder("-- Select --")
+                                                                .Autofill(true)
+                                                                .DataSource(o =>
+                                                                {
+                                                                    o.Url("/api/Selection/GetCostCenter/true")
+                                                                    .CrossDomain(false)
+                                                                    .Adaptor("UrlAdaptor");
+                                                                })
+                                                                .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
+                                                                .CssClass("mandatory")
+                                                                .Change("budgetPlanInvestmentDetail.OnBrandChangeValue")
+                                                                .Value(Model.DetailSaleItem.COMP_CODE)
+                                                                .Render())
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Cost Element
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                                @(Html.EJS().TextBox("COST_ELEMENT_CODE")
+                                                        .Enabled(true)
+                                                        .Render())
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                
+                                            </label>
+                                            <div class="col col-lg-8">
+ 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                <b><u>Overall Information</u></b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Year
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                                @(Html.EJS().TextBox("Year")
+                                                        .Enabled(true)
+                                                        .Render())
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Month
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                                @(Html.EJS().TextBox("Month")
+                                                        .Enabled(true)
+                                                        .Render())
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Total
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                                @(Html.EJS().TextBox("TOTAL")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(false)
+                                                        .Render())
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+
+                                            </label>
+                                            <div class="col col-lg-8">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col col-sm-6  col-lg-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6>Q1</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col col-lg-12 align-content-center">
+
+                                                <div class="form-group row mb-1">
+
+                                                    <div class="col col-lg-3 offset-lg-6 align-content-center">
+                                                        <label class="control-label text-center e-text-center">
+                                                            Acutal
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        January
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M1")
+                                                                //.Value(Model.Detail.M01.ToString())
+                                                                .Render())
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        February
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M2")
+                                                    //.Value(Model.Detail.M02.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        March
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M3")
+                                                    //.Value(Model.Detail.M03.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="form-group row mb-0">
+                                                <label class="col col-lg-6 control-label text-right">
+                                                    Accumulate
+                                                </label>
+                                                <div class="col col-lg-6">
+                                                    <input type="text" disabled class="e-control e-textbox e-lib e-input" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-6 col-lg-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6>Q2</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col col-lg-12 align-content-center">
+
+                                                <div class="form-group row mb-1">
+
+                                                    <div class="col col-lg-3 offset-lg-6 align-content-center">
+                                                        <label class="control-label text-center e-text-center">
+                                                            Actual
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        April
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M4")
+                                                                //.Value(Model.Detail.M04.ToString())
+                                                                .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        May
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M5")
+                                                    //.Value(Model.Detail.M05.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        June
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M6")
+                                                        //.Value(Model.Detail.M06.ToString())
+                                                        .Render())
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="form-group row mb-0">
+                                                <label class="col col-lg-6 control-label text-right">
+                                                    Accumulate
+                                                </label>
+                                                <div class="col col-lg-6">
+                                                    <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-6 col-lg-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6>Q3</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col col-lg-12 align-content-center">
+
+                                                <div class="form-group row mb-1">
+
+                                                    <div class="col col-lg-3 offset-lg-6 align-content-center">
+                                                        <label class="control-label text-center e-text-center">
+                                                            Plan
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        July
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M7")
+                                                    //.Value(Model.Detail.M07.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        August
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M8")
+                                                    //.Value(Model.Detail.M08.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        September
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M9")
+                                                    //.Value(Model.Detail.M09.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="form-group row mb-0">
+                                                <label class="col col-lg-6 control-label text-right">
+                                                    Accumulate
+                                                </label>
+                                                <div class="col col-lg-6">
+                                                    <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-6 col-lg-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6>Q4</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col col-lg-12 align-content-center">
+
+                                                <div class="form-group row mb-1">
+
+                                                    <div class="col col-lg-3 offset-lg-6 align-content-center">
+                                                        <label class="control-label text-center e-text-center">
+                                                            Plan
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        October
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M10")
+                                                    //.Value(Model.Detail.M10.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        November
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M11")
+                                                    //.Value(Model.Detail.M11.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col col-lg-6 control-label text-lg-right text-md-right text-sm-left">
+                                                        December
+                                                    </label>
+                                                    <div class="col col-lg-6">
+                                                        @(Html.EJS().TextBox("M12")
+                                                    //.Value(Model.Detail.M12.ToString())
+                                                    .Render())
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="form-group row mb-0">
+                                                <label class="col col-lg-6 control-label text-right">
+                                                    Accumulate
+                                                </label>
+                                                <div class="col col-lg-6">
+                                                    <input type="number" disabled class="e-control e-textbox e-lib e-input" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <div class="row">
+                                    <div class="col col-sm-12 col-lg-2">
+                                        @if (Model.DataMode != GFCA.APT.Domain.Enums.PAGE_MODE.CREATING)
+                                        {
+                                            <button id="btn-del" class="btn btn-danger" onclick="javascript: budgetplanSaleDetail.onDelete(this);">Delete</button>
+                                        }
+                                    </div>
+                                    <div class="col col-sm-12 col-lg-3 offset-lg-7">
+                                        @if (Model != null)
+                                        {
+                                            <input type="hidden" id="DOC_PROM_PH_ID" value="@Model.DetailSaleItem.DOC_PROM_PH_ID" />
+                                            <input type="hidden" id="DOC_PROM_PS_ID" value="@Model.DetailSaleItem.DOC_PROM_PS_ID" />
+                                            <input type="hidden" id="DOC_CODE" value="@Model.DetailSaleItem.DOC_CODE" />
+                                            <input type="hidden" id="DOC_VER" value="@Model.DetailSaleItem.DOC_VER" />
+                                            <input type="hidden" id="DOC_REV" value="@Model.DetailSaleItem.DOC_REV" />
+                                            <input type="hidden" id="FLAG_ROW" value="@Model.DetailSaleItem.FLAG_ROW" />
+                                        }
+
+                                        <!-- Confirm State -->
+                                        <button id="btn-save" class="btn btn-primary" onclick="javascript: budgetPlanInvestmentDetail.onSave(this);">Save</button>
+                                        <button id="btn-back" class="btn btn-default" onclick="javascript: budgetPlanInvestmentDetail.onBack(this);">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+
+        </div>
+    </div>
+</div>
+
+<!-- </form> -->
+
+@section preScripts
+{
+    <script>
+       
+        var urlServices = {
+            PreviousUrl  : "@Url.Action("BudgetPlanItem", "BudgetPlan", new { Area = "Transactions" })",
+            CurrentUrl   : "@Url.Action("BudgetPlanInvestmentDetail", "BudgetPlan", new { Area = "Transactions" })",
+            AddDetail    : "@Url.Action("CreateBudgetPlanInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            EditDetail   : "@Url.Action("EditBudgetPlanInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            DeleteDetail : "@Url.Action("DeleteBudgetPlanInvestment", "BudgetPlan", new { Area = "Transactions" })",
+        }
+
+     
+
+     
+    </script>
+    @Scripts.Render("~/Scripts/transactions/budgetPlanInvestmentDetail.js")
+}
+

@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Auditable.cs" />
+    <Compile Include="Dto\BudgetPlan\BudgetPlanInvestmentDto.cs" />
+    <Compile Include="Dto\BudgetPlan\BudgetPlanSaleDto.cs" />
     <Compile Include="Dto\BudgetPlan\BudgetPlanHeaderDto.cs" />
     <Compile Include="Dto\BudgetPlan\BudgetPlanDto.cs" />
     <Compile Include="Dto\CustomerPartyDto.cs" />

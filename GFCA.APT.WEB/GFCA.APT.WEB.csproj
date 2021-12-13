@@ -4149,6 +4149,8 @@
     <Content Include="Areas\Transactions\Views\Shared\_BreadCrumbPath.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetHeader.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetPlanHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\BudgetPlan\BudgetPlanSaleDetail.cshtml" />
+    <Content Include="Areas\Transactions\Views\BudgetPlan\BudgetPlanInvestmentDetail.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4396,6 +4398,7 @@
     <Content Include="Scripts\transactions\budgetPlanItem.js" />
     <Content Include="Scripts\transactions\budgetPlanPopup.js" />
     <Content Include="Scripts\transactions\budgetPlan.js" />
+    <Content Include="Scripts\transactions\budgetPlanInvestmentDetail.js" />
     <Content Include="Scripts\transactions\FixedContractDetail.js" />
     <Content Include="Scripts\transactions\fixedContractHeaderPopup.js" />
     <Content Include="Scripts\transactions\fixedContract.js" />
@@ -4432,6 +4435,7 @@
     <Content Include="Scripts\transactions\promotionItem.js" />
     <Content Include="Scripts\transactions\fixedContractItem.js" />
     <Content Include="Scripts\transactions\promotion.js" />
+    <Content Include="Scripts\transactions\budgetPlanSaleDetail.js" />
     <Content Include="Scripts\transactions\promotionSaleDetail.js" />
     <Content Include="Scripts\transactions\promotionInvestmentDetail.js" />
     <Content Include="Scripts\transactions\promotionHeaderPopup.js" />
