@@ -535,6 +535,162 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
+        public IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailSalesItems(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailInvItems(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID)
+        {
+            try
+            {
+                
+
+                var doch = _uow.BudgetPlanRepository.GetDetailSalesItem(DOC_BGH_SALES_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailInvItem(DOC_BGH_INV_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BusinessResponse EditBudgetPlanSale(BudgetPlanSaleDto model)
+        {
+          
+
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                BudgetPlanSaleDto dto = model;
+
+                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                _uow.BudgetPlanRepository.UpdateBudgetPlanSale(dto);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("EditBudgetPlanSale : ", ex);
+            }
+            return response;
+
+ 
+        }
+
+        public BusinessResponse EditBudgetInvsSale(BudgetPlanInvestmentDto model)
+        {
+
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                BudgetPlanInvestmentDto dto = model;
+
+                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                _uow.BudgetPlanRepository.UpdateBudgetInvsSale(dto);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("EditBudgetInvsSale : ", ex);
+            }
+            return response;
+
+        }
+
+        public BusinessResponse RemoveBudgetPlanSale(long DOC_BGH_SALES_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+              
+                
+                _uow.BudgetPlanRepository.DeleteBudgetPlanSale(DOC_BGH_SALES_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemoveBudgetPlanSale : ", ex);
+            }
+            return response;
+        }
+
+        public BusinessResponse RemoveBudgetInvsSale(long DOC_BGH_INV_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+
+
+                _uow.BudgetPlanRepository.DeleteBudgetInvsSale(DOC_BGH_INV_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemoveBudgetInvsSale : ", ex);
+            }
+            return response;
+        }
+
 
 
 

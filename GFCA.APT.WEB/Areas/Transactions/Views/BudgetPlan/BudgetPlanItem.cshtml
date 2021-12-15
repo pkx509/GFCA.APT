@@ -75,8 +75,8 @@
             CurrentUrl     : "@Url.Action("BudgetPlanItem", "BudgetPlan", new { Area = "Transactions", DOC_BGH_ID = Model.BudgetPlanHeader.DOC_BGH_ID })",
             AddSale        : "@Url.Action("CreateBudgetPlaningSale", "BudgetPlan", new { Area = "Transactions" })",
             AddInvestment  : "@Url.Action("CreateBudgetPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
-            EditSale       : "@Url.Action("EditPromotionPlanngSale", "BudgetPlan", new { Area = "Transactions" })",
-            EditInvestment : "@Url.Action("EditPromotionPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            EditSale       : "@Url.Action("EditBudgetPlaningSale", "BudgetPlan", new { Area = "Transactions" })",
+            EditInvestment : "@Url.Action("EditBudgetPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
             DeleteSale       : "@Url.Action("DeletePromotionPlanngSale", "BudgetPlan", new { Area = "Transactions" })",
             DeleteInvestment: "@Url.Action("DeletePromotionPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
             }
@@ -84,16 +84,27 @@
 
   var argruments = {
       DOC_BGH_ID : "@Model.BudgetPlanHeader.DOC_BGH_ID",
-            dataSale: null,
-            dataInvest: null,
+      dataSale: null,
+      dataInvest: null,
         }
-        var OnRowSelected = function (args) {
 
-            argruments.data = args.data;
+        function onGridSaleRowSelected(args) {
+           
+
+            argruments.dataSale = args.data;
         }
-        var OnRowDeselected = function (args) {
-            if (argruments.data == args.data) {
-                argruments.data = null;
+        function onGridSaleRowDeselected(args) {
+            if (argruments.dataSale == args.data) {
+                argruments.dataSale = null;
+            }
+        }
+
+        function onGridInvestRowSelected(args) {
+            argruments.dataInvest = args.data;
+        }
+        function onGridInvestRowDeselected(args) {
+            if (argruments.dataInvest == args.data) {
+                argruments.dataInvest = null;
             }
         }
     </script>

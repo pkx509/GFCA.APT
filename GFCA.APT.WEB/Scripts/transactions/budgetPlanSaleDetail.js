@@ -4,7 +4,7 @@ let sendPost = function (url, data) {
         ...data
     };
 
-    alert(data);
+    
 
 
     $.ajax({
@@ -22,14 +22,14 @@ let sendPost = function (url, data) {
                 title: "information",
                 subtitle: (new Date()).toDateString(),
                 content: res.Message,
-                delay: 7000
+                delay: 70
             });
 
             if (res.Success === true) {
 
                 setTimeout(function () {
                     window.location = urlServices.PreviousUrl;
-                }, 7000);
+                }, 70);
 
             }
         },
@@ -150,7 +150,7 @@ let budgetplanSaleDetail = new (function () {
                 ...this.jsonData,
                 FLAG_ROW
             };
-
+           
             var url = urlServices.EditDetail;
             if (this.jsonData.DOC_BGH_SALES_ID == 0) {
                // alert(urlServices.AddDetail);
@@ -161,6 +161,46 @@ let budgetplanSaleDetail = new (function () {
             sendPost(url, this.jsonData);
         }
     }
+
+    this.onDelete = function (e) {
+
+
+        this.bindField();
+        //begin Validation
+        let msg = '';
+        //end Validation
+
+
+
+        if (msg) {
+            $.toast({
+                type: "warning",
+                title: "Invalid information",
+                subtitle: (new Date()).toDateString(),
+                content: msg,
+                delay: 5000
+            });
+        } else {
+            let FLAG_ROW = 'S';
+            this.jsonData = {
+                ...this.jsonData,
+                FLAG_ROW
+            };
+
+            var url = urlServices.EditDetail;
+            if (this.jsonData.DOC_BGH_SALES_ID != 0) {
+                url = urlServices.DeleteDetail;
+                sendPost(url, this.jsonData);
+            }
+
+
+
+        }
+
+
+
+    }
+
 
     this.onBack = function (e) {
         //e.preventDefault();

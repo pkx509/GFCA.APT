@@ -4,8 +4,7 @@ let sendPost = function (url, data) {
         ...data
     };
 
-    alert(url);
-
+    
 
     $.ajax({
         type: 'POST',
@@ -22,14 +21,14 @@ let sendPost = function (url, data) {
                 title: "information",
                 subtitle: (new Date()).toDateString(),
                 content: res.Message,
-                delay: 7000
+                delay: 70
             });
 
             if (res.Success === true) {
 
                 setTimeout(function () {
                     window.location = urlServices.PreviousUrl;
-                }, 7000);
+                }, 70);
 
             }
         },
@@ -51,14 +50,14 @@ let budgetPlanInvestmentDetail = new (function () {
         let currentURL = window.location.pathname;
         let subStringURL = currentURL.split('/I/');
         
-        
+       
        //DOC_BGH_INV_ID
 
         let DOC_BGH_INV_ID = subStringURL[1];//$("#DOC_PROM_PS_ID").val();
-        let DOC_BGH_ID = subStringURL[0].split('i/')[1]; //$("#DOC_PROM_PH_ID").val();
+        let DOC_BGH_ID = subStringURL[0].split('s/')[1]; //$("#DOC_PROM_PH_ID").val();
 
-
-
+       
+        
 
         let DOC_CODE = $("#DOC_CODE").val();
         let BG_TYPE_CODE = $("#BG_TYPE_CODE").val();
@@ -137,10 +136,8 @@ let budgetPlanInvestmentDetail = new (function () {
         let msg = '';
         //end Validation
 
-
         
-
-        alert(this.jsonData.DOC_BGH_INV_ID);
+         
         if (msg) {
             $.toast({
                 type: "warning",
@@ -165,6 +162,45 @@ let budgetPlanInvestmentDetail = new (function () {
 
             sendPost(url, this.jsonData);
         }
+    }
+
+    this.onDelete = function (e) {
+
+
+        this.bindField();
+        //begin Validation
+        let msg = '';
+        //end Validation
+
+        
+
+        if (msg) {
+            $.toast({
+                type: "warning",
+                title: "Invalid information",
+                subtitle: (new Date()).toDateString(),
+                content: msg,
+                delay: 5000
+            });
+        } else {
+            let FLAG_ROW = 'S';
+            this.jsonData = {
+                ...this.jsonData,
+                FLAG_ROW
+            };
+
+            var url = urlServices.EditDetail;
+            if (this.jsonData.DOC_BGH_INV_ID != 0) {
+                url = urlServices.DeleteDetail;
+                sendPost(url, this.jsonData);
+            }
+            
+
+            
+        }
+
+ 
+         
     }
 
     this.onBack = function (e) {

@@ -26,7 +26,23 @@ namespace GFCA.APT.DAL.Interfaces
 
         void InsertBudgetPlanSale(BudgetPlanSaleDto entity);
         void InsertBudgetPlanInvestment(BudgetPlanInvestmentDto entity);
-         
+        IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID);
+        IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID);
+        BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID);
+        BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID);
+
+        void UpdateBudgetPlanSale(BudgetPlanSaleDto entity);
+        void UpdateBudgetInvsSale(BudgetPlanInvestmentDto entity);
+
+        void DeleteBudgetPlanSale(long DOC_BGH_SALES_ID);
+        void DeleteBudgetInvsSale(long DOC_BGH_INV_ID);
+
+
+
+
+  
+
+
 
     }
 }

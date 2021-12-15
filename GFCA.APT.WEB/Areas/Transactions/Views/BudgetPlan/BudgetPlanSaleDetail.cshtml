@@ -28,13 +28,13 @@
                 <div class="card card-info card-outline">
                     <div class="card-header">
 
-                        @if (@Model.DetailSaleItem.DOC_PROM_PS_ID == 0)
+                        @if (@Model.DetailSaleItem.DOC_BGH_SALES_ID == 0)
                         {
                             <h6> BudgetPlaning - Sale Create</h6>
                         }
                         else
                         {
-                    <h6> BudgetPlaning - Sale ( @Model.DetailSaleItem.DOC_PROM_PS_ID.ToString() ) </h6>
+                    <h6> BudgetPlaning - Sale ( @Model.DetailSaleItem.DOC_BGH_SALES_ID.ToString() ) </h6>
                         }
                     </div>
                     <div class="card-header">
@@ -52,7 +52,7 @@
                                             <div class="col col-lg-8">
                                                 @if (Model != null)
                                                 {
-                                                    @(Html.EJS().ComboBox("PROD_CODE")
+                                                    @(Html.EJS().ComboBox("PRD_CODE")
                                                                  .Placeholder("-- Select --")
                                                                  .Autofill(true)
                                                                  .DataSource(o =>
@@ -64,12 +64,12 @@
                                                                  .CssClass("mandatory")
                                                                  .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                  .Change("budgetplanSaleDetail.OnProductChangeValue")
-                                                                 .Value(Model.DetailSaleItem.PROD_CODE)
+                                                                 .Value(Model.DetailSaleItem.PRD_CODE)
                                                                  .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().ComboBox("PROD_CODE")
+                                                    @(Html.EJS().ComboBox("PRD_CODE")
                                                                  .Placeholder("-- Select --")
                                                                  .Autofill(true)
                                                                  .DataSource(o =>
@@ -142,7 +142,7 @@
                                                 @if (Model != null)
                                                 {
 
-                                                    @(Html.EJS().ComboBox("PROD_PACK")
+                                                    @(Html.EJS().ComboBox("PACK_CODE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -153,12 +153,12 @@
                                                                 })
                                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .Change("budgetplanSaleDetail.OnPackChangeValue")
-                                                                .Value(Model.DetailSaleItem.PROD_PACK)
+                                                                .Value(Model.DetailSaleItem.PACK_CODE)
                                                                 .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().ComboBox("PROD_PACK")
+                                                    @(Html.EJS().ComboBox("PACK_CODE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -184,7 +184,7 @@
                                                 @if (Model != null)
                                                 {
 
-                                                    @(Html.EJS().ComboBox("PROD_SIZE")
+                                                    @(Html.EJS().ComboBox("SIZE_CODE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -195,12 +195,12 @@
                                                                 })
                                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .Change("budgetplanSaleDetail.OnSizeChangeValue")
-                                                                .Value(Model.DetailSaleItem.PROD_SIZE)
+                                                                .Value(Model.DetailSaleItem.SIZE_CODE)
                                                                 .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().ComboBox("PROD_SIZE")
+                                                    @(Html.EJS().ComboBox("SIZE_CODE")
                                                                 .Placeholder("-- Select --")
                                                                 .Autofill(true)
                                                                 .DataSource(o =>
@@ -226,7 +226,7 @@
                                             </label>
                                             <div class="col col-lg-8">
 
-                                                @(Html.EJS().TextBox("COST_ELEMENT_CODE")
+                                                @(Html.EJS().TextBox("COST_ELEMENT_CODE").Value(Model.DetailSaleItem.COST_ELEMENT_CODE?.ToString())
                                                         .Enabled(true)
                                                         .Render())
                                             </div>
@@ -251,7 +251,7 @@
                                                                 .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                                 .CssClass("mandatory")
                                                                 .Change("budgetplanSaleDetail.OnBrandChangeValue")
-                                                                .Value(Model.DetailSaleItem.COMP_CODE)
+                                                                .Value(Model.DetailSaleItem.COST_CENTER)
                                                                 .Render())
 
                                             </div>
@@ -282,7 +282,7 @@
                                             </label>
                                             <div class="col col-lg-8">
 
-                                                @(Html.EJS().TextBox("Year")
+                                                @(Html.EJS().TextBox("YEAR").Value(Model.DetailSaleItem.YEAR.ToString())
                                                         .Enabled(true)
                                                         .Render())
 
@@ -296,7 +296,7 @@
                                             </label>
                                             <div class="col col-lg-8">
 
-                                                @(Html.EJS().TextBox("Month")
+                                                @(Html.EJS().TextBox("MONTH").Value(Model.DetailSaleItem.MONTH.ToString())
                                                         .Enabled(true)
                                                         .Render())
                                             </div>
@@ -312,7 +312,7 @@
                                             </label>
                                             <div class="col col-lg-8">
 
-                                                @(Html.EJS().TextBox("TOTAL")
+                                                @(Html.EJS().TextBox("TOTAL").Value(Model.DetailSaleItem.TOTAL.ToString())
                                                         .Placeholder("0.00")
                                                         .Enabled(false)
                                                         .Render())
@@ -362,7 +362,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M1")
-                                                                //.Value(Model.Detail.M01.ToString())
+                                                                .Value(Model.DetailSaleItem.M1.ToString())
                                                                 .Render())
                                                     </div>
 
@@ -374,7 +374,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M2")
-                                                    //.Value(Model.Detail.M02.ToString())
+                                                    .Value(Model.DetailSaleItem.M2.ToString())
                                                     .Render())
                                                     </div>
 
@@ -386,7 +386,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M3")
-                                                    //.Value(Model.Detail.M03.ToString())
+                                                    .Value(Model.DetailSaleItem.M3.ToString())
                                                     .Render())
                                                     </div>
 
@@ -431,7 +431,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M4")
-                                                                //.Value(Model.Detail.M04.ToString())
+                                                                .Value(Model.DetailSaleItem.M4.ToString())
                                                                 .Render())
                                                     </div>
 
@@ -442,7 +442,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M5")
-                                                    //.Value(Model.Detail.M05.ToString())
+                                                    .Value(Model.DetailSaleItem.M5.ToString())
                                                     .Render())
                                                     </div>
 
@@ -453,7 +453,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M6")
-                                                        //.Value(Model.Detail.M06.ToString())
+                                                        .Value(Model.DetailSaleItem.M6.ToString())
                                                         .Render())
                                                     </div>
 
@@ -497,7 +497,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M7")
-                                                    //.Value(Model.Detail.M07.ToString())
+                                                    .Value(Model.DetailSaleItem.M7.ToString())
                                                     .Render())
                                                     </div>
 
@@ -508,7 +508,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M8")
-                                                    //.Value(Model.Detail.M08.ToString())
+                                                   .Value(Model.DetailSaleItem.M8.ToString())
                                                     .Render())
                                                     </div>
 
@@ -519,7 +519,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M9")
-                                                    //.Value(Model.Detail.M09.ToString())
+                                                    .Value(Model.DetailSaleItem.M9.ToString())
                                                     .Render())
                                                     </div>
 
@@ -564,7 +564,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M10")
-                                                    //.Value(Model.Detail.M10.ToString())
+                                                   .Value(Model.DetailSaleItem.M10.ToString())
                                                     .Render())
                                                     </div>
 
@@ -575,7 +575,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M11")
-                                                    //.Value(Model.Detail.M11.ToString())
+                                                    .Value(Model.DetailSaleItem.M11.ToString())
                                                     .Render())
                                                     </div>
 
@@ -586,7 +586,7 @@
                                                     </label>
                                                     <div class="col col-lg-6">
                                                         @(Html.EJS().TextBox("M12")
-                                                    //.Value(Model.Detail.M12.ToString())
+                                                    .Value(Model.DetailSaleItem.M12.ToString())
                                                     .Render())
                                                     </div>
 
@@ -621,8 +621,8 @@
                                     <div class="col col-sm-12 col-lg-3 offset-lg-7">
                                         @if (Model != null)
                                         {
-                                            <input type="hidden" id="DOC_PROM_PH_ID" value="@Model.DetailSaleItem.DOC_PROM_PH_ID" />
-                                            <input type="hidden" id="DOC_PROM_PS_ID" value="@Model.DetailSaleItem.DOC_PROM_PS_ID" />
+                                            <input type="hidden" id="DOC_PROM_PH_ID" value="@Model.DetailSaleItem.DOC_BGH_ID" />
+                                            <input type="hidden" id="DOC_PROM_PS_ID" value="@Model.DetailSaleItem.DOC_BGH_SALES_ID" />
                                             <input type="hidden" id="DOC_CODE" value="@Model.DetailSaleItem.DOC_CODE" />
                                             <input type="hidden" id="DOC_VER" value="@Model.DetailSaleItem.DOC_VER" />
                                             <input type="hidden" id="DOC_REV" value="@Model.DetailSaleItem.DOC_REV" />

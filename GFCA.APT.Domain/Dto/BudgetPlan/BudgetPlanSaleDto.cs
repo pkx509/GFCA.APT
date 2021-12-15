@@ -10,11 +10,16 @@ namespace GFCA.APT.Domain.Dto
   
         public long DOC_BGH_SALES_ID { get; set; }
         public string BRAND_CODE { get; set; }
+        public string BRAND_NAME { get; set; }
         public string PACK_CODE { get; set; }
+        public string PACK_NAME { get; set; }
         public string SIZE_CODE { get; set; }
+        public string SIZE_NAME { get; set; }
         public string PRD_CODE { get; set; }
+        public string PROD_NAME { get; set; }
         public string COST_ELEMENT_CODE { get; set; }
         public string COST_CENTER { get; set; }
+        public string CENTER_NAME { get; set; }
         public int YEAR { get; set; }
         public int MONTH { get; set; }
         public decimal TOTAL { get; set; }

@@ -67,9 +67,9 @@
     });
     $("#toolbar_edit_sale_grid").click(function (e) {
         e.preventDefault();
-
-        if (argruments.data) {
-            window.location.href = `/T/FixedContracts/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+      
+        if (argruments.dataSale) {
+            window.location.href = `/T/budgetplans/${argruments.DOC_BGH_ID}/S/${argruments.dataSale.DOC_BGH_SALES_ID}`;
         }
 
     });
@@ -101,9 +101,9 @@
     });
     $("#toolbar_edit_investment_grid").click(function (e) {
         e.preventDefault();
-
-        if (argruments.data) {
-            window.location.href = `/T/FixedContracts/${argruments.DOC_FCH_ID}/${argruments.data.DOC_FCD_ID}`;
+       
+        if (argruments.dataInvest) {
+            window.location.href = `/T/budgetplans/${argruments.DOC_BGH_ID}/I/${argruments.dataInvest.DOC_BGH_INV_ID}`;
         }
 
     });

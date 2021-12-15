@@ -29,6 +29,22 @@ namespace GFCA.APT.BAL.Interfaces
 
         BusinessResponse EditDetail(FixedContractDetailDto model);
         BusinessResponse RemoveDetail(FixedContractDetailDto model);
+
+
+        IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID);
+        IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID);
+
+        BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID);
+        BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID);
+
+
+        BusinessResponse EditBudgetPlanSale(BudgetPlanSaleDto model);
+        BusinessResponse EditBudgetInvsSale(BudgetPlanInvestmentDto model);
+
+
+        BusinessResponse RemoveBudgetPlanSale(long DOC_BGH_SALES_ID);
+        BusinessResponse RemoveBudgetInvsSale(long DOC_BGH_INV_ID);
+
     }
 
 }
