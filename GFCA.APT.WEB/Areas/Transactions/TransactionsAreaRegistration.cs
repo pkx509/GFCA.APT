@@ -83,6 +83,12 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 defaults: new { controller = "Promotion", action = "Index" },
                 namespaces: new[] { __nameSpace }
                 );
+            context.MapRoute(
+            name: "Transaction_PromotionPlan_Pending",
+            url: "T/Pendings",
+            defaults: new { controller = "Promotion", action = "Pending" },
+            namespaces: new[] { __nameSpace }
+            );
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Item",

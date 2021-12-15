@@ -4151,6 +4151,7 @@
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetPlanHeader.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\BudgetPlanSaleDetail.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\BudgetPlanInvestmentDetail.cshtml" />
+    <Content Include="Areas\Transactions\Views\Promotion\Pending.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
