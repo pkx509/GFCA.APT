@@ -10,17 +10,41 @@ namespace GFCA.APT.BAL.Interfaces
     {
         IEnumerable<BudgetPlanHeaderDto> GetHeaderAll();
         FixedContractHeaderDto GetHeaderById(int DOC_FCH_ID);
+        BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID);
+        
+
+
         FixedContractHeaderDto GetHeaderByCode(string code, int ver = -1, int rev = -1);
-        BusinessResponse CreateHeader(FixedContractHeaderDto model);
+        BusinessResponse CreateHeader(BudgetPlanHeaderDto model);
         BusinessResponse EditHeader(FixedContractHeaderDto model);
         BusinessResponse RemoveHeader(FixedContractHeaderDto model);
 
         //IEnumerable<FixedContractDetailDto> GetDetailItems(string code, int ver = -1, int rev = -1);
+        BusinessResponse CreateSalesDetail(BudgetPlanSaleDto model);
+        BusinessResponse CreateInvestmentDetail(BudgetPlanInvestmentDto model);
+        //BudgetPlanInvestmentDto
+
         IEnumerable<FixedContractDetailDto> GetDetailItems(int DOC_FCH_ID);
         FixedContractDetailDto GetDetailItem(int DOC_FCD_ID);
-        BusinessResponse CreateDetail(FixedContractDetailDto model);
+
         BusinessResponse EditDetail(FixedContractDetailDto model);
         BusinessResponse RemoveDetail(FixedContractDetailDto model);
+
+
+        IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID);
+        IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID);
+
+        BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID);
+        BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID);
+
+
+        BusinessResponse EditBudgetPlanSale(BudgetPlanSaleDto model);
+        BusinessResponse EditBudgetInvsSale(BudgetPlanInvestmentDto model);
+
+
+        BusinessResponse RemoveBudgetPlanSale(long DOC_BGH_SALES_ID);
+        BusinessResponse RemoveBudgetInvsSale(long DOC_BGH_INV_ID);
+
     }
 
 }

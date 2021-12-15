@@ -9,9 +9,9 @@ namespace GFCA.APT.DAL.Interfaces
 
         IEnumerable<FixedContractHeaderDto> GetFixedContractAll();
         IEnumerable<BudgetPlanHeaderDto> GetBudgetPlanAll();
-
-        FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCD_ID);
-        void InsertFixedContractHeader(FixedContractHeaderDto entity);
+        //
+        BudgetPlanHeaderDto GetBudgetPlanID(int DOC_BGH_ID);
+        void InsertBudgetPlanHeaderHeader(BudgetPlanHeaderDto entity);
         void UpdateFixedContractHeader(FixedContractHeaderDto entity);
         void DeleteFixedContractHeader(int DOC_FCH_ID);
 
@@ -20,5 +20,29 @@ namespace GFCA.APT.DAL.Interfaces
         void InsertFixedContractDetail(FixedContractDetailDto entity);
         void UpdateFixedContractDetail(FixedContractDetailDto entity);
         void DeleteFixedContractDetail(int DOC_FCD_ID);
+
+
+
+
+        void InsertBudgetPlanSale(BudgetPlanSaleDto entity);
+        void InsertBudgetPlanInvestment(BudgetPlanInvestmentDto entity);
+        IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID);
+        IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID);
+        BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID);
+        BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID);
+
+        void UpdateBudgetPlanSale(BudgetPlanSaleDto entity);
+        void UpdateBudgetInvsSale(BudgetPlanInvestmentDto entity);
+
+        void DeleteBudgetPlanSale(long DOC_BGH_SALES_ID);
+        void DeleteBudgetInvsSale(long DOC_BGH_INV_ID);
+
+
+
+
+  
+
+
+
     }
 }

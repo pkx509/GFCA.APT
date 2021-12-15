@@ -1,18 +1,26 @@
 ﻿@using Syncfusion.EJ2
-@model GFCA.APT.Domain.Dto.BudgetPlanDto
-@{ Dictionary<string, object> disabled = new Dictionary<string, object>();
-                disabled.Add("disabled", "true"); }
 
-@*----------------- bugdet planing header -----------------*@
-<div class="row mb-2">
-    <div class="col col-lg p-1">
-        <div class="card card-info card-outline">
-            <div class="card-header">
-                <h6>Budget planning by</h6>
-            </div>
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col col-sm-12 col-lg-10">
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+<form class="form-horizontal" id="pop-form-channel">
+    <div id="popup-budgetplanHeader" class="modal fade bd-brand-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pop-lbl-header-title">NEW BUDGET PLANNING</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div data-alerts="alerts"
+                             data-titles='{"warning": "<em>Warning!</em>", "error": "<em>Error!</em>"}'
+                             data-ids="myid"
+                             data-fade="4000"
+                             data-usebullets="true"></div>
 
                         <div class="row">
                             <div class="col-sm-12 col-lg-6">
@@ -30,7 +38,6 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Value(Model.BudgetPlanHeader.COMP_CODE)
                                                         .Enabled(true)
                                                         .Change("budgetPlanHeaderPopup.OnCompanyChangeValue")
                                                         .CssClass("mandatory")
@@ -172,11 +179,19 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
+                <div class="modal-footer">
+                    <button id="pop-btn-save" type="button" class="e-control e-btn e-lib e-primary" data-loading-text="Processing..." onclick="javascript:budgetPlanHeaderPopup.onSave(this)">Save</button>
+                    <button type="button" class="e-control e-btn e-lib e-secondary" data-dismiss="modal" onclick="javascript:budgetPlanHeaderPopup.close(this)">Close</button>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
+</form>
+
+
+

@@ -1,7 +1,5 @@
-﻿@{
-    ViewBag.Title = "BudgetPlanDetail";
-}
-
+﻿@{ ViewBag.Title = "BudgetPlanDetail"; }
+@model GFCA.APT.Domain.Dto.BudgetPlanDto
 @using Syncfusion.EJ2
 
 @section styles
@@ -39,8 +37,13 @@
 <form autocomplete="off" class="form-horizontal">
     <div class="content-header">
         <div class="container-fluid">
+
+
+
+
+
             @*----------------- document header -----------------*@
-            @Html.Partial("../Default/ItemStateFlowPartial")
+            @@Html.Partial("../Default/ItemStateFlowPartial")
 
             @*----------------- bugdet planning header -----------------*@
             @Html.Partial("ItemHeaderPartial")
@@ -49,10 +52,14 @@
             @Html.Partial("ItemDetailPartial")
 
             @*----------------- bugdet planning footer -----------------*@
-            @Html.Partial("ItemFooterPartial")
+            @@Html.Partial("ItemFooterPartial")
 
             @*----------------- document footer -----------------*@
-            @Html.Partial("../Default/ItemHistoriesPartial")
+            @@Html.Partial("../Default/ItemHistoriesPartial")
+
+
+
+
         </div>
     </div>
 </form>
@@ -64,15 +71,41 @@
     <!-- BEGIN preScripts -->
     <script>
 
-        var urlServices = {
-            CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
-            Add: "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
-            Edit: "@Url.Action("Edit", "BudgetPlan", new { Area = "Transactions" })",
-            Delete: "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
+            var urlServices = {
+            CurrentUrl     : "@Url.Action("BudgetPlanItem", "BudgetPlan", new { Area = "Transactions", DOC_BGH_ID = Model.BudgetPlanHeader.DOC_BGH_ID })",
+            AddSale        : "@Url.Action("CreateBudgetPlaningSale", "BudgetPlan", new { Area = "Transactions" })",
+            AddInvestment  : "@Url.Action("CreateBudgetPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            EditSale       : "@Url.Action("EditBudgetPlaningSale", "BudgetPlan", new { Area = "Transactions" })",
+            EditInvestment : "@Url.Action("EditBudgetPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            DeleteSale       : "@Url.Action("DeletePromotionPlanngSale", "BudgetPlan", new { Area = "Transactions" })",
+            DeleteInvestment: "@Url.Action("DeletePromotionPlanningInvestment", "BudgetPlan", new { Area = "Transactions" })",
+            }
+
+
+  var argruments = {
+      DOC_BGH_ID : "@Model.BudgetPlanHeader.DOC_BGH_ID",
+      dataSale: null,
+      dataInvest: null,
         }
 
-        var argruments = {
-            data: null,
+        function onGridSaleRowSelected(args) {
+           
+
+            argruments.dataSale = args.data;
+        }
+        function onGridSaleRowDeselected(args) {
+            if (argruments.dataSale == args.data) {
+                argruments.dataSale = null;
+            }
+        }
+
+        function onGridInvestRowSelected(args) {
+            argruments.dataInvest = args.data;
+        }
+        function onGridInvestRowDeselected(args) {
+            if (argruments.dataInvest == args.data) {
+                argruments.dataInvest = null;
+            }
         }
     </script>
 
@@ -83,7 +116,7 @@
 
 @section scripts
 {
-
+    @Scripts.Render("~/Scripts/transactions/budgetPlanItem.js")
     @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
 
 }

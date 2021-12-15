@@ -1,9 +1,5 @@
-﻿@{ ViewBag.Title = "Budget Planing"; }
-
-@{ #if DNX48
-ViewBag.Title = "Fixed contract";
-#endif
-}
+﻿
+@{ ViewBag.Title ="My Pending"; }
 @using GFCA.APT.Domain.HTTP.Controls
 @using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
@@ -61,18 +57,15 @@ ViewBag.Title = "Fixed contract";
             <div class="row mb-2">
                 <div class="col-lg-12 p-1">
                     <div class="card card-success card-outline">
-                      
-
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
-                                  .Grid("grdBudgetPlan")
+                                  .Grid("grdPromotion")
                                   .Height("450")
                                   .DataSource(ds =>
                                   {
                                       ds
-                                      .Url(@Url.Action("UrlBudgetPlanHeaderList", "BudgetPlan", new { Area = "Transactions" }))
-                                      .Adaptor("UrlAdaptor")
-                                      ;
+                                      .Url(@Url.Action("UrlPromotionHeaderList", "Promotion", new { Area = "Transactions" }))
+                                      .Adaptor("UrlAdaptor");
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
@@ -84,7 +77,6 @@ ViewBag.Title = "Fixed contract";
                                       new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
                                       new { id = "toolbar_exportexcel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" }
                                   })
-                                  // .ToolbarClick("channelPopup.OnExcelExportClick")
                                   .EditSettings(edit =>
                                   {
                                       edit
@@ -93,26 +85,19 @@ ViewBag.Title = "Fixed contract";
                                       .AllowEditing(false)
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog);
-                                      // .Template("#dialogtemplate");
                                   })
-                                  .RowDeselected("OnRowDeselected")
-                                  .RowSelected("OnRowSelected")
-
+                                  .RowDeselected("promotionHeaderPopup.OnRowDeselected")
+                                  .RowSelected("promotionHeaderPopup.OnRowSelected")
                                   .Columns(col =>
                                   {
-
-                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BG_TYPE_CODE").HeaderText("Code Type").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("COMP_CODE").HeaderText("Comp Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_CODE").HeaderText("Brand Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_NAME").HeaderText("Brand Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("Year").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-                                      col.Field("AMOUNT").HeaderText("Amount").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-
-                                      col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
-                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_VER").HeaderText("Version").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("DOC_REV").HeaderText("Revision").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CUST_NAME").HeaderText("Customer").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Center).Add();
                                   })
                                   .Render())
 
@@ -124,23 +109,17 @@ ViewBag.Title = "Fixed contract";
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    @Html.Partial("~/Areas/Transactions/Views/BudgetPlan/_Popup_BudgetPlanHeader.cshtml")
-
-    }
-
+    @Html.Partial("~/Areas/Transactions/Views/Promotion/_Popup_PromotionHeader.cshtml")
+}
 
 @section preScripts
 {
-    <!-- BEGIN preScripts -->
     <script>
-     
-            var urlServices = {
-            CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
-            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "BudgetPlan", new { Area = "Transactions" })",
-            Delete    : "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
-            }
-
-
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
+            Delete    : "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
+        }
         var argruments = {
             data: null,
         }
@@ -155,14 +134,12 @@ ViewBag.Title = "Fixed contract";
             }
         }
     </script>
-   @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
 
-
-
+    @Scripts.Render("~/Scripts/transactions/promotionHeaderPopup.js")
 }
 
 @section scripts
 {
-
-    @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
+    @Scripts.Render("~/Scripts/transactions/promotion.js")
 }
+

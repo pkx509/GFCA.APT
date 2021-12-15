@@ -1,54 +1,59 @@
-﻿<div class="row mb-2">
-    <div class="col col-lg-12 p-1">
-        <div class="card card-info card-outline">
-            <div class="card-header">
-                <h5>Approval (Display when status approval)</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col col-lg-9">
-                        <div class="form-group row">
-                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
-                        </div>
-                    </div>
-                    <div class="col col-lg-3">
-                        <div class="form-group row">
+﻿@using GFCA.APT.Domain.HTTP.Controls
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Inputs
+@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.BudgetPlanDto
 
-                            <!-- Approval State -->
-                            <button class="btn btn-primary" value="APPROVED">Approve</button>
-                            <button class="btn btn-danger" value="REVISED">Revise</button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@*----------------- Promotion planning detail -----------------*@
 <div class="row mb-2">
     <div class="col col-lg-12 p-1">
         <div class="card card-info card-outline">
-            <div class="card-header">
-                <h5>Reviewer (Display when status accounting review)</h5>
-            </div>
+            
             <div class="card-body">
-                <div class="row">
-                    <div class="col col-lg-9">
-                        <div class="form-group row">
-                            <textarea name="des" cols="2" rows="5" placeholder="Comment" class="e-control e-textbox e-lib e-input"></textarea>
-                        </div>
-                    </div>
-                    <div class="col col-lg-3">
-                        <div class="form-group row">
 
-                            <!-- Review State -->
-                            <button class="btn btn-info">Review</button>
-                            <button class="btn btn-success">Commit</button>
-                        </div>
+                <div class="card-tabs">
+                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tab-toggle-sale" data-toggle="pill" href="#tab-content-sale" role="tab" aria-controls="tab-content-sale" aria-selected="true">Sale</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-toggle-investment" data-toggle="pill" href="#tab-content-invesment" role="tab" aria-controls="tab-content-invesment" aria-selected="false">Investment</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="custom-tabs-three-tabContent">
+                    <div class="tab-pane fade show active" id="tab-content-sale" role="tabpanel" aria-labelledby="tab-toggle-sale">
+
+                     
+
+                    </div>
+                    <div class="tab-pane fade" id="tab-content-invesment" role="tabpanel" aria-labelledby="tab-toggle-investment">
+
+                      
+
                     </div>
                 </div>
+
             </div>
+            <!--
+            <div class="card-footer">
+                <div>
+
+                    <div class="row">
+                        <div class="col col-sm-12 col-lg-3 offset-lg-9">
+
+                            <-- Confirm State --
+                            <button class="btn btn-primary">Save</button>
+                            <button class="btn btn-default">Cancel</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            -->
         </div>
     </div>
 </div>

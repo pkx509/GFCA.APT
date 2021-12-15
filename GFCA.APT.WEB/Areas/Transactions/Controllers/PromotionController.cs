@@ -28,6 +28,13 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View();
         }
 
+        // GET: Transactions/Pending
+        public ActionResult Pending()
+        {
+            return View();
+        }
+
+
         // GET: T/Promotions/{DOC_PROM_PH_ID}}]
         [HttpGet]
         public ViewResult PromotionItem(int DOC_PROM_PH_ID)

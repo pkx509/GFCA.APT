@@ -28,15 +28,30 @@ namespace GFCA.APT.Domain.Dto
         //public string DOC_CODE { get; set; }
         public string BG_TYPE_CODE { get; set; }
         public string COMP_CODE { get; set; }
+        public string CUST_CODE { get; set; }
+
+        public string FISCAL_YEAR { get; set; }
+        public decimal BUDGET_AMOUNT { get; set; }
+        public decimal ACTUAL { get; set; }
+        public decimal COMMITMENT { get; set; }
+        public decimal AVAILABLE { get; set; }
+        public string FLAG_ROW { get; set; }
+
+
+
+
+        public string CUST_NAME { get; set; }
         public string BRAND_CODE { get; set; }
         public string BRAND_NAME { get; set; }
-        public string CUST_NAME { get; set; }
-        public string Year { get; set; }
-        public decimal AMOUNT { get; set; }
+
+
+
+
+
         public string CHANNEL_CODE { get; set; }
         public string CHANNEL_NAME { get; set; }
         public string COMMENT { get; set; }
-        public string FLAG_ROW { get; set; }
+    
         public COMMAND_TYPE COMMAND_TYPE { get; set; } = COMMAND_TYPE.NONE; //SUBMIT, CANCEL, APPROVE, REVIEW, CONFIRM, COMMIT
         public string ORG_CODE { get; set; }
         public string ORG_NAME { get; set; }

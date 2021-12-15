@@ -15,10 +15,10 @@ namespace GFCA.APT.DAL.Implements
 
         public BudgetPlanRepository(IDbTransaction transaction) : base(transaction) { }
 
- 
+
         public FixedContractHeaderDto GetFixedContractByItemID(int DOC_FCH_ID)
         {
-            string sqlQuery = 
+            string sqlQuery =
 @"SELECT 
   DOC_FCH_ID
 , DOC_CODE
@@ -87,18 +87,18 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 
             var parms = new
             {
-                DOC_CODE           = entity.DOC_CODE,
-                DOC_VER            = entity.DOC_VER,
-                DOC_REV            = entity.DOC_REV,
-                CLIENT_CODE        = entity.CLIENT_CODE,
-                CUST_CODE          = entity.CUST_CODE,
-                CHANNEL_CODE       = entity.CHANNEL_CODE,
-                COMP_CODE          = entity.COMP_CODE,
-                DOC_STATUS         = entity.DOC_STATUS,
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                CLIENT_CODE = entity.CLIENT_CODE,
+                CUST_CODE = entity.CUST_CODE,
+                CHANNEL_CODE = entity.CHANNEL_CODE,
+                COMP_CODE = entity.COMP_CODE,
+                DOC_STATUS = entity.DOC_STATUS,
                 //COMMENT          = entity.COMMENT,
-                FLAG_ROW           = entity.FLAG_ROW.ToValue(),
+                FLAG_ROW = entity.FLAG_ROW.ToValue(),
                 REQUESTER_ORG_CODE = entity.ORG_CODE,
-                CREATED_BY         = entity.CREATED_BY
+                CREATED_BY = entity.CREATED_BY
             };
 
             int DOC_FCH_ID = Connection.ExecuteScalar<int>(
@@ -588,7 +588,7 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
             );
         }
 
-       
+
 
         public IEnumerable<BudgetPlanHeaderDto> GetBudgetPlanAll()
         {
@@ -597,15 +597,11 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
       ,A.[BG_TYPE_CODE]
       ,A.[COMP_CODE]
 	  ,(SELECT TOP 1 isnull(b.COMP_NAME,'') FROM [TB_M_COMPANY] b WHERE b.COMP_CODE = A.[COMP_CODE]) COMP_NAME
-      ,A.[BRAND_CODE]
-	    ,(SELECT TOP 1 isnull(b.BRAND_NAME,'') FROM [TB_M_BRAND] b WHERE b.BRAND_CODE = A.BRAND_CODE) BRAND_NAME
-      ,A.[Year]
-      ,A.[AMOUNT]
       ,A.[CREATED_BY]
       ,A.[CREATED_DATE]
       ,A.[UPDATED_BY]
       ,A.[UPDATED_DATE]
-  FROM [dbo].[TB_T_BUDGET_H_V2] AS A;";
+  FROM [dbo].[TB_T_BUDGET_H] AS A;";
             var query = Connection.Query<BudgetPlanHeaderDto>(
                 sql: sqlQuery
                 , transaction: Transaction
@@ -619,5 +615,744 @@ WHERE DOC_FCD_ID = @DOC_FCD_ID
         {
             throw new NotImplementedException();
         }
+
+
+        public BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID)
+        {
+
+
+            string sqlQuery =
+@"SELECT 
+ *
+FROM TB_T_BUDGET_H a
+WHERE DOC_BGH_ID = @DOC_BGH_ID;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanHeaderDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+        public void InsertBudgetPlanHeaderHeader(BudgetPlanHeaderDto entity)
+        {
+            string sqlCommand = @"INSERT INTO TB_T_BUDGET_H
+(DOC_CODE,
+DOC_VER,
+DOC_REV,
+BG_TYPE_CODE,
+COMP_CODE,
+CUST_CODE,
+FISCAL_YEAR,
+BUDGET_AMOUNT,
+ACTUAL,
+COMMITMENT,
+AVAILABLE,
+FLAG_ROW,
+CREATED_BY,
+UPDATED_BY,
+UPDATED_DATE,
+CREATED_DATE
+)
+VALUES
+(
+ @DOC_CODE,
+@DOC_VER,
+@DOC_REV,
+@BG_TYPE_CODE,
+@COMP_CODE,
+@CUST_CODE,
+@FISCAL_YEAR,
+@BUDGET_AMOUNT,
+@ACTUAL,
+@COMMITMENT,
+@AVAILABLE,
+@FLAG_ROW,
+@CREATED_BY,
+@UPDATED_BY,
+@UPDATED_DATE,
+@CREATED_DATE
+); SELECT SCOPE_IDENTITY()";
+
+            var parms = new
+            {
+
+                DOC_CODE = entity.DOC_CODE,
+                DOC_VER = entity.DOC_VER,
+                DOC_REV = entity.DOC_REV,
+                BG_TYPE_CODE = entity.BG_TYPE_CODE,
+                COMP_CODE = entity.COMP_CODE,
+                CUST_CODE = entity.CUST_CODE,
+                FISCAL_YEAR = entity.FISCAL_YEAR,
+                BUDGET_AMOUNT = entity.BUDGET_AMOUNT,
+                ACTUAL = entity.ACTUAL,
+                COMMITMENT = entity.COMMITMENT,
+                AVAILABLE = entity.AVAILABLE,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE,
+
+
+
+
+
+            };
+
+            int DOC_BGH_ID = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+            entity.DOC_BGH_ID = DOC_BGH_ID;
+        }
+
+        public BudgetPlanHeaderDto GetBudgetPlanID(int DOC_BGH_ID)
+        {
+
+            string sqlQuery =
+@"SELECT 
+ *
+FROM TB_T_BUDGET_H a
+WHERE DOC_BGH_ID = @DOC_BGH_ID;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanHeaderDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+        public void InsertBudgetPlanSale(BudgetPlanSaleDto entity)
+        {
+
+            string sqlCommand = @"INSERT INTO TB_T_BUDGET_SALES_D
+([DOC_BGH_ID]
+           ,[BRAND_CODE]
+           ,[PACK_CODE]
+           ,[SIZE_CODE]
+           ,[PRD_CODE]
+           ,[COST_ELEMENT_CODE]
+           ,[COST_CENTER]
+           ,[YEAR]
+           ,[MONTH]
+           ,[TOTAL]
+           ,[M1]
+           ,[M2]
+           ,[M3]
+           ,[M4]
+           ,[M5]
+           ,[M6]
+           ,[M7]
+           ,[M8]
+           ,[M9]
+           ,[M10]
+           ,[M11]
+           ,[M12]
+           ,[FLAG_ROW]
+           ,[CREATED_BY]
+           ,[CREATED_DATE]
+           ,[UPDATED_BY]
+           ,[UPDATED_DATE]
+)
+VALUES
+(
+ @DOC_BGH_ID
+           ,@BRAND_CODE
+           ,@PACK_CODE
+           ,@SIZE_CODE
+           ,@PRD_CODE
+           ,@COST_ELEMENT_CODE
+           ,@COST_CENTER
+           ,@YEAR
+           ,@MONTH
+           ,@TOTAL
+           ,@M1
+           ,@M2
+           ,@M3
+           ,@M4
+           ,@M5
+           ,@M6
+           ,@M7
+           ,@M8
+           ,@M9
+           ,@M10
+           ,@M11
+           ,@M12
+           ,@FLAG_ROW
+           ,@CREATED_BY
+           ,@CREATED_DATE
+           ,@UPDATED_BY
+           ,@UPDATED_DATE
+); SELECT SCOPE_IDENTITY()";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_ID = entity.DOC_BGH_ID,
+
+                BRAND_CODE = entity.BRAND_CODE,
+                PACK_CODE = entity.PACK_CODE,
+                SIZE_CODE = entity.SIZE_CODE,
+                PRD_CODE = entity.PRD_CODE,
+                COST_ELEMENT_CODE = entity.COST_ELEMENT_CODE,
+                COST_CENTER = entity.COST_CENTER,
+                YEAR = entity.YEAR,
+                MONTH = entity.MONTH,
+                TOTAL = entity.TOTAL,
+                M1 = entity.M1,
+                M2 = entity.M2,
+                M3 = entity.M3,
+                M4 = entity.M4,
+                M5 = entity.M5,
+                M6 = entity.M6,
+                M7 = entity.M7,
+                M8 = entity.M8,
+                M9 = entity.M9,
+                M10 = entity.M10,
+                M11 = entity.M11,
+                M12 = entity.M12,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE,
+            };
+
+
+
+            int DOC_BGH_SALES_ID = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+            entity.DOC_BGH_SALES_ID = DOC_BGH_SALES_ID;
+        }
+
+        public void InsertBudgetPlanInvestment(BudgetPlanInvestmentDto entity)
+        {
+            string sqlCommand = @"INSERT INTO TB_T_BUDGET_INVESTMENT_D
+([DOC_BGH_ID]
+,[ACTIVITY_CODE]
+           ,[BRAND_CODE]
+           ,[PACK_CODE]
+           ,[SIZE_CODE]
+           ,[PRD_CODE]
+           ,[COST_ELEMENT_CODE]
+           ,[COST_CENTER]
+           ,[YEAR]
+           ,[MONTH]
+           ,[TOTAL]
+           ,[M1]
+           ,[M2]
+           ,[M3]
+           ,[M4]
+           ,[M5]
+           ,[M6]
+           ,[M7]
+           ,[M8]
+           ,[M9]
+           ,[M10]
+           ,[M11]
+           ,[M12]
+           ,[FLAG_ROW]
+           ,[CREATED_BY]
+           ,[CREATED_DATE]
+           ,[UPDATED_BY]
+           ,[UPDATED_DATE]
+)
+VALUES
+(
+ @DOC_BGH_ID,@ACTIVITY_CODE
+           ,@BRAND_CODE
+           ,@PACK_CODE
+           ,@SIZE_CODE
+           ,@PRD_CODE
+           ,@COST_ELEMENT_CODE
+           ,@COST_CENTER
+           ,@YEAR
+           ,@MONTH
+           ,@TOTAL
+           ,@M1
+           ,@M2
+           ,@M3
+           ,@M4
+           ,@M5
+           ,@M6
+           ,@M7
+           ,@M8
+           ,@M9
+           ,@M10
+           ,@M11
+           ,@M12
+           ,@FLAG_ROW
+           ,@CREATED_BY
+           ,@CREATED_DATE
+           ,@UPDATED_BY
+           ,@UPDATED_DATE
+); SELECT SCOPE_IDENTITY()";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_ID = entity.DOC_BGH_ID,
+                ACTIVITY_CODE = entity.ACTIVITY_CODE,
+                BRAND_CODE = entity.BRAND_CODE,
+                PACK_CODE = entity.PACK_CODE,
+                SIZE_CODE = entity.SIZE_CODE,
+                PRD_CODE = entity.PRD_CODE,
+                COST_ELEMENT_CODE = entity.COST_ELEMENT_CODE,
+                COST_CENTER = entity.COST_CENTER,
+                YEAR = entity.YEAR,
+                MONTH = entity.MONTH,
+                TOTAL = entity.TOTAL,
+                M1 = entity.M1,
+                M2 = entity.M2,
+                M3 = entity.M3,
+                M4 = entity.M4,
+                M5 = entity.M5,
+                M6 = entity.M6,
+                M7 = entity.M7,
+                M8 = entity.M8,
+                M9 = entity.M9,
+                M10 = entity.M10,
+                M11 = entity.M11,
+                M12 = entity.M12,
+                FLAG_ROW = entity.FLAG_ROW,
+                CREATED_BY = entity.CREATED_BY,
+                CREATED_DATE = entity.CREATED_DATE,
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE,
+            };
+
+
+
+            int DOC_BGH_INV_ID = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+            entity.DOC_BGH_INV_ID = DOC_BGH_INV_ID;
+        }
+
+        public IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID)
+        {
+            string sqlQuery = @"SELECT [DOC_BGH_ID]
+      ,[DOC_BGH_SALES_ID]
+      ,[BRAND_CODE]
+	  ,(SELECT TOP 1 isnull(B.BRAND_NAME,'') FROM TB_M_BRAND b WHERE b.BRAND_CODE = A.BRAND_CODE) BRAND_NAME
+      ,[PACK_CODE]
+	  ,(SELECT TOP 1 isnull(P.PACK_NAME,'') FROM TB_M_PACK P WHERE P.PACK_CODE = A.PACK_CODE) PACK_NAME
+      ,[SIZE_CODE]
+	  ,(SELECT TOP 1 isnull(S.SIZE_NAME,'') FROM TB_M_SIZE S WHERE S.SIZE_CODE = A.SIZE_CODE) SIZE_NAME
+      ,[PRD_CODE]
+	  ,(SELECT TOP 1 isnull(PD.PROD_NAME,'') FROM TB_M_PRODUCT PD WHERE PD.PROD_CODE = A.PRD_CODE) PROD_NAME
+      ,[COST_ELEMENT_CODE]
+      ,[COST_CENTER]
+	  ,(SELECT TOP 1 isnull(C.CENTER_NAME,'') FROM TB_M_COST_CENTER C WHERE C.CENTER_CODE = A.COST_CENTER) CENTER_NAME
+      ,[YEAR]
+      ,[MONTH]
+      ,[TOTAL]
+      ,[M1]
+      ,[M2]
+      ,[M3]
+      ,[M4]
+      ,[M5]
+      ,[M6]
+      ,[M7]
+      ,[M8]
+      ,[M9]
+      ,[M10]
+      ,[M11]
+      ,[M12]
+      --,[FLAG_ROW]
+      ,[CREATED_BY]
+      ,[CREATED_DATE]
+      ,[UPDATED_BY]
+      ,[UPDATED_DATE]
+  FROM [dbo].[TB_T_BUDGET_SALES_D] AS A
+  WHERE A.DOC_BGH_ID=@DOC_BGH_ID
+;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.Query<BudgetPlanSaleDto>(
+                sql: sqlQuery,
+                param: parms
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID)
+        {
+            string sqlQuery = @"SELECT 
+      [DOC_BGH_ID]
+      ,[DOC_BGH_INV_ID]
+      ,[BRAND_CODE]
+	  ,[ACTIVITY_CODE]
+	  ,(SELECT TOP 1 isnull(B.BRAND_NAME,'') FROM TB_M_BRAND b WHERE b.BRAND_CODE = A.BRAND_CODE) BRAND_NAME
+      ,[PACK_CODE]
+	  ,(SELECT TOP 1 isnull(P.PACK_NAME,'') FROM TB_M_PACK P WHERE P.PACK_CODE = A.PACK_CODE) PACK_NAME
+      ,[SIZE_CODE]
+	  ,(SELECT TOP 1 isnull(S.SIZE_NAME,'') FROM TB_M_SIZE S WHERE S.SIZE_CODE = A.SIZE_CODE) SIZE_NAME
+      ,[PRD_CODE]
+	  ,(SELECT TOP 1 isnull(PD.PROD_NAME,'') FROM TB_M_PRODUCT PD WHERE PD.PROD_CODE = A.PRD_CODE) PROD_NAME
+      ,[COST_ELEMENT_CODE]
+      ,[COST_CENTER]
+	  ,(SELECT TOP 1 isnull(C.CENTER_NAME,'') FROM TB_M_COST_CENTER C WHERE C.CENTER_CODE = A.COST_CENTER) CENTER_NAME
+      ,[TYPE]
+	  ,[YEAR]
+      ,[MONTH]
+      ,[TOTAL]
+      ,[M1]
+      ,[M2]
+      ,[M3]
+      ,[M4]
+      ,[M5]
+      ,[M6]
+      ,[M7]
+      ,[M8]
+      ,[M9]
+      ,[M10]
+      ,[M11]
+      ,[M12]
+     -- ,[FLAG_ROW]
+      ,[CREATED_BY]
+      ,[CREATED_DATE]
+      ,[UPDATED_BY]
+      ,[UPDATED_DATE]
+  FROM [dbo].TB_T_BUDGET_INVESTMENT_D AS A
+  WHERE A.DOC_BGH_ID=@DOC_BGH_ID;";
+            var parms = new
+            {
+                DOC_BGH_ID = DOC_BGH_ID
+            };
+
+            var query = Connection.Query<BudgetPlanInvestmentDto>(
+                sql: sqlQuery,
+                param: parms
+                , transaction: Transaction
+                ).ToList();
+
+            return query;
+        }
+
+        public BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID)
+        {
+
+            string sqlQuery =
+@"SELECT [DOC_BGH_ID]
+      ,[DOC_BGH_SALES_ID]
+      ,[BRAND_CODE]
+      ,[PACK_CODE]
+      ,[SIZE_CODE]
+      ,[PRD_CODE]
+      ,[COST_ELEMENT_CODE]
+      ,[COST_CENTER]
+      ,[YEAR]
+      ,[MONTH]
+      ,[TOTAL]
+      ,[M1]
+      ,[M2]
+      ,[M3]
+      ,[M4]
+      ,[M5]
+      ,[M6]
+      ,[M7]
+      ,[M8]
+      ,[M9]
+      ,[M10]
+      ,[M11]
+      ,[M12]
+      --,[FLAG_ROW]
+      ,[CREATED_BY]
+      ,[CREATED_DATE]
+      ,[UPDATED_BY]
+      ,[UPDATED_DATE]
+  FROM [dbo].[TB_T_BUDGET_SALES_D] 
+WHERE DOC_BGH_SALES_ID = @DOC_BGH_SALES_ID;";
+            var parms = new
+            {
+                DOC_BGH_SALES_ID = DOC_BGH_SALES_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanSaleDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+        public BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID)
+        {
+
+            string sqlQuery =
+@"SELECT [DOC_BGH_ID]
+      ,[DOC_BGH_INV_ID]
+      ,[BRAND_CODE]
+      ,[PACK_CODE]
+      ,[SIZE_CODE]
+      ,[PRD_CODE]
+      ,[COST_ELEMENT_CODE]
+      ,[ACTIVITY_CODE]
+      ,[COST_CENTER]
+      ,[TYPE]
+      ,[YEAR]
+      ,[MONTH]
+      ,[TOTAL]
+      ,[M1]
+      ,[M2]
+      ,[M3]
+      ,[M4]
+      ,[M5]
+      ,[M6]
+      ,[M7]
+      ,[M8]
+      ,[M9]
+      ,[M10]
+      ,[M11]
+      ,[M12]
+      --,[FLAG_ROW]
+      ,[CREATED_BY]
+      ,[CREATED_DATE]
+      ,[UPDATED_BY]
+      ,[UPDATED_DATE]
+  FROM [dbo].[TB_T_BUDGET_INVESTMENT_D]
+  WHERE DOC_BGH_INV_ID = @DOC_BGH_INV_ID;";
+            var parms = new
+            {
+                DOC_BGH_INV_ID = DOC_BGH_INV_ID
+            };
+
+            var query = Connection.QueryFirstOrDefault<BudgetPlanInvestmentDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+      
+        public void UpdateBudgetPlanSale(BudgetPlanSaleDto entity)
+        {
+            string sqlCommand = @"
+UPDATE  TB_T_BUDGET_SALES_D 
+SET
+ BRAND_CODE = @BRAND_CODE
+,PACK_CODE = @PACK_CODE
+,SIZE_CODE = @SIZE_CODE
+,PRD_CODE = @PRD_CODE
+,COST_ELEMENT_CODE = @COST_ELEMENT_CODE
+,COST_CENTER = @COST_CENTER
+,YEAR = @YEAR
+,MONTH = @MONTH
+,TOTAL = @TOTAL
+,M1 = @M1
+,M2 = @M2
+,M3 = @M3
+,M4 = @M4
+,M5 = @M5
+,M6 = @M6
+,M7 = @M7
+,M8 = @M8
+,M9 = @M9
+,M10 = @M10
+,M11 = @M11
+,M12 = @M12
+--,FLAG_ROW = @FLAG_ROW
+--,CREATED_BY = @CREATED_BY
+--,CREATED_DATE = @CREATED_DATE
+,UPDATED_BY = @UPDATED_BY
+,UPDATED_DATE = @UPDATED_DATE
+WHERE DOC_BGH_SALES_ID = @DOC_BGH_SALES_ID;";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_SALES_ID=entity.DOC_BGH_SALES_ID,
+                BRAND_CODE = entity.BRAND_CODE,
+                PACK_CODE = entity.PACK_CODE,
+                SIZE_CODE = entity.SIZE_CODE,
+                PRD_CODE = entity.PRD_CODE,
+                COST_ELEMENT_CODE = entity.COST_ELEMENT_CODE,
+                COST_CENTER = entity.COST_CENTER,
+                YEAR = entity.YEAR,
+                MONTH = entity.MONTH,
+                TOTAL = entity.TOTAL,
+                M1 = entity.M1,
+                M2 = entity.M2,
+                M3 = entity.M3,
+                M4 = entity.M4,
+                M5 = entity.M5,
+                M6 = entity.M6,
+                M7 = entity.M7,
+                M8 = entity.M8,
+                M9 = entity.M9,
+                M10 = entity.M10,
+                M11 = entity.M11,
+                M12 = entity.M12,           
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+            };
+
+
+
+         
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+
+        }
+        public void UpdateBudgetInvsSale(BudgetPlanInvestmentDto entity)
+        {
+            string sqlCommand = @"
+UPDATE  TB_T_BUDGET_INVESTMENT_D 
+SET
+ BRAND_CODE = @BRAND_CODE
+,PACK_CODE = @PACK_CODE
+,SIZE_CODE = @SIZE_CODE
+,PRD_CODE = @PRD_CODE
+,COST_ELEMENT_CODE = @COST_ELEMENT_CODE
+,COST_CENTER = @COST_CENTER
+,ACTIVITY_CODE=@ACTIVITY_CODE
+,TYPE =@TYPE
+,YEAR = @YEAR
+,MONTH = @MONTH
+,TOTAL = @TOTAL
+,M1 = @M1
+,M2 = @M2
+,M3 = @M3
+,M4 = @M4
+,M5 = @M5
+,M6 = @M6
+,M7 = @M7
+,M8 = @M8
+,M9 = @M9
+,M10 = @M10
+,M11 = @M11
+,M12 = @M12
+--,FLAG_ROW = @FLAG_ROW
+--,CREATED_BY = @CREATED_BY
+--,CREATED_DATE = @CREATED_DATE
+,UPDATED_BY = @UPDATED_BY
+,UPDATED_DATE = @UPDATED_DATE
+WHERE DOC_BGH_INV_ID = @DOC_BGH_INV_ID;";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_INV_ID=entity.DOC_BGH_INV_ID,
+                BRAND_CODE = entity.BRAND_CODE,
+                PACK_CODE = entity.PACK_CODE,
+                SIZE_CODE = entity.SIZE_CODE,
+                PRD_CODE = entity.PRD_CODE,
+                COST_ELEMENT_CODE = entity.COST_ELEMENT_CODE,
+                COST_CENTER = entity.COST_CENTER,
+                ACTIVITY_CODE = entity.ACTIVITY_CODE,
+                TYPE = entity.TYPE,
+                YEAR = entity.YEAR,
+                MONTH = entity.MONTH,
+                TOTAL = entity.TOTAL,
+                M1 = entity.M1,
+                M2 = entity.M2,
+                M3 = entity.M3,
+                M4 = entity.M4,
+                M5 = entity.M5,
+                M6 = entity.M6,
+                M7 = entity.M7,
+                M8 = entity.M8,
+                M9 = entity.M9,
+                M10 = entity.M10,
+                M11 = entity.M11,
+                M12 = entity.M12,
+
+
+                UPDATED_BY = entity.UPDATED_BY,
+                UPDATED_DATE = entity.UPDATED_DATE?.ToDateTime2()
+            };
+
+
+
+
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public void DeleteBudgetPlanSale(long DOC_BGH_SALES_ID)
+        {
+            string sqlCommand = @"DELETE   TB_T_BUDGET_SALES_D WHERE DOC_BGH_SALES_ID = @DOC_BGH_SALES_ID;";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_SALES_ID = DOC_BGH_SALES_ID
+            };
+
+
+
+
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public void DeleteBudgetInvsSale(long DOC_BGH_INV_ID)
+        {
+            string sqlCommand = @"DELETE   TB_T_BUDGET_INVESTMENT_D WHERE DOC_BGH_INV_ID = @DOC_BGH_INV_ID;";
+
+
+
+            var parms = new
+            {
+                DOC_BGH_INV_ID = DOC_BGH_INV_ID
+            };
+
+
+
+
+
+            int effected = Connection.ExecuteScalar<int>(
+                sql: sqlCommand,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+         
     }
 }
