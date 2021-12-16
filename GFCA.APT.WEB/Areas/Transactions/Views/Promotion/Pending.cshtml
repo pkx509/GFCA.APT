@@ -6,6 +6,8 @@
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
 
+@using GFCA.APT.WEB.Helpers
+
 @section styles
 {
     <style>
@@ -74,6 +76,7 @@
                 <div class="col-lg-12 p-1">
 
                     <div class="card card-success card-outline">
+                       
                         <div class="card-header">
 
 
@@ -95,8 +98,7 @@
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
-                                  .RowDeselected("OnRowDeselected_1")
-                                  .RowSelected("OnRowSelected_1")
+
                                   .EditSettings(edit =>
                                   {
                                       edit
@@ -106,7 +108,7 @@
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog);
                                   })
-                                 
+
                                   .Columns(col =>
                                   {
 
@@ -127,6 +129,7 @@
                                   .Render())
 
                         </div>
+
                     </div><!-- /.card -->
                 </div>
             </div><!-- /.row -->
@@ -145,20 +148,8 @@
             AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
             Delete    : "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
         }
-        var argruments = {
-            data: null,
-        }
-
-        var OnRowSelected_1 = function (args) {
-            console.log(args);
-            argruments.data = args.data;
-        }
-        var OnRowDeselected_1 = function (args) {
-            if (argruments.data == args.data) {
-                argruments.data = null;
-            }
-        }
-
+       
+        var btnHtml = "@BtnControltHelper.btnHtml("APP","P")"
 
     </script>
 
@@ -169,19 +160,25 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            
+            $("#btn-command").html(btnHtml);
+             
+        });
+
+
+       
         function Approve(DOC_PROM_PI_ID) {
-           
+
             let url = urlServices.CurrentUrl + `/${DOC_PROM_PI_ID}`;
             window.location.href = url;
-           
+
         }
+
+  
+
     </script>
 
-    @Scripts.Render("~/Scripts/transactions/promotionHeaderPopup.js")
+  
 }
-
-@section scripts
-{
-    @Scripts.Render("~/Scripts/transactions/promotion.js")
-}
-
+ 

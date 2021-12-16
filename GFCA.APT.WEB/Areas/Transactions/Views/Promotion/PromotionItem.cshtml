@@ -1,5 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @model GFCA.APT.Domain.Dto.PromotionPlanningDto
+@using GFCA.APT.WEB.Helpers
 @{
     ViewBag.Title = "PromotionItem";
 }
@@ -68,12 +69,15 @@
             EditInvestment : "@Url.Action("EditPromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
             DeleteSale       : "@Url.Action("DeletePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
             DeleteInvestment: "@Url.Action("DeletePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            Submit: "@Url.Action("SubmitPromotionPlanning", "Promotion", new { Area = "Transactions" })",
+            Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
         }
         var argruments = {
             DOC_PROM_PH_ID : "@Model.OverviewData.DOC_PROM_PH_ID",
             dataSale: null,
             dataInvest: null,
         }
+        var btnHtml = "@BtnControltHelper.btnHtml("APP", Model.WorkflowData.FLOW_CURRENT?.ToString())"
 
         function onGridSaleRowSelected(args) {
             argruments.dataSale = args.data;
@@ -93,7 +97,87 @@
             }
         }
 
+       function Approve () {
+
+
+           alert(argruments.DOC_PROM_PH_ID);
+
+           alert(urlServices.Submit);
+
+            $.ajax({
+                type: 'POST',
+                url: urlServices.Submit,
+                dataType: 'json',
+                data: {
+                    SAPcustcode: $('#delete_SAPcustcode').val()
+                },
+
+
+                success: function (data) {
+
+                    if (data.success) {
+
+                        
+
+
+                        e.preventDefault();
+
+
+                    }
+                    else {
+
+                       // showMessageError(data.messages);
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+
+
+
+
+
+        }
+
+
+        $(document).ready(function () {
+
+            $("#btn-command").html(btnHtml);
+
+            $("#btn-submit").click(function () {
+                if (confirm("Are you sure you want to submit ?") == true) {
+                    text = "You pressed OK!";
+                } else {
+                    text = "You canceled!";
+                }
+               // Approve();
+               // alert(urlServices.AddInvestment);
+            });
+
+            $("#btn-approve").click(function () {
+                if (confirm("Are you sure you want to approve ?") == true) {
+                    text = "You pressed OK!";
+                } else {
+                    text = "You canceled!";
+                }
+                // Approve();
+                // alert(urlServices.AddInvestment);
+            });
+
+        });
+
+
+
+
+
+
     </script>
+
+
 }
 
 @section scripts
