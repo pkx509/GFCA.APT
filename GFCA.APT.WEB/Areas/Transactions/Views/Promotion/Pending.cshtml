@@ -1,5 +1,5 @@
 ﻿
-@{ ViewBag.Title ="My Pending"; }
+@{ ViewBag.Title = "My Pending"; }
 @using GFCA.APT.Domain.HTTP.Controls
 @using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
@@ -35,6 +35,20 @@
                 min-height: 496px;
             }
         }
+
+
+        .pointer-cursor {
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+            .pointer-cursor:hover {
+            }
+
+        .e-checkbox-wrapper {
+            transform: scale(1.5);
+        }
     </style>
 }
 
@@ -53,10 +67,20 @@
 {
     <!-- Content Header (Page header) -->
     <div class="content-header">
+
+
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-lg-12 p-1">
+
                     <div class="card card-success card-outline">
+                        <div class="card-header">
+
+
+                            <h6> Pending Approver</h6>
+
+                        </div>
+
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
                                   .Grid("grdPromotion")
@@ -64,19 +88,15 @@
                                   .DataSource(ds =>
                                   {
                                       ds
-                                      .Url(@Url.Action("UrlPromotionHeaderList", "Promotion", new { Area = "Transactions" }))
+                                      .Url(@Url.Action("UrlPromotionHeaderPendingList", "Promotion", new { Area = "Transactions" }))
                                       .Adaptor("UrlAdaptor");
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
-                                  .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
-                                      new { id = "toolbar_exportexcel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" }
-                                  })
+                                  .RowDeselected("OnRowDeselected_1")
+                                  .RowSelected("OnRowSelected_1")
                                   .EditSettings(edit =>
                                   {
                                       edit
@@ -86,11 +106,16 @@
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog);
                                   })
-                                  .RowDeselected("promotionHeaderPopup.OnRowDeselected")
-                                  .RowSelected("promotionHeaderPopup.OnRowSelected")
+                                 
                                   .Columns(col =>
                                   {
-                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
+                                      col.Type("checkbox").Field("IsCheck").Width("80").HeaderTextAlign(TextAlign.Center).AllowFiltering(false).TextAlign(TextAlign.Center).Add();
+                                      col.Field("DOC_CODE").Template("#template").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
+
+
+
                                       col.Field("DOC_VER").HeaderText("Version").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
                                       col.Field("DOC_REV").HeaderText("Revision").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
                                       col.Field("CUST_NAME").HeaderText("Customer").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
@@ -124,14 +149,31 @@
             data: null,
         }
 
-        var OnRowSelected = function (args) {
+        var OnRowSelected_1 = function (args) {
             console.log(args);
             argruments.data = args.data;
         }
-        var OnRowDeselected = function (args) {
+        var OnRowDeselected_1 = function (args) {
             if (argruments.data == args.data) {
                 argruments.data = null;
             }
+        }
+
+
+    </script>
+
+    <script id="template" type="text/x-template">
+
+        <a onClick=Approve('${DOC_PROM_PH_ID}') class="pointer-cursor">${DOC_CODE}</a>
+
+    </script>
+
+    <script>
+        function Approve(DOC_PROM_PI_ID) {
+           
+            let url = urlServices.CurrentUrl + `/${DOC_PROM_PI_ID}`;
+            window.location.href = url;
+           
         }
     </script>
 
