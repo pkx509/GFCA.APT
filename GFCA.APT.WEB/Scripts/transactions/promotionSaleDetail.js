@@ -1,3 +1,10 @@
+var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 4000
+});
+
 let sendPost = function (url, data) {
 
     let value = {
@@ -13,29 +20,34 @@ let sendPost = function (url, data) {
 
             let res = JSON.parse(response.data);
 
-            $.toast({
-                type: res.MessageType.ToMessageType(),
-                title: "information",
-                subtitle: (new Date()).toDateString(),
-                content: res.Message,
-                delay: 7000
-            });
-
             if (res.Success === true) {
+
+                Toast.fire({
+                    icon: res.MessageType.ToMessageType(),
+                    title: res.Message
+                })
 
                 setTimeout(function () {
                     window.location = urlServices.PreviousUrl;
-                }, 7000);
+                }, 5000);
 
+            } else {
+
+                $(document).Toasts('create', {
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'topRight',
+                    body: res.Message
+                })
             }
         },
         error: function (response) {
-            $.toast({
-                type: "error",
-                title: "error",
-                subtitle: (new Date()).toDateString(),
-                content: JSON.stringify(response),
-                delay: 7000
+            
+            $(document).Toasts('create', {
+                class: 'bg-error',
+                title: 'error',
+                position: 'topRight',
+                body: JSON.stringify(response)
             });
         }
     });
