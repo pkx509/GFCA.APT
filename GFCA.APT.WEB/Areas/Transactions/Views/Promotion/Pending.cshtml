@@ -76,7 +76,7 @@
                 <div class="col-lg-12 p-1">
 
                     <div class="card card-success card-outline">
-                       
+
                         <div class="card-header">
 
 
@@ -113,6 +113,8 @@
                                   {
 
                                       col.Type("checkbox").Field("IsCheck").Width("80").HeaderTextAlign(TextAlign.Center).AllowFiltering(false).TextAlign(TextAlign.Center).Add();
+                                      col.Field("DOC_PROM_PH_ID").HeaderText("No.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
                                       col.Field("DOC_CODE").Template("#template").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
 
 
@@ -146,10 +148,12 @@
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
             AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
-            Delete    : "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
+            Delete: "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
+            ApproveSelect: "@Url.Action("ApprovePromotionSelect", "Promotion", new { Area = "Transactions" })",
+             Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
         }
-       
-        var btnHtml = "@BtnControltHelper.btnHtml("APP","P")"
+
+        var btnHtml = "@BtnControltHelper.btnHtml("APP","APPROVAL")"
 
     </script>
 
@@ -159,26 +163,145 @@
 
     </script>
 
-    <script>
-        $(document).ready(function () {
-            
-            $("#btn-command").html(btnHtml);
-             
-        });
+    <script id="templateAddValue" type="text/x-template">
 
-
-       
-        function Approve(DOC_PROM_PI_ID) {
-
-            let url = urlServices.CurrentUrl + `/${DOC_PROM_PI_ID}`;
-            window.location.href = url;
-
-        }
-
-  
+        value=${DOC_CODE}
 
     </script>
 
-  
-}
+    <script>
+        $(document).ready(function () {
+
+            $("#btn-command").html(btnHtml);
+
+
+            $("#btn-approve").click(function () {
+
+                getSelected();
+            });
+
+        });
+
+
+
+        function Approve(Ids) {
+
+            var postData = { values: Ids };
+
+     
+
+            $.ajax({
+                type: 'POST',
+                url: urlServices.ApproveSelect,
+                dataType: 'json',
+                data: postData,
+                success: function (res) {
+
+                    var obgData_Json = JSON.parse(res.data);
+           
+                    if (obgData_Json.Success) {
+
+
+
+                        window.location = urlServices.Approvelist;
+
+
+
+                    }
+                    else {
+
+                        $.toast({
+                            type: "error",
+                            title: "error",
+                            subtitle: (new Date()).toDateString(),
+                            content: JSON.stringify(data),
+                            delay: 7000
+                        });
  
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+
+
+
+
+
+        }
+
+ 
+
+
+
+        function getSelected() {
+
+            const Ids = [];
+
+            var  i;
+            i = 0;
+
+
+
+            $('#grdPromotion_content_table  tbody tr').each(function () {
+
+
+
+                var IsCheck = $(this).find('td').find('input[type=checkbox]:checked').val();
+                if (IsCheck=="on") {
+
+                    var Id = $(this).find("td").eq(1).html();
+                    Ids[i] = Id
+
+                    i++;
+
+             
+                }
+
+ 
+
+            });
+
+            if (Ids.length > 0) {
+
+
+                BootstrapDialog.show({
+                    message: 'Are you sure you want to Approve?',
+                    type: BootstrapDialog.TYPE_DEFAULT,
+                    title: 'Submit',
+                    buttons: [
+                        {
+                            label: 'Ok',
+                           
+                            data: {
+                                js: 'btn-confirm',
+                            },
+                            action: function (dialogItself) {
+                                Approve(Ids);
+                                dialogItself.close();
+                            }
+                        }, {
+                            label: 'Cancel',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
+
+                });
+
+               
+            }
+
+
+        }
+
+
+    </script>
+
+
+}
+

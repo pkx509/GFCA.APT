@@ -73,7 +73,7 @@
             Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
             Approvelist: "@Url.Action("Pending", "Promotion", new { Area = "Transactions" })",
 
-          
+
         }
         var argruments = {
             DOC_PROM_PH_ID : "@Model.OverviewData.DOC_PROM_PH_ID",
@@ -122,8 +122,8 @@
                     if (obgData_Json.Success) {
 
 
-
-                        window.location = urlServices.CurrentUrl + `/${res.Data.DOC_PROM_PH_ID}`;
+                       
+                        window.location = urlServices.CurrentUrl + `/${@Model.OverviewData.DOC_PROM_PH_ID}`;
 
 
 
@@ -170,7 +170,7 @@
                     DOC_PROM_PH_ID: @Model.OverviewData.DOC_PROM_PH_ID
                 },
                 success: function (res) {
-                    var obgData = JSON.stringify(res.data);
+
                     var obgData_Json = JSON.parse(res.data);
                    // alert(obgData_Json.Success);
                     if (obgData_Json.Success) {

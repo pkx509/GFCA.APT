@@ -154,7 +154,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         public JsonResult UrlPromotionHeaderPendingList(DataManagerRequest dm)
         {
             _biz.LogService.Info("UrlPromotionHeaderList");
-            IEnumerable dataSource = _biz.PromotionService.GetPromotionPlanAll();
+            IEnumerable dataSource = _biz.PromotionService.GetPromotionPlanAllByStatus("APPROVAL");
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
@@ -461,6 +461,29 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             try
             {
                 bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+
+        [HttpPost]
+        public JsonResult ApprovePromotionSelect(List<int> values)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionSelect(values);
             }
             catch (Exception ex)
             {

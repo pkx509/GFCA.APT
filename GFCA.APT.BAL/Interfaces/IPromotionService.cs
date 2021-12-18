@@ -1,4 +1,5 @@
 ﻿using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using System.Collections.Generic;
 
@@ -8,6 +9,8 @@ namespace GFCA.APT.BAL.Interfaces
     {
 
         IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAll();
+        IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAllByStatus(string DOC_STATUS);
+
         PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID);
         BusinessResponse CreateOverview(PromotionPlanngOverviewDto entity);
         BusinessResponse EditOverview(PromotionPlanngOverviewDto entity);
@@ -29,7 +32,8 @@ namespace GFCA.APT.BAL.Interfaces
 
         BusinessResponse SubmitPromotionPlanng(int DOC_PROM_PH_ID);
         BusinessResponse ApprovePromotionPlanng(int DOC_PROM_PH_ID);
+        BusinessResponse ApprovePromotionSelect(List<int> Ids);
 
-    
+
     }
 }

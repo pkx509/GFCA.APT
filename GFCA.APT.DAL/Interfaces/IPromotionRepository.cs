@@ -6,6 +6,7 @@ namespace GFCA.APT.DAL.Interfaces
     public interface IPromotionRepository
     {
         IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAll();
+        IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAllByStatus(string DOCUMENT_STATUS);
         PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID);
         void InsertOverview(PromotionPlanngOverviewDto entity);
         void UpdateOverview(PromotionPlanngOverviewDto entity);
@@ -24,6 +25,8 @@ namespace GFCA.APT.DAL.Interfaces
         void DeleteInvestment(int DOC_PROM_PI_ID);
         void SubmitPromotionPlanng(int DOC_PROM_PH_ID);
         void ApprovePromotionPlanng(int DOC_PROM_PH_ID);
-
+        void ApprovePromotionSelect(List<int> Ids);
+        void ApprovePromotionPlanngSaleDetail(int DOC_PROM_PH_ID);
+        void ApprovePromotionPlanngInvsDetail(int DOC_PROM_PH_ID);
     }
 }
