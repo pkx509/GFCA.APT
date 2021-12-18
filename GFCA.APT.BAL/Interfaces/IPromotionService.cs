@@ -26,5 +26,10 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse EditInvestment(PromotionPlanningInvestmentDto entity);
         BusinessResponse RemoveInvestment(PromotionPlanningInvestmentDto entity);
 
+
+        BusinessResponse SubmitPromotionPlanng(int DOC_PROM_PH_ID);
+        BusinessResponse ApprovePromotionPlanng(int DOC_PROM_PH_ID);
+
+    
     }
 }

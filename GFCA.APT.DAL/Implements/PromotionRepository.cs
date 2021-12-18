@@ -2,6 +2,7 @@
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -150,6 +151,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 DOC_VER          = entity.DOC_VER,
                 DOC_REV          = entity.DOC_REV,
                 DOC_STATUS       = entity.DOC_STATUS.ToValue(),
+               
                 PROMO_NAME       = entity.PROMO_NAME,
                 PROMO_START      = entity.PROMO_START,
                 PROMO_END        = entity.PROMO_END,
@@ -909,6 +911,38 @@ WHERE DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 transaction: Transaction
             );
 
+        }
+
+        public void ApprovePromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_H  SET DOC_STATUS=@DOC_STATUS WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='APPROVAL'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                DOC_STATUS= DOCUMENT_STATUS.COMPLETED.ToValue()
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public void SubmitPromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_H  SET DOC_STATUS=@DOC_STATUS WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                DOC_STATUS = DOCUMENT_STATUS.APPROVAL.ToValue()
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
         }
     }
 

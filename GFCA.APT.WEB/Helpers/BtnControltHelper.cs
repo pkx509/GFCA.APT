@@ -17,13 +17,25 @@ namespace GFCA.APT.WEB.Helpers
             //Create = 'D'
             //Submit == > 'P'
             //Approve == > 'W'
-            //Susess = 'S'
+            //Success = 'S'
             //Error => 'E'
+
+            /*
+              [EnumMember(Value = "NONE")] NONE = 0,
+        [EnumMember(Value = "DRAFT")] DRAFT = 1,
+        [EnumMember(Value = "APPROVAL")] APPROVAL = 2,
+        [EnumMember(Value = "REVIEW")] REVIEW = 3,
+        [EnumMember(Value = "COMPLETED")] COMPLETED = 4,
+        [EnumMember(Value = "REVISED")] REVISED = 5,
+        [EnumMember(Value = "CANCELLED")] CANCELLED = -1,
+
+             
+             */
 
             string htmltxt = "";
 
 
-            if (status == "D")
+            if (status == "DRAFT")
             {
                 htmltxt = "<li class='nav-item mr-sm-1'><a href='#' id='btn-submit' class='btn btn-sm btn-default'>Submit</a></li>";
             }
@@ -32,13 +44,9 @@ namespace GFCA.APT.WEB.Helpers
                 htmltxt = "<li class='nav-item mr-sm-1'><a href='#' id='btn-submit' class='btn btn-sm btn-default'>Submit</a></li>";
             }
 
-            else if (status == "D")
+            else if (status == "APPROVAL")
             {
-                htmltxt = "<li class='nav-item mr-sm-1'><a href='#' id='btn-submit' class='btn btn-sm btn-success'>Submit</a></li>";
-            }
-            else if (status == "P")
-            {
-                htmltxt = "<li class='nav-item mr-sm-1'><a href='#' id='btn-approve' class='btn btn-sm btn-primary'>Approve</a></li>";
+                htmltxt = "<li class='nav-item mr-sm-1'><a href='#' id='btn-approve' class='btn btn-sm btn-success'>Approve</a></li>";
             }
             else
             {

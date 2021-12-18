@@ -22,7 +22,8 @@ namespace GFCA.APT.DAL.Interfaces
         void InsertInvestment(PromotionPlanningInvestmentDto entity);
         void UpdateInvestment(PromotionPlanningInvestmentDto entity);
         void DeleteInvestment(int DOC_PROM_PI_ID);
-
+        void SubmitPromotionPlanng(int DOC_PROM_PH_ID);
+        void ApprovePromotionPlanng(int DOC_PROM_PH_ID);
 
     }
 }

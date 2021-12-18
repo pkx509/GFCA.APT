@@ -427,5 +427,51 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
+
+        [HttpPost]
+        public JsonResult ApprovePromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("ApprovePromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+               
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("ApprovePromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult SubmitPromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+           
+            try
+            {
+                bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
     }
 }
