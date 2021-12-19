@@ -26,9 +26,9 @@
                     fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
                     if (objGrid) {
-                        objGrid.refresh();
+                        window.location = urlServices.CurrentUrl + `/${res.Data.DOC_FCH_ID}`;
                     } else {
-                        window.location = urlServices.CurrentUrl;
+                        objGrid.refresh();
                     }
                 }
             },
