@@ -43,11 +43,14 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             try
             {
+                //dto.WorkflowCommands
                 dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-
+                //dto.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, dto.DocumentData.DOC_STATUS_ID);
+                ViewBag.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, 0);
+                
                 dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
@@ -387,6 +390,28 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             catch (Exception ex)
             {
                 _biz.LogService.Error("DeletePromotionPlanningInvestment : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult PostCommand(Domain.Dto.Workflow.CommandDto data)
+        {
+            _biz.LogService.Info("PostCommand");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                //bizObj = _biz.PromotionService.Post(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("PostCommand : ", ex);
             }
             finally
             {

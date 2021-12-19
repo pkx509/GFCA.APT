@@ -265,7 +265,6 @@
     <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Areas\Transactions\Data\" />
     <Folder Include="log\" />
-    <Folder Include="ModelBinders\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Layout\" />
     <Folder Include="Views\Views\" />
@@ -323,6 +322,8 @@
     <Compile Include="CustomAttributes\IResultFilter.cs" />
     <Compile Include="CustomAttributes\LogActionFilter.cs" />
     <Compile Include="CustomAttributes\NonUrlActionAttribute.cs" />
+    <Compile Include="CustomModelBinders\CommandTypeModelBinder.cs" />
+    <Compile Include="CustomModelBinders\RowTypeModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

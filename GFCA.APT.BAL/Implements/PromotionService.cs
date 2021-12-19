@@ -81,7 +81,7 @@ namespace GFCA.APT.BAL.Implements
                 //model.CUST_NAME = 
                 dto.CREATED_BY = doc.REQUESTER;
                 _uow.PromotionRepository.InsertOverview(dto);
-                
+
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;

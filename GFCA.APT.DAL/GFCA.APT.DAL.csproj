@@ -269,6 +269,7 @@
     <Compile Include="Implements\ProductRepository.cs" />
     <Compile Include="Implements\PromotionGroupRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
+    <Compile Include="Implements\WorkflowRepository.cs" />
     <Compile Include="Interfaces\ICustomerPartyRepository.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Interfaces\IPromotionGroupRepository.cs" />
     <Compile Include="Interfaces\ITradeActivityRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IWorkflowRepository.cs" />
     <Compile Include="PersistedGrant.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>

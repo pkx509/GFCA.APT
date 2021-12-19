@@ -1,6 +1,7 @@
 ﻿using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Dto.Workflow;
 using GFCA.APT.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -106,6 +107,27 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        
+        #region [ Workflow ]
+        public IEnumerable<Domain.Dto.Workflow.CommandDto> GetDocumentCommands(string documentType, int documentStatusId = 0)
+        {
+            IEnumerable<Domain.Dto.Workflow.CommandDto> result = new List<Domain.Dto.Workflow.CommandDto>();
+            try
+            {
+                result = _uow.WorkflowRepository.GetCommands(documentType, documentStatusId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public CommandDto PostDocument(CommandDto command)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion [ Workflow ]
+
+
     }
 }

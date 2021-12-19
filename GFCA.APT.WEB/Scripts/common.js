@@ -16,4 +16,31 @@
     }
 
     return messageTypeName;
+};
+
+var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 4000
+});
+
+
+function AjaxPost(url, data, cbSuccess) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: cbSuccess,
+        error: function (response) {
+            $(document).Toasts('create', {
+                class: 'bg-error',
+                title: 'error',
+                position: 'topRight',
+                body: JSON.stringify(response)
+            });
+        }
+    });
 }

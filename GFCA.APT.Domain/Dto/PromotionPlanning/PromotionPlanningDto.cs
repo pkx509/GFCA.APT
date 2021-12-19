@@ -8,6 +8,7 @@ namespace GFCA.APT.Domain.Dto
     {
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PAGE_MODE DataMode { get; set; }
+        public IEnumerable<Workflow.CommandDto> WorkflowCommands { get; set; }
         public DocumentWorkFlowDto WorkflowData { get; set; }
         public DocumentStateDto DocumentData { get; set; }
         public DocumentRequesterDto RequesterData { get; set; }
@@ -24,6 +25,7 @@ namespace GFCA.APT.Domain.Dto
         public PromotionPlanningDto(int primaryKey = 0)
         {
             DataMode = primaryKey == 0 ? PAGE_MODE.CREATING : PAGE_MODE.EDITING;
+            WorkflowCommands = new List<Workflow.CommandDto>();
             WorkflowData = new DocumentWorkFlowDto();
             DocumentData = new DocumentStateDto();
             RequesterData = new DocumentRequesterDto();

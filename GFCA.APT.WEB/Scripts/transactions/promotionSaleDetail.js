@@ -1,10 +1,3 @@
-var Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 4000
-});
-
 let sendPost = function (url, data) {
 
     let value = {
@@ -38,7 +31,7 @@ let sendPost = function (url, data) {
                     title: res.Title,
                     position: 'topRight',
                     body: res.Message
-                })
+                });
             }
         },
         error: function (response) {
