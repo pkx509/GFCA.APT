@@ -1,5 +1,6 @@
 ﻿@using Syncfusion.EJ2
 @model GFCA.APT.Domain.Dto.PromotionPlanningDto
+@using GFCA.APT.WEB.Helpers
 @{
     ViewBag.Title = "PromotionItem";
 }
@@ -68,12 +69,18 @@
             EditInvestment : "@Url.Action("EditPromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
             DeleteSale       : "@Url.Action("DeletePromotionPlanngSale", "Promotion", new { Area = "Transactions" })",
             DeleteInvestment: "@Url.Action("DeletePromotionPlanningInvestment", "Promotion", new { Area = "Transactions" })",
+            Submit: "@Url.Action("SubmitPromotionPlanning", "Promotion", new { Area = "Transactions" })",
+            Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
+            Approvelist: "@Url.Action("Pending", "Promotion", new { Area = "Transactions" })",
+
+
         }
         var argruments = {
             DOC_PROM_PH_ID : "@Model.OverviewData.DOC_PROM_PH_ID",
             dataSale: null,
             dataInvest: null,
         }
+        var btnHtml = "@BtnControltHelper.btnHtml("APP", Model.OverviewData.DOC_STATUS.ToString())"
 
         function onGridSaleRowSelected(args) {
             argruments.dataSale = args.data;
@@ -93,7 +100,194 @@
             }
         }
 
+       function Submit () {
+
+
+         //  alert(argruments.DOC_PROM_PH_ID);
+
+         //  alert(urlServices.Submit);
+
+            $.ajax({
+                type: 'POST',
+                url: urlServices.Submit,
+                dataType: 'json',
+                data:
+                {
+                    DOC_PROM_PH_ID: @Model.OverviewData.DOC_PROM_PH_ID
+                },
+                success: function (res) {
+                    var obgData = JSON.stringify(res.data);
+                    var obgData_Json = JSON.parse(res.data);
+                   // alert(obgData_Json.Success);
+                    if (obgData_Json.Success) {
+
+
+                       
+                        window.location = urlServices.CurrentUrl + `/${@Model.OverviewData.DOC_PROM_PH_ID}`;
+
+
+
+                    }
+                    else {
+
+                        $.toast({
+                            type: "error",
+                            title: "error",
+                            subtitle: (new Date()).toDateString(),
+                            content: JSON.stringify(data),
+                            delay: 7000
+                        });
+
+                       // showMessageError(data.messages);
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+
+
+
+
+
+        }
+           function Approve () {
+
+
+         //  alert(argruments.DOC_PROM_PH_ID);
+
+         //  alert(urlServices.Submit);
+
+            $.ajax({
+                type: 'POST',
+                url: urlServices.Approve,
+                dataType: 'json',
+                data:
+                {
+                    DOC_PROM_PH_ID: @Model.OverviewData.DOC_PROM_PH_ID
+                },
+                success: function (res) {
+
+                    var obgData_Json = JSON.parse(res.data);
+                   // alert(obgData_Json.Success);
+                    if (obgData_Json.Success) {
+
+
+
+                        window.location = urlServices.Approvelist;
+
+
+
+                    }
+                    else {
+
+                        $.toast({
+                            type: "error",
+                            title: "error",
+                            subtitle: (new Date()).toDateString(),
+                            content: JSON.stringify(data),
+                            delay: 7000
+                        });
+
+                       // showMessageError(data.messages);
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+
+
+
+
+
+        }
+
+        $(document).ready(function () {
+
+            $("#btn-command").html(btnHtml);
+
+            $("#btn-submit").click(function () {
+
+
+
+                BootstrapDialog.show({
+                    message: 'Are you sure you want to submit?',
+                    type: BootstrapDialog.TYPE_DEFAULT,
+                    title: 'Submit',
+                    buttons: [
+                        {
+                        label: 'Ok',
+                        // no title as it is optional
+                       // cssClass: 'btn-primary',
+                        data: {
+                            js: 'btn-confirm',
+                        },
+                            action: function (dialogItself) {
+                                Submit();
+                            dialogItself.close();
+                        }
+                    }, {
+                        label: 'Cancel',
+                        action: function (dialogItself) {
+                            dialogItself.close();
+                        }
+                    }]
+
+                });
+
+
+
+               // Approve();
+               // alert(urlServices.AddInvestment);
+            });
+
+            $("#btn-approve").click(function () {
+
+
+                BootstrapDialog.show({
+                    message: 'Are you sure you want to Approve?',
+                    type: BootstrapDialog.TYPE_DEFAULT,
+                    title: 'Submit',
+                    buttons: [
+                        {
+                            label: 'Ok',
+                            // no title as it is optional
+                            // cssClass: 'btn-primary',
+                            data: {
+                                js: 'btn-confirm',
+                            },
+                            action: function (dialogItself) {
+                                Approve();
+                                dialogItself.close();
+                            }
+                        }, {
+                            label: 'Cancel',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
+
+                });
+                // alert(urlServices.AddInvestment);
+            });
+
+        });
+
+
+
+
+
+
     </script>
+
+
 }
 
 @section scripts

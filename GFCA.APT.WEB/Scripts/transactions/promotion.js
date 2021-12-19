@@ -1,5 +1,8 @@
 
 $(document).ready(function () {
+
+ 
+
     let sendPost = function (url, data) {
         let value = {
             ...data
@@ -67,5 +70,7 @@ $(document).ready(function () {
         };
         promotionHeaderPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
+ 
+
 
 });

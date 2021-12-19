@@ -123,7 +123,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 COMP_CODE          = entity.COMP_CODE,
                 DOC_STATUS         = entity.DOC_STATUS,
                 //COMMENT          = entity.COMMENT,
-                FLAG_ROW           = entity.FLAG_ROW.ToValue(),
+                FLAG_ROW           = entity.FLAG_ROW,
                 REQUESTER_ORG_CODE = entity.ORG_CODE,
                 CREATED_BY         = entity.CREATED_BY
             };

@@ -61,6 +61,7 @@ namespace GFCA.APT.BAL.Implements
         {
             try
             {
+
                 return new DocumentStateDto();
             }
             catch (Exception ex)

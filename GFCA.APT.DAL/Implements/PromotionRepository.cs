@@ -2,6 +2,7 @@
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -150,6 +151,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
                 DOC_VER          = entity.DOC_VER,
                 DOC_REV          = entity.DOC_REV,
                 DOC_STATUS       = entity.DOC_STATUS.ToValue(),
+               
                 PROMO_NAME       = entity.PROMO_NAME,
                 PROMO_START      = entity.PROMO_START,
                 PROMO_END        = entity.PROMO_END,
@@ -909,6 +911,127 @@ WHERE DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 transaction: Transaction
             );
 
+        }
+
+        public void ApprovePromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_H  SET DOC_STATUS=@DOC_STATUS WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='APPROVAL'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                DOC_STATUS= DOCUMENT_STATUS.COMPLETED.ToValue()
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public void SubmitPromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_H  SET DOC_STATUS=@DOC_STATUS WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                DOC_STATUS = DOCUMENT_STATUS.APPROVAL.ToValue()
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+        public IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAllByStatus(string DOC_STATUS="")
+        {
+
+            string sqlQuery =
+@"SELECT
+  A.DOC_PROM_PH_ID
+, A.DOC_CODE
+, A.DOC_VER
+, A.DOC_REV
+, A.DOC_STATUS
+, A.PROMO_NAME
+, A.PROMO_START
+, A.PROMO_END
+, A.BUYING_START
+, A.BUYING_END
+, A.CLIENT_CODE
+, (SELECT TOP 1 CLIENT_NAME FROM TB_M_CLIENT WHERE CLIENT_CODE = A.CLIENT_CODE) 'CLIENT_NAME'
+, A.CHANNEL_CODE
+, (SELECT TOP 1 CHANNEL_NAME FROM TB_M_CHANNEL WHERE CHANNEL_CODE = A.CHANNEL_CODE) 'CHANNEL_NAME'
+, A.CUST_CODE
+, (SELECT TOP 1 CUST_NAME FROM TB_M_CUSTOMER WHERE CUST_CODE = A.CUST_CODE) 'CUST_NAME'
+, A.CUST_SEGMENT
+, A.TOTAL_EST_SALE
+, A.TOTAL_EST_INVEST
+, A.SALE_VS_INVEST
+, A.COMMENT
+--, A.FLAG_ROW
+, A.CREATED_BY
+, A.CREATED_DATE
+, A.UPDATED_BY
+, A.UPDATED_DATE
+FROM TB_T_PROMOTION_H A 
+WHERE DOC_STATUS=@DOC_STATUS";
+
+            var parms = new
+            {
+              
+                DOC_STATUS = DOC_STATUS
+            };
+
+            var query = Connection.Query<PromotionPlanngOverviewDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+        }
+
+        public void ApprovePromotionSelect(List<int> Ids)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public void ApprovePromotionPlanngSaleDetail(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_SALE  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                FLAG_ROW = "W"
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
+        }
+
+       
+
+        public void ApprovePromotionPlanngInvsDetail(int DOC_PROM_PH_ID)
+        {
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_INVEST  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+
+            var parms = new
+            {
+                DOC_PROM_PH_ID = DOC_PROM_PH_ID,
+                FLAG_ROW = "W"
+            };
+            var effected = Connection.ExecuteScalar<int>(
+                sql: sqlComamnd,
+                param: parms,
+                transaction: Transaction
+            );
         }
     }
 

@@ -154,6 +154,38 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
         */
         [HttpPost]
+        public JsonResult UrlPromotionHeaderPendingList(DataManagerRequest dm)
+        {
+            _biz.LogService.Info("UrlPromotionHeaderList");
+            IEnumerable dataSource = _biz.PromotionService.GetPromotionPlanAllByStatus("APPROVAL");
+            DataOperations operation = new DataOperations();
+            List<string> str = new List<string>();
+            if (dm.Search != null && dm.Search.Count > 0) // Search
+            {
+                dataSource = operation.PerformSearching(dataSource, dm.Search);
+            }
+            if (dm.Sorted != null && dm.Sorted.Count > 0) // Sorting
+            {
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0) // Filtering
+            {
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+            }
+            int count = dataSource.Cast<PromotionPlanngOverviewDto>().Count();
+            if (dm.Skip != 0) // Paging
+            {
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);
+            }
+            if (dm.Take != 0)
+            {
+                dataSource = operation.PerformTake(dataSource, dm.Take);
+            }
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+
+
+        [HttpPost]
         public JsonResult UrlPromotionHeaderList(DataManagerRequest dm)
         {
             _biz.LogService.Info("UrlPromotionHeaderList");
@@ -390,6 +422,75 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             catch (Exception ex)
             {
                 _biz.LogService.Error("DeletePromotionPlanningInvestment : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+
+        [HttpPost]
+        public JsonResult ApprovePromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("ApprovePromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+               
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("ApprovePromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult SubmitPromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+           
+            try
+            {
+                bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+
+        [HttpPost]
+        public JsonResult ApprovePromotionSelect(List<int> values)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionSelect(values);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
             }
             finally
             {

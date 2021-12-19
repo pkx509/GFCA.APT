@@ -1,10 +1,12 @@
 ﻿
-@{ ViewBag.Title ="My Pending"; }
+@{ ViewBag.Title = "My Pending"; }
 @using GFCA.APT.Domain.HTTP.Controls
 @using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
+
+@using GFCA.APT.WEB.Helpers
 
 @section styles
 {
@@ -35,6 +37,20 @@
                 min-height: 496px;
             }
         }
+
+
+        .pointer-cursor {
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+            .pointer-cursor:hover {
+            }
+
+        .e-checkbox-wrapper {
+            transform: scale(1.5);
+        }
     </style>
 }
 
@@ -53,10 +69,21 @@
 {
     <!-- Content Header (Page header) -->
     <div class="content-header">
+
+
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-lg-12 p-1">
+
                     <div class="card card-success card-outline">
+
+                        <div class="card-header">
+
+
+                            <h6> Pending Approver</h6>
+
+                        </div>
+
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
                                   .Grid("grdPromotion")
@@ -64,19 +91,14 @@
                                   .DataSource(ds =>
                                   {
                                       ds
-                                      .Url(@Url.Action("UrlPromotionHeaderList", "Promotion", new { Area = "Transactions" }))
+                                      .Url(@Url.Action("UrlPromotionHeaderPendingList", "Promotion", new { Area = "Transactions" }))
                                       .Adaptor("UrlAdaptor");
                                   })
                                   .ShowColumnMenu(false).AllowSorting()
                                   .AllowPaging(true).PageSettings(page => page.PageCount(5))
                                   .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
                                   .AllowExcelExport()
-                                  .Toolbar(new List<object>() {
-                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
-                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
-                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
-                                      new { id = "toolbar_exportexcel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" }
-                                  })
+
                                   .EditSettings(edit =>
                                   {
                                       edit
@@ -86,11 +108,18 @@
                                       .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
                                       .Mode(EditMode.Dialog);
                                   })
-                                  .RowDeselected("promotionHeaderPopup.OnRowDeselected")
-                                  .RowSelected("promotionHeaderPopup.OnRowSelected")
+
                                   .Columns(col =>
                                   {
-                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
+                                      col.Type("checkbox").Field("IsCheck").Width("80").HeaderTextAlign(TextAlign.Center).AllowFiltering(false).TextAlign(TextAlign.Center).Add();
+                                      col.Field("DOC_PROM_PH_ID").HeaderText("No.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
+                                      col.Field("DOC_CODE").Template("#template").HeaderText("Doc no.").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
+
+
+
+
                                       col.Field("DOC_VER").HeaderText("Version").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
                                       col.Field("DOC_REV").HeaderText("Revision").Width("100").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
                                       col.Field("CUST_NAME").HeaderText("Customer").Width("150").HeaderTextAlign(TextAlign.Left).TextAlign(TextAlign.Left).Add();
@@ -102,6 +131,7 @@
                                   .Render())
 
                         </div>
+
                     </div><!-- /.card -->
                 </div>
             </div><!-- /.row -->
@@ -118,28 +148,160 @@
         var urlServices = {
             CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
             AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
-            Delete    : "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
-        }
-        var argruments = {
-            data: null,
+            Delete: "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
+            ApproveSelect: "@Url.Action("ApprovePromotionSelect", "Promotion", new { Area = "Transactions" })",
+             Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
         }
 
-        var OnRowSelected = function (args) {
-            console.log(args);
-            argruments.data = args.data;
-        }
-        var OnRowDeselected = function (args) {
-            if (argruments.data == args.data) {
-                argruments.data = null;
-            }
-        }
+        var btnHtml = "@BtnControltHelper.btnHtml("APP","APPROVAL")"
+
     </script>
 
-    @Scripts.Render("~/Scripts/transactions/promotionHeaderPopup.js")
-}
+    <script id="template" type="text/x-template">
 
-@section scripts
-{
-    @Scripts.Render("~/Scripts/transactions/promotion.js")
+        <a onClick=Approve('${DOC_PROM_PH_ID}') class="pointer-cursor">${DOC_CODE}</a>
+
+    </script>
+
+    <script id="templateAddValue" type="text/x-template">
+
+        value=${DOC_CODE}
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btn-command").html(btnHtml);
+
+
+            $("#btn-approve").click(function () {
+
+                getSelected();
+            });
+
+        });
+
+
+
+        function Approve(Ids) {
+
+            var postData = { values: Ids };
+
+     
+
+            $.ajax({
+                type: 'POST',
+                url: urlServices.ApproveSelect,
+                dataType: 'json',
+                data: postData,
+                success: function (res) {
+
+                    var obgData_Json = JSON.parse(res.data);
+           
+                    if (obgData_Json.Success) {
+
+
+
+                        window.location = urlServices.Approvelist;
+
+
+
+                    }
+                    else {
+
+                        $.toast({
+                            type: "error",
+                            title: "error",
+                            subtitle: (new Date()).toDateString(),
+                            content: JSON.stringify(data),
+                            delay: 7000
+                        });
+ 
+                    }
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+
+
+
+
+
+        }
+
+ 
+
+
+
+        function getSelected() {
+
+            const Ids = [];
+
+            var  i;
+            i = 0;
+
+
+
+            $('#grdPromotion_content_table  tbody tr').each(function () {
+
+
+
+                var IsCheck = $(this).find('td').find('input[type=checkbox]:checked').val();
+                if (IsCheck=="on") {
+
+                    var Id = $(this).find("td").eq(1).html();
+                    Ids[i] = Id
+
+                    i++;
+
+             
+                }
+
+ 
+
+            });
+
+            if (Ids.length > 0) {
+
+
+                BootstrapDialog.show({
+                    message: 'Are you sure you want to Approve?',
+                    type: BootstrapDialog.TYPE_DEFAULT,
+                    title: 'Submit',
+                    buttons: [
+                        {
+                            label: 'Ok',
+                           
+                            data: {
+                                js: 'btn-confirm',
+                            },
+                            action: function (dialogItself) {
+                                Approve(Ids);
+                                dialogItself.close();
+                            }
+                        }, {
+                            label: 'Cancel',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
+
+                });
+
+               
+            }
+
+
+        }
+
+
+    </script>
+
+
 }
 
