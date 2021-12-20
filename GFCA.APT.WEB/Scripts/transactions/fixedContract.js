@@ -14,14 +14,6 @@
 
                 let res = JSON.parse(response.data);
 
-                $.toast({
-                    type: "success",
-                    title: "information",
-                    subtitle: (new Date()).toDateString(),
-                    content: res.Message,
-                    delay: 7000
-                });
-
                 if (res.Success === true) {
                     fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
