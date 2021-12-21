@@ -317,7 +317,7 @@
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
                                                 Year
                                             </label>
-                                            <div class="col col-lg-8">
+                                            <div class="col col-lg-3">
 
                                                 @(Html.EJS().TextBox("YEAR").Value(Model.DetailInvesmentItem.YEAR.ToString())
                                                         .Enabled(true)
@@ -329,45 +329,21 @@
                                     <div class="col col-sm-12 col-lg-6">
                                         <div class="form-group row">
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                Month
-                                            </label>
-                                            <div class="col col-lg-8">
-
-                                                @(Html.EJS().TextBox("MONTH").Value(Model.DetailInvesmentItem.MONTH.ToString())
-                                                        .Enabled(true)
-                                                        .Render())
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col col-sm-12 col-lg-6">
-                                        <div class="form-group row">
-                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
                                                 Total
                                             </label>
-                                            <div class="col col-lg-8">
+                                            <div class="col col-lg-3">
+
 
                                                 @(Html.EJS().TextBox("TOTAL").Value(Model.DetailInvesmentItem.TOTAL.ToString())
                                                         .Placeholder("0.00")
                                                         .Enabled(false)
                                                         .Render())
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col col-sm-12 col-lg-6">
-                                        <div class="form-group row">
-                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-
-                                            </label>
-                                            <div class="col col-lg-8">
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                
 
 
 

@@ -1,7 +1,7 @@
 ﻿@using Syncfusion.EJ2
 @model GFCA.APT.Domain.Dto.BudgetPlanDto
 @{ Dictionary<string, object> disabled = new Dictionary<string, object>();
-                disabled.Add("disabled", "true"); }
+    disabled.Add("disabled", "true"); }
 
 @*----------------- bugdet planing header -----------------*@
 <div class="row mb-2">
@@ -31,9 +31,10 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Value(Model.BudgetPlanHeader.COMP_CODE)
-                                                        .Enabled(true)
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Change("budgetPlanHeaderPopup.OnCompanyChangeValue")
-                                                        .CssClass("mandatory")
+
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
@@ -60,16 +61,18 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().ComboBox("pop-cmb-budgettype")
                                                         .Placeholder("-- Select --")
-                                                        .Autofill(true)
+                                                        .Autofill(false)
                                                         .DataSource(o =>
                                                         {
                                                             o.Url("/api/Selection/GetClient")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
+                                                        .Value(Model.BudgetPlanHeader.BG_TYPE_CODE)
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Change("budgetPlanHeaderPopup.OnClientChangeValue")
-                                                        .CssClass("mandatory")
+
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
@@ -83,47 +86,24 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().ComboBox("pop-cmb-customer")
                                                         .Placeholder("-- Select --")
-                                                        .Autofill(true)
+                                                        .Autofill(false)
                                                         .DataSource(o =>
                                                         {
                                                             o.Url("/api/Selection/GetCustomer")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .Enabled(true)
+                                                        .Value(Model.BudgetPlanHeader.CUST_CODE)
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Change("budgetPlanHeaderPopup.OnCustomerChangeValue")
-                                                        .CssClass("mandatory")
+
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Year
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Render()
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Amount
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-budget_amount").Render()
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
 
 
                         <div class="row">
@@ -132,18 +112,18 @@
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
                                         Actual
                                     </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-actual").Render()
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        @Html.EJS().TextBox("pop-txt-actual").Value(Model.BudgetPlanHeader.ACTUAL.ToString("###,###")).Enabled(false).CssClass("disabled").Render()
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Commitment
+                                        Amount
                                     </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-commitment").Render()
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        @Html.EJS().TextBox("pop-txt-budget_amount").Value(Model.BudgetPlanHeader.BUDGET_AMOUNT.ToString("###,###")).Enabled(false).CssClass("disabled").Render()
                                     </div>
                                 </div>
                             </div>
@@ -154,24 +134,32 @@
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Available
+                                        Year
                                     </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-available").Render()
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Value(Model.BudgetPlanHeader.FISCAL_YEAR.ToString()).Enabled(false).CssClass("disabled").Render()
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Active
+                                         
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+                         
                     </div>
 
                 </div>

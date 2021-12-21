@@ -147,8 +147,9 @@
     <script>
         var urlServices = {
 
-       
+
             CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
+            PendingUrl: "@Url.Action("Pendings", "Promotion", new { Area = "Transactions" })",
             AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
             Delete: "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
             ApproveSelect: "@Url.Action("ApprovePromotionSelect", "Promotion", new { Area = "Transactions" })",
@@ -208,7 +209,7 @@
 
 
 
-                        window.location = urlServices.Approvelist;
+                        window.location = '/T/Pendings';
 
 
 
