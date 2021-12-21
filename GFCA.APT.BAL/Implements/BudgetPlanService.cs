@@ -98,6 +98,34 @@ namespace GFCA.APT.BAL.Implements
                 var doch = model;
 
                 var doc = _uow.DocumentRepository.GenerateDocNo("BP", doch.CUST_CODE, System.DateTime.Now.Year, System.DateTime.Now.Month);
+
+              
+
+                var COMPANY = _uow.CompanyRepository.GetByCode(doch.COMP_CODE);
+                if (COMPANY == null)
+                {
+                    throw new Exception("Company");
+
+                }
+
+
+                var CUSTTOMER = _uow.CustomerRepository.GetByCode(doch.CUST_CODE);
+                if (CUSTTOMER == null)
+                {
+                    throw new Exception("Customer");
+
+                }
+
+
+                if (doch.FISCAL_YEAR < 2020 || doch.FISCAL_YEAR > 9999)
+                {
+                    throw new Exception("Year");
+
+                }
+
+
+                //generate document no
+
                 //generate document no
 
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
@@ -145,6 +173,7 @@ namespace GFCA.APT.BAL.Implements
             }
             catch (Exception ex)
             {
+                _uow.Dispose();
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;

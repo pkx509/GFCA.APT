@@ -62,7 +62,7 @@
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        BudGetType
+                                        BudgetType
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().ComboBox("pop-cmb-budgettype")
@@ -70,12 +70,11 @@
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetClient")
+                                                            o.Url("/api/Selection/GetBudgetType")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Enabled(true)
-                                                        .Change("budgetPlanHeaderPopup.OnClientChangeValue")
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -113,34 +112,29 @@
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
                                         Year
                                     </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Render()
+                                    <div class="col-sm-5 col-md-5 col-lg-4">
+                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Value(System.DateTime.Now.ToString("yyyy")).Render()
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="row">
-                         
-                            <div class="col-sm-12 col-lg-12">
-                                <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Commitment
+                                         
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().textare("pop-txt-commitment").Render()
+
+                                      
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+
+
+                        
 
 
                         

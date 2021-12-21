@@ -104,13 +104,9 @@ ViewBag.Title = "Fixed contract";
                                       col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("BG_TYPE_CODE").HeaderText("Code Type").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("COMP_CODE").HeaderText("Comp Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_CODE").HeaderText("Brand Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_NAME").HeaderText("Brand Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("Year").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-                                      col.Field("AMOUNT").HeaderText("Amount").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-
+                                      col.Field("COMP_NAME").HeaderText("Comp Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("FISCAL_YEAR").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BUDGET_AMOUNT").HeaderText("Amount").Format("##,###.##").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
                                       col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                   })
