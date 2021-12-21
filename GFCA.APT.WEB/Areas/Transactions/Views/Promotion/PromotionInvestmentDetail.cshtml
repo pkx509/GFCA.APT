@@ -192,25 +192,18 @@
                                                     Input type
                                                 </label>
                                                 <div class="col col-lg-8">
-                                                    @(Html.EJS().RadioButton("INPUT_VALUE")
-                                                           .Label("Value")
+                                                    @(Html.EJS().RadioButton("INPUT_BAHT_COMPENSATE")
+                                                           .Label("Baht (compensate)")
                                                            .Name("INVEST_TYPE")
-                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.VALUE.ToString())
-                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("VALUE"))
+                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.BAHT_COMPENSATE.ToString())
+                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("BAHT_COMPENSATE"))
                                                            //.Change("onMutualFieldChanged")
                                                            .Render())&nbsp;&nbsp;&nbsp;
-                                                    @(Html.EJS().RadioButton("INPUT_VALUE_PER_UNIT")
-                                                           .Label("Bath/Unit")
+                                                    @(Html.EJS().RadioButton("INPUT_PROMOTION_DISCOUNT")
+                                                           .Label("Promotion discount")
                                                            .Name("INVEST_TYPE")
-                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.VALUE_PER_UNIT.ToString())
-                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("VALUE_PER_UNIT"))
-                                                           //.Change("onMutualFieldChanged")
-                                                           .Render())&nbsp;&nbsp;&nbsp;
-                                                    @(Html.EJS().RadioButton("INPUT_PERCENT")
-                                                           .Label("Percent")
-                                                           .Name("INVEST_TYPE")
-                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.PERCENT.ToString())
-                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("PERCENT"))
+                                                           .Value(GFCA.APT.Domain.Enums.INVESTMENT_TYPE.PROMOTION_DISCOUNT.ToString())
+                                                           .Checked(Model.DetailInvesmentItem.INVEST_TYPE.ToValue().Equals("PROMOTION_DISCOUNT"))
                                                            //.Change("onMutualFieldChanged")
                                                            .Render())
                                                 </div>
@@ -224,7 +217,7 @@
                                         <div class="col col-sm-12 col-lg-6">
                                             <div class="form-group row">
                                                 <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                    Value
+                                                    Baht (compensate) or % Promotion discount
                                                 </label>
                                                 <div class="col col-lg-8">
                                                     @(Html.EJS().TextBox("INVEST_VALUE")

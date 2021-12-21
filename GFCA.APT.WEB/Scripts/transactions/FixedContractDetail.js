@@ -10,34 +10,16 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-
-
-
             let res = JSON.parse(response.data);
-
-
-
-
-            $.toast({
-                type: res.MessageType.ToMessageType(),
-                title: "information",
-                subtitle: (new Date()).toDateString(),
-                content: res.Message,
-                delay: 7000
-            });
-
-
-
             if (res.Success === true) {
-                //  console.log('url>>>', url);
+                Toast.fire({
+                    icon: res.MessageType.ToMessageType(),
+                    title: res.Message
+                });
 
                 setTimeout(function () {
-                    // alert(url);
                     window.location = document.referrer;
                 }, 500);
-
-
-
             }
         },
         error: function (response) {

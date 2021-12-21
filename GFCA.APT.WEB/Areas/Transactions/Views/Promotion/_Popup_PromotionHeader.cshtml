@@ -215,6 +215,7 @@
                                         @(Html.EJS().DatePicker("pop-cmb-promotionStart")
                                                                     .Placeholder("Choose a Range")
                                                                     .Value(DateTime.Today)
+                                                                    .Change("promotionHeaderPopup.OnPromotionDateValidate")
                                                                     .Format("dd/MM/yyyy")
                                                                     .Enabled(true)
                                                                     .Render())
@@ -229,7 +230,7 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().DatePicker("pop-cmb-promotionEnd")
                                                                     .Placeholder("Choose a Range")
-                                                                    .Value(new DateTime(2099, 12, 31))
+                                                                    .Value(DateTime.Today)
                                                                     .Format("dd/MM/yyyy")
                                                                     .Enabled(true)
                                                                     .Render())
@@ -261,7 +262,7 @@
                                     <div class="col-sm-9 col-md-10 col-lg-9">
                                         @(Html.EJS().DatePicker("pop-cmb-buyingEnd")
                                                                     .Placeholder("Choose a Range")
-                                                                    .Value(new DateTime(2099, 12, 31))
+                                                                    .Value(DateTime.Today)
                                                                     .Format("dd/MM/yyyy")
                                                                     .Enabled(true)
                                                                     .Render())
