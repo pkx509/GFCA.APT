@@ -110,8 +110,9 @@ namespace GFCA.APT.BAL.Implements
                 doc.ORG_CODE = doch.ORG_CODE;
                 doc.ORG_NAME = doch.ORG_NAME;
                 doc.REQUESTER = "System";
-            //    _uow.DocumentRepository.Insert(doc);
+            //_uow.DocumentRepository.Insert(doc);
                 doch.DOC_VER = doc.DOC_VER;
+                doch.DOC_REV = doc.DOC_REV;
                 doch.DOC_CODE = doc.DOC_CODE;
                 /*
                 doch.DOC_TYPE_CODE = "";

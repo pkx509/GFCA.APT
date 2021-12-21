@@ -375,6 +375,7 @@ namespace GFCA.APT.BAL.Implements
             }
             catch (Exception ex)
             {
+                _uow.Dispose();
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;

@@ -82,7 +82,7 @@ FROM TB_T_PROMOTION_H A";
 , A.CREATED_DATE
 , A.UPDATED_BY
 , A.UPDATED_DATE
-FROM TB_T_PROMOTION_H A
+FROM TB_T_PROMOTION_H A (NOLOCK)
 WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID;";
 
             var parms = new
@@ -1002,7 +1002,7 @@ WHERE DOC_STATUS=@DOC_STATUS";
 
         public void ApprovePromotionPlanngSaleDetail(int DOC_PROM_PH_ID)
         {
-            string sqlComamnd = @"UPDATE TB_T_PROMOTION_SALE  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_SALE  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
 
             var parms = new
             {
@@ -1020,7 +1020,7 @@ WHERE DOC_STATUS=@DOC_STATUS";
 
         public void ApprovePromotionPlanngInvsDetail(int DOC_PROM_PH_ID)
         {
-            string sqlComamnd = @"UPDATE TB_T_PROMOTION_INVEST  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID AND DOC_STATUS='DRAFT'";
+            string sqlComamnd = @"UPDATE TB_T_PROMOTION_INVEST  SET FLAG_ROW=@FLAG_ROW WHERE DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
 
             var parms = new
             {

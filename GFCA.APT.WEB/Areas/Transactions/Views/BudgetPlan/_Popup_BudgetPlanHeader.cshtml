@@ -120,12 +120,7 @@
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Amount
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-budget_amount").Render()
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -134,51 +129,21 @@
 
 
                         <div class="row">
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Actual
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-actual").Render()
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-lg-6">
+                         
+                            <div class="col-sm-12 col-lg-12">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
                                         Commitment
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-commitment").Render()
+                                        @Html.EJS().textare("pop-txt-commitment").Render()
                                     </div>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Available
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-available").Render()
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Active
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().CheckBox("pop-ckb-is-active").Render()
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                     </div>
                 </div>
