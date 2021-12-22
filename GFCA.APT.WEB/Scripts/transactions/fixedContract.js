@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     let sendPost = function (url, data) {
-        // console.log('url>>>', url);
         let value = {
             ...data
         };
@@ -18,19 +17,31 @@
                     fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
                     if (objGrid) {
-                        window.location = urlServices.CurrentUrl + `/${res.Data.DOC_FCH_ID}`;
+                        objGrid.refresh();
+                        if (res.Data) {
+                            window.location = urlServices.CurrentUrl + `/${res.Data.DOC_FCH_ID}`;
+                        }
                     } else {
                         objGrid.refresh();
                     }
+                } else {
+                    $(document).Toasts('create', {
+                        class: `bg-${res.MessageType.ToMessageType()}`,
+                        title: res.Title,
+                        position: 'bottomRight',
+                        body: res.Message,
+                        delay: 3000,
+                        autohide: true,
+                        animation: true
+                    });
                 }
             },
             error: function (response) {
-                $.toast({
-                    type: "error",
-                    title: "error",
-                    subtitle: (new Date()).toDateString(),
-                    content: JSON.stringify(response),
-                    delay: 7000
+                $(document).Toasts('create', {
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'bottomRight',
+                    body: res.Message
                 });
             }
         });
@@ -48,34 +59,19 @@
 
     });
     $("#toolbar_edit").click(function (e) {
-        // console.log('click edit>>');
         e.preventDefault();
-
-        console.log('toolbar_edit', argruments.data);
         if (argruments.data) {
             console.log(argruments);
             window.location.href = `/T/FixedContracts/${argruments.data.DOC_FCH_ID}`;
         }
-        
-        /*
-        let callBack = function (data) {
-            // console.log('data>>>', data);
-            // sendPost(urlServices.AddHeader, data);
-            window.location.replace(`/T/FixedContracts/${data.DocCode}`);
-        }; 
-        fixedContractDetail.open(POPUP_MODE.CREATE, argruments.data, callBack);
-        */
-        // var abc = '123';
-        // window.location.href = `/T/FixedContracts/${abc}`;
-
     });
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.DeleteHeader, data);
         };
 
-        // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+        fixedContractHeaderPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });

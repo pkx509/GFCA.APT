@@ -367,6 +367,7 @@ namespace GFCA.APT.BAL.Implements
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
                 response.Message = string.Empty;
+                response.Title = RESPONSE_TITLE.SUCCESS;
             }
             catch (Exception ex)
             {

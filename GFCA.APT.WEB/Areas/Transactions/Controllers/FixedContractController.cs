@@ -254,20 +254,43 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         public JsonResult DeleteFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("DeleteFixedContractDetail");
-            dynamic d = new BusinessResponse();
-
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
             try
             {
-                var biz = _biz.FixedContractService.RemoveDetail(data);
-                d = JsonConvert.SerializeObject(biz);
+                bizObj = _biz.FixedContractService.RemoveDetail(data);
             }
-            catch
+            catch (Exception ex)
             {
-
+                _biz.LogService.Error("DeleteFixedContractDetail : ", ex);
             }
-            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
+        [HttpPost]
+        public JsonResult DeleteFixedContractHeader(FixedContractHeaderDto data)
+        {
+            _biz.LogService.Debug("DeleteFixedContractHeader");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+            try
+            {
+                bizObj = _biz.FixedContractService.RemoveHeader(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("DeleteFixedContractHeader : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
 
         // GET: T/FixedContracts/{DocCode}]
         [HttpGet]
