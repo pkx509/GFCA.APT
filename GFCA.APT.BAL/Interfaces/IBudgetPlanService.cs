@@ -45,6 +45,8 @@ namespace GFCA.APT.BAL.Interfaces
         BusinessResponse RemoveBudgetPlanSale(long DOC_BGH_SALES_ID);
         BusinessResponse RemoveBudgetInvsSale(long DOC_BGH_INV_ID);
 
+        BusinessResponse ExampleCreateByBulk(IEnumerable<TableStagingDto> model);
+
     }
 
 }

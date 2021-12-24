@@ -12,10 +12,7 @@ namespace GFCA.APT.DAL.Implements
         : RepositoryBase
         , IBulkInsertBestPracticesRepository
     {
-        public BulkInsertBestPracticesRepository(IDbTransaction transaction) : base(transaction)
-        {
-
-        }
+        public BulkInsertBestPracticesRepository(IDbTransaction transaction) : base(transaction) { }
 
         /*
             --Type
@@ -26,8 +23,8 @@ namespace GFCA.APT.DAL.Implements
             , FISCAL_YEAR   [int] NOT NULL
             , FISCAL_MONTH  [int] NOT NULL
             , BUDGET_AMOUNT [T_MONEY] NULL
-            , UPLOAD_BY     [T_DATETIME] NOT NULL
-            , UPDATE_DATE   [T_DATETIME] NOT NULL
+            , UPLOAD_BY     [T_NAME] NOT NULL
+            , UPLOAD_DATE   [T_DATETIME] NOT NULL
             )
             --Staging table
             CREATE TABLE TB_S_TARGET_TABLE
@@ -37,8 +34,8 @@ namespace GFCA.APT.DAL.Implements
             , FISCAL_YEAR   [int] NOT NULL
             , FISCAL_MONTH  [int] NOT NULL
             , BUDGET_AMOUNT [T_MONEY] NULL
-            , UPLOAD_BY     [T_DATETIME] NOT NULL
-            , UPDATE_DATE   [T_DATETIME] NOT NULL
+            , UPLOAD_BY     [T_NAME] NOT NULL
+            , UPLOAD_DATE   [T_DATETIME] NOT NULL
             )
             -- On System table
             CREATE TABLE TB_M_TARGET_TABLE
@@ -47,9 +44,9 @@ namespace GFCA.APT.DAL.Implements
             , FISCAL_YEAR    [int] NOT NULL
             , FISCAL_MONTH   [int] NOT NULL
             , BUDGET_AMOUNT  [T_MONEY] NULL
-            , CREATED_BY     [T_DATETIME] NOT NULL
+            , CREATED_BY     [T_NAME] NOT NULL
             , CREATED_DATE   [T_DATETIME] NOT NULL
-            , UPDATED_BY     [T_DATETIME] NULL
+            , UPDATED_BY     [T_NAME] NULL
             , UPDATED_DATE   [T_DATETIME] NULL
             )
             */
@@ -63,9 +60,9 @@ namespace GFCA.APT.DAL.Implements
 , S.FISCAL_MONTH
 , S.BUDGET_AMOUNT
 , S.UPLOAD_BY
-, S.UPDATE_DATE
+, S.UPLOAD_DATE
 FROM TB_S_TARGET_TABLE S
-LEFT JOIN TB_M_TARGET_TABLE M ON 
+INNER JOIN TB_M_TARGET_TABLE M ON 
     M.PROD_CODE    = S.PROD_CODE 
 AND M.FISCAL_YEAR  = S.FISCAL_YEAR 
 AND M.FISCAL_MONTH = S.FISCAL_MONTH";
@@ -99,15 +96,14 @@ AND M.FISCAL_MONTH = S.FISCAL_MONTH";
         {
             string sqlCommand =
 @"TRUNCATE TABLE TB_S_TARGET_TABLE;
-DECLARE @data T_S_TARGET_TABLE;
 INSERT INTO TB_S_TARGET_TABLE 
 (
-, PROD_CODE
+  PROD_CODE
 , FISCAL_YEAR
 , FISCAL_MONTH
 , BUDGET_AMOUNT
 , UPLOAD_BY
-, UPDATE_DATE
+, UPLOAD_DATE
 )
 SELECT
   PROD_CODE
@@ -115,18 +111,38 @@ SELECT
 , FISCAL_MONTH
 , BUDGET_AMOUNT
 , UPLOAD_BY
-, SYSDATETIME() UPDATE_DATE
+, SYSDATETIME() UPLOAD_DATE
 FROM @data";
 
             var dt = bulkData.ToList().ToDataTable<TableStagingDto>();
-            var dataParam = new { data = dt.AsTableValuedParameter("T_S_TARGET_TABLE") };
-
+            var dataParam = new
+            { 
+                data = dt.AsTableValuedParameter("T_S_TARGET_TABLE")
+            };
+            /*
+            int effected = -1;
+            string conString = "Data Source=123.253.61.68;Initial Catalog=APT2Db3;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;User Id=DbaAdmin;Password=Sm@rt1t2021;";
+            using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(conString))
+            {
+                conn.Open();
+                using (var comm = new System.Data.SqlClient.SqlCommand(sqlCommand, conn))
+                {
+                    var param = comm.Parameters.AddWithValue("@data", dt);
+                    param.SqlDbType = SqlDbType.Structured;
+                    param.TypeName = "T_S_TARGET_TABLE";
+                    
+                    effected = comm.ExecuteNonQuery();
+                }
+            }
+            */
+            
             int effected = Connection.Execute(
                 sql: sqlCommand,
                 param: dataParam,
                 commandType: CommandType.Text,
                 transaction: Transaction
             );
+            
             return effected > 0;
         }
         public bool InsertTableReal()
@@ -135,10 +151,10 @@ FROM @data";
 @"UPDATE M
 SET
   M.BUDGET_AMOUNT = S.BUDGET_AMOUNT
-, M.UPDATED_BY    = S.UPDATED_BY
-, M.UPDATED_DATE  = S.UPDATED_DATE
+, M.UPDATED_BY    = S.UPLOAD_BY
+, M.UPDATED_DATE  = S.UPLOAD_DATE
 FROM TB_M_TARGET_TABLE M
-INNER JOIN TB_M_TARGET_TABLE S ON S.PROD_CODE = M.PROD_CODE
+INNER JOIN TB_S_TARGET_TABLE S ON S.PROD_CODE = M.PROD_CODE
 WHERE S.FISCAL_YEAR = M.FISCAL_YEAR 
 AND S.FISCAL_MONTH = M.FISCAL_MONTH;
 
@@ -157,7 +173,7 @@ SELECT
 , S.FISCAL_MONTH
 , S.BUDGET_AMOUNT
 , S.UPLOAD_BY
-, S.UPDATE_DATE
+, S.UPLOAD_DATE
 FROM TB_S_TARGET_TABLE S
 WHERE NOT EXISTS(
 	SELECT M.*

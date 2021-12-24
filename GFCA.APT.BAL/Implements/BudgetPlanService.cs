@@ -728,7 +728,7 @@ namespace GFCA.APT.BAL.Implements
 
         //start examples bulk
 
-        public BusinessResponse ExampleCreateByBulk(IList<TableStagingDto> model)
+        public BusinessResponse ExampleCreateByBulk(IEnumerable<TableStagingDto> model)
         {
             BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
@@ -737,7 +737,7 @@ namespace GFCA.APT.BAL.Implements
                 var msgs = _uow.BulkInsertBestPracticesRepository.ValidationTableStaging();
 
                 bool tbM = false;
-                if (tbS && msgs.Count() > 0)
+                if (tbS)
                     tbM = _uow.BulkInsertBestPracticesRepository.InsertTableReal();
                     
                 _uow.Commit();

@@ -440,8 +440,52 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
         //DeleteBudgetPlanSale
 
+        public JsonResult ExampleBulkCreate()
+        {
+            _biz.LogService.Info("ExampleBulkCreate");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
 
-       
+            try
+            {
+                IList<TableStagingDto> dto = new List<TableStagingDto>();
+
+                dto = GenerateDataFromExcelFile();
+
+                bizObj = _biz.BudgetPlanService.ExampleCreateByBulk(dto);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("ExampleBulkCreate : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        private IList<TableStagingDto> GenerateDataFromExcelFile()
+        {
+            IList<TableStagingDto> dto = new List<TableStagingDto>();
+            for (int i = 0; i < 10; i++)
+            {
+                dto.Add(new TableStagingDto() 
+                {
+                    ROW_INDEX = i+1,
+                    BUDGET_AMOUNT = 100 + i,
+                    FISCAL_MONTH = DateTime.Today.Month,
+                    FISCAL_YEAR = DateTime.Today.Year,
+                    PROD_CODE = $"PCODE-{i}",
+                    UPLOAD_BY = "System",
+                    UPLOAD_DATE = DateTime.Now,
+                });
+            }
+            
+            return dto;
+
+        }
+
         [HttpGet]
         public PartialViewResult ItemHeaderPartial()
         {

@@ -56,6 +56,13 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 );
 
             context.MapRoute(
+                name: "Transaction_BudgetPlan_Bulk",
+                url: "T/BudgetPlans/ExampleBulkCreate",
+                defaults: new { controller = "BudgetPlan", action = "ExampleBulkCreate" },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
                 name: "Transaction_BudgetPlans_Item",
                 url: "T/BudgetPlans/{DOC_BGH_ID}",
                 defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DOC_BGH_ID = UrlParameter.Optional },

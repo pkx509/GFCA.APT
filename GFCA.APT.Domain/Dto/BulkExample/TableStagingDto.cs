@@ -15,7 +15,7 @@ namespace GFCA.APT.Domain.Dto
         public double BUDGET_AMOUNT { get; set; }
 
         public string UPLOAD_BY { get; set; }
-        public DateTime? UPDATE_DATE { get; set; }
+        public DateTime? UPLOAD_DATE { get; set; }
 
     }
 }
