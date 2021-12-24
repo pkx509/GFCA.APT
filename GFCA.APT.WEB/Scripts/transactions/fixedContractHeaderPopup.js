@@ -97,7 +97,7 @@ let fixedContractHeaderPopup = new (function () {
 
     this.init = function () {
         this.clearValue();
-        this.bindDom(this.jsonData);
+        // this.bindDom(this.jsonData);
     }
 
     this.open = function (popupMode, dataSelection, fn) {
@@ -131,6 +131,7 @@ let fixedContractHeaderPopup = new (function () {
             $(this.button_del).hide();
             $(this.popup_id).modal("show");
         }
+        */
         if (popupMode === POPUP_MODE.DELETE) {
             this.jsonData = dataSelection;
             this.callBack = fn;
@@ -141,7 +142,7 @@ let fixedContractHeaderPopup = new (function () {
             }
             this.openFormDeletePermanent(this.jsonData);
         }
-        */
+        
     }
 
     this.close = function () {
@@ -151,6 +152,7 @@ let fixedContractHeaderPopup = new (function () {
 
 
     this.bindDom = function (data) {
+        /*
         $(this.field_emis_code_text).empty();
         var o = new Option(data.EMIS_NAME, data.EMIS_CODE, true);
         $(this.field_emis_code_text).append(o);
@@ -162,7 +164,7 @@ let fixedContractHeaderPopup = new (function () {
         $(this.field_channel_desc).val(data.CHANNEL_DESC);
         $(this.field_permanant_del).val(data.IS_DELETE_PERMANANT);
 
-
+        
         if (data.FLAG_ROW == 'D') {
             $(this.field_is_active).prop("checked", "");
             $(this.field_is_active).parent().parent().attr("aria-checked", "false");
@@ -173,6 +175,7 @@ let fixedContractHeaderPopup = new (function () {
             $(this.field_is_active).parent().children().addClass("e-check");
             $(this.field_is_active).removeClass("e-check");
         }
+        */
     }
 
     this.bindField = function () {
@@ -201,36 +204,12 @@ let fixedContractHeaderPopup = new (function () {
         let COMP_CODE = $(this.field_company_code).val();
         let COMP_NAME = $(this.field_company_name).val();
 
-
-
         this.jsonData = {
             COMPANY, DOC_TYPE_CODE, DOC_CODE, DOC_MONTH, DOC_YEAR, DOC_STATUS, DOC_FCH_ID, CLIENT_CODE, CLIENT_NAME, CUST_CODE,
             CUST_NAME, CHANNEL_CODE, CHANNEL_NAME, REQUESTER, POSITION_CODE, POSITION_NAME, COMMAND_TYPE,
             ORG_CODE, ORG_NAME, COMP_CODE, COMP_NAME
         };
     }
-    /*
-    this.fieldsDisable = function () {
-        //$(this.field_brand_id).prop("disabled", true);
-        //$(this.field_client_code).prop("disabled", true);
-        $(this.field_client_id).prop("disabled", true);
-        $(this.field_brand_code).prop("disabled", true);
-        $(this.field_brand_name).prop("disabled", true);
-        $(this.field_brand_desc).prop("disabled", true);
-        $(this.field_is_active).prop("disabled", true);
-    }
-    
-
-    this.fieldsEnable = function () {
-        //$(this.field_brand_id).prop("disabled", true);
-        //$(this.field_client_code).prop("disabled", true);
-        $(this.field_client_id).prop("disabled", false);
-        $(this.field_brand_code).prop("disabled", false);
-        $(this.field_brand_name).prop("disabled", false);
-        $(this.field_brand_desc).prop("disabled", false);
-        $(this.field_is_active).prop("disabled", false);
-    }
-    */
 
     this.onSave = function (e) {
         this.bindField();
@@ -256,6 +235,7 @@ let fixedContractHeaderPopup = new (function () {
         }
     }
 
+    /*
     this.onDelete = function (e) {
         let IS_ACTIVED = false;
         this.jsonData = {
@@ -263,7 +243,6 @@ let fixedContractHeaderPopup = new (function () {
             IS_ACTIVED
         };
         fixedContractHeaderPopup.callBack(this.jsonData);
-        //fixedContractHeaderPopup.close();
     }
 
     this.onDeletePerm = function (e) {
@@ -275,6 +254,7 @@ let fixedContractHeaderPopup = new (function () {
         fixedContractHeaderPopup.callBack(this.jsonData);
         //fixedContractHeaderPopup.close();
     }
+    
 
     this.onTestNestModal = function (e) {
         BootstrapDialog.show({
@@ -311,6 +291,7 @@ let fixedContractHeaderPopup = new (function () {
             ]
         });
     }
+    */
 
     this.OnRowSelecting = function (args) {
         argruments.data = args.data;
@@ -374,19 +355,13 @@ let fixedContractHeaderPopup = new (function () {
             closeByKeyboard: true,
             draggable: true,
             title: 'Confirmation',
-            message: `<label><input type="checkbox" class="e-control"></input> You're deleting a Channel  "${json.CHANNEL_CODE}", Are you? </label>`,
+            message: `<label>Do you want to delete document no. ${json.DOC_CODE} ? </label>`,
             buttons: [
                 {
                     label: 'Delete',
                     cssClass: 'btn btn-danger',
                     icon: 'fas fa-paper-plane',
                     action: function (self) {
-                        let chkAgree = self.getModalBody().find('input').prop("checked");
-                        let IS_DELETE_PERMANANT = chkAgree;
-                        json = {
-                            ...json,
-                            IS_DELETE_PERMANANT
-                        };
                         self.enableButtons(false);
                         self.setClosable(false);
                         self.getModalBody().html('Processing...');
@@ -405,6 +380,8 @@ let fixedContractHeaderPopup = new (function () {
             ]
         });
     }
+
+    /*
     let appendElement = function (el, form) {
         let dialogTemp = form.querySelector("#dialogTemp");
         dialogTemp.innerHTML = el;
@@ -424,6 +401,7 @@ let fixedContractHeaderPopup = new (function () {
         //var gridObj = document.getElementById('grdBrand')['ej2_instances'][0];
         //Object.assign(gridObj.filterModule.filterOperators, { startsWith: 'contains' });
     }
+    */
 
     this.OnExcelExportClick = function (args) {
         let gridObj = document.getElementById("grdFixedContract").ej2_instances[0];

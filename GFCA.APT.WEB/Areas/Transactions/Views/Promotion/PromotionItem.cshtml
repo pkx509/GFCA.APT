@@ -72,6 +72,7 @@
             Submit: "@Url.Action("SubmitPromotionPlanning", "Promotion", new { Area = "Transactions" })",
             Approve: "@Url.Action("ApprovePromotionPlanning", "Promotion", new { Area = "Transactions" })",
             Approvelist: "@Url.Action("Pending", "Promotion", new { Area = "Transactions" })",
+            index: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
 
 
         }
@@ -116,14 +117,13 @@
                     DOC_PROM_PH_ID: @Model.OverviewData.DOC_PROM_PH_ID
                 },
                 success: function (res) {
-                    var obgData = JSON.stringify(res.data);
+                  // var obgData = JSON.stringify(res.data);
                     var obgData_Json = JSON.parse(res.data);
                    // alert(obgData_Json.Success);
                     if (obgData_Json.Success) {
+ 
 
-
-                       
-                        window.location = urlServices.CurrentUrl + `/${@Model.OverviewData.DOC_PROM_PH_ID}`;
+                        window.location = urlServices.index;
 
 
 
@@ -134,7 +134,7 @@
                             type: "error",
                             title: "error",
                             subtitle: (new Date()).toDateString(),
-                            content: JSON.stringify(data),
+                            content: JSON.stringify(obgData_Json.data),
                             delay: 7000
                         });
 

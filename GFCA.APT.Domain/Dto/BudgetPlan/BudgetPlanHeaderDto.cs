@@ -30,7 +30,7 @@ namespace GFCA.APT.Domain.Dto
         public string COMP_CODE { get; set; }
         public string CUST_CODE { get; set; }
 
-        public string FISCAL_YEAR { get; set; }
+        public int FISCAL_YEAR { get; set; }
         public decimal BUDGET_AMOUNT { get; set; }
         public decimal ACTUAL { get; set; }
         public decimal COMMITMENT { get; set; }

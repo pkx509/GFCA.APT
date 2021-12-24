@@ -146,7 +146,10 @@
 {
     <script>
         var urlServices = {
+
+
             CurrentUrl: "@Url.Action("index", "Promotion", new { Area = "Transactions" })",
+            PendingUrl: "@Url.Action("Pendings", "Promotion", new { Area = "Transactions" })",
             AddHeader : "@Url.Action("CreatePromotionPlanngOverview", "Promotion", new { Area = "Transactions" })",
             Delete: "@Url.Action("Delete", "Promotion", new { Area = "Transactions" })",
             ApproveSelect: "@Url.Action("ApprovePromotionSelect", "Promotion", new { Area = "Transactions" })",
@@ -159,7 +162,7 @@
 
     <script id="template" type="text/x-template">
 
-        <a onClick=Approve('${DOC_PROM_PH_ID}') class="pointer-cursor">${DOC_CODE}</a>
+        <a onClick=PromotionItem('${DOC_PROM_PH_ID}') class="pointer-cursor">${DOC_CODE}</a>
 
     </script>
 
@@ -182,7 +185,10 @@
 
         });
 
+        function PromotionItem(DOC_PROM_PH_ID) {
 
+            window.location = urlServices.CurrentUrl + '/' + DOC_PROM_PH_ID;
+        }
 
         function Approve(Ids) {
 
@@ -203,7 +209,7 @@
 
 
 
-                        window.location = urlServices.Approvelist;
+                        window.location = '/T/Pendings';
 
 
 

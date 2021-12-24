@@ -258,18 +258,35 @@ let promotionHeaderPopup = new (function () {
     */
 
     this.onSave = function (e) {
-        
         this.bindField();
         //begin Validation
         let msg = '';
+
+        // validate promotion date
+        const promotionStartDate = $("#pop-cmb-promotionStart").val();
+        const promotionEndDate = $("#pop-cmb-promotionEnd").val();
+        let validatePromotionDateResult = isValidDatePeriod(promotionStartDate, promotionEndDate);
+        if (!validatePromotionDateResult) {
+            msg = 'Promotion start date must be before promotion end date';
+        };
+
+        // validate Buying date
+        const buyingStartDate = $("#pop-cmb-buyingStart").val();
+        const buyingEndDate = $("#pop-cmb-buyingEnd").val();
+        let validateBuyingDateResult = isValidDatePeriod(buyingStartDate, buyingEndDate);
+        if (!validateBuyingDateResult) {
+            msg = 'Buying start date must be before Buying end date';
+        };
         //end Validation
-        if (msg) {
-            $.toast({
-                type: "warning",
-                title: "Invalid information",
-                subtitle: (new Date()).toDateString(),
-                content: msg,
-                delay: 5000
+
+        if (msg !== '') {
+            $(document).Toasts('create', {
+                title: 'Error',
+                position: 'bottomRight',
+                body: msg,
+                delay: 3000,
+                autohide: true,
+                animation: true
             });
         } else {
             let IS_DELETE_PERMANANT = false;
@@ -360,6 +377,19 @@ let promotionHeaderPopup = new (function () {
         }
     }
 
+    function isValidDatePeriod(startDate, endDate) {
+        const startDateFormat = startDate.replace(/(\d+[/])(\d+[/])/, '$2$1');
+        const endDateFormat = endDate.replace(/(\d+[/])(\d+[/])/, '$2$1');
+
+        const startDateObject = new Date(startDateFormat);
+        const endDateObject = new Date(endDateFormat);
+
+        if (startDateObject <= endDateObject) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /*
     this.openFormDeletePermanent = function () {
         let json = fixedContractHeaderPopup.jsonData;
