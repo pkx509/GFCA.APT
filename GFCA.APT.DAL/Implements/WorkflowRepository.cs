@@ -61,10 +61,6 @@ else
 		order by a.Sort asc
 	end";
 
-            if (DOC_STATUS_ID == 0) 
-            {
-
-            }
             var parms = new
             {
                 IN_DOC_TYPE_CODE = DOC_TYPE_CODE,
@@ -78,6 +74,11 @@ else
                 );
 
             return query;
+        }
+
+        public void PostDocument(string DOC_TYPE_CODE, int DOC_STATUS_ID = 0)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

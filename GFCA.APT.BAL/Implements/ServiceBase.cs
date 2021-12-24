@@ -123,9 +123,19 @@ namespace GFCA.APT.BAL.Implements
             return result;
         }
 
-        public CommandDto PostDocument(CommandDto command)
+        public CommandDto PostDocument(string documentType, int documentHeaderId, CommandDto command)
         {
-            throw new NotImplementedException();
+            CommandDto result = new CommandDto();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
         }
         #endregion [ Workflow ]
 

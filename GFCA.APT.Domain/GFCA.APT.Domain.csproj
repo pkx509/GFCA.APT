@@ -111,6 +111,9 @@
     <Compile Include="Dto\BudgetPlan\BudgetPlanSaleDto.cs" />
     <Compile Include="Dto\BudgetPlan\BudgetPlanHeaderDto.cs" />
     <Compile Include="Dto\BudgetPlan\BudgetPlanDto.cs" />
+    <Compile Include="Dto\BulkExample\BulkMessageDto.cs" />
+    <Compile Include="Dto\BulkExample\TableMasterDto.cs" />
+    <Compile Include="Dto\BulkExample\TableStagingDto.cs" />
     <Compile Include="Dto\CustomerPartyDto.cs" />
     <Compile Include="Dto\BudgetTypeDto.cs" />
     <Compile Include="Dto\DocumentDto.cs" />

@@ -11,7 +11,7 @@ namespace GFCA.APT.BAL.Interfaces
         DocumentRequesterDto GetDocumentRequesterSection(string documentType, int documentHeaderId, int version = -1, int revision = -1);
         IEnumerable<DocumentHistoryDto> GetDocumentHistorySection(string documentType, int documentHeaderId);
         IEnumerable<Domain.Dto.Workflow.CommandDto> GetDocumentCommands(string documentType, int documentStatusId = 0);
-        Domain.Dto.Workflow.CommandDto PostDocument(Domain.Dto.Workflow.CommandDto command);
+        Domain.Dto.Workflow.CommandDto PostDocument(string documentType, int documentHeaderId, Domain.Dto.Workflow.CommandDto command);
         //Section Document History
     }
 }

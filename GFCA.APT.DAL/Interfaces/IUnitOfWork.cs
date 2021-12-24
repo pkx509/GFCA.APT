@@ -30,6 +30,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IPromotionRepository PromotionRepository { get; }
 		IBudgetPlanRepository BudgetPlanRepository { get; }
 		IWorkflowRepository WorkflowRepository { get; }
+		IBulkInsertBestPracticesRepository BulkInsertBestPracticesRepository { get; }
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
 		//bool ProxyCreationEnabled { get; set; }

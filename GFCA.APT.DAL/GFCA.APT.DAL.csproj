@@ -199,9 +199,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Z.Dapper.Plus, Version=4.0.11.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Z.Dapper.Plus.4.0.11\lib\net45\Z.Dapper.Plus.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APTDbContext.cs" />
@@ -244,6 +241,7 @@
     <Compile Include="DeviceCode.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implements\BulkInsertBestPracticesRepository.cs" />
     <Compile Include="Implements\CustomerPartyRepository.cs" />
     <Compile Include="Implements\DocumentRepository.cs" />
     <Compile Include="Implements\BudgetPlanRepository.cs" />
@@ -270,6 +268,7 @@
     <Compile Include="Implements\PromotionGroupRepository.cs" />
     <Compile Include="Implements\RepositoryBase.cs" />
     <Compile Include="Implements\WorkflowRepository.cs" />
+    <Compile Include="Interfaces\IBulkInsertBestPracticesRepository.cs" />
     <Compile Include="Interfaces\ICustomerPartyRepository.cs" />
     <Compile Include="Interfaces\IBudgetTypeRepository.cs" />
     <Compile Include="Implements\TradeActivityRepository.cs" />
@@ -461,6 +460,7 @@
     <Compile Include="TB_WP_STATE_DIRECTION.cs">
       <DependentUpon>APTDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DataTableExtensions.cs" />
     <Compile Include="Utilities\DbUtilities.cs" />
     <Compile Include="Utilities\FLAG_TYPE_Handler.cs" />
   </ItemGroup>

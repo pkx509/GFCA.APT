@@ -696,6 +696,40 @@ namespace GFCA.APT.BAL.Implements
 
         #endregion [ detail ]
 
+        //start examples bulk
+
+        public BusinessResponse ExampleCreateByBulk(IList<TableStagingDto> model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                bool tbS = _uow.BulkInsertBestPracticesRepository.InsertTableStaging(model);
+                var msgs = _uow.BulkInsertBestPracticesRepository.ValidationTableStaging();
+
+                bool tbM = false;
+                if (tbS && msgs.Count() > 0)
+                    tbM = _uow.BulkInsertBestPracticesRepository.InsertTableReal();
+                    
+                _uow.Commit();
+                response.Success = tbM;
+                response.MessageType = tbM? MESSAGE_TYPE.SUCCESS : MESSAGE_TYPE.ERROR;
+                response.Message = string.Empty;
+                if (msgs.Count() > 0)
+                    response.Message = string.Join(",", msgs.ToList());
+                
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("ExampleCreateByBulk", ex);
+            }
+            return response;
+        }
+
+        //end examples bulk
+
 
     }
 }

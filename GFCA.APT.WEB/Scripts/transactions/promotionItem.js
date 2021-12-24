@@ -11,8 +11,6 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                debugger;
-                
                 let res = JSON.parse(response.data);
 
                 if (res.Success === true) {
@@ -38,7 +36,6 @@
 
             },
             error: function (response) {
-                debugger;
                 $(document).Toasts('create', {
                     class: 'bg-error',
                     title: 'error',

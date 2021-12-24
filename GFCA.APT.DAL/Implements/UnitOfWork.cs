@@ -37,6 +37,7 @@ namespace GFCA.APT.DAL.Implements
         private IPromotionRepository _promotionRepository;
         private IBudgetPlanRepository _budgetplanRepository;
         private IWorkflowRepository _workflowRepository;
+        private IBulkInsertBestPracticesRepository _bulkInsertBestPracticesRepository;
 
         public static IUnitOfWork CreateInstant()
         {
@@ -223,9 +224,6 @@ namespace GFCA.APT.DAL.Implements
                 return _promotionRepository ?? (_promotionRepository = new PromotionRepository(_transaction));
             }
         }
-
-      
-
         public IBudgetPlanRepository BudgetPlanRepository
         {
             get
@@ -238,6 +236,13 @@ namespace GFCA.APT.DAL.Implements
             get 
             {
                 return _workflowRepository ?? (_workflowRepository = new WorkflowRepository(_transaction));
+            }
+        }
+        public IBulkInsertBestPracticesRepository BulkInsertBestPracticesRepository
+        {
+            get
+            {
+                return _bulkInsertBestPracticesRepository ?? (_bulkInsertBestPracticesRepository = new BulkInsertBestPracticesRepository(_transaction));
             }
         }
 
@@ -296,6 +301,7 @@ namespace GFCA.APT.DAL.Implements
 
             //workflow
             _workflowRepository = null;
+            _bulkInsertBestPracticesRepository = null;
 
         }
         private void Dispose(bool disposing)
