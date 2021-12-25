@@ -250,12 +250,14 @@ let promotionInvestmentDetail = new (function () {
         window.history.back();
     }
 
+    // add 
     this.onAmountKeyup = function (e) {
         let json = this.jsonData;
         let INVEST_AMOUNT = e.value;
+        let INVEST_VALUE = $("#INVEST_VALUE").val();
         let OTHER_AMOUNT = $("#OTHER_AMOUNT").val();
         
-        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT);
+        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT) + parseFloat(INVEST_VALUE);
         $("#TOTAL_AMOUNT").val(TOTAL_AMOUNT.toFixed(2));
 
         let INCREMENT_SALE_INVEST = parseFloat(INVEST_AMOUNT) / TOTAL_AMOUNT;
@@ -272,9 +274,10 @@ let promotionInvestmentDetail = new (function () {
     this.onAmountOtherKeyup = function (e) {
         let json = this.jsonData;
         let INVEST_AMOUNT = $("#INVEST_AMOUNT").val();
+        let INVEST_VALUE = $("#INVEST_VALUE").val();
         let OTHER_AMOUNT = e.value;
 
-        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT);
+        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT) + parseFloat(INVEST_VALUE);
         $("#TOTAL_AMOUNT").val(TOTAL_AMOUNT.toFixed(2));
 
         let INCREMENT_SALE_INVEST = parseFloat(INVEST_AMOUNT) / TOTAL_AMOUNT;
@@ -285,7 +288,25 @@ let promotionInvestmentDetail = new (function () {
             TOTAL_AMOUNT,
             INCREMENT_SALE_INVEST
         };
+    }
 
+    this.onInvestValueKeyup = function (e) {
+        let json = this.jsonData;
+        let INVEST_AMOUNT = $("#INVEST_AMOUNT").val();
+        let INVEST_VALUE = e.value;
+        let OTHER_AMOUNT = $("#OTHER_AMOUNT").val();
+
+        let TOTAL_AMOUNT = parseFloat(INVEST_AMOUNT) + parseFloat(OTHER_AMOUNT) + parseFloat(INVEST_VALUE);
+        $("#TOTAL_AMOUNT").val(TOTAL_AMOUNT.toFixed(2));
+
+        let INCREMENT_SALE_INVEST = parseFloat(INVEST_AMOUNT) / TOTAL_AMOUNT;
+        $("#INCREMENT_SALE_INVEST").val(INCREMENT_SALE_INVEST.toFixed(2));
+        this.jsonData = {
+            ...json,
+            INVEST_AMOUNT,
+            TOTAL_AMOUNT,
+            INCREMENT_SALE_INVEST
+        };
     }
 
     // onchage 
