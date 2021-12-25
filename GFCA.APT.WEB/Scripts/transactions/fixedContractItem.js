@@ -21,7 +21,7 @@
                         class: `bg-${res.MessageType.ToMessageType()}`,
                         title: res.Title,
                         position: 'bottomRight',
-                        body: res.Message,
+                        body: res.Message ? res.Message : 'Success',
                         delay: 3000,
                         autohide: true,
                         animation: true

@@ -3,7 +3,6 @@
         let value = {
             ...data
         };
-        debugger;
         $.ajax({
             type: 'POST',
             url: url,
@@ -14,33 +13,32 @@
                 let res = JSON.parse(response.data);
 
                 if (res.Success === true) {
+                    promotionHeaderPopup.close();
+                    let objGrid = document.getElementById("grdInvestment").ej2_instances[0];
 
-                    fixedContractHeaderPopup.close();
-                    let objGrid = document.getElementById("grdFixedContractDetailList").ej2_instances[0];
+                    $(document).Toasts('create', {
+                        // class: `bg-${res.MessageType.ToMessageType()}`,
+                        title: res.Title,
+                        position: 'bottomRight',
+                        body: res.Message ? res.Message : 'Success',
+                        delay: 3000,
+                        autohide: true,
+                        animation: true
+                    });
+
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
                         window.location = urlServices.CurrentUrl;
                     }
-
-                } else {
-
-                    $(document).Toasts('create', {
-                        class: `bg-${res.MessageType.ToMessageType()}`,
-                        title: res.Title,
-                        position: 'topRight',
-                        body: res.Message
-                    });
                 }
-
-
             },
             error: function (response) {
                 $(document).Toasts('create', {
-                    class: 'bg-error',
-                    title: 'error',
-                    position: 'topRight',
-                    body: JSON.stringify(response)
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'bottomRight',
+                    body: res.Message
                 });
             }
         });
@@ -64,17 +62,17 @@
         }
 
     });
-    /*
+    
     $("#toolbar_investment_del").click(function (e) {
         e.preventDefault();
         
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.DeleteInvestment, data);
         };
         
-        // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+        promotionHeaderPopup.open(POPUP_MODE.DELETE, argruments.dataInvest, callBack);
     });
-    */
+    
     $("#toolbar_sale_add").click(function (e) {
         e.preventDefault();
 
