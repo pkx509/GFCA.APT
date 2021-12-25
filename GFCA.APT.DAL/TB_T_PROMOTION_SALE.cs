@@ -40,8 +40,9 @@ namespace GFCA.APT.DAL
         public Nullable<decimal> NET_INTO_STORE { get; set; }
         public Nullable<decimal> AVG_SALE { get; set; }
         public Nullable<decimal> AVG_VOLUME { get; set; }
-        public Nullable<int> SALE_QTY { get; set; }
+        public Nullable<decimal> INCLUDE_PROMOTION {get; set;}
         public Nullable<decimal> SALE_VALUE_EXCL_VAT { get; set; }
+        public Nullable<int> SALE_QTY { get; set; }
         public string SALE_UOM { get; set; }
         public string DISC_TYPE { get; set; }
         public string FLAG_ROW { get; set; }

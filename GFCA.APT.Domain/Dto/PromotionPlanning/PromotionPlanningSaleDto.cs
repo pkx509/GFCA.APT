@@ -38,6 +38,7 @@ namespace GFCA.APT.Domain.Dto
 
         public decimal AVG_SALE { get; set; }
         public decimal AVG_VOLUME { get; set; }
+        public decimal INCLUDE_PROMOTION { get; set; }
 
         public int SALE_QTY { get; set; }
         public decimal SALE_VALUE_EXCL_VAT { get; set; }
