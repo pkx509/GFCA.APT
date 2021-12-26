@@ -135,6 +135,7 @@
     <Compile Include="Exceptions\DataDuplicateException.cs" />
     <Compile Include="Exceptions\DataNoSelectionException.cs" />
     <Compile Include="Implements\BudgetPlanService.cs" />
+    <Compile Include="Implements\SaleForecastService.cs" />
     <Compile Include="Implements\PromotionService.cs" />
     <Compile Include="Implements\SizeService.cs" />
     <Compile Include="Implements\UnitService.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\IBudgetPlanService.cs" />
     <Compile Include="Interfaces\IDocumentService.cs" />
+    <Compile Include="Interfaces\ISaleForecastService.cs" />
     <Compile Include="Interfaces\IPromotionService.cs" />
     <Compile Include="Interfaces\IServices.cs" />
     <Compile Include="Interfaces\ISizeService.cs" />

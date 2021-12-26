@@ -39,6 +39,8 @@ namespace GFCA.APT.DAL.Implements
         private IWorkflowRepository _workflowRepository;
         private IBulkInsertBestPracticesRepository _bulkInsertBestPracticesRepository;
 
+        private ISaleForecastRepository _saleForecastRepository;
+        
         public static IUnitOfWork CreateInstant()
         {
             var uow = new UnitOfWork("APTDbConnectionString");
@@ -231,20 +233,7 @@ namespace GFCA.APT.DAL.Implements
                 return _budgetplanRepository ?? (_budgetplanRepository = new BudgetPlanRepository(_transaction));
             }
         }
-        public IWorkflowRepository WorkflowRepository 
-        {
-            get 
-            {
-                return _workflowRepository ?? (_workflowRepository = new WorkflowRepository(_transaction));
-            }
-        }
-        public IBulkInsertBestPracticesRepository BulkInsertBestPracticesRepository
-        {
-            get
-            {
-                return _bulkInsertBestPracticesRepository ?? (_bulkInsertBestPracticesRepository = new BulkInsertBestPracticesRepository(_transaction));
-            }
-        }
+
 
 
         public void Commit()
@@ -298,11 +287,6 @@ namespace GFCA.APT.DAL.Implements
             _documentRepository = null;
             _fixedContractRepository = null;
             _promotionRepository = null;
-
-            //workflow
-            _workflowRepository = null;
-            _bulkInsertBestPracticesRepository = null;
-
         }
         private void Dispose(bool disposing)
         {

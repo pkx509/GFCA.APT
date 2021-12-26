@@ -74,6 +74,31 @@ namespace GFCA.APT.DAL.Implements
                     WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE 
                     AND TTBH.DOC_BGH_ID = @DOC_ID";
                     break;
+                case "SF": //sale forecast
+                    sqlQuery = @"
+                    SELECT 
+                    TTD.DOC_TYPE_CODE,
+                    TTD.DOC_CODE,
+                    TTD.DOC_VER,
+                    TTD.DOC_MONTH,
+                    TTD.DOC_YEAR,
+                    TTD.CUST_CODE,
+                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
+                    TTD.DOC_STATUS,
+                    TTD.FLOW_CURRENT,
+                    TTD.FLOW_NEXT,
+                    TTD.REQUESTER,
+                    TTD.ORG_CODE,
+                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
+                    TTD.COMP_CODE,
+                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
+                    FROM 
+                    TB_T_DOCUMENT TTD 
+                    INNER JOIN TB_T_SALES_FORECAST_H TTSFH 
+                    ON TTD.DOC_CODE = TTSFH.DOC_CODE
+                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE
+                    AND TTSFH.DOC_SFCH_ID = @DOC_ID";
+                    break;
                 default:
                     break;
             }

@@ -1,124 +1,126 @@
-﻿@using GFCA.APT.Domain.HTTP.Controls
-@using Syncfusion.EJ2.Popups
+﻿@using Syncfusion.EJ2.Popups
+@using System.Collections.Generic
 @using Syncfusion.EJ2.Grids
 @using Syncfusion.EJ2.Inputs
 @using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.SaleForecastHeaderDto
 
-@*----------------- Sale forecast detail -----------------*@
+@{
+    Dictionary<string, object> disabled = new Dictionary<string, object>();
+    disabled.Add("disabled", "true");
+}
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+<link rel="stylesheet" href="~/Content/jquery.fileupload.css">*@
+@*<link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>*@
+
 <div class="row mb-2">
     <div class="col col-lg-12 p-1">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <h5>Promotion planning</h5>
+                <h5>Sale forecast detail</h5>
             </div>
             <div class="card-body">
-
                 <div class="row">
+                    <div>
+                        @using (Html.BeginForm("ImportFiles", "SaleForecast", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @*<span>Browse file</span>
+                            <input id="excelfile" type="file" name="excelfile" accept=".xlsx">
+                            <input type="submit" value="ImportFiles" />
+                            @ViewBag.Message*@
 
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-sale" class="col col-lg-4 control-label text-right">
-                                Total Sale Target (THB)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-sale")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
+                        }
+                        @using (Html.BeginForm("UploadFile", "SaleForecast", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                        <div>
+                            <span>Sale Forecast's file : </span>
+                            @Html.TextBox("file", "", new { type = "file", accept = ".xlsx" })
+                            <input type="submit" value="Import" />
+                            @ViewBag.Message
                         </div>
+                        }
                     </div>
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-invest" class="col col-lg-4 control-label text-right">
-                                Total Invesment (THB)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-invest")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4">
-                        <div class="form-group row">
-                            <label for="txt-ratio" class="col col-lg-4 control-label text-right">
-                                Sale vs Invesments (%)
-                            </label>
-                            <div class="col col-lg-8">
-                                @(Html.EJS().TextBox("txt-ratio")
-                                                    .Placeholder("0.00")
-                                                    .Enabled(true)
-                                                    .CssClass("mandatory")
-                                                    .Render())
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-12 col-sm-12">
-                        <div class="card card-info card-outline card-tabs">
-                            <div class="card-header p-0 pt-1 border-bottom-0">
-                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Overview</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Summary</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-body">
-
-
-                                <div class="row">
-
-                                    <div class="tab-content" id="custom-tabs-three-tabContent">
-                                        <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-
-                                            A
-
-                                        </div>
-                                        <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-
-                                            B
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
+        @*@Html.TextBox("file", "", new { type = "file" }) <br />
+        <input type="button" value="ImportFiles" onclick="@Url.Action("ImportFiles", "SaleForecast")" />
+        <div id="fileuploader">Upload</div>
+        <span class="btn btn-warning fileinput-button">
+            <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+            <span>Browse file</span>
+            <input id="fileupload" type="file" accept=".xlsx">
+        </span>*@
+                    @Html.Partial("ItemDetailGridSaleForecastPartial", Model)
                 </div>
             </div>
-
-            <div class="card-footer">
-                <div>
-
-                    <div class="row">
-                        <div class="col col-sm-12 col-lg-3 offset-lg-9">
-
-                            <!-- Confirm State -->
-                            <button class="btn btn-primary">Save</button>
-                            <button class="btn btn-default">Cancel</button>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+    //    $('#fileupload').fileupload({
+    //        dataType: 'json',
+    //        url: '/T/SaleForecasts/ImportFiles',
+    //        //autoUpload: true,
+    //        done: function (e, data) {
+
+    //        },
+    //        submit: function (e, data) {
+
+    //            var name = data.files["0"].name;
+    //            var ext = name.split('.').pop().toLowerCase();
+    //            if ($.inArray(ext, ['xlsx']) == -1) {
+    //                alert('invalid extension!');
+    //                return false
+    //            }
+    //        },
+    //        success: function (response, status) {
+    //            // Success callback
+
+    //            BootstrapDialog.alert(response.message, function () {
+    //                location.reload();
+    //            });
+    //        },
+    //        error: function (error) {
+    //            // Error callback
+
+    //            alert(error.statusText);
+    //        }
+    //    });
+
+    //    $("#fileuploader").uploadFile({
+    //        dataType: 'json',
+    //        url: '/T/SaleForecasts/ImportFiles',
+    //        //autoUpload: true,
+    //        done: function (e, data) {
+
+    //        },
+    //        submit: function (e, data) {
+
+    //            var name = data.files["0"].name;
+    //            var ext = name.split('.').pop().toLowerCase();
+    //            if ($.inArray(ext, ['xlsx']) == -1) {
+    //                alert('invalid extension!');
+    //                return false
+    //            }
+    //        },
+    //        success: function (response, status) {
+    //            // Success callback
+
+    //            BootstrapDialog.alert(response.message, function () {
+    //                location.reload();
+    //            });
+    //        },
+    //        error: function (error) {
+    //            // Error callback
+
+    //            alert(error.statusText);
+    //        }
+    //    });
+    });
+</script>

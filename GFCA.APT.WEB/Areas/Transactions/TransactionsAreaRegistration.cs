@@ -121,15 +121,47 @@ namespace GFCA.APT.WEB.Areas.Transactions
             /* Sale forecaset Route */
             context.MapRoute(
                 name: "Transaction_Saleforecast_List",
-                url: "T/Promotions",
+                url: "T/Saleforecasts",
                 defaults: new { controller = "SaleForecast", action = "Index" },
                 namespaces: new[] { __nameSpace }
                 );
 
             context.MapRoute(
                 name: "Transaction_Saleforecast_Item",
-                url: "T/SaleForecasts/{DocCode}",
-                defaults: new { controller = "SaleForecast", action = "SaleForecastItem", DocCode = UrlParameter.Optional },
+                url: "T/SaleForecasts/{DOC_SFCH_ID}",
+                //defaults: new { controller = "SaleForecast", action = "SaleForecastItem", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "SaleForecast", action = "SaleForecastItem", DOC_SFCH_ID = UrlParameter.Optional},
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_Saleforecast_Detail",
+                url: "T/SaleForecasts/{DOC_SFCH_ID}/{DOC_SFCD_ID}",
+                //defaults: new { controller = "SaleForecast", action = "SaleForecastDetail", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "SaleForecast", action = "SaleForecastDetail", DOC_SFCH_ID = UrlParameter.Optional, DOC_SFCD_ID = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_Saleforecast_ExportFiles",
+                url: "T/SaleForecasts/EX/ExportFiles/{DOC_SFCH_ID}",
+                //defaults: new { controller = "SaleForecast", action = "ExportFiles", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "SaleForecast", action = "ExportFiles", DOC_SFCH_ID = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+
+            context.MapRoute(
+                name: "Transaction_Saleforecast_ImportFiles",
+                url: "T/SaleForecasts/IM/ImportFiles",
+                //defaults: new { controller = "SaleForecast", action = "ImportFiles", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "SaleForecast", action = "ImportFiles" },
+                namespaces: new[] { __nameSpace }
+                );
+            context.MapRoute(
+                name: "Transaction_Saleforecast_ImportFiles2",
+                url: "T/{controller}/{action}",
+                //defaults: new { controller = "SaleForecast", action = "ImportFiles", DocCode = UrlParameter.Optional },
+                defaults: new { controller = "SaleForecast", action = "ImportFiles" },
                 namespaces: new[] { __nameSpace }
                 );
 

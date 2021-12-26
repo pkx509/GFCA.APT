@@ -80,6 +80,8 @@ namespace GFCA.APT.BAL.Implements
         private IBudgetPlanService _budgetplanService;
         public IBudgetPlanService BudgetPlanService => _budgetplanService ?? (_budgetplanService = Serve.BudgetPlanService.CreateInstant());
 
- 
+        private ISaleForecastService _saleForecastService;
+        public ISaleForecastService SaleForecastService => _saleForecastService ?? (_saleForecastService = Serve.SaleForecastService.CreateInstant());
+
     }
 }
