@@ -157,6 +157,7 @@ let promotionHeaderPopup = new (function () {
             $(this.button_del).hide();
             $(this.popup_id).modal("show");
         }
+        */
         if (popupMode === POPUP_MODE.DELETE) {
             this.jsonData = dataSelection;
             this.callBack = fn;
@@ -167,7 +168,7 @@ let promotionHeaderPopup = new (function () {
             }
             this.openFormDeletePermanent(this.jsonData);
         }
-        */
+        
     }
 
     this.close = function () {
@@ -390,9 +391,9 @@ let promotionHeaderPopup = new (function () {
             return false;
         }
     }
-    /*
+    
     this.openFormDeletePermanent = function () {
-        let json = fixedContractHeaderPopup.jsonData;
+        let json = promotionHeaderPopup.jsonData;
         BootstrapDialog.show({
             type: BootstrapDialog.TYPE_WARNING,
             size: BootstrapDialog.SIZE_SMALL,
@@ -401,24 +402,18 @@ let promotionHeaderPopup = new (function () {
             closeByKeyboard: true,
             draggable: true,
             title: 'Confirmation',
-            message: `<label><input type="checkbox" class="e-control"></input> You're deleting a Channel  "${json.CHANNEL_CODE}", Are you? </label>`,
+            message: `<label>Do you want to delete ? </label>`,
             buttons: [
                 {
                     label: 'Delete',
                     cssClass: 'btn btn-danger',
                     icon: 'fas fa-paper-plane',
                     action: function (self) {
-                        let chkAgree = self.getModalBody().find('input').prop("checked");
-                        let IS_DELETE_PERMANANT = chkAgree;
-                        json = {
-                            ...json,
-                            IS_DELETE_PERMANANT
-                        };
                         self.enableButtons(false);
                         self.setClosable(false);
                         self.getModalBody().html('Processing...');
                         setTimeout(function () {
-                            fixedContractHeaderPopup.callBack(json);
+                            promotionHeaderPopup.callBack(json);
                             self.close();
                         }, 1500);
                     }
@@ -432,6 +427,7 @@ let promotionHeaderPopup = new (function () {
             ]
         });
     }
+    /*
     let appendElement = function (el, form) {
         let dialogTemp = form.querySelector("#dialogTemp");
         dialogTemp.innerHTML = el;

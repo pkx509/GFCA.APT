@@ -13,17 +13,20 @@
 
                 let res = JSON.parse(response.data);
 
-                $.toast({
-                    type: "success",
-                    title: "information",
-                    subtitle: (new Date()).toDateString(),
-                    content: res.Message,
-                    delay: 7000
-                });
-
                 if (res.Success === true) {
                     fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContractDetailList").ej2_instances[0];
+
+                    $(document).Toasts('create', {
+                        class: `bg-${res.MessageType.ToMessageType()}`,
+                        title: res.Title,
+                        position: 'bottomRight',
+                        body: res.Message ? res.Message : 'Success',
+                        delay: 3000,
+                        autohide: true,
+                        animation: true
+                    });
+
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
@@ -32,12 +35,11 @@
                 }
             },
             error: function (response) {
-                $.toast({
-                    type: "error",
-                    title: "error",
-                    subtitle: (new Date()).toDateString(),
-                    content: JSON.stringify(response),
-                    delay: 7000
+                $(document).Toasts('create', {
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'bottomRight',
+                    body: res.Message
                 });
             }
         });
@@ -62,15 +64,11 @@
     });
     $("#toolbar_del").click(function (e) {
         e.preventDefault();
-        
-     
-
-        /*
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.DeleteDetail, data);
         };
-        */
-        // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+
+        fixedContractHeaderPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
     });
 
 });

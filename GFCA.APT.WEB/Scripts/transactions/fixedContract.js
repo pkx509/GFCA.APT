@@ -17,6 +17,11 @@
                     fixedContractHeaderPopup.close();
                     let objGrid = document.getElementById("grdFixedContract").ej2_instances[0];
                     if (objGrid) {
+                        Toast.fire({
+                            icon: res.MessageType.ToMessageType(),
+                            title: res.Message
+                        });
+
                         objGrid.refresh();
                         if (res.Data) {
                             window.location = urlServices.CurrentUrl + `/${res.Data.DOC_FCH_ID}`;

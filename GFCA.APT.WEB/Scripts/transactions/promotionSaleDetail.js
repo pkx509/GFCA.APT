@@ -76,6 +76,7 @@ let promotionSaleDetail = new (function () {
         let NET_INTO_STORE      = $("#NET_INTO_STORE").val();
         let AVG_SALE            = $("#AVG_SALE").val();
         let AVG_VOLUME          = $("#AVG_VOLUME").val();
+        let INCLUDE_PROMOTION   = $("#INCLUDE_PROMOTION").val();
         let SALE_QTY            = $("#SALE_QTY").val();
         let SALE_VALUE_EXCL_VAT = $("#SALE_VALUE_EXCL_VAT").val();
         let SALE_UOM            = $("#SALE_UOM").val();
@@ -115,6 +116,7 @@ let promotionSaleDetail = new (function () {
 
             AVG_SALE,
             AVG_VOLUME,
+            INCLUDE_PROMOTION,
 
             SALE_QTY,
             SALE_VALUE_EXCL_VAT,

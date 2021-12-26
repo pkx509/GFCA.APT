@@ -220,12 +220,22 @@
                                                     Baht (compensate) or % Promotion discount
                                                 </label>
                                                 <div class="col col-lg-8">
-                                                    @(Html.EJS().TextBox("INVEST_VALUE")
+                                                    @* @(Html.EJS().TextBox("INVEST_VALUE")
                                                         .Placeholder("0.00")
                                                         .EnableRtl(true)
                                                         .Enabled(true)
                                                         .Value(Model.DetailInvesmentItem.INVEST_VALUE.ToString("N2"))
-                                                        .Render())
+                                                        .Render()) *@
+
+                                                    <input id="INVEST_VALUE"
+                                                               class="e-control e-textbox e-lib e-input"
+                                                               type="text"
+                                                               role="textbox"
+                                                               name="INVEST_VALUE"
+                                                               placeholder="0.00"
+                                                               aria-placeholder="0.00"
+                                                               onkeyup="javascript: promotionInvestmentDetail.onInvestValueKeyup(this);"
+                                                               value="@Model.DetailInvesmentItem.INVEST_VALUE.ToString("N2")" />
                                                 </div>
                                             </div>
                                         </div>

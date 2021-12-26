@@ -34,7 +34,8 @@
                                                                 .CrossDomain(false)
                                                                 .Adaptor("UrlAdaptor");
                                                             })
-                                                            .CssClass("mandatory")
+                                                            .Enabled(false)
+                                                            .CssClass("disabled")
                                                             .Value(Model.CLIENT_CODE)
                                                             .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                             .Render())
@@ -60,7 +61,8 @@
                                                                 .CrossDomain(false)
                                                                 .Adaptor("UrlAdaptor");
                                                             })
-                                                            .CssClass("mandatory")
+                                                            .Enabled(false)
+                                                            .CssClass("disabled")
                                                             .Value(Model.CUST_CODE)
                                                             .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                             .Render())
@@ -85,7 +87,8 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .CssClass("mandatory")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Value(Model.CHANNEL_CODE)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -113,7 +116,8 @@
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
-                                                        .CssClass("mandatory")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Value(Model.REQUESTER)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -140,7 +144,8 @@
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         //.Change("fixedContractDetail.cmbPositionChange")
-                                                        .CssClass("mandatory")
+                                                        .Enabled(false)
+                                                        .CssClass("disabled")
                                                         .Value(Model.ORG_NAME)
                                                         .Fields(new ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())

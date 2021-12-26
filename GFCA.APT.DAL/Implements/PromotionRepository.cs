@@ -645,6 +645,7 @@ WHERE DOC_PROM_PI_ID = @DOC_PROM_PI_ID";
 , A.NET_INTO_STORE
 , A.AVG_SALE
 , A.AVG_VOLUME
+, A.INCLUDE_PROMOTION
 , A.SALE_QTY
 , A.SALE_VALUE_EXCL_VAT
 , A.SALE_UOM
@@ -704,6 +705,7 @@ WHERE A.DOC_PROM_PH_ID = @DOC_PROM_PH_ID";
 , A.NET_INTO_STORE
 , A.AVG_SALE
 , A.AVG_VOLUME
+, A.INCLUDE_PROMOTION
 , A.SALE_QTY
 , A.SALE_VALUE_EXCL_VAT
 , A.SALE_UOM
@@ -755,6 +757,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
 , NET_INTO_STORE
 , AVG_SALE
 , AVG_VOLUME
+, INCLUDE_PROMOTION
 , SALE_QTY
 , SALE_VALUE_EXCL_VAT
 , SALE_UOM
@@ -784,6 +787,7 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
 , @NET_INTO_STORE
 , @AVG_SALE
 , @AVG_VOLUME
+, @INCLUDE_PROMOTION
 , @SALE_QTY
 , @SALE_VALUE_EXCL_VAT
 , @SALE_UOM
@@ -816,8 +820,9 @@ WHERE A.DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 NET_INTO_STORE      = entity.NET_INTO_STORE,
                 AVG_SALE            = entity.AVG_SALE,
                 AVG_VOLUME          = entity.AVG_VOLUME,
-                SALE_QTY            = entity.SALE_QTY,
+                INCLUDE_PROMOTION   = entity.INCLUDE_PROMOTION,
                 SALE_VALUE_EXCL_VAT = entity.SALE_VALUE_EXCL_VAT,
+                SALE_QTY            = entity.SALE_QTY,
                 SALE_UOM            = entity.SALE_UOM,
                 DISC_TYPE           = entity.DISC_TYPE,
                 FLAG_ROW            = entity.FLAG_ROW.ToValue(),
@@ -858,8 +863,9 @@ SET
 , NET_INTO_STORE      = @NET_INTO_STORE
 , AVG_SALE            = @AVG_SALE
 , AVG_VOLUME          = @AVG_VOLUME
-, SALE_QTY            = @SALE_QTY
 , SALE_VALUE_EXCL_VAT = @SALE_VALUE_EXCL_VAT
+, INCLUDE_PROMOTION   = @INCLUDE_PROMOTION
+, SALE_QTY            = @SALE_QTY
 , SALE_UOM            = @SALE_UOM
 , DISC_TYPE           = @DISC_TYPE
 , FLAG_ROW            = @FLAG_ROW
@@ -891,6 +897,7 @@ WHERE DOC_PROM_PS_ID = @DOC_PROM_PS_ID";
                 NET_INTO_STORE      = entity.NET_INTO_STORE,
                 AVG_SALE            = entity.AVG_SALE,
                 AVG_VOLUME          = entity.AVG_VOLUME,
+                INCLUDE_PROMOTION   = entity.INCLUDE_PROMOTION,
                 SALE_QTY            = entity.SALE_QTY,
                 SALE_VALUE_EXCL_VAT = entity.SALE_VALUE_EXCL_VAT,
                 SALE_UOM            = entity.SALE_UOM,
