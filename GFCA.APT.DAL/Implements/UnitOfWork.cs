@@ -233,7 +233,27 @@ namespace GFCA.APT.DAL.Implements
                 return _budgetplanRepository ?? (_budgetplanRepository = new BudgetPlanRepository(_transaction));
             }
         }
-
+        public ISaleForecastRepository SaleForecastRepository
+        {
+            get
+            {
+                return _saleForecastRepository ?? (_saleForecastRepository = new SaleForecastRepository(_transaction));
+            }
+        }
+        public IBulkInsertBestPracticesRepository BulkInsertBestPracticesRepository
+        {
+            get
+            {
+                return _bulkInsertBestPracticesRepository ?? (_bulkInsertBestPracticesRepository = new BulkInsertBestPracticesRepository(_transaction));
+            }
+        }
+        public IWorkflowRepository WorkflowRepository
+        {
+            get
+            {
+                return _workflowRepository ?? (_workflowRepository = new WorkflowRepository(_transaction));
+            }
+        }
 
 
         public void Commit()
@@ -282,11 +302,14 @@ namespace GFCA.APT.DAL.Implements
             _sizeRepository = null;
             _customerPartyRepository = null;
             _promotionGroupRepository = null;
+            _bulkInsertBestPracticesRepository = null;
+            _workflowRepository = null;
 
             //transaction
             _documentRepository = null;
             _fixedContractRepository = null;
             _promotionRepository = null;
+            _saleForecastRepository = null;
         }
         private void Dispose(bool disposing)
         {
