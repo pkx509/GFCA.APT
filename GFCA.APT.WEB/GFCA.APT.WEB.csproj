@@ -527,6 +527,7 @@
     <Content Include="Content\ej2\material.css" />
     <Content Include="Content\ej2\tailwind-dark.css" />
     <Content Include="Content\ej2\tailwind.css" />
+    <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -3977,7 +3978,7 @@
     <Content Include="Content\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Transactions\Views\Default\Index.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\Index.cshtml" />
-    <Content Include="Areas\Transactions\Views\Saleforecast\Index.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\Index.cshtml" />
     <Content Include="Areas\Masters\Views\TradeActivity\Index.cshtml" />
     <Content Include="Areas\Masters\Views\PromotionGroup\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Product\Index.cshtml" />
@@ -4122,9 +4123,9 @@
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridInvestmentPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Saleforecast\SaleForecastItem.cshtml" />
-    <Content Include="Areas\Transactions\Views\Saleforecast\ItemHeaderPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Saleforecast\ItemDetailPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\SaleForecastItem.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemHeaderPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridInvestmentPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\_Popup_FixedContractHeader.cshtml" />
@@ -4135,7 +4136,7 @@
     <Content Include="Areas\Transactions\Views\FixedContract\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemFooterPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\Saleforecast\ItemFooterPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\FixedContractDetail.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_LayoutTransaction.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_RequesterSection.cshtml" />
@@ -4148,6 +4149,15 @@
     <Content Include="Areas\Transactions\Views\Shared\_CommandSection.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_BreadCrumbPath.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_BudgetHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\_Popup_SaleForecastHeader.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\DocumentItem.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\SaleForecastDetail.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\SaleForecastItem.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\Index.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\ItemDetailGridSaleForecastPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\ItemDetailPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\ItemFooterPartial.cshtml" />
+    <Content Include="Areas\Transactions\Views\SaleForecast\ItemHeaderPartial.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -4221,6 +4231,8 @@
     <Content Include="Scripts\jquery-numeric\jquery.numeric.js" />
     <Content Include="Scripts\jquery-numeric\jquery.numeric.min.js" />
     <Content Include="Scripts\jquery.bsAlerts.min.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -4393,7 +4405,10 @@
     <Content Include="Scripts\numeral-js\tests\numeral.js" />
     <Content Include="Scripts\transactions\budgetPlanPopup.js" />
     <Content Include="Scripts\transactions\budgetPlan.js" />
+    <Content Include="Scripts\transactions\saleForecast.js" />
+    <Content Include="Scripts\transactions\saleForecastDetail.js" />
     <Content Include="Scripts\transactions\FixedContractDetail.js" />
+    <Content Include="Scripts\transactions\saleForecastHeaderPopup.js" />
     <Content Include="Scripts\transactions\fixedContractHeaderPopup.js" />
     <Content Include="Scripts\transactions\fixedContract.js" />
     <Content Include="Scripts\masters\pack.js" />
@@ -4426,6 +4441,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\transactions\fixed-contract.js" />
+    <Content Include="Scripts\transactions\saleForecastItem.js" />
     <Content Include="Scripts\transactions\promotionItem.js" />
     <Content Include="Scripts\transactions\fixedContractItem.js" />
     <Content Include="Scripts\transactions\promotion.js" />

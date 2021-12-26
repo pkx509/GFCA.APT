@@ -1,8 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "Sale forecast";
+﻿@{
+#if DNX48
+ViewBag.Title = "Sale forecast";
+#endif
 }
-
 @using GFCA.APT.Domain.HTTP.Controls
 @using Syncfusion.EJ2.Popups
 @using Syncfusion.EJ2.Grids
@@ -41,22 +41,112 @@
     </style>
 }
 
-@section ContentPlaceholder
+@section DialogPlaceholder
 {
-    <form autocomplete="off" class="form-horizontal">
-        <div class="content-header">
-            <div class="container-fluid">
-                @*----------------- document header -----------------*@
-
-                @*----------------- Promotion planning header -----------------*@
-
-                @*----------------- Promotion planning detail -----------------*@
-
-                @*----------------- Promotion planning footer -----------------*@
-
-
-            </div>
+    <!-- BEGIN DialogPlaceholder -->
+    <script id='dialogtemplate' type="text/x-template">
+        <div id="dialogTemp" style="width:650px; height:300px;">
         </div>
-    </form>
+    </script>
+
+    <!-- BEGIN DialogPlaceholder -->
 }
 
+@section ContentPlaceholder
+{
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-lg-12 p-1">
+                    <div class="card card-success card-outline">
+                        <div class="card-body text-sm p-1">
+                            @(Html.EJS()
+                                  .Grid("grdSaleForecast")
+                                  .Height("450")
+                                  .DataSource(ds =>
+                                  {
+                                      ds
+                                      .Url(@Url.Action("UrlSaleForecastHeaderList", "SaleForecast", new { Area = "Transactions" }))
+                                      .Adaptor("UrlAdaptor")
+                                      ;
+                                  })
+                                  .ShowColumnMenu(false).AllowSorting()
+                                  .AllowPaging(true).PageSettings(page => page.PageCount(5))
+                                  .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+                                  .AllowExcelExport()
+                                  .Toolbar(new List<object>() {
+                                      new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
+                                      new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+                                      new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+                                      new { id = "toolbar_exportexcel", text = "Export Excel", prefixIcon = "e-icons e-excelexport" }
+                                  })
+                                  // .ToolbarClick("channelPopup.OnExcelExportClick")
+                                  .EditSettings(edit =>
+                                  {
+                                      edit
+                                      .AllowEditOnDblClick(false)
+                                      .AllowAdding(false)
+                                      .AllowEditing(false)
+                                      .AllowDeleting(false).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+                                      .Mode(EditMode.Dialog);
+                                      // .Template("#dialogtemplate");
+                                  })
+                                  .RowDeselected("OnRowDeselected")
+                                  .RowSelected("OnRowSelected")
+
+                                  .Columns(col =>
+                                  {
+                                      col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CHANNEL_NAME").HeaderText("Channel").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
+                                      col.Field("REQUESTER").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
+                                      //col.Field("CLIENT_NAME").HeaderText("Client").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+                                  })
+                                  .Render())
+
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    @Html.Partial("~/Areas/Transactions/Views/SaleForecast/_Popup_SaleForecastHeader.cshtml")
+}
+
+@section preScripts
+{
+    <!-- BEGIN preScripts -->
+    <script>
+        var urlServices = {
+            CurrentUrl: "@Url.Action("index", "SaleForecast", new { Area = "Transactions" })",
+            Add       : "@Url.Action("Add", "SaleForecast", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreateSaleForecastHeader", "SaleForecast", new { Area = "Transactions" })",
+            AddDetail : "@Url.Action("CreateSaleForecastDetail", "SaleForecast", new { Area = "Transactions" })",
+            Delete    : "@Url.Action("Delete", "SaleForecast", new { Area = "Transactions" })",
+        }
+        var argruments = {
+            data: null,
+        }
+
+        var OnRowSelected = function (args) {
+            console.log(args);
+            argruments.data = args.data;
+        }
+        var OnRowDeselected = function (args) {
+            if (argruments.data == args.data) {
+                argruments.data = null;
+            }
+        }
+    </script>
+
+    @Scripts.Render("~/Scripts/transactions/saleForecastHeaderPopup.js")
+    @Scripts.Render("~/Scripts/transactions/saleForecastDetail.js")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/transactions/saleForecast.js")
+}

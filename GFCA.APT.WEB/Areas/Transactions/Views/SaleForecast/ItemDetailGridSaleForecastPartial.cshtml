@@ -1,0 +1,181 @@
+﻿@using GFCA.APT.Domain.Dto
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.SaleForecastHeaderDto
+
+@(Html.EJS()
+.Grid("grdSaleForecastDetailList")
+.Height("450")
+.Width("100%")
+.DataSource(ds =>
+{
+    ds
+    .Url(@Url.Action("UrlSaleForecastDetailList", "SaleForecast", new { Area = "Transactions", DOC_SFCH_ID = Model.DOC_SFCH_ID }))
+    .Adaptor("UrlAdaptor")
+    ;
+})
+.ShowColumnMenu(false).AllowSorting()
+.AllowPaging(true).PageSettings(page => page.PageCount(5))
+.AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
+.AllowExcelExport()
+.Toolbar(new List<object>() {
+    new { id ="toolbar_add", text = "Add", prefixIcon = "e-icons e-add" },
+    new { id ="toolbar_edit", text = "Edit", prefixIcon = "e-icons e-edit" },
+    new { id ="toolbar_del", text = "Delete", prefixIcon = "e-icons e-delete" },
+    new { id ="toolbar_excel", text = "Excel", prefixIcon = "e-icons e-excelexport" },
+    new { text = "Print", prefixIcon = "e-icons e-print" },
+})
+.EditSettings(edit =>
+{
+    edit
+    .AllowEditOnDblClick(false)
+    .AllowAdding(true)
+    .AllowEditing(true)
+    .AllowDeleting(true).ShowConfirmDialog(true).ShowDeleteConfirmDialog(true)
+    .Mode(EditMode.Dialog)
+    .Template("#dialogtemplate");
+})
+.RowSelected("OnRowSelected")
+.RowDeselected("OnRowDeselected")
+.Columns(col =>
+{
+
+    //col.Field("CONDITION_TYPE").HeaderText("Proceed").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("DOC_SFCD_ID").HeaderText("No").Width("80").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("BRAND_NAME").HeaderText("Brand").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    //col.Field("ACTIVITY_CODE").HeaderText("Trade Activity").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("CONTRACT_CATE").HeaderText("Category").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("DATE_REF").HeaderText("Date Reference").Width("150").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("SIZE").HeaderText("Size").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("PACK").HeaderText("Pack").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("PROD_CODE").HeaderText("Product Code").Width("100").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("PROD_NAME").HeaderText("Product Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("YEAR").HeaderText("YEAR").Width("60").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+    //col.Field("M1Sales").HeaderText("Jan(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M1FOC").HeaderText("Jan(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M2Sales").HeaderText("Feb(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M2FOC").HeaderText("Feb(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M3Sales").HeaderText("Mar(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M3FOC").HeaderText("Mar(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M4Sales").HeaderText("Apr(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M4FOC").HeaderText("Apr(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M5Sales").HeaderText("May(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M5FOC").HeaderText("May(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M6Sales").HeaderText("Jun(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M6FOC").HeaderText("Jun(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M7Sales").HeaderText("Jul(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M7FOC").HeaderText("Jul(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M8Sales").HeaderText("Aug(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M8FOC").HeaderText("Aug(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M9Sales").HeaderText("Sep(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M9FOC").HeaderText("Sep(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M10Sales").HeaderText("Oct(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M10FOC").HeaderText("Oct(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M11Sales").HeaderText("Nov(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M11FOC").HeaderText("Nov(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M12Sales").HeaderText("Dec(Sales)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("M12FOC").HeaderText("Dec(FOC)").Width("100").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("TotalSales").HeaderText("Total(Sales)").Width("120").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    //col.Field("TotalFOC").HeaderText("Total(FOC)").Width("120").Format("N2").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+
+    col.HeaderText("Jan").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M1Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M1FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Feb").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M2Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M2FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Mar").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M3Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M3FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Apr").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M4Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M4FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("May").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M5Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M5FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Jun").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M6Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M6FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Jul").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M7Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M7FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Aug").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M8Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M8FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Sep").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M9Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M9FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Oct").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M10Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M10FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Nov").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M11Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M11FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Dec").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "M12Sales", Width = "100", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "M12FOC", Width = "100", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+    col.HeaderText("Total").HeaderTextAlign(TextAlign.Center).Columns(new List<GridColumn>() {
+        new GridColumn { Field = "TotalSales", Width = "120", HeaderText = "Sales", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" },
+        new GridColumn { Field = "TotalFOC", Width = "120", HeaderText = "FOC", HeaderTextAlign = TextAlign.Center, TextAlign = TextAlign.Left, Format="N2" }
+    }).Add();
+
+
+    //col.Field("CONTRACT_DESC").HeaderText("Remark").Width("350").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("FLAG_ROW").HeaderText("Status").Width("98").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("CREATED_BY").HeaderText("Created By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("CREATED_DATE").HeaderText("Created Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_BY").HeaderText("Updated By").Width("250").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("UPDATED_DATE").HeaderText("Updated Date").Width("208").Format("dd-MMM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+})
+.Render())
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            var urlPrint = '@Url.Action("ExportFiles", "SaleForecast")';
+            var urlUploadFiles = '@Url.Action("UploadFiles", "SaleForecast")';
+
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                url: '/T/SaleForecasts/ImportFiles',
+                //autoUpload: true,
+                done: function (e, data) {
+
+                },
+                submit: function (e, data) {
+
+                    var name = data.files["0"].name;
+                    var ext = name.split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['xlsx']) == -1) {
+                        alert('invalid extension!');
+                        return false
+                    }
+                },
+                success: function (response, status) {
+                    // Success callback
+
+                    BootstrapDialog.alert(response.message, function () {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    // Error callback
+
+                    alert(error.statusText);
+                }
+            });
+        })
+
+</script>*@

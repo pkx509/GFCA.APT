@@ -97,6 +97,11 @@
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningDto.cs" />
     <Compile Include="Dto\PromotionPlanning\PromotionPlanningFooterDto.cs" />
     <Compile Include="Dto\RoutePathDto.cs" />
+    <Compile Include="Dto\SaleForecast\SaleForecastDetailDto.cs" />
+    <Compile Include="Dto\SaleForecast\SaleForecastDto.cs" />
+    <Compile Include="Dto\SaleForecast\SaleForecastFooterDto.cs" />
+    <Compile Include="Dto\SaleForecast\SaleForecastHeaderDto.cs" />
+    <Compile Include="Dto\SaleForecast\SaleForecastItemDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
     <Compile Include="Dto\UnitDto.cs" />
     <Compile Include="Dto\PackDto.cs" />

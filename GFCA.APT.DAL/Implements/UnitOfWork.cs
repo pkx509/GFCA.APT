@@ -36,7 +36,8 @@ namespace GFCA.APT.DAL.Implements
         private IFixedContractRepository _fixedContractRepository;
         private IPromotionRepository _promotionRepository;
         private IBudgetPlanRepository _budgetplanRepository;
-
+        private ISaleForecastRepository _saleForecastRepository;
+        
 
         public static IUnitOfWork CreateInstant()
         {
@@ -233,6 +234,13 @@ namespace GFCA.APT.DAL.Implements
                 return _budgetplanRepository ?? (_budgetplanRepository = new BudgetPlanRepository(_transaction));
             }
         }
+        public ISaleForecastRepository SaleForecastRepository
+        {
+            get
+            {
+                return _saleForecastRepository ?? (_saleForecastRepository = new SaleForecastRepository(_transaction));
+            }
+        }
 
 
 
@@ -287,6 +295,7 @@ namespace GFCA.APT.DAL.Implements
             _documentRepository = null;
             _fixedContractRepository = null;
             _promotionRepository = null;
+            _saleForecastRepository = null;
         }
         private void Dispose(bool disposing)
         {

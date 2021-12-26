@@ -28,5 +28,6 @@ namespace GFCA.APT.BAL.Interfaces
         IBudgetPlanService BudgetPlanService { get; }
         IPromotionGroupService PromotionGroupService { get; }
         IPromotionService PromotionService { get; }
+        ISaleForecastService SaleForecastService { get; }
     }
 }

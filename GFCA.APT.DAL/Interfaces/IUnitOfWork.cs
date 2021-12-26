@@ -29,6 +29,7 @@ namespace GFCA.APT.DAL.Interfaces
 		IFixedContractRepository FixedContractRepository { get; }
 		IPromotionRepository PromotionRepository { get; }
 		IBudgetPlanRepository BudgetPlanRepository { get; }
+		ISaleForecastRepository SaleForecastRepository { get; }
 		void Commit();
 		//bool LazyLoadingEnabled { get; set; }
 		//bool ProxyCreationEnabled { get; set; }
