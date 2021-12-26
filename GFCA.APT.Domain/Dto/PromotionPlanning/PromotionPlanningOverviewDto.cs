@@ -40,5 +40,6 @@ namespace GFCA.APT.Domain.Dto
 
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ROW_TYPE FLAG_ROW { get; set; } = ROW_TYPE.SHOW;
+        public bool IsCheck { get; set; }
     }
 }

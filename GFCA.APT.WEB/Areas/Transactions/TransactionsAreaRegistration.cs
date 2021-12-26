@@ -56,11 +56,32 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 );
 
             context.MapRoute(
-                name: "Transaction_BudgetPlans_Item",
-                url: "T/BudgetPlans/{DOC_BUDGET_PH_ID}",
-                defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DOC_BUDGET_PH_ID = UrlParameter.Optional },
+                name: "Transaction_BudgetPlan_Bulk",
+                url: "T/BudgetPlans/ExampleBulkCreate",
+                defaults: new { controller = "BudgetPlan", action = "ExampleBulkCreate" },
                 namespaces: new[] { __nameSpace }
                 );
+
+            context.MapRoute(
+                name: "Transaction_BudgetPlans_Item",
+                url: "T/BudgetPlans/{DOC_BGH_ID}",
+                defaults: new { controller = "BudgetPlan", action = "BudgetPlanItem", DOC_BGH_ID = UrlParameter.Optional },
+                namespaces: new[] { __nameSpace }
+                );
+            context.MapRoute(
+              name: "Transaction_BudgetPlan_Sale_Detail",
+              url: "T/BudgetPlans/{DOC_BGH_ID}/S/{DOC_BGH_SALES_ID}",
+              defaults: new { controller = "BudgetPlan", action = "BudgetPlanSaleDetail", DOC_BGH_ID = UrlParameter.Optional, DOC_BGH_SALES_ID = UrlParameter.Optional },
+              namespaces: new[] { __nameSpace }
+              );
+
+            context.MapRoute(
+              name: "Transaction_BudgetPlan_Investment_Detail",
+              url: "T/BudgetPlans/{DOC_BGH_ID}/I/{DOC_BGH_INV_ID}",
+              defaults: new { controller = "BudgetPlan", action = "BudgetPlanInvestmentDetail", DOC_BGH_ID = UrlParameter.Optional, DOC_BGH_INV_ID = UrlParameter.Optional },
+              namespaces: new[] { __nameSpace }
+              );
+
 
             /* Promotion Planning Route */
             context.MapRoute(
@@ -69,6 +90,12 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 defaults: new { controller = "Promotion", action = "Index" },
                 namespaces: new[] { __nameSpace }
                 );
+            context.MapRoute(
+            name: "Transaction_PromotionPlan_Pending",
+            url: "T/Pendings",
+            defaults: new { controller = "Promotion", action = "Pending" },
+            namespaces: new[] { __nameSpace }
+            );
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Item",

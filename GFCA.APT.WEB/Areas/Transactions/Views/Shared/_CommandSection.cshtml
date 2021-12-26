@@ -1,4 +1,26 @@
-﻿<li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-default">Clone</a></li>
+﻿@{
+    IEnumerable<GFCA.APT.Domain.Dto.Workflow.CommandDto> commands = ViewBag.WorkflowCommands as IEnumerable<GFCA.APT.Domain.Dto.Workflow.CommandDto>;
+}
+
+@{
+    if (commands != null)
+    {
+        foreach (var item in commands)
+        {
+            <li class="nav-item mr-sm-1">
+                <button id="workflow-command-@(item.FLOW_ITEM_ID)" 
+                        name="btn-workflow-commands" 
+                        class="@item.FLOW_ITEM_DESC"
+                        data-item="@item.FLOW_ITEM_ID"
+                        data-value="@item.FLOW_ITEM_CODE">@item.FLOW_ITEM_NAME</button>
+            </li>
+        }
+    }
+}
+
+@*
+    
+<li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-default">Clone</a></li>
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-default">Draft</a></li>
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-success">Submit</a></li>
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-success">Re-Submit</a></li>
@@ -7,3 +29,5 @@
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-warning">Revise</a></li>
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-info">Review</a></li>
 <li class="nav-item mr-sm-1"><a href="#" class="btn btn-sm btn-success">Commit</a></li>
+
+*@

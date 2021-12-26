@@ -12,6 +12,7 @@ namespace GFCA.APT.Domain.Dto
         public virtual string DOC_MONTH { get; set; }
         public virtual string DOC_YEAR { get; set; }
 
+        public int? DOC_STATUS_ID { get; set; } = 0;
         public DOCUMENT_STATUS DOC_STATUS { get; set; } = DOCUMENT_STATUS.DRAFT;
 
     }

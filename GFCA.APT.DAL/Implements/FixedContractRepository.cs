@@ -34,7 +34,7 @@ namespace GFCA.APT.DAL.Implements
 , CREATED_DATE
 , UPDATED_BY
 , UPDATED_DATE
-  FROM TB_T_FIXED_CONTRACT_H a;";
+  FROM TB_T_FIXED_CONTRACT_H a WHERE FLAG_ROW != 'D' OR FLAG_ROW IS NULL;";
             var query = Connection.Query<FixedContractHeaderDto>(
                 sql: sqlQuery
                 , transaction: Transaction
@@ -123,7 +123,7 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
                 COMP_CODE          = entity.COMP_CODE,
                 DOC_STATUS         = entity.DOC_STATUS,
                 //COMMENT          = entity.COMMENT,
-                FLAG_ROW           = entity.FLAG_ROW.ToValue(),
+                FLAG_ROW           = entity.FLAG_ROW,
                 REQUESTER_ORG_CODE = entity.ORG_CODE,
                 CREATED_BY         = entity.CREATED_BY
             };
@@ -181,7 +181,8 @@ WHERE DOC_FCH_ID = @DOC_FCH_ID;";
         }
         public void DeleteFixedContractHeader(int DOC_FCH_ID)
         {
-            string sqlCommand = @"DELETE TB_T_FIXED_CONTRACT_H WHERE DOC_FCH_ID = @DOC_FCH_ID;";
+            // string sqlCommand = @"DELETE TB_T_FIXED_CONTRACT_H WHERE DOC_FCH_ID = @DOC_FCH_ID;";
+            string sqlCommand = @"UPDATE TB_T_FIXED_CONTRACT_H SET FLAG_ROW = 'D' WHERE DOC_FCH_ID = @DOC_FCH_ID;";
 
             var parms = new
             {

@@ -157,6 +157,7 @@ let promotionHeaderPopup = new (function () {
             $(this.button_del).hide();
             $(this.popup_id).modal("show");
         }
+        */
         if (popupMode === POPUP_MODE.DELETE) {
             this.jsonData = dataSelection;
             this.callBack = fn;
@@ -167,7 +168,7 @@ let promotionHeaderPopup = new (function () {
             }
             this.openFormDeletePermanent(this.jsonData);
         }
-        */
+        
     }
 
     this.close = function () {
@@ -258,18 +259,35 @@ let promotionHeaderPopup = new (function () {
     */
 
     this.onSave = function (e) {
-        
         this.bindField();
         //begin Validation
         let msg = '';
+
+        // validate promotion date
+        const promotionStartDate = $("#pop-cmb-promotionStart").val();
+        const promotionEndDate = $("#pop-cmb-promotionEnd").val();
+        let validatePromotionDateResult = isValidDatePeriod(promotionStartDate, promotionEndDate);
+        if (!validatePromotionDateResult) {
+            msg = 'Promotion start date must be before promotion end date';
+        };
+
+        // validate Buying date
+        const buyingStartDate = $("#pop-cmb-buyingStart").val();
+        const buyingEndDate = $("#pop-cmb-buyingEnd").val();
+        let validateBuyingDateResult = isValidDatePeriod(buyingStartDate, buyingEndDate);
+        if (!validateBuyingDateResult) {
+            msg = 'Buying start date must be before Buying end date';
+        };
         //end Validation
-        if (msg) {
-            $.toast({
-                type: "warning",
-                title: "Invalid information",
-                subtitle: (new Date()).toDateString(),
-                content: msg,
-                delay: 5000
+
+        if (msg !== '') {
+            $(document).Toasts('create', {
+                title: 'Error',
+                position: 'bottomRight',
+                body: msg,
+                delay: 3000,
+                autohide: true,
+                animation: true
             });
         } else {
             let IS_DELETE_PERMANANT = false;
@@ -360,9 +378,22 @@ let promotionHeaderPopup = new (function () {
         }
     }
 
-    /*
+    function isValidDatePeriod(startDate, endDate) {
+        const startDateFormat = startDate.replace(/(\d+[/])(\d+[/])/, '$2$1');
+        const endDateFormat = endDate.replace(/(\d+[/])(\d+[/])/, '$2$1');
+
+        const startDateObject = new Date(startDateFormat);
+        const endDateObject = new Date(endDateFormat);
+
+        if (startDateObject <= endDateObject) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     this.openFormDeletePermanent = function () {
-        let json = fixedContractHeaderPopup.jsonData;
+        let json = promotionHeaderPopup.jsonData;
         BootstrapDialog.show({
             type: BootstrapDialog.TYPE_WARNING,
             size: BootstrapDialog.SIZE_SMALL,
@@ -371,24 +402,18 @@ let promotionHeaderPopup = new (function () {
             closeByKeyboard: true,
             draggable: true,
             title: 'Confirmation',
-            message: `<label><input type="checkbox" class="e-control"></input> You're deleting a Channel  "${json.CHANNEL_CODE}", Are you? </label>`,
+            message: `<label>Do you want to delete ? </label>`,
             buttons: [
                 {
                     label: 'Delete',
                     cssClass: 'btn btn-danger',
                     icon: 'fas fa-paper-plane',
                     action: function (self) {
-                        let chkAgree = self.getModalBody().find('input').prop("checked");
-                        let IS_DELETE_PERMANANT = chkAgree;
-                        json = {
-                            ...json,
-                            IS_DELETE_PERMANANT
-                        };
                         self.enableButtons(false);
                         self.setClosable(false);
                         self.getModalBody().html('Processing...');
                         setTimeout(function () {
-                            fixedContractHeaderPopup.callBack(json);
+                            promotionHeaderPopup.callBack(json);
                             self.close();
                         }, 1500);
                     }
@@ -402,6 +427,7 @@ let promotionHeaderPopup = new (function () {
             ]
         });
     }
+    /*
     let appendElement = function (el, form) {
         let dialogTemp = form.querySelector("#dialogTemp");
         dialogTemp.innerHTML = el;

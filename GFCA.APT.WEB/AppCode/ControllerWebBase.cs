@@ -11,6 +11,21 @@ namespace GFCA.APT.WEB
     {
         private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        /*
+        protected new JsonResult Json(object data, JsonRequestBehavior behavior)
+        {
+            return Json(data, "application/json", System.Text.Encoding.UTF8, behavior);
+        }
+        protected new JsonResult Json(object data)
+        {
+            return Json(data, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.DenyGet);
+        }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return Json(data, contentType, contentEncoding, behavior);
+        }
+        */
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 

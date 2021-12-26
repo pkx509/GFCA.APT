@@ -1,7 +1,9 @@
 ﻿using GFCA.APT.BAL.Interfaces;
+using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
+using MvcBreadCrumbs;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +15,7 @@ using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
+
     public class PromotionController : ControllerWebBase
     {
         public const string DOC_TYPE_CODE = "PP";
@@ -23,28 +26,42 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         // GET: Transactions/Promotions
+        [BreadCrumb(Clear = false, Label = "Promotions")]
         public ActionResult Index()
         {
             return View();
         }
 
+        // GET: Transactions/Pending
+        public ActionResult Pending()
+        {
+            return View();
+        }
+
+
         // GET: T/Promotions/{DOC_PROM_PH_ID}}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionItem")]
         public ViewResult PromotionItem(int DOC_PROM_PH_ID)
         {
             PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PH_ID);
 
             try
             {
+                //dto.WorkflowCommands
                 dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
                 dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-
+                //dto.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, dto.DocumentData.DOC_STATUS_ID);
+                ViewBag.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, 0);
+                
                 dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                
+                BreadCrumb.SetLabel(dto.OverviewData.DOC_CODE);
             }
             catch
             {
@@ -55,6 +72,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionSaleDetail")]
         public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
         {
             _biz.LogService.Info("PromotionSaleDetail");
@@ -75,6 +93,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+
+                if (DOC_PROM_PS_ID == 0)
+                    BreadCrumb.SetLabel($"New Sale");
+                else
+                    BreadCrumb.SetLabel($"Sale No : {DOC_PROM_PS_ID}");
             }
             catch(Exception ex)
             {
@@ -85,6 +108,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionInvestmentDetail")]
         public ActionResult PromotionInvestmentDetail(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
         {
             _biz.LogService.Info("PromotionInvestmentDetail");
@@ -105,6 +129,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
 
+                if (DOC_PROM_PI_ID == 0)
+                    BreadCrumb.SetLabel($"New Investment");
+                else
+                    BreadCrumb.SetLabel($"Investment No : {DOC_PROM_PI_ID}");
             }
             catch (Exception ex)
             {
@@ -143,6 +171,38 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return PartialView();
         }
         */
+        [HttpPost]
+        public JsonResult UrlPromotionHeaderPendingList(DataManagerRequest dm)
+        {
+            _biz.LogService.Info("UrlPromotionHeaderList");
+            IEnumerable dataSource = _biz.PromotionService.GetPromotionPlanAllByStatus("APPROVAL");
+            DataOperations operation = new DataOperations();
+            List<string> str = new List<string>();
+            if (dm.Search != null && dm.Search.Count > 0) // Search
+            {
+                dataSource = operation.PerformSearching(dataSource, dm.Search);
+            }
+            if (dm.Sorted != null && dm.Sorted.Count > 0) // Sorting
+            {
+                dataSource = operation.PerformSorting(dataSource, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0) // Filtering
+            {
+                dataSource = operation.PerformFiltering(dataSource, dm.Where, dm.Where[0].Operator);
+            }
+            int count = dataSource.Cast<PromotionPlanngOverviewDto>().Count();
+            if (dm.Skip != 0) // Paging
+            {
+                dataSource = operation.PerformSkip(dataSource, dm.Skip);
+            }
+            if (dm.Take != 0)
+            {
+                dataSource = operation.PerformTake(dataSource, dm.Take);
+            }
+            return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
+        }
+
+
         [HttpPost]
         public JsonResult UrlPromotionHeaderList(DataManagerRequest dm)
         {
@@ -380,6 +440,97 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             catch (Exception ex)
             {
                 _biz.LogService.Error("DeletePromotionPlanningInvestment : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+
+        [HttpPost]
+        public JsonResult ApprovePromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("ApprovePromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+               
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("ApprovePromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult SubmitPromotionPlanning(int DOC_PROM_PH_ID)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+           
+            try
+            {
+                bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+
+        [HttpPost]
+        public JsonResult ApprovePromotionSelect(List<int> values)
+        {
+            _biz.LogService.Info("SubmitPromotionPlanning");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                bizObj = _biz.PromotionService.ApprovePromotionSelect(values);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("SubmitPromotionPlanning : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult PostCommand(Domain.Dto.Workflow.CommandDto data)
+        {
+            _biz.LogService.Info("PostCommand");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+
+            try
+            {
+                //bizObj = _biz.PromotionService.Post(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("PostCommand : ", ex);
             }
             finally
             {

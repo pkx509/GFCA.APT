@@ -62,20 +62,19 @@
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Client
+                                        BudgetType
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @(Html.EJS().ComboBox("pop-cmb-client")
+                                        @(Html.EJS().ComboBox("pop-cmb-budgettype")
                                                         .Placeholder("-- Select --")
                                                         .Autofill(true)
                                                         .DataSource(o =>
                                                         {
-                                                            o.Url("/api/Selection/GetClient")
+                                                            o.Url("/api/Selection/GetBudgetType")
                                                             .CrossDomain(false)
                                                             .Adaptor("UrlAdaptor");
                                                         })
                                                         .Enabled(true)
-                                                        .Change("budgetPlanHeaderPopup.OnClientChangeValue")
                                                         .CssClass("mandatory")
                                                         .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                         .Render())
@@ -111,65 +110,34 @@
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Channel
+                                        Year
                                     </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @(Html.EJS().ComboBox("pop-cmb-channel")
-                                                        .Placeholder("-- Select --")
-                                                        .Autofill(true)
-                                                        .DataSource(o =>
-                                                        {
-                                                            o.Url("/api/Selection/GetChannel")
-                                                            .CrossDomain(false)
-                                                            .Adaptor("UrlAdaptor");
-                                                        })
-                                                        .Enabled(true)
-                                                        .Change("budgetPlanHeaderPopup.OnChannelChangeValue")
-                                                        .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                        .Render())
+                                    <div class="col-sm-5 col-md-5 col-lg-4">
+                                        @Html.EJS().TextBox("pop-txt-fiscal_year").Value(System.DateTime.Now.ToString("yyyy")).Render()
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Requester
+                                         
                                     </label>
                                     <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @Html.EJS().TextBox("pop-txt-requester").Render()
+
+                                      
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-lg-3 control-label">
-                                        Position
-                                    </label>
-                                    <div class="col-sm-9 col-md-10 col-lg-9">
-                                        @(Html.EJS().ComboBox("pop-cmb-position")
-                                                        .Placeholder("-- Select --")
-                                                        .Autofill(true)
-                                                        .DataSource(o =>
-                                                        {
-                                                            o.Url("/api/Selection/GetOrganization")
-                                                            .CrossDomain(false)
-                                                            .Adaptor("UrlAdaptor");
-                                                        })
-                                                        .Enabled(true)
-                                                        .Change("budgetPlanHeaderPopup.OnPositionChangeValue")
-                                                        .CssClass("mandatory")
-                                                        .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
-                                                        .Render())
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-lg-6">
-                            </div>
-                        </div>
+
+
+
+                        
+
+
+                        
 
                     </div>
                 </div>

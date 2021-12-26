@@ -36,9 +36,11 @@ namespace GFCA.APT.DAL.Implements
         private IFixedContractRepository _fixedContractRepository;
         private IPromotionRepository _promotionRepository;
         private IBudgetPlanRepository _budgetplanRepository;
+        private IWorkflowRepository _workflowRepository;
+        private IBulkInsertBestPracticesRepository _bulkInsertBestPracticesRepository;
+
         private ISaleForecastRepository _saleForecastRepository;
         
-
         public static IUnitOfWork CreateInstant()
         {
             var uow = new UnitOfWork("APTDbConnectionString");
@@ -224,21 +226,11 @@ namespace GFCA.APT.DAL.Implements
                 return _promotionRepository ?? (_promotionRepository = new PromotionRepository(_transaction));
             }
         }
-
-      
-
         public IBudgetPlanRepository BudgetPlanRepository
         {
             get
             {
                 return _budgetplanRepository ?? (_budgetplanRepository = new BudgetPlanRepository(_transaction));
-            }
-        }
-        public ISaleForecastRepository SaleForecastRepository
-        {
-            get
-            {
-                return _saleForecastRepository ?? (_saleForecastRepository = new SaleForecastRepository(_transaction));
             }
         }
 
@@ -295,7 +287,6 @@ namespace GFCA.APT.DAL.Implements
             _documentRepository = null;
             _fixedContractRepository = null;
             _promotionRepository = null;
-            _saleForecastRepository = null;
         }
         private void Dispose(bool disposing)
         {

@@ -32,6 +32,8 @@ namespace GFCA.APT.WEB
             csslteStyle.Orderer = new AsIsBundleOrderer();
             csslteStyle
                 .Include("~/Content/plugins/fontawesome-free/css/all.min.css")
+                .Include("~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")
+                .Include("~/Content/plugins/toastr/toastr.min.css")
                 .Include("~/Content/plugins/ionicons/css/ionicons.min.css")
                 .Include("~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")
                 .Include("~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css")
@@ -79,6 +81,9 @@ namespace GFCA.APT.WEB
             Bundle jqueyLteScript = new ScriptBundle("~/bundles/jquerylte");
             jqueyLteScript.Orderer = new AsIsBundleOrderer();
             jqueyLteScript
+                .Include("~/Scripts/dayjs-1.10.7/package/dayjs.min.js")
+                .Include("~/Scripts/dayjs-1.10.7/package/locale/th.js")
+                .Include("~/Scripts/dayjs-1.10.7/package/plugin/utc.js")
                 .Include("~/Content/plugins/jquery/jquery.min.js ")
                 .Include("~/Content/plugins/jquery-ui/jquery-ui.min.js")
                 //.Include("~/Scripts/numeral-js/min/numeral.min.js")
@@ -122,6 +127,8 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js")
                 .Include("~/Content/plugins/summernote/summernote-bs4.min.js")
                 .Include("~/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")
+                .Include("~/Content/plugins/sweetalert2/sweetalert2.min.js")
+                .Include("~/Content/plugins/toastr/toastr.min.js")
                 .Include("~/Content/dist/js/adminlte.js")
                 .Include("~/Scripts/jquery.bsAlerts.min.js")
                 .Include("~/Scripts/bs4-toast/dist/toast.min.js")

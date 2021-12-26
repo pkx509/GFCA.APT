@@ -431,7 +431,7 @@
                                     <div class="col col-sm-12 col-lg-6">
                                         <div class="form-group row">
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                Sales Quantity
+                                                Before promotion
                                             </label>
                                             <div class="col col-lg-8">
                                                 @if (Model != null)
@@ -439,7 +439,7 @@
                                                     @(Html.EJS().TextBox("SALE_QTY")
                                                             .Placeholder("0.00")
                                                             .Enabled(true)
-                                                            .Value(Model.DetailSaleItem.SALE_QTY.ToString("N0"))
+                                                            .Value(Model.DetailSaleItem.SALE_QTY.ToString("N2"))
                                                             .Render())
                                                 }
                                                 else
@@ -456,20 +456,20 @@
                                     <div class="col col-sm-12 col-lg-6">
                                         <div class="form-group row">
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                Average Volume
+                                                Include promotion
                                             </label>
                                             <div class="col col-lg-8">
                                                 @if (Model != null)
                                                 {
-                                                    @(Html.EJS().TextBox("AVG_VOLUME")
+                                                    @(Html.EJS().TextBox("INCLUDE_PROMOTION")
                                                             .Placeholder("0.00")
                                                             .Enabled(true)
-                                                            .Value(Model.DetailSaleItem.AVG_VOLUME.ToString("N2"))
+                                                            .Value(Model.DetailSaleItem.INCLUDE_PROMOTION.ToString("N2"))
                                                             .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().TextBox("AVG_VOLUME")
+                                                    @(Html.EJS().TextBox("INCLUDE_PROMOTION")
                                                         .Placeholder("0.00")
                                                         .Enabled(true)
                                                         .Render())
@@ -508,20 +508,20 @@
                                     <div class="col col-sm-12 col-lg-6">
                                         <div class="form-group row">
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                Average Sales (THB)
+                                                Average Volume
                                             </label>
                                             <div class="col col-lg-8">
                                                 @if (Model != null)
                                                 {
-                                                    @(Html.EJS().TextBox("AVG_SALE")
+                                                    @(Html.EJS().TextBox("AVG_VOLUME")
                                                             .Placeholder("0.00")
                                                             .Enabled(true)
-                                                            .Value(Model.DetailSaleItem.AVG_SALE.ToString("N2"))
+                                                            .Value(Model.DetailSaleItem.AVG_VOLUME.ToString("N2"))
                                                             .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().TextBox("AVG_SALE")
+                                                    @(Html.EJS().TextBox("AVG_VOLUME")
                                                         .Placeholder("0.00")
                                                         .Enabled(true)
                                                         .Render())
@@ -559,20 +559,20 @@
                                     <div class="col col-sm-12 col-lg-6">
                                         <div class="form-group row">
                                             <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
-                                                Deal Guideline
+                                                Average Sales (THB)
                                             </label>
                                             <div class="col col-lg-8">
                                                 @if (Model != null)
                                                 {
-                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                    @(Html.EJS().TextBox("AVG_SALE")
                                                             .Placeholder("0.00")
                                                             .Enabled(true)
-                                                            .Value(Model.DetailSaleItem.DEAL_GUIDE_LINE.ToString("N2"))
+                                                            .Value(Model.DetailSaleItem.AVG_SALE.ToString("N2"))
                                                             .Render())
                                                 }
                                                 else
                                                 {
-                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                    @(Html.EJS().TextBox("AVG_SALE")
                                                         .Placeholder("0.00")
                                                         .Enabled(true)
                                                         .Render())
@@ -608,6 +608,28 @@
                                         </div>
                                     </div>
                                     <div class="col col-sm-12 col-lg-6">
+                                        <div class="form-group row">
+                                            <label class="col col-lg-4 control-label text-lg-right text-md-right text-sm-left">
+                                                Deal Guideline
+                                            </label>
+                                            <div class="col col-lg-8">
+                                                @if (Model != null)
+                                                {
+                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                            .Placeholder("0.00")
+                                                            .Enabled(true)
+                                                            .Value(Model.DetailSaleItem.DEAL_GUIDE_LINE.ToString("N2"))
+                                                            .Render())
+                                                }
+                                                else
+                                                {
+                                                    @(Html.EJS().TextBox("DEAL_GUIDE_LINE")
+                                                        .Placeholder("0.00")
+                                                        .Enabled(true)
+                                                        .Render())
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -644,7 +666,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <!--/form -->

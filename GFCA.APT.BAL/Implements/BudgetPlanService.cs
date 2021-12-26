@@ -90,14 +90,42 @@ namespace GFCA.APT.BAL.Implements
             }
         }
 
-        public BusinessResponse CreateHeader(FixedContractHeaderDto model)
+        public BusinessResponse CreateHeader(BudgetPlanHeaderDto model)
         {
             BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
             try
             {
                 var doch = model;
 
-                var doc = _uow.DocumentRepository.GenerateDocNo(doch.DOC_TYPE_CODE, doch.CUST_CODE, doch.DOC_YEAR, doch.DOC_MONTH);
+                var doc = _uow.DocumentRepository.GenerateDocNo("BP", doch.CUST_CODE, System.DateTime.Now.Year, System.DateTime.Now.Month);
+
+              
+
+                var COMPANY = _uow.CompanyRepository.GetByCode(doch.COMP_CODE);
+                if (COMPANY == null)
+                {
+                    throw new Exception("Company");
+
+                }
+
+
+                var CUSTTOMER = _uow.CustomerRepository.GetByCode(doch.CUST_CODE);
+                if (CUSTTOMER == null)
+                {
+                    throw new Exception("Customer");
+
+                }
+
+
+                if (doch.FISCAL_YEAR < 2020 || doch.FISCAL_YEAR > 9999)
+                {
+                    throw new Exception("Year");
+
+                }
+
+
+                //generate document no
+
                 //generate document no
 
                 doc.DOC_STATUS = DOCUMENT_STATUS.DRAFT;
@@ -110,8 +138,9 @@ namespace GFCA.APT.BAL.Implements
                 doc.ORG_CODE = doch.ORG_CODE;
                 doc.ORG_NAME = doch.ORG_NAME;
                 doc.REQUESTER = "System";
-                _uow.DocumentRepository.Insert(doc);
+            //_uow.DocumentRepository.Insert(doc);
                 doch.DOC_VER = doc.DOC_VER;
+                doch.DOC_REV = doc.DOC_REV;
                 doch.DOC_CODE = doc.DOC_CODE;
                 /*
                 doch.DOC_TYPE_CODE = "";
@@ -134,7 +163,7 @@ namespace GFCA.APT.BAL.Implements
                 */
                 doch.CREATED_BY = doc.REQUESTER;
                 doch.CREATED_DATE = DateTime.UtcNow;
-                _uow.FixedContractRepository.InsertFixedContractHeader(doch);
+                _uow.BudgetPlanRepository.InsertBudgetPlanHeaderHeader(doch);
 
                 _uow.Commit();
                 response.Success = true;
@@ -144,6 +173,7 @@ namespace GFCA.APT.BAL.Implements
             }
             catch (Exception ex)
             {
+                _uow.Dispose();
                 response.Success = false;
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
@@ -381,11 +411,354 @@ namespace GFCA.APT.BAL.Implements
             return response;
         }
 
-        
+     
+
+
+
+
+
+        public BudgetPlanHeaderDto BudgetPlanHeaderDto(int id)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetBudgetPlanID(id);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanHeaderDto BudgetPlanByID(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetBudgetPlanID(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BusinessResponse CreateHeader(PromotionPlanningSaleDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusinessResponse CreateSalesDetail(BudgetPlanSaleDto model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                var dto = model;
+
+
+
+                dto.DOC_BGH_ID = model.DOC_BGH_ID;
+             //  dto.DOC_BGH_SALES_ID = model.DOC_BGH_SALES_ID;
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.PACK_CODE = model.PACK_CODE;
+                dto.SIZE_CODE = model.SIZE_CODE;
+                dto.PRD_CODE = model.PRD_CODE;
+                dto.COST_ELEMENT_CODE = model.COST_ELEMENT_CODE;
+                dto.COST_CENTER = model.COST_CENTER;
+                dto.YEAR = model.YEAR;
+                dto.MONTH = model.MONTH;
+                dto.TOTAL = model.TOTAL;
+                dto.M1 = model.M1;
+                dto.M2 = model.M2;
+                dto.M3 = model.M3;
+                dto.M4 = model.M4;
+                dto.M5 = model.M5;
+                dto.M6 = model.M6;
+                dto.M7 = model.M7;
+                dto.M8 = model.M8;
+                dto.M9 = model.M9;
+                dto.M10 = model.M10;
+                dto.M11 = model.M11;
+                dto.M12 = model.M12;
+                dto.FLAG_ROW = model.FLAG_ROW;
+                dto.CREATED_BY = model.CREATED_BY;
+                dto.CREATED_DATE = model.CREATED_DATE;
+                dto.UPDATED_BY = model.UPDATED_BY;
+                dto.UPDATED_DATE = model.UPDATED_DATE;
+                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_DATE = DateTime.UtcNow;
+                _uow.BudgetPlanRepository.InsertBudgetPlanSale(dto);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("CreateHeader", ex);
+            }
+
+            return response;
+        }
+
+        public BusinessResponse CreateInvestmentDetail(BudgetPlanInvestmentDto model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                var dto = model;
+
+
+
+                dto.DOC_BGH_ID = model.DOC_BGH_ID;
+                //  dto.DOC_BGH_SALES_ID = model.DOC_BGH_SALES_ID;
+                dto.BRAND_CODE = model.BRAND_CODE;
+                dto.PACK_CODE = model.PACK_CODE;
+                dto.SIZE_CODE = model.SIZE_CODE;
+                dto.PRD_CODE = model.PRD_CODE;
+                dto.ACTIVITY_CODE = model.ACTIVITY_CODE;
+                dto.COST_ELEMENT_CODE = model.COST_ELEMENT_CODE;
+                dto.COST_CENTER = model.COST_CENTER;
+                dto.YEAR = model.YEAR;
+                dto.MONTH = model.MONTH;
+                dto.TOTAL = model.TOTAL;
+                dto.M1 = model.M1;
+                dto.M2 = model.M2;
+                dto.M3 = model.M3;
+                dto.M4 = model.M4;
+                dto.M5 = model.M5;
+                dto.M6 = model.M6;
+                dto.M7 = model.M7;
+                dto.M8 = model.M8;
+                dto.M9 = model.M9;
+                dto.M10 = model.M10;
+                dto.M11 = model.M11;
+                dto.M12 = model.M12;
+                dto.FLAG_ROW = model.FLAG_ROW;
+                dto.CREATED_BY = model.CREATED_BY;
+                dto.CREATED_DATE = model.CREATED_DATE;
+                dto.UPDATED_BY = model.UPDATED_BY;
+                dto.UPDATED_DATE = model.UPDATED_DATE;
+                dto.CREATED_BY = _currentUser.UserName ?? "System";
+                dto.CREATED_DATE = DateTime.UtcNow;
+                _uow.BudgetPlanRepository.InsertBudgetPlanInvestment(dto);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("CreateInvestmentDetail", ex);
+            }
+
+            return response;
+        }
+
+        public IEnumerable<BudgetPlanSaleDto> GetDetailSalesItems(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailSalesItems(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<BudgetPlanInvestmentDto> GetDetailInvItems(int DOC_BGH_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailInvItems(DOC_BGH_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanSaleDto GetDetailSalesItem(int DOC_BGH_SALES_ID)
+        {
+            try
+            {
+                
+
+                var doch = _uow.BudgetPlanRepository.GetDetailSalesItem(DOC_BGH_SALES_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BudgetPlanInvestmentDto GetDetailInvItem(int DOC_BGH_INV_ID)
+        {
+            try
+            {
+                var doch = _uow.BudgetPlanRepository.GetDetailInvItem(DOC_BGH_INV_ID);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BusinessResponse EditBudgetPlanSale(BudgetPlanSaleDto model)
+        {
+          
+
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                BudgetPlanSaleDto dto = model;
+
+                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                _uow.BudgetPlanRepository.UpdateBudgetPlanSale(dto);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("EditBudgetPlanSale : ", ex);
+            }
+            return response;
+
  
+        }
+
+        public BusinessResponse EditBudgetInvsSale(BudgetPlanInvestmentDto model)
+        {
+
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                BudgetPlanInvestmentDto dto = model;
+
+                dto.UPDATED_BY = _currentUser.UserName ?? "System";
+                _uow.BudgetPlanRepository.UpdateBudgetInvsSale(dto);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+                response.Data = dto;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("EditBudgetInvsSale : ", ex);
+            }
+            return response;
+
+        }
+
+        public BusinessResponse RemoveBudgetPlanSale(long DOC_BGH_SALES_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+              
+                
+                _uow.BudgetPlanRepository.DeleteBudgetPlanSale(DOC_BGH_SALES_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemoveBudgetPlanSale : ", ex);
+            }
+            return response;
+        }
+
+        public BusinessResponse RemoveBudgetInvsSale(long DOC_BGH_INV_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+
+
+                _uow.BudgetPlanRepository.DeleteBudgetInvsSale(DOC_BGH_INV_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemoveBudgetInvsSale : ", ex);
+            }
+            return response;
+        }
+
+
 
 
         #endregion [ detail ]
+
+        //start examples bulk
+
+        public BusinessResponse ExampleCreateByBulk(IEnumerable<TableStagingDto> model)
+        {
+            BusinessResponse response = new BusinessResponse(false, MESSAGE_TYPE.WARNING, string.Empty);
+            try
+            {
+                bool tbS = _uow.BulkInsertBestPracticesRepository.InsertTableStaging(model);
+                var msgs = _uow.BulkInsertBestPracticesRepository.ValidationTableStaging();
+
+                bool tbM = false;
+                if (tbS)
+                    tbM = _uow.BulkInsertBestPracticesRepository.InsertTableReal();
+                    
+                _uow.Commit();
+                response.Success = tbM;
+                response.MessageType = tbM? MESSAGE_TYPE.SUCCESS : MESSAGE_TYPE.ERROR;
+                response.Message = string.Empty;
+                if (msgs.Count() > 0)
+                    response.Message = string.Join(",", msgs.ToList());
+                
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("ExampleCreateByBulk", ex);
+            }
+            return response;
+        }
+
+        //end examples bulk
 
 
     }

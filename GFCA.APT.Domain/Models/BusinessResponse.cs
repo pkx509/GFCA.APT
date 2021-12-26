@@ -1,4 +1,5 @@
-﻿using GFCA.APT.Domain.HTTP.Controls;
+﻿using GFCA.APT.Domain;
+using GFCA.APT.Domain.HTTP.Controls;
 
 namespace GFCA.APT.Domain.Models
 {
@@ -6,6 +7,7 @@ namespace GFCA.APT.Domain.Models
     {
         public bool Success { get; set; } = false;
         public MESSAGE_TYPE MessageType { get; set; } = MESSAGE_TYPE.WARNING;
+        public string Title { get; set; }
         public string Message { get; set; }
         public dynamic Data { get; set; }
 
@@ -13,12 +15,14 @@ namespace GFCA.APT.Domain.Models
         {
             Success = false;
             MessageType = MESSAGE_TYPE.WARNING;
+            Title = MessageType.ToString();
             Message = string.Empty;
         }
         public BusinessResponse(bool isSuccess, MESSAGE_TYPE messageType, string message)
         {
             Success = isSuccess;
             MessageType = messageType;
+            Title = messageType.ToString();
             Message = message;
         }
     }

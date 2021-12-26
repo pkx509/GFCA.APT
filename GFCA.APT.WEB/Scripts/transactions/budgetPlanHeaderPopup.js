@@ -195,7 +195,7 @@ let budgetPlanHeaderPopup = new (function () {
         let currentDate = new Date();
         let docId = $(this.field_document_no).val() !== undefined ? $(this.field_document_no).val() : '0';
 
-        let COMP_CODE         = $("#pop-cmb-company").val();
+        let COMP_CODE = $("#pop-cmb-company_hidden").val();
         let DOC_TYPE_CODE     = 'PP';
         let DOC_PROM_PH_ID    = docId;
         //let DOC_CODE        = null;
@@ -213,7 +213,10 @@ let budgetPlanHeaderPopup = new (function () {
         let CHANNEL_NAME      = $("#pop-cmb-channel").val();
         let CUST_CODE         = $("#pop-cmb-customer_hidden").val();
         let CUST_NAME         = $("#pop-cmb-customer").val();
-        let CUST_SEGMENT      = $("#pop-cmb-cust-segment_hidden").val();
+        let CUST_SEGMENT = $("#pop-cmb-cust-segment_hidden").val();
+        let BG_TYPE_CODE = $("#pop-cmb-budgettype_hidden").val();
+        let FISCAL_YEAR = $("#pop-txt-fiscal_year").val();
+        //pop-cmb-company  pop-txt-fiscal_year
         //let TOTAL_EST_SALE    = 0.00;
         //let TOTAL_EST_INVEST  = 0.00;
         //let SALE_VS_INVEST    = 0.00;
@@ -227,9 +230,10 @@ let budgetPlanHeaderPopup = new (function () {
             PROMO_NAME, PROMO_START, PROMO_END, BUYING_START, BUYING_END,
             CLIENT_CODE, CLIENT_NAME,
             CHANNEL_CODE, CHANNEL_NAME,
-            CUST_CODE, CUST_NAME, CUST_SEGMENT,
+            CUST_CODE, CUST_NAME, CUST_SEGMENT, BG_TYPE_CODE,
             //TOTAL_EST_SALE, TOTAL_EST_INVEST, SALE_VS_INVEST,
             //COMMENT,
+            FISCAL_YEAR,
             FLAG_ROW
         };
         
@@ -277,8 +281,8 @@ let budgetPlanHeaderPopup = new (function () {
                 ...this.jsonData,
                 IS_DELETE_PERMANANT
             };
-            promotionHeaderPopup.callBack(this.jsonData);
-            promotionHeaderPopup.close();
+            budgetPlanHeaderPopup.callBack(this.jsonData);
+            budgetPlanHeaderPopup.close();
         }
         
     }

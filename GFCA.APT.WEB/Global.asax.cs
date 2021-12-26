@@ -29,7 +29,7 @@ namespace GFCA.APT.WEB
 
         protected void Application_PreSendRequestHeaders()
         {
-            Response.Headers.Set("Server", "My httpd server");
+            Response.Headers.Set("Server", "xercise httpd server");
             Response.Headers.Remove("X-AspNet-Version");
             Response.Headers.Remove("X-AspNetMvc-Version");
         }

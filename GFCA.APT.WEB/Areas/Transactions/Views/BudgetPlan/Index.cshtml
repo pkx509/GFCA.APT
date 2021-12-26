@@ -61,6 +61,8 @@ ViewBag.Title = "Fixed contract";
             <div class="row mb-2">
                 <div class="col-lg-12 p-1">
                     <div class="card card-success card-outline">
+                      
+
                         <div class="card-body text-sm p-1">
                             @(Html.EJS()
                                   .Grid("grdBudgetPlan")
@@ -102,13 +104,9 @@ ViewBag.Title = "Fixed contract";
                                       col.Field("DOC_CODE").HeaderText("Doc no.").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("BG_TYPE_CODE").HeaderText("Code Type").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("COMP_CODE").HeaderText("Comp Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_CODE").HeaderText("Brand Code").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("BRAND_NAME").HeaderText("Brand Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-                                      col.Field("Year").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-                                      col.Field("AMOUNT").HeaderText("Amount").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-
-
+                                      col.Field("COMP_NAME").HeaderText("Comp Name").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("FISCAL_YEAR").HeaderText("Year").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+                                      col.Field("BUDGET_AMOUNT").HeaderText("Amount").Format("##,###.##").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
                                       col.Field("CREATED_BY").HeaderText("Requester").Width("200").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Right).Add();
                                       col.Field("CREATED_DATE").HeaderText("Created Date").Width("200").Format("dd-MM-yyyy hh:mm:ss").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
                                   })
@@ -131,13 +129,14 @@ ViewBag.Title = "Fixed contract";
 {
     <!-- BEGIN preScripts -->
     <script>
-        var urlServices = {
+     
+            var urlServices = {
             CurrentUrl: "@Url.Action("index", "BudgetPlan", new { Area = "Transactions" })",
-            Add       : "@Url.Action("Add", "BudgetPlan", new { Area = "Transactions" })",
-            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "FixedContract", new { Area = "Transactions" })",
-            AddDetail : "@Url.Action("CreateBudgetPlanDetail", "FixedContract", new { Area = "Transactions" })",
+            AddHeader : "@Url.Action("CreateBudgetPlanHeader", "BudgetPlan", new { Area = "Transactions" })",
             Delete    : "@Url.Action("Delete", "BudgetPlan", new { Area = "Transactions" })",
-        }
+            }
+
+
         var argruments = {
             data: null,
         }
@@ -152,7 +151,7 @@ ViewBag.Title = "Fixed contract";
             }
         }
     </script>
-    @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
+   @Scripts.Render("~/Scripts/transactions/budgetPlanHeaderPopup.js")
 
 
 
@@ -160,5 +159,6 @@ ViewBag.Title = "Fixed contract";
 
 @section scripts
 {
+
     @Scripts.Render("~/Scripts/transactions/budgetPlan.js")
 }

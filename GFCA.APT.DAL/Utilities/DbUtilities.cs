@@ -14,7 +14,6 @@ namespace GFCA.APT.DAL
 
     }
 
-
 }
 
 namespace GFCA.APT.DAL

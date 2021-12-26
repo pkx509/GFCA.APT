@@ -1,6 +1,41 @@
-﻿<div class="breadcrumb">
+﻿<!-- <div class="breadcrumb"> -->
+
+    <!--
     <a href="/">Portal</a>
     <a href="/t/promotions">Promotions</a>
     <a href="/t/promotions/21">PP-202111-0001</a>
     <a href="#">Item No 1</a>
-</div>
+    -->
+    @* Portal *@
+    @*Html.ActionLink("Portal", "Index", "Home")
+    *@
+    @* Module Document List *@
+    @*
+        @if (ViewContext.RouteData.Values["controller"].ToString().ToLower() != "home")
+        {
+            @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+        }
+    *@
+    @*
+        Document Number
+        Document Detail Number
+    *@
+    @*
+        @if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "index")
+        {
+            Html.ActionLink(ViewContext.RouteData.Values["DOC_PROM_PH_ID"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+            var models = ViewBag.BreadCrumb as IList<GFCA.APT.Domain.Dto.BreadCrumbRouteDto>;
+            if (ViewContext.RouteData.Values.Count == 3)
+            {
+            }
+            if (models != null)
+            {
+                foreach (var item in models)
+                {
+                    <a href="@item.Url">@item.Label</a>
+                }
+            }
+        }
+    *@
+<!-- </div>-->
+

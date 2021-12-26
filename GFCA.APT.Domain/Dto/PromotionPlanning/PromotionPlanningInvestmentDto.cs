@@ -29,7 +29,7 @@ namespace GFCA.APT.Domain.Dto
         public string ACTIVITY_NAME { get; set; }
 
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public INVESTMENT_TYPE INVEST_TYPE { get; set; } = INVESTMENT_TYPE.VALUE; // PERCENT, VALUE
+        public INVESTMENT_TYPE INVEST_TYPE { get; set; } = INVESTMENT_TYPE.BAHT_COMPENSATE;
         public decimal INVEST_VALUE { get; set; } = 0.00M;
         public decimal INVEST_AMOUNT { get; set; } = 0.00M;
 

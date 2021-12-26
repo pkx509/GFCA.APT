@@ -8,6 +8,7 @@ using GFCA.APT.BAL.Interfaces;
 using GFCA.APT.Domain.Models;
 using Newtonsoft.Json;
 using System;
+using MvcBreadCrumbs;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
@@ -25,6 +26,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/FixedContracts
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Fixed Contracts")]
         public ActionResult Index()
         {
             return View();
@@ -69,6 +71,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/FixedContracts/{DOC_FCH_ID}]
         //[HttpGet]
+        [BreadCrumb(Clear = false, Label = "Fixed Contract Item")]
         public ActionResult FixedContractItem(int DOC_FCH_ID)
         {
             var dto = new FixedContractDto();
@@ -90,7 +93,8 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //no use this line bcause already use for bind grid at function UrlFixedContractDetailList
                 //dto.DetailData = _biz.FixedContractService.GetDetailItems(DOC_FCH_ID);
                 dto.FooterData = new FixedContractFooterDto();
-                
+
+                BreadCrumb.SetLabel(dto.DocumentData.DOC_CODE);
             }
             catch
             {
@@ -101,6 +105,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
         // GET: T/FixedContracts/{DOC_FCH_ID}/{DOC_FCD_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Fixed Contract Item Detail")]
         public ActionResult FixedContractDetail(int DOC_FCH_ID, int DOC_FCD_ID)
         {
             FixedContractDto dto = new FixedContractDto();
@@ -108,6 +113,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             {
                 var item = _biz.FixedContractService.GetDetailItem(DOC_FCD_ID);
                 dto.DetailItem = item;
+
+                if (DOC_FCD_ID == 0)
+                    BreadCrumb.SetLabel($"New Fix Contract");
+                else
+                    BreadCrumb.SetLabel($"Fix Contract No : {DOC_FCD_ID}");
             }
             catch
             {
@@ -254,20 +264,43 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         public JsonResult DeleteFixedContractDetail(FixedContractDetailDto data)
         {
             _biz.LogService.Debug("DeleteFixedContractDetail");
-            dynamic d = new BusinessResponse();
-
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
             try
             {
-                var biz = _biz.FixedContractService.RemoveDetail(data);
-                d = JsonConvert.SerializeObject(biz);
+                bizObj = _biz.FixedContractService.RemoveDetail(data);
             }
-            catch
+            catch (Exception ex)
             {
-
+                _biz.LogService.Error("DeleteFixedContractDetail : ", ex);
             }
-            return Json(new { data = d, JsonRequestBehavior.AllowGet });
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
+        [HttpPost]
+        public JsonResult DeleteFixedContractHeader(FixedContractHeaderDto data)
+        {
+            _biz.LogService.Debug("DeleteFixedContractHeader");
+            string jsonData = string.Empty;
+            var bizObj = new BusinessResponse();
+            try
+            {
+                bizObj = _biz.FixedContractService.RemoveHeader(data);
+            }
+            catch (Exception ex)
+            {
+                _biz.LogService.Error("DeleteFixedContractHeader : ", ex);
+            }
+            finally
+            {
+                jsonData = JsonConvert.SerializeObject(bizObj);
+            }
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
 
         // GET: T/FixedContracts/{DocCode}]
         [HttpGet]

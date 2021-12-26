@@ -64,7 +64,8 @@
 {
     <script>
         var urlServices = {
-            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
+            AddDetail: "@Url.Action("CreateFixedContractDetail", "FixedContract", new { Area = "Transactions" })",
+            DeleteDetail: "@Url.Action("DeleteFixedContractDetail", "FixedContract", new { Area = "Transactions" })"
         }
         var argruments = {
             DOC_FCH_ID: "@Model.HeaderData.DOC_FCH_ID",
@@ -79,6 +80,7 @@
             }
         }
     </script>
+    @Scripts.Render("~/Scripts/transactions/fixedContractHeaderPopup.js")
     @Scripts.Render("~/Scripts/transactions/fixedContractItem.js")
 
 }

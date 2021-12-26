@@ -13,29 +13,34 @@ let sendPost = function (url, data) {
 
             let res = JSON.parse(response.data);
 
-            $.toast({
-                type: res.MessageType.ToMessageType(),
-                title: "information",
-                subtitle: (new Date()).toDateString(),
-                content: res.Message,
-                delay: 7000
-            });
-
             if (res.Success === true) {
+
+                Toast.fire({
+                    icon: res.MessageType.ToMessageType(),
+                    title: res.Message
+                })
 
                 setTimeout(function () {
                     window.location = urlServices.PreviousUrl;
-                }, 7000);
+                }, 5000);
 
+            } else {
+
+                $(document).Toasts('create', {
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'topRight',
+                    body: res.Message
+                });
             }
         },
         error: function (response) {
-            $.toast({
-                type: "error",
-                title: "error",
-                subtitle: (new Date()).toDateString(),
-                content: JSON.stringify(response),
-                delay: 7000
+            
+            $(document).Toasts('create', {
+                class: 'bg-error',
+                title: 'error',
+                position: 'topRight',
+                body: JSON.stringify(response)
             });
         }
     });
@@ -71,6 +76,7 @@ let promotionSaleDetail = new (function () {
         let NET_INTO_STORE      = $("#NET_INTO_STORE").val();
         let AVG_SALE            = $("#AVG_SALE").val();
         let AVG_VOLUME          = $("#AVG_VOLUME").val();
+        let INCLUDE_PROMOTION   = $("#INCLUDE_PROMOTION").val();
         let SALE_QTY            = $("#SALE_QTY").val();
         let SALE_VALUE_EXCL_VAT = $("#SALE_VALUE_EXCL_VAT").val();
         let SALE_UOM            = $("#SALE_UOM").val();
@@ -110,6 +116,7 @@ let promotionSaleDetail = new (function () {
 
             AVG_SALE,
             AVG_VOLUME,
+            INCLUDE_PROMOTION,
 
             SALE_QTY,
             SALE_VALUE_EXCL_VAT,

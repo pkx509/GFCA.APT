@@ -81,7 +81,7 @@ namespace GFCA.APT.BAL.Implements
                 //model.CUST_NAME = 
                 dto.CREATED_BY = doc.REQUESTER;
                 _uow.PromotionRepository.InsertOverview(dto);
-                
+
                 _uow.Commit();
                 response.Success = true;
                 response.MessageType = MESSAGE_TYPE.SUCCESS;
@@ -334,6 +334,99 @@ namespace GFCA.APT.BAL.Implements
                 response.MessageType = MESSAGE_TYPE.ERROR;
                 response.Message = ex.Message;
                 _logger.Error("RemovePlanngSale : ", ex);
+            }
+            return response;
+        }
+
+        public BusinessResponse SubmitPromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                _uow.PromotionRepository.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemovePlanngSale : ", ex);
+            }
+            return response;
+        }
+
+        public BusinessResponse ApprovePromotionPlanng(int DOC_PROM_PH_ID)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+            {
+                _uow.PromotionRepository.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+                _uow.PromotionRepository.ApprovePromotionPlanngInvsDetail(DOC_PROM_PH_ID);
+                _uow.PromotionRepository.ApprovePromotionPlanngSaleDetail(DOC_PROM_PH_ID);
+                _uow.Commit();
+                response.Success = true;
+                response.MessageType = MESSAGE_TYPE.SUCCESS;
+                response.Message = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                _uow.Dispose();
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("RemovePlanngSale : ", ex);
+            }
+            return response;
+        }
+
+        public IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAllByStatus(string DOC_STATUS = "")
+        {
+            try
+            {
+                var doch = _uow.PromotionRepository.GetPromotionPlanAllByStatus(DOC_STATUS);
+                return doch;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BusinessResponse ApprovePromotionSelect(List<int> Ids)
+        {
+            BusinessResponse response = new BusinessResponse();
+            try
+
+
+            {
+
+                foreach (int DOC_PROM_PH_ID in Ids)
+                {
+
+
+
+
+                    _uow.PromotionRepository.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+                    _uow.PromotionRepository.ApprovePromotionPlanngInvsDetail(DOC_PROM_PH_ID);
+                    _uow.PromotionRepository.ApprovePromotionPlanngSaleDetail(DOC_PROM_PH_ID);
+                    _uow.Commit();
+                    response.Success = true;
+                    response.MessageType = MESSAGE_TYPE.SUCCESS;
+                    response.Message = string.Empty;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.MessageType = MESSAGE_TYPE.ERROR;
+                response.Message = ex.Message;
+                _logger.Error("ApprovePromotionSelect : ", ex);
             }
             return response;
         }

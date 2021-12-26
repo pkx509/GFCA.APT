@@ -10,20 +10,22 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-
                 let res = JSON.parse(response.data);
 
-                $.toast({
-                    type: res.MessageType.ToMessageType(),
-                    title: "information",
-                    subtitle: (new Date()).toDateString(),
-                    content: res.Message,
-                    delay: 7000
-                });
-
                 if (res.Success === true) {
-                    fixedContractHeaderPopup.close();
-                    let objGrid = document.getElementById("grdFixedContractDetailList").ej2_instances[0];
+                    promotionHeaderPopup.close();
+                    let objGrid = document.getElementById("grdInvestment").ej2_instances[0];
+
+                    $(document).Toasts('create', {
+                        // class: `bg-${res.MessageType.ToMessageType()}`,
+                        title: res.Title,
+                        position: 'bottomRight',
+                        body: res.Message ? res.Message : 'Success',
+                        delay: 3000,
+                        autohide: true,
+                        animation: true
+                    });
+
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
@@ -32,12 +34,11 @@
                 }
             },
             error: function (response) {
-                $.toast({
-                    type: "error",
-                    title: "error",
-                    subtitle: (new Date()).toDateString(),
-                    content: JSON.stringify(response),
-                    delay: 7000
+                $(document).Toasts('create', {
+                    class: `bg-${res.MessageType.ToMessageType()}`,
+                    title: res.Title,
+                    position: 'bottomRight',
+                    body: res.Message
                 });
             }
         });
@@ -61,17 +62,17 @@
         }
 
     });
-    /*
+    
     $("#toolbar_investment_del").click(function (e) {
         e.preventDefault();
         
         let callBack = function (data) {
-            sendPost(urlServices.Edit, data);
+            sendPost(urlServices.DeleteInvestment, data);
         };
         
-        // channelPopup.open(POPUP_MODE.DELETE, argruments.data, callBack);
+        promotionHeaderPopup.open(POPUP_MODE.DELETE, argruments.dataInvest, callBack);
     });
-    */
+    
     $("#toolbar_sale_add").click(function (e) {
         e.preventDefault();
 
@@ -100,5 +101,33 @@
             window.location.href = url;
         }
     });
-    
+
+    $('button[name="btn-workflow-commands"]').click(function (e) {
+        //e.preventDefault();
+
+        let cmd = $(e.target).data("value");
+        console.log(cmd);
+
+        let cbSuccess = function (response) {
+
+        };
+
+        let data = {
+            WF_STATE_ID : 0,
+            FLOW_ITEM_ID : 0,
+            STATE_CODE : '',
+            FLOW_ITEM_CODE : cmd,
+            FLOW_ITEM_NAME: '',
+            FLOW_ITEM_DESC: '',
+            DIRECTION_CODE: '',
+            DIRECTION_NAME: '',
+            Sort: 1,
+        };
+        //let url = `${window.location.origin}/T/Promotions/PostCommand`;
+        let url = "/T/Promotions/PostCommand`"
+        sendPost(url, data);
+
+        //AjaxPost(url, data, cbSuccess);
+            
+    });
 });

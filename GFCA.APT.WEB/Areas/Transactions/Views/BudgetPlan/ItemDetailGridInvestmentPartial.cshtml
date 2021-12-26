@@ -1,14 +1,19 @@
 ﻿@using Syncfusion.EJ2.Grids
-@(Html.EJS()
+@using Syncfusion.EJ2
+@model GFCA.APT.Domain.Dto.BudgetPlanDto
+
+
+<div class="col-lg-12 p-1">
+    @(Html.EJS()
 .Grid("grdBudgetPlanInvestment")
 .Height("450")
-//.DataSource(ds =>
-//{
-//    ds
-//    .Url(@Url.Action("UrlDataSource/{id}", "FixedContract", new { Area = "Transactions" }))
-//    .Adaptor("UrlAdaptor")
-//    ;
-//})
+.DataSource(ds =>
+{
+    ds
+    .Url(@Url.Action("UrlBudgetPlanInvsList", "BudgetPlan", new { Area = "Transactions", DOC_BGH_ID = Model.DOC_BGH_ID }))
+   .Adaptor("UrlAdaptor")
+    ;
+})
 .ShowColumnMenu(false).AllowSorting()
 .AllowPaging(true).PageSettings(page => page.PageCount(5))
 .AllowFiltering(true).FilterSettings(filter => filter.Type(FilterType.Excel))
@@ -16,11 +21,10 @@
 .Toolbar(new List<object>() {
     new { id ="toolbar_add_investment_grid", text = "Add", prefixIcon = "e-icons e-add" },
     new { id ="toolbar_edit_investment_grid", text = "Edit", prefixIcon = "e-icons e-edit" },
-    new { id ="toolbar_del_investment_grid", text = "Delete", prefixIcon = "e-icons e-delete" },
+  //  new { id ="toolbar_del_investment_grid", text = "Delete", prefixIcon = "e-icons e-delete" },
     new { id ="toolbar_excel_investment_grid", text = "Excel", prefixIcon = "e-icons e-excelexport" },
     //new { text = "Print", prefixIcon = "e-icons e-print" },
 })
-
 .EditSettings(edit =>
 {
     edit
@@ -32,19 +36,36 @@
     //.Template("#dialogtemplate")
     ;
 })
+    .RowDeselected("onGridInvestRowDeselected")
+    .RowSelected("onGridInvestRowSelected")
 .Columns(col =>
 {
+        col.Field("YEAR").Width("100").HeaderText("Year").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("MONTH").Width("100").HeaderText("Month").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("TOTAL").Width("200").HeaderText("Total").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("BRAND_NAME").Width("200").HeaderText("Brand").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
+    col.Field("PRD_CODE").Width("200").HeaderText("Prd. Code").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("PROD_NAME").Width("200").HeaderText("Prd. Name").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("PACK_NAME").Width("200").HeaderText("Pack").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("SIZE_NAME").Width("200").HeaderText("Size").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("COST_CENTER").Width("200").HeaderText("CostCenter").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
 
-    col.Field("Brand").HeaderText("Channel").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Center).Add();
-    col.Field("Trade_Activity").HeaderText("Customer").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Category").HeaderText("Brand").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Date_Reference").HeaderText("Trade Invesment Category").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Size").HeaderText("Cost Center").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Pack").HeaderText("Source of Fund").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Cost_center").HeaderText("Actual Last Year (THB)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Remark").HeaderText("Type").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Remark").HeaderText("Value (THB / %)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Remark").HeaderText("Target Current Year (THB)").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
-    col.Field("Remark").HeaderText("% Contribution").HeaderTextAlign(TextAlign.Center).TextAlign(TextAlign.Left).Add();
+    col.Field("M1").HeaderText("M1").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M2").HeaderText("M2").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M2").HeaderText("M2").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M3").HeaderText("M3").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M4").HeaderText("M4").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M5").HeaderText("M5").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M6").HeaderText("M6").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M7").HeaderText("M7").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M8").HeaderText("M8").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M9").HeaderText("M9").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M10").HeaderText("M10").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M11").HeaderText("M11").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+    col.Field("M12").HeaderText("M12").Width("200").HeaderTextAlign(TextAlign.Right).TextAlign(TextAlign.Right).Add();
+
 })
 .Render())
+
+
+</div>.
