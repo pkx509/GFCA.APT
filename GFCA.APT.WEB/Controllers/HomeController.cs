@@ -1,4 +1,5 @@
 ﻿using GFCA.APT.BAL.Interfaces;
+using MvcBreadCrumbs;
 using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Controllers
@@ -11,6 +12,7 @@ namespace GFCA.APT.WEB.Controllers
             _biz = biz;
         }
 
+        [BreadCrumb(Clear = false, Order = 0, Label = "Portal")]
         public ActionResult Index()
         {
             return View();

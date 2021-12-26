@@ -7,23 +7,11 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-    <ul class="navbar-nav">
-        @{
-            if (ViewBag.Title == "Portal")
-            {
-                <li class="breadcrumb-item nav-link active">Portal</li>
-            }
-            else
-            {
-                <li class="breadcrumb-item"><a href="/" class="nav-link">Portal</a></li>
-            }
 
-            if (ViewBag.Title != "Portal")
-            {
-                <li class="breadcrumb-item nav-link active">@ViewBag.Title</li>
-            }
-        }
-    </ul>
+    <div class="light placeholder">
+        @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+    </div>
+    
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">

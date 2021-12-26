@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
-namespace GFCA.APT.Domain.Common
+namespace GFCA.APT.Domain
 {
     public class Dynamic : DynamicObject
     {

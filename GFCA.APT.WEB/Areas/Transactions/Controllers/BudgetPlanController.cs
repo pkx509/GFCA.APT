@@ -2,6 +2,7 @@
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
+using MvcBreadCrumbs;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System;
@@ -23,12 +24,14 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/BudgetPlans
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Budget Plans")]
         public ActionResult Index()
         {
             return View();
         }
         // GET: T/BudgetPlans/{DocCode}
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Budget Plan Item")]
         public ViewResult BudgetPlanItem(int DOC_BGH_ID)
         {
             BudgetPlanDto dto = new BudgetPlanDto(DOC_BGH_ID);
@@ -51,6 +54,8 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 //   dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+
+                BreadCrumb.SetLabel(dto.BudgetPlanHeader.DOC_CODE);
             }
             catch
             {
@@ -148,6 +153,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
  
         // GET: T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Budget Plan Sale detail")]
         public ActionResult BudgetPlanSaleDetail(int DOC_BGH_ID, int DOC_BGH_SALES_ID)
         {
             _biz.LogService.Info("PromotionInvestmentDetail");
@@ -174,6 +180,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
                 */
 
+                if (DOC_BGH_SALES_ID == 0)
+                    BreadCrumb.SetLabel($"New Planing Sale");
+                else
+                    BreadCrumb.SetLabel($"Planing Sale No : {DOC_BGH_SALES_ID}");
 
             }
             catch (Exception ex)
@@ -185,6 +195,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "Budget Plan Investment detail")]
         public ActionResult BudgetPlanInvestmentDetail(int DOC_BGH_ID, int DOC_BGH_INV_ID)
         {
             _biz.LogService.Info("BudgetPlanInvestmentDetail");
@@ -208,7 +219,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
                 */
 
-
+                if (DOC_BGH_INV_ID == 0)
+                    BreadCrumb.SetLabel($"New Planing Sale");
+                else
+                    BreadCrumb.SetLabel($"Planing Sale No : {DOC_BGH_INV_ID}");
             }
             catch (Exception ex)
             {

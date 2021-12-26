@@ -1,4 +1,4 @@
-﻿using GFCA.APT.Domain.Common;
+﻿using GFCA.APT.Domain;
 using GFCA.APT.Domain.HTTP.Controls;
 
 namespace GFCA.APT.Domain.Models

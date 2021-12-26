@@ -1,7 +1,9 @@
 ﻿using GFCA.APT.BAL.Interfaces;
+using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
+using MvcBreadCrumbs;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
 using System;
@@ -13,6 +15,7 @@ using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
+
     public class PromotionController : ControllerWebBase
     {
         public const string DOC_TYPE_CODE = "PP";
@@ -23,6 +26,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         // GET: Transactions/Promotions
+        [BreadCrumb(Clear = false, Label = "Promotions")]
         public ActionResult Index()
         {
             return View();
@@ -37,6 +41,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionItem")]
         public ViewResult PromotionItem(int DOC_PROM_PH_ID)
         {
             PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PH_ID);
@@ -55,6 +60,8 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                
+                BreadCrumb.SetLabel(dto.OverviewData.DOC_CODE);
             }
             catch
             {
@@ -65,6 +72,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionSaleDetail")]
         public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
         {
             _biz.LogService.Info("PromotionSaleDetail");
@@ -85,6 +93,11 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+
+                if (DOC_PROM_PS_ID == 0)
+                    BreadCrumb.SetLabel($"New Sale");
+                else
+                    BreadCrumb.SetLabel($"Sale No : {DOC_PROM_PS_ID}");
             }
             catch(Exception ex)
             {
@@ -95,6 +108,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
         // GET: T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}]
         [HttpGet]
+        [BreadCrumb(Clear = false, Label = "PromotionInvestmentDetail")]
         public ActionResult PromotionInvestmentDetail(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
         {
             _biz.LogService.Info("PromotionInvestmentDetail");
@@ -115,6 +129,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
                 //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
                 dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
 
+                if (DOC_PROM_PI_ID == 0)
+                    BreadCrumb.SetLabel($"New Investment");
+                else
+                    BreadCrumb.SetLabel($"Investment No : {DOC_PROM_PI_ID}");
             }
             catch (Exception ex)
             {
