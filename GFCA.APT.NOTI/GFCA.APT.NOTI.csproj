@@ -202,12 +202,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implements\LineNoti.cs" />
-    <Compile Include="Interfaces\INotifies.cs" />
+    <Compile Include="Implements\EmailService.cs" />
+    <Compile Include="Implements\LineService.cs" />
+    <Compile Include="Implements\NotifyService.cs" />
+    <Compile Include="Interfaces\INotifyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

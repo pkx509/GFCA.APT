@@ -90,31 +90,32 @@ namespace GFCA.APT.WEB.Areas.Transactions
                 defaults: new { controller = "Promotion", action = "Index" },
                 namespaces: new[] { __nameSpace }
                 );
+
             context.MapRoute(
-            name: "Transaction_PromotionPlan_Pending",
-            url: "T/Pendings",
-            defaults: new { controller = "Promotion", action = "Pending" },
-            namespaces: new[] { __nameSpace }
+                name: "Transaction_PromotionPlan_Pending",
+                url: "T/Pendings",
+                defaults: new { controller = "Promotion", action = "Pending" },
+                namespaces: new[] { __nameSpace }
             );
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Item",
-                url: "T/Promotions/{DOC_PROM_PH_ID}",
-                defaults: new { controller = "Promotion", action = "PromotionItem", DOC_PROM_PH_ID = UrlParameter.Optional },
+                url: "T/Promotions/{DOC_HEADER_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionItem" },
                 namespaces: new[] { __nameSpace }
                 );
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Investment_Detail",
-                url: "T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}",
-                defaults: new { controller = "Promotion", action = "PromotionInvestmentDetail", DOC_PROM_PH_ID = UrlParameter.Optional, DOC_PROM_PI_ID = UrlParameter.Optional },
+                url: "T/Promotions/{DOC_HEADER_ID}/I/{DOC_DETAIL_ID}",
+                defaults: new { controller = "Promotion", action = "PromotionInvestmentDetail" },
                 namespaces: new[] { __nameSpace }
                 );
 
             context.MapRoute(
                 name: "Transaction_PromotionPlan_Sale_Detail",
-                url: "T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}/{PS_MODE}",
-                defaults: new { controller = "Promotion", action = "PromotionSaleDetail", DOC_PROM_PH_ID = UrlParameter.Optional, DOC_PROM_PS_ID = UrlParameter.Optional, PS_MODE = UrlParameter.Optional },
+                url: "T/Promotions/{DOC_HEADER_ID}/S/{DOC_DETAIL_ID}/{PS_MODE}",
+                defaults: new { controller = "Promotion", action = "PromotionSaleDetail", PS_MODE = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
                 );
 
@@ -168,8 +169,8 @@ namespace GFCA.APT.WEB.Areas.Transactions
             /* Default Route */
             context.MapRoute(
                 name: "Transactions_default",
-                url: "T/{controller}/{action}/{DocCode}",
-                defaults: new { action = "Index", DocCode = UrlParameter.Optional },
+                url: "T/{controller}/{action}/{DOC_HEADER_ID}",
+                defaults: new { action = "PostDocument", DOC_HEADER_ID = UrlParameter.Optional },
                 namespaces: new[] { __nameSpace }
             );
 

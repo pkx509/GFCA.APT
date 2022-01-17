@@ -261,7 +261,7 @@ namespace GFCA.APT.BAL.Implements
                 var doch = _uow.FixedContractRepository.GetFixedContractByItemID(docd.DOC_FCH_ID);
                 dto.HeaderData = doch;
                 dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(documentType, doch.DOC_FCH_ID);
-                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
+                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(documentType, doch.DOC_FCH_ID);
 
                 return docd;
             }

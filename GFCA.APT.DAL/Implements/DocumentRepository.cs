@@ -1,6 +1,9 @@
 ﻿using Dapper;
 using GFCA.APT.DAL.Interfaces;
+using GFCA.APT.DAL.Utilities;
+using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,132 +23,366 @@ namespace GFCA.APT.DAL.Implements
 
         public DocumentStateDto GetDocumentStateFlow(string documentType, int headerId)
         {
-            string sqlQuery = @"";
+            string sqlQuery =
+@"IF(@IN_DOC_TYPE_CODE = 'FC')
+BEGIN
+    SELECT TOP 1
 
-            switch (documentType)
+      DOC_FCH_ID 'DOC_HEAD_ID'
+	, COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE'
+    , (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE
+	, DOC_VER
+	, DOC_REV
+	, CUST_CODE
+	, DOC_MONTH
+	, DOC_YEAR
+	, DOC_STATUS
+	, FLOW_CURRENT
+	, FLOW_PREVIOUS
+	, FLOW_NEXT
+	, FLAG_ROW
+	, CREATED_BY
+	, CREATED_DATE
+    , UPDATED_BY
+	, UPDATED_DATE
+    FROM TB_T_FIXED_CONTRACT_H
+    WHERE DOC_FCH_ID = @IN_DOC_HEAD_ID
+END
+
+IF(@IN_DOC_TYPE_CODE = 'PP')
+BEGIN
+    SELECT TOP 1
+
+      DOC_PROM_PH_ID 'DOC_HEAD_ID'
+	, COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE'
+    , (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE
+	, DOC_VER
+	, DOC_REV
+	, CUST_CODE
+	, DOC_MONTH
+	, DOC_YEAR
+	, DOC_STATUS
+	, FLOW_CURRENT
+	, FLOW_PREVIOUS
+	, FLOW_NEXT
+	, FLAG_ROW
+	, CREATED_BY
+	, CREATED_DATE
+    , UPDATED_BY
+	, UPDATED_DATE
+    FROM TB_T_PROMOTION_H
+    WHERE DOC_PROM_PH_ID = @IN_DOC_HEAD_ID
+END
+
+IF(@IN_DOC_TYPE_CODE = 'SF')
+BEGIN
+    SELECT TOP 1
+
+      DOC_SFCH_ID 'DOC_HEAD_ID'
+	, COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE'
+    , (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE
+	, DOC_VER
+	, DOC_REV
+    , CUST_CODE
+	, DOC_MONTH
+	, DOC_YEAR
+	, DOC_STATUS
+	, FLOW_CURRENT
+	, FLOW_PREVIOUS
+	, FLOW_NEXT
+	, FLAG_ROW
+	, CREATED_BY
+	, CREATED_DATE
+    , UPDATED_BY
+	, UPDATED_DATE
+    FROM TB_T_SALES_FORECAST_H
+    WHERE DOC_SFCH_ID = @IN_DOC_HEAD_ID
+END
+
+IF(@IN_DOC_TYPE_CODE = 'CM')
+BEGIN
+    SELECT TOP 1
+
+      DOC_CLMH_ID 'DOC_HEAD_ID'
+	, COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE'
+    , (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE
+	, DOC_VER
+	, DOC_REV
+	, CUST_CODE
+	, DOC_MONTH
+	, DOC_YEAR
+	, DOC_STATUS
+	, FLOW_CURRENT
+	, FLOW_PREVIOUS
+	, FLOW_NEXT
+	, FLAG_ROW
+	, CREATED_BY
+	, CREATED_DATE
+    , UPDATED_BY
+	, UPDATED_DATE
+    FROM TB_T_CLAIM_H
+    WHERE DOC_CLMH_ID = @IN_DOC_HEAD_ID
+END
+
+IF(@IN_DOC_TYPE_CODE = 'BP')
+BEGIN
+    SELECT TOP 1
+
+      DOC_BGH_ID 'DOC_HEAD_ID'
+	, COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE'
+    , (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE
+	, DOC_VER
+	, DOC_REV
+	, CUST_CODE
+	, DOC_MONTH
+	, DOC_YEAR
+	, DOC_STATUS
+	, FLOW_CURRENT
+	, FLOW_PREVIOUS
+	, FLOW_NEXT
+	, FLAG_ROW
+	, CREATED_BY
+	, CREATED_DATE
+    , UPDATED_BY
+	, UPDATED_DATE
+    FROM TB_T_BUDGET_H
+    WHERE DOC_BGH_ID = @IN_DOC_HEAD_ID
+END";
+
+            var parms = new
             {
-                case "FC": //fixed contract
-                    sqlQuery = @"
-                    SELECT 
-                    TTD.DOC_TYPE_CODE,
-                    TTD.DOC_CODE,
-                    TTD.DOC_VER,
-                    TTD.DOC_MONTH,
-                    TTD.DOC_YEAR,
-                    TTD.CUST_CODE,
-                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
-                    TTD.DOC_STATUS,
-                    TTD.FLOW_CURRENT,
-                    TTD.FLOW_NEXT,
-                    TTD.REQUESTER,
-                    TTD.ORG_CODE,
-                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
-                    TTD.COMP_CODE,
-                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
-                    FROM 
-                    TB_T_DOCUMENT TTD 
-                    INNER JOIN TB_T_FIXED_CONTRACT_H TTFCH 
-                    ON TTD.DOC_CODE = TTFCH.DOC_CODE
-                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE
-                    AND TTFCH.DOC_FCH_ID = @DOC_ID";
-                    break;
-                case "BP": //budget planning
-                    sqlQuery = @"
-                    SELECT 
-                    TTD.DOC_TYPE_CODE,
-                    TTD.DOC_CODE,
-                    TTD.DOC_VER,
-                    TTD.DOC_MONTH,
-                    TTD.DOC_YEAR,
-                    TTD.CUST_CODE,
-                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
-                    TTD.DOC_STATUS,
-                    TTD.FLOW_CURRENT,
-                    TTD.FLOW_NEXT,
-                    TTD.REQUESTER,
-                    TTD.ORG_CODE,
-                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
-                    TTD.COMP_CODE,
-                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
-                    FROM 
-                    TB_T_DOCUMENT TTD 
-                    INNER JOIN TB_T_BUDGET_H TTBH 
-                    ON TTD.DOC_CODE = TTBH.DOC_CODE
-                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE 
-                    AND TTBH.DOC_BGH_ID = @DOC_ID";
-                    break;
-                case "SF": //sale forecast
-                    sqlQuery = @"
-                    SELECT 
-                    TTD.DOC_TYPE_CODE,
-                    TTD.DOC_CODE,
-                    TTD.DOC_VER,
-                    TTD.DOC_MONTH,
-                    TTD.DOC_YEAR,
-                    TTD.CUST_CODE,
-                    (SELECT TOP 1 C.CUST_NAME FROM TB_M_CUSTOMER C WHERE C.CUST_CODE = TTD.CUST_CODE) CUST_NAME,
-                    TTD.DOC_STATUS,
-                    TTD.FLOW_CURRENT,
-                    TTD.FLOW_NEXT,
-                    TTD.REQUESTER,
-                    TTD.ORG_CODE,
-                    (SELECT TOP 1 O.ORG_NAME FROM TB_M_ORGANIZATION O WHERE O.ORG_CODE = TTD.ORG_CODE) ORG_NAME,
-                    TTD.COMP_CODE,
-                    (SELECT TOP 1 C.COMP_NAME FROM TB_M_COMPANY C WHERE C.COMP_CODE = TTD.COMP_CODE) COMP_NAME
-                    FROM 
-                    TB_T_DOCUMENT TTD 
-                    INNER JOIN TB_T_SALES_FORECAST_H TTSFH 
-                    ON TTD.DOC_CODE = TTSFH.DOC_CODE
-                    WHERE TTD.DOC_TYPE_CODE = @DOC_TYPE_CODE
-                    AND TTSFH.DOC_SFCH_ID = @DOC_ID";
-                    break;
-                default:
-                    break;
+                IN_DOC_TYPE_CODE = documentType,
+                IN_DOC_HEAD_ID = headerId
+            };
+
+            DocumentStateDto result = new DocumentStateDto();
+            try
+            {
+                
+                var query = Connection.Query(
+                    sql: sqlQuery,
+                    param: parms,
+                    transaction: Transaction
+                );
+                
+                if (query != null)
+                {
+                    result = query.Select(x => transformDocumentState(x)).FirstOrDefault();
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            var parms = new
-            {
-                DOC_ID = headerId,
-                DOC_TYPE_CODE = documentType
-            };
-
-            var query = Connection.Query<DocumentStateDto>(
-                sql: sqlQuery,
-                param: parms,
-                transaction: Transaction
-                ).FirstOrDefault()
-                ;
-
-            return query;
-
         }
-
-        public IEnumerable<DocumentHistoryDto> GetDocumentHistories(int headerId)
+        private DocumentStateDto transformDocumentState(dynamic x)
         {
-            string sqlQuery = @"SELECT 
-  ISNULL(b.UPDATED_BY, b.CREATED_BY) ACTION_BY
-, ISNULL(b.UPDATED_DATE, b.CREATED_DATE) ACTION_DATETIME
-, b.COMMENT
-FROM TB_T_FIXED_CONTRACT_D a
-LEFT JOIN TB_T_FIXED_CONTRACT_H b on b.DOC_FCH_ID = a.DOC_FCH_ID
-WHERE a.CONDITION_TYPE = 'PLANNING'
-and a.FLAG_ROW = 'S'
-and b.DOC_FCH_ID = @DOC_FCH_ID
-ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
-
-            var parms = new
+            DocumentStateDto result = new DocumentStateDto();
+            try
             {
-                DOC_FCH_ID = headerId
-            };
+                var dto = new DocumentStateDto();
 
-            var query = Connection.Query<DocumentHistoryDto>(
-                sql: sqlQuery,
-                param: parms,
-                transaction: Transaction
-                ).ToList()
-                ;
+                dto.DOC_HEAD_ID = x.DOC_HEAD_ID;
+                dto.COMP_CODE = x.COMP_CODE;
+                dto.DOC_TYPE_CODE = x.DOC_TYPE_CODE;
+                dto.DOC_TYPE_NAME = x.DOC_TYPE_NAME;
+                dto.DOC_CODE = x.DOC_CODE;
+                dto.DOC_VER = x.DOC_VER;
+                dto.DOC_REV = x.DOC_REV;
+                dto.CUST_CODE = x.CUST_CODE;
+                dto.DOC_MONTH = x.DOC_MONTH;
+                dto.DOC_YEAR = x.DOC_YEAR;
 
-            return query;
+                string docStatus = x.DOC_STATUS as string;
+                dto.DOC_STATUS = docStatus.ToEnum<DOCUMENT_STATUS>();
+                dto.FLOW_CURRENT = x.FLOW_CURREN;
+                dto.FLOW_PREVIOUS = x.FLOW_PREVIOUS;
+                dto.FLOW_NEXT = x.FLOW_NEXT;
+            
+                string flagRow = x.FLAG_ROW as string;
+                dto.FLAG_ROW = flagRow.ToEnum<ROW_TYPE>();
+                dto.CREATED_BY = x.CREATED_BY;
+                dto.CREATED_DATE = x.CREATED_DATE;
+                dto.UPDATED_BY = x.UPDATED_BY;
+                dto.UPDATED_DATE = x.UPDATED_DATE;
+
+                result = dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
+        private DocumentHistoryDto transformDocumentHistories(dynamic x)
+        {
+            DocumentHistoryDto result = new DocumentHistoryDto();
+            try
+            {
+                var dto = new DocumentHistoryDto();
+
+                dto.DOC_HEAD_ID = x.DOC_HEAD_ID;
+                dto.COMP_CODE = x.COMP_CODE;
+                dto.DOC_TYPE_CODE = x.DOC_TYPE_CODE;
+                dto.DOC_TYPE_NAME = x.DOC_TYPE_NAME;
+                dto.DOC_CODE = x.DOC_CODE;
+                dto.DOC_VER = x.DOC_VER;
+                dto.DOC_REV = x.DOC_REV;
+                dto.CUST_CODE = x.CUST_CODE;
+                dto.DOC_MONTH = x.DOC_MONTH;
+                dto.DOC_YEAR = x.DOC_YEAR;
+
+                string docStatus = x.DOC_STATUS as string;
+                dto.DOC_STATUS = docStatus.ToEnum<DOCUMENT_STATUS>();
+                dto.FLOW_CURRENT = x.FLOW_CURREN;
+                dto.FLOW_PREVIOUS = x.FLOW_PREVIOUS;
+                dto.FLOW_NEXT = x.FLOW_NEXT;
+
+                string flagRow = x.FLAG_ROW as string;
+                dto.FLAG_ROW = flagRow.ToEnum<ROW_TYPE>();
+                dto.CREATED_BY = x.CREATED_BY;
+                dto.CREATED_DATE = x.CREATED_DATE;
+                dto.UPDATED_BY = x.UPDATED_BY;
+                dto.UPDATED_DATE = x.UPDATED_DATE;
+
+                dto.COMMENT = x.COMMENT;
+                dto.DOC_ACTION = COMMAND_TYPE.NONE;
+                dto.ACTOR_NAME = x.ACTOR_NAME;
+                dto.ACTION_DATETIME = x.ACTION_DATETIME;
+                dto.ACTOR_POSITION = null;
+
+                result = dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
+        public IEnumerable<DocumentHistoryDto> GetDocumentHistories(string documentType, int headerId)
+        {
+            string sqlQuery =
+@"IF (@IN_DOC_TYPE_CODE = 'FC')
+BEGIN
+	SELECT 
+	  DOC_FCH_ID 'DOC_HEAD_ID'
+    , COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+    , CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	, ISNULL(UPDATED_BY, CREATED_BY) 'ACTOR_NAME'
+	, ISNULL(UPDATED_DATE, CREATED_DATE) 'ACTION_DATETIME'
+	FROM TB_T_FIXED_CONTRACT_H
+	WHERE DOC_CODE IN (SELECT TOP 1 DOC_CODE FROM TB_T_FIXED_CONTRACT_H WHERE DOC_FCH_ID = @IN_DOC_HEAD_ID)
+	ORDER BY DOC_TYPE_CODE, COMP_CODE, DOC_YEAR, CUST_CODE, DOC_MONTH, DOC_VER, DOC_REV, DOC_HEAD_ID
+END
+ELSE IF (@IN_DOC_TYPE_CODE = 'PP')
+BEGIN
+	SELECT
+	  DOC_PROM_PH_ID 'DOC_HEAD_ID'
+    , COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+    , CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	, ISNULL(UPDATED_BY, CREATED_BY) 'ACTOR_NAME'
+	, ISNULL(UPDATED_DATE, CREATED_DATE) 'ACTION_DATETIME'
+	FROM TB_T_PROMOTION_H
+	WHERE DOC_CODE IN (SELECT TOP 1 DOC_CODE FROM TB_T_PROMOTION_H WHERE DOC_PROM_PH_ID = @IN_DOC_HEAD_ID)
+	ORDER BY DOC_TYPE_CODE, COMP_CODE, DOC_YEAR, CUST_CODE, DOC_MONTH, DOC_VER, DOC_REV, DOC_HEAD_ID
+END
+ELSE IF (@IN_DOC_TYPE_CODE = 'FC')
+BEGIN
+	SELECT
+	  DOC_SFCH_ID 'DOC_HEAD_ID'
+    , COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+    , CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	, ISNULL(UPDATED_BY, CREATED_BY) 'ACTOR_NAME'
+	, ISNULL(UPDATED_DATE, CREATED_DATE) 'ACTION_DATETIME'
+	FROM TB_T_SALES_FORECAST_H
+	WHERE DOC_CODE IN (SELECT TOP 1 DOC_CODE FROM TB_T_SALES_FORECAST_H WHERE DOC_SFCH_ID = @IN_DOC_HEAD_ID)
+	ORDER BY DOC_TYPE_CODE, COMP_CODE, DOC_YEAR, CUST_CODE, DOC_MONTH, DOC_VER, DOC_REV, DOC_HEAD_ID
+END
+ELSE IF (@IN_DOC_TYPE_CODE = 'CM')
+BEGIN
+	SELECT
+	  DOC_CLMH_ID 'DOC_HEAD_ID'
+    , COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+    , CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	, ISNULL(UPDATED_BY, CREATED_BY) 'ACTOR_NAME'
+	, ISNULL(UPDATED_DATE, CREATED_DATE) 'ACTION_DATETIME'
+	FROM TB_T_CLAIM_H
+	WHERE DOC_CODE IN (SELECT TOP 1 DOC_CODE FROM TB_T_CLAIM_H WHERE DOC_CLMH_ID = @IN_DOC_HEAD_ID)
+	ORDER BY DOC_TYPE_CODE, COMP_CODE, DOC_YEAR, CUST_CODE, DOC_MONTH, DOC_VER, DOC_REV, DOC_HEAD_ID
+END
+ELSE IF (@IN_DOC_TYPE_CODE = 'BP')
+BEGIN
+
+	SELECT
+	  DOC_BGH_ID 'DOC_HEAD_ID'
+    , COMP_CODE
+	, @IN_DOC_TYPE_CODE 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = @IN_DOC_TYPE_CODE) 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+    , CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	, ISNULL(UPDATED_BY, CREATED_BY) 'ACTOR_NAME'
+	, ISNULL(UPDATED_DATE, CREATED_DATE) 'ACTION_DATETIME'
+	FROM TB_T_BUDGET_H
+	WHERE DOC_CODE IN (SELECT TOP 1 DOC_CODE FROM TB_T_BUDGET_H WHERE DOC_BGH_ID = @IN_DOC_HEAD_ID)
+	ORDER BY DOC_TYPE_CODE, COMP_CODE, DOC_YEAR, CUST_CODE, DOC_MONTH, DOC_VER, DOC_REV, DOC_HEAD_ID
+END";
+
+            IList<DocumentHistoryDto> result = new List<DocumentHistoryDto>();
+            try
+            {
+            
+                var parms = new
+                {
+                    IN_DOC_TYPE_CODE = documentType,
+                    IN_DOC_HEAD_ID = headerId
+                };
+
+                var query = Connection.Query(
+                    sql: sqlQuery,
+                    param: parms,
+                    transaction: Transaction
+                    ).ToList()
+                    ;
+                
+                if (query != null)
+                {
+                    result = query.Select<dynamic, DocumentHistoryDto>(x => transformDocumentHistories(x)).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
 
         }
 
@@ -171,21 +408,64 @@ ORDER BY b.DOC_FCH_ID, b.DOC_VER, b.DOC_REV";
 
         public IEnumerable<DocumentDto> All()
         {
-            string sqlQuery = @"SELECT a.DOC_TYPE_CODE
-	        ,(SELECT TOP 1 DOC_TYPE_NAME  from TB_M_DOCUMENT_TYPE b where b.DOC_TYPE_CODE = a.DOC_TYPE_CODE) as DOC_TYPE_NAME
-            ,a.DOC_CODE
-            ,a.DOC_VER
-            ,a.DOC_REV
-            ,a.DOC_MONTH
-            ,a.DOC_YEAR
-            ,a.CUST_CODE
-            ,a.DOC_STATUS
-            ,a.FLOW_CURRENT
-            ,a.FLOW_NEXT
-            ,a.REQUESTER
-            ,a.ORG_CODE
-            ,a.COMP_CODE
-FROM TB_T_DOCUMENT a;";
+            string sqlQuery =
+@"SELECT
+  A.DOC_HEAD_ID, A.DOC_TYPE_NAME
+, A.DOC_CODE, A.DOC_VER, A.DOC_REV, A.COMP_CODE, A.CUST_CODE, A.DOC_MONTH, A.DOC_YEAR
+, A.DOC_STATUS, A.FLOW_CURRENT, A.FLOW_PREVIOUS, A.FLOW_NEXT, A.COMMENT, A.FLAG_ROW
+, A.CREATED_BY, A.CREATED_DATE, A.UPDATED_BY, A.UPDATED_DATE
+FROM
+(
+	SELECT 
+	  DOC_FCH_ID 'DOC_HEAD_ID'
+	, 'FC' 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = 'FC') 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, COMP_CODE, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+	, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	FROM TB_T_FIXED_CONTRACT_H
+	WHERE FLAG_ROW = 'S'
+	UNION
+	SELECT
+	  DOC_PROM_PH_ID 'DOC_HEAD_ID'
+	, 'PP' 'DOC_TYPE_CODE', (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = 'PP') 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, COMP_CODE, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+	, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	FROM TB_T_PROMOTION_H
+	WHERE FLAG_ROW = 'S'
+	UNION
+	SELECT
+	  DOC_SFCH_ID 'DOC_HEAD_ID'
+	, 'SF' 'DOC_TYPE_CODE'
+	, (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = 'SF') 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, COMP_CODE, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+	, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	FROM TB_T_SALES_FORECAST_H
+	WHERE FLAG_ROW = 'S'
+	UNION
+	SELECT
+	  DOC_CLMH_ID 'DOC_HEAD_ID'
+	, 'CM' 'DOC_TYPE_CODE'
+	, (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = 'CM') 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, COMP_CODE, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+	, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	FROM TB_T_CLAIM_H
+	WHERE FLAG_ROW = 'S'
+	UNION
+	SELECT
+	  DOC_BGH_ID 'DOC_HEAD_ID'
+	, 'BP' 'DOC_TYPE_CODE'
+	, (SELECT TOP 1 DOC_TYPE_NAME FROM TB_M_DOCUMENT_TYPE WHERE DOC_TYPE_CODE = 'BP') 'DOC_TYPE_NAME'
+	, DOC_CODE, DOC_VER, DOC_REV, COMP_CODE, CUST_CODE, DOC_MONTH, DOC_YEAR
+	, DOC_STATUS, FLOW_CURRENT, FLOW_PREVIOUS, FLOW_NEXT, COMMENT, FLAG_ROW
+	, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE
+	FROM TB_T_BUDGET_H
+	WHERE FLAG_ROW = 'S'
+) A
+ORDER BY A.DOC_TYPE_CODE, A.COMP_CODE, A.DOC_YEAR, A.CUST_CODE, A.DOC_MONTH, A.DOC_VER, A.DOC_REV, A.DOC_HEAD_ID";
+
             var query = Connection.Query<DocumentDto>(
                 sql: sqlQuery
                 , transaction: Transaction
@@ -344,4 +624,5 @@ and DOC_REV    = @DOC_REV
         }
 
     }
+
 }

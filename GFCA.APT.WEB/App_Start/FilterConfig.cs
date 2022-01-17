@@ -8,8 +8,11 @@ namespace GFCA.APT.WEB
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new AuthorizerAttribute());
             filters.Add(new HandleErrorAttribute());
             //filters.Add(new LogActionFilter());
+            filters.Add(new CustomErrorHandler());
+            //filters.Add(new CustomAuthenticationAttribute());
         }
     }
 }

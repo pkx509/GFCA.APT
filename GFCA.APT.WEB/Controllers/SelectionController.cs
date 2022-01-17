@@ -232,7 +232,7 @@ namespace GFCA.APT.WEB.Controllers
             IEmployeeService svc = biz.EmployeeService;
             var ret = svc.GetAll()
                 .Where(o => (o.FLAG_ROW == null) || o.FLAG_ROW == FLAG_ROW.SHOW)
-                .Select(o => new SelectionItem { Value = o.EMP_CODE, Text = $"{o.EMP_CODE} - {o.PREFIX}{o.NAME_FIRST} {o.NAME_LAST}" });
+                .Select(o => new SelectionItem { Value = o.EMP_CODE, Text = $"{o.EMP_CODE} - {o.PREFIX}{o.FIRSTNAME} {o.LASTNAME}" });
 
             if (isEmployee)
             {

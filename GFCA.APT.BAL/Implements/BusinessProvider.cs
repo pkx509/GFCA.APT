@@ -83,5 +83,8 @@ namespace GFCA.APT.BAL.Implements
         private ISaleForecastService _saleForecastService;
         public ISaleForecastService SaleForecastService => _saleForecastService ?? (_saleForecastService = Serve.SaleForecastService.CreateInstant());
 
+        private IAuthenticationService _authenticationService;
+        public IAuthenticationService AuthenticationService => _authenticationService ?? (_authenticationService = Serve.AuthenticationService.CreateInstant());
+
     }
 }

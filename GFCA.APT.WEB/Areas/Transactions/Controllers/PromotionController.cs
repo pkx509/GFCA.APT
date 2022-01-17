@@ -1,8 +1,8 @@
 ﻿using GFCA.APT.BAL.Interfaces;
-using GFCA.APT.Domain;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
+using GFCA.APT.WEB.CustomAttributes;
 using MvcBreadCrumbs;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.Base;
@@ -10,12 +10,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 {
-
+    //[Authorizer(Roles = "Root, Administrators, Users")]
     public class PromotionController : ControllerWebBase
     {
         public const string DOC_TYPE_CODE = "PP";
@@ -39,27 +39,27 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
 
-        // GET: T/Promotions/{DOC_PROM_PH_ID}}]
+        // GET: T/Promotions/{DOC_HEADER_ID}}]
         [HttpGet]
         [BreadCrumb(Clear = false, Label = "PromotionItem")]
-        public ViewResult PromotionItem(int DOC_PROM_PH_ID)
+        public ViewResult PromotionItem(int DOC_HEADER_ID)
         {
-            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PH_ID);
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_HEADER_ID);
 
             try
             {
                 //dto.WorkflowCommands
-                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_HEADER_ID);
                 //dto.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, dto.DocumentData.DOC_STATUS_ID);
                 ViewBag.WorkflowCommands = _biz.PromotionService.GetDocumentCommands(DOC_TYPE_CODE, 0);
                 
-                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
-                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
-                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
-                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_HEADER_ID);
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_HEADER_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_HEADER_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_HEADER_ID);
                 
                 BreadCrumb.SetLabel(dto.OverviewData.DOC_CODE);
             }
@@ -70,34 +70,34 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View(dto);
         }
 
-        // GET: T/Promotions/{DOC_PROM_PH_ID}/S/{DOC_PROM_PS_ID}]
+        // GET: T/Promotions/{DOC_HEADER_ID}/S/{DOC_DETAIL_ID}]
         [HttpGet]
         [BreadCrumb(Clear = false, Label = "PromotionSaleDetail")]
-        public ActionResult PromotionSaleDetail(int DOC_PROM_PH_ID, int DOC_PROM_PS_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
+        public ActionResult PromotionSaleDetail(int DOC_HEADER_ID, int DOC_DETAIL_ID, PAGE_MODE PS_MODE = PAGE_MODE.EDITING)
         {
             _biz.LogService.Info("PromotionSaleDetail");
-            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PS_ID);
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_DETAIL_ID);
             //PromotionPlanningSaleDto dto = new PromotionPlanningSaleDto();
             try
             {
-                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_HEADER_ID);
 
-                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
-                dto.DetailSaleItem = _biz.PromotionService.GetSaleDataByItemID(DOC_PROM_PS_ID);
-                if (DOC_PROM_PS_ID != 0)
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_HEADER_ID);
+                dto.DetailSaleItem = _biz.PromotionService.GetSaleDataByItemID(DOC_DETAIL_ID);
+                if (DOC_DETAIL_ID != 0)
                     dto.DataMode = PS_MODE;
 
-                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
-                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
-                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_HEADER_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_DETAIL_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_HEADER_ID);
 
-                if (DOC_PROM_PS_ID == 0)
+                if (DOC_DETAIL_ID == 0)
                     BreadCrumb.SetLabel($"New Sale");
                 else
-                    BreadCrumb.SetLabel($"Sale No : {DOC_PROM_PS_ID}");
+                    BreadCrumb.SetLabel($"Sale No : {DOC_DETAIL_ID}");
             }
             catch(Exception ex)
             {
@@ -106,33 +106,33 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return View(dto);
         }
 
-        // GET: T/Promotions/{DOC_PROM_PH_ID}/I/{DOC_PROM_PI_ID}]
+        // GET: T/Promotions/{DOC_HEADER_ID}/I/{DOC_DETAIL_ID}]
         [HttpGet]
         [BreadCrumb(Clear = false, Label = "PromotionInvestmentDetail")]
-        public ActionResult PromotionInvestmentDetail(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
+        public ActionResult PromotionInvestmentDetail(int DOC_HEADER_ID, int DOC_DETAIL_ID)
         {
             _biz.LogService.Info("PromotionInvestmentDetail");
-            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_PROM_PI_ID);
+            PromotionPlanningDto dto = new PromotionPlanningDto(DOC_DETAIL_ID);
             //PromotionPlanningInvestmentDto dto = new PromotionPlanningInvestmentDto();
             try
             {
 
-                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
-                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_PROM_PH_ID);
+                dto.DocumentData = _biz.PromotionService.GetDocumentStateSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.HistoryData = _biz.PromotionService.GetDocumentHistorySection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.RequesterData = _biz.PromotionService.GetDocumentRequesterSection(DOC_TYPE_CODE, DOC_HEADER_ID);
+                dto.WorkflowData = _biz.PromotionService.GetDocumentWorkFlowSection(DOC_TYPE_CODE, DOC_HEADER_ID);
 
-                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
-                dto.DetailInvesmentItem = _biz.PromotionService.GetInvestmentByItemID(DOC_PROM_PH_ID, DOC_PROM_PI_ID);
-                
-                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
-                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
-                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_PROM_PH_ID);
+                dto.OverviewData = _biz.PromotionService.GetPromotionPlanByItemID(DOC_HEADER_ID);
+                dto.DetailInvesmentItem = _biz.PromotionService.GetInvestmentByItemID(DOC_HEADER_ID, DOC_DETAIL_ID);
 
-                if (DOC_PROM_PI_ID == 0)
+                //dto.DetailSaleData = _biz.PromotionService.GetSaleDataByHeaderID(DOC_HEADER_ID);
+                //dto.DetailInvesmentData = _biz.PromotionService.GetInvestmentByHeaderID(DOC_DETAIL_ID);
+                dto.FooterData = _biz.PromotionService.GetPromotionFooterByItemID(DOC_HEADER_ID);
+
+                if (DOC_DETAIL_ID == 0)
                     BreadCrumb.SetLabel($"New Investment");
                 else
-                    BreadCrumb.SetLabel($"Investment No : {DOC_PROM_PI_ID}");
+                    BreadCrumb.SetLabel($"Investment No : {DOC_DETAIL_ID}");
             }
             catch (Exception ex)
             {
@@ -234,10 +234,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
         [HttpPost]
-        public JsonResult UrlPromotionPlanningSaleList(int DOC_PROM_PH_ID, DataManagerRequest dm)
+        public JsonResult UrlPromotionPlanningSaleList(int DOC_HEADER_ID, DataManagerRequest dm)
         {
             _biz.LogService.Info("UrlPromotionPlanningSaleList");
-            IEnumerable dataSource = _biz.PromotionService.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
+            IEnumerable dataSource = _biz.PromotionService.GetSaleDataByHeaderID(DOC_HEADER_ID);
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
@@ -264,10 +264,10 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return dm.RequiresCounts ? Json(new { result = dataSource, count = count }) : Json(dataSource);
         }
         [HttpPost]
-        public JsonResult UrlPromotionPlanningInvesmentList(int DOC_PROM_PH_ID, DataManagerRequest dm)
+        public JsonResult UrlPromotionPlanningInvesmentList(int DOC_HEADER_ID, DataManagerRequest dm)
         {
             _biz.LogService.Info("UrlPromotionPlanningInvesmentList");
-            IEnumerable dataSource = _biz.PromotionService.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
+            IEnumerable dataSource = _biz.PromotionService.GetInvestmentByHeaderID(DOC_HEADER_ID);
             DataOperations operation = new DataOperations();
             List<string> str = new List<string>();
             if (dm.Search != null && dm.Search.Count > 0) // Search
@@ -448,9 +448,9 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
 
-
+        /*
         [HttpPost]
-        public JsonResult ApprovePromotionPlanning(int DOC_PROM_PH_ID)
+        public JsonResult ApprovePromotionPlanning(int DOC_HEADER_ID)
         {
             _biz.LogService.Info("ApprovePromotionPlanning");
             string jsonData = string.Empty;
@@ -458,7 +458,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
 
             try
             {
-                bizObj = _biz.PromotionService.ApprovePromotionPlanng(DOC_PROM_PH_ID);
+                bizObj = _biz.PromotionService.ApprovePromotionPlanng(DOC_HEADER_ID);
                
             }
             catch (Exception ex)
@@ -473,7 +473,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
         }
 
         [HttpPost]
-        public JsonResult SubmitPromotionPlanning(int DOC_PROM_PH_ID)
+        public JsonResult SubmitPromotionPlanning(int DOC_HEADER_ID)
         {
             _biz.LogService.Info("SubmitPromotionPlanning");
             string jsonData = string.Empty;
@@ -481,7 +481,7 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
            
             try
             {
-                bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_PROM_PH_ID);
+                bizObj = _biz.PromotionService.SubmitPromotionPlanng(DOC_HEADER_ID);
             }
             catch (Exception ex)
             {
@@ -516,27 +516,23 @@ namespace GFCA.APT.WEB.Areas.Transactions.Controllers
             }
             return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
         }
-
+        */
         [HttpPost]
-        public JsonResult PostCommand(Domain.Dto.Workflow.CommandDto data)
+        public async Task<JsonResult> PostDocument(int DOC_HEADER_ID)
         {
             _biz.LogService.Info("PostCommand");
             string jsonData = string.Empty;
             var bizObj = new BusinessResponse();
-
+            Domain.Dto.Workflow.CommandDto data = new Domain.Dto.Workflow.CommandDto();
             try
             {
-                //bizObj = _biz.PromotionService.Post(data);
+                bizObj = await _biz.PromotionService.PostDocumentAsync(DOC_TYPE_CODE, DOC_HEADER_ID, data);
             }
             catch (Exception ex)
             {
                 _biz.LogService.Error("PostCommand : ", ex);
             }
-            finally
-            {
-                jsonData = JsonConvert.SerializeObject(bizObj);
-            }
-            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+            return Json(bizObj);
         }
 
     }

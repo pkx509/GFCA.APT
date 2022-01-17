@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AUTHENTICATION.cs" />
     <Compile Include="Common\Dynamic.cs" />
     <Compile Include="Dto\Auditable.cs" />
     <Compile Include="Dto\BudgetPlan\BudgetPlanInvestmentDto.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Dto\Document\DocumentRequesterDto.cs" />
     <Compile Include="Dto\Document\DocumentStateDto.cs" />
     <Compile Include="Dto\Document\DocumentWorkFlowDto.cs" />
+    <Compile Include="Dto\EmployeeRoleDto.cs" />
     <Compile Include="Dto\FixedContract\FixedContractDetailDto.cs" />
     <Compile Include="Dto\FixedContract\FixedContractDto.cs" />
     <Compile Include="Dto\FixedContract\FixedContractFooterDto.cs" />
@@ -160,9 +162,9 @@
     <Compile Include="Dto\TradeActivityDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="Dto\SizeDto.cs" />
-    <Compile Include="Dto\UserLoginDto.cs" />
     <Compile Include="Dto\VenderDto.cs" />
     <Compile Include="Dto\Workflow\CommandDto.cs" />
+    <Compile Include="Dto\Workflow\WorkflowStateDto.cs" />
     <Compile Include="Enums\COMMAND_TYPE.cs" />
     <Compile Include="Enums\CONDITION_TYPE.cs" />
     <Compile Include="Enums\DOCUMENT_STATUS.cs" />
@@ -170,6 +172,8 @@
     <Compile Include="Enums\FLAG_DEL.cs" />
     <Compile Include="Enums\FLAG_ROW.cs" />
     <Compile Include="Enums\INVESTMENT_TYPE.cs" />
+    <Compile Include="Enums\MESSAGE_TITLE.cs" />
+    <Compile Include="Enums\MESSAGE_TYPE.cs" />
     <Compile Include="Enums\PAGE_MODE.cs" />
     <Compile Include="HTTP\Controls\SelectionItem.cs" />
     <Compile Include="HTTP\Controls\ToolbarItem.cs" />
@@ -177,6 +181,7 @@
     <Compile Include="HTTP\IResponse.cs" />
     <Compile Include="Mappers\Destination.cs" />
     <Compile Include="Mappers\Source.cs" />
+    <Compile Include="Models\AuthenticationResponse.cs" />
     <Compile Include="Models\BusinessResponse.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

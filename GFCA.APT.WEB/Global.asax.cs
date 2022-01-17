@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using GFCA.APT.Domain.Dto;
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Web;
@@ -6,6 +9,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace GFCA.APT.WEB
 {
@@ -26,12 +31,32 @@ namespace GFCA.APT.WEB
             MvcHandler.DisableMvcResponseHeader = true;
             
         }
+        protected void Application_PostAuthenticateRequest()
+        {
+            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (cookie != null && !string.IsNullOrEmpty(cookie.Value)) 
+            {
+                FormsAuthenticationTicket tk = FormsAuthentication.Decrypt(cookie.Value);
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                UserInfoDto user = js.Deserialize<UserInfoDto>(tk.UserData);
+                if (user == null)
+                    return;
+
+                MyIdentity id = new MyIdentity(user);
+                MyPrincipal pc = new MyPrincipal(id, user.Roles);
+                
+                HttpContext.Current.User = pc;
+                System.Threading.Thread.CurrentPrincipal = pc;
+            }
+        }
 
         protected void Application_PreSendRequestHeaders()
         {
-            Response.Headers.Set("Server", "xercise httpd server");
+            Response.Headers.Set("Server", "httpd");
             Response.Headers.Remove("X-AspNet-Version");
             Response.Headers.Remove("X-AspNetMvc-Version");
+            Response.Headers.Remove("X-Powered-By");
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

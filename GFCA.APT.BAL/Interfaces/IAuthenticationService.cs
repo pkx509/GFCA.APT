@@ -1,13 +1,12 @@
 ﻿using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Models;
 
 namespace GFCA.APT.BAL.Interfaces
 {
     public interface IAuthenticationService
     {
-        void SignIn(UserLoginDto user, bool createPersistentCookie);
-        void SignOut();
 
-        UserInfoDto GetAuthenticatedUser();
+        AuthenticationResponse ValidateUser(string userName, string password);
 
     }
 }

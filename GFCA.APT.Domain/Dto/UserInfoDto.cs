@@ -4,6 +4,7 @@ namespace GFCA.APT.Domain.Dto
     public class UserInfoDto
     {
         public int? UserId { get; set; }
+        public string EmpCode { get; set; }
         public string UserName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -22,6 +23,7 @@ namespace GFCA.APT.Domain.Dto
         public string Company { get; set; }
         public string Language { get; set; }
         public string UserAlias { get; set; }
+        public string[] Roles { get; set; }
 
     }
 }

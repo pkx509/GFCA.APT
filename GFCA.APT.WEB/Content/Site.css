@@ -1,5 +1,16 @@
-﻿/* header-section styles */
+﻿a.btn.btn-circle {
+    border-width:0;
+    border-radius: 50px
+}
+
+a.btn.btn-icon {
+    color:white;
+}
+/* header-section styles */
 #header.header-section,
+button.btn {
+    width: 90px;
+}
 #header .search-icon {
     height: 50px;
 }

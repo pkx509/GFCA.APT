@@ -23,9 +23,62 @@ namespace GFCA.APT.DAL.Implements
        
             return query;
         }
+
+        public EmployeeDto GetEmployee(string email, string password)
+        {
+            string sqlQuery =
+@"SELECT
+  EMP_ID
+, EMP_CODE
+, PREFIX
+, FIRSTNAME
+, LASTNAME
+, EMAIL
+, PWD
+, SALT
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+, UPDATED_BY
+, UPDATED_DATE
+FROM TB_M_EMPLOYEE
+WHERE EMAIL = @IN_EMAIL
+AND PWD = @IN_PWD";
+            
+            var parms = new
+            {
+                IN_EMAIL = email,
+                IN_PWD = password
+            };
+
+            var query = Connection.QueryFirstOrDefault<EmployeeDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+
+        }
+
         public IEnumerable<EmployeeDto> All()
         {
-            string sqlQuery = @"SELECT * FROM TB_M_EMPLOYEE";
+            string sqlQuery = 
+@"SELECT
+  EMP_ID 'USER_ID'
+, EMP_CODE
+, PREFIX
+, FIRSTNAME
+, LASTNAME
+, EMAIL
+, PWD
+, SALT
+, FLAG_ROW
+, CREATED_BY
+, CREATED_DATE
+, UPDATED_BY
+, UPDATED_DATE
+FROM TB_M_EMPLOYEE";
             var query = Connection.Query<EmployeeDto>(
                 sql: sqlQuery
                 ,transaction: Transaction
@@ -62,8 +115,8 @@ namespace GFCA.APT.DAL.Implements
             {
                 EMP_CODE = entity.EMP_CODE,
                 PREFIX = entity.PREFIX,
-                NAME_FIRST = entity.NAME_FIRST,
-                NAME_LAST = entity.NAME_LAST,
+                FIRSTNAME = entity.FIRSTNAME,
+                LASTNAME = entity.LASTNAME,
                 EMAIL = entity.EMAIL,
                 FLAG_ROW = entity.FLAG_ROW,
                 CREATED_BY = entity.CREATED_BY,
@@ -96,8 +149,8 @@ namespace GFCA.APT.DAL.Implements
             {
                 EMP_CODE = entity.EMP_CODE,
                 PREFIX = entity.PREFIX,
-                NAME_FIRST = entity.NAME_FIRST,
-                NAME_LAST = entity.NAME_LAST,
+                FIRSTNAME = entity.FIRSTNAME,
+                LASTNAME = entity.LASTNAME,
                 EMAIL = entity.EMAIL,
                 FLAG_ROW = entity.FLAG_ROW,
                 UPDATED_BY = entity.UPDATED_BY,
@@ -125,6 +178,36 @@ namespace GFCA.APT.DAL.Implements
 
         }
 
+        public IEnumerable<EmployeeRoleDto> GetRoles(int empId)
+        {
+            string sqlQuery =
+@"SELECT 
+  A.EMP_ID
+, A.EMP_CODE
+, A.EMAIL
+, B.EMP_ROLE_ID
+, B.ROLE_ID
+, B.PERMISSION
+, C.ROLE_NAME
+FROM TB_M_EMPLOYEE A
+LEFT JOIN TB_P_EMP_ROLE B ON B.EMP_ID = A.EMP_ID
+LEFT JOIN TB_M_ROLE C ON C.ROLE_ID = B.ROLE_ID
+WHERE A.EMP_ID = @IN_EMP_ID";
+
+            var parms = new
+            {
+                IN_EMP_ID = empId
+            };
+
+            var query = Connection.Query<EmployeeRoleDto>(
+                sql: sqlQuery
+                , param: parms
+                , transaction: Transaction
+                );
+
+            return query;
+
+        }
     }
 
 }

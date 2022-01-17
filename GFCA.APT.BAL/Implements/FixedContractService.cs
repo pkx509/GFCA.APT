@@ -3,7 +3,6 @@ using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Enums;
-using GFCA.APT.Domain.HTTP.Controls;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;
@@ -229,7 +228,7 @@ namespace GFCA.APT.BAL.Implements
                 var doch = _uow.FixedContractRepository.GetFixedContractByItemID(docd.DOC_FCH_ID);
                 dto.HeaderData = doch;
                 dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(documentType, doch.DOC_FCH_ID);
-                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_FCH_ID);
+                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(documentType, doch.DOC_FCH_ID);
 
                 return docd;
             }
@@ -364,16 +363,11 @@ namespace GFCA.APT.BAL.Implements
                 _uow.FixedContractRepository.DeleteFixedContractDetail(model.DOC_FCD_ID);
                 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Title = RESPONSE_TITLE.SUCCESS;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.MessageType = MESSAGE_TYPE.ERROR;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("RemoveDetail : ", ex);
             }
 

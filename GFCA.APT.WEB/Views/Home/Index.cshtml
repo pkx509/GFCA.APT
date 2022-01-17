@@ -11,26 +11,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Content/dist/js/pages/dashboard.js"></script>
 }
-@*
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="">Portal</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-*@
 
 <!-- Main content -->
 <section class="content">
@@ -42,64 +22,72 @@
                     <div class="card-body">
 
                         <form class="form-horizontal">
+                            @Html.AntiForgeryToken()
                             <div class="row">
-                                <div class="col-sm-12 col-lg-4">
+                                <div class="col-sm-12 col-lg-3">
                                     <div class="form-group row">
 
-                                        <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                            Date
+                                        <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                            Company
                                         </label>
-                                        <div class="col-sm-9 col-md-10 col-lg-7">
-                                            @Html.EJS().DatePicker("dpk1").Placeholder("Choose a Date").CssClass("mandatory").Render()
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-lg-4">
-                                    <div class="form-group row">
-
-                                        <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                            Text
-                                        </label>
-                                        <div class="col-sm-9 col-md-10 col-lg-7">
-                                            @Html.EJS().TextBox("txt1").Placeholder("Type in").CssClass("mandatory").Render()
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-lg-4">
-                                    <div class="form-group row">
-
-                                        <label class="col-sm-3 col-md-2 col-lg-5 control-label">
-                                            cmb Emission Example
-                                        </label>
-                                        <div class="col-sm-9 col-md-10 col-lg-7">
+                                        <div class="col-sm-9 col-md-10 col-lg-9">
                                             @(Html.EJS().ComboBox("cmb3")
                                                 .Placeholder("-- Select --")
                                                 .Autofill(true)
                                                 .DataSource(o =>
                                                 {
-                                                    o.Url("/api/Selection/GetEmission")
+                                                    o.Url("/api/Selection/GetCompany")
                                                     .CrossDomain(false)
                                                     .Adaptor("UrlAdaptor");
                                                 })
-                                                .Change("cmb3ChangeValue")
-                                                .Value("20")
                                                 .Fields(new Syncfusion.EJ2.DropDowns.ComboBoxFieldSettings { Text = "Text", Value = "Value" })
                                                 .Render())
 
-                                            <script>
-                                                function cmb3ChangeValue() {
-                                                    let cmb3 = document.getElementById('cmb3').ej2_instances[0];
-                                                    alert(cmb3.value.toString());
-                                                }
-                                            </script>
-
-
                                         </div>
 
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3">
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                            Period
+                                        </label>
+                                        <div class="col-sm-9 col-md-10 col-lg-9">
+                                            @Html.EJS().DatePicker("dpk1").Placeholder("Choose a Date").CssClass("mandatory").Render()
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3">
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                            To
+                                        </label>
+                                        <div class="col-sm-9 col-md-10 col-lg-9">
+                                            @Html.EJS().DatePicker("dpk2").Placeholder("Choose a Date").CssClass("mandatory").Render()
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @*
+                                <div class="col-sm-12 col-lg-4">
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-3 col-md-2 col-lg-3 control-label">
+                                            Customer
+                                        </label>
+                                        <div class="col-sm-9 col-md-10 col-lg-9">
+                                            @Html.EJS().TextBox("txt1").Placeholder("Type in").CssClass("mandatory").Render()
+                                        </div>
+
+                                    </div>
+                                </div>
+                                *@
+                                <div class="col-sm-12 col-lg-1 offset-2">
+                                    <div class="form-group row float-right">
+                                        <button class="btn btn-outline-primary" type="submit">View</button>
                                     </div>
                                 </div>
                             </div>
@@ -107,8 +95,6 @@
 
                     </div>
                 </div>
-
-
             </div>
 
         </div>
@@ -124,7 +110,7 @@
                         <p>My Draft</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-bookmark"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -139,7 +125,7 @@
                         <p>My Pending</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                        <i class="ion ion-clipboard"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -147,14 +133,14 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-danger">
+                <div class="small-box bg-pink">
                     <div class="inner">
                         <h3>44</h3>
 
                         <p>My Approval</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="ion ion-flag"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -169,7 +155,7 @@
                         <p>Completed</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="ion ion-checkmark-circled"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>

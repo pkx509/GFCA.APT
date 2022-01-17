@@ -18,7 +18,7 @@ let sendPost = function (url, data) {
                 Toast.fire({
                     icon: res.MessageType.ToMessageType(),
                     title: res.Message
-                })
+                });
 
                 setTimeout(function () {
                     window.location = urlServices.PreviousUrl;
@@ -40,8 +40,9 @@ let sendPost = function (url, data) {
                 class: 'bg-error',
                 title: 'error',
                 position: 'topRight',
-                body: JSON.stringify(response)
+                body: `${response.status} ${response.statusText}`
             });
+
         }
     });
 }

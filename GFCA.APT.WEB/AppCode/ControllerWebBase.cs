@@ -1,5 +1,7 @@
 ﻿using GFCA.APT.Domain.Dto;
+using GFCA.APT.Domain.Models;
 using log4net;
+using Newtonsoft.Json;
 using System;
 using System.Reflection;
 using System.Web;
@@ -10,6 +12,12 @@ namespace GFCA.APT.WEB
     public abstract class ControllerWebBase : Controller
     {
         private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        protected new JsonResult Json(BusinessResponse model)
+        {
+            var jsonData = JsonConvert.SerializeObject(model);
+            return Json(new { data = jsonData, JsonRequestBehavior.AllowGet });
+        }
 
         /*
         protected new JsonResult Json(object data, JsonRequestBehavior behavior)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace GFCA.APT.Domain
@@ -12,7 +13,14 @@ namespace GFCA.APT.Domain
             if (!typeof(T).IsEnum)
                 throw new ArgumentException("T must be an enumerated type");
 
-            return (T)Enum.Parse(typeof(T), value, true);
+            var enumType = typeof(T);
+            foreach (var name in Enum.GetNames(enumType))
+            {
+                var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).FirstOrDefault();
+                if (enumMemberAttribute.Value == value && enumMemberAttribute != null)
+                    return (T)Enum.Parse(enumType, name);
+            }
+            return default(T);
         }    
         public static T ToEnum<T>(this int value) where T : struct, IConvertible
         {

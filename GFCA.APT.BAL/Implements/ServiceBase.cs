@@ -3,8 +3,10 @@ using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
 using GFCA.APT.Domain.Dto.Workflow;
 using GFCA.APT.Domain.Enums;
+using GFCA.APT.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GFCA.APT.BAL.Implements
 {
@@ -57,12 +59,15 @@ namespace GFCA.APT.BAL.Implements
             _uow.Dispose();
         }
 
-        public DocumentStateDto GetDocumentStateSection(string documentType, int documentHeaderId, int version = -1, int revision = -1)
+        public DocumentStateDto GetDocumentStateSection(string documentType, int documentHeaderId)
         {
             try
             {
+                var docStateFlow = _uow.DocumentRepository.GetDocumentStateFlow(documentType, documentHeaderId);
+                if (docStateFlow == null)
+                    return new DocumentStateDto();
 
-                return new DocumentStateDto();
+                return docStateFlow;
             }
             catch (Exception ex)
             {
@@ -99,8 +104,11 @@ namespace GFCA.APT.BAL.Implements
         {
             try
             {
+                var docHistories =  _uow.DocumentRepository.GetDocumentHistories(documentType, documentHeaderId);
+                if (docHistories == null)
+                    return new List<DocumentHistoryDto>();
 
-                return new List<DocumentHistoryDto>();
+                return docHistories;
             }
             catch (Exception ex)
             {
@@ -123,9 +131,9 @@ namespace GFCA.APT.BAL.Implements
             return result;
         }
 
-        public CommandDto PostDocument(string documentType, int documentHeaderId, CommandDto command)
+        public BusinessResponse PostDocument(string documentType, int documentHeaderId, CommandDto command)
         {
-            CommandDto result = new CommandDto();
+            BusinessResponse result = BusinessResponse.CreateInstance(MESSAGE_TYPE.WARNING);
             try
             {
 
@@ -137,6 +145,22 @@ namespace GFCA.APT.BAL.Implements
 
             return result;
         }
+
+        public async Task<BusinessResponse> PostDocumentAsync(string documentType, int documentHeaderId, CommandDto command)
+        {
+            BusinessResponse result = BusinessResponse.CreateInstance(MESSAGE_TYPE.WARNING);
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
+
         #endregion [ Workflow ]
 
 

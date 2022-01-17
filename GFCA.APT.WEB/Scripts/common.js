@@ -26,21 +26,37 @@ var Toast = Swal.mixin({
 });
 
 
-function AjaxPost(url, data, cbSuccess) {
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: cbSuccess,
-        error: function (response) {
-            $(document).Toasts('create', {
-                class: 'bg-error',
-                title: 'error',
-                position: 'topRight',
-                body: JSON.stringify(response)
-            });
+function AjaxPost(form, callbackSuccess) {
+
+    $.validator.unobtrusive.parse(form);
+    if ($(form).valid()) {
+        let verifyToken = $(form).find("input[name='__RequestVerificationToken']").val();
+        let formData = new FormData(form);
+        formData.append('__RequestVerificationToken', verifyToken);
+        let ajaxConfig = {
+            type: 'POST',
+            url: form.action,
+            data: formData,
+            //contentType: false,
+            //processData: false,
+            success: callbackSuccess,
+            error: function (response) {
+                $('.content-wrapper').Toasts('create', {
+                    class: 'bg-error',
+                    title: 'error',
+                    position: 'topRight',
+                    body: `${response.status} : The network connection is unreachable.`
+                });
+            }
         }
-    });
+        if ($(form).attr('enctype') == "multipart/form-data") {
+            ajaxConfig["contentType"] = false;
+            ajaxConfig["processData"] = false;
+        }
+
+        $.ajax(ajaxConfig);
+    }
+
+    return false;
+
 }

@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
     <TypeScriptModuleKind />
@@ -59,7 +59,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -92,14 +92,11 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -120,32 +117,14 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -201,6 +180,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -274,13 +254,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCode\ControllerWebBase.cs" />
+    <Compile Include="AppCode\FormsAuthenticationExtensions.cs" />
+    <Compile Include="AppCode\MyIdentity.cs" />
+    <Compile Include="AppCode\MyMembershipProvider.cs" />
+    <Compile Include="AppCode\MyPrincipal.cs" />
+    <Compile Include="AppCode\MyRoleProvider.cs" />
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NotificationConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Masters\Controllers\AccountpaybleController.cs" />
     <Compile Include="Areas\Masters\Controllers\VenderController.cs" />
     <Compile Include="Areas\Masters\Controllers\SizeController.cs" />
     <Compile Include="Areas\Masters\Controllers\CustomerPartyController.cs" />
@@ -310,13 +293,15 @@
     <Compile Include="Areas\Transactions\Controllers\PromotionController.cs" />
     <Compile Include="Areas\Transactions\Controllers\SaleForecastController.cs" />
     <Compile Include="Areas\Transactions\TransactionsAreaRegistration.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SelectionController.cs" />
     <Compile Include="CustomAttributes\AuthorizeAttribute.cs" />
+    <Compile Include="CustomAttributes\AuthorizerAttribute.cs" />
     <Compile Include="CustomAttributes\CustomAuthenticationAttribute.cs" />
+    <Compile Include="CustomAttributes\CustomErrorAttribute.cs" />
+    <Compile Include="CustomAttributes\CustomErrorHandler.cs" />
     <Compile Include="CustomAttributes\CustomHandleErrorAttribute.cs" />
     <Compile Include="CustomAttributes\IActionFilter.cs" />
     <Compile Include="CustomAttributes\IAuthenticationFilter.cs" />
@@ -325,8 +310,10 @@
     <Compile Include="CustomAttributes\IResultFilter.cs" />
     <Compile Include="CustomAttributes\LogActionFilter.cs" />
     <Compile Include="CustomAttributes\NonUrlActionAttribute.cs" />
+    <Compile Include="CustomAttributes\RouteDataTokenKeys.cs" />
     <Compile Include="CustomModelBinders\CommandTypeModelBinder.cs" />
     <Compile Include="CustomModelBinders\RowTypeModelBinder.cs" />
+    <Compile Include="Extensions\ArrayExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -335,12 +322,11 @@
     <Compile Include="Helpers\ConvertHelper.cs" />
     <Compile Include="Helpers\HtmlRequestHelper.cs" />
     <Compile Include="Helpers\ViewsController.cs" />
+    <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
@@ -533,6 +519,7 @@
     <Content Include="Content\ej2\material.css" />
     <Content Include="Content\ej2\tailwind-dark.css" />
     <Content Include="Content\ej2\tailwind.css" />
+    <Content Include="Content\images\bg-allowed-01.jpg" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -548,6 +535,8 @@
     <Content Include="Content\plugins\bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css" />
     <Content Include="Content\plugins\bootstrap-switch\js\bootstrap-switch.js" />
     <Content Include="Content\plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
+    <Content Include="Content\plugins\bootstrap3-dialog\1.34.7\bootstrap-dialog.css" />
+    <Content Include="Content\plugins\bootstrap3-dialog\1.34.7\bootstrap-dialog.js" />
     <Content Include="Content\plugins\bootstrap4-duallistbox\bootstrap-duallistbox.css" />
     <Content Include="Content\plugins\bootstrap4-duallistbox\bootstrap-duallistbox.min.css" />
     <Content Include="Content\plugins\bootstrap4-duallistbox\jquery.bootstrap-duallistbox.js" />
@@ -3984,7 +3973,6 @@
     <Content Include="Content\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Transactions\Views\Default\Index.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\Index.cshtml" />
-    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\Index.cshtml" />
     <Content Include="Areas\Masters\Views\TradeActivity\Index.cshtml" />
     <Content Include="Areas\Masters\Views\PromotionGroup\Index.cshtml" />
     <Content Include="Areas\Masters\Views\Product\Index.cshtml" />
@@ -4129,9 +4117,6 @@
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemDetailGridInvestmentPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\SaleForecastItem.cshtml" />
-    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemHeaderPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemDetailPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridSalePartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\_Popup_DetailGridInvestmentPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\_Popup_FixedContractHeader.cshtml" />
@@ -4142,7 +4127,6 @@
     <Content Include="Areas\Transactions\Views\FixedContract\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\Promotion\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\BudgetPlan\ItemFooterPartial.cshtml" />
-    <Content Include="Areas\Transactions\Views\SaleForecast\Backup\ItemFooterPartial.cshtml" />
     <Content Include="Areas\Transactions\Views\FixedContract\FixedContractDetail.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_LayoutTransaction.cshtml" />
     <Content Include="Areas\Transactions\Views\Shared\_RequesterSection.cshtml" />
@@ -4425,6 +4409,8 @@
     <Content Include="Scripts\jquery-numeric\jquery.numeric.min.js" />
     <Content Include="Scripts\jquery.bsAlerts.min.js" />
     <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.2.min.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -4685,6 +4671,8 @@
     <Content Include="Scripts\numeral-js\LICENSE" />
     <Content Include="Scripts\numeral-js\package.json" />
     <Content Include="Scripts\numeral-js\README.md" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAllowed.cshtml" />
     <None Include="Web.Development.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -4733,7 +4721,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>6</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
@@ -4748,7 +4736,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>6</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

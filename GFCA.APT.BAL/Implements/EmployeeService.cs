@@ -52,8 +52,8 @@ namespace GFCA.APT.BAL.Implements
 
                 dto.EMP_CODE = model.EMP_CODE;
                 dto.PREFIX = model.PREFIX;
-                dto.NAME_FIRST = model.NAME_FIRST;
-                dto.NAME_LAST = model.NAME_LAST;
+                dto.FIRSTNAME = model.FIRSTNAME;
+                dto.LASTNAME = model.LASTNAME;
                 dto.EMAIL = model.EMAIL;
                 dto.FLAG_ROW = FLAG_ROW.SHOW;
                 dto.CREATED_BY = _currentUser.UserName ?? "SYSTEM";
@@ -94,8 +94,8 @@ namespace GFCA.APT.BAL.Implements
 
                 dto.EMP_CODE = model.EMP_CODE;
                 dto.PREFIX = model.PREFIX;
-                dto.NAME_FIRST = model.NAME_FIRST;
-                dto.NAME_LAST = model.NAME_LAST;
+                dto.FIRSTNAME = model.FIRSTNAME;
+                dto.LASTNAME = model.LASTNAME;
                 dto.EMAIL = model.EMAIL;
                 dto.FLAG_ROW = model.IS_ACTIVED ? FLAG_ROW.SHOW : FLAG_ROW.DELETE;
 

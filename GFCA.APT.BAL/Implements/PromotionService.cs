@@ -2,11 +2,12 @@
 using GFCA.APT.DAL.Implements;
 using GFCA.APT.DAL.Interfaces;
 using GFCA.APT.Domain.Dto;
-using GFCA.APT.Domain.HTTP.Controls;
+using GFCA.APT.Domain.Enums;
 using GFCA.APT.Domain.Models;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace GFCA.APT.BAL.Implements
@@ -28,39 +29,58 @@ namespace GFCA.APT.BAL.Implements
         #region [ header ]
         public IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAll()
         {
+            IList<PromotionPlanngOverviewDto> result = new List<PromotionPlanngOverviewDto>();
             try
             {
-                var doch = _uow.PromotionRepository.GetPromotionPlanAll();
-                return doch;
+                result = _uow.PromotionRepository.GetPromotionPlanAll().ToList();
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetPromotionPlanAll : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+
+            return result;
         }
         public PromotionPlanngOverviewDto GetPromotionPlanByItemID(int DOC_PROM_PH_ID)
         {
+            PromotionPlanngOverviewDto result = new PromotionPlanngOverviewDto();
             try
             {
-                var docdo = _uow.PromotionRepository.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
-                return docdo;
+                result = _uow.PromotionRepository.GetPromotionPlanByItemID(DOC_PROM_PH_ID);
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetPromotionPlanByItemID : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
         public PromotionPlanningFooterDto GetPromotionFooterByItemID(int DOC_PROM_PH_ID)
         {
+            PromotionPlanningFooterDto result = new PromotionPlanningFooterDto();
             try
             {
                 var dto = new PromotionPlanningFooterDto();
-                return dto;
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetPromotionFooterByItemID : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
         public BusinessResponse CreateOverview(PromotionPlanngOverviewDto entity)
         {
@@ -68,6 +88,7 @@ namespace GFCA.APT.BAL.Implements
             try
             {
                 PromotionPlanngOverviewDto dto = entity;
+
                 var dummyDoc = _uow.DocumentRepository.GenerateDocNo(dto.DOC_TYPE_CODE, dto.CUST_CODE, DateTime.Today.Year, DateTime.Today.Month);
                 DocumentDto doc = dummyDoc;
                 doc.REQUESTER = "System";
@@ -83,17 +104,16 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.InsertOverview(dto);
 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("CreateOverview : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
 
             return response;
@@ -107,17 +127,16 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.UpdateOverview(dto);
 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("EditOverview : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -129,16 +148,16 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.DeleteOverview(DOC_PROM_PH_ID);
 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("RemoveOverview : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -147,33 +166,45 @@ namespace GFCA.APT.BAL.Implements
         #region [ Investment ]
         public IEnumerable<PromotionPlanningInvestmentDto> GetInvestmentByHeaderID(int DOC_PROM_PH_ID)
         {
+            IList<PromotionPlanningInvestmentDto> result = new List<PromotionPlanningInvestmentDto>();
             try
             {
-                var docdi = _uow.PromotionRepository.GetInvestmentByHeaderID(DOC_PROM_PH_ID);
-                return docdi;
+                result = _uow.PromotionRepository.GetInvestmentByHeaderID(DOC_PROM_PH_ID).ToList();
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("RemoveOverview : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
         public PromotionPlanningInvestmentDto GetInvestmentByItemID(int DOC_PROM_PH_ID, int DOC_PROM_PI_ID)
         {
+            var result = new PromotionPlanningInvestmentDto();
             try
             {
-                var docdi = _uow.PromotionRepository.GetInvestmentByItemID(DOC_PROM_PI_ID);
-                if (docdi == null)
+                result = _uow.PromotionRepository.GetInvestmentByItemID(DOC_PROM_PI_ID);
+                if (result == null)
                 {
-                    docdi = new PromotionPlanningInvestmentDto();
-                    docdi.DOC_PROM_PH_ID = DOC_PROM_PH_ID;
-                    //docdi.DOC_PROM_PS_ID = 
+                    result = new PromotionPlanningInvestmentDto();
+                    result.DOC_PROM_PH_ID = DOC_PROM_PH_ID;
                 }
-                return docdi;
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetInvestmentByItemID : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+
+            return result;
         }
         public BusinessResponse CreateInvestment(PromotionPlanningInvestmentDto entity)
         {
@@ -184,18 +215,18 @@ namespace GFCA.APT.BAL.Implements
                 dto.CREATED_BY = "System";
                 _uow.PromotionRepository.InsertInvestment(dto);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("CreateInvestment : ", ex);
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+
             return response;
         }
         public BusinessResponse EditInvestment(PromotionPlanningInvestmentDto entity)
@@ -207,17 +238,16 @@ namespace GFCA.APT.BAL.Implements
                 dto.UPDATED_BY = "System";
                 _uow.PromotionRepository.UpdateInvestment(dto);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("EditInvestment : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -228,36 +258,44 @@ namespace GFCA.APT.BAL.Implements
             {
                 _uow.PromotionRepository.DeleteInvestment(entity.DOC_PROM_PI_ID);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("RemoveInvestment : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
         #endregion [ Investment ]
 
         #region [ Sale ]
+
         public IEnumerable<PromotionPlanningSaleDto> GetSaleDataByHeaderID(int DOC_PROM_PH_ID)
         {
+            IList<PromotionPlanningSaleDto> result = new List<PromotionPlanningSaleDto>();
             try
             {
-                var docds = _uow.PromotionRepository.GetSaleDataByHeaderID(DOC_PROM_PH_ID);
-                return docds;
+                result = _uow.PromotionRepository.GetSaleDataByHeaderID(DOC_PROM_PH_ID).ToList();
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetInvestmentByHeaderID : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
         public PromotionPlanningSaleDto GetSaleDataByItemID(int DOC_PROM_PS_ID)
         {
+            var result = new PromotionPlanningSaleDto();
             try
             {
                 var docds = _uow.PromotionRepository.GetSaleDataByItemID(DOC_PROM_PS_ID);
@@ -267,8 +305,14 @@ namespace GFCA.APT.BAL.Implements
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("GetSaleDataByItemID : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
         public BusinessResponse CreatePlanngSale(PromotionPlanningSaleDto entity)
         {
@@ -279,17 +323,16 @@ namespace GFCA.APT.BAL.Implements
                 dto.CREATED_BY = "System";
                 _uow.PromotionRepository.InsertPlanngSale(dto);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("CreatePlanngSale : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -302,17 +345,16 @@ namespace GFCA.APT.BAL.Implements
 
                 _uow.PromotionRepository.UpdatePlanngSale(dto);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
-                response.Data = dto;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("EditPlanngSale : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -324,16 +366,16 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.DeletePlanngSale(entity.DOC_PROM_PS_ID);
 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("RemovePlanngSale : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
@@ -346,20 +388,19 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.SubmitPromotionPlanng(DOC_PROM_PH_ID);
 
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
-                _logger.Error("RemovePlanngSale : ", ex);
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
+                _logger.Error("SubmitPromotionPlanng : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
-
         public BusinessResponse ApprovePromotionPlanng(int DOC_PROM_PH_ID)
         {
             BusinessResponse response = new BusinessResponse();
@@ -369,67 +410,65 @@ namespace GFCA.APT.BAL.Implements
                 _uow.PromotionRepository.ApprovePromotionPlanngInvsDetail(DOC_PROM_PH_ID);
                 _uow.PromotionRepository.ApprovePromotionPlanngSaleDetail(DOC_PROM_PH_ID);
                 _uow.Commit();
-                response.Success = true;
-                response.MessageType = MESSAGE_TYPE.SUCCESS;
-                response.Message = string.Empty;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
             }
             catch (Exception ex)
             {
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
+                _logger.Error("ApprovePromotionPlanng : ", ex);
+            }
+            finally
+            {
                 _uow.Dispose();
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
-                _logger.Error("RemovePlanngSale : ", ex);
             }
             return response;
         }
-
         public IEnumerable<PromotionPlanngOverviewDto> GetPromotionPlanAllByStatus(string DOC_STATUS = "")
         {
+            IEnumerable<PromotionPlanngOverviewDto> result = new List<PromotionPlanngOverviewDto>();
             try
             {
-                var doch = _uow.PromotionRepository.GetPromotionPlanAllByStatus(DOC_STATUS);
-                return doch;
+                result = _uow.PromotionRepository.GetPromotionPlanAllByStatus(DOC_STATUS);
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error("ApprovePromotionPlanng : ", ex);
+                //throw ex;
             }
+            finally
+            {
+                _uow.Dispose();
+            }
+            return result;
         }
 
         public BusinessResponse ApprovePromotionSelect(List<int> Ids)
         {
             BusinessResponse response = new BusinessResponse();
             try
-
-
             {
 
                 foreach (int DOC_PROM_PH_ID in Ids)
                 {
-
-
-
-
                     _uow.PromotionRepository.ApprovePromotionPlanng(DOC_PROM_PH_ID);
                     _uow.PromotionRepository.ApprovePromotionPlanngInvsDetail(DOC_PROM_PH_ID);
                     _uow.PromotionRepository.ApprovePromotionPlanngSaleDetail(DOC_PROM_PH_ID);
                     _uow.Commit();
-                    response.Success = true;
-                    response.MessageType = MESSAGE_TYPE.SUCCESS;
-                    response.Message = string.Empty;
-
+                    response = BusinessResponse.CreateInstance(MESSAGE_TYPE.SUCCESS);
                 }
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.MessageType = MESSAGE_TYPE.ERROR;
-                response.Message = ex.Message;
+                response = BusinessResponse.CreateInstance(MESSAGE_TYPE.ERROR, ex.Message);
                 _logger.Error("ApprovePromotionSelect : ", ex);
+            }
+            finally
+            {
+                _uow.Dispose();
             }
             return response;
         }
+        
         #endregion [ Sale ]
 
     }

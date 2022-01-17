@@ -44,7 +44,7 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/summernote/summernote-bs4.min.css")
                 //.Include("~/Content/bootstrap.css")
                 .Include("~/Content/ej2/bootstrap4.css")
-                .Include("~/Scripts/bs4-toast/dist/toast.min.css")
+                //.Include("~/Scripts/bs4-toast/dist/toast.min.css")
                 .Include("~/Content/Site.css")
                 ;
             bundles.Add(csslteStyle);
@@ -130,13 +130,13 @@ namespace GFCA.APT.WEB
                 .Include("~/Content/plugins/sweetalert2/sweetalert2.min.js")
                 .Include("~/Content/plugins/toastr/toastr.min.js")
                 .Include("~/Content/dist/js/adminlte.js")
-                .Include("~/Scripts/jquery.bsAlerts.min.js")
-                .Include("~/Scripts/bs4-toast/dist/toast.min.js")
+                //.Include("~/Scripts/jquery.bsAlerts.min.js")
+                //.Include("~/Scripts/bs4-toast/dist/toast.min.js")
                 .Include("~/Scripts/common.js")
                 ;
             bundles.Add(adminlteScript);
-            bundles.Add(new StyleBundle("~/bundles/ejstyles").Include(
-                      "~/ejThemes/flat-saffron/ej.web.all.min.css"));
+            bundles.Add(new StyleBundle("~/bundles/ejstyles")
+                .Include("~/ejThemes/flat-saffron/ej.web.all.min.css"));
 
             
         }

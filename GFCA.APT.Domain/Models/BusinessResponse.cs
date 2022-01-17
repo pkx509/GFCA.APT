@@ -1,5 +1,4 @@
-﻿using GFCA.APT.Domain;
-using GFCA.APT.Domain.HTTP.Controls;
+﻿using GFCA.APT.Domain.Enums;
 
 namespace GFCA.APT.Domain.Models
 {
@@ -7,7 +6,7 @@ namespace GFCA.APT.Domain.Models
     {
         public bool Success { get; set; } = false;
         public MESSAGE_TYPE MessageType { get; set; } = MESSAGE_TYPE.WARNING;
-        public string Title { get; set; }
+        public string Title { get; set; } = MESSAGE_TITLE.ERROR;
         public string Message { get; set; }
         public dynamic Data { get; set; }
 
@@ -25,24 +24,21 @@ namespace GFCA.APT.Domain.Models
             Title = messageType.ToString();
             Message = message;
         }
-    }
 
-    public class WorkflowResponse
-    {
-        public bool Success { get; set; } = false;
-        public MESSAGE_TYPE MessageType { get; set; } = MESSAGE_TYPE.WARNING;
-        public string Message { get; set; } = string.Empty;
-        public dynamic Data { get; set; }
-
-        public WorkflowResponse()
+        public static BusinessResponse CreateInstance(MESSAGE_TYPE messgeType, string message = "")
         {
-
+            string messageTitle = messgeType == MESSAGE_TYPE.SUCCESS ? MESSAGE_TITLE.SUCCESS : MESSAGE_TITLE.ERROR;
+            BusinessResponse response = BusinessResponse.CreateInstance(messgeType, messageTitle, message);
+            return response;
         }
-        public WorkflowResponse(bool isSuccess, MESSAGE_TYPE messageType, string message)
+        public static BusinessResponse CreateInstance(MESSAGE_TYPE messgeType, string messageTitle, string message = "")
         {
-            Success = isSuccess;
-            MessageType = messageType;
-            Message = message;
+            BusinessResponse response = new BusinessResponse();
+            response.Success = (messgeType == MESSAGE_TYPE.SUCCESS);
+            response.MessageType = messgeType;
+            response.Message = message;
+            response.Title = messageTitle;
+            return response;
         }
     }
 }

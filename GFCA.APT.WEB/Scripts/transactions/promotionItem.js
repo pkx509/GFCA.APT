@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     let sendPost = function (url, data) {
+        
         let value = {
             ...data
         };
@@ -16,16 +17,11 @@
                     promotionHeaderPopup.close();
                     let objGrid = document.getElementById("grdInvestment").ej2_instances[0];
 
-                    $(document).Toasts('create', {
-                        // class: `bg-${res.MessageType.ToMessageType()}`,
-                        title: res.Title,
-                        position: 'bottomRight',
-                        body: res.Message ? res.Message : 'Success',
-                        delay: 3000,
-                        autohide: true,
-                        animation: true
+                    Toast.fire({
+                        icon: res.MessageType.ToMessageType(),
+                        title: res.Message
                     });
-
+                    
                     if (objGrid) {
                         objGrid.refresh();
                     } else {
@@ -35,12 +31,13 @@
             },
             error: function (response) {
                 $(document).Toasts('create', {
-                    class: `bg-${res.MessageType.ToMessageType()}`,
-                    title: res.Title,
-                    position: 'bottomRight',
-                    body: res.Message
+                    class: 'bg-error',
+                    title: 'error',
+                    position: 'topRight',
+                    body: `${response.status} : The network connection is unreachable.`
                 });
             }
+
         });
     }
 
@@ -105,24 +102,30 @@
     $('button[name="btn-workflow-commands"]').click(function (e) {
         //e.preventDefault();
 
-        let cmd = $(e.target).data("value");
-        console.log(cmd);
+        let stateCode = $(e.target).data("state-code");
+        let workflowCode = $(e.target).data("workflow-code");
+        let flowItem = $(e.target).data("flow-item");
+        let flowCode = $(e.target).data("flow-code");
+        let flowSort = $(e.target).data("flow-sort");
+        
 
         let cbSuccess = function (response) {
 
         };
 
         let data = {
-            WF_STATE_ID : 0,
-            FLOW_ITEM_ID : 0,
-            STATE_CODE : '',
-            FLOW_ITEM_CODE : cmd,
+            WF_STATE_ID: 0,
+            WF_CODE: workflowCode,
+            STATE_CODE: stateCode,
+            FLOW_ITEM_ID: flowItem,
+            FLOW_ITEM_CODE: flowCode,
             FLOW_ITEM_NAME: '',
             FLOW_ITEM_DESC: '',
             DIRECTION_CODE: '',
             DIRECTION_NAME: '',
-            Sort: 1,
+            SORT: flowSort,
         };
+        console.log(data);
         //let url = `${window.location.origin}/T/Promotions/PostCommand`;
         let url = "/T/Promotions/PostCommand`"
         sendPost(url, data);

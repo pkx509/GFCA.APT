@@ -8,8 +8,13 @@ namespace GFCA.APT.Domain
     public class Dynamic : DynamicObject
     {
         internal Dictionary<string, object> _dictionary = new Dictionary<string, object>();
-        
-
+        /*
+        public object this[int propertyIndex]
+        {
+            get { return _dictionary[propertyIndex]; }
+            set { AddProperty(propertyIndex, value); }
+        }
+        */
         public object this[string propertyName]
         {
             get { return _dictionary[propertyName]; }
@@ -20,7 +25,6 @@ namespace GFCA.APT.Domain
         {
             return _dictionary.TryGetValue(binder.Name, out result);
         }
-
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
             AddProperty(binder.Name, value);
@@ -31,6 +35,12 @@ namespace GFCA.APT.Domain
         {
             _dictionary[name] = value;
         }
+        /*
+        public void AddProperty(int index, object value)
+        {
+            _dictionary[index] = value;
+        }
+        */
     }
     public class DynamicConverter : System.Text.Json.Serialization.JsonConverter<Dynamic>
     {

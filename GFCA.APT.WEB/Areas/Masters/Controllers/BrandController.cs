@@ -8,10 +8,11 @@ using Newtonsoft.Json;
 using GFCA.APT.Domain.Models;
 using GFCA.APT.BAL.Interfaces;
 using System.Reflection;
+using GFCA.APT.WEB.CustomAttributes;
 
 namespace GFCA.APT.WEB.Areas.Masters.Controllers
 {
-
+    [Authorizer(Roles = "Root, Administrators")]
     public class BrandController : ControllerWebBase
     {
         private readonly IBusinessProvider _biz;

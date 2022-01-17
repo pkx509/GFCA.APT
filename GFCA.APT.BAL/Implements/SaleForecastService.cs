@@ -237,7 +237,7 @@ namespace GFCA.APT.BAL.Implements
                 var doch = _uow.SaleForecastRepository.GetSaleForecastByItemID(docd.DOC_SFCH_ID);
                 dto.HeaderData = doch;
                 dto.DocumentData = _uow.DocumentRepository.GetDocumentStateFlow(documentType, doch.DOC_SFCH_ID);
-                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(doch.DOC_SFCH_ID);
+                dto.HistoryData = _uow.DocumentRepository.GetDocumentHistories(documentType, doch.DOC_SFCH_ID);
 
                 return docd;
             }
